@@ -78,7 +78,7 @@ $ cd Reduced
 $ npm run dev
 ```
 
-> **NOTE :** Running only the backend server will use previously generated static files ( from server -> static ) of the frontend.
+> **NOTE :** Running only the backend server will use previously generated static files ( from server -> static ) for the frontend.
 
 #### :art: Frontend Setup
 
@@ -130,6 +130,7 @@ $ npm run build
 	* Date / Day of Creation
 	* Time of Creation
 	* Original link
+  * Time / Date of link expiration
 
 - The API comes with **Rate-Limiting** by default. The settings can be changed as per one's requirements.
 
@@ -267,7 +268,7 @@ http://localhost:80/api/check
 {"message":"Link does not exist"}
 ```
 
-- **Invalid Link :** When the supplies link is invalid **(is not an actual link)** is provided.
+- **Invalid Link :** When the supplies link is invalid **(is not an actual link)**.
 
 ```
 curl --header "Content-Type: application/json" \
