@@ -1,2 +1,0 @@
-- name: Zip Release
-  uses: TheDoctor0/zip-release@v0.3.0
