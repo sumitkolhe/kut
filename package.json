@@ -20,5 +20,5 @@
   "devDependencies": {
     "nodemon": "^2.0.4"
   },
-  "description": ""
+  "description": "Reduced is a powerful modern custom URL shortener with a minimalistic design and a public API made with MEVN stack"
 }
