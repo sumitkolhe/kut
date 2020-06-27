@@ -115,29 +115,13 @@
     </v-row>
 
     <div>
-      <v-snackbar
-        color="info"
-        bottom
-        multi-line
-        class="copied-snackbar"
-        v-model="aliasdoesnotexist"
-        timeout="3000"
-      >
-        Link does not exist!
-        <v-icon color="white" right>mdi-link-off</v-icon>
+       <v-snackbar  color="red" elevation="24" top v-model="aliasdoesnotexist" rounded="pill">
+        <h3 class="text-center">Invalid Link</h3>
       </v-snackbar>
     </div>
     <div>
-      <v-snackbar
-        color="error"
-        multi-line
-        class="copied-snackbar"
-        v-model="limit"
-        bottom
-        timeout="3000"
-      >
-        Quota exceeded!
-        <v-icon color="white" right>mdi-alert</v-icon>
+       <v-snackbar color="red" elevation="24" top v-model="limit" rounded="pill">
+        <h3 class="text-center">Quota Exceeded</h3>
       </v-snackbar>
     </div>
   </v-container>
@@ -278,12 +262,6 @@ a:active {
   font-weight: 900;
 }
 
-.copied-snackbar {
-  color: white;
-  font-size: large;
-  font-weight: 700;
-  margin-bottom: 5rem;
-}
 .card-font {
   font-weight: 500;
   letter-spacing: 1px;

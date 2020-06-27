@@ -77,7 +77,7 @@
                         icon
                         color="green"
                         v-clipboard:copy="(local.link.shorturl)"
-                        @click="snackbar=true"
+                        @click="copy=true"
                       >
                         <svg
                           viewBox="0 0 24 24"
@@ -88,7 +88,7 @@
                           fill="none"
                           stroke-linecap="round"
                           stroke-linejoin="round"
-                          class="css-i6dzq1"
+                          
                         >
                           <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
@@ -134,14 +134,13 @@
 
     <!--Snackbars-->
     <div>
-      <v-snackbar absolute color="black" elevation="24" v-model="snackbar" rounded="pill">
-        <h3>Copied</h3>
+      <v-snackbar  color="black" elevation="24" top v-model="copy" rounded="pill">
+        <h3 class="text-center">Copied</h3>
       </v-snackbar>
     </div>
     <div>
-      <v-snackbar color="error" multi-line v-model="limit" bottom timeout="3000">
-        Quota exceeded!
-        <v-icon color="white" right>mdi-alert</v-icon>
+     <v-snackbar  color="red" elevation="24" top v-model="limit" rounded="pill">
+        <h3 class="text-center">Quota Exceeded</h3>
       </v-snackbar>
     </div>
 
@@ -204,7 +203,7 @@ export default {
       shorturl: null,
       alias: "",
       response: "",
-      snackbar: false,
+      copy: false,
       limit: false,
       local: [],
       drawer: false,
@@ -291,9 +290,7 @@ export default {
 .body {
   overflow: hidden;
 }
-.copied {
-  text-align: center;
-}
+
 
 .main {
   padding: 3rem 1rem;
@@ -385,9 +382,6 @@ export default {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
-h3 {
-  text-align: center;
-}
 
 /* ============================================================
 	Responsive Table via Data Label
