@@ -1,8 +1,7 @@
 # Reduced
 
----
 
-### 🔗 Reduced is a modern custom URL shortener with minimalistic design made by [Sumit Kolhe](https://github.com/sumitkolhe)
+### 🔗 Reduced is a powerful modern custom URL shortener with a minimalistic design made with MEVN stack by [Sumit Kolhe](https://github.com/sumitkolhe)
 
 ---
 
