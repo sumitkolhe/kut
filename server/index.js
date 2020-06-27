@@ -41,7 +41,7 @@ app.use(express.static(__dirname + "/static/"));
 
 // Handle SPA
 app.get("/dashboard", (req, res) =>
-  res.sendFile(__dirname + "static/index.html")
+  res.sendFile(__dirname + "/static/index.html")
 );
 app.get(/.*/, (req, res) => res.sendFile(__dirname + "/errors/error.html"));
 
