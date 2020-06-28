@@ -9,6 +9,7 @@
   <br>
   <img src="resources/1.png" alt="Reduced" width="100%">
   <img src="resources/2.png" alt="reduced" width="100%">
+  
   <br>
 </div>
 
