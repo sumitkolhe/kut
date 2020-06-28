@@ -90,7 +90,7 @@
                   <v-list-item-subtitle class="subtitle-1">{{version}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-action>
-                  <a href="https://github.com/sumitkolhe/Slash" target="_blank">
+                  <a href="https://github.com/sumitkolhe/Reduced" target="_blank">
                     <v-btn icon>
                       <svg viewBox="0 0 24 24">
                         <path
