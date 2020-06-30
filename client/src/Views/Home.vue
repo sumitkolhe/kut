@@ -1,26 +1,25 @@
 <template>
-  <div class="body">
+  <div class="body" >
     <!--  <bg class="bg"></bg>
     <bg2 class="bg2"></bg2>-->
     <!--Fluid needs to be addedd to make the padding remain constant-->
-    <v-container fluid>
+    <v-container fluid >
       <!--Heading for create links  lg md sm xs -->
-      <v-row justify="center">
+      <v-row justify="center" color="bgColor">
         <v-col cols="12" sm="10" md="8" lg="8" xl="6" class="mt-2 mt-md-12">
           <v-row justify="center" class="mb-8 mt-2 mt-lg-2 mt-md-0 mx-1" align="center" wrap>
-            <h1 style="color:#000; font-size:22px; font-weight:500;font-family: ">
+            <h1 style="font-size:22px; font-weight:500;font-family: " color="black">
               Create short links quickly
               <svg
                 style="vertical-align:middle;"
                 viewBox="0 0 24 24"
                 width="26"
                 height="26"
-                stroke="#000"
+                stroke="currentColor"
                 stroke-width="2"
-                fill="#000"
+                fill="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="css-i6dzq1"
               >
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
               </svg>
@@ -52,7 +51,9 @@
 
           <!--Submit button -->
           <v-row justify="center" class="mt-md-4 mt-sm-0" align="center" dense>
-            <button class="btn" type="submit" v-on:keyup.enter="sub" @click="sub">{{buttonstatus}}</button>
+            <button class="btn mx-2" type="submit" v-on:keyup.enter="sub" @click="sub">{{buttonstatus}}</button>
+
+            
           </v-row>
 
           <!--LocalStorage Links-->
@@ -68,61 +69,60 @@
               <tbody>
                 <tr v-for="(local,index) in local" :key="index">
                   <td data-label="Original">
-                    <div>{{local.link.longurl}}</div>
+                    <div>
+                      <p>{{local.link.longurl}}</p>
+                    </div>
                   </td>
                   <td data-label="Shortened">{{local.link.shorturl}}</td>
                   <td data-label="Actions">
-                    <div>
-                      <v-btn
-                        icon
-                        color="green"
-                        v-clipboard:copy="(local.link.shorturl)"
-                        @click="copy=true"
+                    <v-btn
+                      icon
+                      color="green"
+                      v-clipboard:copy="(local.link.shorturl)"
+                      @click="copy=true"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="22"
+                        height="22"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                       >
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="22"
-                          height="22"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          
-                        >
-                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                        </svg>
-                      </v-btn>
-                      <v-btn color="blue" @click="generateqrcode(index)" icon>
-                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                          <path
-                            fill="currentColor"
-                            d="M4,4H10V10H4V4M20,4V10H14V4H20M14,15H16V13H14V11H16V13H18V11H20V13H18V15H20V18H18V20H16V18H13V20H11V16H14V15M16,15V18H18V15H16M4,20V14H10V20H4M6,6V8H8V6H6M16,6V8H18V6H16M6,16V18H8V16H6M4,11H6V13H4V11M9,11H13V15H11V13H9V11M11,6H13V10H11V6M2,2V6H0V2A2,2 0 0,1 2,0H6V2H2M22,0A2,2 0 0,1 24,2V6H22V2H18V0H22M2,18V22H6V24H2A2,2 0 0,1 0,22V18H2M22,22V18H24V22A2,2 0 0,1 22,24H18V22H22Z"
-                          />
-                        </svg>
-                      </v-btn>
-                      <v-btn color="error" icon @click="removefromlocal(index)">
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="22"
-                          height="22"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="css-i6dzq1"
-                        >
-                          <polyline points="3 6 5 6 21 6" />
-                          <path
-                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                          />
-                          <line x1="10" y1="11" x2="10" y2="17" />
-                          <line x1="14" y1="11" x2="14" y2="17" />
-                        </svg>
-                      </v-btn>
-                    </div>
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                      </svg>
+                    </v-btn>
+                    <v-btn color="blue" @click="generateqrcode(index)" icon>
+                      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M4,4H10V10H4V4M20,4V10H14V4H20M14,15H16V13H14V11H16V13H18V11H20V13H18V15H20V18H18V20H16V18H13V20H11V16H14V15M16,15V18H18V15H16M4,20V14H10V20H4M6,6V8H8V6H6M16,6V8H18V6H16M6,16V18H8V16H6M4,11H6V13H4V11M9,11H13V15H11V13H9V11M11,6H13V10H11V6M2,2V6H0V2A2,2 0 0,1 2,0H6V2H2M22,0A2,2 0 0,1 24,2V6H22V2H18V0H22M2,18V22H6V24H2A2,2 0 0,1 0,22V18H2M22,22V18H24V22A2,2 0 0,1 22,24H18V22H22Z"
+                        />
+                      </svg>
+                    </v-btn>
+                    <v-btn color="error" icon @click="removefromlocal(index)">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="22"
+                        height="22"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="css-i6dzq1"
+                      >
+                        <polyline points="3 6 5 6 21 6" />
+                        <path
+                          d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                        />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                      </svg>
+                    </v-btn>
                   </td>
                 </tr>
               </tbody>
@@ -134,12 +134,12 @@
 
     <!--Snackbars-->
     <div>
-      <v-snackbar  color="black" elevation="24" top v-model="copy" rounded="pill">
+      <v-snackbar color="black" elevation="24" top v-model="copy" rounded="pill">
         <h3 class="text-center">Copied</h3>
       </v-snackbar>
     </div>
     <div>
-     <v-snackbar  color="red" elevation="24" top v-model="limit" rounded="pill">
+      <v-snackbar color="red" elevation="24" top v-model="limit" rounded="pill">
         <h3 class="text-center">Quota Exceeded</h3>
       </v-snackbar>
     </div>
@@ -151,7 +151,7 @@
           <qrcode :value="qrcodevalue" :options="{ width: 200 }"></qrcode>
         </v-card-text>
         <v-card-actions class="justify-center">
-          <v-btn color="black" dark @click="qrcode= false">Close</v-btn>
+          <v-btn color="black" @click="qrcode= false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -160,15 +160,11 @@
 
 
 <script>
-import api from "../api";
-//import bg from "../components/bg";
-//import bg2 from "../components/bg2";
+import api from "../controller/api";
 
 export default {
   name: "Home",
-  components: {
-    //bg,bg2
-  },
+  components: {},
   data() {
     return {
       headers: [
@@ -176,23 +172,19 @@ export default {
           text: "Orignal",
           align: "center",
           value: "link.longurl",
-          sortable: false,
-          width: "50%"
+          sortable: false
         },
         {
           text: "Shortened",
           align: "center",
           value: "link.shorturl",
-          sortable: false,
-
-          width: "30%"
+          sortable: false
         },
         {
           text: "Actions",
           align: "center",
           value: "actions",
-          sortable: false,
-          width: "20%"
+          sortable: false
         }
       ],
       qrcode: false,
@@ -291,7 +283,6 @@ export default {
   overflow: hidden;
 }
 
-
 .main {
   padding: 3rem 1rem;
 }
@@ -336,20 +327,6 @@ export default {
   -webkit-appearance: none;
 }
 
-.bg {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  right: 0;
-  bottom: 0;
-}
-.bg2 {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  left: 0;
-  bottom: 0;
-}
 .badurl {
   border: 0.2rem solid #f55;
   box-shadow: 0 0 10px #f55;
@@ -382,12 +359,11 @@ export default {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
-
 /* ============================================================
 	Responsive Table via Data Label
 ============================================================ */
 table {
-  border-radius: 0.8rem;
+  border-radius: 0.75rem;
   background-color: #121212;
   padding: 1rem;
   font-weight: bolder;
@@ -401,6 +377,7 @@ table thead tr th {
   font-weight: 500;
   text-align: center;
   font-size: 14px;
+  min-width: 150px;
   padding: 0.2rem 0.5rem 0.5rem 0.2rem;
 }
 
@@ -408,7 +385,21 @@ table tbody tr td {
   height: 40px;
   text-align: center;
   font-size: 14px;
-  padding: 0.2rem 0.5rem 1rem 0.2rem;
+  padding: 0.5rem 0.5rem;
+}
+
+tbody div {
+  margin: auto;
+}
+
+tbody div p {
+  max-width: 300px;
+  min-width: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  margin: auto;
 }
 
 @media screen and (max-width: 800px) {
@@ -417,17 +408,19 @@ table tbody tr td {
   }
 
   table tr {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    margin-top: -0.4rem;
     display: block;
+    padding-bottom: 0.8rem;
     border-bottom: 1px solid rgb(54, 54, 54);
   }
 
   table tr:last-child {
     border-bottom: none;
-    margin-bottom: -0.2rem;
+    margin-bottom: -0.8rem;
   }
   tbody div {
-    width: 25ch;
+    width: 20ch;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

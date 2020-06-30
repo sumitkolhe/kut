@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  outputDir: path.resolve(__dirname, "../server/static"),
+  outputDir: path.resolve(__dirname, "../server/views/static"),
   publicPath: "",
   devServer:{
     proxy:{

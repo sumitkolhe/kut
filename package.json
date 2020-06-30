@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server/index.js",
   "scripts": {
-    "dev": "nodemon server/index.js",
+    "dev": "set NODE_ENV=development&&nodemon server/index.js",
     "start": "node server/index.js"
   },
   "author": "Sumit Kolhe",
@@ -15,7 +15,8 @@
     "express-rate-limit": "^5.1.3",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.9",
-    "mongoose": "^5.9.20"
+    "mongoose": "^5.9.20",
+    "rate-limiter-flexible": "^2.1.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
