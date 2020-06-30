@@ -1,7 +1,7 @@
 # Reduced
 
 
-### 🔗 Reduced is a powerful modern custom URL shortener with a minimalistic design made with MEVN stack by [Sumit Kolhe](https://github.com/sumitkolhe)
+### 🔗 A powerful modern custom URL shortener with a minimalistic design and public API by [Sumit Kolhe](https://github.com/sumitkolhe)
 
 ---
 
@@ -9,9 +9,14 @@
   <br>
   <img src="resources/1.png" alt="Reduced" width="100%">
   <img src="resources/2.png" alt="reduced" width="100%">
-  
-  <br>
+
+![Travis (.com)](https://img.shields.io/travis/com/sumitkolhe/reduced?style=flat-square)
+  ![GitHub repo size](https://img.shields.io/github/repo-size/sumitkolhe/reduced?style=flat-square)
+  ![GitHub release (latest by date)](https://img.shields.io/github/v/release/sumitkolhe/reduced?style=flat-square)
+  ![GitHub](https://img.shields.io/github/license/sumitkolhe/reduced?style=flat-square)
+  <hr>
 </div>
+
 
 ## ✨ Features
 
