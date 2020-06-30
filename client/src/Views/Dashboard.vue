@@ -2,16 +2,16 @@
   <v-container fluid class="px-xl-12 px-lg-10 px-md-10 px-sm-10 px-cols-4 body">
     <v-row justify="center" class="mt-xl-10 mt-lg-10 mt-md-8 mt-sm-6 mt-cols-6">
       <v-col justify="center" cols="12" sm="12" md="10" lg="8" xl="8">
-        <v-sheet justify="center" color="#f1f1f1" class="sheet">
+        <v-sheet justify="center" >
           <v-row>
             <v-col align="center" cols="12" sm="12" md="12" lg="12" xl="12">
-              <h1 class="mb-0">&#128075; Hey,</h1>
+              <h1 class="mb-0" color="black">&#128075; Hey,</h1>
             </v-col>
           </v-row>
 
           <v-row>
             <v-col align="center" cols="12" sm="12" md="12" lg="12" xl="12">
-              <h2 class="mb-0 mx-2 font-weight-medium">Enter the link to get its statistics</h2>
+              <h2 class="mb-0 mx-2 font-weight-medium" color="black">Enter the link to get its statistics</h2>
             </v-col>
           </v-row>
 
@@ -128,7 +128,7 @@
 </template>
 
 <script>
-import api from "../api";
+import api from "../controller/api";
 export default {
   name: "Dashboard",
   components: {},
@@ -144,7 +144,7 @@ export default {
       placeholder: "Enter a shortened link",
       response: "",
       date: "",
-      limit: "",
+      limit: false,
       statdate: "",
       sample: [],
       buttonstatus: "Check",
@@ -327,7 +327,7 @@ a:active {
 }
 
 h2 {
-  color: #424242;
+ 
   font-weight: 400;
 }
 

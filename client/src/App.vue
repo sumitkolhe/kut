@@ -1,9 +1,9 @@
 <template>
-  <v-app style="background-color:transparent;">
+  <v-app >
     <Navbar />
-    <v-main>
+    <v-main style="z-index:0;" >
       <vue-particles
-        color="#000"
+        color=#000
         :particleOpacity="0.8"
         :particlesNumber="30"
         shapeType="circle"
@@ -14,10 +14,10 @@
         :lineOpacity="0.4"
         :linesDistance="150"
         :moveSpeed="2"
-        
       ></vue-particles>
+
       <transition name="fade" mode="out-in">
-        <router-view />
+        <router-view style="z-index:999;" />
       </transition>
     </v-main>
 
@@ -39,9 +39,14 @@ export default {
       if (this.$vuetify.breakpoint.sm) return 100;
       else return 150;
     },
+
   },
 
-  data: () => ({})
+  data() {
+    return {
+      color: "#000"
+    };
+  }
 };
 </script>
 

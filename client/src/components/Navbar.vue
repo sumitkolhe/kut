@@ -1,10 +1,10 @@
 <template>
   <nav>
     <!-- APPBAR -->
-    <v-app-bar :height="height" color="#fff" flat app>
+    <v-app-bar :height="height" color="navbarColor" flat app>
       <!--navigation drawer-->
 
-      <v-btn icon color="black" class="hidden-sm-and-up" @click="drawer=!drawer">
+      <v-btn icon color="svgColor"  class="hidden-sm-and-up" @click="drawer=!drawer">
         <svg viewBox="0 0 24 24">
           <path
             fill="currentColor"
@@ -13,7 +13,7 @@
         </svg>
       </v-btn>
 
-      <h2>{{title}}</h2>
+      <h2 >{{title}}</h2>
 
       <v-spacer></v-spacer>
       <!--Routes-->
@@ -22,11 +22,12 @@
           class="svg-padding"
           v-if="location==true && mobile==false"
           icon
+          color="svgColor"
           @click="$router.push('/dashboard'),location=!location"
         >
           <svg viewBox="0 0 24 24">
             <path
-              fill="#000"
+              fill="currentColor"
               d="M13,2.05V5.08C16.39,5.57 19,8.47 19,12C19,12.9 18.82,13.75 18.5,14.54L21.12,16.07C21.68,14.83 22,13.45 22,12C22,6.82 18.05,2.55 13,2.05M12,19A7,7 0 0,1 5,12C5,8.47 7.61,5.57 11,5.08V2.05C5.94,2.55 2,6.81 2,12A10,10 0 0,0 12,22C15.3,22 18.23,20.39 20.05,17.91L17.45,16.38C16.17,18 14.21,19 12,19Z"
             />
           </svg>
@@ -34,24 +35,31 @@
         <v-btn
           class="hidden-xs-down svg-padding"
           icon
+          color="svgColor"
           v-else-if="location==false && mobile==false"
           @click="$router.push('/'),location=!location"
         >
           <svg viewBox="0 0 24 24">
             <path
-              fill="#000"
+              fill="currentColor"
               d="M7,7H11V9H7A3,3 0 0,0 4,12A3,3 0 0,0 7,15H11V17H7A5,5 0 0,1 2,12A5,5 0 0,1 7,7M17,7A5,5 0 0,1 22,12H20A3,3 0 0,0 17,9H13V7H17M8,11H16V13H8V11M17,12H19V15H22V17H19V20H17V17H14V15H17V12Z"
             />
           </svg>
         </v-btn>
 
         <!--theme-->
-        <v-btn v-if="isthemedark==false" @click="isthemedark=!isthemedark" class="svg-padding" icon>
+        <v-btn
+          v-if="isthemedark==false"
+          @click="isthemedark=!isthemedark,$vuetify.theme.dark=!$vuetify.theme.dark"
+          class="svg-padding"
+          icon
+          color="svgColor"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            fill="#000"
-            stroke="#000000"
+            fill="currentColor"
+            stroke
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -59,22 +67,23 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
         </v-btn>
-        <v-btn v-else class="svg-padding" @click="isthemedark=!isthemedark" icon>
+
+        <v-btn v-else class="svg-padding" color="svgColor" @click="isthemedark=!isthemedark, $vuetify.theme.dark=!$vuetify.theme.dark" icon>
           <svg viewBox="0 0 24 24">
             <path
-              fill="#000"
+              fill="currentColor"
               d="M3.55,18.54L4.96,19.95L6.76,18.16L5.34,16.74M11,22.45C11.32,22.45 13,22.45 13,22.45V19.5H11M12,5.5A6,6 0 0,0 6,11.5A6,6 0 0,0 12,17.5A6,6 0 0,0 18,11.5C18,8.18 15.31,5.5 12,5.5M20,12.5H23V10.5H20M17.24,18.16L19.04,19.95L20.45,18.54L18.66,16.74M20.45,4.46L19.04,3.05L17.24,4.84L18.66,6.26M13,0.55H11V3.5H13M4,10.5H1V12.5H4M6.76,4.84L4.96,3.05L3.55,4.46L5.34,6.26L6.76,4.84Z"
             />
           </svg>
         </v-btn>
 
-        <v-menu offset-y content-class="modale" dark open-on-click>
+        <v-menu offset-y content-class="modale" open-on-click>
           <template v-slot:activator="{ on }">
             <!--about-->
-            <v-btn v-on="on" class="svg-padding" icon>
+            <v-btn v-on="on" class="svg-padding" color="svgColor" icon>
               <svg viewBox="0 0 24 24">
                 <path
-                  fill="#000"
+                  fill="currentColor"
                   d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
                 />
               </svg>
@@ -91,7 +100,7 @@
                 </v-list-item-content>
                 <v-list-item-action>
                   <a href="https://github.com/sumitkolhe/Reduced" target="_blank">
-                    <v-btn icon>
+                    <v-btn icon color="svgColor">
                       <svg viewBox="0 0 24 24">
                         <path
                           fill="currentColor"
@@ -181,7 +190,7 @@
 </template>
 
 <script>
-import api from "../api";
+import api from "../controller/api";
 
 export default {
   name: "Navbar",
@@ -265,7 +274,7 @@ h2 {
   font-size: 2.5rem;
   font-weight: 800;
   letter-spacing: 0px;
-  color: #000;
+
   margin: 0rem 1rem;
 }
 
@@ -283,7 +292,7 @@ svg {
     font-size: 1.8rem;
     font-weight: 800;
     letter-spacing: 0px;
-    color: #000;
+
     margin: 0rem 1rem;
   }
 
