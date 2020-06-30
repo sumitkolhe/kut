@@ -1,7 +1,10 @@
-#Type:String -> Enter MonogDB database URL here
-MONGO_URL = 
+#Type:String -> Enter MonogDB production database URL here. 
+MONGO_PROD_URL = 
 
-#Type:Integer -> Enter port here. Default is 80
+#Type:String  -> Enter local MongoDB development database URL here.
+MONGO_DEV_URL = mongodb://localhost:27017/development
+
+#Type:Integer -> Enter port here. If not supplied app will run on port 80
 PORT = 80
 
 #Type:String -> Set domain name of the website here. The provided domain name will be used for shorturl generation and redirection
