@@ -19,6 +19,7 @@
   font-size: large;
   padding: 1rem 1rem 1rem 1rem;
   line-height: 1.5rem;
+  outline: none;
 }
 .urlboxdark {
   border: 0.2rem solid #f1f1f1;
@@ -46,6 +47,7 @@
   transition: all 0.1s ease;
   font-weight: 600;
   margin-bottom: 2rem;
+  outline: none;
 }
 .btndark {
   background-color: rgb(255, 255, 255);
