@@ -1,6 +1,6 @@
 {
   "name": "reduced",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "server/index.js",
   "scripts": {
     "dev": "set NODE_ENV=development&&nodemon server/index.js",
