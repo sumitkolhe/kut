@@ -1,21 +1,8 @@
 <template>
-  <v-app >
-    <Navbar />
-    <v-main style="z-index:0;" >
-      <vue-particles
-        color=#000
-        :particleOpacity="0.8"
-        :particlesNumber="30"
-        shapeType="circle"
-        :particleSize="3"
-        linesColor="#2c2b2b"
-        :linesWidth="1"
-        :lineLinked="true"
-        :lineOpacity="0.4"
-        :linesDistance="150"
-        :moveSpeed="2"
-      ></vue-particles>
-
+  <v-app>
+    <Navbar @toggle="renderComponent" />
+    <v-main style="z-index:0;">
+      <Particles :key="render" />
       <transition name="fade" mode="out-in">
         <router-view style="z-index:999;" />
       </transition>
@@ -28,32 +15,29 @@
 <script>
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Particles from "@/components/Particles";
+
 export default {
   name: "App",
   components: {
     Navbar,
-    Footer
+    Footer,
+    Particles
   },
-  computed: {
-    particlesNumber() {
-      if (this.$vuetify.breakpoint.sm) return 100;
-      else return 150;
-    },
-
-  },
-
   data() {
     return {
-      color: "#000"
+      render: 1
     };
+  },
+  methods: {
+    renderComponent() {
+      this.render += 1;
+    }
   }
 };
 </script>
 
 <style >
-* {
-  font-family: "Montserrat", sans-serif;
-}
 #particles-js {
   position: absolute;
   width: 100%;
@@ -64,7 +48,6 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-
   transform: scale(1);
 }
 

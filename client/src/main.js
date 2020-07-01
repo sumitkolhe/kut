@@ -3,9 +3,8 @@ import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import router from "./router/router";
 import VueClipboard from "vue-clipboard2";
-import VueQrcode from '@chenfengyuan/vue-qrcode';
-import VueParticles from "vue-particles";
-Vue.use(VueParticles);
+import VueQrcode from "@chenfengyuan/vue-qrcode";
+import "./assets/global.css";
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.use(VueClipboard);
 

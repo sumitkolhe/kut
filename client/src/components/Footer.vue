@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-footer padless inset  color="footerColor" width="100%">
+    <v-footer padless inset color="footerColor" width="100%">
       <v-col class="text-center" cols="12">
         <strong>
           Made with
@@ -55,14 +55,7 @@ export default {
 </script>
 
 <style scoped>
-a,
-a:hover,
-a:active,
-a:visited {
-  color: #000;
-  text-decoration: none;
-  margin-left: 3px;
-}
+
 
 @keyframes heartbeat {
   0% {

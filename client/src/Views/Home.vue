@@ -1,14 +1,14 @@
 <template>
-  <div class="body" >
+  <div class="body">
     <!--  <bg class="bg"></bg>
     <bg2 class="bg2"></bg2>-->
     <!--Fluid needs to be addedd to make the padding remain constant-->
-    <v-container fluid >
+    <v-container fluid>
       <!--Heading for create links  lg md sm xs -->
       <v-row justify="center" color="bgColor">
         <v-col cols="12" sm="10" md="8" lg="8" xl="6" class="mt-2 mt-md-12">
           <v-row justify="center" class="mb-8 mt-2 mt-lg-2 mt-md-0 mx-1" align="center" wrap>
-            <h1 style="font-size:22px; font-weight:500;font-family: " color="black">
+            <h1 style="font-size:22px; font-weight:500; " color="black">
               Create short links quickly
               <svg
                 style="vertical-align:middle;"
@@ -30,7 +30,7 @@
           <v-row justify="center" dense class="mx-1" align="center">
             <input
               class="urlbox"
-              :class="{badurl:badurl}"
+              :class="{'badinfo':badurl, 'urlboxdark':$vuetify.theme.dark}"
               v-model="longurl"
               :placeholder="urlplaceholder"
               v-on:keyup.enter="sub"
@@ -41,8 +41,8 @@
           <!--Alias box -->
           <v-row justify="center" class="mx-1 mx-sm-6 mx-md-12" align="center" dense>
             <input
-              class="alias"
-              v-bind:class="{badalias:badalias}"
+              class="urlbox"
+              :class="{'badinfo':badalias, 'urlboxdark':$vuetify.theme.dark}"
               :placeholder="aliasplaceholder"
               v-model="alias"
               type="text"
@@ -51,9 +51,16 @@
 
           <!--Submit button -->
           <v-row justify="center" class="mt-md-4 mt-sm-0" align="center" dense>
-            <button class="btn mx-2" type="submit" v-on:keyup.enter="sub" @click="sub">{{buttonstatus}}</button>
-
-            
+            <button
+              class="btn"
+              :class="{'btndark':$vuetify.theme.dark}"
+              x-large
+              rounded
+              :ripple="false"
+              type="submit"
+              v-on:keyup.enter="sub"
+              @click="sub"
+            >{{buttonstatus}}</button>
           </v-row>
 
           <!--LocalStorage Links-->
@@ -134,26 +141,31 @@
 
     <!--Snackbars-->
     <div>
-      <v-snackbar color="black" elevation="24" top v-model="copy" rounded="pill">
+      <v-snackbar
+        color="green"
+        elevation="24"
+        top
+        v-model="copy"
+        rounded="pill"
+        timeout="1000"
+      >
         <h3 class="text-center">Copied</h3>
       </v-snackbar>
     </div>
     <div>
-      <v-snackbar color="red" elevation="24" top v-model="limit" rounded="pill">
+      <v-snackbar timeout="3000" color="red" elevation="24" top v-model="limit" rounded="pill">
         <h3 class="text-center">Quota Exceeded</h3>
       </v-snackbar>
     </div>
 
     <!--QR code Modal-->
-    <v-dialog v-model="qrcode" persistent max-width="290">
-      <v-card align-center>
+    <v-dialog v-model="qrcode" overlay-color="black" max-width="250">
+      <v-sheet align-center color="white">
         <v-card-text class="text-center">
           <qrcode :value="qrcodevalue" :options="{ width: 200 }"></qrcode>
         </v-card-text>
-        <v-card-actions class="justify-center">
-          <v-btn color="black" @click="qrcode= false">Close</v-btn>
-        </v-card-actions>
-      </v-card>
+    
+      </v-sheet>
     </v-dialog>
   </div>
 </template>
@@ -254,10 +266,12 @@ export default {
     store() {
       var temp = [];
       temp = JSON.parse(localStorage.getItem("links")) || [];
-      temp.splice(0, 0, { link: this.local });
-      localStorage.setItem("links", JSON.stringify(temp));
+      if (this.local != 500) {
+        //workaround if server does not respond  //500 internal server error
+        temp.splice(0, 0, { link: this.local });
+        localStorage.setItem("links", JSON.stringify(temp));
+      }
       this.local = JSON.parse(localStorage.getItem("links"));
-      console.log(this.local);
     },
 
     removefromlocal(index) {
@@ -276,92 +290,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  font-family: "Montserrat", sans-serif;
-}
-.body {
-  overflow: hidden;
-}
-
-.main {
-  padding: 3rem 1rem;
-}
-
-.btn {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  border-radius: 1.6rem;
-  font-size: larger;
-  background-color: #000;
-  color: #fff;
-  font-family: "Montserrat", sans-serif;
-  text-decoration: none;
-  transition: all 0.1s ease;
-  outline: none;
-  font-weight: 600;
-  margin-bottom: 2rem;
-  box-shadow: 0 0 0 2px #f1f1f1;
-}
-
-::placeholder {
-  font-weight: 700;
-}
-
-.btn:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-}
-
-.urlbox {
-  border-radius: 0.75rem;
-  margin: 0rem 0rem 1.5rem 0rem;
-  min-width: 100%;
-  border: 0.2rem solid #f1f1f1;
-  outline: none;
-  background-color: #ffffff;
-  font-weight: bolder;
-  font-size: large;
-  padding: 1rem 1rem 1rem 1rem;
-  line-height: 1.5rem;
-  -webkit-appearance: none;
-}
-
-.badurl {
-  border: 0.2rem solid #f55;
-  box-shadow: 0 0 10px #f55;
-}
-
-.alias {
-  background-color: #ffffff;
-  border-radius: 0.75rem;
-  margin: 0rem 0rem 1.5rem 0rem;
-  min-width: 100%;
-  border: 0.2rem solid #f1f1f1;
-  outline: none;
-  font-weight: bolder;
-  font-size: large;
-  padding: 1rem 1rem 1rem 1rem;
-  line-height: 1.5rem;
-  -webkit-appearance: none;
-}
-
-.badalias {
-  border: 0.2rem solid #f55;
-  box-shadow: 0 0 10px #f55;
-}
-
-.urlbox:focus {
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-}
-
-.alias:focus {
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* ============================================================
-	Responsive Table via Data Label
-============================================================ */
 table {
   border-radius: 0.75rem;
   background-color: #121212;
@@ -370,6 +298,7 @@ table {
   font-size: 15px;
   color: #b3b3b3;
   width: 100%;
+  border: 2px solid #424242;
 }
 
 table thead tr th {

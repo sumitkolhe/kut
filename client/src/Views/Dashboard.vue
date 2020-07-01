@@ -1,126 +1,122 @@
 <template>
-  <v-container fluid class="px-xl-12 px-lg-10 px-md-10 px-sm-10 px-cols-4 body">
-    <v-row justify="center" class="mt-xl-10 mt-lg-10 mt-md-8 mt-sm-6 mt-cols-6">
-      <v-col justify="center" cols="12" sm="12" md="10" lg="8" xl="8">
-        <v-sheet justify="center" >
-          <v-row>
-            <v-col align="center" cols="12" sm="12" md="12" lg="12" xl="12">
-              <h1 class="mb-0" color="black">&#128075; Hey,</h1>
-            </v-col>
-          </v-row>
+  <v-container class="body" fluid>
+    <!--Heading for create links  lg md sm xs -->
+    <v-row justify="center">
+      <v-col cols="12" sm="10" md="8" lg="10" xl="8" class="mt-2 mt-md-8">
+        <v-row justify="center" class="mb-6 mt-2 mt-lg-0 mt-md-0 mx-1" align="center" wrap>
+          <h1 style="font-size:32px; font-weight:700;font-family: " color="black">&#128075; Hey</h1>
+        </v-row>
+        <v-row justify="center" class="mb-6 mx-1" align="center" wrap>
+          <h1
+            style="font-size:22px; font-weight:500;font-family: "
+            color="black"
+          >Enter a link to check its details</h1>
+        </v-row>
 
-          <v-row>
-            <v-col align="center" cols="12" sm="12" md="12" lg="12" xl="12">
-              <h2 class="mb-0 mx-2 font-weight-medium" color="black">Enter the link to get its statistics</h2>
-            </v-col>
-          </v-row>
+        <!--FULL URL box -->
+        <v-row justify="center" class="mx-1" align="center">
+          <v-col cols="12" sm="10" md="10" lg="8" xl="8">
+            <input
+              class="urlbox"
+              :class="{'badinfo':badurl, 'urlboxdark':$vuetify.theme.dark}"
+              v-model="staturl"
+              :placeholder="placeholder"
+              v-on:keyup.enter="staturl"
+              type="text"
+            />
+          </v-col>
+        </v-row>
 
-          <v-row>
-            <v-col align="center" cols="12" sm="12" md="12" lg="12" xl="12">
-              <input
-                class="urlbox"
-                :class="{badurl:badurl}"
-                :placeholder="placeholder"
-                v-model="staturl"
-                v-on:keyup.enter="getstats"
-              />
+        <!--Check button -->
+        <v-row justify="center" class="mt-md-0 mt-sm-0" align="center" dense>
+          <button
+            class="btn"
+            :class="{'btndark':$vuetify.theme.dark}"
+            x-large
+            rounded
+            :ripple="false"
+            type="submit"
+            v-on:keyup.enter="getstats"
+            @click="getstats"
+          >{{buttonstatus}}</button>
+        </v-row>
 
-              <button
-                type="submit"
-                @click="getstats"
-                v-on:keyup.enter="getstats"
-                class="btn"
-              >{{buttonstatus}}</button>
-            </v-col>
-          </v-row>
-        </v-sheet>
-      </v-col>
+        <!--Detailed Statistics-->
 
-      <!-- GRAPH
-      <v-col>
-        
-        <v-sheet class="graphsheet" v-if="value!=''" color="#f1f1f1">
-          <v-sparkline
-            :labels="labels"
-            :value="value"
-            :gradient="gradient"
-            color="#181818"
-            height="93"
-            padding="20"
-            auto-draw
-            auto-draw-duration
-            stroke-linecap="round"
-            smooth="10"
-            show-labels
-            line-width="2"
-          >
-            <template class="graphfont" v-slot:label="item">{{ item.value }}</template>
-          </v-sparkline>
-        </v-sheet>
-     
-      </v-col>
-      -->
-    </v-row>
+        <v-row v-if="createdon!=''" class="mt-10 justify-space-around">
+          <v-col cols="12" sm="6" md="6" lg="3" xl="3">
+            <v-sheet class="mx-auto card">
+              <svg style="width:32px;height:32px" viewBox="0 0 24 24">
+                <path
+                  fill="#fff"
+                  d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"
+                />
+              </svg>
+              <v-card-title>
+                <span class="mx-auto card-title">Created on</span>
+              </v-card-title>
+              <v-card-text class="card-info">{{createtime}} | {{createdon}}</v-card-text>
+            </v-sheet>
+          </v-col>
 
-    <v-spacer></v-spacer>
+          <v-col cols="12" sm="6" md="6" lg="3" xl="3">
+            <v-sheet class="mx-auto card">
+              <svg style="width:32px;height:32px" viewBox="0 0 24 24">
+                <path
+                  fill="#fff"
+                  d="M8,15A2,2 0 0,1 6,13A2,2 0 0,1 8,11A2,2 0 0,1 10,13A2,2 0 0,1 8,15M10.5,17L12,14L13.5,17H10.5M16,15A2,2 0 0,1 14,13A2,2 0 0,1 16,11A2,2 0 0,1 18,13A2,2 0 0,1 16,15M22,11A10,10 0 0,0 12,1A10,10 0 0,0 2,11C2,13.8 3.2,16.3 5,18.1V22H19V18.1C20.8,16.3 22,13.8 22,11M17,20H15V18H13V20H11V18H9V20H7V17.2C5.2,15.7 4,13.5 4,11A8,8 0 0,1 12,3A8,8 0 0,1 20,11C20,13.5 18.8,15.8 17,17.2V20Z"
+                />
+              </svg>
+              <v-card-title>
+                <span class="mx-auto card-title">Expiration Date</span>
+              </v-card-title>
+              <v-card-text class="card-info">{{expiretime}} | {{expiredate}}</v-card-text>
+            </v-sheet>
+          </v-col>
 
-    <!--Detailed Statistics-->
+          <v-col cols="12" sm="6" md="6" lg="3" xl="3">
+            <v-sheet class="mx-auto card">
+              <svg style="width:32px;height:32px" viewBox="0 0 24 24">
+                <path
+                  fill="#fff"
+                  d="M10.76,8.69A0.76,0.76 0 0,0 10,9.45V20.9C10,21.32 10.34,21.66 10.76,21.66C10.95,21.66 11.11,21.6 11.24,21.5L13.15,19.95L14.81,23.57C14.94,23.84 15.21,24 15.5,24C15.61,24 15.72,24 15.83,23.92L18.59,22.64C18.97,22.46 19.15,22 18.95,21.63L17.28,18L19.69,17.55C19.85,17.5 20,17.43 20.12,17.29C20.39,16.97 20.35,16.5 20,16.21L11.26,8.86L11.25,8.87C11.12,8.76 10.95,8.69 10.76,8.69M15,10V8H20V10H15M13.83,4.76L16.66,1.93L18.07,3.34L15.24,6.17L13.83,4.76M10,0H12V5H10V0M3.93,14.66L6.76,11.83L8.17,13.24L5.34,16.07L3.93,14.66M3.93,3.34L5.34,1.93L8.17,4.76L6.76,6.17L3.93,3.34M7,10H2V8H7V10"
+                />
+              </svg>
+              <v-card-title>
+                <span class="mx-auto card-title">Total Clicks</span>
+              </v-card-title>
+              <v-card-text class="card-info">{{totalclicks}}</v-card-text>
+            </v-sheet>
+          </v-col>
 
-    <v-row v-if="createdon!=''" class="mt-12 justify-center">
-      <v-col cols="12" sm="6" md="6" lg="2" xl="2">
-        <v-sheet class="mx-auto stats" dark>
-          <v-icon class="info-icons" large>mdi-link-variant-plus</v-icon>
-          <v-card-title>
-            <span class="mx-auto font-weight-dark card-font">Created on</span>
-          </v-card-title>
-
-          <v-card-text class="card-text">{{createdon}}</v-card-text>
-        </v-sheet>
-      </v-col>
-
-      <v-col cols="12" sm="6" md="6" lg="2" xl="2">
-        <v-sheet class="mx-auto stats" dark>
-          <v-icon class="info-icons" large>mdi-timer-sand</v-icon>
-          <v-card-title>
-            <span class="mx-auto font-weight-dark card-font">Created time</span>
-          </v-card-title>
-
-          <v-card-text class="card-text">{{createtime}}</v-card-text>
-        </v-sheet>
-      </v-col>
-
-      <v-col cols="12" sm="6" md="6" lg="2" xl="2">
-        <v-sheet class="mx-auto stats" dark>
-          <v-icon class="info-icons" large>mdi-cursor-default-click-outline</v-icon>
-          <v-card-title>
-            <span class="mx-auto font-weight-dark card-font">Total Clicks</span>
-          </v-card-title>
-
-          <v-card-text class="card-text">{{totalclicks}}</v-card-text>
-        </v-sheet>
-      </v-col>
-
-      <v-col cols="12" sm="6" md="6" lg="2" xl="2">
-        <v-sheet class="mx-auto stats" dark>
-          <v-icon class="info-icons" large>mdi-open-in-new</v-icon>
-          <v-card-title>
-            <span class="mx-auto font-weight-dark card-font">Orignal link</span>
-          </v-card-title>
-
-          <v-card-text class="card-text">
-            <a :href="originallink" target="_blank">{{originallink}}</a>
-          </v-card-text>
-        </v-sheet>
+          <v-col cols="12" sm="6" md="6" lg="3" xl="3">
+            <v-sheet class="mx-auto card">
+              <svg style="width:32px;height:32px" viewBox="0 0 24 24">
+                <path
+                  fill="#fff"
+                  d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
+                />
+              </svg>
+              <v-card-title>
+                <span class="mx-auto card-title">Orignal link</span>
+              </v-card-title>
+              <v-card-text class="card-info">
+                <a :href="originallink" target="_blank">{{originallink}}</a>
+              </v-card-text>
+            </v-sheet>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
 
+    <!--SNACKBARS-->
     <div>
-       <v-snackbar  color="red" elevation="24" top v-model="aliasdoesnotexist" rounded="pill">
+      <v-snackbar timeout="3000" color="red" elevation="24" top v-model="aliasdoesnotexist" rounded="pill">
         <h3 class="text-center">Invalid Link</h3>
       </v-snackbar>
     </div>
     <div>
-       <v-snackbar color="red" elevation="24" top v-model="limit" rounded="pill">
+      <v-snackbar timeout="3000" color="red" elevation="24" top v-model="limitReached" rounded="pill">
         <h3 class="text-center">Quota Exceeded</h3>
       </v-snackbar>
     </div>
@@ -141,12 +137,13 @@ export default {
       totalclicks: "",
       createdon: "",
       createtime: "",
+      expiredate: "",
+      expiretime: "",
       placeholder: "Enter a shortened link",
       response: "",
       date: "",
-      limit: false,
+      limitReached: false,
       statdate: "",
-      sample: [],
       buttonstatus: "Check",
       badurl: false,
       aliasdoesnotexist: false,
@@ -163,6 +160,8 @@ export default {
       this.totalclicks = "";
       this.originallink = "";
       this.createtime = "";
+      this.expiredate = "";
+      this.expiretime = "";
       this.badurl = false;
       this.value = [];
       this.labels = [];
@@ -174,11 +173,13 @@ export default {
 
         if (this.response.status == 200) {
           this.date = new Date(this.response.data.created);
+          this.expire = new Date(this.response.data.expire);
           this.createdon = this.date.toDateString();
           this.createtime = this.response.data.created.match(/\d\d:\d\d/)[0];
+          this.expiretime = this.response.data.expire.match(/\d\d:\d\d/)[0];
           this.totalclicks = this.response.data.clicks;
           this.originallink = this.response.data.longurl;
-
+          this.expiredate = this.expire.toDateString();
           for (var i = 0; i < this.response.data.stats.length; i++) {
             this.statdate = new Date(this.response.data.stats[i]);
             this.store[i] =
@@ -191,6 +192,7 @@ export default {
           var result = this.graph(this.store);
           this.labels = result[0]; //labels for the graph
           this.value = result[1];
+          console.log(this.response.data.stats.length);
         } else if (this.response.status == 404) {
           this.aliasdoesnotexist = true;
         } else if (this.response.status == 400) {
@@ -198,7 +200,7 @@ export default {
           this.staturl = "";
           this.placeholder = "Not a valid link";
         } else if (this.response.status == 429) {
-          this.limit = true;
+          this.limitReached = true;
         }
       }
       this.buttonstatus = "Check";
@@ -226,128 +228,37 @@ export default {
 </script>
 
 <style scoped>
-* {
-  font-family: "Montserrat", sans-serif;
-}
-.body {
-  overflow: hidden;
-}
-
 a {
   text-decoration: none;
 }
 /* visited link */
 a:visited {
-  color: white;
+  color: #c5c5c5;
 }
 
-a:link {
-  color: #fff;
-}
-
-/* selected link */
-a:active {
-  color: white;
-}
-.card-text {
-  font-size: large;
-  font-weight: 700;
-  margin-top: 0.5rem;
-  padding: 0 1.2rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.graphfont {
-  font-weight: 900;
-}
-
-.card-font {
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-align: center;
-  color: #969696;
-}
-::placeholder {
-  font-weight: 900;
-}
-.style {
-  display: inline-block;
-}
-.sheet {
-  padding: 1.5rem 1rem;
-  border-radius: 1.5rem;
-  margin-top: 1rem;
-}
-
-.graphsheet {
-  padding: 1.5rem 1rem;
-  border-radius: 1.5rem;
-  min-height: 93px;
-}
-
-.info-icons {
-  color: #969696;
-  margin-bottom: -5px;
-}
-
-.stats {
+.card {
   padding-top: 1.5rem;
   border-radius: 1.5rem;
   min-width: 15ch;
   max-width: 300px;
   min-height: 230px;
   text-align: center;
+  background-color: #202020;
 }
-
-.urlbox {
-  border-radius: 0.75rem;
-  margin: 0rem 0.5rem 1.5rem 0.5rem;
-  min-width: fit-content;
-  border: 0.2rem solid #d6d6d6;
-  outline: none;
-  font-weight: bolder;
-  font-size: large;
-  padding: 1rem 1rem;
-  line-height: 1.5rem;
-  -webkit-appearance: none;
+.card-title {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #ffffff;
 }
-
-.badurl {
-  border: 0.2rem solid #f55;
-  box-shadow: 0 0 10px #f55;
-}
-
-::placeholder {
+.card-info {
+  font-size: 18px;
   font-weight: 600;
-}
-
-.urlbox:focus {
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-}
-
-h2 {
- 
-  font-weight: 400;
-}
-
-.btn:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 1);
-}
-.btn {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  margin-left: 0.4rem;
-  padding: 0.8rem 1.5rem 0.8rem 1.5rem;
-  border-radius: 1.6rem;
-  font-size: larger;
-  background-color: #000;
-  color: #fff;
-  font-family: "Montserrat", sans-serif;
-  text-decoration: none;
-  transition: all 0.1s ease;
-  outline: none;
-  font-weight: 600;
-  box-shadow: 0 0 0 2px #f1f1f1;
+  margin-top: 0.5rem;
+  padding: 0 1.2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.527);
 }
 </style>

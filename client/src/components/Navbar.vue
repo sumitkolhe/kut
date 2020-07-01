@@ -2,9 +2,7 @@
   <nav>
     <!-- APPBAR -->
     <v-app-bar :height="height" color="navbarColor" flat app>
-      <!--navigation drawer-->
-
-      <v-btn icon color="svgColor"  class="hidden-sm-and-up" @click="drawer=!drawer">
+      <v-btn icon color="svgColor" class="hidden-sm-and-up" @click="drawer=!drawer">
         <svg viewBox="0 0 24 24">
           <path
             fill="currentColor"
@@ -13,31 +11,35 @@
         </svg>
       </v-btn>
 
-      <h2 >{{title}}</h2>
+      <h2>{{title}}</h2>
 
       <v-spacer></v-spacer>
       <!--Routes-->
+
+      <!--Home show dashboard logo-->
       <div>
         <v-btn
           class="svg-padding"
-          v-if="location==true && mobile==false"
+          v-if="athomeroute==true && mobileMode==false"
           icon
           color="svgColor"
-          @click="$router.push('/dashboard'),location=!location"
+          @click="changeRoute()"
         >
           <svg viewBox="0 0 24 24">
             <path
               fill="currentColor"
-              d="M13,2.05V5.08C16.39,5.57 19,8.47 19,12C19,12.9 18.82,13.75 18.5,14.54L21.12,16.07C21.68,14.83 22,13.45 22,12C22,6.82 18.05,2.55 13,2.05M12,19A7,7 0 0,1 5,12C5,8.47 7.61,5.57 11,5.08V2.05C5.94,2.55 2,6.81 2,12A10,10 0 0,0 12,22C15.3,22 18.23,20.39 20.05,17.91L17.45,16.38C16.17,18 14.21,19 12,19Z"
+              d="M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z"
             />
           </svg>
         </v-btn>
+
+        <!--Dashboard  shows home logo-->
         <v-btn
           class="hidden-xs-down svg-padding"
           icon
           color="svgColor"
-          v-else-if="location==false && mobile==false"
-          @click="$router.push('/'),location=!location"
+          v-else-if="athomeroute==false && mobileMode==false"
+          @click="changeRoute()"
         >
           <svg viewBox="0 0 24 24">
             <path
@@ -50,7 +52,7 @@
         <!--theme-->
         <v-btn
           v-if="isthemedark==false"
-          @click="isthemedark=!isthemedark,$vuetify.theme.dark=!$vuetify.theme.dark"
+          @click="changeTheme()"
           class="svg-padding"
           icon
           color="svgColor"
@@ -68,7 +70,7 @@
           </svg>
         </v-btn>
 
-        <v-btn v-else class="svg-padding" color="svgColor" @click="isthemedark=!isthemedark, $vuetify.theme.dark=!$vuetify.theme.dark" icon>
+        <v-btn v-else class="svg-padding" color="svgColor" @click="changeTheme()" icon>
           <svg viewBox="0 0 24 24">
             <path
               fill="currentColor"
@@ -126,19 +128,22 @@
 
     <!-- NAVIGATION DRAWER  -->
     <v-navigation-drawer
-      mobile-breakpoint="100000"
+      mobile-breakpoint="999999"
       width="350"
       v-model="drawer"
       app
       fixed
       floating
       clipped
+      :class="{'navigationDrawerColor':!$vuetify.theme.dark,'navigationDrawerColor':$vuetify.theme.dark}"
     >
       <v-list flat>
-        <v-list-item-group active-class="active">
-          <v-list-item class="card" @click="$router.push('/')">
+        <v-list-item-group :mandatory="true" active-class="active">
+          <v-list-item class="selecteditem" @click="changeRoute()">
             <v-list-item-content>
-              <v-list-item-title class="text">Home</v-list-item-title>
+              <v-list-item-title
+                :class="{'white--text navigationmenutext':this.$vuetify.theme.dark,'black--text navigationmenutext':!this.$vuetify.theme.dark}"
+              >Home</v-list-item-title>
             </v-list-item-content>
             <v-list-item-icon class="image">
               <svg viewBox="0 0 24 24">
@@ -150,15 +155,17 @@
             </v-list-item-icon>
           </v-list-item>
 
-          <v-list-item class="card" @click="$router.push('/dashboard')">
+          <v-list-item class="selecteditem" @click="changeRoute()">
             <v-list-item-content>
-              <v-list-item-title class="text">Dashboard</v-list-item-title>
+              <v-list-item-title
+                :class="{'white--text navigationmenutext':this.$vuetify.theme.dark,'black--text navigationmenutext':!this.$vuetify.theme.dark}"
+              >Dashboard</v-list-item-title>
             </v-list-item-content>
             <v-list-item-icon class="image">
               <svg viewBox="0 0 24 24">
                 <path
                   fill="#000"
-                  d="M13,2.05V5.08C16.39,5.57 19,8.47 19,12C19,12.9 18.82,13.75 18.5,14.54L21.12,16.07C21.68,14.83 22,13.45 22,12C22,6.82 18.05,2.55 13,2.05M12,19A7,7 0 0,1 5,12C5,8.47 7.61,5.57 11,5.08V2.05C5.94,2.55 2,6.81 2,12A10,10 0 0,0 12,22C15.3,22 18.23,20.39 20.05,17.91L17.45,16.38C16.17,18 14.21,19 12,19Z"
+                  d="M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z"
                 />
               </svg>
             </v-list-item-icon>
@@ -166,21 +173,13 @@
         </v-list-item-group>
       </v-list>
       <template v-slot:append>
-        <div class="feedback d-lg-none">
-          <v-btn icon @click="drawer= !drawer">
-            <svg
-              viewBox="0 0 24 24"
-              width="32"
-              height="32"
-              stroke="#2c2b2b"
-              stroke-width="2.5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <line x1="15" y1="9" x2="9" y2="15" />
-              <line x1="9" y1="9" x2="15" y2="15" />
+        <div class="text-center mb-4 d-lg-none">
+          <v-btn color="svgColor" icon @click="drawer= !drawer">
+            <svg style="width:40px;height:40px" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z"
+              />
             </svg>
           </v-btn>
         </div>
@@ -191,7 +190,7 @@
 
 <script>
 import api from "../controller/api";
-
+//import { bus } from "../main";
 export default {
   name: "Navbar",
   components: {},
@@ -200,12 +199,42 @@ export default {
       if (this.$vuetify.breakpoint.xs) return 65;
       else return 80;
     },
-    mobile() {
+    mobileMode() {
       if (this.$vuetify.breakpoint.xs) return true;
       else return false;
     }
   },
 
+  mounted() {
+    this.$vuetify.theme.dark =
+      JSON.parse(localStorage.getItem("isThemeDark")) || false;
+
+    if (this.$router.currentRoute.path == "/") {
+      this.athomeroute = true;
+    } else this.athomeroute = false;
+  },
+
+  methods: {
+    changeTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      this.isthemedark = !this.isthemedark;
+      localStorage.setItem(
+        "isThemeDark",
+        JSON.stringify(this.$vuetify.theme.dark)
+      );
+      this.$emit("toggle");
+    },
+
+    changeRoute() {
+      if (this.athomeroute == true) {
+        this.$router.push("/dashboard");
+        this.athomeroute = false;
+      } else if (this.athomeroute == false) {
+        this.$router.push("/");
+        this.athomeroute = true;
+      }
+    }
+  },
   data() {
     return {
       title: process.env.VUE_APP_TITLE,
@@ -213,12 +242,12 @@ export default {
       content: "OFFLINE",
       color: "error",
       response: null,
-      location: true,
       drawer: false,
-      isthemedark: false
+      isthemedark: false,
+      athomeroute: ""
     };
   },
-  async mounted() {
+  async created() {
     this.response = await api.getstatus();
 
     if (this.response.status == 200 && this.response.data.status == "OK") {
@@ -235,33 +264,26 @@ export default {
   font-weight: 500;
   border-radius: 0.5rem;
 }
-.card {
+.selecteditem {
   margin: 1rem 1.5rem;
   font-weight: 600;
   padding: 0.8rem 1.8rem;
-}
-
-.feedback {
-  text-align: center;
-  margin: 1rem;
 }
 
 a {
   text-decoration: none;
 }
 
-.about {
-  border-radius: 2rem;
-}
 .active {
-  background-color: #f1f1f1;
+  background-color: #5858583d;
   border-radius: 1rem;
 }
 
-.text {
-  font-size: 18px;
-  font-weight: 600;
-  color: #000000 !important;
+.navigationmenutext {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+ 
 }
 
 .image {
