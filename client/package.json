@@ -11,6 +11,7 @@
     "@chenfengyuan/vue-qrcode": "^1.0.2",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "particles.js": "^2.0.0",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",
     "vue-router": "^3.3.4",
