@@ -11,19 +11,18 @@ const vuetify = new Vuetify({
     themes: {
       light: {
         svgColor: "#000",
-        text:"#000",
-        navbarColor:"#fff",
-        footerColor:"#fff",
-        bgColor:"#fff",
-        btnn:"#000"
+        navbarColor: "#fff",
+        footerColor: "#fff",
+        textColor: "#fff",
+        navigationDrawerColor: "#f55555"
       },
       dark: {
         svgColor: "#fff",
-        text:"#fff",
-        navbarColor:"#000",
-        footerColor:"#000",
-        bgColor:"#000",
-        btnn:"#fff"
+        textColor: "#000",
+        navbarColor: "#121212",
+        footerColor: "#121212",
+        navigationDrawerColor: "#212121"
+      
       },
     },
   },
