@@ -1,0 +1,70 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+.body {
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/*URL BOX START*/
+
+.urlbox {
+  border-radius: 0.75rem;
+  margin: 0rem 0rem 1.5rem 0rem;
+  min-width: 100%;
+  border: 0.2rem solid #f1f1f1;
+  background-color: #ffffff;
+  font-weight: bolder;
+  font-size: large;
+  padding: 1rem 1rem 1rem 1rem;
+  line-height: 1.5rem;
+}
+.urlboxdark {
+  border: 0.2rem solid #f1f1f1;
+  background-color: #fff;
+}
+.urlbox:focus {
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+.urlboxdark:focus {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+/*URL BOX END*/
+
+/*BUTTON START*/
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 1.6rem;
+  font-size: larger;
+  background-color: #000;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  transition: all 0.1s ease;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.btndark {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.btn:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0);
+}
+.btndark:hover {
+  box-shadow: 0 0 12px rgb(255, 255, 255);
+}
+/*BUTTON END*/
+
+.badinfo {
+  border: 0.2rem solid #f55;
+  box-shadow: 0 0 10px #f55;
+}
+
+::placeholder {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
