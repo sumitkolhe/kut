@@ -84,7 +84,7 @@ $ cd Reduced
 $ npm run dev
 ```
 
-> **NOTE :** Running only the backend server will use previously generated static files ( from server -> static ) for the frontend.
+> **NOTE :** Running only the backend server will use previously generated static files ( from server -> views -> static ) for the frontend.
 
 #### :art: Frontend Setup
 
@@ -117,7 +117,7 @@ $ cd client
 $ npm run build
 ```
 
-> **NOTE :** All frontend builds will automatically be placed in **server -> static**. You can edit this in **client -> vue.config.js**
+> **NOTE :** All frontend builds will automatically be placed in **server -> views -> static**. You can edit this in **client -> vue.config.js**
 
 ---
 
