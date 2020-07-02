@@ -8,47 +8,34 @@ const mongoOpts = {
   useCreateIndex: true,
 };
 
-if (process.env.NODE_ENV === "production") {
-  var mongoConnection = mongoose.createConnection(
-    process.env.MONGO_PROD_URL,
-    mongoOpts
-  );
+var mongoConnection = mongoose.createConnection(
+  process.env.MONGO_URL,
+  mongoOpts
+);
 
-  mongoConnection.on("connected", () => {
-    console.log("Connected to MongoDB Production -> limits");
-  });
-} else if (process.env.NODE_ENV === "development") {
-  var mongoConnection = mongoose.createConnection(
-    process.env.MONGO_DEV_URL,
-    mongoOpts
-  );
-
-  mongoConnection.on("connected", () => {
-    console.log("Connected to MongoDB Development -> limits");
-  });
-}
+mongoConnection.on("connected", () => {
+  console.log("Connected [Production] | collection => limits");
+});
 
 const opts = {
   mongo: mongoConnection,
   storeClient: mongoConnection,
   keyPrefix: "limits",
-  points: 5,  // total points available
+  points: 5, // total points available
   duration: 60, //in seconds
 };
 
 const rateLimiterMongo = new RateLimiterMongo(opts);
 
-async function limitchecker(req, res,next) {
+async function limitchecker(req, res, next) {
   await rateLimiterMongo
-    .consume(req.ip, 1) //consumes 1 point 
+    .consume(req.ip, 1) //consumes 1 point
     .then(() => {
-     next();
+      next();
     })
     .catch((rateLimiterRes) => {
       res.status(429).end();
     });
 }
-
-
 
 module.exports = limitchecker;
