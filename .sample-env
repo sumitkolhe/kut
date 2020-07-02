@@ -1,9 +1,6 @@
 #Type:String -> Enter MonogDB production database URL here. 
 MONGO_PROD_URL = 
 
-#Type:String  -> Enter local MongoDB development database URL here.
-MONGO_DEV_URL = mongodb://localhost:27017/development
-
 #Type:Integer -> Enter port here. If not supplied app will run on port 80
 PORT = 80
 
