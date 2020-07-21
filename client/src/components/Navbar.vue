@@ -208,6 +208,7 @@ export default {
   mounted() {
     this.$vuetify.theme.dark =
       JSON.parse(localStorage.getItem("isThemeDark")) || false;
+      this.isthemedark = this.$vuetify.theme.dark
 
     if (this.$router.currentRoute.path == "/") {
       this.athomeroute = true;
