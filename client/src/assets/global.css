@@ -38,8 +38,9 @@
 
 .btn {
   display: inline-block;
-  padding: 0.8rem 2rem;
   border-radius: 1.6rem;
+  height: 55px;
+  width: 130px;
   font-size: larger;
   background-color: #000;
   color: rgb(255, 255, 255);

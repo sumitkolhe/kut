@@ -1,7 +1,5 @@
 <template>
   <div class="body">
-    <!--  <bg class="bg"></bg>
-    <bg2 class="bg2"></bg2>-->
     <!--Fluid needs to be addedd to make the padding remain constant-->
     <v-container fluid>
       <!--Heading for create links  lg md sm xs -->
@@ -52,6 +50,7 @@
           <!--Submit button -->
           <v-row justify="center" class="mt-md-4 mt-sm-0" align="center" dense>
             <button
+              v-if="!loading"
               class="btn"
               :class="{'btndark':$vuetify.theme.dark}"
               x-large
@@ -61,6 +60,18 @@
               v-on:keyup.enter="sub"
               @click="sub"
             >{{buttonstatus}}</button>
+
+            <button
+              v-else
+              class="btn"
+              :class="{'btndark':$vuetify.theme.dark}"
+              x-large
+              rounded
+              :ripple="false"
+              type="submit"
+              v-on:keyup.enter="sub"
+              @click="sub"
+            ><div class="shortenSpinner"></div></button>
           </v-row>
 
           <!--LocalStorage Links-->
@@ -141,14 +152,7 @@
 
     <!--Snackbars-->
     <div>
-      <v-snackbar
-        color="green"
-        elevation="24"
-        top
-        v-model="copy"
-        rounded="pill"
-        timeout="1000"
-      >
+      <v-snackbar color="green" elevation="24" top v-model="copy" rounded="pill" timeout="1000">
         <h3 class="text-center">Copied</h3>
       </v-snackbar>
     </div>
@@ -164,7 +168,6 @@
         <v-card-text class="text-center">
           <qrcode :value="qrcodevalue" :options="{ width: 200 }"></qrcode>
         </v-card-text>
-    
       </v-sheet>
     </v-dialog>
   </div>
@@ -184,20 +187,20 @@ export default {
           text: "Orignal",
           align: "center",
           value: "link.longurl",
-          sortable: false
+          sortable: false,
         },
         {
           text: "Shortened",
           align: "center",
           value: "link.shorturl",
-          sortable: false
+          sortable: false,
         },
         {
           text: "Actions",
           align: "center",
           value: "actions",
-          sortable: false
-        }
+          sortable: false,
+        },
       ],
       qrcode: false,
       qrcodevalue: "",
@@ -211,9 +214,10 @@ export default {
       limit: false,
       local: [],
       drawer: false,
+      loading: false,
       buttonstatus: "Shorten",
       urlplaceholder: "Enter long url...",
-      aliasplaceholder: "Alias (Optional)"
+      aliasplaceholder: "Alias (Optional)",
     };
   },
 
@@ -227,6 +231,7 @@ export default {
         this.badalias = false;
         this.badurl = false;
         this.buttonstatus = "Shortening";
+        this.loading = true
         this.response = await api.putURL(this.longurl, this.alias);
 
         if (this.response.status == "IURL") {
@@ -261,6 +266,7 @@ export default {
         this.urlplaceholder = "Invalid URL";
       }
       this.buttonstatus = "Shorten";
+      this.loading = false
     },
 
     store() {
@@ -284,12 +290,32 @@ export default {
       this.qrcode = !this.qrcode;
       var temp = JSON.parse(localStorage.getItem("links"));
       this.qrcodevalue = temp[index].link.shorturl;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
+.shortenSpinner {
+  margin: 0px  0px -4px 0px;
+  display: inline-block;
+  border: 4px solid hsl(0, 0%, 83%);
+  border-left-color: hsl(0, 0%, 0%);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: donut-spin 1.2s linear infinite;
+}
+
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 table {
   border-radius: 0.75rem;
   background-color: #121212;
