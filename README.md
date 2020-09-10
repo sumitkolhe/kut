@@ -1,7 +1,7 @@
 # Reduced
 
 
-### 🔗 A powerful modern custom URL shortener with a minimalistic design and public API by [Sumit Kolhe](https://github.com/sumitkolhe)
+### 🔗 A powerful modern custom URL shortener with a minimalistic design and public API
 
 ---
 
