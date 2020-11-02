@@ -11,6 +11,7 @@ app.use(express.json());
 //Routes
 
 app.get("/api/status", (req, res) => {
+  console.log("Server online")
   res.status(200).json({ status: "OK" });
 });
 
