@@ -2,7 +2,12 @@
   <nav>
     <!-- APPBAR -->
     <v-app-bar :height="height" color="navbarColor" flat app>
-      <v-btn icon color="svgColor" class="hidden-sm-and-up" @click="drawer=!drawer">
+      <v-btn
+        icon
+        color="svgColor"
+        class="hidden-sm-and-up"
+        @click="drawer = !drawer"
+      >
         <svg viewBox="0 0 24 24">
           <path
             fill="currentColor"
@@ -11,8 +16,9 @@
         </svg>
       </v-btn>
 
-      <h2>{{title}}</h2>
-
+      <router-link to="/">
+        <h2>{{ title }}</h2>
+      </router-link>
       <v-spacer></v-spacer>
       <!--Routes-->
 
@@ -20,7 +26,7 @@
       <div>
         <v-btn
           class="svg-padding"
-          v-if="athomeroute==true && mobileMode==false"
+          v-if="athomeroute == true && mobileMode == false"
           icon
           color="svgColor"
           @click="changeRoute()"
@@ -38,7 +44,7 @@
           class="hidden-xs-down svg-padding"
           icon
           color="svgColor"
-          v-else-if="athomeroute==false && mobileMode==false"
+          v-else-if="athomeroute == false && mobileMode == false"
           @click="changeRoute()"
         >
           <svg viewBox="0 0 24 24">
@@ -51,7 +57,7 @@
 
         <!--theme-->
         <v-btn
-          v-if="isthemedark==false"
+          v-if="isthemedark == false"
           @click="changeTheme()"
           class="svg-padding"
           icon
@@ -70,7 +76,13 @@
           </svg>
         </v-btn>
 
-        <v-btn v-else class="svg-padding" color="svgColor" @click="changeTheme()" icon>
+        <v-btn
+          v-else
+          class="svg-padding"
+          color="svgColor"
+          @click="changeTheme()"
+          icon
+        >
           <svg viewBox="0 0 24 24">
             <path
               fill="currentColor"
@@ -96,12 +108,17 @@
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title>
-                    <h3>{{title}}</h3>
+                    <h3>{{ title }}</h3>
                   </v-list-item-title>
-                  <v-list-item-subtitle class="subtitle-1">{{version}}</v-list-item-subtitle>
+                  <v-list-item-subtitle class="subtitle-1">{{
+                    version
+                  }}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-action>
-                  <a href="https://github.com/sumitkolhe/Reduced" target="_blank">
+                  <a
+                    href="https://github.com/sumitkolhe/Reduced"
+                    target="_blank"
+                  >
                     <v-btn icon color="svgColor">
                       <svg viewBox="0 0 24 24">
                         <path
@@ -118,11 +135,24 @@
             <v-list>
               <v-list-item>
                 <v-list-tile-title>Server Status</v-list-tile-title>
-                <v-badge class="ml-12" :content="content" inline :color="color"></v-badge>
+                <v-badge
+                  class="ml-12"
+                  :content="content"
+                  inline
+                  :color="color"
+                ></v-badge>
               </v-list-item>
             </v-list>
           </v-card>
         </v-menu>
+        <v-btn class="svg-padding" color="svgColor" @click="changeTheme()" icon>
+          <svg viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.07,18.28C7.5,17.38 10.12,16.5 12,16.5C13.88,16.5 16.5,17.38 16.93,18.28C15.57,19.36 13.86,20 12,20C10.14,20 8.43,19.36 7.07,18.28M18.36,16.83C16.93,15.09 13.46,14.5 12,14.5C10.54,14.5 7.07,15.09 5.64,16.83C4.62,15.5 4,13.82 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,13.82 19.38,15.5 18.36,16.83M12,6C10.06,6 8.5,7.56 8.5,9.5C8.5,11.44 10.06,13 12,13C13.94,13 15.5,11.44 15.5,9.5C15.5,7.56 13.94,6 12,6M12,11A1.5,1.5 0 0,1 10.5,9.5A1.5,1.5 0 0,1 12,8A1.5,1.5 0 0,1 13.5,9.5A1.5,1.5 0 0,1 12,11Z"
+            />
+          </svg>
+        </v-btn>
       </div>
     </v-app-bar>
 
@@ -135,15 +165,22 @@
       fixed
       floating
       clipped
-      :class="{'navigationDrawerColor':!$vuetify.theme.dark,'navigationDrawerColor':$vuetify.theme.dark}"
+      :class="{
+        navigationDrawerColor: !$vuetify.theme.dark,
+        navigationDrawerColor: $vuetify.theme.dark,
+      }"
     >
       <v-list flat>
         <v-list-item-group :mandatory="true" active-class="active">
           <v-list-item class="selecteditem" @click="changeRoute()">
             <v-list-item-content>
               <v-list-item-title
-                :class="{'white--text navigationmenutext':this.$vuetify.theme.dark,'black--text navigationmenutext':!this.$vuetify.theme.dark}"
-              >Home</v-list-item-title>
+                :class="{
+                  'white--text navigationmenutext': this.$vuetify.theme.dark,
+                  'black--text navigationmenutext': !this.$vuetify.theme.dark,
+                }"
+                >Home</v-list-item-title
+              >
             </v-list-item-content>
             <v-list-item-icon class="image">
               <svg viewBox="0 0 24 24">
@@ -158,8 +195,12 @@
           <v-list-item class="selecteditem" @click="changeRoute()">
             <v-list-item-content>
               <v-list-item-title
-                :class="{'white--text navigationmenutext':this.$vuetify.theme.dark,'black--text navigationmenutext':!this.$vuetify.theme.dark}"
-              >Dashboard</v-list-item-title>
+                :class="{
+                  'white--text navigationmenutext': this.$vuetify.theme.dark,
+                  'black--text navigationmenutext': !this.$vuetify.theme.dark,
+                }"
+                >Dashboard</v-list-item-title
+              >
             </v-list-item-content>
             <v-list-item-icon class="image">
               <svg viewBox="0 0 24 24">
@@ -174,8 +215,8 @@
       </v-list>
       <template v-slot:append>
         <div class="text-center mb-4 d-lg-none">
-          <v-btn color="svgColor" icon @click="drawer= !drawer">
-            <svg style="width:40px;height:40px" viewBox="0 0 24 24">
+          <v-btn color="svgColor" icon @click="drawer = !drawer">
+            <svg style="width: 40px; height: 40px" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z"
@@ -189,8 +230,7 @@
 </template>
 
 <script>
-import api from "../controller/api";
-//import { bus } from "../main";
+import api from "../controller/controller";
 export default {
   name: "Navbar",
   components: {},
@@ -202,13 +242,13 @@ export default {
     mobileMode() {
       if (this.$vuetify.breakpoint.xs) return true;
       else return false;
-    }
+    },
   },
 
   mounted() {
     this.$vuetify.theme.dark =
       JSON.parse(localStorage.getItem("isThemeDark")) || false;
-      this.isthemedark = this.$vuetify.theme.dark
+    this.isthemedark = this.$vuetify.theme.dark;
 
     if (this.$router.currentRoute.path == "/") {
       this.athomeroute = true;
@@ -234,7 +274,7 @@ export default {
         this.$router.push("/");
         this.athomeroute = true;
       }
-    }
+    },
   },
   data() {
     return {
@@ -245,7 +285,7 @@ export default {
       response: null,
       drawer: false,
       isthemedark: false,
-      athomeroute: ""
+      athomeroute: "",
     };
   },
   async created() {
@@ -255,7 +295,7 @@ export default {
       this.content = "ONLINE";
       this.color = "success";
     }
-  }
+  },
 };
 </script>
 
@@ -284,7 +324,6 @@ a {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 2px;
- 
 }
 
 .image {

@@ -1,7 +1,7 @@
 const express = require("express");
-const routes = require("./routes/reducedRoutes");
-const database = require("./middleware/dbConnection");
-require("dotenv").config();
+const routes = require("./route/route");
+const database = require("./middleware/db");
+const env = require("./config/config")
 const app = express();
 
 //MIDDLEWARE
@@ -17,12 +17,12 @@ app.get("/api/status", (req, res) => {
 
 app.use(routes);
 
-app.use(express.static(__dirname + "/views/static/"));
+app.use(express.static(__dirname + "/view/static/"));
 app.get("/dashboard", (req, res) =>
-  res.sendFile(__dirname + "/views/static/index.html")
+  res.sendFile(__dirname + "/view/static/index.html")
 );
 app.get(/.*/, (req, res) =>
-  res.sendFile(__dirname + "/views/errors/error.html")
+  res.sendFile(__dirname + "/view/error/error.html")
 );
 
 const port = process.env.PORT || 80;

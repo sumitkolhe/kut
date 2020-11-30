@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import api from "../controller/api";
+import api from "../controller/controller";
 export default {
   name: "Dashboard",
   components: {},

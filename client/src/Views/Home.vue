@@ -5,11 +5,16 @@
       <!--Heading for create links  lg md sm xs -->
       <v-row justify="center" color="bgColor">
         <v-col cols="12" sm="10" md="8" lg="8" xl="6" class="mt-2 mt-md-12">
-          <v-row justify="center" class="mb-8 mt-2 mt-lg-2 mt-md-0 mx-1" align="center" wrap>
-            <h1 style="font-size:22px; font-weight:500; " color="black">
+          <v-row
+            justify="center"
+            class="mb-8 mt-2 mt-lg-2 mt-md-0 mx-1"
+            align="center"
+            wrap
+          >
+            <h1 style="font-size: 22px; font-weight: 500" color="black">
               Create short links quickly
               <svg
-                style="vertical-align:middle;"
+                style="vertical-align: middle"
                 viewBox="0 0 24 24"
                 width="26"
                 height="26"
@@ -28,7 +33,7 @@
           <v-row justify="center" dense class="mx-1" align="center">
             <input
               class="urlbox"
-              :class="{'badinfo':badurl, 'urlboxdark':$vuetify.theme.dark}"
+              :class="{ badinfo: badurl, urlboxdark: $vuetify.theme.dark }"
               v-model="longurl"
               :placeholder="urlplaceholder"
               v-on:keyup.enter="sub"
@@ -37,10 +42,15 @@
           </v-row>
 
           <!--Alias box -->
-          <v-row justify="center" class="mx-1 mx-sm-6 mx-md-12" align="center" dense>
+          <v-row
+            justify="center"
+            class="mx-1 mx-sm-6 mx-md-12"
+            align="center"
+            dense
+          >
             <input
               class="urlbox"
-              :class="{'badinfo':badalias, 'urlboxdark':$vuetify.theme.dark}"
+              :class="{ badinfo: badalias, urlboxdark: $vuetify.theme.dark }"
               :placeholder="aliasplaceholder"
               v-model="alias"
               type="text"
@@ -52,30 +62,40 @@
             <button
               v-if="!loading"
               class="btn"
-              :class="{'btndark':$vuetify.theme.dark}"
+              :class="{ btndark: $vuetify.theme.dark }"
               x-large
               rounded
               :ripple="false"
               type="submit"
               v-on:keyup.enter="sub"
               @click="sub"
-            >{{buttonstatus}}</button>
+            >
+              {{ buttonstatus }}
+            </button>
 
             <button
               v-else
               class="btn"
-              :class="{'btndark':$vuetify.theme.dark}"
+              :class="{ btndark: $vuetify.theme.dark }"
               x-large
               rounded
               :ripple="false"
               type="submit"
               v-on:keyup.enter="sub"
               @click="sub"
-            ><div class="shortenSpinner"></div></button>
+            >
+              <div class="shortenSpinner"></div>
+            </button>
           </v-row>
 
           <!--LocalStorage Links-->
-          <v-row justify="center" dense class="mx-1" align="center" v-if="local!=''">
+          <v-row
+            justify="center"
+            dense
+            class="mx-1"
+            align="center"
+            v-if="local != ''"
+          >
             <table class="table">
               <thead>
                 <tr>
@@ -85,19 +105,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(local,index) in local" :key="index">
+                <tr v-for="(local, index) in local" :key="index">
                   <td data-label="Original">
                     <div>
-                      <p>{{local.link.longurl}}</p>
+                      <p>{{ local.link.longurl }}</p>
                     </div>
                   </td>
-                  <td data-label="Shortened">{{local.link.shorturl}}</td>
+                  <td data-label="Shortened">{{ local.link.shorturl }}</td>
                   <td data-label="Actions">
                     <v-btn
                       icon
                       color="green"
-                      v-clipboard:copy="(local.link.shorturl)"
-                      @click="copy=true"
+                      v-clipboard:copy="local.link.shorturl"
+                      @click="copy = true"
                     >
                       <svg
                         viewBox="0 0 24 24"
@@ -109,12 +129,24 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       >
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        <rect
+                          x="9"
+                          y="9"
+                          width="13"
+                          height="13"
+                          rx="2"
+                          ry="2"
+                        />
+                        <path
+                          d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                        />
                       </svg>
                     </v-btn>
                     <v-btn color="blue" @click="generateqrcode(index)" icon>
-                      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <svg
+                        style="width: 24px; height: 24px"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           fill="currentColor"
                           d="M4,4H10V10H4V4M20,4V10H14V4H20M14,15H16V13H14V11H16V13H18V11H20V13H18V15H20V18H18V20H16V18H13V20H11V16H14V15M16,15V18H18V15H16M4,20V14H10V20H4M6,6V8H8V6H6M16,6V8H18V6H16M6,16V18H8V16H6M4,11H6V13H4V11M9,11H13V15H11V13H9V11M11,6H13V10H11V6M2,2V6H0V2A2,2 0 0,1 2,0H6V2H2M22,0A2,2 0 0,1 24,2V6H22V2H18V0H22M2,18V22H6V24H2A2,2 0 0,1 0,22V18H2M22,22V18H24V22A2,2 0 0,1 22,24H18V22H22Z"
@@ -152,12 +184,26 @@
 
     <!--Snackbars-->
     <div>
-      <v-snackbar color="green" elevation="24" top v-model="copy" rounded="pill" timeout="1000">
+      <v-snackbar
+        color="green"
+        elevation="24"
+        top
+        v-model="copy"
+        rounded="pill"
+        timeout="1000"
+      >
         <h3 class="text-center">Copied</h3>
       </v-snackbar>
     </div>
     <div>
-      <v-snackbar timeout="3000" color="red" elevation="24" top v-model="limit" rounded="pill">
+      <v-snackbar
+        timeout="3000"
+        color="red"
+        elevation="24"
+        top
+        v-model="limit"
+        rounded="pill"
+      >
         <h3 class="text-center">Quota Exceeded</h3>
       </v-snackbar>
     </div>
@@ -175,7 +221,7 @@
 
 
 <script>
-import api from "../controller/api";
+import api from "../controller/controller";
 
 export default {
   name: "Home",
@@ -231,7 +277,7 @@ export default {
         this.badalias = false;
         this.badurl = false;
         this.buttonstatus = "Shortening";
-        this.loading = true
+        this.loading = true;
         this.response = await api.putURL(this.longurl, this.alias);
 
         if (this.response.status == "IURL") {
@@ -242,7 +288,7 @@ export default {
         } else if (this.response.status == "AAE") {
           //duplicate alias
           this.badalias = true;
-          this.alias = "";
+          this.alias = ""; 
           this.aliasplaceholder = "Alias not available";
         } else if (this.response == 429) {
           //Limit reached
@@ -266,7 +312,7 @@ export default {
         this.urlplaceholder = "Invalid URL";
       }
       this.buttonstatus = "Shorten";
-      this.loading = false
+      this.loading = false;
     },
 
     store() {
@@ -297,7 +343,7 @@ export default {
 
 <style scoped>
 .shortenSpinner {
-  margin: 0px  0px -4px 0px;
+  margin: 0px 0px -4px 0px;
   display: inline-block;
   border: 4px solid hsl(0, 0%, 83%);
   border-left-color: hsl(0, 0%, 0%);

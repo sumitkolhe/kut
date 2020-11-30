@@ -2,7 +2,7 @@ import axios from "axios";
 
 const host = "api/";
 
-class api {
+class controller {
   //check server status
   static async getstatus() {
     let axiosConfig = {
@@ -92,4 +92,4 @@ class api {
   }
 }
 
-export default api;
+export default controller;

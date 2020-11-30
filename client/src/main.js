@@ -4,7 +4,7 @@ import vuetify from "./plugins/vuetify";
 import router from "./router/router";
 import VueClipboard from "vue-clipboard2";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
-import "./assets/global.css";
+import "./styles/global.css";
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.use(VueClipboard);
 

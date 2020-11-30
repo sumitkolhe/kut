@@ -71,3 +71,8 @@
   font-weight: 700;
   letter-spacing: 1px;
 }
+
+a{
+  text-decoration: none !important;
+  color: #f55555 !important;
+}

@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require("../models/linksModel");
+const db = require("../model/model");
 require("dotenv").config();
 
 const reduced_redirect = async (req, res, next) => {
@@ -83,7 +83,7 @@ const reduced_shorten = async (req, res) => {
         const savedurl = await db_instance.save();
         res.json(savedurl);
       } catch (err) {
-        res.status(400).end(); 
+        res.status(400).end();
         //Bad Request while saving to DB
       }
     }

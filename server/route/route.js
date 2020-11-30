@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const reducedController = require("../controllers/reducedController");
+const reducedController = require("../controller/controller");
 const limit = require("../middleware/rateLimiter");
 
 router.get("/:alias", reducedController.reduced_redirect);

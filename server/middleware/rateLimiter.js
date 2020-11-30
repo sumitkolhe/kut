@@ -33,7 +33,7 @@ async function limitchecker(req, res, next) {
     .then(() => {
       next();
     })
-    .catch((rateLimiterRes) => {
+    .catch(() => {
       res.status(429).end();
     });
 }
