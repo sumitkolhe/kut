@@ -1,54 +1,27 @@
 {
-  "name": "reduced",
-  "version": "1.1.0",
+  "name": "client",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "dev": "vue-cli-service serve"
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "generate": "nuxt-ts generate"
   },
   "dependencies": {
-    "@chenfengyuan/vue-qrcode": "^1.0.2",
-    "@vue/cli": "^4.5.9",
-    "axios": "^0.19.2",
+    "@nuxt/typescript-runtime": "^2.0.0",
+    "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/pwa": "^3.0.2",
     "core-js": "^3.6.5",
-    "particles.js": "^2.0.0",
-    "vue": "^2.6.11",
-    "vue-clipboard2": "^0.3.1",
-    "vue-router": "^3.3.4",
+    "nuxt": "^2.14.6",
     "vuetify": "^2.3.19"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.6",
-    "@vue/cli-plugin-eslint": "^4.4.6",
-    "@vue/cli-service": "^4.5.9",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.26.9",
-    "sass-loader": "^8.0.0",
-    "vue-cli-plugin-vuetify": "^2.0.7",
-    "vue-particles": "^1.0.9",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.5.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "@nuxt/types": "^2.14.6",
+    "@nuxt/typescript-build": "^2.0.3",
+    "@nuxtjs/vuetify": "^1.11.2",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2"
+  }
 }
