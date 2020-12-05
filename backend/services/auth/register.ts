@@ -1,8 +1,8 @@
 import express from "express";
 import createError from "http-errors";
-import userModel from "../../model/user";
-import { userAuthSchema } from "../../utils/validation";
 import bcrypt from "bcrypt";
+import { userModel } from "../../model/user";
+import { userAuthSchema } from "../../utils/validation";
 
 export const register = async (
   req: express.Request,

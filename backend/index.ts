@@ -1,7 +1,7 @@
 import express from "express";
-import { config } from "../config";
 import routes from "./routes/routes";
 import createError from "http-errors";
+import { config } from "../config";
 import { connectDatabase } from "./utils/database";
 import { errorHandler } from "./middleware/error";
 
