@@ -1,11 +1,16 @@
-import express from "express";
+import express, { Application } from "express";
 import { config } from "../config";
-const app = express();
+import routes from "./routes/routes";
+import { connectDatabase } from "./utils/database";
+const app: Application = express();
+
+connectDatabase();
 
 //MIDDLEWARE
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(routes);
 
-const port = config.PORT || 80;
-
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(config.PORT, () =>
+  console.log(`Server started on port ${config.PORT}`)
+);
