@@ -10,7 +10,7 @@ export const connectDatabase = () => {
       useCreateIndex: true,
     })
     .then(() => {
-      console.log("Connected To DB");
+      console.log("Connected To Database");
     })
     .catch((err) => {
       console.log(err.message);
