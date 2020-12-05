@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server/index.ts",
+    "dev": "nodemon backend/index.ts",
     "build": "tsc --project ./"
   },
   "repository": {
@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/sumitkolhe/Reduced#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.3.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
