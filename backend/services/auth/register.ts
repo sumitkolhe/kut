@@ -1,22 +1,29 @@
 import express from "express";
-import user from "../../model/user";
+import createError from "http-errors";
+import userModel from "../../model/user";
 import { userAuthSchema } from "../../utils/validation";
 
-export const register = async (req: express.Request, res: express.Response) => {
+export const register = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   try {
-    const { email, password } = req.body;
-    const result = await userAuthSchema.validateAsync(req.body);
-    
-    console.log(result)
+    const validatedUserDetails = await userAuthSchema.validateAsync(req.body);
 
-    const userExist = await user.findOne({ email: email });
+    const ifUserExist = await userModel.findOne({
+      email: validatedUserDetails.email,
+    });
 
-    if (userExist) res.status(400).send("User exist");
+    if (ifUserExist) {
+      throw new createError.Conflict("User already exists");
+    }
 
-    const newUser = new user({ email, password });
+    const newUser = new userModel(validatedUserDetails);
     const savedUser = await newUser.save();
     res.send(savedUser);
   } catch (error) {
-    //console.log(error);
+    if (error.isJoi === true) error.status = 422;
+    next(error);
   }
 };
