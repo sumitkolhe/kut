@@ -4,7 +4,7 @@ import createError from "http-errors";
 import { config } from "../config";
 import { connectDatabase } from "./utils/database";
 import { errorHandler } from "./middleware/error";
-import { verifyToken } from "./utils/token";
+import { verifyToken } from "./middleware/verifyToken";
 
 const app = express();
 connectDatabase();
@@ -12,7 +12,7 @@ connectDatabase();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post("/",verifyToken,(req: express.Request, res: express.Response) => {
+app.post("/", verifyToken, (req: express.Request, res: express.Response) => {
   res.send(req.body);
 });
 

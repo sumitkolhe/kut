@@ -3,7 +3,7 @@ import createError from "http-errors";
 import bcrypt from "bcrypt";
 import { UserModel } from "../../model/model";
 import { userAuthSchema } from "../../utils/validation";
-import { signToken } from "../../utils/token";
+import { signToken } from "../../utils/signToken";
 
 export const login = async (
   req: express.Request,
