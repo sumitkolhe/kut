@@ -8,4 +8,6 @@ export const config = {
   MONGO_URL: process.env.MONGODB_URI || "mongodb://localhost:27017/dev",
   ALIAS_LENGTH: process.env.ALIAS_LENGTH || 4,
   DOMAIN: process.env.DOMAIN || "reduced.me",
+  ACCESS_TOKEN_SECRET: "t4gQdVeCKqawXVOazIZ1",
+  ACCESS_TOKEN_EXPIRATION: "7d"
 };

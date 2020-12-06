@@ -4,7 +4,7 @@ import { register } from "./register";
 
 const authRoutes = express.Router();
 
-authRoutes.get("/login", login);
+authRoutes.post("/login", login);
 //authRoutes.post("/login", login);
 authRoutes.post("/register", register);
 

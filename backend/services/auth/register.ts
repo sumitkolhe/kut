@@ -1,7 +1,7 @@
 import express from "express";
 import createError from "http-errors";
 import bcrypt from "bcrypt";
-import { userModel } from "../../model/user";
+import { UserModel } from "../../model/model";
 import { userAuthSchema } from "../../utils/validation";
 
 export const register = async (
@@ -12,13 +12,11 @@ export const register = async (
   try {
     const validatedUserDetails = await userAuthSchema.validateAsync(req.body);
 
-    const ifUserExist = await userModel.findOne({
+    const ifUserExist = await UserModel.findOne({
       email: validatedUserDetails.email,
     });
 
-    if (ifUserExist) {
-      throw new createError.Conflict("User already exists");
-    }
+    if (ifUserExist) throw new createError.Conflict("User already exists");
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(
@@ -28,7 +26,7 @@ export const register = async (
 
     validatedUserDetails.password = hashedPassword;
 
-    const newUser = new userModel(validatedUserDetails);
+    const newUser = new UserModel(validatedUserDetails);
     const savedUser = await newUser.save();
 
     res.send(savedUser);

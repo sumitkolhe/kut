@@ -24,12 +24,14 @@
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
     "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/express": "^4.17.9",
     "@types/http-errors": "^1.8.0",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/mongoose": "^5.10.2",
     "@types/node": "^14.14.10",
     "nodemon": "^2.0.6",

@@ -4,12 +4,17 @@ import createError from "http-errors";
 import { config } from "../config";
 import { connectDatabase } from "./utils/database";
 import { errorHandler } from "./middleware/error";
+import { verifyToken } from "./utils/token";
 
 const app = express();
 connectDatabase();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.post("/",verifyToken,(req: express.Request, res: express.Response) => {
+  res.send(req.body);
+});
 
 app.use(routes);
 
