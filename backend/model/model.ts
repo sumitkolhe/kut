@@ -49,5 +49,7 @@ const LinkSchema = new Schema({
   created: { type: Date, default: Date.now, required: true },
 });
 
+LinkSchema.index({ alias: 1 }, { unique: true });
+
 export const UserModel = mongoose.model<UserDocument>("user", UserSchema);
 export const LinkModel = mongoose.model<LinkDocument>("link", LinkSchema);

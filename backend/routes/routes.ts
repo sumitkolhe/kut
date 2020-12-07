@@ -4,7 +4,9 @@ import { controllerRoutes } from "../services/routes/controller.routes";
 
 const routes = express.Router();
 
-routes.use("/api/auth", authRoutes);
-routes.use("/api/shorten", controllerRoutes);
+routes.use("/", controllerRoutes.redirect);
+routes.use("/api/", controllerRoutes.shorten);
+routes.use("/api/auth", authRoutes.login);
+routes.use("/api/auth", authRoutes.register);
 
 export default routes;

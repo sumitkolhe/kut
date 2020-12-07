@@ -1,12 +1,6 @@
-import express from "express";
-import { HttpError } from "http-errors";
+import { ErrorRequestHandler } from "express";
 
-export const errorHandler = (
-  err: HttpError,
-  _req: any,
-  res: express.Response,
-  _next: any
-) => {
+export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   res.status(err.status || 500);
   res.send({
     error: {

@@ -1,14 +1,10 @@
-import express from "express";
+import { RequestHandler } from "express";
 import createError from "http-errors";
 import bcrypt from "bcrypt";
 import { UserModel } from "../../model/model";
 import { userAuthSchema } from "../../utils/validation";
 
-export const register = async (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-) => {
+export const register: RequestHandler = async (req, res, next) => {
   try {
     const validatedUserDetails = await userAuthSchema.validateAsync(req.body);
 

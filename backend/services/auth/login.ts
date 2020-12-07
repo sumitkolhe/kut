@@ -1,15 +1,11 @@
-import express from "express";
+import { RequestHandler } from "express";
 import createError from "http-errors";
 import bcrypt from "bcrypt";
 import { UserModel } from "../../model/model";
 import { userAuthSchema } from "../../utils/validation";
 import { signToken } from "../../utils/signToken";
 
-export const login = async (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-) => {
+export const login: RequestHandler = async (req, res, next) => {
   try {
     const validatedUserDetails = await userAuthSchema.validateAsync(req.body);
 
@@ -26,11 +22,11 @@ export const login = async (
 
     if (!checkPassword) throw new createError.NotFound("Wrong password");
 
-    const signedToken = signToken({ _id: UserDetails._id });
-
+    const signedToken = signToken({ email: UserDetails.email });
     res.header("auth-token", signedToken).send(signedToken);
+    
   } catch (error) {
     if (error.isJoi === true) error.status = 422;
     next(error);
   }
-}; 
+};
