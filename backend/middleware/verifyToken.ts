@@ -1,22 +1,23 @@
-import { RequestHandler } from "express";
+import express from "express";
 import Jwt from "jsonwebtoken";
 import createError from "http-errors";
 import { config } from "../../config";
 
-export const verifyToken: RequestHandler = async (req, _res, next) => {
+export const verifyToken = (
+  req: express.Request,
+  _res: express.Response,
+  next: express.NextFunction
+) => {
   const authHeader = req.headers["authorization"];
   const authToken = authHeader && authHeader.split(" ")[1];
   if (!authToken) throw new createError.Forbidden();
 
   try {
-    const verifiedToken: any = Jwt.verify(
-      authToken,
-      config.ACCESS_TOKEN_SECRET
-    );
-    const email = verifiedToken.email as { email: string };
-    req.body.email = email;
+    const tokenDetails = Jwt.verify(authToken, config.ACCESS_TOKEN_SECRET);
+    req.body.authToken = tokenDetails;
+
     next();
   } catch (error) {
-    throw new createError.NotFound("Invalid token");
+    throw new createError.NotFound("Authorization token invalid");
   }
 };

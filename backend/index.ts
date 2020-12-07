@@ -1,6 +1,6 @@
 import express from "express";
-import routes from "./routes/routes";
 import createError from "http-errors";
+import route from "./routes/route";
 import { config } from "../config";
 import { connectDatabase } from "./utils/database";
 import { errorHandler } from "./middleware/error";
@@ -16,7 +16,7 @@ app.post("/", verifyToken, (req: express.Request, res: express.Response) => {
   res.send(req.body);
 });
 
-app.use(routes);
+app.use(route);
 
 app.use(
   (

@@ -1,6 +1,6 @@
 import createError from "http-errors";
 import { RequestHandler } from "express";
-import { LinkModel } from "../../model/model";
+import { LinkModel } from "../../model/link.model";
 
 export const redirect: RequestHandler = async (req, _res, next) => {
   let al: any = req.params.alias;

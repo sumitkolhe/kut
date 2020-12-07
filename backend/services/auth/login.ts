@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import createError from "http-errors";
 import bcrypt from "bcrypt";
-import { UserModel } from "../../model/model";
+import { UserModel } from "../../model/user.model";
 import { userAuthSchema } from "../../utils/validation";
 import { signToken } from "../../utils/signToken";
 

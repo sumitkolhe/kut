@@ -1,21 +1,6 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-export interface UserDocument extends mongoose.Document {
-  email: {
-    type: string;
-    unique: boolean;
-    required: boolean;
-    lowercase: boolean;
-  };
-
-  password: {
-    type: string;
-    required: boolean;
-    minlength: number;
-  };
-}
-
 export interface LinkDocument extends mongoose.Document {
   alias: { type: string; required: true; unique: boolean };
   longurl: { type: string; required: boolean };
@@ -24,21 +9,6 @@ export interface LinkDocument extends mongoose.Document {
   stats: [{ type: Date }];
   created: { type: Date; required: boolean };
 }
-
-const UserSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    lowercase: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 6,
-  },
-  links: [{ type: Schema.Types.ObjectId, ref: "LinkModel" }],
-});
 
 const LinkSchema = new Schema({
   alias: { type: String, required: true, unique: true },
@@ -51,5 +21,4 @@ const LinkSchema = new Schema({
 
 LinkSchema.index({ alias: 1 }, { unique: true });
 
-export const UserModel = mongoose.model<UserDocument>("user", UserSchema);
 export const LinkModel = mongoose.model<LinkDocument>("link", LinkSchema);

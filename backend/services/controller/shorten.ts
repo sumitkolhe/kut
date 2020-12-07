@@ -2,28 +2,28 @@ import createError from "http-errors";
 import { RequestHandler } from "express";
 //import { config } from "../../../config";
 import { isValidURL } from "../../utils/checkLink";
-import { LinkModel } from "../../model/model";
+import { UserModel } from "../../model/user.model";
+import { LinkModel } from "../../model/link.model";
 
 export const shorten: RequestHandler = async (req, res, _next) => {
-
   try {
     const longUrl = req.body.longurl.trim();
     if (!isValidURL(longUrl)) throw new createError.NotAcceptable();
 
-    if (req.body.alias != null) {
-      //when the alias is provided by the user take it and push to DB
-      var LinkInstance = new LinkModel({
-        alias: req.body.alias,
-        shorturl: "https://" + process.env.DOMAIN + "/" + req.body.alias,
-        longurl: isValidURL(longUrl),
+    const userInstance: any = await UserModel.findOne({
+      email: req.body.authToken.email,
+    });
+
+    const newLink = new LinkModel({ alias: "alia00", longurl: longUrl });
+
+    await newLink.save();
+    userInstance.userLinks.push(newLink);
+    await userInstance.save();
+
+    await UserModel.findOne({ email: req.body.authToken.email })
+      .populate("userLinks")
+      .exec((_err, link) => {
+        res.json(link);
       });
-      try {
-        const savedurl = await LinkInstance.save();
-        res.json(savedurl);
-      } catch (err) {
-        res.json({ status: "AAE", message: "Alias already exists" });
-        //check if alias is available and throw err if not available
-      }
-    }
   } catch (error) {}
 };
