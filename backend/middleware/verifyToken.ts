@@ -14,7 +14,7 @@ export const verifyToken = (
 
   try {
     const tokenDetails = Jwt.verify(authToken, config.ACCESS_TOKEN_SECRET);
-    req.body.authToken = tokenDetails;
+    req.body.auth = tokenDetails;
 
     next();
   } catch (error) {
