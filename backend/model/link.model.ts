@@ -1,12 +1,13 @@
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import { model, Schema, Document } from "mongoose";
+import { StatisticsModel } from "./statistics.model";
 
-export interface LinkDocument extends mongoose.Document {
+export interface LinkDocument extends Document {
   alias: { type: string; required: true; unique: boolean };
   longurl: { type: string; required: boolean };
   shorturl: { type: string };
   clicks: { type: number };
-  stats: [{ type: Date }];
+  password: { type: string };
+  statistics: { type: Schema.Types.ObjectId; ref: string };
   created: { type: Date; required: boolean };
 }
 
@@ -15,10 +16,11 @@ const LinkSchema = new Schema({
   longurl: { type: String, required: true },
   shorturl: { type: String },
   clicks: { type: Number, default: 0 },
-  stats: [{ type: Date }],
+  password: { type: String },
+  statistics: [{ type: Schema.Types.ObjectId, ref: StatisticsModel }],
   created: { type: Date, default: Date.now, required: true },
 });
 
 LinkSchema.index({ alias: 1 }, { unique: true });
 
-export const LinkModel = mongoose.model<LinkDocument>("link", LinkSchema);
+export const LinkModel = model<LinkDocument>("link", LinkSchema);

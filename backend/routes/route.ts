@@ -6,6 +6,7 @@ const routes = express.Router();
 
 routes.use("/", controllerRoutes.redirect);
 routes.use("/api/", controllerRoutes.shorten);
+routes.use("/api/", controllerRoutes.analytics);
 routes.use("/api/auth", authRoutes.login);
 routes.use("/api/auth", authRoutes.register);
 
