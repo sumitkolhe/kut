@@ -1,9 +1,14 @@
 import createError from "http-errors";
 import { RequestHandler } from "express";
+import { LinkModel } from "../../model/link.model";
 
-export const analytics: RequestHandler = async (_req, res, next) => {
+export const analytics: RequestHandler = async (req, res, next) => {
   try {
-    res.json("analytics");
+    await LinkModel.findOne({ shorturl: req.body.shorturl })
+      .populate("statistics")
+      .then((linkDetails: any) => {
+        res.json(linkDetails);
+      });
   } catch (err) {
     next(new createError.InternalServerError());
   }
