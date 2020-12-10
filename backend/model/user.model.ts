@@ -1,6 +1,5 @@
 import { model, Schema, Document } from "mongoose";
 import { LinkModel } from "./link.model";
-
 interface UserDocument extends Document {
   email: {
     type: string;

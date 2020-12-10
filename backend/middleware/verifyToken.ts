@@ -15,7 +15,6 @@ export const verifyToken = (
   try {
     const tokenDetails = Jwt.verify(authToken, config.ACCESS_TOKEN_SECRET);
     req.body.auth = tokenDetails;
-
     next();
   } catch (error) {
     throw new createError.NotFound("Authorization token invalid");

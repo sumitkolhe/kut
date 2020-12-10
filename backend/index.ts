@@ -1,6 +1,6 @@
 import express from "express";
 import createError from "http-errors";
-import route from "./routes/route";
+import routes from "./routes/routes";
 import useragent from "express-useragent";
 import { config } from "../config";
 import { connectDatabase } from "./utils/database";
@@ -12,7 +12,7 @@ connectDatabase();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(useragent.express());
-app.use(route);
+app.use(routes);
 app.use((next: express.NextFunction) => {
   next(createError(404, "Not Found"));
 });

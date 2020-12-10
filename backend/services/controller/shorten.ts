@@ -12,8 +12,10 @@ export const shorten: RequestHandler = async (req, res, next) => {
     alias: newAlias,
     shorturl: "https://" + config.DOMAIN + "/" + newAlias,
     longurl: verifyLink(req.body.longurl),
-    password: req.body.password ? req.body.password : null,
   });
+
+  if (req.body.password) newLink.password = req.body.password;
+  
   try {
     const savedLink = await newLink.save();
     const userInstance: any = await UserModel.findOne({

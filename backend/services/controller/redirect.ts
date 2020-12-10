@@ -10,17 +10,16 @@ export const redirect: RequestHandler = async (req: any, res, next) => {
     });
 
     if (!linkDetails) throw new createError.NotFound();
-    if (!linkDetails.password)
-      throw new createError.BadRequest("Incorrect password");
+    if (linkDetails.password) res.send("enter pass");
+    else {
+      const newStatistic = new StatisticsModel(req.useragent);
+      await newStatistic.save();
+      linkDetails.clicks++;
+      await linkDetails.statistics.push(newStatistic);
+      await linkDetails.save();
 
-    const newStatistic = new StatisticsModel(req.useragent);
-    await newStatistic.save();
-    linkDetails.clicks++;
-    await linkDetails.statistics.push(newStatistic);
-    await linkDetails.save();
-
-    res.redirect(301, linkDetails.longurl.toString());
-
+      res.redirect(301, linkDetails.longurl.toString());
+    }
   } catch (err) {
     next(err);
   }
