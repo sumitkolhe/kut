@@ -6,7 +6,6 @@ import { userAuthSchema } from "../../utils/validation";
 
 export const register: RequestHandler = async (req, res, next) => {
   try {
-    console.log(req.body)
     const validatedUserDetails = await userAuthSchema.validateAsync(req.body);
 
     const ifUserExist = await UserModel.findOne({
@@ -24,8 +23,9 @@ export const register: RequestHandler = async (req, res, next) => {
     validatedUserDetails.password = hashedPassword;
 
     const newUser = new UserModel(validatedUserDetails);
+    await newUser.save();
 
-    res.send(await newUser.save());
+    res.json({ message: "User registered successfully" });
   } catch (error) {
     if (error.isJoi === true) error.status = 422;
     next(error);

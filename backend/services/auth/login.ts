@@ -23,8 +23,11 @@ export const login: RequestHandler = async (req, res, next) => {
     if (!checkPassword) throw new createError.NotFound("Wrong password");
 
     const signedToken = signToken({ email: UserDetails.email });
-    res.header("auth-token", signedToken).send(signedToken);
-    
+
+    res.json({
+      authToken: signedToken,
+      userDetails: { userName: UserDetails.userName, email: UserDetails.email },
+    });
   } catch (error) {
     if (error.isJoi === true) error.status = 422;
     next(error);
