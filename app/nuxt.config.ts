@@ -28,21 +28,27 @@ const config: NuxtConfig = {
 
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
 
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
   axios: {
-    //baseURL: 'http://localhost:80/',
-    common: {
-      'Content-Type': 'application/json;charset=UTF-8',
-      'Access-Control-Allow-Origin': '*',
-      'Cache-Control': 'no-cache',
+    baseURL: 'http://localhost:80/',
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+        },
+        endpoints: {
+          login: { url: 'api/auth/login', method: 'post' },
+          logout: { url: 'api/auth/logout', method: 'post' },
+          register: { url: 'api/auth/register', method: 'post' },
+        },
+      },
     },
-    delete: {},
-    get: {},
-    head: {},
-    post: {},
-    put: {},
-    patch: {},
   },
 
   vuetify: {
@@ -75,7 +81,13 @@ const config: NuxtConfig = {
     },
   },
 
-  build: {},
+  build: {
+    extend: function (config, { isDev, isClient }) {
+      config.node = {
+        fs: 'empty',
+      }
+    },
+  },
 }
 
 export default config
