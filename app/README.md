@@ -1,4 +1,4 @@
-# client
+# app
 
 ## Build Setup
 

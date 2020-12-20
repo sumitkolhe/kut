@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "app",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,12 +10,9 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
-    "@nuxtjs/auth-next": "^5.0.0-1608347545.4014627",
-    "@nuxtjs/axios": "^5.12.4",
-    "@nuxtjs/pwa": "^3.0.2",
+    "@nuxtjs/axios": "^5.12.2",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6",
-    "vuetify": "^2.3.19"
+    "nuxt": "^2.14.6"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",
