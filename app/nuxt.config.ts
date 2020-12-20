@@ -6,8 +6,8 @@ const config: NuxtConfig = {
   target: 'static',
 
   head: {
-    titleTemplate: '%s - app',
-    title: 'app',
+    titleTemplate: '%s | Shorten your links easily',
+    title: 'Reduced',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
