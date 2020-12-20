@@ -2,15 +2,18 @@ import { RequestHandler } from "express";
 import createError from "http-errors";
 import bcrypt from "bcrypt";
 import { UserModel } from "../../model/user.model";
-import { userAuthSchema } from "../../utils/validation";
+import { userLoginSchema } from "../../utils/validation";
 import { signToken } from "../../utils/signToken";
 
 export const login: RequestHandler = async (req, res, next) => {
   try {
-    const validatedUserDetails = await userAuthSchema.validateAsync(req.body);
+    const validatedUserDetails = await userLoginSchema.validateAsync(req.body);
 
     const UserDetails = await UserModel.findOne({
-      email: validatedUserDetails.email,
+      $or: [
+        { email: validatedUserDetails.email },
+        { userName: validatedUserDetails.userName },
+      ],
     });
 
     if (!UserDetails) throw new createError.NotFound("User not found");

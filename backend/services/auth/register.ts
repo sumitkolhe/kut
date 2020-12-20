@@ -2,11 +2,13 @@ import { RequestHandler } from "express";
 import createError from "http-errors";
 import bcrypt from "bcrypt";
 import { UserModel } from "../../model/user.model";
-import { userAuthSchema } from "../../utils/validation";
+import { userRegisterSchema } from "../../utils/validation";
 
 export const register: RequestHandler = async (req, res, next) => {
   try {
-    const validatedUserDetails = await userAuthSchema.validateAsync(req.body);
+    const validatedUserDetails = await userRegisterSchema.validateAsync(
+      req.body
+    );
 
     const ifUserExist = await UserModel.findOne({
       email: validatedUserDetails.email,
