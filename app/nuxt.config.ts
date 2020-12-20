@@ -1,4 +1,3 @@
-import colors from 'vuetify/es5/util/colors'
 import type { NuxtConfig } from '@nuxt/types'
 
 const config: NuxtConfig = {
@@ -37,27 +36,27 @@ const config: NuxtConfig = {
     customVariables: ['~/assets/variables.scss'],
     theme: {
       options: {},
-      dark: true,
+      dark: false,
       default: false,
       disable: false,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          primary: '#F55555',
+          accent: '#424242',
+          secondary: '#26C6DA',
+          success: '#4CAF50',
+          info: '#2196F3',
+          warning: '#FB8C00',
+          error: '#FF5252',
         },
         light: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          primary: '#F55555',
+          accent: '#212121',
+          secondary: '#26C6DA',
+          success: '#4CAF50',
+          info: '#2196F3',
+          warning: '#FB8C00',
+          error: '#F44336',
         },
       },
     },
