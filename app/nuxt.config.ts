@@ -16,7 +16,7 @@ const config: NuxtConfig = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  loading: { color: '#f55555' },
+  //loading: { color: '#f55555' },
 
   css: [],
 
@@ -30,7 +30,20 @@ const config: NuxtConfig = {
 
   modules: ['@nuxtjs/axios'],
 
-  axios: {},
+  axios: {
+    //baseURL: 'http://localhost:80/',
+    common: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'no-cache',
+    },
+    delete: {},
+    get: {},
+    head: {},
+    post: {},
+    put: {},
+    patch: {},
+  },
 
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
