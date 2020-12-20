@@ -85,6 +85,7 @@ const config: NuxtConfig = {
     extend: function (config, { isDev, isClient }) {
       config.node = {
         fs: 'empty',
+        worker_threads: 'empty',
       }
     },
   },
