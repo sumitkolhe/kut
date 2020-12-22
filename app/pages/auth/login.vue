@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height fluid>
+  <v-container fill-height fluid class="bg">
     <v-row align="center" justify="center">
       <v-col class="login-form"
         ><v-card class="pa-6" rounded>
@@ -27,7 +27,6 @@
         </v-card></v-col
       >
     </v-row>
-    <v-btn @click="logout()">logout</v-btn>
   </v-container>
 </template> 
 
@@ -60,21 +59,23 @@ export default Vue.extend({
 
   methods: {
     async loginUser() {
-      await this.$auth.loginWith('local', {
-        data: this.login,
-      })
-    },
-
-    async logout() {
-      await this.$auth.logout()
+      try {
+        await this.$auth.loginWith('local', {
+          data: this.login,
+        })
+      } catch (error) {
+        console.log('err')
+      }
     },
   },
 })
 </script>
 
-<style >
-#app {
+<style scoped>
+.bg {
   background-image: url('../../assets/bg.png');
+  background-size: cover;
+  background-color: #121212;
 }
 
 .v-text-field {
@@ -85,3 +86,4 @@ export default Vue.extend({
   text-align: center;
 }
 </style>
+

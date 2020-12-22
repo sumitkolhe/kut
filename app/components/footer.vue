@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-footer padless inset color="footerColor" width="100%">
+    <v-footer padless inset color="transparent" width="100%">
       <v-col class="text-center" cols="12">
         <strong>
           Made with
