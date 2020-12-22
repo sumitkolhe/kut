@@ -5,7 +5,7 @@ import { UserModel } from "../../model/user.model";
 export const me: RequestHandler = async (req, res, next) => {
   try {
     const UserDetails = await UserModel.findOne({
-      email: req.body.email,
+      email: req.body.auth.email,
     });
 
     if (!UserDetails) throw new createError.NotFound("User not found");

@@ -23,10 +23,11 @@
               Login
             </v-btn>
           </v-form>
-          <div v-if="$auth.loggedIn">Logged in</div>
+          <div v-if="$auth.loggedIn">{{ $auth.loggedIn }}</div>
         </v-card></v-col
       >
     </v-row>
+    <v-btn @click="logout()">logout</v-btn>
   </v-container>
 </template> 
 
@@ -64,6 +65,10 @@ export default Vue.extend({
       })
       this.status = result.data.userDetails.userName
       console.log(this.status)
+    },
+
+    async logout() {
+      await this.$auth.logout()
     },
   },
 })

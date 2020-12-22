@@ -7,7 +7,7 @@ import { verifyToken } from "../../middleware/verifyToken";
 const router = express.Router();
 
 export const authRoutes = {
-  me: router.post("/me", verifyToken, me),
+  me: router.get("/me", verifyToken, me),
   login: router.post("/login", login),
   register: router.post("/register", register),
 };
