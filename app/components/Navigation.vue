@@ -81,6 +81,8 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
+      on: '',
+      attrs: '',
       clipped: true,
       drawer: false,
       clippedbar: false,

@@ -46,14 +46,17 @@ const config: NuxtConfig = {
       local: {
         token: {
           property: 'authToken',
+          required: true,
+          type: 'Bearer',
+        },
+        user: {
+          property: 'userDetails',
+          // autoFetch: true
         },
         endpoints: {
-          login: {
-            url: 'api/auth/login',
-            method: 'post',
-          },
-          user: { url: 'api/auth/me', method: 'post' },
+          login: { url: 'api/auth/login', method: 'post' },
           register: { url: 'api/auth/register', method: 'post' },
+          user: { url: 'api/auth/me', method: 'get' },
         },
       },
     },

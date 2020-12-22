@@ -60,11 +60,9 @@ export default Vue.extend({
 
   methods: {
     async loginUser() {
-      const result: any = await this.$auth.loginWith('local', {
+      await this.$auth.loginWith('local', {
         data: this.login,
       })
-      this.status = result.data.userDetails.userName
-      console.log(this.status)
     },
 
     async logout() {
