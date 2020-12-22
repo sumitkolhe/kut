@@ -10,5 +10,6 @@ routes.use("/api/", controllerRoutes.analytics);
 routes.use("/api/", controllerRoutes.links);
 routes.use("/api/auth", authRoutes.login);
 routes.use("/api/auth", authRoutes.register);
+routes.use("/api/auth", authRoutes.me);
 
 export default routes;

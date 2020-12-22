@@ -13,7 +13,14 @@ const config: NuxtConfig = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Montserrat&display=swap',
+      },
+    ],
   },
 
   //loading: { color: '#f55555' },
@@ -38,9 +45,13 @@ const config: NuxtConfig = {
     strategies: {
       local: {
         token: {
-          property: 'token',
+          property: 'authToken',
           required: true,
           type: 'Bearer',
+        },
+        user: {
+          property: 'userDetails',
+          // autoFetch: true
         },
         endpoints: {
           login: { url: 'api/auth/login', method: 'post' },
@@ -55,12 +66,12 @@ const config: NuxtConfig = {
     customVariables: ['~/assets/variables.scss'],
     theme: {
       options: {},
-      dark: false,
+      dark: true,
       default: false,
       disable: false,
       themes: {
         dark: {
-          primary: '#F55555',
+          primary: '#f55555',
           accent: '#424242',
           secondary: '#26C6DA',
           success: '#4CAF50',
@@ -69,7 +80,7 @@ const config: NuxtConfig = {
           error: '#FF5252',
         },
         light: {
-          primary: '#F55555',
+          primary: '#f55555',
           accent: '#212121',
           secondary: '#26C6DA',
           success: '#4CAF50',

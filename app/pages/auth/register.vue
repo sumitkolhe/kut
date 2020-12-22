@@ -1,42 +1,29 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
-    <v-text-field
-      v-model="register.userName"
-      :counter="10"
-      :rules="usernameRules"
-      label="UsernName"
-      required
-    ></v-text-field>
-    <v-text-field
-      v-model="register.email"
-      :counter="10"
-      :rules="emailRules"
-      label="Email"
-      required
-    ></v-text-field>
-    <v-text-field
-      v-model="register.password"
-      label="Password"
-      required
-    ></v-text-field>
-
-    <v-btn
-      :disabled="!valid"
-      color="success"
-      class="mr-4"
-      @click="registerUser"
-    >
-      Register
-    </v-btn>
-
-    hi {{ status }}
-  </v-form>
-</template>
+  <v-container fluid class="fill-height">
+    <v-row class="fill-height">
+      <v-col class="f"></v-col>
+      <v-col class="ff" align-self="center">
+        <v-sheet class="ff">
+          <v-row
+            v-for="feature in features"
+            :key="feature.title"
+            class="justify-center"
+          >
+            <h2>{{ feature.title }}</h2>
+            <br />
+            <h3>{{ feature.description }}</h3>
+          </v-row>
+        </v-sheet>
+      </v-col>
+    </v-row>
+  </v-container>
+</template> 
 
 <script lang="ts">
 import Vue from 'vue'
 import '@nuxtjs/auth-next'
 export default Vue.extend({
+  layout: 'blank',
   data() {
     return {
       valid: true,
@@ -56,6 +43,13 @@ export default Vue.extend({
         email: '',
         password: '',
       },
+
+      features: [
+        { title: 'hello', description: 'ougboulv' },
+        { title: 'hello', description: 'cul' },
+        { title: 'hello', description: 'txy' },
+        { title: 'hello', description: 'xtyxty' },
+      ],
     }
   },
 
@@ -72,4 +66,11 @@ export default Vue.extend({
 </script>
 
 <style>
+.f {
+  background-color: #f1f5f9;
+}
+
+.ff {
+  background-color: green;
+}
 </style>

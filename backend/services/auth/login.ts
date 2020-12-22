@@ -29,7 +29,6 @@ export const login: RequestHandler = async (req, res, next) => {
 
     res.json({
       authToken: signedToken,
-      userDetails: { userName: UserDetails.userName, email: UserDetails.email },
     });
   } catch (error) {
     if (error.isJoi === true) error.status = 422;
