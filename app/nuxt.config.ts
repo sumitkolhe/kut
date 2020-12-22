@@ -1,8 +1,6 @@
 import type { NuxtConfig } from '@nuxt/types'
 
 const config: NuxtConfig = {
-  ssr: false,
-
   target: 'static',
 
   head: {
@@ -90,6 +88,10 @@ const config: NuxtConfig = {
         },
       },
     },
+  },
+
+  generate: {
+    dir: '../public',
   },
 
   build: {
