@@ -5,8 +5,7 @@
 </template>
 
 <style scoped>
-#app {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
+* {
+  font-weight: 500;
 }
 </style>

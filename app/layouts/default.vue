@@ -10,3 +10,10 @@
   </v-app>
 </template>
 
+
+<style >
+#app {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+}
+</style>

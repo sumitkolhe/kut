@@ -15,8 +15,7 @@ const config: NuxtConfig = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css2?family=Montserrat&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
       },
     ],
   },

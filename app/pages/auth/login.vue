@@ -1,31 +1,39 @@
 <template>
   <v-container fill-height fluid class="bg">
     <v-row align="center" justify="center">
-      <v-col class="login-form"
-        ><v-card class="pa-6" rounded>
-          <v-card-title>Login into your account</v-card-title>
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field
-              v-model="login.userName"
-              :rules="usernameRules"
-              label="Username / E-mail"
-              outlined
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="login.password"
-              label="Password"
-              required
-              outlined
-            ></v-text-field>
+      <v-card class="pa-6 login-form" outlined rounded="lg">
+        <v-card-title>Login into your account</v-card-title>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-text-field
+            v-model="login.userName"
+            :rules="usernameRules"
+            label="Username / E-mail"
+            outlined
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="login.password"
+            label="Password"
+            :rules="passwordRules"
+            required
+            outlined
+          ></v-text-field>
 
-            <v-btn :disabled="!valid" color="primary" @click="loginUser">
-              Login
-            </v-btn>
-          </v-form>
-          <div v-if="$auth.loggedIn">{{ $auth.loggedIn }}</div>
-        </v-card></v-col
-      >
+          <v-btn
+            class="mt-2"
+            block
+            :disabled="!valid"
+            color="primary"
+            @click="loginUser"
+          >
+            Login
+          </v-btn>
+        </v-form>
+        <v-card-actions class="mt-4">
+          <v-btn text> Create an account </v-btn>
+          <v-btn text> Forgot Password? </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-row>
   </v-container>
 </template> 
@@ -33,6 +41,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import '@nuxtjs/auth-next'
+
 export default Vue.extend({
   layout: 'blank',
   data() {
@@ -49,9 +58,13 @@ export default Vue.extend({
         (v: any) => !!v || 'E-mail is required',
         (v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
+      passwordRules: [
+        (v: any) => !!v || 'Password is required',
+        (v: any) => /^.{6,}$/.test(v) || 'Password must be min 6 characters',
+      ],
+
       login: {
         userName: '',
-
         password: '',
       },
     }
@@ -75,12 +88,9 @@ export default Vue.extend({
 .bg {
   background-image: url('../../assets/bg.png');
   background-size: cover;
-  background-color: #121212;
+  background-color: #1e1e1e;
 }
 
-.v-text-field {
-  width: 400px;
-}
 .login-form {
   max-width: 450px;
   text-align: center;

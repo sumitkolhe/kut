@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-app-bar :clipped-left="clippedbar" app elevation="0" color="transparent">
+    <v-app-bar :clipped-left="clippedbar" app elevation="0" height="80">
       <!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
       <v-spacer />
@@ -39,39 +39,45 @@
       fixed
       app
     >
-      <div class="navi">
-        <v-list nav>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :to="item.to"
-            router
-            exact
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
-            </v-list-item-content>
-          </v-list-item>
-          <v-btn icon @click.stop="miniVariant = !miniVariant">
-            <v-icon x-large
-              >mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon
-            >
-          </v-btn>
-        </v-list>
-      </div>
+      <v-list nav>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
 
       <template v-slot:prepend>
-        <div class="pa-2">
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title class="title"> Reduced </v-list-item-title>
-              <v-list-item-subtitle> v2.0 </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </div>
+        <v-row>
+          <v-col v-if="!miniVariant">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="title"> Reduced </v-list-item-title>
+                <v-list-item-subtitle> v2.0 </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item></v-col
+          >
+          <v-col>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="title">
+                  <v-btn icon @click.stop="miniVariant = !miniVariant">
+                    <v-icon x-large>mdi-menu</v-icon>
+                  </v-btn>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+        </v-row>
       </template>
       <template v-slot:append>
         <div class="pa-2">
@@ -139,5 +145,14 @@ export default Vue.extend({
 <style>
 .v-list {
   margin: 0px 16px !important;
+}
+
+.v-list-item {
+  min-height: 64px !important;
+  border-radius: 20px !important;
+}
+
+.v-list--nav .v-list-item::before {
+  border-radius: 20px;
 }
 </style> 
