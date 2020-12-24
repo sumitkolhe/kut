@@ -39,6 +39,7 @@ const config: NuxtConfig = {
   },
 
   auth: {
+    cookie: false,
     strategies: {
       local: {
         token: {
@@ -60,7 +61,7 @@ const config: NuxtConfig = {
     redirect: {
       login: '/auth/login',
       logout: '/auth/login',
-      home: '/dashboard',
+      home: '/user/dashboard',
     },
   },
 

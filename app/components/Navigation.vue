@@ -112,23 +112,23 @@ export default Vue.extend({
         {
           icon: 'mdi-view-dashboard-outline',
           title: 'Dashboard',
-          to: '/dashboard',
+          to: '/user/dashboard',
         },
 
         {
           icon: 'mdi-link',
           title: 'My Links',
-          to: '/links',
+          to: '/user/links',
         },
         {
           icon: 'mdi-chart-bell-curve-cumulative',
           title: 'Analytics',
-          to: '/analytics',
+          to: '/user/analytics',
         },
         {
           icon: 'mdi-notebook-outline',
           title: 'Notes',
-          to: '/notes',
+          to: '/user/notes',
         },
       ],
     }

@@ -48,7 +48,6 @@ import '@nuxtjs/auth-next'
 
 export default Vue.extend({
   layout: 'guest',
-  auth: true,
   data() {
     return {
       valid: true,
