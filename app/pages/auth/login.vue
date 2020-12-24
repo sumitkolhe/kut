@@ -1,8 +1,9 @@
 <template>
   <v-container fill-height fluid class="bg">
     <v-row align="center" justify="center">
-      <v-card class="pa-6 login-form" outlined rounded="lg">
-        <v-card-title>Login into your account</v-card-title>
+      <v-card class="pa-6 login-form" outlined rounded="lg"
+        ><img class="mb-6" src="~/assets/banner.svg" />
+        <p class="text-h5 text-center">Login into your account</p>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
             v-model="login.userName"
@@ -29,12 +30,15 @@
             Login
           </v-btn>
         </v-form>
-        <v-card-actions class="mt-4">
-          <v-btn text> Create an account </v-btn>
+        <v-card-actions class="mt-4" align="center">
+          <NuxtLink to="/auth/register"> Create an account </NuxtLink>
           <v-btn text> Forgot Password? </v-btn>
         </v-card-actions>
       </v-card>
     </v-row>
+    <v-snackbar v-model="error" color="accent">
+      Invalid email and password combination
+    </v-snackbar>
   </v-container>
 </template> 
 
@@ -43,11 +47,13 @@ import Vue from 'vue'
 import '@nuxtjs/auth-next'
 
 export default Vue.extend({
-  layout: 'blank',
+  layout: 'guest',
+  auth: true,
   data() {
     return {
       valid: true,
       status: '',
+      error: false,
       usernameRules: [
         (v: any) => !!v || 'Username or email is required',
         (v: any) =>
@@ -77,7 +83,7 @@ export default Vue.extend({
           data: this.login,
         })
       } catch (error) {
-        console.log('err')
+        this.error = true
       }
     },
   },
@@ -92,7 +98,7 @@ export default Vue.extend({
 }
 
 .login-form {
-  max-width: 450px;
+  width: 500px;
   text-align: center;
 }
 </style>

@@ -57,6 +57,11 @@ const config: NuxtConfig = {
         },
       },
     },
+    redirect: {
+      login: '/auth/login',
+      logout: '/auth/login',
+      home: '/dashboard',
+    },
   },
 
   vuetify: {
@@ -68,7 +73,7 @@ const config: NuxtConfig = {
       disable: false,
       themes: {
         dark: {
-          primary: '#1e1e1e',
+          primary: '#f1f1f1',
           accent: '#ff5050',
           secondary: '#2b2d42',
           success: '#4CAF50',

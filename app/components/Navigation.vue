@@ -34,7 +34,7 @@
       v-model="drawer"
       :mini-variant="miniVariant"
       mini-variant-width="100"
-      width="300"
+      width="260"
       :clipped="clipped"
       fixed
       app
@@ -110,23 +110,23 @@ export default Vue.extend({
       ],
       items: [
         {
-          icon: 'mdi-link-variant',
-          title: 'Shorten',
-          to: '/',
+          icon: 'mdi-view-dashboard-outline',
+          title: 'Dashboard',
+          to: '/dashboard',
         },
 
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-link',
           title: 'My Links',
           to: '/links',
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-chart-bell-curve-cumulative',
           title: 'Analytics',
           to: '/analytics',
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-notebook-outline',
           title: 'Notes',
           to: '/notes',
         },

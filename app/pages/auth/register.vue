@@ -1,54 +1,81 @@
 <template>
-  <v-container fluid class="fill-height">
-    <v-row>
-      <v-col align="center" justify="center">
-        <v-form ref="form" v-model="valid" class="register-form" lazy-validation
-          ><p class="font-weight-medium text-h4 text-left pb-4">
-            Sign up to our product today for free
-          </p>
-          <v-text-field
-            v-model="register.userName"
-            :rules="usernameRules"
-            label="Username"
-            outlined
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="register.email"
-            :rules="emailRules"
-            label="E-mail"
-            outlined
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="register.password"
-            label="Password"
-            :rules="passwordRules"
-            required
-            outlined
-          ></v-text-field>
-
-          <v-btn
-            class="mt-2"
-            block
-            :disabled="!valid"
-            color="primary"
-            @click="registerUser"
+  <v-container>
+    <v-row justify="center" align="center">
+      <v-col>
+        <v-row> <img class="mb-12" src="~/assets/banner.svg" /></v-row>
+        <v-row
+          ><p
+            class="font-weight-bold text-h3 text-center mt-12 secondary--text"
           >
-            Login
-          </v-btn>
-        </v-form>
-      </v-col>
-      <v-col align="center" align-self="center" class="fill-height">
-        <div class="register-features">
-          <img class="mb-4" src="~/assets/b.svg" />
+            Hey 👋
+          </p></v-row
+        >
+        <v-row
+          ><p
+            class="font-weight-medium text-h4 mt-2 text-center mb-12 secondary--text"
+          >
+            Create your Free Account
+          </p></v-row
+        >
+        <v-row
+          ><v-form
+            ref="form"
+            class="register-form"
+            v-model="valid"
+            lazy-validation
+          >
+            <p class="mb-1">Username</p>
+            <v-text-field
+              v-model="register.userName"
+              :rules="usernameRules"
+              placeholder="John Doe"
+              outlined
+              required
+            ></v-text-field>
+            <p class="mb-1">E-mail</p>
+            <v-text-field
+              v-model="register.email"
+              :rules="emailRules"
+              placeholder="john@doe.com"
+              outlined
+              required
+            ></v-text-field>
+            <p class="mb-1">Password</p>
+            <v-text-field
+              v-model="register.password"
+              :rules="passwordRules"
+              placeholder="***********"
+              outlined
+              required
+            ></v-text-field>
 
+            <v-btn
+              class="mt-2"
+              block
+              large
+              :disabled="!valid"
+              color="primary"
+              @click="registerUser"
+            >
+              Create Account
+            </v-btn>
+          </v-form></v-row
+        >
+        <v-row class="mt-4"
+          >Already have an account?
+          <NuxtLink to="/auth/login"> Log in </NuxtLink></v-row
+        >
+      </v-col>
+      <v-col class="full-height">
+        <div class="register-features">
           <div v-for="feature in features" :key="feature.title">
             <div>
               <v-icon color="accent">mdi-check-circle</v-icon>
-              <span class="ml-3 accent--text h5"> {{ feature.title }}</span>
+              <span class="ml-3 accent--text h5 font-weight-bold">
+                {{ feature.title }}</span
+              >
             </div>
-            <div class="ml-10 mb-8">
+            <div class="ml-10 mb-12">
               {{ feature.description }}
             </div>
           </div>
@@ -62,10 +89,10 @@
 import Vue from 'vue'
 import '@nuxtjs/auth-next'
 export default Vue.extend({
-  layout: 'blank',
+  layout: 'guest',
   data() {
     return {
-      valid: true,
+      valid: false,
       status: '',
       usernameRules: [
         (v: any) => !!v || 'Username is required',
@@ -121,12 +148,11 @@ export default Vue.extend({
 
 <style>
 .register-features {
-  max-width: 700px;
-  text-align: left;
-  margin-bottom: 24px;
+  margin-top: 250px;
+  background-color: crimson;
 }
 
 .register-form {
-  max-width: 500px;
+  width: 480px;
 }
 </style>
