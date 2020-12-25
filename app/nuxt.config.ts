@@ -49,7 +49,7 @@ const config: NuxtConfig = {
         },
         user: {
           property: 'userDetails',
-          // autoFetch: true
+          autoFetch: true,
         },
         endpoints: {
           login: { url: '/auth/login', method: 'post' },

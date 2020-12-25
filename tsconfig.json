@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2018",
     "outDir": "./dist/backend",
     "module": "commonjs",
     "strict": true,
@@ -21,7 +21,6 @@
     "moduleResolution": "node",
     "baseUrl": "./backend",
     "paths": {
-      "@backend/*": ["backend/*"],
       "@middleware/*": ["middleware/*"],
       "@model/*": ["model/*"],
       "@routes/*": ["routes/*"],
