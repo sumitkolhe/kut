@@ -1,4 +1,4 @@
-import { config } from "@config";
+import { config } from "@config/config";
 import { LinkModel } from "@model/link.model";
 
 export const generateUniqueAlias = async (): Promise<string> => {

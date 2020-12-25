@@ -2,7 +2,7 @@ import express from "express";
 import createError from "http-errors";
 import useragent from "express-useragent";
 import routes from "@routes/routes";
-import { config } from "@config";
+import { config } from "@config/config";
 import { connectDatabase } from "@utils/database";
 import { errorHandler } from "@middleware/errorHandler";
 import { setHeaders } from "@middleware/header";

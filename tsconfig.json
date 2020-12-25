@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "outDir": "./dist/backend",
+    "outDir": "./dist",
     "module": "commonjs",
     "strict": true,
     "noImplicitAny": true,
@@ -21,12 +21,14 @@
     "moduleResolution": "node",
     "baseUrl": "./backend",
     "paths": {
-      "@config": ["../config.ts"],
+      "@config/*": ["config/*"],
       "@middleware/*": ["middleware/*"],
       "@model/*": ["model/*"],
       "@routes/*": ["routes/*"],
       "@utils/*": ["utils/*"],
       "@services/*": ["services/*"]
     }
-  }
+  },
+  "include": ["backend/**/*"],
+  "exclude": ["node_modules", "app", "dist"]
 }

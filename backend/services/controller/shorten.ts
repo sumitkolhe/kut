@@ -1,5 +1,5 @@
 import createError from "http-errors";
-import { config } from "@config";
+import { config } from "@config/config";
 import { RequestHandler } from "express";
 import { verifyLink } from "@utils/verifyLink";
 import { UserModel } from "@model/user.model";
