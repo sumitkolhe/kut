@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
 import createError from "http-errors";
 import bcrypt from "bcrypt";
-import { UserModel } from "../../model/user.model";
-import { userLoginSchema } from "../../utils/validation";
-import { signToken } from "../../utils/signToken";
+import { UserModel } from "@model/user.model";
+import { userLoginSchema } from "@utils/validation";
+import { signToken } from "@utils/signToken";
 
 export const login: RequestHandler = async (req, res, next) => {
   try {

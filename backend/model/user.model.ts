@@ -1,5 +1,5 @@
 import { model, Schema, Document } from "mongoose";
-import { LinkModel } from "./link.model";
+import { LinkModel } from "@model/link.model";
 interface UserDocument extends Document {
   userName: {
     type: string;

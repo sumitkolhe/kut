@@ -1,5 +1,5 @@
-import { config } from "../../config";
-import { LinkModel } from "../model/link.model";
+import { config } from "@config";
+import { LinkModel } from "@model/link.model";
 
 export const generateUniqueAlias = async (): Promise<string> => {
   let randomAlias: any = "";

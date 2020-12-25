@@ -1,5 +1,5 @@
 import { model, Schema, Document } from "mongoose";
-import { StatisticsModel } from "./statistics.model";
+import { StatisticsModel } from "@model/statistics.model";
 
 export interface LinkDocument extends Document {
   alias: { type: string; required: true; unique: boolean };

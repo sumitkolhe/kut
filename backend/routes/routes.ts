@@ -1,6 +1,6 @@
 import express from "express";
-import { authRoutes } from "../services/routes/auth.routes";
-import { controllerRoutes } from "../services/routes/controller.routes";
+import { authRoutes } from "@services/routes/auth.routes";
+import { controllerRoutes } from "@services/routes/controller.routes";
 
 const routes = express.Router();
 

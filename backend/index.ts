@@ -1,11 +1,11 @@
 import express from "express";
 import createError from "http-errors";
-import routes from "./routes/routes";
 import useragent from "express-useragent";
-import { config } from "../config";
-import { connectDatabase } from "./utils/database";
-import { errorHandler } from "./middleware/errorHandler";
-import { setHeaders } from "./middleware/header";
+import routes from "@routes/routes";
+import { config } from "@config";
+import { connectDatabase } from "@utils/database";
+import { errorHandler } from "@middleware/errorHandler";
+import { setHeaders } from "@middleware/header";
 
 const app = express();
 connectDatabase();

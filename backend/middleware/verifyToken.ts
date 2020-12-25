@@ -1,7 +1,7 @@
 import express from "express";
 import Jwt from "jsonwebtoken";
 import createError from "http-errors";
-import { config } from "../../config";
+import { config } from "@config";
 
 export const verifyToken = (
   req: express.Request,

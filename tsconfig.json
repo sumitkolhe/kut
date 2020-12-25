@@ -21,6 +21,7 @@
     "moduleResolution": "node",
     "baseUrl": "./backend",
     "paths": {
+      "@config": ["../config.ts"],
       "@middleware/*": ["middleware/*"],
       "@model/*": ["model/*"],
       "@routes/*": ["routes/*"],

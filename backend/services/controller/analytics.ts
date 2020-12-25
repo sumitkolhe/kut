@@ -1,6 +1,6 @@
 import createError from "http-errors";
 import { RequestHandler } from "express";
-import { LinkModel } from "../../model/link.model";
+import { LinkModel } from "@model/link.model";
 
 export const analytics: RequestHandler = async (req, res, next) => {
   try {

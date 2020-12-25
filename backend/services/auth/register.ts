@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
 import createError from "http-errors";
 import bcrypt from "bcrypt";
-import { UserModel } from "../../model/user.model";
-import { userRegisterSchema } from "../../utils/validation";
+import { UserModel } from "@model/user.model";
+import { userRegisterSchema } from "@utils/validation";
 
 export const register: RequestHandler = async (req, res, next) => {
   try {

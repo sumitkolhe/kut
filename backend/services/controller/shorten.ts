@@ -1,10 +1,10 @@
 import createError from "http-errors";
-import { config } from "../../../config";
+import { config } from "@config";
 import { RequestHandler } from "express";
-import { verifyLink } from "../../utils/verifyLink";
-import { UserModel } from "../../model/user.model";
-import { LinkModel } from "../../model/link.model";
-import { generateUniqueAlias } from "../../utils/generateAlias";
+import { verifyLink } from "@utils/verifyLink";
+import { UserModel } from "@model/user.model";
+import { LinkModel } from "@model/link.model";
+import { generateUniqueAlias } from "@utils/generateAlias";
 
 export const shorten: RequestHandler = async (req, res, next) => {
   let newAlias = req.body.alias ? req.body.alias : await generateUniqueAlias();
@@ -15,7 +15,7 @@ export const shorten: RequestHandler = async (req, res, next) => {
   });
 
   if (req.body.password) newLink.password = req.body.password;
-  
+
   try {
     const savedLink = await newLink.save();
     const userInstance: any = await UserModel.findOne({

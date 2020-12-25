@@ -1,4 +1,4 @@
-import { UserModel } from "../../model/user.model";
+import { UserModel } from "@model/user.model";
 import { RequestHandler } from "express";
 
 export const links: RequestHandler = async (req, res, next) => {

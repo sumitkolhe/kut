@@ -1,7 +1,7 @@
 import createError from "http-errors";
 import { RequestHandler } from "express";
-import { LinkModel } from "../../model/link.model";
-import { StatisticsModel } from "../../model/statistics.model";
+import { LinkModel } from "@model/link.model";
+import { StatisticsModel } from "@model/statistics.model";
 
 export const redirect: RequestHandler = async (req: any, res, next) => {
   try {

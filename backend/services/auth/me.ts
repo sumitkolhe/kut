@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import createError from "http-errors";
-import { UserModel } from "../../model/user.model";
+import { UserModel } from "@model/user.model";
 
 export const me: RequestHandler = async (req, res, next) => {
   try {
