@@ -3,6 +3,6 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  layout: 'guest',
+  layout: 'public',
 })
 </script>

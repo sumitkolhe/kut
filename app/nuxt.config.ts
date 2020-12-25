@@ -35,7 +35,7 @@ const config: NuxtConfig = {
   modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
   axios: {
-    baseURL: 'http://localhost:80/',
+    baseURL: 'http://localhost:80/api',
   },
 
   auth: {
@@ -52,9 +52,9 @@ const config: NuxtConfig = {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: 'api/auth/login', method: 'post' },
-          register: { url: 'api/auth/register', method: 'post' },
-          user: { url: 'api/auth/me', method: 'get' },
+          login: { url: '/auth/login', method: 'post' },
+          register: { url: '/auth/register', method: 'post' },
+          user: { url: '/auth/me', method: 'get' },
         },
       },
     },
