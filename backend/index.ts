@@ -14,10 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(useragent.express());
 app.use(setHeaders);
-app.get("/", (_req, res) => {
-  res.json("online");
-});
 app.use(routes);
+app.use(express.static(__dirname + "/view/"));
 app.use((next: express.NextFunction) => {
   next(createError(404, "Not Found"));
 });

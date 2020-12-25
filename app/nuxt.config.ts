@@ -96,7 +96,7 @@ const config: NuxtConfig = {
   },
 
   generate: {
-    dir: '../public',
+    dir: '../dist/view',
   },
 
   build: {
