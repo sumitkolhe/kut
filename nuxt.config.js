@@ -24,7 +24,7 @@ module.exports = {
 
   publicRuntimeConfig: {
     axios: {
-      baseURL: `http://localhost:${process.env.PORT || '3000'}/`, // server
+      baseURL: `http://localhost:${process.env.PORT || '80'}/`, // server
       browserBaseURL: '/', // client / browser
     },
   },
