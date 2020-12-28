@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
 
       <Nuxtlink to="auth/login">Login</Nuxtlink>
-
+      
       <v-btn text class="font-weight-bold">Register</v-btn>
       <v-spacer></v-spacer>
     </v-app-bar>

@@ -19,10 +19,17 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
+    "baseUrl": "./server",
+    "outDir": "./server-dist",
     "paths": {
       "~/*": ["./*"],
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@config/*": ["config/*"],
+      "@middleware/*": ["middleware/*"],
+      "@model/*": ["model/*"],
+      "@routes/*": ["routes/*"],
+      "@utils/*": ["utils/*"],
+      "@controller/*": ["controller/*"]
     },
     "types": [
       "@types/node",
@@ -39,5 +46,7 @@
     "server-dist",
     "**/*.spec.ts",
     "**/*.test.ts"
-  ]
+  ],
+
+  "include": ["server/**/*"]
 }

@@ -3,12 +3,12 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env TS_NODE_PROJECT=\"./tsconfig.server.json\" nodemon server/index.ts",
+    "dev": "nodemon server/index.ts",
     "dev:js": "nodemon server-dist/index.js --watch server",
     "build": "npm run build:client && npm run build:server",
     "build:client": "nuxt build",
-    "build:server": "tsc --project tsconfig.server.json && tscpaths -p tsconfig.server.json -s ./server -o ./server-dist",
-    "start": "node server-dist/index.js",
+    "build:server": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./server -o ./server-dist",
+    "start": "cross-env NODE_ENV=production node server-dist/index.js",
     "generate": "nuxt generate"
   },
   "dependencies": {
