@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
-    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
+    "target": "es2018",
     "module": "commonjs",
     "strict": true,
     "noImplicitAny": true,
@@ -18,26 +17,16 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "baseUrl": ".",
+    "baseUrl": "./server",
+    "outDir": "./server-dist",
     "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./*"]
-    },
-    "types": [
-      "@types/node",
-      "@nuxt/types",
-      "@nuxt/vue-app",
-      "@nuxtjs/vuetify",
-      "@nuxtjs/auth-next"
-    ]
+      "@config/*": ["config/*"],
+      "@middleware/*": ["middleware/*"],
+      "@model/*": ["model/*"],
+      "@routes/*": ["routes/*"],
+      "@utils/*": ["utils/*"],
+      "@controller/*": ["controller/*"]
+    }
   },
-  "exclude": [
-    "node_modules",
-    ".nuxt",
-    "dist",
-    "server-dist",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "include": ["server/**/*"]
 }
