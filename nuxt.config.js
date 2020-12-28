@@ -38,7 +38,7 @@ module.exports = {
   server: {
     port: 80, // default: 3000
     host: '0.0.0.0', // default: localhost,
-  }
+  },
 
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
 
