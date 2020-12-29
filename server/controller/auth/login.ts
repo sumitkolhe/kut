@@ -1,6 +1,5 @@
 import { RequestHandler } from 'express'
-
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { UserModel } from '@model/user.model'
 import { userLoginSchema } from '@utils/validators'
 import { signToken } from '@utils/signToken'

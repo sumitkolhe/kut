@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { UserModel } from '@model/user.model'
 import { userRegisterSchema } from '@utils/validators'
 import { CreateError } from '@middleware/errorHandler'
