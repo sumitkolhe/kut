@@ -23,7 +23,8 @@
           <v-btn
             class="mt-2"
             block
-            :disabled="!valid"
+            :loading="loading"
+            :disabled="loading"
             color="primary"
             @click="loginUser"
           >
@@ -52,8 +53,8 @@ export default Vue.extend({
   data() {
     return {
       valid: true,
-      status: '',
       error: false,
+      loading: false,
       usernameRules: [
         (v: any) => !!v || 'Username or email is required',
         (v: any) =>
@@ -78,11 +79,14 @@ export default Vue.extend({
 
   methods: {
     async loginUser() {
+      this.loading = true
       try {
         await this.$auth.loginWith('local', {
           data: this.login,
         })
+        this.loading = false
       } catch (error) {
+        this.loading = false
         this.error = true
       }
     },

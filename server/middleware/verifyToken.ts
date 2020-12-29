@@ -1,6 +1,6 @@
 import express from 'express'
 import Jwt from 'jsonwebtoken'
-import { config } from '@config/config'
+import { AppConfig } from '@config/config'
 import { CreateError } from '@middleware/errorHandler'
 
 export const verifyToken = (
@@ -13,7 +13,7 @@ export const verifyToken = (
   if (!authToken) throw CreateError.Forbidden()
 
   try {
-    const tokenDetails = Jwt.verify(authToken, config.ACCESS_TOKEN_SECRET)
+    const tokenDetails = Jwt.verify(authToken, AppConfig.ACCESS_TOKEN_SECRET)
     req.body.auth = tokenDetails
     next()
   } catch (error) {

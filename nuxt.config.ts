@@ -1,4 +1,9 @@
-module.exports = {
+import { AppConfig } from './server/config/config'
+import type { NuxtConfig } from '@nuxt/types'
+
+const isDev = process.env.NODE_ENV !== 'production'
+
+export const config: NuxtConfig = {
   telemetry: false,
 
   head: {
@@ -18,16 +23,9 @@ module.exports = {
     ],
   },
 
-  //loading: { color: '#f55555' },
+  loading: { color: '#f55555' },
 
   css: [],
-
-  publicRuntimeConfig: {
-    axios: {
-      baseURL: `http://localhost:${process.env.PORT || '80'}/`, // server
-      browserBaseURL: '/', // client / browser
-    },
-  },
 
   env: {},
 
@@ -36,8 +34,8 @@ module.exports = {
   components: true,
 
   server: {
-    port: 80, // default: 3000
-    host: '0.0.0.0', // default: localhost,
+    port: AppConfig.PORT, // default: 3000
+    host: isDev ? 'localhost' : '0.0.0.0', // default: localhost,
   },
 
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
@@ -104,7 +102,7 @@ module.exports = {
     },
   },
   build: {
-    extend: function (config, { isDev, isClient }) {
+    extend: function (config) {
       config.node = {
         fs: 'empty',
         worker_threads: 'empty',
