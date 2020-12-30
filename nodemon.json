@@ -2,9 +2,8 @@
   "restartable": "rs",
   "ignore": [".git", "node_modules/**/node_modules"],
   "verbose": true,
-  "execMap": {
-    "ts": "node --require tsconfig-paths/register --require ts-node/register"
-  },
+  "exec": "node -r tsconfig-paths/register -r ts-node/register",
+
   "watch": ["server/", "nuxt.config.js", "tsconfig.json", ".env"],
   "env": {
     "NODE_ENV": "development"

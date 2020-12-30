@@ -1,7 +1,11 @@
 <template>
   <v-app dark>
     <Navigation />
-    <nuxt />
+    <v-main>
+      <v-container>
+        <nuxt />
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
@@ -13,5 +17,8 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
+#app {
+  font-family: 'Poppins', sans-serif;
+}
 </style>

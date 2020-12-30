@@ -142,7 +142,7 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
+<style>
 .v-list {
   margin: 0px 16px !important;
 }

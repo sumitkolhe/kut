@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "nodemon server/index.ts",
-    "dev:js": "nodemon server-dist/index.js --watch server",
+    "dev:js": "nodemon dist/index.js --watch server",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "nuxt build",
-    "build:server": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./server -o ./server-dist",
-    "start": "cross-env NODE_ENV=production node server-dist/index.js",
-    "generate": "nuxt generate"
+    "build:client": "nuxt-ts generate",
+    "build:server": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./server -o ./dist",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start:client": "nuxt-ts start"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
@@ -24,7 +24,8 @@
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.4",
-    "nuxt": "^2.14.6"
+    "nuxt": "^2.14.6",
+    "serve-static": "^1.14.1"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.12",

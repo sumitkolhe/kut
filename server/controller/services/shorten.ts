@@ -1,4 +1,4 @@
-import { AppConfig } from '@config/config'
+import { config } from '@config/config'
 import { RequestHandler } from 'express'
 import { verifyLink } from '@utils/verifyLink'
 import { UserModel } from '@model/user.model'
@@ -10,7 +10,7 @@ export const shorten: RequestHandler = async (req, res, next) => {
   let newAlias = req.body.alias ? req.body.alias : await generateUniqueAlias()
   const newLink = new LinkModel({
     alias: newAlias,
-    shorturl: 'https://' + AppConfig.DOMAIN + '/' + newAlias,
+    shorturl: 'https://' + config.DOMAIN + '/' + newAlias,
     longurl: verifyLink(req.body.longurl),
   })
 

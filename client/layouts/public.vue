@@ -1,6 +1,10 @@
 <template>
   <v-app dark>
-    <nuxt />
+    <v-main>
+      <v-container>
+        <nuxt />
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
@@ -9,5 +13,8 @@ import Vue from 'vue'
 export default Vue.extend({})
 </script>
 
-<style>
+<style scoped>
+* {
+  font-weight: 500;
+}
 </style>

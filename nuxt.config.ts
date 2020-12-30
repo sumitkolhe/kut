@@ -1,10 +1,9 @@
-import { AppConfig } from './server/config/config'
-import type { NuxtConfig } from '@nuxt/types'
+import { NuxtConfig } from '@nuxt/types/config'
+import { config } from './server/config/config'
 
-const isDev = process.env.NODE_ENV !== 'production'
-
-export const config: NuxtConfig = {
+const NuxtAppConfig: NuxtConfig = {
   telemetry: false,
+  target: 'static',
 
   head: {
     titleTemplate: '%s | Shorten your links easily',
@@ -14,35 +13,36 @@ export const config: NuxtConfig = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
-      },
-    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   loading: { color: '#f55555' },
 
-  css: [],
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: `http://localhost:${config.PORT}`, // server
+      browserBaseURL: '/', // client / browser
+    },
+  },
 
-  env: {},
+  srcDir: 'client/',
 
-  plugins: [],
+  buildDir: './dist/.nuxt',
+
+  generate: {
+    dir: './dist/.nuxt',
+  },
 
   components: true,
 
   server: {
-    port: AppConfig.PORT, // default: 3000
-    host: isDev ? 'localhost' : '0.0.0.0', // default: localhost,
+    port: config.PORT,
+    host: config.HOST,
   },
 
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
 
   modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
-
-  axios: {},
 
   auth: {
     cookie: false,
@@ -69,7 +69,6 @@ export const config: NuxtConfig = {
       logout: '/auth/login',
       home: '/user/dashboard',
     },
-    rewriteRedirects: true,
   },
 
   vuetify: {
@@ -102,11 +101,14 @@ export const config: NuxtConfig = {
     },
   },
   build: {
-    extend: function (config) {
-      config.node = {
+    extractCSS: true,
+    extend: function (NuxtAppConfig) {
+      NuxtAppConfig.node = {
         fs: 'empty',
         worker_threads: 'empty',
       }
     },
   },
 }
+
+export default NuxtAppConfig

@@ -1,8 +1,8 @@
-import Jwt from 'jsonwebtoken'
-import { AppConfig } from '@config/config'
+import Jwt from "jsonwebtoken";
+import { config } from "@config/config";
 
 export const signToken = (data: any) => {
-  return Jwt.sign(data, AppConfig.ACCESS_TOKEN_SECRET, {
-    expiresIn: AppConfig.ACCESS_TOKEN_EXPIRATION,
-  })
-}
+  return Jwt.sign(data, config.ACCESS_TOKEN_SECRET, {
+    expiresIn: config.ACCESS_TOKEN_EXPIRATION,
+  });
+};
