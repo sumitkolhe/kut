@@ -16,8 +16,9 @@ const app = express()
 connectDatabase()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(useragent.express())
 app.use(setHeaders)
+app.use(useragent.express())
+
 app.use(routes)
 
 app.use(
@@ -51,8 +52,8 @@ const startProdServer = async () => {
   console.log(__dirname)
   app.use(serveStatic(__dirname + '/.nuxt'))
 
-  const HOST: any = config.HOST
-  const PORT = config.PORT
+  const HOST: any = config.SERVER_HOST
+  const PORT = config.SERVER_PORT
 
   // Listen the server
   app.listen(PORT, HOST)

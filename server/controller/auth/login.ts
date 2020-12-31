@@ -2,7 +2,7 @@ import { RequestHandler } from 'express'
 import bcrypt from 'bcryptjs'
 import { UserModel } from '@model/user.model'
 import { userLoginSchema } from '@utils/validators'
-import { signToken } from '@utils/signToken'
+import { signAccessToken, signRefreshToken } from '@utils/signToken'
 import { CreateError } from '@middleware/errorHandler'
 
 export const login: RequestHandler = async (req, res, next) => {
@@ -25,10 +25,16 @@ export const login: RequestHandler = async (req, res, next) => {
 
     if (!checkPassword) throw CreateError.NotFound('Wrong Password')
 
-    const signedToken = signToken({ email: UserDetails.email })
+    const signedAccessToken = await signAccessToken({
+      email: UserDetails.email,
+    })
+    const signedRefreshToken = await signRefreshToken({
+      email: UserDetails.email,
+    })
 
     res.json({
-      authToken: signedToken,
+      accessToken: signedAccessToken,
+      refreshToken: signedRefreshToken,
     })
   } catch (error) {
     if (error.isJoi === true) error.status = 422

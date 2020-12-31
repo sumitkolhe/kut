@@ -20,7 +20,7 @@ const NuxtAppConfig: NuxtConfig = {
 
   publicRuntimeConfig: {
     axios: {
-      baseURL: `http://localhost:${config.PORT}`, // server
+      baseURL: `http://localhost:${config.SERVER_PORT}`, // server
       browserBaseURL: '/', // client / browser
     },
   },
@@ -36,8 +36,8 @@ const NuxtAppConfig: NuxtConfig = {
   components: true,
 
   server: {
-    port: config.PORT,
-    host: config.HOST,
+    port: config.SERVER_PORT,
+    host: config.SERVER_HOST,
   },
 
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
@@ -49,7 +49,7 @@ const NuxtAppConfig: NuxtConfig = {
     strategies: {
       local: {
         token: {
-          property: 'authToken',
+          property: 'accessToken',
           required: true,
           type: 'Bearer',
         },

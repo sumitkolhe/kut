@@ -5,7 +5,6 @@ export class CreateError extends Error {
   public message: any
   public constructor(status: number, message: string) {
     super(message)
-
     this.status = status
     this.message = message
   }
@@ -16,24 +15,23 @@ export class CreateError extends Error {
   static Unauthorized(message?: string) {
     return new CreateError(401, message || 'Unauthorized')
   }
-
   static Forbidden(message?: string) {
     return new CreateError(403, message || 'Forbidden')
   }
   static NotFound(message?: string) {
     return new CreateError(404, message || 'Not Found')
   }
-
   static Conflict(message?: string) {
     return new CreateError(400, message || 'Conflict')
   }
-
   static MethodNotAllower(message?: string) {
     return new CreateError(405, message || 'Method Not Allowed')
   }
-
   static TooManyRequests(message?: string) {
     return new CreateError(429, message || 'Too Many Requests')
+  }
+  static InternalServerError(message?: string) {
+    return new CreateError(500, message || 'Something Went Wrong')
   }
 }
 
