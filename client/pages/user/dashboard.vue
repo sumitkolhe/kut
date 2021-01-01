@@ -1,15 +1,20 @@
 <template>
-	<v-row justify="center" align="center">Dashboard {{ message.message }}</v-row>
+	<v-row justify="center" align="center">
+		<v-btn @click="snackTime">Test snack</v-btn>
+	</v-row>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
 export default Vue.extend({
-	data() {
-		return {
-			message: this.$store.state.notification,
-		}
+	methods: {
+		snackTime() {
+			this.$store.commit('notification/showNotification', {
+				message: 'hello',
+				color: 'info',
+			})
+		},
 	},
 })
 </script>

@@ -1,16 +1,27 @@
 <template>
-	<v-snackbar v-model="show" :color="color">
-		{{ message }}
-		<v-btn text @click="show = false">Close</v-btn>
-	</v-snackbar>
+	<div class="text-center ma-2">
+		<v-snackbar v-model="showNotification" :color="color">
+			{{ message }}
+
+			<template v-slot:action="{ attrs }">
+				<v-btn
+					color="black"
+					text
+					v-bind="attrs"
+					@click="showNotification = false"
+				>
+					<v-icon>mdi-close</v-icon>
+				</v-btn>
+			</template>
+		</v-snackbar>
+	</div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
+<script>
+export default {
 	data() {
 		return {
-			show: false,
+			showNotification: false,
 			message: '',
 			color: '',
 		}
@@ -18,12 +29,12 @@ export default Vue.extend({
 
 	created() {
 		this.$store.subscribe((mutation, state) => {
-			if (mutation.type === 'snackbar/showNotification') {
-				this.message = state.snackbar.notifcationMessage
-				this.color = state.snackbar.notificationColor
-				this.show = true
+			if (mutation.type === 'notification/showNotification') {
+				this.message = state.notification.message
+				this.color = state.notification.color
+				this.showNotification = true
 			}
 		})
 	},
-})
+}
 </script>
