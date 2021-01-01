@@ -17,7 +17,7 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
+<style>
 #app {
   font-family: 'Poppins', sans-serif;
 }

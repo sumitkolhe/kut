@@ -1,11 +1,7 @@
 <template>
-  <v-app dark>
-    <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-main>
-  </v-app>
+	<v-app dark>
+		<nuxt />
+	</v-app>
 </template>
 
 <script lang="ts">
@@ -14,7 +10,7 @@ export default Vue.extend({})
 </script>
 
 <style scoped>
-* {
-  font-weight: 500;
+#app {
+	overflow: hidden;
 }
 </style>
