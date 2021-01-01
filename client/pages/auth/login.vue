@@ -1,21 +1,26 @@
 <template>
 	<v-row class="fill-height">
 		<v-col
+			d-none
+			d-md-block
 			md="6"
 			cols="12"
-			class="d-flex hero align-center accent d-none d-md-block"
+			class="d-flex align-center accent hero"
 		></v-col>
 		<v-col md="6" cols="12" class="d-flex align-center">
 			<v-row justify="center">
 				<div class="login-form">
-					<v-row>
-						<p class="px-3 font-weight-bold text-h3 secondary--text">Login</p>
-					</v-row>
-					<v-row>
-						<p class="px-3 pb-6 font-weight-regular text-h6 text--disabled">
-							Welcome back! Please login into your account.
-						</p>
-					</v-row>
+					<p
+						class="font-weight-bold text-h3 secondary--text text-md-left text-center"
+					>
+						Login
+					</p>
+
+					<p
+						class="pb-6 font-weight-regular text-h6 text--disabled text-md-left text-center"
+					>
+						Welcome back! Please login into your account.
+					</p>
 
 					<v-form ref="form" v-model="valid" lazy-validation>
 						<p class="mb-2 font-weight-medium">E-mail / Username</p>
@@ -37,13 +42,12 @@
 							outlined
 						></v-text-field>
 
-						<v-row class="mt-n8 mb-n4">
-							<v-col>
-								<v-checkbox color="accent">
-									<template v-slot:label>Remember me</template>
-								</v-checkbox>
-							</v-col>
-						</v-row>
+						<v-checkbox
+							class="mt-n2"
+							label="Remember me"
+							color="accent"
+							value="Remember me"
+						></v-checkbox>
 
 						<v-btn
 							block
@@ -56,17 +60,13 @@
 							<v-icon left>mdi-send-outline</v-icon>
 							Login
 						</v-btn>
-						<v-row justify="center" class="mt-4 px-3">
-							<p class="font-weight-medium">
-								Don't have an account?
-								<NuxtLink
-									class="text-decoration-none accent--text"
-									to="register"
-								>
-									Create an account
-								</NuxtLink>
-							</p>
-						</v-row>
+
+						<p class="font-weight-medium mt-4 text-md-left text-center">
+							Don't have an account?
+							<NuxtLink class="text-decoration-none accent--text" to="register">
+								Create an account
+							</NuxtLink>
+						</p>
 					</v-form>
 				</div>
 			</v-row>
@@ -76,8 +76,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import '@nuxtjs/auth-next'
-
 export default Vue.extend({
 	layout: 'public',
 
@@ -135,7 +133,6 @@ export default Vue.extend({
 .login-form {
 	min-width: 300px;
 	max-width: 500px;
-	text-align: left;
-	padding: 0px 25px;
+	margin: 30px 0px;
 }
 </style>

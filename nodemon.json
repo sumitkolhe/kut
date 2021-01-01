@@ -1,12 +1,12 @@
 {
-  "restartable": "rs",
-  "ignore": [".git", "node_modules/**/node_modules"],
-  "verbose": true,
-  "exec": "node -r tsconfig-paths/register -r ts-node/register",
+	"restartable": "rs",
+	"ignore": [".git", "node_modules/**/node_modules"],
+	"verbose": true,
+	"exec": "node -r tsconfig-paths/register -r ts-node/register",
 
-  "watch": ["server/", "nuxt.config.js", "tsconfig.json", ".env"],
-  "env": {
-    "NODE_ENV": "development"
-  },
-  "ext": "js,json,ts"
+	"watch": ["server/", "nuxt.config.ts", "tsconfig.json", ".env"],
+	"env": {
+		"NODE_ENV": "development"
+	},
+	"ext": "js,json,ts"
 }
