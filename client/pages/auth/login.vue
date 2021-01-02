@@ -82,8 +82,6 @@ export default Vue.extend({
 	data() {
 		return {
 			valid: true,
-			status: '',
-			error: false,
 			rememberMe: false,
 			usernameRules: [
 				(v: any) => !!v || 'Username or email is required',
@@ -113,8 +111,20 @@ export default Vue.extend({
 				await this.$auth.loginWith('local', {
 					data: this.login,
 				})
+				this.$store.commit('notification/showNotification', {
+					message: 'Login successful',
+					color: 'success',
+				})
+
+				if (this.$auth.loggedIn)
+					setTimeout(() => {
+						this.$router.push('/user/dashboard')
+					}, 1000)
 			} catch (error) {
-				this.error = true
+				this.$store.commit('notification/showNotification', {
+					message: error.response.data.message,
+					color: 'error',
+				})
 			}
 		},
 	},

@@ -1,24 +1,31 @@
 <template>
-	<div class="text-center ma-2">
-		<v-snackbar v-model="showNotification" :color="color">
+	<div class="text-center">
+		<v-snackbar
+			v-model="showNotification"
+			:color="color"
+			class="mb-4"
+			timeout="1500"
+		>
 			{{ message }}
 
 			<template v-slot:action="{ attrs }">
 				<v-btn
-					color="black"
+					color="white"
 					text
+					icon
 					v-bind="attrs"
 					@click="showNotification = false"
 				>
-					<v-icon>mdi-close</v-icon>
+					<v-icon text>mdi-close-circle</v-icon>
 				</v-btn>
 			</template>
 		</v-snackbar>
 	</div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
 	data() {
 		return {
 			showNotification: false,
@@ -36,5 +43,5 @@ export default {
 			}
 		})
 	},
-}
+})
 </script>

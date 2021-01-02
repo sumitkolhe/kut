@@ -1,158 +1,179 @@
 <template>
-  <v-main>
-    <v-app-bar :clipped-left="clippedbar" app elevation="0" height="80">
-      <!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
+	<v-main>
+		<v-app-bar :clipped-left="clippedbar" app elevation="0" height="80">
+			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
-      <v-spacer />
+			<v-spacer />
 
-      <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn icon color="accent" dark v-bind="attrs" v-on="on">
-            <v-icon large>mdi-bell-outline</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item v-for="(item, index) in notiItems" :key="index">
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      <NuxtLink to="/auth/register">
-        <v-btn text color="accent" dark v-bind="attrs" v-on="on">
-          Register
-        </v-btn></NuxtLink
-      >
-      <NuxtLink to="/auth/login">
-        <v-btn text color="accent" dark v-bind="attrs" v-on="on">
-          Login
-        </v-btn></NuxtLink
-      >
-    </v-app-bar>
+			<v-menu offset-y offset-x left rounded="lg">
+				<template v-slot:activator="{ on, attrs }">
+					<v-btn
+						class="mr-8"
+						icon
+						color="accent"
+						text
+						dark
+						v-bind="attrs"
+						v-on="on"
+					>
+						<v-icon large>mdi-bell-outline</v-icon>
+					</v-btn>
+				</template>
+				<v-list nav>
+					<v-list-item link v-for="(item, i) in notificationItems" :key="i">
+						<v-list-item-title v-text="item.title" />
+					</v-list-item>
+				</v-list>
+			</v-menu>
 
-    <v-navigation-drawer
-      permanent
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      mini-variant-width="100"
-      width="260"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list nav>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+			<v-menu offset-y bottom nudge-bottom="10" rounded="lg">
+				<template v-slot:activator="{ on, attrs }">
+					<v-avatar
+						class="mr-8"
+						v-bind="attrs"
+						v-on="on"
+						color="primary"
+						size="36"
+					>
+						<v-icon dark>mdi-account-circle</v-icon>
+					</v-avatar>
+				</template>
+				<v-list nav>
+					<v-list-item link v-for="(item, i) in profileItems" :key="i">
+						<v-list-item-title v-text="item.title" />
+					</v-list-item>
+				</v-list>
+			</v-menu>
+		</v-app-bar>
 
-      <template v-slot:prepend>
-        <v-row>
-          <v-col v-if="!miniVariant">
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title"> Reduced </v-list-item-title>
-                <v-list-item-subtitle> v2.0 </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item></v-col
-          >
-          <v-col>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title">
-                  <v-btn icon @click.stop="miniVariant = !miniVariant">
-                    <v-icon x-large>mdi-menu</v-icon>
-                  </v-btn>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-col>
-        </v-row>
-      </template>
-      <template v-slot:append>
-        <div class="pa-2">
-          <v-btn block elevation="0" @click="logout()"> Logout </v-btn>
-        </div>
-      </template>
-    </v-navigation-drawer>
-  </v-main>
+		<v-navigation-drawer
+			permanent
+			v-model="drawer"
+			:mini-variant="miniVariant"
+			mini-variant-width="100"
+			width="260"
+			:clipped="clipped"
+			fixed
+			app
+		>
+			<v-list nav>
+				<v-list-item
+					v-for="(item, i) in items"
+					:key="i"
+					:to="item.to"
+					router
+					exact
+				>
+					<v-list-item-action>
+						<v-icon>{{ item.icon }}</v-icon>
+					</v-list-item-action>
+					<v-list-item-content>
+						<v-list-item-title v-text="item.title" />
+					</v-list-item-content>
+				</v-list-item>
+			</v-list>
+
+			<template v-slot:prepend>
+				<v-row>
+					<v-col v-if="!miniVariant">
+						<v-list-item>
+							<v-list-item-content>
+								<v-list-item-title class="title">Reduced</v-list-item-title>
+								<v-list-item-subtitle>v2.0</v-list-item-subtitle>
+							</v-list-item-content>
+						</v-list-item>
+					</v-col>
+					<v-col>
+						<v-list-item>
+							<v-list-item-content>
+								<v-list-item-title class="title">
+									<v-btn icon @click.stop="miniVariant = !miniVariant">
+										<v-icon x-large>mdi-menu</v-icon>
+									</v-btn>
+								</v-list-item-title>
+							</v-list-item-content>
+						</v-list-item>
+					</v-col>
+				</v-row>
+			</template>
+			<template v-slot:append>
+				<div class="pa-2">
+					<v-btn block elevation="0" @click="logout()">Logout</v-btn>
+				</div>
+			</template>
+		</v-navigation-drawer>
+	</v-main>
 </template>
 
 
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  data() {
-    return {
-      on: '',
-      attrs: '',
-      clipped: false,
-      drawer: false,
-      clippedbar: false,
-      fixed: false,
-      miniVariant: false,
-      title: 'Reduced',
-      notiItems: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
-      ],
-      items: [
-        {
-          icon: 'mdi-view-dashboard-outline',
-          title: 'Dashboard',
-          to: '/user/dashboard',
-        },
+	data() {
+		return {
+			on: '',
+			attrs: '',
+			clipped: false,
+			drawer: false,
+			clippedbar: false,
+			fixed: false,
+			miniVariant: false,
+			title: 'Reduced',
+			notificationItems: [
+				{ title: 'Profile' },
+				{ title: 'Settings' },
+				{ title: 'Logout' },
+			],
+			profileItems: [
+				{ title: 'Profile' },
+				{ title: 'Settings' },
+				{ title: 'Logout' },
+			],
+			items: [
+				{
+					icon: 'mdi-view-dashboard-outline',
+					title: 'Dashboard',
+					to: '/user/dashboard',
+				},
 
-        {
-          icon: 'mdi-link',
-          title: 'My Links',
-          to: '/user/links',
-        },
-        {
-          icon: 'mdi-chart-bell-curve-cumulative',
-          title: 'Analytics',
-          to: '/user/analytics',
-        },
-        {
-          icon: 'mdi-notebook-outline',
-          title: 'Notes',
-          to: '/user/notes',
-        },
-      ],
-    }
-  },
+				{
+					icon: 'mdi-link',
+					title: 'My Links',
+					to: '/user/links',
+				},
+				{
+					icon: 'mdi-chart-bell-curve-cumulative',
+					title: 'Analytics',
+					to: '/user/analytics',
+				},
+				{
+					icon: 'mdi-notebook-outline',
+					title: 'Notes',
+					to: '/user/notes',
+				},
+			],
+		}
+	},
 
-  methods: {
-    async logout() {
-      await this.$auth.logout()
-    },
-  },
+	methods: {
+		async logout() {
+			await this.$auth.logout()
+		},
+	},
 })
 </script>
 
 <style>
 .v-list {
-  margin: 0px 16px !important;
+	padding: 4px 16px !important;
 }
 
 .v-list-item {
-  min-height: 64px !important;
-  border-radius: 20px !important;
+	min-height: 60px !important;
+	border-radius: 12px !important;
 }
 
 .v-list--nav .v-list-item::before {
-  border-radius: 20px;
+	border-radius: 12px;
 }
 </style> 

@@ -3,7 +3,7 @@
 		<Navigation />
 		<v-main>
 			<v-container>
-				<Snackbar />
+				<Notification />
 				<nuxt />
 			</v-container>
 		</v-main>

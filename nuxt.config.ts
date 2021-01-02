@@ -51,6 +51,8 @@ const NuxtAppConfig: NuxtConfig = {
 
 	modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
+	plugins: ['~/plugins/notification.ts'],
+
 	publicRuntimeConfig: {
 		axios: {
 			baseURL: `http://localhost:${config.SERVER_PORT}/api`, // server
@@ -81,7 +83,7 @@ const NuxtAppConfig: NuxtConfig = {
 		redirect: {
 			login: '/auth/login',
 			logout: '/auth/login',
-			home: '/user/dashboard',
+			home: false,
 		},
 	},
 

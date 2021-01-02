@@ -1,101 +1,96 @@
 <template>
-	<v-container>
-		<v-row justify="center" align="center">
-			<v-col>
-				<v-row><img class="mb-12" src="~/assets/banner.svg" /></v-row>
-				<v-row>
-					<p class="font-weight-bold text-h3 text-center mt-12 secondary--text">
-						Hey 👋
-					</p>
-				</v-row>
-				<v-row>
+	<v-row class="fill-height">
+		<v-col md="4" cols="12" class="d-flex align-center">
+			<v-row justify="center">
+				<div class="login-form">
 					<p
-						class="font-weight-medium text-h4 mt-2 text-center mb-12 secondary--text"
+						class="font-weight-bold text-h3 secondary--text text-md-left text-center"
 					>
-						Create your Free Account
+						Register
 					</p>
-				</v-row>
-				<v-row>
-					<v-form
-						ref="form"
-						class="register-form"
-						v-model="valid"
-						lazy-validation
+
+					<p
+						class="pb-6 font-weight-regular text-h6 text--disabled text-md-left text-center"
 					>
-						<p class="mb-1">Username</p>
+						Create a new account to enjoy Reduced
+					</p>
+
+					<v-form ref="form" v-model="valid" lazy-validation>
+						<p class="mb-2 font-weight-medium">Username</p>
 						<v-text-field
 							v-model="register.userName"
 							:rules="usernameRules"
 							placeholder="John Doe"
+							append-icon="mdi-account-circle"
 							outlined
 							required
 						></v-text-field>
-						<p class="mb-1">E-mail</p>
+						<p class="mb-2 font-weight-medium">E-mail</p>
 						<v-text-field
 							v-model="register.email"
 							:rules="emailRules"
-							placeholder="john@doe.com"
+							placeholder="John@Doe.com"
+							append-icon="mdi-email"
 							outlined
 							required
 						></v-text-field>
-						<p class="mb-1">Password</p>
+						<p class="mb-2 font-weight-medium mt-n1">Password</p>
 						<v-text-field
 							v-model="register.password"
 							:rules="passwordRules"
+							append-icon="mdi-lock"
 							placeholder="***********"
-							outlined
 							required
+							outlined
 						></v-text-field>
 
 						<v-btn
-							class="mt-2"
 							block
 							large
+							elevation="1"
 							:disabled="!valid"
-							color="primary"
+							color="secondary"
 							@click="registerUser"
 						>
-							Create Account
+							<v-icon left>mdi-send-outline</v-icon>
+							Create an account
 						</v-btn>
+
+						<p class="font-weight-medium mt-4 text-md-left text-center">
+							Already have an account?
+							<NuxtLink class="text-decoration-none accent--text" to="login">
+								Login
+							</NuxtLink>
+						</p>
 					</v-form>
-				</v-row>
-				<v-row class="mt-4">
-					Already have an account?
-					<NuxtLink to="/auth/login">Log in</NuxtLink>
-				</v-row>
-			</v-col>
-			<v-col class="full-height">
-				<div class="register-features">
-					<div v-for="feature in features" :key="feature.title">
-						<div>
-							<v-icon color="accent">mdi-check-circle</v-icon>
-							<span class="ml-3 accent--text h5 font-weight-bold">
-								{{ feature.title }}
-							</span>
-						</div>
-						<div class="ml-10 mb-12">
-							{{ feature.description }}
-						</div>
-					</div>
 				</div>
-			</v-col>
-		</v-row>
-	</v-container>
-</template> 
+			</v-row>
+		</v-col>
+		<v-col
+			d-none
+			d-md-block
+			md="8"
+			cols="12"
+			class="d-flex align-center accent hero"
+		></v-col>
+	</v-row>
+</template>
 
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
 	layout: 'public',
+
 	data() {
 		return {
-			valid: false,
-			status: '',
+			valid: true,
+
 			usernameRules: [
-				(v: any) => !!v || 'Username is required',
+				(v: any) => !!v || 'Username or email is required',
 				(v: any) =>
-					(v && v.length <= 10) || 'Username must be less than 10 characters',
+					(v && v.length <= 10) || 'Name must be less than 10 characters',
 			],
+
 			emailRules: [
 				(v: any) => !!v || 'E-mail is required',
 				(v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -110,46 +105,52 @@ export default Vue.extend({
 				email: '',
 				password: '',
 			},
-
-			features: [
-				{
-					title: 'Free account',
-					description:
-						'Create apps, connect databases and add-on services, and collaborate on your apps, for free. ',
-				},
-				{
-					title: 'Your app platform',
-					description:
-						'A platform for apps, with app management & instant scaling, for development and production. ',
-				},
-				{
-					title: 'Deploy now',
-					description:
-						'Go from code to running app in minutes. Deploy, scale, and deliver your app to the world. ',
-				},
-			],
 		}
 	},
 
 	methods: {
 		async registerUser() {
-			const result: any = await this.$auth.loginWith('local', {
-				data: this.register,
-			})
-			this.status = result.data.userDetails.userName
-			console.log(this.status)
+			try {
+				await this.$axios.post('/auth/register', this.register)
+
+				await this.$auth.loginWith('local', {
+					data: {
+						email: this.register.email,
+						password: this.register.password,
+					},
+				})
+				this.$store.commit('notification/showNotification', {
+					message: 'Registered successfully',
+					color: 'success',
+				})
+
+				if (this.$auth.loggedIn)
+					setTimeout(() => {
+						this.$router.push('/user/dashboard')
+					}, 1000)
+			} catch (error) {
+				this.$store.commit('notification/showNotification', {
+					message: error.response.data.message,
+					color: 'error',
+				})
+			}
 		},
 	},
 })
 </script>
 
-<style>
-.register-features {
-	margin-top: 250px;
-	background-color: crimson;
+<style scoped>
+.hero {
+	background: url('../../assets/cat.svg') no-repeat center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: 70%;
 }
 
-.register-form {
-	width: 480px;
+.login-form {
+	min-width: 300px;
+	max-width: 500px;
+	margin: 30px 0px;
 }
 </style>

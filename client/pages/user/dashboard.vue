@@ -12,7 +12,7 @@ export default Vue.extend({
 		snackTime() {
 			this.$store.commit('notification/showNotification', {
 				message: 'hello',
-				color: 'info',
+				color: 'accent',
 			})
 		},
 	},
