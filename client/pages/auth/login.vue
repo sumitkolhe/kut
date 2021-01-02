@@ -36,7 +36,9 @@
 						<v-text-field
 							v-model="login.password"
 							:rules="passwordRules"
-							append-icon="mdi-lock"
+							:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+							@click:append="showPassword = !showPassword"
+							:type="showPassword ? 'text' : 'password'"
 							placeholder="***********"
 							required
 							outlined
@@ -83,10 +85,12 @@ export default Vue.extend({
 		return {
 			valid: true,
 			rememberMe: false,
+			showPassword: false,
 			usernameRules: [
 				(v: any) => !!v || 'Username or email is required',
 				(v: any) =>
-					(v && v.length <= 10) || 'Name must be less than 10 characters',
+					(v && v.length <= 30 && v.split(' ').length <= 1) ||
+					'Name must be less than 30 characters',
 			],
 
 			emailRules: [

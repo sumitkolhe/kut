@@ -97,7 +97,7 @@ const NuxtAppConfig: NuxtConfig = {
 			themes: {
 				dark: {
 					primary: '#f1f1f1',
-					accent: '#ff5050',
+					accent: '#f55555',
 					secondary: '#2b2d42',
 					success: '#4CAF50',
 					info: '#2196F3',
@@ -106,7 +106,7 @@ const NuxtAppConfig: NuxtConfig = {
 				},
 				light: {
 					primary: '#1e1e1e',
-					accent: '#ff5050',
+					accent: '#f55555',
 					secondary: '#2b2d42',
 					success: '#4CAF50',
 					info: '#2196F3',

@@ -38,7 +38,9 @@
 						<v-text-field
 							v-model="register.password"
 							:rules="passwordRules"
-							append-icon="mdi-lock"
+							:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+							@click:append="showPassword = !showPassword"
+							:type="showPassword ? 'text' : 'password'"
 							placeholder="***********"
 							required
 							outlined
@@ -71,7 +73,7 @@
 			d-md-block
 			md="8"
 			cols="12"
-			class="d-flex align-center accent hero"
+			class="d-flex align-center primary hero"
 		></v-col>
 	</v-row>
 </template>
@@ -84,11 +86,13 @@ export default Vue.extend({
 	data() {
 		return {
 			valid: true,
+			showPassword: false,
 
 			usernameRules: [
 				(v: any) => !!v || 'Username or email is required',
 				(v: any) =>
-					(v && v.length <= 10) || 'Name must be less than 10 characters',
+					(v && v.length <= 30 && v.split(' ').length <= 1) ||
+					'Name must be less than 10 characters',
 			],
 
 			emailRules: [
@@ -141,7 +145,7 @@ export default Vue.extend({
 
 <style scoped>
 .hero {
-	background: url('../../assets/cat.svg') no-repeat center;
+	background: url('../../assets/camping.svg') no-repeat center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
