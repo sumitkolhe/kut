@@ -1,6 +1,12 @@
 <template>
 	<v-main>
-		<v-app-bar :clipped-left="clippedbar" app elevation="0" height="80">
+		<v-app-bar
+			:clipped-left="clippedbar"
+			app
+			elevation="0"
+			height="80"
+			color="transparent"
+		>
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
 			<v-spacer />
@@ -108,6 +114,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import '@nuxtjs/auth-next'
 export default Vue.extend({
 	data() {
 		return {
