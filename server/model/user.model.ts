@@ -1,5 +1,6 @@
 import { model, Schema, Document } from 'mongoose'
 import { LinkModel } from '@model/link.model'
+import { NotesModel } from '@model/notes.model'
 interface UserDocument extends Document {
 	userName: {
 		type: string
@@ -19,6 +20,10 @@ interface UserDocument extends Document {
 		minlength: number
 	}
 	userLinks: {
+		type: Schema.Types.ObjectId
+		ref: string
+	}
+	userNotes: {
 		type: Schema.Types.ObjectId
 		ref: string
 	}
@@ -44,6 +49,7 @@ const UserSchema = new Schema({
 		minlength: 6,
 	},
 	userLinks: [{ type: Schema.Types.ObjectId, ref: LinkModel }],
+	userNotes: [{ type: Schema.Types.ObjectId, ref: NotesModel }],
 	created: { type: Date, default: Date.now, required: true },
 })
 

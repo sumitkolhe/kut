@@ -26,7 +26,7 @@
 						<p class="mb-2 font-weight-medium">E-mail / Username</p>
 						<v-text-field
 							v-model="login.userName"
-							:rules="usernameRules"
+							:rules="[rules.required, rules.noSpace]"
 							placeholder="John Doe"
 							append-icon="mdi-email"
 							outlined
@@ -35,7 +35,7 @@
 						<p class="mb-2 font-weight-medium mt-n1">Password</p>
 						<v-text-field
 							v-model="login.password"
-							:rules="passwordRules"
+							:rules="[rules.required, rules.min]"
 							:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
 							@click:append="showPassword = !showPassword"
 							:type="showPassword ? 'text' : 'password'"
@@ -66,7 +66,7 @@
 						<p class="font-weight-medium mt-4 text-md-left text-center">
 							Don't have an account?
 							<NuxtLink class="text-decoration-none accent--text" to="register">
-								Create an account
+								Sign Up
 							</NuxtLink>
 						</p>
 					</v-form>
@@ -86,21 +86,14 @@ export default Vue.extend({
 			valid: true,
 			rememberMe: false,
 			showPassword: false,
-			usernameRules: [
-				(v: any) => !!v || 'Username or email is required',
-				(v: any) =>
-					(v && v.length <= 30 && v.split(' ').length <= 1) ||
-					'Name must be less than 30 characters',
-			],
 
-			emailRules: [
-				(v: any) => !!v || 'E-mail is required',
-				(v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-			],
-			passwordRules: [
-				(v: any) => !!v || 'Password is required',
-				(v: any) => /^.{6,}$/.test(v) || 'Password must be min 6 characters',
-			],
+			rules: {
+				required: (v: any) => !!v || 'Field is Required',
+				min: (v: any) => v.length >= 6 || 'Must be atleast 6 characters',
+				email: (v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+				noSpace: (v: any) =>
+					v.split(' ').length <= 1 || 'Must not contain blank space',
+			},
 
 			login: {
 				userName: '',

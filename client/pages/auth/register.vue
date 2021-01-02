@@ -6,7 +6,7 @@
 					<p
 						class="font-weight-bold text-h3 secondary--text text-md-left text-center"
 					>
-						Register
+						Sign Up
 					</p>
 
 					<p
@@ -15,11 +15,11 @@
 						Create a new account to enjoy Reduced
 					</p>
 
-					<v-form ref="form" v-model="valid" lazy-validation>
+					<v-form ref="form" v-model="isFormValid" lazy-validation>
 						<p class="mb-2 font-weight-medium">Username</p>
 						<v-text-field
 							v-model="register.userName"
-							:rules="usernameRules"
+							:rules="[rules.required, rules.noSpace]"
 							placeholder="John Doe"
 							append-icon="mdi-account-circle"
 							outlined
@@ -28,7 +28,7 @@
 						<p class="mb-2 font-weight-medium">E-mail</p>
 						<v-text-field
 							v-model="register.email"
-							:rules="emailRules"
+							:rules="[rules.required, rules.email]"
 							placeholder="John@Doe.com"
 							append-icon="mdi-email"
 							outlined
@@ -37,7 +37,7 @@
 						<p class="mb-2 font-weight-medium mt-n1">Password</p>
 						<v-text-field
 							v-model="register.password"
-							:rules="passwordRules"
+							:rules="[rules.required, rules.min]"
 							:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
 							@click:append="showPassword = !showPassword"
 							:type="showPassword ? 'text' : 'password'"
@@ -50,7 +50,7 @@
 							block
 							large
 							elevation="1"
-							:disabled="!valid"
+							:disabled="isFormValid"
 							color="secondary"
 							@click="registerUser"
 						>
@@ -85,24 +85,15 @@ export default Vue.extend({
 
 	data() {
 		return {
-			valid: true,
-			showPassword: false,
-
-			usernameRules: [
-				(v: any) => !!v || 'Username or email is required',
-				(v: any) =>
-					(v && v.length <= 30 && v.split(' ').length <= 1) ||
-					'Name must be less than 10 characters',
-			],
-
-			emailRules: [
-				(v: any) => !!v || 'E-mail is required',
-				(v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-			],
-			passwordRules: [
-				(v: any) => !!v || 'Password is required',
-				(v: any) => /^.{6,}$/.test(v) || 'Password must be min 6 characters',
-			],
+			isFormValid: true,
+			showPassword: null,
+			rules: {
+				required: (v: any) => !!v || 'Field is Required',
+				min: (v: any) => v.length >= 6 || 'Must be atleast 6 characters',
+				email: (v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+				noSpace: (v: any) =>
+					v.split(' ').length <= 1 || 'Must not contain blank space',
+			},
 
 			register: {
 				userName: '',
