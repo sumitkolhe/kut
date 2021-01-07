@@ -5,7 +5,7 @@
 			app
 			elevation="0"
 			height="80"
-			color="transparent"
+			color="background"
 		>
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
@@ -80,16 +80,18 @@
 			</v-list>
 
 			<template v-slot:prepend>
-				<v-row>
+				<v-row class="py-4">
 					<v-col v-if="!miniVariant">
 						<v-list-item>
 							<v-list-item-content>
-								<v-list-item-title class="title">Reduced</v-list-item-title>
-								<v-list-item-subtitle>v2.0</v-list-item-subtitle>
+								<v-list-item-title class="text-h4 font-weight-bold">
+									{{ title }}
+								</v-list-item-title>
+								<v-list-item-subtitle>v{{ version }}</v-list-item-subtitle>
 							</v-list-item-content>
 						</v-list-item>
 					</v-col>
-					<v-col>
+					<v-col align="center">
 						<v-list-item>
 							<v-list-item-content>
 								<v-list-item-title class="title">
@@ -125,7 +127,8 @@ export default Vue.extend({
 			clippedbar: false,
 			fixed: false,
 			miniVariant: false,
-			title: 'Reduced',
+			title: process.env.APP_NAME,
+			version: process.env.APP_VERSION,
 			notificationItems: [
 				{ title: 'Profile' },
 				{ title: 'Settings' },

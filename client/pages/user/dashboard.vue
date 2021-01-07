@@ -52,6 +52,16 @@
 				</v-card>
 			</v-col>
 		</v-row>
+		<v-row class="px-4 mt-12" justify="center" align="center">
+			<v-text-field
+				label="Enter a long url"
+				solo
+				v-model="payload.longurl"
+			></v-text-field>
+		</v-row>
+		<v-row justify="center">
+			<v-btn @click="shorten()" elevation="2">Reduce</v-btn>
+		</v-row>
 	</div>
 </template>
 
@@ -59,12 +69,31 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+	data() {
+		return {
+			payload: {
+				longurl: '',
+			},
+		}
+	},
 	methods: {
-		snackTime() {
+		creatNotification() {
 			this.$store.commit('notification/showNotification', {
 				message: 'hello',
 				color: 'accent',
 			})
+		},
+
+		shorten() {
+			this.$axios
+				.post('/shorten/', this.payload)
+				.then((response) => {
+					console.log(response.data)
+					this.$notify.showNotification()
+				})
+				.catch((err) => {
+					console.log(err)
+				})
 		},
 	},
 })

@@ -26,6 +26,11 @@ const NuxtAppConfig: NuxtConfig = {
 		],
 	},
 
+	env: {
+		APP_NAME: process.env.APP_NAME || config.APP_NAME,
+		APP_VERSION: process.env.APP_VERSION || config.APP_VERSION,
+	},
+
 	loading: { color: '#f55555' },
 
 	srcDir: 'client/',
