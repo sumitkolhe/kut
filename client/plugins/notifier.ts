@@ -1,11 +1,16 @@
 declare module 'vuex/types/index' {
-	// this.$myInjectedFunction inside Vuex stores
 	interface Store<S> {
-		$myInjectedFunction(message: string): void
+		$notify(message: string): void
 	}
 }
 
-export default ({ store }, inject: any) => {
+declare module 'vue/types/vue' {
+	interface Vue {
+		$notify(message: string): void
+	}
+}
+
+export default ({ store }: any, inject: any) => {
 	inject('notify', {
 		success(message: string) {
 			store.commit('notification/showNotification', {
@@ -25,5 +30,5 @@ export default ({ store }, inject: any) => {
 				color: 'info',
 			})
 		},
-	})
+	}) as any
 }

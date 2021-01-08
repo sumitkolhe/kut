@@ -80,12 +80,11 @@ export default Vue.extend({
 		shorten() {
 			this.$axios
 				.post('/shorten/', this.payload)
-				.then((response) => {
-					console.log(response.data)
-					this.$notify.error('Something went wrong')
+				.then(() => {
+					;(this as any).$notify.success('Link shortened sucessfully')
 				})
 				.catch((err) => {
-					console.log(err)
+					;(this as any).$notify.error(err.response.data.message)
 				})
 		},
 	},
