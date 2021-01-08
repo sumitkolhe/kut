@@ -11,6 +11,8 @@
 
 			<v-spacer />
 
+			<v-btn @click="$vuetify.theme.dark = !$vuetify.theme.dark">Theme</v-btn>
+
 			<v-menu offset-y offset-x left rounded="lg">
 				<template v-slot:activator="{ on, attrs }">
 					<v-btn
@@ -81,16 +83,19 @@
 
 			<template v-slot:prepend>
 				<v-row class="py-4">
-					<v-col v-if="!miniVariant">
-						<v-list-item>
-							<v-list-item-content>
-								<v-list-item-title class="text-h4 font-weight-bold">
-									{{ title }}
-								</v-list-item-title>
-								<v-list-item-subtitle>v{{ version }}</v-list-item-subtitle>
-							</v-list-item-content>
-						</v-list-item>
-					</v-col>
+					<v-fade-transition>
+						<v-col v-if="!miniVariant">
+							<v-list-item>
+								<v-list-item-content>
+									<v-list-item-title class="text-h4 font-weight-bold">
+										{{ title }}
+									</v-list-item-title>
+									<v-list-item-subtitle>v{{ version }}</v-list-item-subtitle>
+								</v-list-item-content>
+							</v-list-item>
+						</v-col>
+					</v-fade-transition>
+
 					<v-col align="center">
 						<v-list-item>
 							<v-list-item-content>

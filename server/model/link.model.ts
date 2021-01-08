@@ -7,6 +7,7 @@ export interface LinkDocument extends Document {
 	shorturl: { type: string }
 	clicks: { type: number }
 	password: { type: string }
+	description: { type: string }
 	statistics: { type: Schema.Types.ObjectId; ref: string }
 	created: { type: Date; required: boolean }
 }
@@ -17,6 +18,7 @@ const LinkSchema = new Schema({
 	shorturl: { type: String },
 	clicks: { type: Number, default: 0 },
 	password: { type: String, default: null },
+	description: { type: String, default: null },
 	statistics: [{ type: Schema.Types.ObjectId, ref: StatisticsModel }],
 	created: { type: Date, default: Date.now, required: true },
 })

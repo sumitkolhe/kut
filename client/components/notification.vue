@@ -4,9 +4,9 @@
 			v-model="showNotification"
 			:color="color"
 			class="mb-4"
-			timeout="1500"
+			timeout="2000"
 		>
-			{{ message }}
+			<h3>{{ message }}</h3>
 
 			<template v-slot:action="{ attrs }">
 				<v-btn

@@ -13,5 +13,6 @@ export default Vue.extend({})
 <style scoped>
 #app {
 	overflow: hidden;
+	font-family: 'Montserrat', sans-serif;
 }
 </style>

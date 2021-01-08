@@ -15,9 +15,9 @@ export const shorten: RequestHandler = async (req, res, next) => {
 			alias: newAlias,
 			shorturl: 'https://' + config.WEBSITE_DOMAIN + '/' + newAlias,
 			longurl: verifyLink(req.body.longurl),
+			description: req.body.description ? req.body.description : null,
+			password: req.body.password ? req.body.password : null,
 		})
-
-		if (req.body.password) newLink.password = req.body.password
 
 		const savedLink = await newLink.save().catch(() => {
 			throw CreateError.BadRequest('Alias Unavailable')
