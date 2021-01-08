@@ -77,19 +77,12 @@ export default Vue.extend({
 		}
 	},
 	methods: {
-		creatNotification() {
-			this.$store.commit('notification/showNotification', {
-				message: 'hello',
-				color: 'accent',
-			})
-		},
-
 		shorten() {
 			this.$axios
 				.post('/shorten/', this.payload)
 				.then((response) => {
 					console.log(response.data)
-					this.$notify.showNotification()
+					this.$notify.error('Something went wrong')
 				})
 				.catch((err) => {
 					console.log(err)

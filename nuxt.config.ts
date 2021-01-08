@@ -56,7 +56,7 @@ const NuxtAppConfig: NuxtConfig = {
 
 	modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
-	plugins: ['~/plugins/notification.ts'],
+	plugins: ['~/plugins/notifier.ts'],
 
 	publicRuntimeConfig: {
 		axios: {
