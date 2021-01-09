@@ -81,7 +81,7 @@
 
 			<v-row justify="center" class="mt-12">
 				<v-col>
-					<recent-data-table v-bind:recent_links="recent_links" />
+					<recent-links v-bind:recent_links="recent_links" />
 				</v-col>
 			</v-row>
 		</v-col>

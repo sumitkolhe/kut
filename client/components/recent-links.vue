@@ -1,5 +1,10 @@
 <template>
-	<v-row justify="center" class="mx-0" align="center">
+	<v-row
+		justify="center"
+		class="mx-0"
+		align="center"
+		v-show="recent_links != ''"
+	>
 		<table class="table">
 			<thead>
 				<tr>

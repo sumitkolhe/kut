@@ -8,13 +8,15 @@
 import Vue from 'vue'
 export default Vue.extend({
 	mounted() {
-		this.$vuetify.theme.dark = this.$store.getters['theme/getTheme']
-		console.log(this.$store.getters['theme/getTheme'])
+		this.$store.getters['theme/getTheme'] == 'dark'
+			? (this.$vuetify.theme.dark = true)
+			: (this.$vuetify.theme.dark = false)
 	},
 	methods: {
 		changeTheme() {
 			this.$store.commit('theme/changeTheme')
-			this.$vuetify.theme.dark = this.$store.getters['theme/getTheme']
+
+			//this.$vuetify.theme.dark = this.$store.getters['theme/getTheme']
 		},
 	},
 })
