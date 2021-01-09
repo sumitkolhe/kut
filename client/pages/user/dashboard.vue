@@ -81,13 +81,7 @@
 
 			<v-row justify="center" class="mt-12">
 				<v-col>
-					<v-data-table
-						dark
-						calculate-widths
-						hide-default-footer
-						:headers="table.headers"
-						:items="table.data"
-					></v-data-table>
+					<recent-data-table v-bind:recent_links="recent_links" />
 				</v-col>
 			</v-row>
 		</v-col>
@@ -109,23 +103,13 @@ export default Vue.extend({
 				password: '',
 				description: '',
 			},
-
-			table: {
-				headers: [
-					{ text: 'Original Link', value: 'longurl', align: 'start' },
-					{ text: 'Created on', value: 'created' },
-					{ text: 'Alias', value: 'alias' },
-					{ text: 'Short Link', value: 'shorturl' },
-				],
-				data: [],
-			},
+			recent_links: '',
 		}
 	},
 
 	async mounted() {
 		await this.$store.dispatch('all-links/fetchAllLinks')
-		this.table.data = this.$store.getters['all-links/getAllLinks']
-		console.log(this.table.data)
+		this.recent_links = this.$store.getters['all-links/getAllLinks']
 	},
 	methods: {
 		async shorten() {

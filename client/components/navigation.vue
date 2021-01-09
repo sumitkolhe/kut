@@ -18,8 +18,8 @@
 		</v-app-bar>
 
 		<v-navigation-drawer
-			permanent
 			v-model="drawer"
+			:permanent="$vuetify.breakpoint.mdAndUp"
 			:mini-variant="miniVariant"
 			mini-variant-width="100"
 			width="260"
@@ -91,6 +91,7 @@ export default Vue.extend({
 			on: '',
 			attrs: '',
 			clipped: false,
+			permanent: true,
 			drawer: false,
 			clippedbar: false,
 			fixed: false,

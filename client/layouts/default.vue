@@ -2,12 +2,12 @@
 	<v-app dark>
 		<client-only>
 			<Particles
-				color="#1e1e1e"
+				color="#fff"
 				:particles-number="50"
 				shape-type="circle"
 				:particle-size="3"
 				movement-direction="none"
-				lines-color="#000"
+				lines-color="#fff"
 				:line-linked="true"
 				:move-speed="0.8"
 			/>
