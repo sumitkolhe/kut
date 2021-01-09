@@ -5,7 +5,7 @@
 			app
 			elevation="0"
 			height="80"
-			color="background"
+			color="secondary"
 		>
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
@@ -13,45 +13,8 @@
 
 			<v-btn @click="$vuetify.theme.dark = !$vuetify.theme.dark">Theme</v-btn>
 
-			<v-menu offset-y offset-x left rounded="lg">
-				<template v-slot:activator="{ on, attrs }">
-					<v-btn
-						class="mr-8"
-						icon
-						color="accent"
-						text
-						dark
-						v-bind="attrs"
-						v-on="on"
-					>
-						<v-icon large>mdi-bell-outline</v-icon>
-					</v-btn>
-				</template>
-				<v-list nav>
-					<v-list-item link v-for="(item, i) in notificationItems" :key="i">
-						<v-list-item-title v-text="item.title" />
-					</v-list-item>
-				</v-list>
-			</v-menu>
-
-			<v-menu offset-y bottom nudge-bottom="10" rounded="lg">
-				<template v-slot:activator="{ on, attrs }">
-					<v-avatar
-						class="mr-8"
-						v-bind="attrs"
-						v-on="on"
-						color="primary"
-						size="36"
-					>
-						<v-icon dark>mdi-account-circle</v-icon>
-					</v-avatar>
-				</template>
-				<v-list nav>
-					<v-list-item link v-for="(item, i) in profileItems" :key="i">
-						<v-list-item-title v-text="item.title" />
-					</v-list-item>
-				</v-list>
-			</v-menu>
+			<notification-menu />
+			<user-menu />
 		</v-app-bar>
 
 		<v-navigation-drawer
@@ -134,16 +97,7 @@ export default Vue.extend({
 			miniVariant: false,
 			title: process.env.APP_NAME,
 			version: process.env.APP_VERSION,
-			notificationItems: [
-				{ title: 'Profile' },
-				{ title: 'Settings' },
-				{ title: 'Logout' },
-			],
-			profileItems: [
-				{ title: 'Profile' },
-				{ title: 'Settings' },
-				{ title: 'Logout' },
-			],
+
 			items: [
 				{
 					icon: 'mdi-view-dashboard-outline',
