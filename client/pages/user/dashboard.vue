@@ -79,18 +79,19 @@
 				</v-sheet>
 			</v-fade-transition>
 
-			<v-fade-transition>
-				<v-row justify="center" class="mt-12">
+			<v-row justify="center" class="mt-12">
+				<v-col>
 					<v-data-table
-						class="d-flex"
 						dark
+						calculate-widths
 						hide-default-footer
 						:headers="table.headers"
 						:items="table.data"
 					></v-data-table>
-				</v-row>
-			</v-fade-transition>
+				</v-col>
+			</v-row>
 		</v-col>
+		{{ newLink }}
 	</v-row>
 </template>
 
@@ -101,6 +102,7 @@ export default Vue.extend({
 	data() {
 		return {
 			showAdvanced: false,
+			newLink: '',
 			payload: {
 				longurl: '',
 				alias: '',
@@ -112,31 +114,28 @@ export default Vue.extend({
 				headers: [
 					{ text: 'Original Link', value: 'longurl', align: 'start' },
 					{ text: 'Created on', value: 'created' },
+					{ text: 'Alias', value: 'alias' },
 					{ text: 'Short Link', value: 'shorturl' },
 				],
-				data: [
-					{
-						longurl: 'google.com',
-						created: '2020',
-						shorturl: 'red.com',
-					},
-					{
-						longurl: 'google.com',
-						created: '2020',
-						shorturl: 'red.com',
-					},
-					{
-						longurl: 'google.com',
-						created: '2020',
-						shorturl: 'red.com',
-					},
-				],
+				data: [],
 			},
 		}
 	},
+
+	async mounted() {
+		await this.$store.dispatch('all-links/fetchAllLinks')
+		this.table.data = this.$store.getters['all-links/getAllLinks']
+		console.log(this.table.data)
+	},
 	methods: {
-		shorten() {
-			this.$axios
+		async shorten() {
+			await this.$store.dispatch(
+				'shorten-link/createShortLink',
+				this.showAdvanced ? this.payload : { longurl: this.payload.longurl }
+			)
+			this.newLink = this.$store.getters['shorten-link/getShortLink']
+
+			/*	this.$axios
 				.post(
 					'/shorten/',
 					this.showAdvanced ? this.payload : { longurl: this.payload.longurl }
@@ -148,6 +147,7 @@ export default Vue.extend({
 				.catch((err) => {
 					;(this as any).$notify.error(err.response.data.message)
 				})
+				*/
 		},
 	},
 })

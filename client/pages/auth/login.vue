@@ -1,11 +1,9 @@
 <template>
 	<v-row class="fill-height">
 		<v-col
-			d-none
-			d-md-block
 			md="6"
 			cols="12"
-			class="d-flex align-center accent hero"
+			class="d-flex d-none d-md-flex align-center primary hero"
 		></v-col>
 		<v-col md="6" cols="12" class="d-flex align-center">
 			<v-row justify="center">
@@ -22,7 +20,7 @@
 						Welcome back! Please login into your account.
 					</p>
 
-					<v-form ref="form" v-model="isValid" lazy-validation>
+					<v-form ref="form" v-model="isFormValid" lazy-validation>
 						<p class="mb-2 font-weight-medium">E-mail / Username</p>
 						<v-text-field
 							v-model="login.userName"
@@ -55,7 +53,7 @@
 							block
 							large
 							elevation="1"
-							:disabled="!isValid"
+							:disabled="!isFormValid"
 							color="secondary"
 							@click="loginUser"
 						>
@@ -65,7 +63,10 @@
 
 						<p class="font-weight-medium mt-4 text-md-left text-center">
 							Don't have an account?
-							<NuxtLink class="text-decoration-none accent--text" to="register">
+							<NuxtLink
+								class="text-decoration-none primary--text"
+								to="register"
+							>
 								Sign Up
 							</NuxtLink>
 						</p>
@@ -83,7 +84,7 @@ export default Vue.extend({
 
 	data() {
 		return {
-			isValid: true,
+			isFormValid: true,
 			rememberMe: false,
 			showPassword: false,
 
@@ -136,12 +137,12 @@ export default Vue.extend({
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	background-size: 70%;
+	background-size: cover;
 }
 
 .login-form {
 	min-width: 300px;
 	max-width: 500px;
-	margin: 30px 0px;
+	padding: 30px 20px;
 }
 </style>

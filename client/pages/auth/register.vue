@@ -50,7 +50,7 @@
 							block
 							large
 							elevation="1"
-							:disabled="isFormValid"
+							:disabled="!isFormValid"
 							color="secondary"
 							@click="registerUser"
 						>
@@ -142,7 +142,7 @@ export default Vue.extend({
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	background-size: 70%;
+	background-size: 100%;
 }
 
 .login-form {
