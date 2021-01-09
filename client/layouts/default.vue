@@ -16,7 +16,7 @@
 			<Navigation />
 
 			<v-container>
-				<Alert />
+				<Alert-notification />
 
 				<nuxt />
 			</v-container>
