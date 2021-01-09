@@ -105,29 +105,31 @@ export default Vue.extend({
 
 	methods: {
 		async registerUser() {
-			try {
-				await this.$axios.post('/auth/register', this.register)
+			if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+				try {
+					await this.$axios.post('/auth/register', this.register)
 
-				await this.$auth.loginWith('local', {
-					data: {
-						email: this.register.email,
-						password: this.register.password,
-					},
-				})
-				this.$store.commit('notification/showNotification', {
-					message: 'Registered successfully',
-					color: 'success',
-				})
+					await this.$auth.loginWith('local', {
+						data: {
+							email: this.register.email,
+							password: this.register.password,
+						},
+					})
+					this.$store.commit('notification/showNotification', {
+						message: 'Registered successfully',
+						color: 'success',
+					})
 
-				if (this.$auth.loggedIn)
-					setTimeout(() => {
-						this.$router.push('/user/dashboard')
-					}, 1000)
-			} catch (error) {
-				this.$store.commit('notification/showNotification', {
-					message: error.response.data.message,
-					color: 'error',
-				})
+					if (this.$auth.loggedIn)
+						setTimeout(() => {
+							this.$router.push('/user/dashboard')
+						}, 1000)
+				} catch (error) {
+					this.$store.commit('notification/showNotification', {
+						message: error.response.data.message,
+						color: 'error',
+					})
+				}
 			}
 		},
 	},

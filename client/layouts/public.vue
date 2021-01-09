@@ -1,7 +1,7 @@
 <template>
 	<v-app dark>
 		<nuxt />
-		<Alert-notification />
+		<alert-notification />
 	</v-app>
 </template>
 

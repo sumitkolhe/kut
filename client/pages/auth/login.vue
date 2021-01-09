@@ -22,7 +22,7 @@
 						Welcome back! Please login into your account.
 					</p>
 
-					<v-form ref="form" v-model="valid" lazy-validation>
+					<v-form ref="form" v-model="isValid" lazy-validation>
 						<p class="mb-2 font-weight-medium">E-mail / Username</p>
 						<v-text-field
 							v-model="login.userName"
@@ -55,7 +55,7 @@
 							block
 							large
 							elevation="1"
-							:disabled="!valid"
+							:disabled="!isValid"
 							color="secondary"
 							@click="loginUser"
 						>
@@ -83,7 +83,7 @@ export default Vue.extend({
 
 	data() {
 		return {
-			valid: true,
+			isValid: true,
 			rememberMe: false,
 			showPassword: false,
 
@@ -104,24 +104,26 @@ export default Vue.extend({
 
 	methods: {
 		async loginUser() {
-			try {
-				await this.$auth.loginWith('local', {
-					data: this.login,
-				})
-				this.$store.commit('notification/showNotification', {
-					message: 'Login successful',
-					color: 'success',
-				})
+			if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+				try {
+					await this.$auth.loginWith('local', {
+						data: this.login,
+					})
+					this.$store.commit('notification/showNotification', {
+						message: 'Login successful',
+						color: 'success',
+					})
 
-				if (this.$auth.loggedIn)
-					setTimeout(() => {
-						this.$router.push('/user/dashboard')
-					}, 1000)
-			} catch (error) {
-				this.$store.commit('notification/showNotification', {
-					message: error.response.data.message,
-					color: 'error',
-				})
+					if (this.$auth.loggedIn)
+						setTimeout(() => {
+							this.$router.push('/user/dashboard')
+						}, 1000)
+				} catch (error) {
+					this.$store.commit('notification/showNotification', {
+						message: error.response.data.message,
+						color: 'error',
+					})
+				}
 			}
 		},
 	},

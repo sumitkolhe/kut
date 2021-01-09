@@ -1,7 +1,13 @@
 <template>
 	<v-menu offset-y bottom nudge-bottom="10" rounded="lg">
 		<template v-slot:activator="{ on, attrs }">
-			<v-avatar class="mr-8" v-bind="attrs" v-on="on" color="primary" size="36">
+			<v-avatar
+				class="mr-8"
+				v-bind="attrs"
+				v-on="on"
+				color="secondary"
+				size="36"
+			>
 				<v-icon dark>mdi-account-circle</v-icon>
 			</v-avatar>
 		</template>

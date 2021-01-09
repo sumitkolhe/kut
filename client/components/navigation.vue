@@ -5,7 +5,7 @@
 			app
 			elevation="0"
 			height="80"
-			color="secondary"
+			color="background"
 		>
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
@@ -133,16 +133,4 @@ export default Vue.extend({
 </script>
 
 <style>
-.v-list {
-	padding: 4px 16px !important;
-}
-
-.v-list-item {
-	min-height: 60px !important;
-	border-radius: 12px !important;
-}
-
-.v-list--nav .v-list-item::before {
-	border-radius: 12px;
-}
 </style> 
