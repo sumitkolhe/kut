@@ -4,18 +4,19 @@ import { MutationTree, GetterTree } from 'vuex'
 export type RootState = ReturnType<typeof state>
 
 export const state = () => ({
-	isDarkTheme: false,
+	isThemeDark: false,
 })
 
 export const mutations: MutationTree<RootState> = {
-	changeTheme(state, payload) {
-		Vue.prototype.$vuetify.theme.dark = true
-		//localStorage.setItem('isDarkTheme', state.isDarkTheme as any)
+	changeTheme(state) {
+		state.isThemeDark = localStorage.getItem('isThemeDark') as any
+
+		localStorage.setItem('isThemeDark', state.isThemeDark.toString())
 	},
 }
 
 export const getters: GetterTree<RootState, RootState> = {
-	isDarkTheme: (state) => {
-		return state.isDarkTheme
+	getTheme: (state) => {
+		return state.isThemeDark
 	},
 }

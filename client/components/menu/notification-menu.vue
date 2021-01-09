@@ -1,15 +1,7 @@
 <template>
 	<v-menu offset-y offset-x left rounded="lg">
 		<template v-slot:activator="{ on, attrs }">
-			<v-btn
-				class="mr-6"
-				icon
-				color="secondary"
-				text
-				dark
-				v-bind="attrs"
-				v-on="on"
-			>
+			<v-btn class="mr-6" icon text v-bind="attrs" v-on="on">
 				<v-icon large>mdi-bell-outline</v-icon>
 			</v-btn>
 		</template>

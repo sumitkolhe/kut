@@ -10,9 +10,7 @@
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
 			<v-spacer />
-
-			<v-btn @click="$vuetify.theme.dark = !$vuetify.theme.dark">Theme</v-btn>
-
+			<theme-switch />
 			<notification-menu />
 			<user-menu />
 		</v-app-bar>
@@ -85,6 +83,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import '@nuxtjs/auth-next'
+
 export default Vue.extend({
 	data() {
 		return {

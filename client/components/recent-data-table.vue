@@ -1,11 +1,12 @@
 <template>
-	<v-row justify="center" dense class="mx-1" align="center">
+	<v-row justify="center" class="mx-0" align="center">
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Orignal</th>
-					<th>Shortened</th>
+					<th>Orignal URL</th>
 					<th>Created</th>
+					<th>Short URL</th>
+					<th>Description</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -18,7 +19,31 @@
 						<p>{{ link.created }}</p>
 					</td>
 					<td data-label="Shortened">
-						<p>{{ link.shorturl }}</p>
+						<p>
+							<v-btn icon color="green">
+								<svg
+									viewBox="0 0 24 24"
+									width="22"
+									height="22"
+									stroke="currentColor"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+									<path
+										d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+									/>
+								</svg>
+							</v-btn>
+							{{ link.shorturl }}
+						</p>
+					</td>
+					<td data-label="Description">
+						<p>
+							{{ link.description }}
+						</p>
 					</td>
 				</tr>
 			</tbody>
@@ -41,38 +66,40 @@ export default Vue.extend({
 table {
 	border-radius: 12px;
 	background-color: var(--dark_color1);
-	padding: 1rem;
-	font-weight: bolder;
+	font-weight: 600;
 	font-size: 15px;
-	color: #b3b3b3;
+	padding-bottom: 16px;
+	color: #c9c9c9;
 	width: 100%;
-	border: 2px solid #424242;
+	border: 2px solid #555555;
 }
-table thead tr th {
+thead th {
 	color: #a0a0a0;
 	font-weight: 500;
 	text-align: center;
 	font-size: 18px;
+	padding: 16px 0px;
 	min-width: 150px;
-	padding: 0.2rem 0.5rem 0.5rem 0.2rem;
 }
-table tbody tr td {
+tr td {
 	height: 40px;
 	text-align: center;
 	font-size: 14px;
-	padding: 0.5rem 0.5rem;
 }
-tbody div {
-	margin: auto;
+
+.v-application p {
+	margin-bottom: 0px !important;
 }
+
 tbody div p {
 	max-width: 300px;
 	min-width: 20px;
 	white-space: nowrap;
+	padding: 12px 0px;
 	overflow: hidden;
 	font-weight: 500;
 	text-overflow: ellipsis;
-	margin: auto;
+	margin: 0 auto;
 }
 @media screen and (max-width: 800px) {
 	table thead {

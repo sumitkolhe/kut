@@ -1,5 +1,5 @@
 <template>
-	<v-app dark>
+	<v-app :dark="true">
 		<client-only>
 			<Particles
 				color="#fff"

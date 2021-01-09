@@ -103,7 +103,7 @@ export default Vue.extend({
 				password: '',
 				description: '',
 			},
-			recent_links: '',
+			recent_links: [],
 		}
 	},
 
