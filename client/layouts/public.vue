@@ -1,5 +1,5 @@
 <template>
-	<v-app dark>
+	<v-app>
 		<nuxt />
 		<alert-notification />
 	</v-app>
