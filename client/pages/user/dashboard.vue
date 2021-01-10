@@ -119,6 +119,8 @@ export default Vue.extend({
 			)
 			this.newLink = this.$store.getters['shorten-link/getShortLink']
 
+			console.log(this.newLink)
+
 			/*	this.$axios
 				.post(
 					'/shorten/',
