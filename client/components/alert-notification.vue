@@ -1,7 +1,7 @@
 <template>
 	<div class="text-center">
 		<v-snackbar
-			v-model="showNotification"
+			v-model="show_notification"
 			:color="color"
 			class="mb-4"
 			timeout="2000"
@@ -14,7 +14,7 @@
 					text
 					icon
 					v-bind="attrs"
-					@click="showNotification = false"
+					@click="show_notification = false"
 				>
 					<v-icon text>mdi-close-circle</v-icon>
 				</v-btn>
@@ -28,7 +28,7 @@ import Vue from 'vue'
 export default Vue.extend({
 	data() {
 		return {
-			showNotification: false,
+			show_notification: false,
 			message: '',
 			color: '',
 		}
@@ -39,7 +39,7 @@ export default Vue.extend({
 			if (mutation.type === 'notification/showNotification') {
 				this.message = state.notification.message
 				this.color = state.notification.color
-				this.showNotification = true
+				this.show_notification = true
 			}
 		})
 	},

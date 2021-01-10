@@ -6,7 +6,7 @@
 			</v-btn>
 		</template>
 		<v-list>
-			<v-list-item link v-for="(item, i) in notificationItems" :key="i">
+			<v-list-item link v-for="(item, i) in notification_items" :key="i">
 				<v-list-item-title v-text="item.title" />
 			</v-list-item>
 		</v-list>
@@ -18,7 +18,7 @@ import Vue from 'vue'
 export default Vue.extend({
 	data() {
 		return {
-			notificationItems: [
+			notification_items: [
 				{ title: 'Profile' },
 				{ title: 'Settings' },
 				{ title: 'Logout' },

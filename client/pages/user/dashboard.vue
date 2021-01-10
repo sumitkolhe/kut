@@ -37,9 +37,9 @@
 					</v-col>
 				</v-row>
 				<v-row justify="center" class="mb-1">
-					<v-btn text @click="showAdvanced = !showAdvanced">
+					<v-btn text @click="show_advanced = !show_advanced">
 						<v-icon>
-							{{ showAdvanced ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+							{{ show_advanced ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
 						</v-icon>
 						Advance Options
 					</v-btn>
@@ -47,7 +47,7 @@
 			</v-sheet>
 
 			<v-fade-transition>
-				<v-sheet v-show="showAdvanced" class="mt-2 pa-6" rounded="xl">
+				<v-sheet v-show="show_advanced" class="mt-2 pa-6" rounded="xl">
 					<v-row justify="space-around">
 						<v-col cols="6">
 							<p class="mb-2 font-weight-medium mt-n1">Alias</p>
@@ -96,15 +96,14 @@ import Vue from 'vue'
 export default Vue.extend({
 	data() {
 		return {
-			showAdvanced: false,
-
+			show_advanced: false,
+			recent_links: [] as any,
 			payload: {
 				longurl: '',
 				alias: '',
 				password: '',
 				description: '',
 			},
-			recent_links: [] as any,
 		}
 	},
 
@@ -116,7 +115,7 @@ export default Vue.extend({
 		async shorten() {
 			await this.$store.dispatch(
 				'shorten-link/createShortLink',
-				this.showAdvanced ? this.payload : { longurl: this.payload.longurl }
+				this.show_advanced ? this.payload : { longurl: this.payload.longurl }
 			)
 			this.recent_links.unshift(
 				this.$store.getters['shorten-link/getShortLink']

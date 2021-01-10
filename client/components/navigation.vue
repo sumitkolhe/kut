@@ -71,9 +71,17 @@
 				</v-row>
 			</template>
 			<template v-slot:append>
-				<div class="pa-2">
-					<v-btn block elevation="0" @click="logout()">Logout</v-btn>
+				<div class="pa-4" v-show="!miniVariant">
+					<v-btn block color="primary" elevation="0" @click="logout()">
+						Logout
+					</v-btn>
 				</div>
+
+				<v-row justify="center" class="pa-6 mb-0" v-show="miniVariant">
+					<v-btn icon color="primary" @click="logout()">
+						<v-icon x-large>mdi-logout-variant</v-icon>
+					</v-btn>
+				</v-row>
 			</template>
 		</v-navigation-drawer>
 	</v-main>
@@ -108,7 +116,7 @@ export default Vue.extend({
 				{
 					icon: 'mdi-link',
 					title: 'My Links',
-					to: '/user/links',
+					to: '/user/my-links',
 				},
 				{
 					icon: 'mdi-chart-bell-curve-cumulative',

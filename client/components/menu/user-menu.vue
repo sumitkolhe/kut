@@ -6,7 +6,7 @@
 			</v-avatar>
 		</template>
 		<v-list nav>
-			<v-list-item link v-for="(item, i) in profileItems" :key="i">
+			<v-list-item link v-for="(item, i) in profile_items" :key="i">
 				<v-list-item-title v-text="item.title" />
 			</v-list-item>
 		</v-list>
@@ -18,7 +18,7 @@ import Vue from 'vue'
 export default Vue.extend({
 	data() {
 		return {
-			profileItems: [
+			profile_items: [
 				{ title: 'Profile' },
 				{ title: 'Settings' },
 				{ title: 'Logout' },
