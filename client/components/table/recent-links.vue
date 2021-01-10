@@ -70,7 +70,7 @@ export default Vue.extend({
 <style>
 table {
 	border-radius: 12px;
-	background-color: var(--dark_color1);
+	background-color: #121212;
 	font-weight: 600;
 	font-size: 15px;
 	padding-bottom: 16px;

@@ -5,7 +5,7 @@
 			app
 			elevation="0"
 			height="80"
-			color="background"
+			color="transparent"
 		>
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 

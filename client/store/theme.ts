@@ -1,31 +1,41 @@
-import { MutationTree, GetterTree } from 'vuex'
+import { MutationTree, GetterTree, ActionTree } from 'vuex'
 
 export type RootState = ReturnType<typeof state>
 
 export const state = () => ({
-	themeVariant: 'light',
+	isThemeDark: false,
+	renderKey: 0,
 })
 
 export const mutations: MutationTree<RootState> = {
-	changeTheme(state) {
-		state.themeVariant =
-			(localStorage.getItem('themeVariant') as string) || 'light'
-		if (state.themeVariant == 'light') {
-			state.themeVariant = 'dark'
+	SET_THEME: (state) => {
+		if (state.isThemeDark == false) {
 			window.$nuxt.$root.$vuetify.theme.dark = true
-		} else if (state.themeVariant == 'dark') {
-			state.themeVariant = 'light'
+			state.isThemeDark = true
+			state.renderKey += 1
+		} else if (state.isThemeDark == true) {
 			window.$nuxt.$root.$vuetify.theme.dark = false
+			state.isThemeDark = false
+			state.renderKey += 1
 		}
-		localStorage.setItem('themeVariant', state.themeVariant)
+	},
+
+	INIT_THEME: (state) => {
+		if (state.isThemeDark == true) {
+			window.$nuxt.$root.$vuetify.theme.dark = true
+			state.isThemeDark = true
+		}
+
+		state.renderKey = 0
 	},
 }
 
 export const getters: GetterTree<RootState, RootState> = {
 	getTheme: (state) => {
-		return (
-			(localStorage.getItem('themeVariant') as string) ||
-			state.themeVariant
-		)
+		return state.isThemeDark
+	},
+
+	getRenderKey: (state) => {
+		return state.renderKey
 	},
 }

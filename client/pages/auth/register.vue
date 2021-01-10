@@ -60,7 +60,7 @@
 
 						<p class="font-weight-medium mt-4 text-md-left text-center">
 							Already have an account?
-							<NuxtLink class="text-decoration-none accent--text" to="login">
+							<NuxtLink class="text-decoration-none primary--text" to="login">
 								Login
 							</NuxtLink>
 						</p>

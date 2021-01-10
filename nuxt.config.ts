@@ -55,7 +55,11 @@ const NuxtAppConfig: NuxtConfig = {
 		'nuxt-typed-vuex',
 	],
 
-	modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+	modules: [
+		'@nuxtjs/axios',
+		'@nuxtjs/auth-next',
+		['nuxt-vuex-localstorage', { mode: 'debug', localStorage: ['theme'] }],
+	],
 
 	plugins: ['~/plugins/notifier.ts'],
 
@@ -104,14 +108,14 @@ const NuxtAppConfig: NuxtConfig = {
 				dark: {
 					primary: '#ff5050',
 					secondary: '#3d405b',
-					background: '#121212',
 					surface: '#242424',
+					background: '#121212',
 				},
 				light: {
 					primary: '#ff5050',
 					secondary: '#3d405b',
-					background: '#f1f2f4',
 					surface: '#f1f1f1',
+					background: '#f1f2f4',
 				},
 			},
 		},

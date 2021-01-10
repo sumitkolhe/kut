@@ -1,166 +1,74 @@
 <template>
-	<div
-		:id="id"
-		class="particles-js"
-		:color="color"
-		:particleOpacity="particleOpacity"
-		:linesColor="linesColor"
-		:particlesNumber="particlesNumber"
-		:shapeType="shapeType"
-		:particleSize="particleSize"
-		:linesWidth="linesWidth"
-		:lineLinked="lineLinked"
-		:lineOpacity="lineOpacity"
-		:linesDistance="linesDistance"
-		:moveSpeed="moveSpeed"
-		:movementDirection="movementDirection"
-		:hoverEffect="hoverEffect"
-		:hoverMode="hoverMode"
-		:clickEffect="clickEffect"
-		:clickMode="clickMode"
-	></div>
+	<div id="particles-js"></div>
 </template>
+
 <script>
-/* eslint-disable */
 export default {
-	props: {
-		color: {
-			type: String,
-			default: '#dedede',
-		},
-		particleOpacity: {
-			type: Number,
-			default: 1.0,
-		},
-		particlesNumber: {
-			type: Number,
-			default: 80,
-		},
-		shapeType: {
-			type: String,
-			default: 'circle',
-		},
-		particleSize: {
-			type: Number,
-			default: 4,
-		},
-		linesColor: {
-			type: String,
-			default: '#dedede',
-		},
-		linesWidth: {
-			type: Number,
-			default: 1,
-		},
-		lineLinked: {
-			type: Boolean,
-			default: true,
-		},
-		lineOpacity: {
-			type: Number,
-			default: 0.4,
-		},
-		linesDistance: {
-			type: Number,
-			default: 150,
-		},
-		moveSpeed: {
-			type: Number,
-			default: 3,
-		},
-		movementDirection: {
-			type: String,
-			default: 'bottom-left',
-		},
-		hoverEffect: {
-			type: Boolean,
-			default: false,
-		},
-		hoverMode: {
-			type: String,
-			default: 'grab',
-		},
-		clickEffect: {
-			type: Boolean,
-			default: false,
-		},
-		clickMode: {
-			type: String,
-			default: 'push',
-		},
-	},
-	data() {
-		return {
-			id: 'particles-instance-' + Math.floor(Math.random() * 5000),
-		}
-	},
+	name: 'ParticlesJS',
+
 	mounted() {
 		require('particles.js')
 		this.$nextTick(() => {
-			this.initParticleJS(
-				this.color,
-				this.particleOpacity,
-				this.particlesNumber,
-				this.shapeType,
-				this.particleSize,
-				this.linesColor,
-				this.linesWidth,
-				this.lineLinked,
-				this.lineOpacity,
-				this.linesDistance,
-				this.moveSpeed,
-				this.movementDirection,
-				this.hoverEffect,
-				this.hoverMode,
-				this.clickEffect,
-				this.clickMode
-			)
+			this.initParticlesJS()
 		})
 	},
+	beforeDestroy() {
+		window['pJSDom'][0].pJS.fn.vendors.destroypJS()
+		window['pJSDom'] = []
+	},
+	data() {
+		return {
+			light: '#FFFFFF',
+			dark: '#000000',
+		}
+	},
+
+	computed: {
+		particlesNumber() {
+			return 50
+		},
+
+		theme() {
+			if (this.$vuetify.theme.dark) {
+				return this.light
+			} else {
+				return this.dark
+			}
+		},
+	},
+
 	methods: {
-		initParticleJS(
-			color,
-			particleOpacity,
-			particlesNumber,
-			shapeType,
-			particleSize,
-			linesColor,
-			linesWidth,
-			lineLinked,
-			lineOpacity,
-			linesDistance,
-			moveSpeed,
-			movementDirection,
-			hoverEffect,
-			hoverMode,
-			clickEffect,
-			clickMode
-		) {
-			particlesJS(this.id, {
+		async initParticlesJS() {
+			/* eslint-disable */
+			particlesJS('particles-js', {
 				particles: {
 					number: {
-						value: particlesNumber,
+						value: this.particlesNumber,
 						density: {
 							enable: true,
 							value_area: 800,
 						},
 					},
 					color: {
-						value: color,
+						value: this.theme,
 					},
 					shape: {
-						// circle, edge, triangle, polygon, star, image
-						type: shapeType,
+						type: 'circle',
 						stroke: {
 							width: 0,
-							color: '#192231',
+							color: this.theme,
 						},
 						polygon: {
 							nb_sides: 5,
 						},
+						image: {
+							src: 'img/github.svg',
+							width: 100,
+							height: 100,
+						},
 					},
 					opacity: {
-						value: particleOpacity,
+						value: 1,
 						random: false,
 						anim: {
 							enable: false,
@@ -170,7 +78,7 @@ export default {
 						},
 					},
 					size: {
-						value: particleSize,
+						value: 3,
 						random: true,
 						anim: {
 							enable: false,
@@ -180,16 +88,16 @@ export default {
 						},
 					},
 					line_linked: {
-						enable: lineLinked,
-						distance: linesDistance,
-						color: linesColor,
-						opacity: lineOpacity,
-						width: linesWidth,
+						enable: true,
+						distance: 150,
+						color: this.theme,
+						opacity: 0.5,
+						width: 1,
 					},
 					move: {
 						enable: true,
-						speed: moveSpeed,
-						direction: movementDirection,
+						speed: 1,
+						direction: 'none',
 						random: false,
 						straight: false,
 						out_mode: 'out',
@@ -205,35 +113,31 @@ export default {
 					detect_on: 'canvas',
 					events: {
 						onhover: {
-							enable: hoverEffect,
-							mode: hoverMode,
+							enable: false,
+							mode: 'repulse',
 						},
 						onclick: {
-							enable: clickEffect,
-							mode: clickMode,
-						},
-						onresize: {
 							enable: true,
-							density_auto: true,
-							density_area: 400,
+							mode: 'push',
 						},
+						resize: true,
 					},
 					modes: {
 						grab: {
-							distance: 140,
+							distance: 800,
 							line_linked: {
 								opacity: 1,
 							},
 						},
 						bubble: {
-							distance: 400,
-							size: 40,
+							distance: 800,
+							size: 80,
 							duration: 2,
-							opacity: 8,
+							opacity: 0.8,
 							speed: 3,
 						},
 						repulse: {
-							distance: 200,
+							distance: 400,
 							duration: 0.4,
 						},
 						push: {
@@ -250,3 +154,7 @@ export default {
 	},
 }
 </script>
+
+<style>
+/* Your styles */
+</style>

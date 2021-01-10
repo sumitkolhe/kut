@@ -1,16 +1,7 @@
 <template>
 	<v-app dark>
 		<client-only>
-			<Particles
-				color="#fff"
-				:particles-number="50"
-				shape-type="circle"
-				:particle-size="3"
-				movement-direction="none"
-				lines-color="#fff"
-				:line-linked="true"
-				:move-speed="0.8"
-			/>
+			<Particles :key="$store.getters['theme/getRenderKey']" />
 		</client-only>
 		<v-main class="pt-2 pt-sm-2 pt-xs-2 pt-md-0 pt-lg-0 pt-xl-0 background">
 			<Navigation />
@@ -36,7 +27,7 @@ export default Vue.extend({
 	font-family: 'Montserrat', sans-serif;
 }
 
-div[id^='particles-instance-'] {
+div[id^='particles-js'] {
 	height: 100vh !important;
 	width: 100vw !important;
 	position: fixed !important;

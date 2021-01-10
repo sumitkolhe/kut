@@ -1,7 +1,7 @@
 <template>
 	<v-row justify="center" align="center">
 		<v-col cols="10">
-			<p class="title-text">
+			<p class="title-text" dark>
 				Shorten Your links Quickly
 				<svg
 					data-v-55d53dfe=""
@@ -143,10 +143,10 @@ export default Vue.extend({
 	text-align: center;
 	font-size: 22px;
 	letter-spacing: 1px;
+	padding: 16px 0px;
 }
 
 .v-text-field--outlined >>> fieldset {
-	border-color: var(--light_color4);
 	border-width: 2px;
 	border-radius: 12px;
 }
