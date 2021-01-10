@@ -85,7 +85,6 @@
 				</v-col>
 			</v-row>
 		</v-col>
-		{{ newLink }}
 	</v-row>
 </template>
 
@@ -96,14 +95,14 @@ export default Vue.extend({
 	data() {
 		return {
 			showAdvanced: false,
-			newLink: '',
+
 			payload: {
 				longurl: '',
 				alias: '',
 				password: '',
 				description: '',
 			},
-			recent_links: [],
+			recent_links: [] as any,
 		}
 	},
 
@@ -117,9 +116,9 @@ export default Vue.extend({
 				'shorten-link/createShortLink',
 				this.showAdvanced ? this.payload : { longurl: this.payload.longurl }
 			)
-			this.newLink = this.$store.getters['shorten-link/getShortLink']
-
-			console.log(this.newLink)
+			this.recent_links.unshift(
+				this.$store.getters['shorten-link/getShortLink']
+			)
 
 			/*	this.$axios
 				.post(

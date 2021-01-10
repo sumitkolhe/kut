@@ -18,7 +18,7 @@ export const getters: GetterTree<RootState, RootState> = {
 
 export const actions: ActionTree<RootState, RootState> = {
 	async fetchAllLinks({ commit }) {
-		const res = await this.$axios.$get('/links')
-		commit('SET_ALL_LINKS', res)
+		const data = await this.$axios.$get('/links')
+		commit('SET_ALL_LINKS', data)
 	},
 }

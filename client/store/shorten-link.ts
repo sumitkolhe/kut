@@ -10,22 +10,21 @@ export const mutations: MutationTree<RootState> = {
 	SET_SHORT_LINK: (state, link) => (state.shortened_link = link),
 }
 
+export const getters: GetterTree<RootState, RootState> = {
+	getShortLink: (state) => {
+		return state.shortened_link
+	},
+}
 export const actions: ActionTree<RootState, RootState> = {
 	async createShortLink({ commit }, payload) {
-		const data = await this.$axios
+		await this.$axios
 			.$post('/shorten/', payload)
-			.then(() => {
+			.then((data) => {
 				;(this as any).$notify.success('Link shortened sucessfully')
+				commit('SET_SHORT_LINK', data)
 			})
 			.catch((err) => {
 				;(this as any).$notify.error(err.response.data.message)
 			})
-		commit('SET_SHORT_LINK', data)
-	},
-}
-
-export const getters: GetterTree<RootState, RootState> = {
-	getShortLink: (state) => {
-		return state.shortened_link
 	},
 }
