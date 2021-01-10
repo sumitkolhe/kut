@@ -61,7 +61,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
 table {
 	border-radius: 12px;
 	background-color: #121212;

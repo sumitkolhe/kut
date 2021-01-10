@@ -6,8 +6,8 @@
 		"dev": "nodemon server/index.ts",
 		"dev:js": "nodemon dist/index.js --watch server",
 		"build": "npm run build:client && npm run build:server",
-		"build:client": "nuxt-ts generate",
-		"build:server": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./server -o ./dist",
+		"build:client": "cross-env NODE_ENV=production nuxt-ts generate",
+		"build:server": "cross-env NODE_ENV=production tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./server -o ./dist",
 		"start": "cross-env NODE_ENV=production node dist/index.js",
 		"start:client": "nuxt-ts start"
 	},

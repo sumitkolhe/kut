@@ -154,7 +154,3 @@ export default {
 	},
 }
 </script>
-
-<style>
-/* Your styles */
-</style>

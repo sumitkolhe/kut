@@ -2,19 +2,11 @@
 	<v-main>
 		<v-row justify="center">
 			<v-col cols="12" align="center">
-				<v-row justify="center" class="mt-12">
-					<p class="text-h3 font-weight-bold">Oops! Its a 404.</p>
-				</v-row>
-				<v-row justify="center" class="mt-2">
-					<p class="text-h5">We can't find the page you're looking for.</p>
-				</v-row>
-
 				<v-row justify="center">
 					<svg
 						class="astronaut"
 						width="64px"
 						height="64px"
-						id="astronaut"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 512 512"
 					>
@@ -417,8 +409,17 @@
 						</g>
 					</svg>
 				</v-row>
-				<v-row justify="center" class="mt-n8">
-					<v-btn outlined large to="/user/dashboard">Go Home</v-btn>
+				<v-row justify="center" class="mt-0">
+					<p class="text-h3 font-weight-bold">Oops! Its a 404.</p>
+				</v-row>
+				<v-row justify="center" class="mt-6">
+					<p class="text-h5">We can't find the page you're looking for.</p>
+				</v-row>
+
+				<v-row justify="center" class="mt-12">
+					<NuxtLink to="/user/dashboard">
+						<v-btn outlined large>Go Home</v-btn>
+					</NuxtLink>
 				</v-row>
 			</v-col>
 		</v-row>
@@ -428,15 +429,9 @@
 <script>
 export default {
 	layout: 'empty',
-	props: {
-		error: {
-			type: Object,
-			default: null,
-		},
-	},
+
 	head() {
-		const title =
-			this.error.statusCode === 404 ? this.pageNotFound : this.otherError
+		const title = 404
 		return {
 			title,
 		}
@@ -452,7 +447,7 @@ export default {
 .astronaut {
 	position: absolute;
 	right: 41%;
-	top: 245px;
+	top: 90px;
 	transform: rotateZ(45deg);
 }
 

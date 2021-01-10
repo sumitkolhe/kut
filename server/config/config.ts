@@ -10,7 +10,7 @@ export const config = {
 
 	//Server vars
 	SERVER_HOST: isDev ? 'localhost' : '0.0.0.0',
-	SERVER_PORT: process.env.PORT ? process.env.PORT : '3000',
+	SERVER_PORT: isDev ? 3000 : process.env.PORT || 80,
 
 	//MongoDB vars
 	MONGO_URL: process.env.MONGO_URL

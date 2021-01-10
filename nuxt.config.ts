@@ -40,6 +40,7 @@ const NuxtAppConfig: NuxtConfig = {
 
 	generate: {
 		dir: './dist/.nuxt',
+		fallback: true,
 	},
 
 	components: true,
