@@ -30,7 +30,9 @@
 							single-line
 							outlined
 						>
-							<v-icon slot="append" @click="shorten()">mdi-send</v-icon>
+							<v-icon slot="append" @click="shorten()" @keyup.enter="shorten()">
+								mdi-send
+							</v-icon>
 						</v-text-field>
 					</v-col>
 				</v-row>
@@ -119,20 +121,6 @@ export default Vue.extend({
 			this.recent_links.unshift(
 				this.$store.getters['shorten-link/getShortLink']
 			)
-
-			/*	this.$axios
-				.post(
-					'/shorten/',
-					this.showAdvanced ? this.payload : { longurl: this.payload.longurl }
-				)
-				.then((res) => {
-					;(this as any).$notify.success('Link shortened sucessfully')
-					console.log(res.data)
-				})
-				.catch((err) => {
-					;(this as any).$notify.error(err.response.data.message)
-				})
-				*/
 		},
 	},
 })

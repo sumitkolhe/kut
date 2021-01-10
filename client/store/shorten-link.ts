@@ -19,11 +19,11 @@ export const actions: ActionTree<RootState, RootState> = {
 	async createShortLink({ commit }, payload) {
 		await this.$axios
 			.$post('/shorten/', payload)
-			.then((data) => {
+			.then((data: any) => {
 				;(this as any).$notify.success('Link shortened sucessfully')
 				commit('SET_SHORT_LINK', data)
 			})
-			.catch((err) => {
+			.catch((err: any) => {
 				;(this as any).$notify.error(err.response.data.message)
 			})
 	},

@@ -11,7 +11,6 @@
 					<th>Orignal URL</th>
 					<th>Created</th>
 					<th>Short URL</th>
-					<th>Description</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,11 +42,6 @@
 								</svg>
 							</v-btn>
 							{{ link.shorturl }}
-						</p>
-					</td>
-					<td data-label="Description">
-						<p>
-							{{ link.description }}
 						</p>
 					</td>
 				</tr>

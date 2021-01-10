@@ -1,15 +1,3 @@
-declare module 'vuex/types/index' {
-	interface Store<S> {
-		$notify(message: string): void
-	}
-}
-
-declare module 'vue/types/vue' {
-	interface Vue {
-		$notify(message: string): void
-	}
-}
-
 export default ({ store }: any, inject: any) => {
 	inject('notify', {
 		success(message: string) {
@@ -30,5 +18,5 @@ export default ({ store }: any, inject: any) => {
 				color: 'info',
 			})
 		},
-	}) as any
+	})
 }
