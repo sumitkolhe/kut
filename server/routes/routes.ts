@@ -4,7 +4,7 @@ import { controllerRoutes } from '@controller/routes/services.routes'
 
 export const routes = express.Router()
 
-routes.use('/redirect', controllerRoutes.redirect)
+routes.use('/', controllerRoutes.redirect)
 routes.use('/api', controllerRoutes.shorten)
 routes.use('/api', controllerRoutes.analytics)
 routes.use('/api', controllerRoutes.links)

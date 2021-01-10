@@ -8,15 +8,17 @@
 					v-for="card in info_card"
 					:key="card.card_title"
 				>
-					<v-card flat rounded="lg" :height="card_height" class="pa-4">
+					<v-card flat rounded="xl" :height="card_height" class="pa-4">
 						<v-list-item three-line>
 							<v-list-item-content>
-								<v-list-item-title class="body-1 font-weight-medium mt-1 pb-2">
+								<v-list-item-subtitle
+									class="text-h6 font-weight-regular mt-1 pb-2"
+								>
 									{{ card.title }}
-								</v-list-item-title>
-								<v-list-item-subtitle class="text-h4 font-weight-medium">
-									987
 								</v-list-item-subtitle>
+								<v-list-item-title class="text-h4 font-weight-medium">
+									{{ card.value }}
+								</v-list-item-title>
 							</v-list-item-content>
 
 							<v-list-item-avatar rounded color="primary" size="56">
