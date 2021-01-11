@@ -22,7 +22,7 @@ const NuxtAppConfig: NuxtConfig = {
 				rel: 'stylesheet',
 				type: 'text/css',
 				href:
-					'https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;90',
+					'https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900',
 			},
 		],
 	},

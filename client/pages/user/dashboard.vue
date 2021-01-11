@@ -1,89 +1,92 @@
 <template>
 	<v-row justify="center" align="center">
-		<v-col cols="10">
+		<v-col cols="12" md="10">
 			<p class="title-text" dark>
-				Shorten Your links Quickly
+				Create short links quickly
 				<svg
-					data-v-55d53dfe=""
 					viewBox="0 0 24 24"
-					width="26"
-					height="26"
-					stroke="#000"
-					stroke-width="1"
-					fill="#000"
+					width="28"
+					height="28"
+					stroke-width="2"
 					stroke-linecap="round"
 					stroke-linejoin="round"
 					style="vertical-align: middle"
 				>
-					<polygon
-						data-v-55d53dfe=""
-						points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-					></polygon>
+					<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
 				</svg>
 			</p>
-			<v-sheet color="background" class="pa-6" rounded="xl">
+			<v-sheet elevation="2" class="pa-10 mt-4" rounded="xl">
 				<v-row>
-					<v-col cols="12">
-						<v-text-field
-							label="Enter long Url"
+					<v-col>
+						<input-field
+							:placeholder="'Enter a URL'"
+							:type="'text'"
 							v-model="payload.longurl"
-							single-line
-							outlined
-						>
-							<v-icon slot="append" @click="shorten()" @keyup.enter="shorten()">
-								mdi-send
-							</v-icon>
-						</v-text-field>
+						/>
 					</v-col>
 				</v-row>
-				<v-row justify="center" class="mb-1">
-					<v-btn text @click="show_advanced = !show_advanced">
-						<v-icon>
-							{{ show_advanced ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
-						</v-icon>
-						Advance Options
+				<v-row justify="center">
+					<v-btn
+						@click="shorten()"
+						depressed
+						color="secondary"
+						large
+						:loading="loading"
+					>
+						Shorten
 					</v-btn>
 				</v-row>
 			</v-sheet>
+			<v-row justify="center" class="mb-6 mt-6">
+				<v-btn
+					color="primary"
+					depressed
+					@click="show_advanced = !show_advanced"
+				>
+					<v-icon>
+						{{ show_advanced ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+					</v-icon>
+					Advance Options
+				</v-btn>
+			</v-row>
 
 			<v-fade-transition>
-				<v-sheet v-show="show_advanced" class="mt-2 pa-6" rounded="xl">
+				<v-sheet
+					elevation="2"
+					v-show="show_advanced"
+					class="mt-2 pa-6"
+					rounded="xl"
+				>
 					<v-row justify="space-around">
-						<v-col cols="6">
-							<p class="mb-2 font-weight-medium mt-n1">Alias</p>
-							<v-text-field
-								placeholder="Alias"
-								class="d-flex"
-								outlined
-								single-line
+						<v-col cols="12" md="6">
+							<input-field
+								:placeholder="'Custom Alias'"
+								:type="'text'"
 								v-model="payload.alias"
-							></v-text-field>
+							/>
 						</v-col>
 
-						<v-col cols="6">
-							<p class="mb-2 font-weight-medium mt-n1">Password</p>
-							<v-text-field
-								placeholder="Password"
-								outlined
-								single-line
+						<v-col cols="12" md="6">
+							<input-field
+								:placeholder="'Password'"
+								:type="'password'"
 								v-model="payload.password"
-							></v-text-field>
+							/>
+						</v-col>
+						<v-col cols="12">
+							<input-field
+								:placeholder="'Description'"
+								:type="'text'"
+								v-model="payload.description"
+							/>
 						</v-col>
 					</v-row>
-
-					<p class="mb-2 font-weight-medium mt-n1">Description</p>
-					<v-text-field
-						placeholder="Description"
-						outlined
-						single-line
-						v-model="payload.description"
-					></v-text-field>
 				</v-sheet>
 			</v-fade-transition>
 
 			<v-row justify="center" class="mt-12">
 				<v-col>
-					<recent-links v-bind:recent_links="recent_links" />
+					<recent-links :recent_links="recent_links" />
 				</v-col>
 			</v-row>
 		</v-col>
@@ -152,8 +155,8 @@ export default Vue.extend({
 }
 
 .v-text-field--outlined >>> .v-label {
-	font-weight: 900;
 	padding: 0px 8px;
+	font-size: 18px;
 	letter-spacing: 1px;
 }
 </style>

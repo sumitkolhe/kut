@@ -1,7 +1,7 @@
 <template>
 	<v-row
 		justify="center"
-		class="mx-0"
+		class="mx-0 mb-8"
 		align="center"
 		v-show="recent_links != ''"
 	>
@@ -110,6 +110,7 @@ tbody div p {
 		margin-bottom: 0.8rem;
 		margin-top: -0.4rem;
 		display: block;
+
 		padding-bottom: 0.8rem;
 		border-bottom: 1px solid rgb(54, 54, 54);
 	}
@@ -136,6 +137,7 @@ tbody div p {
 		text-align: right;
 		font-size: 14px;
 		border: none;
+		padding: 16px;
 	}
 }
 </style>
