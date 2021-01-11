@@ -5,64 +5,58 @@
 		align="center"
 		v-show="recent_links != ''"
 	>
-		<v-col cols="10">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Orignal URL</th>
-						<th>Created</th>
-						<th>Short URL</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(link, index) in recent_links" :key="index">
-						<td data-label="Original">
-							<p>{{ link.longurl }}</p>
-						</td>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Orignal URL</th>
+					<th>Created</th>
+					<th>Short URL</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(link, index) in recent_links" :key="index">
+					<td data-label="Original">
+						<p>{{ link.longurl }}</p>
+					</td>
 
-						<td data-label="Created">
-							<p>{{ link.created }}</p>
-						</td>
-						<td data-label="Shortened">
-							<p>
-								<v-btn icon color="green">
-									<svg
-										viewBox="0 0 24 24"
-										width="22"
-										height="22"
-										stroke="currentColor"
-										stroke-width="2"
-										fill="none"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									>
-										<rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-										<path
-											d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-										/>
-									</svg>
-								</v-btn>
-								{{ link.shorturl }}
-							</p>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</v-col>
+					<td data-label="Created">
+						<p>{{ link.created }}</p>
+					</td>
+					<td data-label="Shortened">
+						<p>
+							<v-btn icon color="green">
+								<svg
+									viewBox="0 0 24 24"
+									width="22"
+									height="22"
+									stroke="currentColor"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+									<path
+										d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+									/>
+								</svg>
+							</v-btn>
+							{{ link.shorturl }}
+						</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</v-row>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-	data() {
-		return {
-			recent_links: this.$store.getters['all-links/GET_ALL_LINKS'],
-		}
-	},
-
-	async mounted() {
-		await this.$store.dispatch('all-links/fetchAllLinks', 3)
+	props: {
+		recent_links: {
+			type: Array,
+		},
 	},
 })
 </script>

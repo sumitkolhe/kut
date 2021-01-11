@@ -83,7 +83,7 @@
 
 			<v-row justify="center" class="mt-12">
 				<v-col>
-					<recent-links />
+					<recent-links v-bind:recent_links="recent_links" />
 				</v-col>
 			</v-row>
 		</v-col>
@@ -97,7 +97,7 @@ export default Vue.extend({
 	data() {
 		return {
 			show_advanced: false,
-
+			recent_links: [] as any,
 			payload: {
 				longurl: '',
 				alias: '',
@@ -109,6 +109,10 @@ export default Vue.extend({
 
 	computed: {},
 
+	async mounted() {
+		await this.$store.dispatch('all-links/fetchAllLinks', 3)
+		this.recent_links = this.$store.getters['all-links/GET_ALL_LINKS']
+	},
 	methods: {
 		async shorten() {
 			await this.$store.dispatch(
@@ -116,7 +120,7 @@ export default Vue.extend({
 				this.show_advanced ? this.payload : { longurl: this.payload.longurl }
 			)
 
-			this.$store.getters['shorten-link/GET_SHORT_LINK']
+			this.recent_links = this.$store.getters['shorten-link/GET_SHORT_LINK']
 		},
 	},
 })
