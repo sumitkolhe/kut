@@ -49,8 +49,7 @@ const startDevServer = async () => {
 }
 
 const startProdServer = async () => {
-	app.use(serveStatic(__dirname + '/.nuxt'))
-	app.get(/.*/, (_req, res) => res.sendFile(__dirname + '/.nuxt/404.html'))
+	app.use(serveStatic(__dirname + '/nuxt'))
 
 	const HOST: any = config.SERVER_HOST
 	const PORT = config.SERVER_PORT

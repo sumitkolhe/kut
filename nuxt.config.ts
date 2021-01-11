@@ -36,10 +36,10 @@ const NuxtAppConfig: NuxtConfig = {
 
 	srcDir: 'client/',
 
-	buildDir: './dist/.nuxt',
+	buildDir: './dist/nuxt',
 
 	generate: {
-		dir: './dist/.nuxt',
+		dir: './dist/nuxt',
 		fallback: true,
 	},
 
@@ -50,11 +50,7 @@ const NuxtAppConfig: NuxtConfig = {
 		host: config.SERVER_HOST,
 	},
 
-	buildModules: [
-		'@nuxt/typescript-build',
-		'@nuxtjs/vuetify',
-		'nuxt-typed-vuex',
-	],
+	buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
 
 	modules: [
 		'@nuxtjs/axios',

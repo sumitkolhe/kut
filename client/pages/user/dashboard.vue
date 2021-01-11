@@ -118,7 +118,7 @@ export default Vue.extend({
 				this.show_advanced ? this.payload : { longurl: this.payload.longurl }
 			)
 			this.recent_links.unshift(
-				this.$store.getters['shorten-link/getShortLink']
+				this.$store.getters['shorten-link/GET_SHORT_LINK']
 			)
 		},
 	},

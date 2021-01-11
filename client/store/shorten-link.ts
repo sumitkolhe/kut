@@ -11,7 +11,7 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const getters: GetterTree<RootState, RootState> = {
-	getShortLink: (state) => {
+	GET_SHORT_LINK: (state) => {
 		return state.shortened_link
 	},
 }
