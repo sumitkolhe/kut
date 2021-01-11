@@ -22,45 +22,45 @@ app.use(useragent.express())
 app.use(routes)
 
 app.use(
-  (
-    err: express.ErrorRequestHandler,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => HandleError(err, req, res, next)
+	(
+		err: express.ErrorRequestHandler,
+		req: express.Request,
+		res: express.Response,
+		next: express.NextFunction
+	) => HandleError(err, req, res, next)
 )
 
 const startDevServer = async () => {
-  const nuxt = await loadNuxt('dev')
-  const { host, port } = nuxt.options.server
+	const nuxt = await loadNuxt('dev')
+	const { host, port } = nuxt.options.server
 
-  build(nuxt)
-  await nuxt.ready()
+	build(nuxt)
+	await nuxt.ready()
 
-  // Give nuxt middleware to express
-  app.use(nuxt.render)
+	// Give nuxt middleware to express
+	app.use(nuxt.render)
 
-  // Listen the server
-  app.listen(port, host)
-  consola.ready({
-    message: `Server listening on http://${host}:${port}`,
-    badge: true,
-  })
+	// Listen the server
+	app.listen(port, host)
+	consola.ready({
+		message: `Server listening on http://${host}:${port}`,
+		badge: true,
+	})
 }
 
 const startProdServer = async () => {
-  console.log(__dirname)
-  app.use(serveStatic(__dirname + '/.nuxt'))
+	app.use(serveStatic(__dirname + '/.nuxt'))
+	app.get(/.*/, (_req, res) => res.sendFile(__dirname + '/.nuxt/404.html'))
 
-  const HOST: any = config.SERVER_HOST
-  const PORT = config.SERVER_PORT
+	const HOST: any = config.SERVER_HOST
+	const PORT = config.SERVER_PORT
 
-  // Listen the server
-  app.listen(PORT, HOST)
-  consola.ready({
-    message: `Server listening on http://${HOST}:${PORT}`,
-    badge: true,
-  })
+	// Listen the server
+	app.listen(PORT, HOST)
+	consola.ready({
+		message: `Server listening on http://${HOST}:${PORT}`,
+		badge: true,
+	})
 }
 
 if (isDev) startDevServer()
