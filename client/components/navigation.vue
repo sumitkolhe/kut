@@ -48,9 +48,9 @@
 						<v-col v-if="!miniVariant">
 							<v-list-item>
 								<v-list-item-content>
-									<v-list-item-title class="text-h4 font-weight-bold">
+									<p class="app-title">
 										{{ title }}
-									</v-list-item-title>
+									</p>
 									<v-list-item-subtitle>v{{ version }}</v-list-item-subtitle>
 								</v-list-item-content>
 							</v-list-item>
@@ -60,9 +60,9 @@
 					<v-col align="center">
 						<v-list-item>
 							<v-list-item-content>
-								<v-list-item-title class="title">
+								<v-list-item-title>
 									<v-btn icon @click.stop="miniVariant = !miniVariant">
-										<v-icon x-large>mdi-menu</v-icon>
+										<v-icon large>mdi-menu</v-icon>
 									</v-btn>
 								</v-list-item-title>
 							</v-list-item-content>
@@ -139,3 +139,10 @@ export default Vue.extend({
 	},
 })
 </script> 
+
+<style  scoped>
+.app-title {
+	font-size: 28px;
+	font-weight: 700;
+}
+</style>

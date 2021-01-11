@@ -15,7 +15,7 @@
 					<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
 				</svg>
 			</p>
-			<v-sheet elevation="2" class="pa-10 mt-4" rounded="xl">
+			<v-sheet elevation="0" class="pa-10 mt-4" rounded="xl">
 				<v-row>
 					<v-col>
 						<input-field
@@ -52,7 +52,7 @@
 
 			<v-fade-transition>
 				<v-sheet
-					elevation="2"
+					elevation="0"
 					v-show="show_advanced"
 					class="mt-2 pa-6"
 					rounded="xl"
@@ -85,7 +85,7 @@
 			</v-fade-transition>
 
 			<v-row justify="center" class="mt-12">
-				<v-col>
+				<v-col cols="10">
 					<recent-links :recent_links="recent_links" />
 				</v-col>
 			</v-row>
@@ -100,6 +100,7 @@ export default Vue.extend({
 	data() {
 		return {
 			show_advanced: false,
+			loading: false,
 			recent_links: Array(),
 			payload: {
 				longurl: '',
@@ -118,6 +119,7 @@ export default Vue.extend({
 	},
 	methods: {
 		async shorten() {
+			this.loading = true
 			await this.$store
 				.dispatch(
 					'shorten-link/createShortLink',
@@ -126,9 +128,11 @@ export default Vue.extend({
 				.then((short_link: any) => {
 					this.$store.commit('all-links/PUSH_RECENT_LINK', short_link)
 					this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
+					this.loading = false
 					;(this as any).$notify.success('Link shortened sucessfully')
 				})
 				.catch((err: any) => {
+					this.loading = false
 					;(this as any).$notify.error(err.response.data.message)
 				})
 		},
