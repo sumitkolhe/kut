@@ -1,19 +1,20 @@
 import { MutationTree, GetterTree, ActionTree } from 'vuex'
+import { RootState } from '~/store'
 
-export type RootState = ReturnType<typeof state>
+export type AllLinksState = ReturnType<typeof state>
 
 export const state = () => ({
 	all_links: Array(),
 	recent_links: Array(),
 })
 
-export const mutations: MutationTree<RootState> = {
+export const mutations: MutationTree<AllLinksState> = {
 	SET_ALL_LINKS: (state, links) => (state.all_links = links),
 	SET_RECENT_LINKS: (state, links) => (state.recent_links = links),
 	PUSH_RECENT_LINK: (state, links) => state.recent_links.unshift(links),
 }
 
-export const getters: GetterTree<RootState, RootState> = {
+export const getters: GetterTree<AllLinksState, RootState> = {
 	GET_ALL_LINKS: (state) => {
 		return state.all_links
 	},
@@ -22,7 +23,7 @@ export const getters: GetterTree<RootState, RootState> = {
 	},
 }
 
-export const actions: ActionTree<RootState, RootState> = {
+export const actions: ActionTree<AllLinksState, RootState> = {
 	async fetchRecentLinks({ commit }, limit?: string) {
 		const data = await this.$axios.$get(
 			limit ? `/links/?limit=${limit}` : `/links/`

@@ -1,7 +1,7 @@
 <template>
 	<v-app :style="{ background: $vuetify.theme.themes[theme].background }">
 		<client-only>
-			<Particles :key="$store.getters['theme/getRenderKey']" />
+			<Particles :key="$store.getters['theme/GET_RENDER_KEY']" />
 		</client-only>
 		<v-main class="pt-2 pt-sm-2 pt-xs-2 pt-md-0 pt-lg-0 pt-xl-0">
 			<Navigation />
@@ -22,7 +22,7 @@ export default Vue.extend({
 
 	computed: {
 		theme() {
-			return this.$store.getters['theme/getTheme'] ? 'dark' : 'light'
+			return this.$store.getters['theme/GET_THEME'] ? 'dark' : 'light'
 		},
 	},
 })

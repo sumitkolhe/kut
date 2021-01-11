@@ -1,13 +1,14 @@
 import { MutationTree, GetterTree, ActionTree } from 'vuex'
+import { RootState } from '~/store'
 
-export type RootState = ReturnType<typeof state>
+export type ThemeState = ReturnType<typeof state>
 
 export const state = () => ({
 	isThemeDark: false,
 	renderKey: 0,
 })
 
-export const mutations: MutationTree<RootState> = {
+export const mutations: MutationTree<ThemeState> = {
 	SET_THEME: (state) => {
 		if (state.isThemeDark == false) {
 			window.$nuxt.$root.$vuetify.theme.dark = true
@@ -30,12 +31,12 @@ export const mutations: MutationTree<RootState> = {
 	},
 }
 
-export const getters: GetterTree<RootState, RootState> = {
-	getTheme: (state) => {
+export const getters: GetterTree<ThemeState, RootState> = {
+	GET_THEME: (state) => {
 		return state.isThemeDark
 	},
 
-	getRenderKey: (state) => {
+	GET_RENDER_KEY: (state) => {
 		return state.renderKey
 	},
 }
