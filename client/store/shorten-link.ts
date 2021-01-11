@@ -17,7 +17,7 @@ export const getters: GetterTree<ShortenLinkState, RootState> = {
 	},
 }
 export const actions: ActionTree<ShortenLinkState, RootState> = {
-	async createShortLink({ commit }, payload) {
+	async createShortLink({ commit, rootState }, payload) {
 		return this.$axios
 			.$post('/shorten/', payload)
 			.then((data: any) => {
@@ -25,7 +25,8 @@ export const actions: ActionTree<ShortenLinkState, RootState> = {
 				commit('SET_SHORT_LINK', data)
 			})
 			.catch((err: any) => {
-				;(this as any).$notify.error(err.response.data.message)
+				commit('SET_ERROR', err, { root: true })
+				//;(this as any).$notify.error(err.response.data.message)
 			})
 	},
 }

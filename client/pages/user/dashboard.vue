@@ -120,9 +120,13 @@ export default Vue.extend({
 				this.show_advanced ? this.payload : { longurl: this.payload.longurl }
 			)
 
-			let short_link = this.$store.getters['shorten-link/GET_SHORT_LINK']
-			this.$store.commit('all-links/PUSH_RECENT_LINK', short_link)
-			this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
+			if (this.$store.getters['GET_ERROR']) {
+				;(this as any).$notify.error(this.$store.getters['GET_ERROR'].message)
+			} else {
+				let short_link = this.$store.getters['shorten-link/GET_SHORT_LINK']
+				this.$store.commit('all-links/PUSH_RECENT_LINK', short_link)
+				this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
+			}
 		},
 	},
 })
@@ -137,8 +141,17 @@ export default Vue.extend({
 	padding: 16px 0px;
 }
 
+.v-label {
+	color: green !important;
+}
+
 .v-text-field--outlined >>> fieldset {
 	border-width: 3px;
 	border-radius: 12px;
+}
+
+.v-text-field--outlined >>> .v-label {
+	font-weight: 700;
+	padding: 0px 8px;
 }
 </style>
