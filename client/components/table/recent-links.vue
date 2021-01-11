@@ -55,10 +55,14 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-	props: {
-		recent_links: {
-			type: Array,
-		},
+	data() {
+		return {
+			recent_links: this.$store.getters['all-links/GET_ALL_LINKS'],
+		}
+	},
+
+	async mounted() {
+		await this.$store.dispatch('all-links/fetchAllLinks', 3)
 	},
 })
 </script>

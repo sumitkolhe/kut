@@ -6,11 +6,11 @@
 				<svg
 					data-v-55d53dfe=""
 					viewBox="0 0 24 24"
-					width="24"
-					height="24"
-					stroke="currentColor"
-					stroke-width="2"
-					fill="currentColor"
+					width="26"
+					height="26"
+					stroke="#000"
+					stroke-width="1"
+					fill="#000"
 					stroke-linecap="round"
 					stroke-linejoin="round"
 					style="vertical-align: middle"
@@ -83,7 +83,7 @@
 
 			<v-row justify="center" class="mt-12">
 				<v-col>
-					<recent-links v-bind:recent_links="recent_links" />
+					<recent-links />
 				</v-col>
 			</v-row>
 		</v-col>
@@ -97,7 +97,7 @@ export default Vue.extend({
 	data() {
 		return {
 			show_advanced: false,
-			recent_links: [] as any,
+
 			payload: {
 				longurl: '',
 				alias: '',
@@ -107,19 +107,16 @@ export default Vue.extend({
 		}
 	},
 
-	async mounted() {
-		await this.$store.dispatch('all-links/fetchAllLinks')
-		this.recent_links = this.$store.getters['all-links/getAllLinks']
-	},
+	computed: {},
+
 	methods: {
 		async shorten() {
 			await this.$store.dispatch(
 				'shorten-link/createShortLink',
 				this.show_advanced ? this.payload : { longurl: this.payload.longurl }
 			)
-			this.recent_links.unshift(
-				this.$store.getters['shorten-link/GET_SHORT_LINK']
-			)
+
+			this.$store.getters['shorten-link/GET_SHORT_LINK']
 		},
 	},
 })
@@ -135,7 +132,7 @@ export default Vue.extend({
 }
 
 .v-text-field--outlined >>> fieldset {
-	border-width: 2px;
+	border-width: 3px;
 	border-radius: 12px;
 }
 </style>

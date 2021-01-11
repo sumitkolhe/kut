@@ -7,7 +7,10 @@ export const links: RequestHandler = async (req, res, next) => {
 			.populate({
 				path: 'userLinks',
 				options: {
-					limit: req.query.limit || 3,
+					limit: req.query.limit
+						? req.query.limit != (undefined || null) &&
+						  req.query.limit
+						: false,
 					sort: { created: -1 },
 				},
 			})

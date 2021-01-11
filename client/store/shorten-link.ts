@@ -3,7 +3,7 @@ import { MutationTree, GetterTree, ActionTree } from 'vuex'
 export type RootState = ReturnType<typeof state>
 
 export const state = () => ({
-	shortened_link: '',
+	shortened_link: null,
 })
 
 export const mutations: MutationTree<RootState> = {
@@ -17,7 +17,7 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 export const actions: ActionTree<RootState, RootState> = {
 	async createShortLink({ commit }, payload) {
-		await this.$axios
+		return this.$axios
 			.$post('/shorten/', payload)
 			.then((data: any) => {
 				;(this as any).$notify.success('Link shortened sucessfully')

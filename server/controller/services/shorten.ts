@@ -29,11 +29,7 @@ export const shorten: RequestHandler = async (req, res, next) => {
 		await userInstance.userLinks.push(newLink)
 		await userInstance.save()
 
-		res.json({
-			longurl: savedLink.longurl,
-			shorturl: savedLink.shorturl,
-			created: savedLink.created,
-		})
+		res.status(201).json(savedLink)
 	} catch (err) {
 		next(err)
 	}
