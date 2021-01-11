@@ -21,7 +21,7 @@
 					></polygon>
 				</svg>
 			</p>
-			<v-sheet class="pa-6" rounded="xl">
+			<v-sheet color="background" class="pa-6" rounded="xl">
 				<v-row>
 					<v-col cols="12">
 						<v-text-field
@@ -115,18 +115,19 @@ export default Vue.extend({
 	},
 	methods: {
 		async shorten() {
-			await this.$store.dispatch(
-				'shorten-link/createShortLink',
-				this.show_advanced ? this.payload : { longurl: this.payload.longurl }
-			)
-
-			if (this.$store.getters['GET_ERROR']) {
-				;(this as any).$notify.error(this.$store.getters['GET_ERROR'].message)
-			} else {
-				let short_link = this.$store.getters['shorten-link/GET_SHORT_LINK']
-				this.$store.commit('all-links/PUSH_RECENT_LINK', short_link)
-				this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
-			}
+			await this.$store
+				.dispatch(
+					'shorten-link/createShortLink',
+					this.show_advanced ? this.payload : { longurl: this.payload.longurl }
+				)
+				.then((short_link: any) => {
+					this.$store.commit('all-links/PUSH_RECENT_LINK', short_link)
+					this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
+					;(this as any).$notify.success('Link shortened sucessfully')
+				})
+				.catch((err: any) => {
+					;(this as any).$notify.error(err.response.data.message)
+				})
 		},
 	},
 })
@@ -151,7 +152,8 @@ export default Vue.extend({
 }
 
 .v-text-field--outlined >>> .v-label {
-	font-weight: 700;
+	font-weight: 900;
 	padding: 0px 8px;
+	letter-spacing: 1px;
 }
 </style>
