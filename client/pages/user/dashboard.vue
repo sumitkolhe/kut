@@ -97,7 +97,7 @@ export default Vue.extend({
 	data() {
 		return {
 			show_advanced: false,
-			recent_links: [] as any,
+			recent_links: Array(),
 			payload: {
 				longurl: '',
 				alias: '',
@@ -110,8 +110,8 @@ export default Vue.extend({
 	computed: {},
 
 	async mounted() {
-		await this.$store.dispatch('all-links/fetchAllLinks', 3)
-		this.recent_links = this.$store.getters['all-links/GET_ALL_LINKS']
+		await this.$store.dispatch('all-links/fetchRecentLinks', 3)
+		this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
 	},
 	methods: {
 		async shorten() {
@@ -120,7 +120,9 @@ export default Vue.extend({
 				this.show_advanced ? this.payload : { longurl: this.payload.longurl }
 			)
 
-			this.recent_links = this.$store.getters['shorten-link/GET_SHORT_LINK']
+			let short_link = this.$store.getters['shorten-link/GET_SHORT_LINK']
+			this.$store.commit('all-links/PUSH_RECENT_LINK', short_link)
+			this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
 		},
 	},
 })

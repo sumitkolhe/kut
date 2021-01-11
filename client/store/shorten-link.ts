@@ -3,7 +3,7 @@ import { MutationTree, GetterTree, ActionTree } from 'vuex'
 export type RootState = ReturnType<typeof state>
 
 export const state = () => ({
-	shortened_link: null,
+	shortened_link: '',
 })
 
 export const mutations: MutationTree<RootState> = {

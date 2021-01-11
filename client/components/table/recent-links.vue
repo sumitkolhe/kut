@@ -58,6 +58,8 @@ export default Vue.extend({
 			type: Array,
 		},
 	},
+
+	mounted() {},
 })
 </script>
 
