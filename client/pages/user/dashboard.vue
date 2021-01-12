@@ -1,6 +1,6 @@
 <template>
 	<v-row justify="center" align="center">
-		<v-col cols="12" md="10">
+		<v-col cols="12" sm="10" lg="8">
 			<p class="title-text" dark>
 				Create short links quickly
 				<svg
@@ -91,8 +91,8 @@
 			</v-fade-transition>
 
 			<v-row justify="center" class="mt-12">
-				<v-col cols="12" md="10">
-					<h3 class="mb-6 font-weight-medium">Recently shortened links</h3>
+				<v-col cols="12">
+					<h3 class="mb-8 mt-4 font-weight-medium">Recently shortened links</h3>
 					<recent-links-table :recent_links="recent_links" />
 				</v-col>
 			</v-row>

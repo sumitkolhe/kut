@@ -12,6 +12,7 @@
 		"start:client": "nuxt-ts start"
 	},
 	"dependencies": {
+		"@chenfengyuan/vue-qrcode": "^1.0.2",
 		"@nuxt/typescript-runtime": "^2.0.0",
 		"@nuxtjs/auth-next": "^5.0.0-1608461079.ae1e5db",
 		"@nuxtjs/axios": "^5.12.4",
@@ -28,7 +29,8 @@
 		"nuxt-clipboard2": "^0.2.1",
 		"nuxt-vuex-localstorage": "^1.2.7",
 		"particles.js": "^2.0.0",
-		"serve-static": "^1.14.1"
+		"serve-static": "^1.14.1",
+		"vue": "^2.6.12"
 	},
 	"devDependencies": {
 		"@nuxt/types": "^2.14.12",
@@ -36,6 +38,7 @@
 		"@nuxtjs/vuetify": "^1.11.2",
 		"@types/bcrypt": "^3.0.0",
 		"@types/bcryptjs": "^2.4.2",
+		"@types/chenfengyuan__vue-qrcode": "^1.0.2",
 		"@types/express": "^4.17.9",
 		"@types/express-useragent": "^1.0.0",
 		"@types/http-errors": "^1.8.0",

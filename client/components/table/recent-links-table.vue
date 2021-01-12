@@ -11,6 +11,7 @@
 					<th>Orignal URL</th>
 					<th>Created</th>
 					<th>Short URL</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -23,9 +24,13 @@
 						<p>{{ link.created }}</p>
 					</td>
 					<td data-label="Shortened">
-						<copy-content :target="link.shorturl" />
-
 						{{ link.shorturl }}
+					</td>
+					<td data-label="Shortened">
+						<v-row justify="center">
+							<copy-content :target="link.shorturl" />
+							<qr-code :target="link.shorturl" />
+						</v-row>
 					</td>
 				</tr>
 			</tbody>
