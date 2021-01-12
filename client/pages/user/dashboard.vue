@@ -86,7 +86,7 @@
 
 			<v-row justify="center" class="mt-12">
 				<v-col cols="10">
-					<recent-links :recent_links="recent_links" />
+					<recent-links-table :recent_links="recent_links" />
 				</v-col>
 			</v-row>
 		</v-col>

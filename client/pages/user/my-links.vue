@@ -28,6 +28,10 @@
 					</v-card>
 				</v-col>
 			</v-row>
+
+			<v-row>
+				<all-links-table />
+			</v-row>
 		</v-col>
 	</v-row>
 </template>

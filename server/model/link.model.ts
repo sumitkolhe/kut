@@ -1,5 +1,5 @@
 import { model, Schema, Document } from 'mongoose'
-import { StatisticsModel } from '@model/statistics.model'
+import { AnalyticsModel } from '@model/analytics.model'
 
 export interface LinkDocument extends Document {
 	alias: { type: string; required: true; unique: boolean }
@@ -8,7 +8,7 @@ export interface LinkDocument extends Document {
 	clicks: { type: number }
 	password: { type: string }
 	description: { type: string }
-	statistics: { type: Schema.Types.ObjectId; ref: string }
+	analytics: { type: Schema.Types.ObjectId; ref: string }
 	created: { type: Date; required: boolean }
 }
 
@@ -19,7 +19,7 @@ const LinkSchema = new Schema({
 	clicks: { type: Number, default: 0 },
 	password: { type: String, default: null },
 	description: { type: String, default: null },
-	statistics: [{ type: Schema.Types.ObjectId, ref: StatisticsModel }],
+	analytics: [{ type: Schema.Types.ObjectId, ref: AnalyticsModel }],
 	created: { type: Date, default: Date.now, required: true },
 })
 
