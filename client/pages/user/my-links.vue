@@ -29,8 +29,10 @@
 				</v-col>
 			</v-row>
 
-			<v-row>
-				<all-links-table />
+			<v-row justify="center" class="mt-12">
+				<v-col align="center">
+					<all-links-table />
+				</v-col>
 			</v-row>
 		</v-col>
 	</v-row>
