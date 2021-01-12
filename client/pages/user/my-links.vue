@@ -16,7 +16,7 @@
 								>
 									{{ card.title }}
 								</v-list-item-subtitle>
-								<v-list-item-title class="text-h4 font-weight-medium">
+								<v-list-item-title class="pl-1 text-h4 font-weight-medium">
 									{{ card.value }}
 								</v-list-item-title>
 							</v-list-item-content>
@@ -71,6 +71,19 @@ export default Vue.extend({
 				},
 			],
 		}
+	},
+
+	async mounted() {
+		await this.$axios
+			.get('/stats')
+			.then((response: any) => {
+				this.info_card.forEach((item: any, index) => {
+					item.value = Object.values(response.data)[index]
+				})
+			})
+			.catch((err: any) => {
+				;(this as any).$notify.error(err.response.data.message)
+			})
 	},
 
 	methods: {},

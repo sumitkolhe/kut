@@ -2,8 +2,8 @@ import { RequestHandler } from 'express'
 import bcrypt from 'bcryptjs'
 import { UserModel } from '@model/user.model'
 import { userLoginSchema } from '@utils/validators'
-import { signAccessToken, signRefreshToken } from '@utils/signToken'
-import { CreateError } from '@middleware/errorHandler'
+import { signAccessToken, signRefreshToken } from '@utils/sign-token'
+import { CreateError } from '@middleware/error-handler'
 
 export const login: RequestHandler = async (req, res, next) => {
 	try {
@@ -14,7 +14,7 @@ export const login: RequestHandler = async (req, res, next) => {
 		const UserDetails = await UserModel.findOne({
 			$or: [
 				{ email: validatedUserDetails.email },
-				{ userName: validatedUserDetails.userName },
+				{ user_name: validatedUserDetails.user_name },
 			],
 		})
 
@@ -38,8 +38,8 @@ export const login: RequestHandler = async (req, res, next) => {
 		})
 
 		res.json({
-			accessToken: signedAccessToken,
-			refreshToken: signedRefreshToken,
+			access_token: signedAccessToken,
+			refresh_token: signedRefreshToken,
 		})
 	} catch (error) {
 		if (error.isJoi === true) error.status = 422

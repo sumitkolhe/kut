@@ -2,7 +2,7 @@ import { RequestHandler } from 'express'
 import bcrypt from 'bcryptjs'
 import { UserModel } from '@model/user.model'
 import { userRegisterSchema } from '@utils/validators'
-import { CreateError } from '@middleware/errorHandler'
+import { CreateError } from '@middleware/error-handler'
 
 export const register: RequestHandler = async (req, res, next) => {
 	try {
@@ -13,7 +13,7 @@ export const register: RequestHandler = async (req, res, next) => {
 		const ifUserExist = await UserModel.findOne({
 			$or: [
 				{ email: validatedUserDetails.email },
-				{ userName: validatedUserDetails.userName },
+				{ user_name: validatedUserDetails.user_name },
 			],
 		})
 

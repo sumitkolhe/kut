@@ -6,9 +6,9 @@ import serveStatic from 'serve-static'
 import { loadNuxt, build } from 'nuxt'
 import { config } from '@config/config'
 import { routes } from '@routes/routes'
-import { connectDatabase } from '@utils/initDatabase'
+import { connectDatabase } from '@utils/init-database'
 import { setHeaders } from '@middleware/header'
-import { HandleError } from '@middleware/errorHandler'
+import { HandleError } from '@middleware/error-handler'
 
 const isDev = process.env.NODE_ENV !== 'production'
 const app = express()

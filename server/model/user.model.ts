@@ -2,7 +2,7 @@ import { model, Schema, Document } from 'mongoose'
 import { LinkModel } from '@model/link.model'
 import { NotesModel } from '@model/notes.model'
 interface UserDocument extends Document {
-	userName: {
+	user_name: {
 		type: string
 		unique: boolean
 		required: boolean
@@ -19,11 +19,11 @@ interface UserDocument extends Document {
 		required: boolean
 		minlength: number
 	}
-	userLinks: {
+	user_links: {
 		type: Schema.Types.ObjectId
 		ref: string
 	}
-	userNotes: {
+	user_notes: {
 		type: Schema.Types.ObjectId
 		ref: string
 	}
@@ -31,7 +31,7 @@ interface UserDocument extends Document {
 }
 
 const UserSchema = new Schema({
-	userName: {
+	user_name: {
 		type: String,
 		required: true,
 		lowercase: true,
@@ -48,12 +48,12 @@ const UserSchema = new Schema({
 		required: true,
 		minlength: 6,
 	},
-	userLinks: [{ type: Schema.Types.ObjectId, ref: LinkModel }],
-	userNotes: [{ type: Schema.Types.ObjectId, ref: NotesModel }],
+	user_links: [{ type: Schema.Types.ObjectId, ref: LinkModel }],
+	user_notes: [{ type: Schema.Types.ObjectId, ref: NotesModel }],
 	created: { type: Date, default: Date.now, required: true },
 })
 
-UserSchema.index({ userName: 1 }, { unique: true })
+UserSchema.index({ user_name: 1 }, { unique: true })
 UserSchema.index({ email: 1 }, { unique: true })
 
 export const UserModel = model<UserDocument>('user', UserSchema)

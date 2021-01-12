@@ -1,4 +1,4 @@
-import { CreateError } from '@middleware/errorHandler'
+import { CreateError } from '@middleware/error-handler'
 
 export const verifyLink = (link: string) => {
 	const linkWithProtocol = /(?:(?:https?|ftp|file):\/\/|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/gim

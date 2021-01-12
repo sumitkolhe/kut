@@ -1,6 +1,6 @@
 import Jwt from 'jsonwebtoken'
 import { config } from '@config/config'
-import { CreateError } from '@middleware/errorHandler'
+import { CreateError } from '@middleware/error-handler'
 
 export const signAccessToken = async (data: any) => {
 	try {

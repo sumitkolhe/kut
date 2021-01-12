@@ -18,7 +18,7 @@
 					<v-form ref="form" v-model="isFormValid" lazy-validation>
 						<p class="mb-2 font-weight-medium">Username</p>
 						<v-text-field
-							v-model="register.userName"
+							v-model="register.user_name"
 							:rules="[rules.required, rules.noSpace]"
 							placeholder="John Doe"
 							append-icon="mdi-account-circle"
@@ -96,7 +96,7 @@ export default Vue.extend({
 			},
 
 			register: {
-				userName: '',
+				user_name: '',
 				email: '',
 				password: '',
 			},

@@ -10,7 +10,12 @@ export const state = () => ({
 })
 
 export const mutations: MutationTree<AllLinksState> = {
-	SET_ALL_LINKS: (state, links) => (state.all_links = links),
+	SET_ALL_LINKS: (state, links) => {
+		state.all_links = links
+		state.all_links.forEach((item) => {
+			item.created = convertDate(item.created)
+		})
+	},
 	SET_RECENT_LINKS: (state, links) => {
 		state.recent_links = links
 		state.recent_links.forEach((item) => {
@@ -39,8 +44,8 @@ export const actions: ActionTree<AllLinksState, RootState> = {
 		)
 		commit('SET_RECENT_LINKS', data)
 	},
-	async fetchALLLinks({ commit }) {
-		const data = await this.$axios.$get(' /links/')
+	async fetchAllLinks({ commit }) {
+		const data = await this.$axios.$get('/links/')
 		commit('SET_ALL_LINKS', data)
 	},
 }

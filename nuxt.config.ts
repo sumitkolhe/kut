@@ -72,12 +72,12 @@ const NuxtAppConfig: NuxtConfig = {
 		strategies: {
 			local: {
 				token: {
-					property: 'accessToken',
+					property: 'access_token',
 					required: true,
 					type: 'Bearer',
 				},
 				user: {
-					property: 'userDetails',
+					property: 'user_details',
 					autoFetch: true,
 				},
 				endpoints: {

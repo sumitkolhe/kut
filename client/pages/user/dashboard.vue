@@ -27,7 +27,7 @@
 						<input-field
 							:placeholder="'Enter a URL'"
 							:type="'text'"
-							v-model="payload.longurl"
+							v-model="payload.long_url"
 						/>
 					</v-col>
 				</v-row>
@@ -110,7 +110,7 @@ export default Vue.extend({
 			loading: false,
 			recent_links: Array(),
 			payload: {
-				longurl: '',
+				long_url: '',
 				alias: '',
 				password: '',
 				description: '',
@@ -130,7 +130,9 @@ export default Vue.extend({
 			await this.$store
 				.dispatch(
 					'shorten-link/createShortLink',
-					this.show_advanced ? this.payload : { longurl: this.payload.longurl }
+					this.show_advanced
+						? this.payload
+						: { long_url: this.payload.long_url }
 				)
 				.then((short_link: any) => {
 					this.$store.commit('all-links/PUSH_RECENT_LINK', short_link)

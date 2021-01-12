@@ -5,7 +5,7 @@ export const links: RequestHandler = async (req, res, next) => {
 	try {
 		await UserModel.findOne({ email: req.body.auth.email })
 			.populate({
-				path: 'userLinks',
+				path: 'user_links',
 				options: {
 					limit: req.query.limit
 						? req.query.limit != (undefined || null) &&
@@ -15,7 +15,7 @@ export const links: RequestHandler = async (req, res, next) => {
 				},
 			})
 			.then((link: any) => {
-				res.json(link?.userLinks)
+				res.json(link?.user_links)
 			})
 	} catch (error) {
 		next(error)

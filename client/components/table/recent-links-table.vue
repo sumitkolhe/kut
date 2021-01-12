@@ -17,19 +17,19 @@
 			<tbody>
 				<tr v-for="(link, index) in recent_links" :key="index">
 					<td data-label="Original">
-						<p>{{ link.longurl }}</p>
+						<p>{{ link.long_url }}</p>
 					</td>
 
 					<td data-label="Created">
 						<p>{{ link.created }}</p>
 					</td>
 					<td data-label="Shortened">
-						{{ link.shorturl }}
+						{{ link.short_url }}
 					</td>
 					<td data-label="Shortened">
 						<v-row justify="center">
-							<copy-content :target="link.shorturl" />
-							<qr-code :target="link.shorturl" />
+							<copy-content :target="link.short_url" />
+							<qr-code :target="link.short_url" />
 						</v-row>
 					</td>
 				</tr>

@@ -23,7 +23,7 @@
 					<v-form ref="form" v-model="isFormValid" lazy-validation>
 						<p class="mb-2 font-weight-medium">E-mail / Username</p>
 						<v-text-field
-							v-model="login.userName"
+							v-model="login.user_name"
 							:rules="[rules.required, rules.noSpace]"
 							placeholder="John Doe"
 							append-icon="mdi-email"
@@ -97,7 +97,7 @@ export default Vue.extend({
 			},
 
 			login: {
-				userName: '',
+				user_name: '',
 				password: '',
 			},
 		}

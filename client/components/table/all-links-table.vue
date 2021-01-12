@@ -1,8 +1,8 @@
 <template>
 	<v-data-table
 		:headers="headers"
-		:items="desserts"
-		:single-expand="singleExpand"
+		:items="all_links"
+		single-expand
 		:expanded.sync="expanded"
 		item-key="name"
 		show-expand
@@ -40,70 +40,44 @@
 		</template>
 	</v-data-table>
 </template>
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
 	data() {
 		return {
 			payload: {
-				longurl: '',
+				long_url: '',
 				alias: '',
 				password: '',
 				description: '',
 			},
 			expanded: [],
-			singleExpand: false,
+
 			headers: [
 				{
-					text: 'Dessert (100g serving)',
+					text: 'Original Link',
 					align: 'left',
 					sortable: false,
-					value: 'name',
+					value: 'long_url',
 				},
-				{ text: 'Calories', value: 'calories' },
-				{ text: 'Fat (g)', value: 'fat' },
-				{ text: 'Carbs (g)', value: 'carbs' },
-				{ text: 'Protein (g)', value: 'protein' },
-				{ text: 'Iron (%)', value: 'iron' },
+				{ text: 'Short Link', value: 'short_url' },
+				{ text: 'Created', value: 'created' },
+				{ text: 'Description', value: 'description' },
+				{ text: 'Password', value: 'password' },
 				{ text: '', value: 'data-table-expand' },
 			],
-			desserts: [
-				{
-					name: 'Eclair',
-					calories: 262,
-					fat: 16.0,
-					carbs: 23,
-					protein: 6.0,
-					iron: '7%',
-				},
-				{
-					name: 'Cupcake',
-					calories: 305,
-					fat: 3.7,
-					carbs: 67,
-					protein: 4.3,
-					iron: '8%',
-				},
-				{
-					name: 'Gingerbread',
-					calories: 356,
-					fat: 16.0,
-					carbs: 49,
-					protein: 3.9,
-					iron: '16%',
-				},
-
-				{
-					name: 'KitKat',
-					calories: 518,
-					fat: 26.0,
-					carbs: 65,
-					protein: 7,
-					iron: '6%',
-				},
-			],
+			all_links: [],
 		}
 	},
-}
+
+	async mounted() {
+		await this.$store.dispatch('all-links/fetchAllLinks').catch((err: any) => {
+			;(this as any).$notify.error(err)
+		})
+
+		this.all_links = this.$store.getters['all-links/GET_ALL_LINKS']
+	},
+})
 </script>
 
 <style  scoped>
