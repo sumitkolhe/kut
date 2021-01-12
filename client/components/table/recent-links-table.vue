@@ -23,10 +23,9 @@
 						<p>{{ link.created }}</p>
 					</td>
 					<td data-label="Shortened">
-						<p>
-							<copy :target="link.shorturl" />
-							{{ link.shorturl }}
-						</p>
+						<copy-content :target="link.shorturl" />
+
+						{{ link.shorturl }}
 					</td>
 				</tr>
 			</tbody>
@@ -42,8 +41,6 @@ export default Vue.extend({
 			type: Array,
 		},
 	},
-
-	mounted() {},
 })
 </script>
 

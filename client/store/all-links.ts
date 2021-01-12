@@ -1,5 +1,6 @@
 import { MutationTree, GetterTree, ActionTree } from 'vuex'
 import { RootState } from '~/store'
+import { convertDate } from '~/utils/convert-date'
 
 export type AllLinksState = ReturnType<typeof state>
 
@@ -10,8 +11,16 @@ export const state = () => ({
 
 export const mutations: MutationTree<AllLinksState> = {
 	SET_ALL_LINKS: (state, links) => (state.all_links = links),
-	SET_RECENT_LINKS: (state, links) => (state.recent_links = links),
-	PUSH_RECENT_LINK: (state, links) => state.recent_links.unshift(links),
+	SET_RECENT_LINKS: (state, links) => {
+		state.recent_links = links
+		state.recent_links.forEach((item) => {
+			item.created = convertDate(item.created)
+		})
+	},
+	PUSH_RECENT_LINK: (state, recent_link) => {
+		recent_link.created = convertDate(recent_link.created)
+		state.recent_links.unshift(recent_link)
+	},
 }
 
 export const getters: GetterTree<AllLinksState, RootState> = {

@@ -85,7 +85,8 @@
 			</v-fade-transition>
 
 			<v-row justify="center" class="mt-12">
-				<v-col cols="10">
+				<v-col cols="12" md="10">
+					<h3 class="mb-6 font-weight-medium">Recently shortened links</h3>
 					<recent-links-table :recent_links="recent_links" />
 				</v-col>
 			</v-row>
