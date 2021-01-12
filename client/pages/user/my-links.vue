@@ -52,7 +52,7 @@ export default Vue.extend({
 					title: 'Total Shortened Links',
 					value: '',
 					icon: 'mdi-link',
-					icon_bg_color: '#e9fbf5',
+					icon_bg_color: '#e1fdff',
 					icon_color: '#00cc88',
 				},
 				{

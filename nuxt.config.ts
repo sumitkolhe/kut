@@ -55,6 +55,7 @@ const NuxtAppConfig: NuxtConfig = {
 	modules: [
 		'@nuxtjs/axios',
 		'@nuxtjs/auth-next',
+		'nuxt-clipboard2',
 		['nuxt-vuex-localstorage', { mode: 'debug', localStorage: ['theme'] }],
 	],
 
