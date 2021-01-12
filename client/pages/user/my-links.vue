@@ -21,8 +21,10 @@
 								</v-list-item-title>
 							</v-list-item-content>
 
-							<v-list-item-avatar rounded color="primary" size="56">
-								<v-icon x-large>{{ card.icon }}</v-icon>
+							<v-list-item-avatar rounded :color="card.icon_bg_color" size="56">
+								<v-icon x-large :color="card.icon_color">
+									{{ card.icon }}
+								</v-icon>
 							</v-list-item-avatar>
 						</v-list-item>
 					</v-card>
@@ -44,21 +46,28 @@ export default Vue.extend({
 	data() {
 		return {
 			card_height: '150px',
+
 			info_card: [
 				{
 					title: 'Total Shortened Links',
 					value: '',
 					icon: 'mdi-link',
+					icon_bg_color: '#e9fbf5',
+					icon_color: '#00cc88',
 				},
 				{
 					title: 'Total Notes Created',
 					value: '',
 					icon: 'mdi-book-edit',
+					icon_bg_color: '#f3f9ff',
+					icon_color: '#0062ff',
 				},
 				{
 					title: 'Total Link Impressions',
 					value: '',
 					icon: 'mdi-cursor-default-click',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
 				},
 			],
 		}
@@ -69,10 +78,4 @@ export default Vue.extend({
 </script>
 
 <style  scoped>
-.holo {
-	width: 46px;
-	height: 46px;
-	border-radius: 12px;
-	background-color: red;
-}
 </style>
