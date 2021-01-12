@@ -6,13 +6,37 @@
 		:expanded.sync="expanded"
 		item-key="name"
 		show-expand
-		class="elevation-1"
 	>
 		<template v-slot:[`item.data-table-expand`]="{ expand, isExpanded }">
 			<v-icon @click="expand(!isExpanded)">mdi-pencil</v-icon>
 		</template>
 		<template v-slot:expanded-item="{ headers }">
-			<td :colspan="headers.length">Peek-a-boo!</td>
+			<td :colspan="headers.length">
+				<v-row justify="space-around" class="pa-8">
+					<v-col cols="12" md="6">
+						<input-field
+							:placeholder="'Custom Alias'"
+							:type="'text'"
+							v-model="payload.alias"
+						/>
+					</v-col>
+
+					<v-col cols="12" md="6">
+						<input-field
+							:placeholder="'Password'"
+							:type="'password'"
+							v-model="payload.password"
+						/>
+					</v-col>
+					<v-col cols="12">
+						<input-field
+							:placeholder="'Description'"
+							:type="'text'"
+							v-model="payload.description"
+						/>
+					</v-col>
+				</v-row>
+			</td>
 		</template>
 	</v-data-table>
 </template>
@@ -20,6 +44,12 @@
 export default {
 	data() {
 		return {
+			payload: {
+				longurl: '',
+				alias: '',
+				password: '',
+				description: '',
+			},
 			expanded: [],
 			singleExpand: false,
 			headers: [
@@ -37,22 +67,6 @@ export default {
 				{ text: '', value: 'data-table-expand' },
 			],
 			desserts: [
-				{
-					name: 'Frozen Yogurt',
-					calories: 159,
-					fat: 6.0,
-					carbs: 24,
-					protein: 4.0,
-					iron: '1%',
-				},
-				{
-					name: 'Ice cream sandwich',
-					calories: 237,
-					fat: 9.0,
-					carbs: 37,
-					protein: 4.3,
-					iron: '1%',
-				},
 				{
 					name: 'Eclair',
 					calories: 262,
@@ -77,38 +91,7 @@ export default {
 					protein: 3.9,
 					iron: '16%',
 				},
-				{
-					name: 'Jelly bean',
-					calories: 375,
-					fat: 0.0,
-					carbs: 94,
-					protein: 0.0,
-					iron: '0%',
-				},
-				{
-					name: 'Lollipop',
-					calories: 392,
-					fat: 0.2,
-					carbs: 98,
-					protein: 0,
-					iron: '2%',
-				},
-				{
-					name: 'Honeycomb',
-					calories: 408,
-					fat: 3.2,
-					carbs: 87,
-					protein: 6.5,
-					iron: '45%',
-				},
-				{
-					name: 'Donut',
-					calories: 452,
-					fat: 25.0,
-					carbs: 51,
-					protein: 4.9,
-					iron: '22%',
-				},
+
 				{
 					name: 'KitKat',
 					calories: 518,
@@ -122,3 +105,9 @@ export default {
 	},
 }
 </script>
+
+<style  scoped>
+.v-data-table {
+	border-radius: 12px !important;
+}
+</style>
