@@ -9,15 +9,24 @@
 	>
 		<template v-slot:[`item.data-table-expand`]="{ expand, isExpanded, item }">
 			<v-row>
-				<v-btn icon @click="expand(!isExpanded)">
+				<v-btn class="mr-1" icon @click="expand(!isExpanded)">
 					<v-icon>mdi-pencil</v-icon>
 				</v-btn>
-				<v-btn icon>
+				<v-btn class="mr-1" icon>
 					<qr-code :target="item.short_url" />
 				</v-btn>
 				<v-btn icon>
 					<delete-link @callback="fetchLinks" :target="item._id" />
 				</v-btn>
+
+				<v-tooltip bottom>
+					<template v-slot:activator="{ on, attrs }">
+						<v-btn class="mr-1" icon v-show="item.password_protected">
+							<v-icon v-bind="attrs" v-on="on">mdi-security</v-icon>
+						</v-btn>
+					</template>
+					<span>Password Protected</span>
+				</v-tooltip>
 			</v-row>
 		</template>
 
@@ -50,7 +59,7 @@ export default Vue.extend({
 				{ text: 'Created', value: 'created' },
 				{ text: 'Total Views', value: 'visit_count' },
 				{ text: 'Description', value: 'description' },
-				{ text: 'Actions', value: 'data-table-expand', width: '10%' },
+				{ text: 'Actions', value: 'data-table-expand', width: '15%' },
 			],
 			all_links: [],
 		}
