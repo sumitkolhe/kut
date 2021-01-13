@@ -7,6 +7,7 @@ export interface LinkDocument extends Document {
 	short_url: { type: string }
 	visit_count: { type: number }
 	password: { type: string }
+	password_protected: { type: boolean }
 	description: { type: string }
 	analytics: { type: Schema.Types.ObjectId; ref: string }
 	created: { type: Date; required: boolean }
@@ -17,7 +18,8 @@ const LinkSchema = new Schema({
 	long_url: { type: String, required: true },
 	short_url: { type: String },
 	visit_count: { type: Number, default: 0 },
-	password: { type: String, default: null },
+	password: { type: String, select: false, default: null },
+	password_protected: { type: Boolean, default: false },
 	description: { type: String, default: null },
 	analytics: [{ type: Schema.Types.ObjectId, ref: AnalyticsModel }],
 	created: { type: Date, default: Date.now, required: true },

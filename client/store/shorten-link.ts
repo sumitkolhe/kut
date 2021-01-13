@@ -18,6 +18,6 @@ export const getters: GetterTree<ShortenLinkState, RootState> = {
 }
 export const actions: ActionTree<ShortenLinkState, RootState> = {
 	async createShortLink({ commit }, payload) {
-		return this.$axios.$post('/shorten/', payload)
+		return this.$axios.$post('/shorten', payload)
 	},
 }

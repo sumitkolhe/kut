@@ -10,8 +10,12 @@
 	</v-btn>
 </template>
 
-<script>
-export default {
+
+<script lang="ts">
+import Vue from 'vue'
+import '@nuxtjs/auth-next'
+
+export default Vue.extend({
 	props: {
 		target: String,
 	},
@@ -25,7 +29,7 @@ export default {
 		async copy() {
 			try {
 				this.clicked = true
-				await this.$copyText(this.target)
+				await (this as any).$copyText(this.target)
 
 				setTimeout(() => {
 					this.clicked = false
@@ -35,5 +39,5 @@ export default {
 			}
 		},
 	},
-}
+})
 </script>

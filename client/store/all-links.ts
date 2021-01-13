@@ -40,12 +40,12 @@ export const getters: GetterTree<AllLinksState, RootState> = {
 export const actions: ActionTree<AllLinksState, RootState> = {
 	async fetchRecentLinks({ commit }, limit?: string) {
 		const data = await this.$axios.$get(
-			limit ? `/links/?limit=${limit}` : `/links/`
+			limit ? `/links/?limit=${limit}` : `/links`
 		)
 		commit('SET_RECENT_LINKS', data)
 	},
 	async fetchAllLinks({ commit }) {
-		const data = await this.$axios.$get('/links/')
+		const data = await this.$axios.$get('/links')
 		commit('SET_ALL_LINKS', data)
 	},
 }

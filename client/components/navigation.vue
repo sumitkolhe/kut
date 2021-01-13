@@ -37,7 +37,7 @@
 						<v-icon>{{ item.icon }}</v-icon>
 					</v-list-item-action>
 					<v-list-item-content>
-						<v-list-item-title v-text="item.title" />
+						<v-list-item-title class="nav-links" v-text="item.title" />
 					</v-list-item-content>
 				</v-list-item>
 			</v-list>
@@ -144,5 +144,9 @@ export default Vue.extend({
 .app-title {
 	font-size: 28px;
 	font-weight: 700;
+}
+
+.nav-links {
+	font-weight: 600;
 }
 </style>

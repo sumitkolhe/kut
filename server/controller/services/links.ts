@@ -1,3 +1,4 @@
+import { LinkModel } from '@model/link.model'
 import { UserModel } from '@model/user.model'
 import { RequestHandler } from 'express'
 
@@ -17,6 +18,19 @@ export const links: RequestHandler = async (req, res, next) => {
 			.then((link: any) => {
 				res.json(link?.user_links)
 			})
+	} catch (error) {
+		next(error)
+	}
+}
+
+export const updateLinks: RequestHandler = async (req, res, next) => {
+	try {
+		await LinkModel.findOneAndUpdate(
+			{ _id: req.body._id },
+			{ $set: req.body }
+		).then((link: any) => {
+			res.json(link?.user_links)
+		})
 	} catch (error) {
 		next(error)
 	}

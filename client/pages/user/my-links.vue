@@ -1,6 +1,6 @@
 <template>
 	<v-row justify="center" class="mt-6">
-		<v-col cols="10">
+		<v-col cols="12" sm="10" lg="10">
 			<v-row justify="space-around">
 				<v-col
 					cols="12"
@@ -32,7 +32,7 @@
 			</v-row>
 
 			<v-row justify="center" class="mt-12">
-				<v-col align="center">
+				<v-col align="center" cols="12">
 					<all-links-table />
 				</v-col>
 			</v-row>
@@ -82,7 +82,7 @@ export default Vue.extend({
 				})
 			})
 			.catch((err: any) => {
-				;(this as any).$notify.error(err.response.data.message)
+				;(this as any).$notify.error(err)
 			})
 	},
 

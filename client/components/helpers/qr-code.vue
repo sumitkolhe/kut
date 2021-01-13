@@ -4,7 +4,7 @@
 			<v-fade-transition hide-on-leave>
 				<v-icon
 					:key="String(clicked)"
-					color="#2196f3"
+					color="#3a86ff"
 					v-text="clicked ? 'mdi-qrcode-plus' : 'mdi-qrcode-scan'"
 				/>
 			</v-fade-transition>
@@ -20,8 +20,11 @@
 	</div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import '@nuxtjs/auth-next'
+
+export default Vue.extend({
 	props: {
 		target: String,
 	},
@@ -46,5 +49,5 @@ export default {
 			}
 		},
 	},
-}
+})
 </script>
