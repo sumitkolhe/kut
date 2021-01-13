@@ -3,7 +3,7 @@
 		<v-icon color="#ff0054">mdi-delete</v-icon>
 		<v-fade-transition hide-on-leave>
 			<v-bottom-sheet v-model="show_dialog">
-				<v-sheet class="text-center" height="200px">
+				<v-sheet class="text-center" height="180px">
 					<div class="py-3">
 						<p class="font-weight-bold mt-4">
 							Do you really want to delete this link?
@@ -22,6 +22,7 @@
 							depressed
 							class="mt-6 ml-4"
 							color="primary"
+							:loading="loading"
 							@click="deleteLink(target)"
 						>
 							<v-icon left>mdi-delete</v-icon>
@@ -44,7 +45,7 @@ export default Vue.extend({
 	},
 
 	data: () => ({
-		clicked: false,
+		loading: false,
 		show_dialog: false,
 		wait: 1500,
 	}),
@@ -54,8 +55,19 @@ export default Vue.extend({
 			this.show_dialog = true
 		},
 
-		deleteLink(target: any) {
-			console.log(target)
+		async deleteLink(target: any) {
+			await this.$store
+				.dispatch('all-links/deleteLink', target)
+				.then(() => {
+					this.loading = false
+					this.show_dialog = false
+					;(this as any).$notify.success('Link deleted sucessfully')
+					this.$emit('callback')
+				})
+				.catch((err: any) => {
+					this.loading = false
+					;(this as any).$notify.error(err.response.data.message)
+				})
 		},
 	},
 })

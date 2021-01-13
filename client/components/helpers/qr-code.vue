@@ -4,8 +4,8 @@
 			<v-fade-transition hide-on-leave>
 				<v-icon
 					:key="String(clicked)"
-					color="#3a86ff"
-					v-text="clicked ? 'mdi-qrcode-plus' : 'mdi-qrcode-scan'"
+					color="#2176ff"
+					v-text="clicked ? 'mdi-qrcode-scan' : 'mdi-qrcode-plus'"
 				/>
 			</v-fade-transition>
 		</v-btn>
