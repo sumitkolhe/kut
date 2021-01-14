@@ -7,39 +7,39 @@ import { CreateError } from '@middleware/error-handler'
 
 export const login: RequestHandler = async (req, res, next) => {
 	try {
-		const validatedUserDetails = await userLoginSchema.validateAsync(
+		const validated_user_details = await userLoginSchema.validateAsync(
 			req.body
 		)
 
-		const UserDetails = await UserModel.findOne({
+		const user_details = await UserModel.findOne({
 			$or: [
-				{ email: validatedUserDetails.email },
-				{ user_name: validatedUserDetails.user_name },
+				{ email: validated_user_details.email },
+				{ user_name: validated_user_details.user_name },
 			],
 		})
 
-		if (!UserDetails) throw CreateError.NotFound('User Does Not Exist')
+		if (!user_details) throw CreateError.NotFound('User Does Not Exist')
 
-		const checkPassword = await bcrypt.compare(
+		const check_password = await bcrypt.compare(
 			req.body.password,
-			UserDetails.password.toString()
+			user_details.password.toString()
 		)
 
-		if (!checkPassword)
+		if (!check_password)
 			throw CreateError.BadRequest(
 				'Incorrect username/email and password combination'
 			)
 
-		const signedAccessToken = await signAccessToken({
-			email: UserDetails.email,
+		const signed_access_token = await signAccessToken({
+			email: user_details.email,
 		})
-		const signedRefreshToken = await signRefreshToken({
-			email: UserDetails.email,
+		const signed_refresh_token = await signRefreshToken({
+			email: user_details.email,
 		})
 
 		res.json({
-			access_token: signedAccessToken,
-			refresh_token: signedRefreshToken,
+			access_token: signed_access_token,
+			refresh_token: signed_refresh_token,
 		})
 	} catch (error) {
 		if (error.isJoi === true) error.status = 422

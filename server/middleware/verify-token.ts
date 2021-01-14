@@ -8,24 +8,24 @@ export const verifyToken = (
 	_res: express.Response,
 	next: express.NextFunction
 ) => {
-	const authHeader = req.headers['authorization']
-	const access_token = authHeader && authHeader.split(' ')[1]
+	const auth_header = req.headers['authorization']
+	const access_token = auth_header && auth_header.split(' ')[1]
 	if (!access_token)
-		throw CreateError.Unauthorized('Authorization Token Not Supplied')
+		throw CreateError.Unauthorized('Authorization token not supplied')
 
 	try {
-		const tokenDetails = Jwt.verify(
+		const token_details = Jwt.verify(
 			access_token,
 			config.ACCESS_TOKEN_SECRET
 		)
-		req.body.auth = tokenDetails
+		req.body.auth = token_details
 		next()
 	} catch (error) {
-		const errMessage =
+		const err_message =
 			error.name === 'JsonWebTokenError'
 				? 'Invalid Authentication Token'
 				: error.message
 
-		throw CreateError.Unauthorized(errMessage)
+		throw CreateError.Unauthorized(err_message)
 	}
 }

@@ -6,24 +6,24 @@ import { generateLinkPayload } from '@helpers/generate-link-payload'
 
 export const shorten: RequestHandler = async (req, res, next) => {
 	try {
-		const newLink = new LinkModel(await generateLinkPayload(req))
+		const new_link = new LinkModel(await generateLinkPayload(req))
 
-		const savedLink = await newLink.save().catch((err: any) => {
+		const saved_link = await new_link.save().catch((err: any) => {
 			throw CreateError.BadRequest(`${err}Alias already in use`)
 		})
 
-		const userInstance: any = await UserModel.findOne({
+		const user_instance: any = await UserModel.findOne({
 			email: req.body.auth.email,
 		})
-		await userInstance.user_links.push(newLink)
-		await userInstance.save()
+		await user_instance.user_links.push(new_link)
+		await user_instance.save()
 		res.status(201).json({
-			password_protected: savedLink.password_protected,
-			description: savedLink.description,
-			alias: savedLink.alias,
-			short_url: savedLink.short_url,
-			long_url: savedLink.long_url,
-			created: savedLink.created,
+			password_protected: saved_link.password_protected,
+			description: saved_link.description,
+			alias: saved_link.alias,
+			short_url: saved_link.short_url,
+			long_url: saved_link.long_url,
+			created: saved_link.created,
 		})
 	} catch (err) {
 		next(err)

@@ -6,8 +6,8 @@ export const analytics: RequestHandler = async (req, res, next) => {
 	try {
 		await LinkModel.findOne({ short_url: req.body.short_url })
 			.populate('analytics')
-			.then((linkDetails: any) => {
-				res.json(linkDetails)
+			.then((link_details: any) => {
+				res.json(link_details)
 			})
 	} catch (err) {
 		next(CreateError.NotFound())

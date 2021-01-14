@@ -3,19 +3,19 @@ import { LinkModel } from '@model/link.model'
 
 export const generateUniqueAlias = async (): Promise<string> => {
 	try {
-		let randomAlias: string = ''
+		let random_alias: string = ''
 		const characterSet = 'abcdefghijklmnopqrstuvwxyz1234567890'
 
 		for (var i = 0; i < config.ALIAS_LENGTH; i++) {
-			randomAlias += characterSet.charAt(
+			random_alias += characterSet.charAt(
 				Math.floor(Math.random() * characterSet.length)
 			)
 		}
-		var isAliasAvailable = await LinkModel.findOne({
-			alias: randomAlias,
+		var is_alias_available = await LinkModel.findOne({
+			alias: random_alias,
 		} as any)
 
-		return isAliasAvailable ? await generateUniqueAlias() : randomAlias
+		return is_alias_available ? await generateUniqueAlias() : random_alias
 	} catch (err) {
 		return err
 	}

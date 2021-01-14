@@ -6,14 +6,14 @@ import { CreateError } from '@middleware/error-handler'
 
 export const register: RequestHandler = async (req, res, next) => {
 	try {
-		const validatedUserDetails = await userRegisterSchema.validateAsync(
+		const validated_user_details = await userRegisterSchema.validateAsync(
 			req.body
 		)
 
 		const ifUserExist = await UserModel.findOne({
 			$or: [
-				{ email: validatedUserDetails.email },
-				{ user_name: validatedUserDetails.user_name },
+				{ email: validated_user_details.email },
+				{ user_name: validated_user_details.user_name },
 			],
 		})
 
@@ -21,15 +21,15 @@ export const register: RequestHandler = async (req, res, next) => {
 			throw new CreateError(409, 'Username or email already registered')
 
 		const salt = await bcrypt.genSalt(10)
-		const hashedPassword = await bcrypt.hash(
-			validatedUserDetails.password,
+		const hashed_password = await bcrypt.hash(
+			validated_user_details.password,
 			salt
 		)
 
-		validatedUserDetails.password = hashedPassword
+		validated_user_details.password = hashed_password
 
-		const newUser = new UserModel(validatedUserDetails)
-		await newUser.save().catch(() => {
+		const new_user = new UserModel(validated_user_details)
+		await new_user.save().catch(() => {
 			throw CreateError.InternalServerError('Some error occurred')
 		})
 

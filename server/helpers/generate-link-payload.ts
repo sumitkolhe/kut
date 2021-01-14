@@ -22,7 +22,7 @@ export const generateLinkPayload = async (req: any) => {
 	payload.alias = req.body.alias
 		? req.body.alias
 		: await generateUniqueAlias()
-	payload.short_url = await generateShortLink(payload.alias!)
+	payload.short_url = generateShortLink(payload.alias!)
 	payload.long_url = verifyOriginalLink(req.body.long_url)
 	return payload
 }
@@ -30,18 +30,18 @@ export const generateLinkPayload = async (req: any) => {
 export const generateUpdateLinkPayload = async (req: any) => {
 	//check if alias is untouched (user did not modify it),
 	//if yes, exclude it from payload to avoid duplicate key error
-	const isAliasUntouched: boolean = await checkAliasExistence({
+	const is_alias_untouched: boolean = await checkAliasExistence({
 		_id: req.body._id,
 		alias: req.body.alias,
 	})
 
-	console.log(isAliasUntouched)
+	console.log(is_alias_untouched)
 
 	payload._id = req.body._id
 	payload.description = req.body.description
-	if (!isAliasUntouched) {
+	if (!is_alias_untouched) {
 		payload.alias = req.body.alias
-		payload.short_url = await generateShortLink(payload.alias!)
+		payload.short_url = generateShortLink(payload.alias!)
 	}
 	payload.long_url = verifyOriginalLink(req.body.long_url)
 	return payload
