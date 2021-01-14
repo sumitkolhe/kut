@@ -64,7 +64,7 @@ export const actions: ActionTree<AllLinksState, RootState> = {
 	},
 
 	async updateLink({ commit }, payload: Object) {
-		const data = await this.$axios.$patch('/links', { data: payload })
+		const data = await this.$axios.$patch('/links', payload)
 		commit('SET_UPDATE_LINK', data)
 	},
 }

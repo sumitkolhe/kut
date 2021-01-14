@@ -28,4 +28,7 @@ export const config = {
 	WEBSITE_DOMAIN: process.env.WEBSITE_DOMAIN
 		? process.env.WEBSITE_DOMAIN
 		: 'reduced.me',
+	WEBSITE_PROTOCOL: process.env.WEBSITE_PROTOCOL
+		? process.env.WEBSITE_PROTOCOL
+		: 'https',
 }

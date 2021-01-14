@@ -1,6 +1,6 @@
 <template>
 	<v-row justify="center" class="mt-6">
-		<v-col cols="12" sm="10" lg="10">
+		<v-col cols="12" sm="12" lg="11" xl="10">
 			<v-row justify="space-around">
 				<v-col
 					cols="12"

@@ -21,7 +21,12 @@
 
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on, attrs }">
-						<v-btn class="mr-1" icon v-show="item.password_protected">
+						<v-btn
+							class="mr-1"
+							icon
+							color="green"
+							v-show="item.password_protected"
+						>
 							<v-icon v-bind="attrs" v-on="on">mdi-security</v-icon>
 						</v-btn>
 					</template>

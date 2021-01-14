@@ -6,7 +6,7 @@ import serveStatic from 'serve-static'
 import { loadNuxt, build } from 'nuxt'
 import { config } from '@config/config'
 import { routes } from '@routes/routes'
-import { connectDatabase } from '@utils/init-database'
+import { connectDatabase } from '@helpers/init-database'
 import { setHeaders } from '@middleware/header'
 import { HandleError } from '@middleware/error-handler'
 

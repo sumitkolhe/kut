@@ -1,6 +1,7 @@
 import { CreateError } from '@middleware/error-handler'
 
-export const verifyLink = (link: string) => {
+export const verifyOriginalLink = (link: string) => {
+	console.log(link)
 	const linkWithProtocol = /(?:(?:https?|ftp|file):\/\/|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/gim
 	const linkWithoutProtocol = /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,6})?(\/.*)?$/gim
 

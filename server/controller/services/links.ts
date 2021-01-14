@@ -1,5 +1,7 @@
+import { CreateError } from '@middleware/error-handler'
 import { LinkModel } from '@model/link.model'
 import { UserModel } from '@model/user.model'
+import { generateUpdateLinkPayload } from '@helpers/generate-link-payload'
 import { RequestHandler } from 'express'
 
 export const getLinks: RequestHandler = async (req, res, next) => {
@@ -25,11 +27,15 @@ export const getLinks: RequestHandler = async (req, res, next) => {
 
 export const updateLink: RequestHandler = async (req, res, next) => {
 	try {
-		await LinkModel.findByIdAndUpdate(
-			req.body.data._id,
-			req.body.data
-		).then(() => {
-			res.json({ message: 'Link updated successfully' })
+		const payload = await generateUpdateLinkPayload(req)
+		console.log(payload)
+		await LinkModel.findByIdAndUpdate(payload._id, payload as any).catch(
+			() => {
+				throw CreateError.BadRequest('Alias is already in use')
+			}
+		)
+		res.json({
+			message: 'Link updated successfully',
 		})
 	} catch (error) {
 		next(error)

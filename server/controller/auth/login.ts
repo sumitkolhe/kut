@@ -2,7 +2,7 @@ import { RequestHandler } from 'express'
 import bcrypt from 'bcryptjs'
 import { UserModel } from '@model/user.model'
 import { userLoginSchema } from '@utils/validators'
-import { signAccessToken, signRefreshToken } from '@utils/sign-token'
+import { signAccessToken, signRefreshToken } from '@helpers/sign-token'
 import { CreateError } from '@middleware/error-handler'
 
 export const login: RequestHandler = async (req, res, next) => {
