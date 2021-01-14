@@ -18,8 +18,6 @@ export const shorten: RequestHandler = async (req, res, next) => {
 		await user_instance.user_links.push(new_link)
 		await user_instance.save()
 		res.status(201).json({
-			password_protected: saved_link.password_protected,
-			description: saved_link.description,
 			alias: saved_link.alias,
 			short_url: saved_link.short_url,
 			long_url: saved_link.long_url,
