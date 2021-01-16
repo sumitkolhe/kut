@@ -7,7 +7,12 @@ import { userAgent } from '@middleware/user-agent'
 import { getLinks, updateLink, deleteLink } from '@controller/services/links'
 import { statistics } from '@controller/services/statistics'
 import { notification } from '@controller/services/notification'
-import { createNote, deleteNote, getNotes, updateNote } from '@controller/services/notes'
+import {
+	createNote,
+	deleteNote,
+	getNotes,
+	updateNote,
+} from '@controller/services/notes'
 
 const router = express.Router()
 

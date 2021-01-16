@@ -61,8 +61,17 @@ export const updateNote: RequestHandler = async (req, res, next) => {
 
 export const deleteNote: RequestHandler = async (req, res, next) => {
 	try {
-		await NotesModel.findByIdAndDelete(req.body._id).then(() => {
-			res.json({ message: 'Note deleted successfully' })
+		await NotesModel.findOneAndUpdate(
+			{ email: req.body.auth.email },
+			{
+				$pull: {
+					user_notes: req.body._id,
+				},
+			}
+		).then(async () => {
+			await NotesModel.findByIdAndDelete(req.body._id).then(() => {
+				res.json({ message: 'Note deleted successfully' })
+			})
 		})
 	} catch (error) {
 		next(error)

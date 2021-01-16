@@ -28,7 +28,6 @@ export const getLinks: RequestHandler = async (req, res, next) => {
 export const updateLink: RequestHandler = async (req, res, next) => {
 	try {
 		const payload = await generateUpdateLinkPayload(req)
-		console.log(payload)
 		await LinkModel.findByIdAndUpdate(payload._id, payload as any).catch(
 			() => {
 				throw CreateError.BadRequest('Alias is already in use')
@@ -44,8 +43,17 @@ export const updateLink: RequestHandler = async (req, res, next) => {
 
 export const deleteLink: RequestHandler = async (req, res, next) => {
 	try {
-		await LinkModel.findByIdAndDelete(req.body._id).then(() => {
-			res.json({ message: 'Link deleted successfully' })
+		await UserModel.findOneAndUpdate(
+			{ email: req.body.auth.email },
+			{
+				$pull: {
+					user_links: req.body._id,
+				},
+			}
+		).then(async () => {
+			await LinkModel.findByIdAndDelete(req.body._id).then(() => {
+				res.json({ message: 'Link deleted successfully' })
+			})
 		})
 	} catch (error) {
 		next(error)

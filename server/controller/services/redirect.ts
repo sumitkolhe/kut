@@ -12,7 +12,7 @@ export const redirect: RequestHandler = async (req: any, res, next) => {
 		if (!link_details) throw CreateError.NotFound()
 		//if (linkDetails.password) res.send('enter pass')
 		else {
-			const new_analytic = new AnalyticsModel(req.user_agent)
+			const new_analytic = new AnalyticsModel(req.useragent)
 			await new_analytic.save()
 			await link_details.analytics.push(new_analytic)
 			link_details.visit_count++

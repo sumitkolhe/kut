@@ -35,8 +35,6 @@ export const generateUpdateLinkPayload = async (req: any) => {
 		alias: req.body.alias,
 	})
 
-	console.log(is_alias_untouched)
-
 	payload._id = req.body._id
 	payload.description = req.body.description
 	if (!is_alias_untouched) {

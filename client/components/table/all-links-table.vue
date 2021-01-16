@@ -4,6 +4,7 @@
 		:items="all_links"
 		:single-expand="singleExpand"
 		:expanded.sync="expanded"
+		:loading="loading"
 		item-key="short_url"
 		show-expand
 	>
@@ -17,6 +18,9 @@
 				</v-btn>
 				<v-btn icon>
 					<delete-link @callback="fetchLinks" :target="item._id" />
+				</v-btn>
+				<v-btn icon>
+					<v-icon>mdi-chart-line</v-icon>
 				</v-btn>
 
 				<v-tooltip bottom>
@@ -49,7 +53,7 @@ import Vue from 'vue'
 export default Vue.extend({
 	data() {
 		return {
-			loading: false,
+			loading: true,
 			expanded: [],
 			singleExpand: false,
 			payload: {
@@ -64,13 +68,13 @@ export default Vue.extend({
 				{ text: 'Created', value: 'created' },
 				{ text: 'Total Views', value: 'visit_count' },
 				{ text: 'Description', value: 'description' },
-				{ text: 'Actions', value: 'data-table-expand', width: '16%' },
+				{ text: 'Actions', value: 'data-table-expand', width: '20%' },
 			],
 			all_links: [],
 		}
 	},
 
-	async mounted() {
+	async created() {
 		await this.fetchLinks()
 	},
 
@@ -82,10 +86,7 @@ export default Vue.extend({
 					;(this as any).$notify.error(err)
 				})
 			this.all_links = this.$store.getters['all-links/GET_ALL_LINKS']
-		},
-
-		setSelectedLink(item: any) {
-			this.$store.commit('all-links/SET_UPDATE_LINK', item)
+			this.loading = false
 		},
 	},
 })

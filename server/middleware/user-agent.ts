@@ -1,15 +1,15 @@
 export const userAgent = (req: any, _res: any, next: () => void) => {
-  req.user_agent = {
-    os: req.user_agent.os,
-    mobile: req.user_agent.isMobile,
-    tablet: req.user_agent.isTablet,
-    desktop: req.user_agent.isDesktop,
-    browser: req.user_agent.browser,
-    version: req.user_agent.version,
-    platform: req.user_agent.platform,
-    location: req.user_agent.geoIp,
-    source: req.user_agent.source,
-  };
+	req.useragent = {
+		os: req.useragent.os,
+		mobile: req.useragent.isMobile,
+		tablet: req.useragent.isTablet,
+		desktop: req.useragent.isDesktop,
+		browser: req.useragent.browser,
+		version: req.useragent.version,
+		platform: req.useragent.platform,
+		location: req.useragent.geoIp,
+		source: req.useragent.source,
+	}
 
-  next();
-};
+	next()
+}
