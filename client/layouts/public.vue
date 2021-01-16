@@ -8,8 +8,7 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-	mounted() {
-		console.log(this.$route.fullPath)
+	beforeCreate() {
 		if (this.$auth.loggedIn) {
 			this.$router.push('/user/dashboard')
 		}

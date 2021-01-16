@@ -8,8 +8,8 @@ export const shorten: RequestHandler = async (req, res, next) => {
 	try {
 		const new_link = new LinkModel(await generateLinkPayload(req))
 
-		const saved_link = await new_link.save().catch((err: any) => {
-			throw CreateError.BadRequest(`${err}Alias already in use`)
+		const saved_link = await new_link.save().catch(() => {
+			throw CreateError.BadRequest('Alias already in use')
 		})
 
 		const user_instance: any = await UserModel.findOne({

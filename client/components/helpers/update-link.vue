@@ -12,8 +12,6 @@
 			<v-col cols="12" md="4">
 				<p class="font-weight-bold">Custom Alias</p>
 				<v-text-field
-					:label="target.alias"
-					:placeholder="target.alias"
 					v-model="payload.alias"
 					single-line
 					outlined
@@ -22,8 +20,6 @@
 			<v-col cols="12" md="4">
 				<p class="font-weight-bold">Description</p>
 				<v-text-field
-					:label="target.description"
-					:placeholder="target.description"
 					v-model="payload.description"
 					single-line
 					outlined
@@ -65,7 +61,7 @@ export default Vue.extend({
 		} as any,
 	}),
 
-	mounted() {
+	created() {
 		this.$store.commit('all-links/SET_UPDATE_LINK', this.target)
 
 		let data = this.$store.getters['all-links/GET_UPDATE_LINK']

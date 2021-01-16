@@ -32,6 +32,11 @@ export const mutations: MutationTree<AllLinksState> = {
 		recent_link.created = convertDate(recent_link.created)
 		state.recent_links.unshift(recent_link)
 	},
+	REMOVE_DELETED_LINK: (state, deleted_link) => {
+		state.all_links = state.all_links.filter(function (obj) {
+			return obj._id !== deleted_link
+		})
+	},
 }
 
 export const getters: GetterTree<AllLinksState, RootState> = {
@@ -60,7 +65,8 @@ export const actions: ActionTree<AllLinksState, RootState> = {
 
 	async deleteLink({ commit, dispatch }, link_id: string) {
 		await this.$axios.$delete('/links', { data: { _id: link_id } })
-		dispatch('fetchAllLinks')
+		commit('REMOVE_DELETED_LINK', link_id)
+		//dispatch('fetchAllLinks')
 	},
 
 	async updateLink({ commit }, payload: Object) {

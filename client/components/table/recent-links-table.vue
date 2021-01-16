@@ -5,6 +5,7 @@
 		align="center"
 		v-show="recent_links != ''"
 	>
+		<h3 class="mb-8 mt-4 font-weight-medium">Recently shortened links</h3>
 		<table class="table">
 			<thead>
 				<tr>

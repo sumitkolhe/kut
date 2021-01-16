@@ -7,11 +7,9 @@ export interface NotesDocument extends Document {
 }
 
 const NotesSchema = new Schema({
-	title: { type: String, required: true, unique: true },
-	description: { type: String, required: true },
+	title: { type: String, required: true },
+	content: { type: String, required: true },
 	created: { type: Date, default: Date.now, required: true },
 })
-
-NotesSchema.index({ title: 1 }, { unique: true })
 
 export const NotesModel = model<NotesDocument>('note', NotesSchema)

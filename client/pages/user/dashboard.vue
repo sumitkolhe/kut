@@ -92,7 +92,6 @@
 
 			<v-row justify="center" class="mt-12">
 				<v-col cols="12">
-					<h3 class="mb-8 mt-4 font-weight-medium">Recently shortened links</h3>
 					<recent-links-table :recent_links="recent_links" />
 				</v-col>
 			</v-row>
@@ -108,7 +107,6 @@ export default Vue.extend({
 		return {
 			show_advanced: false,
 			loading: false,
-			recent_links: Array(),
 			payload: {
 				long_url: '',
 				alias: '',
@@ -118,11 +116,14 @@ export default Vue.extend({
 		}
 	},
 
-	computed: {},
+	computed: {
+		recent_links() {
+			return this.$store.getters['all-links/GET_RECENT_LINKS']
+		},
+	},
 
-	async mounted() {
+	async created() {
 		await this.$store.dispatch('all-links/fetchRecentLinks', 3)
-		this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
 	},
 	methods: {
 		async shorten() {
@@ -136,7 +137,6 @@ export default Vue.extend({
 				)
 				.then((short_link: any) => {
 					this.$store.commit('all-links/PUSH_RECENT_LINK', short_link)
-					this.recent_links = this.$store.getters['all-links/GET_RECENT_LINKS']
 					this.loading = false
 					;(this as any).$notify.success('Link shortened sucessfully')
 				})

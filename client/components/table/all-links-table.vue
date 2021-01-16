@@ -51,7 +51,7 @@ export default Vue.extend({
 		return {
 			loading: false,
 			expanded: [],
-			singleExpand: true,
+			singleExpand: false,
 			payload: {
 				long_url: '',
 				alias: '',
@@ -64,7 +64,7 @@ export default Vue.extend({
 				{ text: 'Created', value: 'created' },
 				{ text: 'Total Views', value: 'visit_count' },
 				{ text: 'Description', value: 'description' },
-				{ text: 'Actions', value: 'data-table-expand', width: '15%' },
+				{ text: 'Actions', value: 'data-table-expand', width: '16%' },
 			],
 			all_links: [],
 		}
@@ -83,16 +83,26 @@ export default Vue.extend({
 				})
 			this.all_links = this.$store.getters['all-links/GET_ALL_LINKS']
 		},
+
+		setSelectedLink(item: any) {
+			this.$store.commit('all-links/SET_UPDATE_LINK', item)
+		},
 	},
 })
 </script>
 
-<style  scoped>
+<style >
 .v-data-table {
 	border-radius: 12px !important;
+	padding: 4px;
 }
 
-.custom {
-	font-size: 40px;
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+	font-weight: 500 !important;
+	font-size: 14px !important;
+}
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+	font-weight: 700 !important;
+	font-size: 15px !important;
 }
 </style>
