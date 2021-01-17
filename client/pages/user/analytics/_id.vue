@@ -32,16 +32,21 @@
 			</v-row>
 
 			<v-sheet class="py-8 mt-12" rounded="xl">
+				<p class="px-8 text-h6 font-weight-bold">Views</p>
 				<v-row justify="center" class="my-6">
 					<v-col cols="12" md="10">
-						<line-chart legend="bottom" :data="chart_data.views"></line-chart>
+						<bar-chart legend="bottom" :data="chart_data.views"></bar-chart>
 					</v-col>
 				</v-row>
+			</v-sheet>
+			<v-sheet class="py-8 mt-12 mb-10" rounded="xl">
 				<v-row justify="space-between">
 					<v-col cols="12" md="5">
+						<p class="px-8 text-h6 font-weight-bold">OS</p>
 						<pie-chart legend="bottom" :data="chart_data.os"></pie-chart>
 					</v-col>
 					<v-col cols="12" md="5">
+						<p class="px-8 text-h6 font-weight-bold">Browsers</p>
 						<pie-chart legend="bottom" :data="chart_data.browser"></pie-chart>
 					</v-col>
 				</v-row>
