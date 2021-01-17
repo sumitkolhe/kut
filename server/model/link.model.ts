@@ -2,7 +2,7 @@ import { model, Schema, Document } from 'mongoose'
 import { AnalyticsModel } from '@model/analytics.model'
 
 export interface LinkDocument extends Document {
-	alias: { type: string; required: true; unique: boolean }
+	alias: { type: string; required: boolean; unique: boolean }
 	long_url: { type: string; required: boolean }
 	short_url: { type: string }
 	visit_count: { type: number }

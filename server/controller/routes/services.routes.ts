@@ -3,7 +3,7 @@ import { redirect } from '@controller/services/redirect'
 import { shorten } from '@controller/services/shorten'
 import { verifyToken } from '@middleware/verify-token'
 import { analytics } from '@controller/services/analytics'
-import { userAgent } from '@middleware/user-agent'
+import { analyticsHandler } from '@middleware/analytics-handler'
 import { getLinks, updateLink, deleteLink } from '@controller/services/links'
 import { statistics } from '@controller/services/statistics'
 import { notification } from '@controller/services/notification'
@@ -28,5 +28,5 @@ export const controllerRoutes = {
 	createNote: router.post('/notes', verifyToken, createNote),
 	shorten: router.post('/shorten', verifyToken, shorten),
 	analytics: router.post('/analytics', verifyToken, analytics),
-	redirect: router.get('/:alias', userAgent, redirect),
+	redirect: router.get('/:alias', analyticsHandler, redirect),
 }

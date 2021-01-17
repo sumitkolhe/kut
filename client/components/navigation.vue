@@ -5,7 +5,7 @@
 			app
 			elevation="0"
 			height="80"
-			color="transparent"
+			color="background"
 		>
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
@@ -119,7 +119,7 @@ export default Vue.extend({
 					to: '/user/my-links',
 				},
 				{
-					icon: 'mdi-chart-bell-curve-cumulative',
+					icon: 'mdi-chart-line',
 					title: 'Analytics',
 					to: '/user/analytics',
 				},
@@ -148,5 +148,18 @@ export default Vue.extend({
 
 .nav-links {
 	font-weight: 600;
+}
+
+.v-list {
+	padding: 4px 16px !important;
+}
+
+.v-list-item {
+	min-height: 60px !important;
+	border-radius: 12px !important;
+}
+
+.v-list--nav .v-list-item::before {
+	border-radius: 12px;
 }
 </style>

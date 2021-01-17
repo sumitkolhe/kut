@@ -59,7 +59,11 @@ const NuxtAppConfig: NuxtConfig = {
 		['nuxt-vuex-localstorage', { mode: 'debug', localStorage: ['theme'] }],
 	],
 
-	plugins: ['~/plugins/notifier.ts', '~/plugins/qr-code.ts'],
+	plugins: [
+		'~/plugins/notifier.ts',
+		'~/plugins/qr-code.ts',
+		'~/plugins/chart.ts',
+	],
 
 	publicRuntimeConfig: {
 		axios: {
