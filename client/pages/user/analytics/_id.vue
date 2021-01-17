@@ -8,7 +8,7 @@
 					v-for="card in info_card"
 					:key="card.card_title"
 				>
-					<v-card flat rounded="xl" :height="card_height" class="pa-4">
+					<v-card flat rounded="lg" :height="card_height" class="pa-2">
 						<v-list-item three-line>
 							<v-list-item-content>
 								<v-list-item-subtitle
@@ -16,13 +16,13 @@
 								>
 									{{ card.title }}
 								</v-list-item-subtitle>
-								<v-list-item-title class="pl-1 text-h4 font-weight-medium">
+								<v-list-item-title class="pl-1 text-h6 font-weight-medium">
 									{{ card.value }}
 								</v-list-item-title>
 							</v-list-item-content>
 
-							<v-list-item-avatar rounded :color="card.icon_bg_color" size="56">
-								<v-icon x-large :color="card.icon_color">
+							<v-list-item-avatar rounded :color="card.icon_bg_color" size="46">
+								<v-icon large :color="card.icon_color">
 									{{ card.icon }}
 								</v-icon>
 							</v-list-item-avatar>
@@ -31,7 +31,7 @@
 				</v-col>
 			</v-row>
 
-			<v-sheet color="#fff" class="pa-4 mt-12" rounded="xl">
+			<v-sheet class="py-8 mt-12" rounded="xl">
 				<v-row justify="space-between">
 					<v-col cols="12" md="5">
 						<pie-chart legend="bottom" :data="chart_data.os"></pie-chart>
@@ -51,7 +51,7 @@ export default Vue.extend({
 	data() {
 		return {
 			chart_data: {},
-			card_height: '130px',
+			card_height: '150px',
 
 			info_card: [
 				{
@@ -76,9 +76,9 @@ export default Vue.extend({
 					icon_color: '#ff3d3d',
 				},
 				{
-					title: 'Created On',
+					title: 'Short Link',
 					value: '',
-					icon: 'mdi-calendar-text',
+					icon: 'mdi-link',
 					icon_bg_color: '#ffeeee',
 					icon_color: '#ff3d3d',
 				},
@@ -91,7 +91,12 @@ export default Vue.extend({
 			_id: this.$nuxt.$route.params.id,
 		})
 
-		this.chart_data = this.$store.getters['analytics/GET_ANALYTICS'].analytics
+		let data = this.$store.getters['analytics/GET_ANALYTICS']
+		this.chart_data = data.analytics
+		this.info_card[0].value = data.visit_count
+		this.info_card[1].value = data.description || "No description provided"
+		this.info_card[2].value = data.created_at
+		this.info_card[3].value = data.short_url
 	},
 })
 </script>

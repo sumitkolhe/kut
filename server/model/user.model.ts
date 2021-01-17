@@ -27,31 +27,34 @@ interface UserDocument extends Document {
 		type: Schema.Types.ObjectId
 		ref: string
 	}
-	created: { type: Date; required: boolean }
+	created_at: { type: Date }
+	updated_at: { type: Date }
 }
 
-const UserSchema = new Schema({
-	user_name: {
-		type: String,
-		required: true,
-		lowercase: true,
-		unique: true,
+const UserSchema = new Schema(
+	{
+		user_name: {
+			type: String,
+			required: true,
+			lowercase: true,
+			unique: true,
+		},
+		email: {
+			type: String,
+			required: true,
+			lowercase: true,
+			unique: true,
+		},
+		password: {
+			type: String,
+			required: true,
+			minlength: 6,
+		},
+		user_links: [{ type: Schema.Types.ObjectId, ref: LinkModel }],
+		user_notes: [{ type: Schema.Types.ObjectId, ref: NotesModel }],
 	},
-	email: {
-		type: String,
-		required: true,
-		lowercase: true,
-		unique: true,
-	},
-	password: {
-		type: String,
-		required: true,
-		minlength: 6,
-	},
-	user_links: [{ type: Schema.Types.ObjectId, ref: LinkModel }],
-	user_notes: [{ type: Schema.Types.ObjectId, ref: NotesModel }],
-	created: { type: Date, default: Date.now, required: true },
-})
+	{ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
+)
 
 UserSchema.index({ user_name: 1 }, { unique: true })
 UserSchema.index({ email: 1 }, { unique: true })

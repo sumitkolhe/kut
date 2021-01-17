@@ -1,6 +1,7 @@
 import { model, Schema, Document } from 'mongoose'
 
 interface AnalyticsDocument extends Document {
+	visit_date: { type: Date; required: boolean }
 	os: {
 		windows: boolean
 		linux: boolean
@@ -28,6 +29,7 @@ interface AnalyticsDocument extends Document {
 }
 
 const AnalyticsSchema: Schema = new Schema({
+	visit_date: { type: Date, default: Date.now, required: true },
 	os: {
 		windows: Boolean,
 		linux: Boolean,

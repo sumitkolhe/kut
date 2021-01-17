@@ -14,7 +14,7 @@ export const getLinks: RequestHandler = async (req, res, next) => {
 						? req.query.limit != (undefined || null) &&
 						  req.query.limit
 						: false,
-					sort: { created: -1 },
+					sort: { created_at: -1 },
 				},
 			})
 			.then((link: any) => {

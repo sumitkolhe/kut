@@ -15,13 +15,13 @@ export const mutations: MutationTree<AllLinksState> = {
 	SET_ALL_LINKS: (state, links) => {
 		state.all_links = links
 		state.all_links.forEach((item) => {
-			item.created = convertDate(item.created)
+			item.created_at = convertDate(item.created_at)
 		})
 	},
 	SET_RECENT_LINKS: (state, links) => {
 		state.recent_links = links
 		state.recent_links.forEach((item) => {
-			item.created = convertDate(item.created)
+			item.created_at = convertDate(item.created_at)
 		})
 	},
 
@@ -29,7 +29,7 @@ export const mutations: MutationTree<AllLinksState> = {
 		state.update_link = links
 	},
 	PUSH_RECENT_LINK: (state, recent_link) => {
-		recent_link.created = convertDate(recent_link.created)
+		recent_link.created_at = convertDate(recent_link.created_at)
 		state.recent_links.unshift(recent_link)
 	},
 	REMOVE_DELETED_LINK: (state, deleted_link) => {

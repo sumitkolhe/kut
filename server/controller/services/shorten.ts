@@ -21,7 +21,7 @@ export const shorten: RequestHandler = async (req, res, next) => {
 			alias: saved_link.alias,
 			short_url: saved_link.short_url,
 			long_url: saved_link.long_url,
-			created: saved_link.created,
+			created_at: saved_link.created_at,
 		})
 	} catch (err) {
 		next(err)

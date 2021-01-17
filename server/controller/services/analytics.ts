@@ -28,7 +28,7 @@ export const analytics: RequestHandler = async (req, res, next) => {
 					alias: { $first: '$alias' },
 					short_url: { $first: '$short_url' },
 					long_url: { $first: '$long_url' },
-					created: { $first: '$created' },
+					created_at: { $first: '$created_at' },
 
 					windows: {
 						$sum: { $cond: ['$analytics.os.windows', 1, 0] },

@@ -14,7 +14,7 @@ export const me: RequestHandler = async (req, res, next) => {
 			user_details: {
 				user_name: user_details.user_name,
 				email: user_details.email,
-				created: user_details.created,
+				created_at: user_details.created_at,
 			},
 		})
 	} catch (error) {

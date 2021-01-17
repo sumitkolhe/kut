@@ -62,7 +62,7 @@ export default Vue.extend({
 			headers: [
 				{ text: 'Original Link', value: 'long_url' },
 				{ text: 'Short Link', value: 'short_url' },
-				{ text: 'Created', value: 'created' },
+				{ text: 'Created', value: 'created_at' },
 				{ text: 'Total Views', value: 'visit_count' },
 				{ text: 'Description', value: 'description' },
 				{ text: 'Actions', value: 'data-table-expand', width: '20%' },

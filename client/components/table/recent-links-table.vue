@@ -22,7 +22,7 @@
 					</td>
 
 					<td data-label="Created">
-						<p>{{ link.created }}</p>
+						<p>{{ link.created_at }}</p>
 					</td>
 					<td data-label="Shortened">
 						{{ link.short_url }}
