@@ -30,8 +30,17 @@
 					</v-card>
 				</v-col>
 			</v-row>
-			<pie-chart :data="os_data"></pie-chart>
-			<pie-chart :data="browser_data"></pie-chart>
+
+			<v-sheet color="#fff" class="pa-4 mt-12" rounded="xl">
+				<v-row justify="space-between">
+					<v-col cols="12" md="5">
+						<pie-chart legend="bottom" :data="chart_data.os"></pie-chart>
+					</v-col>
+					<v-col cols="12" md="5">
+						<pie-chart legend="bottom" :data="chart_data.browser"></pie-chart>
+					</v-col>
+				</v-row>
+			</v-sheet>
 		</v-col>
 	</v-row>
 </template>
@@ -41,9 +50,8 @@ import Vue from 'vue'
 export default Vue.extend({
 	data() {
 		return {
-			os_data: {},
-			browser_data: {},
-			card_height: '150px',
+			chart_data: {},
+			card_height: '130px',
 
 			info_card: [
 				{
@@ -83,10 +91,7 @@ export default Vue.extend({
 			_id: this.$nuxt.$route.params.id,
 		})
 
-		this.os_data = this.$store.getters['analytics/GET_ANALYTICS'].analytics.os
-		this.browser_data = this.$store.getters[
-			'analytics/GET_ANALYTICS'
-		].analytics.browser
+		this.chart_data = this.$store.getters['analytics/GET_ANALYTICS'].analytics
 	},
 })
 </script>
