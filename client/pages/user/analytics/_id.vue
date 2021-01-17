@@ -32,6 +32,11 @@
 			</v-row>
 
 			<v-sheet class="py-8 mt-12" rounded="xl">
+				<v-row justify="center" class="my-6">
+					<v-col cols="12" md="10">
+						<line-chart legend="bottom" :data="chart_data.views"></line-chart>
+					</v-col>
+				</v-row>
 				<v-row justify="space-between">
 					<v-col cols="12" md="5">
 						<pie-chart legend="bottom" :data="chart_data.os"></pie-chart>
@@ -94,7 +99,7 @@ export default Vue.extend({
 		let data = this.$store.getters['analytics/GET_ANALYTICS']
 		this.chart_data = data.analytics
 		this.info_card[0].value = data.visit_count
-		this.info_card[1].value = data.description || "No description provided"
+		this.info_card[1].value = data.description || 'No description provided'
 		this.info_card[2].value = data.created_at
 		this.info_card[3].value = data.short_url
 	},

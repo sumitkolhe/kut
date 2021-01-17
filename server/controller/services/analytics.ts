@@ -5,7 +5,6 @@ import { CreateError } from '@middleware/error-handler'
 
 export const analytics: RequestHandler = async (req, res, next) => {
 	try {
-		
 		const analytics = await LinkModel.aggregate([
 			{ $match: { _id: Types.ObjectId(req.body._id) } },
 
@@ -21,7 +20,6 @@ export const analytics: RequestHandler = async (req, res, next) => {
 			{
 				$group: {
 					_id: null,
-
 					visit_count: { $first: '$visit_count' },
 					password_protected: { $first: '$password_protected' },
 					description: { $first: '$description' },
@@ -100,8 +98,56 @@ export const analytics: RequestHandler = async (req, res, next) => {
 			},
 		])
 
-		if (analytics.length <= 0)
+		const views = await LinkModel.aggregate([
+			{ $match: { _id: Types.ObjectId(req.body._id) } },
+			{
+				$lookup: {
+					from: 'analytics',
+					let: {
+						analytics: '$analytics',
+					},
+					pipeline: [
+						{
+							$match: {
+								$expr: {
+									$in: ['$_id', '$$analytics'],
+								},
+							},
+						},
+						{
+							$group: {
+								_id: {
+									$substr: ['$visit_date', 0, 10],
+								},
+								v: {
+									$sum: 1,
+								},
+							},
+						},
+						{
+							$project: {
+								_id: 0,
+								k: '$_id',
+								v: 1,
+							},
+						},
+					],
+					as: 'visit_data',
+				},
+			},
+			{
+				$addFields: {
+					visit_data: {
+						$arrayToObject: '$visit_data',
+					},
+				},
+			},
+		])
+
+		if (analytics.length <= 0 && views.length <= 0)
 			throw CreateError.NotFound('No data available')
+
+		analytics[0].analytics.views = views[0].visit_data
 
 		res.json(analytics[0])
 	} catch (err) {
