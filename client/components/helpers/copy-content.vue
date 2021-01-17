@@ -1,5 +1,5 @@
 <template>
-	<v-btn icon right top @click="copy">
+	<v-btn class="mx-1" icon right top @click="copy">
 		<v-fade-transition hide-on-leave>
 			<v-icon
 				:key="String(clicked)"

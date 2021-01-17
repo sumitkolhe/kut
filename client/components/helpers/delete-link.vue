@@ -1,5 +1,5 @@
 <template>
-	<v-btn icon right top @click="openSheet()">
+	<v-btn class="mx-1" icon right top @click="openSheet()">
 		<v-icon color="#ff0054">mdi-delete</v-icon>
 		<v-fade-transition hide-on-leave>
 			<v-bottom-sheet v-model="show_dialog">

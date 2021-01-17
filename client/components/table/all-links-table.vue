@@ -13,13 +13,12 @@
 				<v-btn class="mr-1" icon @click="expand(!isExpanded)">
 					<v-icon>mdi-pencil</v-icon>
 				</v-btn>
-				<v-btn class="mr-1" icon>
-					<qr-code :target="item.short_url" />
-				</v-btn>
-				<v-btn icon>
-					<delete-link @callback="fetchLinks" :target="item._id" />
-				</v-btn>
-				<link-analytics :target="item._id" />
+
+				<qr-code :target="item.short_url" />
+
+				<delete-link @callback="fetchLinks" :target="item._id" />
+
+				<link-analytics v-show="item.visit_count > 0" :target="item._id" />
 
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on, attrs }">
