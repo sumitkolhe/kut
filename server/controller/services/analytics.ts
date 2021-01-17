@@ -1,11 +1,13 @@
 import { RequestHandler } from 'express'
 import { LinkModel } from '@model/link.model'
-//import { CreateError } from '@middleware/error-handler'
+import { Types } from 'mongoose'
+import { CreateError } from '@middleware/error-handler'
 
 export const analytics: RequestHandler = async (req, res, next) => {
 	try {
+		
 		const analytics = await LinkModel.aggregate([
-			{ $match: { short_url: req.body.short_url } },
+			{ $match: { _id: Types.ObjectId(req.body._id) } },
 
 			{
 				$lookup: {
@@ -98,7 +100,10 @@ export const analytics: RequestHandler = async (req, res, next) => {
 			},
 		])
 
-		res.json(analytics)
+		if (analytics.length <= 0)
+			throw CreateError.NotFound('No data available')
+
+		res.json(analytics[0])
 	} catch (err) {
 		next(err)
 	}

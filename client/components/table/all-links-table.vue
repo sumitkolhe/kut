@@ -19,9 +19,7 @@
 				<v-btn icon>
 					<delete-link @callback="fetchLinks" :target="item._id" />
 				</v-btn>
-				<v-btn icon>
-					<v-icon>mdi-chart-line</v-icon>
-				</v-btn>
+				<link-analytics :target="item._id" />
 
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on, attrs }">

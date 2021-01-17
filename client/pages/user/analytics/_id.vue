@@ -1,8 +1,94 @@
-<template></template>
+<template>
+	<v-row justify="center" class="mt-6">
+		<v-col cols="12" sm="12" lg="11" xl="10">
+			<v-row justify="space-around">
+				<v-col
+					cols="12"
+					md="3"
+					v-for="card in info_card"
+					:key="card.card_title"
+				>
+					<v-card flat rounded="xl" :height="card_height" class="pa-4">
+						<v-list-item three-line>
+							<v-list-item-content>
+								<v-list-item-subtitle
+									class="text-h6 font-weight-regular mt-1 pb-2"
+								>
+									{{ card.title }}
+								</v-list-item-subtitle>
+								<v-list-item-title class="pl-1 text-h4 font-weight-medium">
+									{{ card.value }}
+								</v-list-item-title>
+							</v-list-item-content>
+
+							<v-list-item-avatar rounded :color="card.icon_bg_color" size="56">
+								<v-icon x-large :color="card.icon_color">
+									{{ card.icon }}
+								</v-icon>
+							</v-list-item-avatar>
+						</v-list-item>
+					</v-card>
+				</v-col>
+			</v-row>
+			<pie-chart :data="os_data"></pie-chart>
+			<pie-chart :data="browser_data"></pie-chart>
+		</v-col>
+	</v-row>
+</template>
 
 <script lang="ts">
 import Vue from 'vue'
-export default Vue.extend({})
+export default Vue.extend({
+	data() {
+		return {
+			os_data: {},
+			browser_data: {},
+			card_height: '150px',
+
+			info_card: [
+				{
+					title: 'Total Visits',
+					value: '',
+					icon: 'mdi-link',
+					icon_bg_color: '#e1fdff',
+					icon_color: '#00cc88',
+				},
+				{
+					title: 'Link Description',
+					value: '',
+					icon: 'mdi-card-text',
+					icon_bg_color: '#f3f9ff',
+					icon_color: '#0062ff',
+				},
+				{
+					title: 'Created On',
+					value: '',
+					icon: 'mdi-calendar-text',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
+				},
+				{
+					title: 'Created On',
+					value: '',
+					icon: 'mdi-calendar-text',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
+				},
+			],
+		}
+	},
+
+	async created() {
+		await this.$store.dispatch('analytics/fetchAnalytics', {
+			_id: this.$nuxt.$route.params.id,
+		})
+
+		this.os_data = this.$store.getters['analytics/GET_ANALYTICS'].analytics.os
+		this.browser_data = this.$store.getters[
+			'analytics/GET_ANALYTICS'
+		].analytics.browser
+	},
+})
 </script>
 
 <style>

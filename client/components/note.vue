@@ -40,7 +40,7 @@ export default Vue.extend({
 
 		editNote() {
 			this.showEdit = true
-			console.log(this.note)
+		
 			this.$store.commit('notes/SET_UPDATE_NOTE', this.note)
 			this.$store.commit('notes/SET_SHOW_DIALOG', true)
 		},

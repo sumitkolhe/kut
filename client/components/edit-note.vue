@@ -59,11 +59,11 @@ export default Vue.extend({
 
 	mounted() {
 		let data = this.$store.getters['notes/GET_UPDATE_NOTE']
-		console.log(data)
+		
 		for (let prop in data) {
 			this.payload[prop] = data[prop]
 		}
-		//console.log(this.note)
+		
 	},
 
 	methods: {
@@ -72,7 +72,7 @@ export default Vue.extend({
 		},
 
 		updateNote() {
-			console.log(this.payload)
+			
 			//this.$store.dispatch('notes/SET_UPDATE_NOTE', this.payload)
 		},
 	},
