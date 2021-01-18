@@ -63,7 +63,9 @@
 
 				<v-row justify="center" class="mt-12 mb-md-0 mb-8">
 					<v-col cols="10" sm="8" md="4" lg="3">
-						<v-btn to="/auth/register" x-large depressed>Get Started Now</v-btn>
+						<v-btn to="/auth/register" x-large outlined depressed>
+							Get Started Now
+						</v-btn>
 					</v-col>
 				</v-row>
 			</v-col>
