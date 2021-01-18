@@ -126,7 +126,7 @@ export default Vue.extend({
 						}, 1000)
 				} catch (error) {
 					this.loading = false
-					;(this as any).$notify.err(error.response.data.message)
+					;(this as any).$notify.error(error.response.data.message)
 				}
 			}
 		},
