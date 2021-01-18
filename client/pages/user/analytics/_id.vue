@@ -68,7 +68,7 @@ export default Vue.extend({
 					title: 'Total Visits',
 					value: '',
 					icon: 'mdi-link',
-					icon_bg_color: '#e1fdff',
+					icon_bg_color: 'rgba(0,0,0,.1)',
 					icon_color: '#00cc88',
 				},
 				{
@@ -89,8 +89,8 @@ export default Vue.extend({
 					title: 'Short Link',
 					value: '',
 					icon: 'mdi-link',
-					icon_bg_color: '#ffeeee',
-					icon_color: '#ff3d3d',
+					icon_bg_color: '#d8e2dc',
+					icon_color: '#ff5',
 				},
 			],
 		}

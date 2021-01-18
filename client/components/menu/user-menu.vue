@@ -1,29 +1,79 @@
 <template>
-	<v-menu offset-y bottom nudge-bottom="10" rounded="lg">
-		<template v-slot:activator="{ on, attrs }">
-			<v-avatar class="mr-8" v-bind="attrs" v-on="on" size="36">
-				<v-icon large>mdi-account-circle</v-icon>
-			</v-avatar>
+	<v-menu
+		offset-y
+		offset-x
+		left
+		bottom
+		nudge-right="60"
+		nudge-bottom="15"
+		min-width="220px"
+	>
+		<template v-slot:activator="{ on }">
+			<v-btn class="mr-8" icon large v-on="on">
+				<v-avatar color="primary" size="38">
+					<span class="white--text">
+						{{ user.initials }}
+					</span>
+				</v-avatar>
+			</v-btn>
 		</template>
-		<v-list nav>
-			<v-list-item link v-for="(item, i) in profile_items" :key="i">
-				<v-list-item-title v-text="item.title" />
-			</v-list-item>
-		</v-list>
+		<v-card class="pa-4" rounded="lg">
+			<v-list-item-content class="justify-center">
+				<div class="mx-auto text-center">
+					<v-avatar class="mb-2" size="38" color="primary">
+						<span class="white--text headline">
+							{{ user.initials }}
+						</span>
+					</v-avatar>
+					<h3>{{ this.$auth.user.user_name }}</h3>
+					<p class="caption mt-1">
+						{{ user.email }}
+					</p>
+
+					<v-row justify="center" class="mt-2">
+						<v-btn to="settings" depressed rounded text>Settings</v-btn>
+					</v-row>
+
+					<v-row justify="center" class="mt-4">
+						<v-btn @click="logout()" color="primary" depressed rounded text>
+							Logout
+						</v-btn>
+					</v-row>
+				</div>
+			</v-list-item-content>
+		</v-card>
 	</v-menu>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { getInitials } from '../../utils/get-initials'
 export default Vue.extend({
 	data() {
 		return {
+			user: {
+				initials: '',
+				user_name: '',
+				email: '',
+			},
 			profile_items: [
 				{ title: 'Profile' },
 				{ title: 'Settings' },
 				{ title: 'Logout' },
 			],
 		}
+	},
+
+	mounted() {
+		this.user.email = this.$auth?.user?.email as string
+		this.user.user_name = this.$auth?.user?.user_name as string
+		this.user.initials = getInitials(this.$auth?.user?.user_name as string)
+	},
+
+	methods: {
+		async logout() {
+			await this.$auth.logout()
+		},
 	},
 })
 </script>

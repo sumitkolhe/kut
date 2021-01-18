@@ -62,7 +62,7 @@
 							<v-list-item-content>
 								<v-list-item-title>
 									<v-btn icon @click.stop="miniVariant = !miniVariant">
-										<v-icon large>mdi-menu</v-icon>
+										<v-icon x-large>mdi-microsoft-xbox-controller-menu</v-icon>
 									</v-btn>
 								</v-list-item-title>
 							</v-list-item-content>
@@ -132,11 +132,7 @@ export default Vue.extend({
 		}
 	},
 
-	methods: {
-		async logout() {
-			await this.$auth.logout()
-		},
-	},
+	methods: {},
 })
 </script> 
 
