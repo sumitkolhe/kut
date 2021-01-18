@@ -1,8 +1,8 @@
 <template>
 	<v-card
 		outlined
-		rounded="xl"
 		hover
+		rounded="lg"
 		class="flex d-flex flex-column"
 		@mouseenter="toggleEditIcon"
 		@mouseleave="toggleEditIcon"
@@ -46,4 +46,5 @@ export default Vue.extend({
 	},
 })
 </script>
+
 

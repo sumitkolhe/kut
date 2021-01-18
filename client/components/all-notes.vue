@@ -7,7 +7,7 @@
 			sm="6"
 			md="4"
 			lg="4"
-			xl="2"
+			xl="3"
 			class="d-flex flex-column"
 		>
 			<note :note="note" />

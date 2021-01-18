@@ -59,7 +59,7 @@ export const updateNote: RequestHandler = async (req, res, next) => {
 
 export const deleteNote: RequestHandler = async (req, res, next) => {
 	try {
-		await NotesModel.findOneAndUpdate(
+		await UserModel.findOneAndUpdate(
 			{ email: req.body.auth.email },
 			{
 				$pull: {

@@ -33,7 +33,7 @@
 
 				<v-spacer></v-spacer>
 				<v-btn color="primary" text @click="closeDialog()">Close</v-btn>
-				<v-btn text color="green" @click="updateNote()">Save</v-btn>
+				<v-btn text color="green" @click="updateNote()">Update</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>

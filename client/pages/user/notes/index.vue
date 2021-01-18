@@ -2,7 +2,7 @@
 	<div>
 		<v-row justify="center">
 			<v-col cols="12" md="8" lg="8" xl="6" v-click-outside="onClickOutside">
-				<v-card outlined class="mx-2 mt-8" rounded="xl">
+				<v-card outlined class="mx-2 mt-8 round">
 					<div class="pa-2">
 						<v-text-field
 							v-model="note.title"
@@ -32,7 +32,14 @@
 					<v-card-actions v-show="actionsVisible">
 						<v-btn color="error" text @click="close()">Close</v-btn>
 						<v-spacer></v-spacer>
-						<v-btn color="success" text @click="createNote()">Create</v-btn>
+						<v-btn
+							:disabled="(note.title && note.content) == ''"
+							color="success"
+							text
+							@click="createNote()"
+						>
+							Create
+						</v-btn>
 					</v-card-actions>
 				</v-card>
 			</v-col>
@@ -78,6 +85,8 @@ export default Vue.extend({
 			await this.$store
 				.dispatch('notes/createNote', this.note)
 				.then(() => {
+					this.note.title = ''
+					this.note.content = ''
 					;(this as any).$notify.success('Note created sucessfully')
 				})
 				.catch((err: any) => {
@@ -88,3 +97,8 @@ export default Vue.extend({
 })
 </script>
 
+<style  scoped>
+.round {
+	border-radius: 12px !important;
+}
+</style>
