@@ -2,7 +2,7 @@
 	<v-main class="root">
 		<v-app-bar class="pt-2" elevation="0" height="100" color="primary">
 			<v-spacer></v-spacer>
-			<img class="mb-6" src="~/assets/banner-light.svg" />
+			<img class="mb-6" src="~/assets/banner/banner-light.svg" />
 			<v-spacer></v-spacer>
 
 			<p>
@@ -68,17 +68,23 @@
 					Create, protect and delete your links and monitor them with detailed
 					statistics.
 				</v-col>
-				<v-col align="center"><img src="~/assets/banner-light.svg" /></v-col>
+				<v-col align="center">
+					<img src="~/assets/banner/banner-light.svg" />
+				</v-col>
 			</v-row>
 			<v-row>
-				<v-col align="center"><img src="~/assets/banner-light.svg" /></v-col>
+				<v-col align="center">
+					<img src="~/assets/banner/banner-light.svg" />
+				</v-col>
 				<v-col align="center">
 					Completely open source and free. You can host it on your own server.
 				</v-col>
 			</v-row>
 			<v-row>
 				<v-col align="center">Inspire trust</v-col>
-				<v-col align="center"><img src="~/assets/banner-light.svg" /></v-col>
+				<v-col align="center">
+					<img src="~/assets/banner/banner-light.svg" />
+				</v-col>
 			</v-row>
 			<v-card color="#ff5050" class="pa-6 my-8" rounded="xl" height="300px">
 				<v-row justify="center" align="center">

@@ -1,19 +1,19 @@
 <template>
-	<v-row justify="center" align="center">
+	<v-row justify="center" align="center" class="bg">
 		<v-col cols="12" align="center">
-			<img class="logo" src="../../assets/banner.svg" />
 			<v-card
 				rounded="lg"
 				elevation="7"
 				class="mx-4 mt-4 pa-8"
 				max-width="500px"
 			>
+				<img class="logo mb-2" src="../../assets/logo/logo.svg" />
 				<p class="font-weight-bold text-h5 secondary--text text-center">
-					Sign Up
+					Sign Up on {{ title }}
 				</p>
 
-				<p class="pb-6 font-weight-regular text--disabled text-center">
-					Create a new account on reduced!
+				<p class="mb-6 font-weight-regular text--disabled text-center">
+					Create a new account
 				</p>
 
 				<v-form ref="form" v-model="isFormValid" lazy-validation>
@@ -82,6 +82,7 @@ export default Vue.extend({
 			isFormValid: true,
 			showPassword: null,
 			loading: false,
+			title: process.env.APP_NAME,
 			rules: {
 				required: (v: any) => !!v || 'Field is Required',
 				min: (v: any) => v.length >= 6 || 'Must be atleast 6 characters',
@@ -129,6 +130,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.bg {
+	background: url('../../assets/bg.svg');
+	background-size: 100%;
+}
 .logo {
 	pointer-events: none;
 }

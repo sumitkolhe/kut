@@ -1,18 +1,18 @@
 <template>
-	<v-row justify="center" align="center">
+	<v-row justify="center" align="center" class="bg">
 		<v-col cols="12" align="center">
-			<img class="logo" src="../../assets/banner.svg" />
 			<v-card
 				rounded="lg"
 				elevation="7"
 				class="mx-4 mt-4 pa-8"
 				max-width="500px"
 			>
+				<img class="logo mb-2" src="../../assets/logo/logo.svg" />
 				<p class="font-weight-bold text-h5 secondary--text text-center">
-					Login
+					Login in to {{ title }}
 				</p>
 
-				<p class="pb-6 font-weight-regular text--disabled text-center">
+				<p class="mb-6 font-weight-regular text--disabled text-center">
 					Welcome back! login into your account.
 				</p>
 
@@ -92,6 +92,7 @@ export default Vue.extend({
 			rememberMe: false,
 			loading: false,
 			showPassword: false,
+			title: process.env.APP_NAME,
 
 			rules: {
 				required: (v: any) => !!v || 'Field is Required',
@@ -134,6 +135,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.bg {
+	background: url('../../assets/bg.svg');
+	background-size: 100%;
+}
 .logo {
 	pointer-events: none;
 }
