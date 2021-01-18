@@ -29,8 +29,8 @@ export const register: RequestHandler = async (req, res, next) => {
 		validated_user_details.password = hashed_password
 
 		const new_user = new UserModel(validated_user_details)
-		await new_user.save().catch(() => {
-			throw CreateError.InternalServerError('Some error occurred')
+		await new_user.save().catch((err) => {
+			throw CreateError.InternalServerError(err)
 		})
 
 		res.json({ message: 'User registered successfully' })
