@@ -11,6 +11,7 @@ export const config = {
 	//Server vars
 	SERVER_HOST: isDev ? 'localhost' : '0.0.0.0',
 	SERVER_PORT: isDev ? 3000 : process.env.PORT || 80,
+	SERVER_PROTOCOL: isDev ? 'http' : process.env.SERVER_PROTOCOL || 'https',
 
 	//MongoDB vars
 	MONGO_URL: process.env.MONGO_URL
@@ -28,7 +29,4 @@ export const config = {
 	WEBSITE_DOMAIN: process.env.WEBSITE_DOMAIN
 		? process.env.WEBSITE_DOMAIN
 		: 'reduced.me',
-	WEBSITE_PROTOCOL: process.env.WEBSITE_PROTOCOL
-		? process.env.WEBSITE_PROTOCOL
-		: 'https',
 }
