@@ -34,6 +34,12 @@ const NuxtAppConfig: NuxtConfig = {
 
 	loading: { color: '#f55555' },
 
+	loadingIndicator: {
+		name: 'circle',
+		color: '#3B8070',
+		background: 'white',
+	},
+
 	srcDir: 'client/',
 
 	buildDir: './dist/nuxt',
