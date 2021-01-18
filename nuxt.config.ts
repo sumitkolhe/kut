@@ -67,7 +67,7 @@ const NuxtAppConfig: NuxtConfig = {
 
 	publicRuntimeConfig: {
 		axios: {
-			baseURL: `${config.SERVER_PROTOCOL}://${config.SERVER_HOST}:${config.SERVER_PORT}/api`, // server
+			browserBaseURL: `${config.SERVER_PROTOCOL}://${config.SERVER_HOST}:${config.SERVER_PORT}/api`, // server
 		},
 	},
 

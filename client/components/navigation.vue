@@ -137,7 +137,11 @@ export default Vue.extend({
 		}
 	},
 
-	methods: {},
+	methods: {
+		async logout() {
+			await this.$auth.logout()
+		},
+	},
 })
 </script> 
 
