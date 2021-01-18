@@ -60,7 +60,7 @@
 				<v-sheet
 					elevation="0"
 					v-show="show_advanced"
-					class="mt-2 pa-6"
+					class="mt-2 pa-6 py-10"
 					rounded="xl"
 				>
 					<v-row justify="space-around">

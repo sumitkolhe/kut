@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-btn icon right top @click="showAnalytics()">
+		<v-btn class="mr-1" icon @click="showAnalytics()">
 			<v-icon>mdi-chart-line</v-icon>
 		</v-btn>
 	</div>
@@ -23,7 +23,6 @@ export default Vue.extend({
 
 	methods: {
 		async showAnalytics() {
-		
 			try {
 				this.$router.push(`/user/analytics/${this.target}`)
 			} catch (err) {}

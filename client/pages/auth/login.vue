@@ -1,78 +1,82 @@
 <template>
-	<v-row class="fill-height">
-		<v-col
-			md="6"
-			cols="12"
-			class="d-flex d-none d-md-flex align-center primary hero"
-		></v-col>
-		<v-col md="6" cols="12" class="d-flex align-center">
-			<v-row justify="center">
-				<div class="login-form">
-					<p
-						class="font-weight-bold text-h3 secondary--text text-md-left text-center"
+	<v-row justify="center" align="center">
+		<v-col cols="12" align="center">
+			<img class="logo" src="../../assets/banner.svg" />
+			<v-card
+				rounded="lg"
+				elevation="7"
+				class="mx-4 mt-4 pa-8"
+				max-width="500px"
+			>
+				<p class="font-weight-bold text-h5 secondary--text text-center">
+					Login
+				</p>
+
+				<p class="pb-6 font-weight-regular text--disabled text-center">
+					Welcome back! login into your account.
+				</p>
+
+				<v-form ref="form" v-model="isFormValid" lazy-validation>
+					<p class="mb-2 font-weight-medium">E-mail / Username</p>
+					<v-text-field
+						v-model="login.user_name"
+						:rules="[rules.required, rules.noSpace]"
+						placeholder="John Doe"
+						append-icon="mdi-email"
+						outlined
+						required
+					></v-text-field>
+					<p class="mb-2 font-weight-medium mt-n1">Password</p>
+					<v-text-field
+						v-model="login.password"
+						:rules="[rules.required, rules.min]"
+						:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+						@click:append="showPassword = !showPassword"
+						:type="showPassword ? 'text' : 'password'"
+						placeholder="***********"
+						required
+						outlined
+					></v-text-field>
+
+					<v-checkbox
+						class="mt-n2"
+						label="Remember me"
+						color="primary"
+						value="Remember me"
+					></v-checkbox>
+
+					<v-btn
+						block
+						large
+						elevation="1"
+						:loading="loading"
+						:disabled="!isFormValid"
+						color="primary"
+						@click="loginUser"
 					>
+						<v-icon left>mdi-email</v-icon>
 						Login
-					</p>
+					</v-btn>
 
-					<p
-						class="pb-6 font-weight-regular text-h6 text--disabled text-md-left text-center"
-					>
-						Welcome back! Please login into your account.
-					</p>
-
-					<v-form ref="form" v-model="isFormValid" lazy-validation>
-						<p class="mb-2 font-weight-medium">E-mail / Username</p>
-						<v-text-field
-							v-model="login.user_name"
-							:rules="[rules.required, rules.noSpace]"
-							placeholder="John Doe"
-							append-icon="mdi-email"
-							outlined
-							required
-						></v-text-field>
-						<p class="mb-2 font-weight-medium mt-n1">Password</p>
-						<v-text-field
-							v-model="login.password"
-							:rules="[rules.required, rules.min]"
-							:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-							@click:append="showPassword = !showPassword"
-							:type="showPassword ? 'text' : 'password'"
-							placeholder="***********"
-							required
-							outlined
-						></v-text-field>
-
-						<v-checkbox
-							class="mt-n2"
-							label="Remember me"
-							color="accent"
-							value="Remember me"
-						></v-checkbox>
-
-						<v-btn
-							block
-							large
-							elevation="1"
-							:disabled="!isFormValid"
-							color="secondary"
-							@click="loginUser"
-						>
-							<v-icon left>mdi-send-outline</v-icon>
-							Login
-						</v-btn>
-
-						<p class="font-weight-medium mt-4 text-md-left text-center">
-							Don't have an account?
-							<NuxtLink
-								class="text-decoration-none primary--text"
-								to="register"
-							>
-								Sign Up
-							</NuxtLink>
-						</p>
-					</v-form>
-				</div>
-			</v-row>
+					<v-row>
+						<v-col>
+							<p class="font-weight-medium mt-6 text-left">
+								New user?
+								<NuxtLink class="text-decoration-none" to="register">
+									Sign Up
+								</NuxtLink>
+							</p>
+						</v-col>
+						<v-col>
+							<p class="font-weight-medium mt-6 text-right">
+								<NuxtLink class="text-decoration-none" to="forgot-password">
+									Forgot password?
+								</NuxtLink>
+							</p>
+						</v-col>
+					</v-row>
+				</v-form>
+			</v-card>
 		</v-col>
 	</v-row>
 </template>
@@ -86,6 +90,7 @@ export default Vue.extend({
 		return {
 			isFormValid: true,
 			rememberMe: false,
+			loading: false,
 			showPassword: false,
 
 			rules: {
@@ -106,24 +111,21 @@ export default Vue.extend({
 	methods: {
 		async loginUser() {
 			if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+				this.loading = true
 				try {
 					await this.$auth.loginWith('local', {
 						data: this.login,
 					})
-					this.$store.commit('notification/showNotification', {
-						message: 'Login successful',
-						color: 'success',
-					})
+					this.loading = false
+					;(this as any).$notify.success('Login Successful')
 
 					if (this.$auth.loggedIn)
 						setTimeout(() => {
 							this.$router.push('/user/dashboard')
 						}, 1000)
 				} catch (error) {
-					this.$store.commit('notification/showNotification', {
-						message: error.response.data.message,
-						color: 'error',
-					})
+					this.loading = false
+					;(this as any).$notify.err(error.response.data.message)
 				}
 			}
 		},
@@ -132,17 +134,7 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.hero {
-	background: url('../../assets/cat.svg') no-repeat center;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
-
-.login-form {
-	min-width: 300px;
-	max-width: 500px;
-	padding: 30px 20px;
+.logo {
+	pointer-events: none;
 }
 </style>

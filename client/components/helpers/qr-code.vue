@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<v-btn icon right top @click="generateQr">
+		<v-btn class="mr-1" icon @click="generateQr">
 			<v-fade-transition hide-on-leave>
 				<v-icon
 					:key="String(clicked)"
-					color="#985eff"
+					color="#00bbf9"
 					v-text="clicked ? 'mdi-qrcode-scan' : 'mdi-qrcode-plus'"
 				/>
 			</v-fade-transition>

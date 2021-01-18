@@ -14,9 +14,11 @@
 					<v-icon>mdi-pencil</v-icon>
 				</v-btn>
 
+				<copy-content :targer="item.short_url" />
+
 				<qr-code :target="item.short_url" />
 
-				<delete-link @callback="fetchLinks" :target="item._id" />
+				<delete-link :target="item._id" />
 
 				<link-analytics v-show="item.visit_count > 0" :target="item._id" />
 
@@ -67,12 +69,17 @@ export default Vue.extend({
 				{ text: 'Description', value: 'description' },
 				{ text: 'Actions', value: 'data-table-expand', width: '20%' },
 			],
-			all_links: [],
 		}
 	},
 
 	async created() {
 		await this.fetchLinks()
+	},
+
+	computed: {
+		all_links() {
+			return this.$store.getters['all-links/GET_ALL_LINKS']
+		},
 	},
 
 	methods: {
@@ -82,7 +89,7 @@ export default Vue.extend({
 				.catch((err: any) => {
 					;(this as any).$notify.error(err)
 				})
-			this.all_links = this.$store.getters['all-links/GET_ALL_LINKS']
+
 			this.loading = false
 		},
 	},
@@ -92,7 +99,6 @@ export default Vue.extend({
 <style >
 .v-data-table {
 	border-radius: 12px !important;
-	padding: 4px;
 }
 
 .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {

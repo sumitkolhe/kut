@@ -1,5 +1,5 @@
 <template>
-	<v-btn class="mx-1" icon right top @click="copy">
+	<v-btn class="mr-1" icon @click="copy">
 		<v-fade-transition hide-on-leave>
 			<v-icon
 				:key="String(clicked)"
@@ -27,6 +27,7 @@ export default Vue.extend({
 
 	methods: {
 		async copy() {
+			console.log('yes')
 			try {
 				this.clicked = true
 				await (this as any).$copyText(this.target)

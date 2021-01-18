@@ -76,7 +76,7 @@
 				</v-row>
 			</template>
 			<template v-slot:append>
-				<div class="pa-4" v-show="!miniVariant">
+				<div class="pa-4" v-if="!miniVariant">
 					<v-btn block color="primary" elevation="0" @click="logout()">
 						Logout
 					</v-btn>
