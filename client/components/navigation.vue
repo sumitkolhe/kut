@@ -25,7 +25,9 @@
 			fixed
 			app
 			:color="
-				$vuetify.theme.dark ? `rgba(0, 0, 0, 0.6)` : `rgba(255, 255, 255, 0.5)`
+				$vuetify.theme.dark
+					? `rgba(36, 36, 36, 0.6)`
+					: `rgba(255, 255, 255, 0.5)`
 			"
 		>
 			<v-list nav>
