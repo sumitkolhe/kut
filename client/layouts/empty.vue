@@ -1,7 +1,6 @@
 <template>
 	<v-app>
 		<Particles />
-
 		<v-main>
 			<v-container>
 				<nuxt />

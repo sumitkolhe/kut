@@ -22,14 +22,15 @@ export default Vue.extend({
 
 <style scoped>
 .urlbox {
-	border-radius: 6px;
+	border-radius: 10px;
 	width: 100%;
-	border: 2px solid #f1f1f1;
+	border: 3px solid #f1f1f1;
 	background-color: #ffffff;
 	font-weight: bolder;
 	font-size: large;
-	padding: 8px;
-	line-height: 32px;
+	padding: 8px 16px;
+	line-height: 38px;
+
 	outline: none;
 }
 .urlbox:focus {
@@ -37,8 +38,22 @@ export default Vue.extend({
 }
 
 .urlboxdark {
-	border: 2px solid #f1f1f1;
-	background-color: #fff;
+	border: 3px solid #696969;
+	background-color: #191919;
+	color: #fff;
+}
+
+::placeholder {
+	color: #808080;
+	opacity: 1;
+}
+
+:-ms-input-placeholder {
+	color: #808080;
+}
+
+::-ms-input-placeholder {
+	color: #808080;
 }
 
 .urlboxdark:focus {
