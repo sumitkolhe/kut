@@ -38,7 +38,7 @@
 					<p class="mb-2 font-weight-medium mt-n1">Password</p>
 					<v-text-field
 						v-model="register.password"
-						:rules="[rules.required, rules.min]"
+						:rules="[rules.required, rules.min, rules.noSpace]"
 						:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
 						@click:append="showPassword = !showPassword"
 						:type="showPassword ? 'text' : 'password'"
