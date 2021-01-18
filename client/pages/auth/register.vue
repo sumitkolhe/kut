@@ -3,7 +3,7 @@
 		<v-col cols="12" align="center">
 			<v-card
 				rounded="lg"
-				elevation="7"
+				elevation="16"
 				class="mx-4 mt-4 pa-8"
 				max-width="500px"
 			>
