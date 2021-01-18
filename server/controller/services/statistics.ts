@@ -19,7 +19,12 @@ export const statistics: RequestHandler = async (req, res, next) => {
 			},
 		])
 		const total_link_impressions = await LinkModel.aggregate([
-			{ $match: { visit_count: { $gte: 0 } } },
+			{
+				$match: [
+					{ email: req.body.auth.email },
+					{ visit_count: { $gte: 0 } },
+				],
+			},
 			{
 				$group: {
 					_id: null,
