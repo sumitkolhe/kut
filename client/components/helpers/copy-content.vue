@@ -4,7 +4,7 @@
 			<v-icon
 				:key="String(clicked)"
 				color="green"
-				v-text="clicked ? 'mdi-check' : 'mdi-content-copy'"
+				v-text="clicked ? 'mdi-check-circle' : 'mdi-content-copy'"
 			/>
 		</v-fade-transition>
 	</v-btn>

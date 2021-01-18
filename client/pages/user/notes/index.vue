@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<v-row justify="center">
-			<v-col cols="12" md="8" lg="6" xl="4" v-click-outside="onClickOutside">
-				<v-card outlined class="mx-2" rounded="lg">
+			<v-col cols="12" md="8" lg="8" xl="6" v-click-outside="onClickOutside">
+				<v-card outlined class="mx-2 mt-8" rounded="xl">
 					<div class="pa-2">
 						<v-text-field
 							v-model="note.title"
@@ -30,9 +30,9 @@
 						></v-textarea>
 					</div>
 					<v-card-actions v-show="actionsVisible">
-						<v-btn text @click="close()">Close</v-btn>
+						<v-btn color="error" text @click="close()">Close</v-btn>
 						<v-spacer></v-spacer>
-						<v-btn text @click="createNote()">Create</v-btn>
+						<v-btn color="success" text @click="createNote()">Create</v-btn>
 					</v-card-actions>
 				</v-card>
 			</v-col>

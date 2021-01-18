@@ -41,19 +41,17 @@ export const getNotes: RequestHandler = async (req, res, next) => {
 
 export const updateNote: RequestHandler = async (req, res, next) => {
 	try {
-		const payload = {
-			title: req.body.title,
-			content: req.body.content,
-		}
-
-		await NotesModel.findByIdAndUpdate(req.body._id, payload as any).catch(
-			(err: any) => {
-				throw CreateError.BadRequest(err)
-			}
+		const response = await NotesModel.findByIdAndUpdate(
+			req.body.data._id,
+			req.body.data
 		)
-		res.json({
-			message: 'Note updated successfully',
-		})
+
+		if (!response) throw CreateError.BadRequest()
+		{
+			res.json({
+				message: 'Note updated successfully',
+			})
+		}
 	} catch (error) {
 		next(error)
 	}

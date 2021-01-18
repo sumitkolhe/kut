@@ -14,6 +14,9 @@ export const mutations: MutationTree<AllLinksState> = {
 	SET_ALL_NOTES: (state, notes) => {
 		state.all_notes = notes
 	},
+	PUSH_UPDATE_NOTE: (state, note) => {
+		state.all_notes.push(note)
+	},
 	SET_UPDATE_NOTE: (state, note) => {
 		state.update_note = note
 	},
@@ -37,7 +40,7 @@ export const getters: GetterTree<AllLinksState, RootState> = {
 export const actions: ActionTree<AllLinksState, RootState> = {
 	async createNote({ commit }, payload) {
 		const data = await this.$axios.$post('/notes', payload)
-		commit('SET_ALL_NOTES', data)
+		commit('PUSH_UPDATE_NOTE', data)
 	},
 
 	async fetchAllNotes({ commit }) {
@@ -46,12 +49,13 @@ export const actions: ActionTree<AllLinksState, RootState> = {
 	},
 
 	async deleteNote({ dispatch }, link_id: string) {
-		await this.$axios.$delete('/note', { data: { _id: link_id } })
+		await this.$axios.$delete('/notes', { data: { _id: link_id } })
 		dispatch('fetchAllNotes')
 	},
 
-	async updateNote({ commit }, payload: Object) {
-		const data = await this.$axios.$patch('/note', payload)
+	async updateNote({ commit, dispatch }, payload: Object) {
+		const data = await this.$axios.$patch('/notes', { data: payload })
 		commit('SET_UPDATE_NOTE', data)
+		dispatch('fetchAllNotes')
 	},
 }

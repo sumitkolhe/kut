@@ -1,7 +1,7 @@
 <template>
 	<v-card
 		outlined
-		rounded="lg"
+		rounded="xl"
 		hover
 		class="flex d-flex flex-column"
 		@mouseenter="toggleEditIcon"
@@ -40,7 +40,6 @@ export default Vue.extend({
 
 		editNote() {
 			this.showEdit = true
-		
 			this.$store.commit('notes/SET_UPDATE_NOTE', this.note)
 			this.$store.commit('notes/SET_SHOW_DIALOG', true)
 		},

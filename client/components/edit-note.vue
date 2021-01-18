@@ -27,7 +27,7 @@
 				></v-textarea>
 			</div>
 			<v-card-actions>
-				<v-btn icon>
+				<v-btn @click="deleteNote()" icon>
 					<v-icon color="red">mdi-delete</v-icon>
 				</v-btn>
 
@@ -59,11 +59,10 @@ export default Vue.extend({
 
 	mounted() {
 		let data = this.$store.getters['notes/GET_UPDATE_NOTE']
-		
+
 		for (let prop in data) {
 			this.payload[prop] = data[prop]
 		}
-		
 	},
 
 	methods: {
@@ -71,9 +70,28 @@ export default Vue.extend({
 			this.$store.commit('notes/SET_SHOW_DIALOG', false)
 		},
 
-		updateNote() {
-			
-			//this.$store.dispatch('notes/SET_UPDATE_NOTE', this.payload)
+		async updateNote() {
+			this.payload._id = this.selected_note._id
+			await this.$store
+				.dispatch('notes/updateNote', this.payload)
+				.then(() => {
+					this.$store.commit('notes/SET_SHOW_DIALOG', false)
+					;(this as any).$notify.success('Note updated sucessfully')
+				})
+				.catch((err: any) => {
+					;(this as any).$notify.error(err.response.data.message)
+				})
+		},
+		async deleteNote() {
+			await this.$store
+				.dispatch('notes/deleteNote', this.selected_note._id)
+				.then(() => {
+					this.$store.commit('notes/SET_SHOW_DIALOG', false)
+					;(this as any).$notify.success('Note deleted sucessfully')
+				})
+				.catch((err: any) => {
+					;(this as any).$notify.error(err.response.data.message)
+				})
 		},
 	},
 })

@@ -31,11 +31,11 @@
 						/>
 					</v-col>
 				</v-row>
-				<v-row justify="center">
+				<v-row justify="center" class="mt-6">
 					<v-btn
 						@click="shorten()"
 						depressed
-						color="secondary"
+						color="accent"
 						large
 						:loading="loading"
 					>

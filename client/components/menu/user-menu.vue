@@ -4,9 +4,9 @@
 		offset-x
 		left
 		bottom
-		nudge-right="60"
+		nudge-right="50"
 		nudge-bottom="15"
-		min-width="220px"
+		min-width="250px"
 	>
 		<template v-slot:activator="{ on }">
 			<v-btn class="mr-8" icon large v-on="on">
@@ -20,21 +20,21 @@
 		<v-card class="pa-4" rounded="lg">
 			<v-list-item-content class="justify-center">
 				<div class="mx-auto text-center">
-					<v-avatar class="mb-2" size="38" color="primary">
+					<v-avatar class="mt-n2 mb-3" size="38" color="primary">
 						<span class="white--text headline">
 							{{ user.initials }}
 						</span>
 					</v-avatar>
-					<h3>{{ this.$auth.user.user_name }}</h3>
+					<h3 class="text-capitalize">{{ this.$auth.user.user_name }}</h3>
 					<p class="caption mt-1">
 						{{ user.email }}
 					</p>
 
-					<v-row justify="center" class="mt-2">
+					<v-row justify="center" class="mt-6">
 						<v-btn to="settings" depressed rounded text>Settings</v-btn>
 					</v-row>
 
-					<v-row justify="center" class="mt-4">
+					<v-row justify="center" class="mt-6">
 						<v-btn @click="logout()" color="primary" depressed rounded text>
 							Logout
 						</v-btn>

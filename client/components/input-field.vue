@@ -22,15 +22,14 @@ export default Vue.extend({
 
 <style scoped>
 .urlbox {
-	border-radius: 0.75rem;
-	margin: 0rem 0rem 1.5rem 0rem;
+	border-radius: 6px;
 	width: 100%;
-	border: 0.2rem solid #f1f1f1;
+	border: 2px solid #f1f1f1;
 	background-color: #ffffff;
 	font-weight: bolder;
 	font-size: large;
-	padding: 1rem 1rem 1rem 1rem;
-	line-height: 1.5rem;
+	padding: 8px;
+	line-height: 32px;
 	outline: none;
 }
 .urlbox:focus {
@@ -38,7 +37,7 @@ export default Vue.extend({
 }
 
 .urlboxdark {
-	border: 0.2rem solid #f1f1f1;
+	border: 2px solid #f1f1f1;
 	background-color: #fff;
 }
 

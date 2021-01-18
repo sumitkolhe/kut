@@ -1,5 +1,5 @@
 <template>
-	<v-row class="mx-1 mt-12" justify="center">
+	<v-row v-if="all_notes.length > 0" class="mx-1 mt-12" justify="center">
 		<v-col
 			v-for="(note, idx) in all_notes"
 			:key="idx"
@@ -18,15 +18,14 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-	data() {
-		return {
-			all_notes: {},
-		}
+	computed: {
+		all_notes() {
+			return this.$store.getters['notes/GET_ALL_NOTES']
+		},
 	},
 
 	async mounted() {
 		await this.$store.dispatch('notes/fetchAllNotes')
-		this.all_notes = this.$store.getters['notes/GET_ALL_NOTES']
 	},
 })
 </script>

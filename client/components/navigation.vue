@@ -5,7 +5,7 @@
 			app
 			elevation="0"
 			height="80"
-			color="background"
+			color="transparent"
 		>
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
 
@@ -24,6 +24,9 @@
 			:clipped="clipped"
 			fixed
 			app
+			:color="
+				$vuetify.theme.dark ? `rgba(0, 0, 0, 0.6)` : `rgba(255, 255, 255, 0.5)`
+			"
 		>
 			<v-list nav>
 				<v-list-item
@@ -34,7 +37,7 @@
 					exact
 				>
 					<v-list-item-action>
-						<v-icon>{{ item.icon }}</v-icon>
+						<v-icon right>{{ item.icon }}</v-icon>
 					</v-list-item-action>
 					<v-list-item-content>
 						<v-list-item-title class="nav-links" v-text="item.title" />
