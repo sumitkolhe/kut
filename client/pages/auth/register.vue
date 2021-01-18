@@ -12,7 +12,7 @@
 					Sign Up on {{ title }}
 				</p>
 
-				<p class="mb-6 font-weight-regular text--disabled text-center">
+				<p class="mb-6 mt-n1 font-weight-regular text--disabled text-center">
 					Create a new account
 				</p>
 

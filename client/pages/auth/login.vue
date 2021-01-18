@@ -7,12 +7,12 @@
 				class="mx-4 mt-4 pa-8"
 				max-width="500px"
 			>
-				<img class="logo mb-2" src="../../assets/logo/logo.svg" />
+				<img class="mb-2" src="../../assets/logo/logo.svg" />
 				<p class="font-weight-bold text-h5 secondary--text text-center">
 					Login in to {{ title }}
 				</p>
 
-				<p class="mb-6 font-weight-regular text--disabled text-center">
+				<p class="mb-6 mt-n1 font-weight-regular text--disabled text-center">
 					Welcome back! login into your account.
 				</p>
 
