@@ -65,18 +65,10 @@ const NuxtAppConfig: NuxtConfig = {
 		'~/plugins/chart.ts',
 	],
 
-	// publicRuntimeConfig: {
-	// 	axios: {
-	// 		browserBaseURL: `${config.SERVER_PROTOCOL}://${config.SERVER_HOST}:${config.SERVER_PORT}/api`, // server
-	// 	},
-	// },
-
-	axios: {
-		proxy: true, // Can be also an object with default options
-	},
-
-	proxy: {
-		'/api': 'http://localhost:80',
+	publicRuntimeConfig: {
+		axios: {
+			baseURL: `/api`, // server
+		},
 	},
 
 	auth: {
