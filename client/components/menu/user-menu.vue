@@ -73,6 +73,7 @@ export default Vue.extend({
 	methods: {
 		async logout() {
 			await this.$auth.logout()
+			if (this.$vuetify.theme.dark) this.$vuetify.theme.dark = false
 		},
 	},
 })

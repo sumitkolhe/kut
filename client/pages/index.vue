@@ -1,33 +1,53 @@
 <template>
 	<v-main :style="{ background: '#121212' }">
 		<v-app-bar class="pt-2" elevation="0" height="100" color="primary">
-			<v-spacer></v-spacer>
+			<v-spacer class="hidden-sm-and-down"></v-spacer>
+
 			<img class="mb-6" src="~/assets/banner/banner-light.svg" />
+
 			<v-spacer></v-spacer>
 
 			<v-btn
-				dark
-				text
 				depressed
+				color="rgba(0,0,0,0.1)"
 				large
-				class="mr-2 font-weight-bold hidden-sm-and-down"
+				class="mx-2 font-weight-bold hidden-sm-and-down"
 				to="auth/login"
 			>
 				Login
 			</v-btn>
 			<v-btn
-				dark
-				text
-				class="font-weight-bold hidden-sm-and-down"
 				depressed
+				color="rgba(0,0,0,0.1)"
+				class="mx-2 font-weight-bold hidden-sm-and-down"
 				large
 				to="auth/register"
 			>
 				Register
 			</v-btn>
 
-			<v-spacer></v-spacer>
+			<v-app-bar-nav-icon
+				x-large
+				class="hidden-md-and-up"
+				@click.stop="drawer = !drawer"
+			/>
+
+			<v-spacer class="hidden-sm-and-down"></v-spacer>
 		</v-app-bar>
+
+		<v-navigation-drawer
+			disable-resize-watcher
+			v-model="drawer"
+			width="260"
+			fixed
+			app
+			color="#121212"
+		>
+			<v-list dark nav>
+				<v-list-item router exact>Register</v-list-item>
+				<v-list-item router exact>Login</v-list-item>
+			</v-list>
+		</v-navigation-drawer>
 
 		<v-row justify="center" class="pt-12 primary">
 			<v-col align="center">
@@ -41,9 +61,9 @@
 					</p>
 				</v-row>
 
-				<v-row justify="center" class="mt-12">
+				<v-row justify="center" class="mt-12 mb-md-0 mb-8">
 					<v-col cols="10" sm="8" md="4" lg="3">
-						<v-btn x-large depressed>Get Started Now</v-btn>
+						<v-btn to="/auth/register" x-large depressed>Get Started Now</v-btn>
 					</v-col>
 				</v-row>
 			</v-col>
@@ -103,7 +123,7 @@
 			</v-col>
 		</v-row>
 
-		<v-row justify="center">
+		<v-row justify="center" class="mb-12">
 			<v-col align="center" cols="12" md="8">
 				<v-card
 					color="#ff5050"
@@ -112,21 +132,21 @@
 					max-width="960px"
 				>
 					<v-row justify="center" align="center" class="px-4">
-						<v-col cols="12" md="8" align="left" class="px-4 pt-8">
+						<v-col cols="12" md="8" align="left" class="px-4 pt-6">
 							<v-row justify="center" class="mt-3">
-								<p class="text-h3 text--white font-weight-bold">
+								<p class="contribution-text">
 									Its free & open-source
 
 									<v-icon color="#121212" x-large>mdi-heart</v-icon>
 								</p>
 							</v-row>
-							<v-row justify="center" class="mt-4">
-								<p class="text-h6 text--secondary font-weight-regular">
+							<v-row justify="center" class="mt-2">
+								<h3 class="text--secondary font-weight-medium">
 									Contribute to the project or become a sponsor
-								</p>
+								</h3>
 							</v-row>
 
-							<v-row class="my-8" justify="center">
+							<v-row class="mt-8 mb-4" justify="center">
 								<v-btn
 									href="https://github.com/sumitkolhe/reduced"
 									dark
@@ -154,6 +174,12 @@
 import Vue from 'vue'
 export default Vue.extend({
 	layout: 'public',
+
+	data() {
+		return {
+			drawer: false,
+		}
+	},
 })
 </script>
 
@@ -162,6 +188,11 @@ export default Vue.extend({
 	height: auto;
 	padding-top: 80px;
 	background-color: #ff5050;
+}
+
+.contribution-text {
+	font-size: 44px;
+	font-weight: 600;
 }
 
 .main-title {

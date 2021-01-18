@@ -7,8 +7,6 @@
 			height="80"
 			color="transparent"
 		>
-			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" />-->
-
 			<v-spacer />
 			<theme-switch />
 			<notification-menu />
