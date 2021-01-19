@@ -1,7 +1,7 @@
 <template>
 	<v-row justify="center">
 		<v-col cols="12" sm="10" md="8" lg="6">
-			<v-card ref="form" class="pa-8" rounded="lg">
+			<v-card class="pa-sm-8 pa-4 mb-4" rounded="lg">
 				<v-row justify="start" class="mb-0">
 					<v-col>
 						<h1>Hey {{ this.$auth.user.user_name }},</h1>
@@ -31,14 +31,14 @@
 						<v-row justify="center">
 							<v-btn color="success" depressed>Submit</v-btn>
 						</v-row>
-						<v-row justify="center" class="mt-12 mb-n8">
+						<v-row justify="center" class="mt-12 mb-n4">
 							<v-btn depressed @click="show_advanced = !show_advanced">
 								Advanced Settings
 							</v-btn>
 						</v-row>
 					</v-col>
 				</v-card-actions>
-				<v-row v-show="show_advanced" justify="space-around" class="mt-12">
+				<v-row v-show="show_advanced" justify="space-around" class="mt-8">
 					<v-col>
 						<h2 class="font-weight-bold primary--text">Delete Account</h2>
 						<v-divider class="mt-2 mb-6"></v-divider>
