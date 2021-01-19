@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-btn class="mr-1" icon @click="showAnalytics()">
-			<v-icon>mdi-chart-line</v-icon>
+			<svg-icon name="analytics" />
 		</v-btn>
 	</div>
 </template>

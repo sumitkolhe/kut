@@ -1,6 +1,6 @@
 <template>
 	<v-btn icon @click="changeTheme()">
-		<v-icon large>mdi-white-balance-sunny</v-icon>
+		<svg-icon size="36" name="sun" />
 	</v-btn>
 </template>
 

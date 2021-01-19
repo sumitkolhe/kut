@@ -204,6 +204,7 @@ export default Vue.extend({
 	letter-spacing: 2px;
 	line-height: 80px;
 	opacity: 95%;
+	z-index: 99;
 }
 
 .sub-title {
@@ -212,5 +213,6 @@ export default Vue.extend({
 	font-weight: 500;
 	max-width: 600px;
 	opacity: 50%;
+	z-index: 99;
 }
 </style>

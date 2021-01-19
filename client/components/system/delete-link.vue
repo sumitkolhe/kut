@@ -1,6 +1,6 @@
 <template>
 	<v-btn class="mr-1" icon @click="openSheet()">
-		<v-icon color="#ff0054">mdi-delete</v-icon>
+		<svg-icon name="delete" color="#ff0054" />
 		<v-fade-transition hide-on-leave>
 			<v-bottom-sheet v-model="show_dialog">
 				<v-sheet class="text-center" height="180px">
@@ -13,7 +13,6 @@
 						<v-btn
 							depressed
 							class="mt-6 mr-4"
-							color="secondary"
 							@click="show_dialog = !show_dialog"
 						>
 							Cancel
@@ -25,7 +24,7 @@
 							:loading="loading"
 							@click="deleteLink(target)"
 						>
-							<v-icon left>mdi-delete</v-icon>
+							<svg-icon name="delete" />
 							Delete
 						</v-btn>
 					</v-row>

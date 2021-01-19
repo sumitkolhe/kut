@@ -10,9 +10,7 @@ export const createNote: RequestHandler = async (req, res, next) => {
 			content: req.body.content,
 		})
 
-		const saved_note = await new_note.save().catch((err: any) => {
-			throw CreateError.InternalServerError(err)
-		})
+		const saved_note = await new_note.save()
 
 		const user_instance: any = await UserModel.findOne({
 			email: req.auth_data.email,

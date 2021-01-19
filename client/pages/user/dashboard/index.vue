@@ -3,23 +3,7 @@
 		<v-col cols="12" sm="10" lg="8">
 			<p class="title-text" dark>
 				Create short links quickly
-				<svg
-					data-v-55d53dfe=""
-					viewBox="0 0 24 24"
-					width="26"
-					height="26"
-					stroke="currentColor"
-					stroke-width="2"
-					fill="currentColor"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					style="vertical-align: middle"
-				>
-					<polygon
-						data-v-55d53dfe=""
-						points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-					></polygon>
-				</svg>
+				<svg-icon name="flash" />
 			</p>
 
 			<v-row justify="center">
@@ -51,12 +35,13 @@
 				<v-btn
 					color="primary"
 					depressed
+					large
 					rounded
 					@click="show_advanced = !show_advanced"
 				>
-					<v-icon>
-						{{ show_advanced ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
-					</v-icon>
+					<svg-icon v-if="show_advanced" name="chevron_up" />
+					<svg-icon v-else name="chevron_down" />
+
 					Advance Options
 				</v-btn>
 			</v-row>

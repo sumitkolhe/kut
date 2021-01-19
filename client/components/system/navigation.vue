@@ -8,14 +8,17 @@
 			:height="height"
 		>
 			<v-btn @click="drawer = !drawer" icon v-show="mobile_mode">
-				<v-icon>mdi-arrow-right-circle</v-icon>
+				<svg-icon size="32" name="chevron_left" />
 			</v-btn>
 			<h2 v-show="mobile_mode">{{ title }}</h2>
 
 			<v-spacer />
 			<theme-switch />
+			<span class="mx-2"></span>
 			<notification-menu />
+			<span class="mx-2"></span>
 			<user-menu />
+			<span class="mx-2"></span>
 		</v-app-bar>
 
 		<v-navigation-drawer
@@ -66,13 +69,12 @@
 							<v-list-item-content>
 								<v-list-item-title>
 									<v-btn icon @click.stop="mini_variant = !mini_variant">
-										<v-icon x-large>
-											{{
-												mini_variant
-													? 'mdi-chevron-right-circle'
-													: 'mdi-chevron-left-circle'
-											}}
-										</v-icon>
+										<svg-icon
+											size="30"
+											name="chevron_right"
+											v-if="mini_variant"
+										/>
+										<svg-icon v-else size="30" name="chevron_left" />
 									</v-btn>
 								</v-list-item-title>
 							</v-list-item-content>
@@ -89,7 +91,7 @@
 
 				<v-row justify="center" class="pa-6 mb-0" v-show="mini_variant">
 					<v-btn icon color="primary" @click="logout()">
-						<v-icon x-large>mdi-logout-variant</v-icon>
+						<svg-icon name="logout" size="40" />
 					</v-btn>
 				</v-row>
 			</template>
@@ -105,11 +107,11 @@ import '@nuxtjs/auth-next'
 export default Vue.extend({
 	computed: {
 		height() {
-			if (this.$vuetify.breakpoint.xs) return 65
+			if ((this as any).$vuetify.breakpoint.xs) return 65
 			else return 80
 		},
 		mobile_mode() {
-			if (this.$vuetify.breakpoint.xs) return true
+			if ((this as any).$vuetify.breakpoint.xs) return true
 			else return false
 		},
 		theme() {
@@ -117,11 +119,11 @@ export default Vue.extend({
 		},
 
 		drawer_color() {
-			if (this.$vuetify.theme.dark && this.mobile_mode)
+			if ((this as any).$vuetify.theme.dark && this.mobile_mode)
 				return 'rgba(0, 0, 0, 1)'
-			else if (!this.$vuetify.theme.dark && this.mobile_mode)
+			else if (!(this as any).$vuetify.theme.dark && this.mobile_mode)
 				return 'rgba(255, 255, 255,1)'
-			else if (this.$vuetify.theme.dark && !this.mobile_mode)
+			else if ((this as any).$vuetify.theme.dark && !this.mobile_mode)
 				return 'rgba(0, 0, 0, .6)'
 			else return 'rgba(255, 255, 255,.6)'
 		},
@@ -141,23 +143,27 @@ export default Vue.extend({
 
 			items: [
 				{
-					icon: 'mdi-view-dashboard-outline',
+					icon:
+						'M19,5V7H15V5H19M9,5V11H5V5H9M19,13V19H15V13H19M9,17V19H5V17H9M21,3H13V9H21V3M11,3H3V13H11V3M21,11H13V21H21V11M11,15H3V21H11V15Z',
 					title: 'Dashboard',
 					to: '/user/dashboard',
 				},
 
 				{
-					icon: 'mdi-link',
+					icon:
+						'M3 1C1.89 1 1 1.89 1 3V14C1 15.11 1.89 16 3 16H14C15.11 16 16 15.11 16 14V11H14V14H3V3H14V5H16V3C16 1.89 15.11 1 14 1M9 7C7.89 7 7 7.89 7 9V12H9V9H20V20H9V18H7V20C7 21.11 7.89 22 9 22H20C21.11 22 22 21.11 22 20V9C22 7.89 21.11 7 20 7H9',
 					title: 'My Links',
 					to: '/user/my-links',
 				},
 				{
-					icon: 'mdi-chart-line',
+					icon:
+						'M16,11.78L20.24,4.45L21.97,5.45L16.74,14.5L10.23,10.75L5.46,19H22V21H2V3H4V17.54L9.5,8L16,11.78Z',
 					title: 'Analytics',
 					to: '/user/analytics',
 				},
 				{
-					icon: 'mdi-notebook-outline',
+					icon:
+						'M17,4V10L15,8L13,10V4H9V20H19V4H17M3,7V5H5V4C5,2.89 5.9,2 7,2H19C20.05,2 21,2.95 21,4V20C21,21.05 20.05,22 19,22H7C5.95,22 5,21.05 5,20V19H3V17H5V13H3V11H5V7H3M5,5V7H7V5H5M5,19H7V17H5V19M5,13H7V11H5V13Z',
 					title: 'Notes',
 					to: '/user/notes',
 				},

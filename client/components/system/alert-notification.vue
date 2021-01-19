@@ -16,7 +16,7 @@
 					v-bind="attrs"
 					@click="show_notification = false"
 				>
-					<v-icon text>mdi-close-circle</v-icon>
+					<svg-icon name="close" />
 				</v-btn>
 			</template>
 		</v-snackbar>

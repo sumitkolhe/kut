@@ -1,11 +1,13 @@
 <template>
 	<v-btn class="mr-1" icon @click="copy">
 		<v-fade-transition hide-on-leave>
-			<v-icon
+			<svg-icon
+				v-if="clicked"
 				:key="String(clicked)"
 				color="green"
-				v-text="clicked ? 'mdi-check-circle' : 'mdi-content-copy'"
+				name="check"
 			/>
+			<svg-icon v-else :key="String(clicked)" color="green" name="copy" />
 		</v-fade-transition>
 	</v-btn>
 </template>

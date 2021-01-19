@@ -12,7 +12,7 @@
 			{{ note.title }}
 			<v-spacer></v-spacer>
 			<v-btn icon :ripple="false">
-				<v-icon v-show="showEditIcon">mdi-pencil-outline</v-icon>
+				<svg-icon name="edit" v-show="showEditIcon" />
 			</v-btn>
 		</v-card-title>
 		<v-card-text v-text="note.content"></v-card-text>

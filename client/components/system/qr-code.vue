@@ -1,11 +1,7 @@
 <template>
 	<v-btn class="mr-1" icon @click="generateQr">
 		<v-fade-transition hide-on-leave>
-			<v-icon
-				:key="String(clicked)"
-				color="#00bbf9"
-				v-text="clicked ? 'mdi-qrcode-scan' : 'mdi-qrcode-plus'"
-			/>
+			<svg-icon :key="String(clicked)" color="#00bbf9" name="qr" />
 		</v-fade-transition>
 		<v-dialog v-model="show_dialog" overlay-color="black" max-width="250">
 			<v-sheet rounded="lg" align-center color="white">
@@ -29,7 +25,7 @@ export default Vue.extend({
 	data: () => ({
 		clicked: false,
 		show_dialog: false,
-		wait: 1500,
+		wait: 1000,
 	}),
 
 	methods: {

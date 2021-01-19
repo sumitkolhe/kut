@@ -30,7 +30,6 @@
 					<td data-label="Shortened">
 						<v-row justify="center">
 							<copy-content :target="link.short_url" />
-
 							<qr-code :target="link.short_url" />
 						</v-row>
 					</td>

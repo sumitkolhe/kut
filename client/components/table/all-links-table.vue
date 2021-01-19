@@ -11,7 +11,7 @@
 		<template v-slot:[`item.data-table-expand`]="{ expand, isExpanded, item }">
 			<v-row>
 				<v-btn class="mr-1" icon @click="expand(!isExpanded)">
-					<v-icon>mdi-pencil</v-icon>
+					<svg-icon name="edit" />
 				</v-btn>
 
 				<copy-content :targer="item.short_url" />
@@ -24,13 +24,8 @@
 
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on, attrs }">
-						<v-btn
-							class="mr-1"
-							icon
-							color="green"
-							v-show="item.password_protected"
-						>
-							<v-icon v-bind="attrs" v-on="on">mdi-security</v-icon>
+						<v-btn icon v-show="item.password_protected">
+							<svg-icon v-bind="attrs" v-on="on" name="lock" />
 						</v-btn>
 					</template>
 					<span>Password Protected</span>
@@ -49,6 +44,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+
 export default Vue.extend({
 	data() {
 		return {
