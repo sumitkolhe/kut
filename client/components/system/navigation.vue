@@ -8,17 +8,17 @@
 			:height="height"
 		>
 			<v-btn @click="drawer = !drawer" icon v-show="mobile_mode">
-				<svg-icon size="32" name="chevron_left" />
+				<svg-icon size="32" name="arrow_right" />
 			</v-btn>
-			<h2 v-show="mobile_mode">{{ title }}</h2>
+			<h2 v-show="mobile_mode" class="ml-2 font-weight-bold">{{ title }}</h2>
 
 			<v-spacer />
 			<theme-switch />
-			<span class="mx-2"></span>
-			<notification-menu />
+			<span v-show="!mobile_mode" class="mx-2"></span>
+			<notification-menu v-if="!mobile_mode" />
 			<span class="mx-2"></span>
 			<user-menu />
-			<span class="mx-2"></span>
+			<span v-show="!mobile_mode" class="mx-2"></span>
 		</v-app-bar>
 
 		<v-navigation-drawer
@@ -107,12 +107,12 @@ import '@nuxtjs/auth-next'
 export default Vue.extend({
 	computed: {
 		height() {
-			if ((this as any).$vuetify.breakpoint.xs) return 65
-			else return 80
+			if ((this as any).$vuetify.breakpoint.width < 960) return 65
+			return 80
 		},
 		mobile_mode() {
-			if ((this as any).$vuetify.breakpoint.xs) return true
-			else return false
+			if ((this as any).$vuetify.breakpoint.width < 960) return true
+			return false
 		},
 		theme() {
 			return this.$store.getters['theme/GET_THEME'] ? 'dark' : 'light'
