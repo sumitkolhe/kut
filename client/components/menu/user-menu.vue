@@ -11,7 +11,7 @@
 		<template v-slot:activator="{ on }">
 			<v-btn icon large v-on="on">
 				<v-avatar color="primary" size="38">
-					<span class="white--text">
+					<span class="white--text headline">
 						{{ user.initials }}
 					</span>
 				</v-avatar>
@@ -73,7 +73,8 @@ export default Vue.extend({
 	methods: {
 		async logout() {
 			await this.$auth.logout()
-			if (this.$vuetify.theme.dark) this.$vuetify.theme.dark = false
+			if ((this as any).$vuetify.theme.dark)
+				(this as any).$vuetify.theme.dark = false
 		},
 	},
 })
