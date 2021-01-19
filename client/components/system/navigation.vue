@@ -1,31 +1,34 @@
 <template>
 	<v-main>
 		<v-app-bar
-			:clipped-left="clippedbar"
+			:color="$vuetify.theme.themes[theme].background"
+			:clipped-left="clipped_bar"
 			app
-			elevation="0"
-			height="80"
-			color="transparent"
+			flat
+			:height="height"
 		>
+			<v-btn @click="drawer = !drawer" icon v-show="mobileMode">
+				<v-icon large>mdi-arrow-right-circle</v-icon>
+			</v-btn>
+			<h2 v-show="mobileMode">{{ title }}</h2>
+
 			<v-spacer />
-			<theme-switch />
-			<notification-menu />
-			<user-menu />
+			<theme-switch class="mx-md-4" />
+			<notification-menu class="mx-md-4" />
+			<user-menu class="mx-md-4" />
 		</v-app-bar>
 
 		<v-navigation-drawer
 			v-model="drawer"
 			:permanent="$vuetify.breakpoint.mdAndUp"
-			:mini-variant="miniVariant"
+			:mini-variant="mini_variant"
 			mini-variant-width="100"
 			width="260"
 			:clipped="clipped"
 			fixed
 			app
 			:color="
-				$vuetify.theme.dark
-					? `rgba(36, 36, 36, 0.6)`
-					: `rgba(255, 255, 255, 0.5)`
+				$vuetify.theme.dark ? `rgba(0, 0, 0, .8)` : `rgba(255, 255, 255,1)`
 			"
 		>
 			<v-list nav>
@@ -37,7 +40,7 @@
 					exact
 				>
 					<v-list-item-action>
-						<v-icon right>{{ item.icon }}</v-icon>
+						<v-icon>{{ item.icon }}</v-icon>
 					</v-list-item-action>
 					<v-list-item-content>
 						<v-list-item-title class="nav-links" v-text="item.title" />
@@ -48,7 +51,7 @@
 			<template v-slot:prepend>
 				<v-row class="py-4">
 					<v-fade-transition>
-						<v-col v-if="!miniVariant">
+						<v-col v-if="!mini_variant">
 							<v-list-item>
 								<v-list-item-content>
 									<p class="app-title">
@@ -64,8 +67,14 @@
 						<v-list-item>
 							<v-list-item-content>
 								<v-list-item-title>
-									<v-btn icon @click.stop="miniVariant = !miniVariant">
-										<v-icon x-large>mdi-microsoft-xbox-controller-menu</v-icon>
+									<v-btn icon @click.stop="mini_variant = !mini_variant">
+										<v-icon x-large>
+											{{
+												mini_variant
+													? 'mdi-chevron-right-circle'
+													: 'mdi-chevron-left-circle'
+											}}
+										</v-icon>
 									</v-btn>
 								</v-list-item-title>
 							</v-list-item-content>
@@ -74,13 +83,13 @@
 				</v-row>
 			</template>
 			<template v-slot:append>
-				<div class="pa-4" v-if="!miniVariant">
-					<v-btn block color="primary" elevation="0" @click="logout()">
+				<v-row class="ma-4" v-if="!mini_variant">
+					<v-btn block color="primary" depressed @click="logout()">
 						Logout
 					</v-btn>
-				</div>
+				</v-row>
 
-				<v-row justify="center" class="pa-6 mb-0" v-show="miniVariant">
+				<v-row justify="center" class="pa-6 mb-0" v-show="mini_variant">
 					<v-btn icon color="primary" @click="logout()">
 						<v-icon x-large>mdi-logout-variant</v-icon>
 					</v-btn>
@@ -96,6 +105,19 @@ import Vue from 'vue'
 import '@nuxtjs/auth-next'
 
 export default Vue.extend({
+	computed: {
+		height() {
+			if (this.$vuetify.breakpoint.xs) return 65
+			else return 80
+		},
+		mobileMode() {
+			if (this.$vuetify.breakpoint.xs) return true
+			else return false
+		},
+		theme() {
+			return this.$store.getters['theme/GET_THEME'] ? 'dark' : 'light'
+		},
+	},
 	data() {
 		return {
 			on: '',
@@ -103,9 +125,9 @@ export default Vue.extend({
 			clipped: false,
 			permanent: true,
 			drawer: false,
-			clippedbar: false,
+			clipped_bar: false,
 			fixed: false,
-			miniVariant: false,
+			mini_variant: false,
 			title: process.env.APP_NAME,
 			version: process.env.APP_VERSION,
 

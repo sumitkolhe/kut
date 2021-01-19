@@ -1,5 +1,5 @@
 <template>
-	<v-btn class="mr-6" icon @click="changeTheme()">
+	<v-btn icon @click="changeTheme()">
 		<v-icon large>mdi-white-balance-sunny</v-icon>
 	</v-btn>
 </template>

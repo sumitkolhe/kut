@@ -1,5 +1,5 @@
 <template>
-	<v-row justify="center" align="center">
+	<v-row justify="center" align="center" class="mt-2 mt-md-8">
 		<v-col cols="12" sm="10" lg="8">
 			<p class="title-text" dark>
 				Create short links quickly
@@ -21,32 +21,37 @@
 					></polygon>
 				</svg>
 			</p>
-			<v-sheet elevation="0" class="pa-10 mt-4" rounded="xl">
-				<v-row>
-					<v-col>
-						<input-field
-							:placeholder="'Enter a URL'"
-							:type="'text'"
-							v-model="payload.long_url"
-						/>
-					</v-col>
-				</v-row>
-				<v-row justify="center" class="mt-6">
-					<v-btn
-						@click="shorten()"
-						depressed
-						color="accent"
-						large
-						:loading="loading"
-					>
-						Shorten
-					</v-btn>
-				</v-row>
-			</v-sheet>
-			<v-row justify="center" class="mb-6 mt-6">
+
+			<v-row justify="center">
+				<v-col cols="12" md="9">
+					<input-field
+						:placeholder="'Enter a URL'"
+						:type="'text'"
+						v-model="payload.long_url"
+					/>
+				</v-col>
+			</v-row>
+
+			<v-row justify="center" class="mt-6">
+				<v-btn
+					@click="shorten()"
+					depressed
+					color="secondary"
+					x-large
+					dark
+					class="font-weight-bold background--text"
+					rounded
+					:loading="loading"
+				>
+					Shorten
+				</v-btn>
+			</v-row>
+
+			<v-row justify="center" class="mb-6 mt-10">
 				<v-btn
 					color="primary"
 					depressed
+					rounded
 					@click="show_advanced = !show_advanced"
 				>
 					<v-icon>
@@ -57,37 +62,30 @@
 			</v-row>
 
 			<v-fade-transition>
-				<v-sheet
-					elevation="0"
-					v-show="show_advanced"
-					class="mt-2 pa-6 py-10"
-					rounded="xl"
-				>
-					<v-row justify="space-around">
-						<v-col cols="12" md="6">
-							<input-field
-								:placeholder="'Custom Alias'"
-								:type="'text'"
-								v-model="payload.alias"
-							/>
-						</v-col>
+				<v-row justify="center" v-show="show_advanced" class="mt-8">
+					<v-col cols="12" md="9">
+						<input-field
+							:placeholder="'Custom Alias'"
+							:type="'text'"
+							v-model="payload.alias"
+						/>
+					</v-col>
 
-						<v-col cols="12" md="6">
-							<input-field
-								:placeholder="'Password'"
-								:type="'password'"
-								v-model="payload.password"
-							/>
-						</v-col>
-						<v-col cols="12">
-							<input-field
-								:placeholder="'Description'"
-								:type="'text'"
-								v-model="payload.description"
-							/>
-						</v-col>
-					</v-row>
-				</v-sheet>
+					<v-col cols="12" md="9">
+						<input-field
+							:placeholder="'Password'"
+							:type="'password'"
+							v-model="payload.password"
+						/>
+					</v-col>
+					<v-col cols="12" md="9">
+						<input-field
+							:placeholder="'Description'"
+							:type="'text'"
+							v-model="payload.description"
+						/>
+					</v-col>
+				</v-row>
 			</v-fade-transition>
 
 			<v-row justify="center" class="mt-12">
@@ -156,10 +154,6 @@ export default Vue.extend({
 	font-size: 22px;
 	letter-spacing: 1px;
 	padding: 16px 0px;
-}
-
-.v-label {
-	color: green !important;
 }
 
 .v-text-field--outlined >>> fieldset {

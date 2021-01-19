@@ -115,14 +115,15 @@ const NuxtAppConfig: NuxtConfig = {
 			themes: {
 				dark: {
 					primary: '#ff5050',
-					secondary: '#3d405b',
+					secondary: '#fff',
 					accent: '#613dc1',
+
 					surface: '#242424',
 					background: '#121212',
 				},
 				light: {
 					primary: '#ff5050',
-					secondary: '#3d405b',
+					secondary: '#111',
 					accent: '#00bbf9',
 					surface: '#f1f1f1',
 					background: '#f1f2f4',

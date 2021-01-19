@@ -9,7 +9,7 @@
 		min-width="250px"
 	>
 		<template v-slot:activator="{ on }">
-			<v-btn class="mr-8" icon large v-on="on">
+			<v-btn icon large v-on="on">
 				<v-avatar color="primary" size="38">
 					<span class="white--text">
 						{{ user.initials }}

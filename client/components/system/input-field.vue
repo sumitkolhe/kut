@@ -24,7 +24,7 @@ export default Vue.extend({
 .urlbox {
 	border-radius: 10px;
 	width: 100%;
-	border: 3px solid #f1f1f1;
+	border: 3px solid #d8d8d8;
 	background-color: #ffffff;
 	font-weight: bolder;
 	font-size: large;
