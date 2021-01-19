@@ -18,7 +18,8 @@ export const verifyToken = (
 			access_token,
 			config.ACCESS_TOKEN_SECRET
 		)
-		req.body.auth = token_details
+
+		req.auth_data = token_details
 		next()
 	} catch (error) {
 		const err_message =

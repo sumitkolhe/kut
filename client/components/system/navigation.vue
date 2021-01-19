@@ -7,15 +7,15 @@
 			flat
 			:height="height"
 		>
-			<v-btn @click="drawer = !drawer" icon v-show="mobileMode">
-				<v-icon large>mdi-arrow-right-circle</v-icon>
+			<v-btn @click="drawer = !drawer" icon v-show="mobile_mode">
+				<v-icon>mdi-arrow-right-circle</v-icon>
 			</v-btn>
-			<h2 v-show="mobileMode">{{ title }}</h2>
+			<h2 v-show="mobile_mode">{{ title }}</h2>
 
 			<v-spacer />
-			<theme-switch class="mx-md-4" />
-			<notification-menu class="mx-md-4" />
-			<user-menu class="mx-md-4" />
+			<theme-switch />
+			<notification-menu />
+			<user-menu />
 		</v-app-bar>
 
 		<v-navigation-drawer
@@ -27,9 +27,7 @@
 			:clipped="clipped"
 			fixed
 			app
-			:color="
-				$vuetify.theme.dark ? `rgba(0, 0, 0, .8)` : `rgba(255, 255, 255,1)`
-			"
+			:color="drawer_color"
 		>
 			<v-list nav>
 				<v-list-item
@@ -110,12 +108,22 @@ export default Vue.extend({
 			if (this.$vuetify.breakpoint.xs) return 65
 			else return 80
 		},
-		mobileMode() {
+		mobile_mode() {
 			if (this.$vuetify.breakpoint.xs) return true
 			else return false
 		},
 		theme() {
 			return this.$store.getters['theme/GET_THEME'] ? 'dark' : 'light'
+		},
+
+		drawer_color() {
+			if (this.$vuetify.theme.dark && this.mobile_mode)
+				return 'rgba(0, 0, 0, 1)'
+			else if (!this.$vuetify.theme.dark && this.mobile_mode)
+				return 'rgba(255, 255, 255,1)'
+			else if (this.$vuetify.theme.dark && !this.mobile_mode)
+				return 'rgba(0, 0, 0, .6)'
+			else return 'rgba(255, 255, 255,.6)'
 		},
 	},
 	data() {

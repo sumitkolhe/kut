@@ -15,7 +15,7 @@ export const createNote: RequestHandler = async (req, res, next) => {
 		})
 
 		const user_instance: any = await UserModel.findOne({
-			email: req.body.auth.email,
+			email: req.auth_data.email,
 		})
 		await user_instance.user_notes.push(new_note)
 		await user_instance.save()
@@ -27,7 +27,7 @@ export const createNote: RequestHandler = async (req, res, next) => {
 
 export const getNotes: RequestHandler = async (req, res, next) => {
 	try {
-		await UserModel.findOne({ email: req.body.auth.email })
+		await UserModel.findOne({ email: req.auth_data.email })
 			.populate({
 				path: 'user_notes',
 			})
@@ -42,8 +42,8 @@ export const getNotes: RequestHandler = async (req, res, next) => {
 export const updateNote: RequestHandler = async (req, res, next) => {
 	try {
 		const response = await NotesModel.findByIdAndUpdate(
-			req.body.data._id,
-			req.body.data
+			req.body._id,
+			req.body
 		)
 
 		if (!response) throw CreateError.BadRequest()
@@ -60,7 +60,7 @@ export const updateNote: RequestHandler = async (req, res, next) => {
 export const deleteNote: RequestHandler = async (req, res, next) => {
 	try {
 		await UserModel.findOneAndUpdate(
-			{ email: req.body.auth.email },
+			{ email: req.auth_data.email },
 			{
 				$pull: {
 					user_notes: req.body._id,

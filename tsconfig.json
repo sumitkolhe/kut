@@ -31,6 +31,6 @@
 		}
 	},
 
-	"include": ["server/**/*"],
+	"include": ["server/**/*", "@types"],
 	"exclude": ["node_modules", "client", "production", "nuxt.config.ts"]
 }

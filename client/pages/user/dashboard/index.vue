@@ -25,7 +25,7 @@
 			<v-row justify="center">
 				<v-col cols="12" md="9">
 					<input-field
-						:placeholder="'Enter a URL'"
+						:placeholder="'Enter a URL...'"
 						:type="'text'"
 						v-model="payload.long_url"
 					/>

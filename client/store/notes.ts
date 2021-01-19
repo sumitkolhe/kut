@@ -54,7 +54,7 @@ export const actions: ActionTree<AllLinksState, RootState> = {
 	},
 
 	async updateNote({ commit, dispatch }, payload: Object) {
-		const data = await this.$axios.$patch('/notes', { data: payload })
+		const data = await this.$axios.$patch('/notes', payload)
 		commit('SET_UPDATE_NOTE', data)
 		dispatch('fetchAllNotes')
 	},

@@ -6,14 +6,14 @@ import { UserModel } from '@model/user.model'
 export const statistics: RequestHandler = async (req, res, next) => {
 	try {
 		const total_active_links = await UserModel.aggregate([
-			{ $match: { email: req.body.auth.email } },
+			{ $match: { email: req.auth_data.email } },
 			{
 				$project: { user_links: { $size: '$user_links' } },
 			},
 		])
 
 		const total_active_notes = await UserModel.aggregate([
-			{ $match: { email: req.body.auth.email } },
+			{ $match: { email: req.auth_data.email } },
 			{
 				$project: { user_notes: { $size: '$user_notes' } },
 			},
@@ -21,7 +21,7 @@ export const statistics: RequestHandler = async (req, res, next) => {
 		const total_link_impressions = await UserModel.aggregate([
 			{
 				$match: {
-					$and: [{ email: req.body.auth.email }],
+					$and: [{ email: req.auth_data.email }],
 				},
 			},
 			{

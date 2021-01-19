@@ -10,6 +10,14 @@ import { connectDatabase } from '@helpers/init-database'
 import { setHeaders } from '@middleware/header'
 import { HandleError } from '@middleware/error-handler'
 
+declare global {
+	namespace Express {
+		interface Request {
+			auth_data: any
+		}
+	}
+}
+
 const isDev = process.env.NODE_ENV !== 'production'
 const app = express()
 

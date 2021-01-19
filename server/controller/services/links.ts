@@ -6,7 +6,7 @@ import { RequestHandler } from 'express'
 
 export const getLinks: RequestHandler = async (req, res, next) => {
 	try {
-		await UserModel.findOne({ email: req.body.auth.email })
+		await UserModel.findOne({ email: req.auth_data.email })
 			.populate({
 				path: 'user_links',
 				options: {
@@ -44,7 +44,7 @@ export const updateLink: RequestHandler = async (req, res, next) => {
 export const deleteLink: RequestHandler = async (req, res, next) => {
 	try {
 		await UserModel.findOneAndUpdate(
-			{ email: req.body.auth.email },
+			{ email: req.auth_data.email },
 			{
 				$pull: {
 					user_links: req.body._id,

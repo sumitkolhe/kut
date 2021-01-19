@@ -13,7 +13,7 @@ export const shorten: RequestHandler = async (req, res, next) => {
 		})
 
 		const user_instance: any = await UserModel.findOne({
-			email: req.body.auth.email,
+			email: req.auth_data.email,
 		})
 		await user_instance.user_links.push(new_link)
 		await user_instance.save()
