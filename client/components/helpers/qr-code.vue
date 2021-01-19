@@ -1,15 +1,12 @@
 <template>
-	<div>
-		<v-btn class="mr-1" icon @click="generateQr">
-			<v-fade-transition hide-on-leave>
-				<v-icon
-					:key="String(clicked)"
-					color="#00bbf9"
-					v-text="clicked ? 'mdi-qrcode-scan' : 'mdi-qrcode-plus'"
-				/>
-			</v-fade-transition>
-		</v-btn>
-
+	<v-btn class="mr-1" icon @click="generateQr">
+		<v-fade-transition hide-on-leave>
+			<v-icon
+				:key="String(clicked)"
+				color="#00bbf9"
+				v-text="clicked ? 'mdi-qrcode-scan' : 'mdi-qrcode-plus'"
+			/>
+		</v-fade-transition>
 		<v-dialog v-model="show_dialog" overlay-color="black" max-width="250">
 			<v-sheet rounded="lg" align-center color="white">
 				<v-card-text class="text-center">
@@ -17,7 +14,7 @@
 				</v-card-text>
 			</v-sheet>
 		</v-dialog>
-	</div>
+	</v-btn>
 </template>
 
 <script lang="ts">

@@ -30,6 +30,7 @@
 					<td data-label="Shortened">
 						<v-row justify="center">
 							<copy-content :target="link.short_url" />
+
 							<qr-code :target="link.short_url" />
 						</v-row>
 					</td>
@@ -89,7 +90,7 @@ tbody div p {
 	text-overflow: ellipsis;
 	margin: 0 auto;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 960px) {
 	table thead {
 		display: none;
 	}
@@ -97,8 +98,7 @@ tbody div p {
 		margin-bottom: 0.8rem;
 		margin-top: -0.4rem;
 		display: block;
-
-		padding-bottom: 0.8rem;
+		padding-bottom: 8px;
 		border-bottom: 1px solid rgb(54, 54, 54);
 	}
 	table tr:last-child {
