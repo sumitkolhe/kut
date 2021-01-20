@@ -1,7 +1,7 @@
 <template>
 	<v-card
-		outlined
 		hover
+		outlined
 		rounded="lg"
 		class="flex d-flex flex-column"
 		@mouseenter="toggleEditIcon"
@@ -48,3 +48,11 @@ export default Vue.extend({
 </script>
 
 
+<style scoped>
+.v-card.v-sheet.theme--light {
+	border: 2px solid rgba(0, 0, 0, 0.12) !important;
+}
+.v-card.v-sheet.theme--dark {
+	border: 2px solid rgba(255, 255, 255, 0.12) !important;
+}
+</style>
