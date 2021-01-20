@@ -55,7 +55,7 @@
 					<p class="main-title px-6">Shorten your links quickly</p>
 				</v-row>
 				<v-row justify="center" class="mt-4">
-					<p class="sub-title px-6">
+					<p class="sub-title px-6 text--secondary">
 						An Open-Source URL shortener built with powerful tools to help you
 						grow and protect your brand.
 					</p>
@@ -203,7 +203,6 @@ export default Vue.extend({
 	max-width: 700px;
 	letter-spacing: 2px;
 	line-height: 80px;
-	opacity: 95%;
 	z-index: 99;
 }
 
@@ -212,7 +211,6 @@ export default Vue.extend({
 	font-size: 22px;
 	font-weight: 500;
 	max-width: 600px;
-	opacity: 50%;
 	z-index: 99;
 }
 </style>

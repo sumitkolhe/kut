@@ -3,7 +3,6 @@ import { config } from './server/config/config'
 
 const NuxtAppConfig: NuxtConfig = {
 	telemetry: false,
-	target: 'static',
 
 	head: {
 		titleTemplate: '%s | Shorten your links easily',
@@ -42,7 +41,7 @@ const NuxtAppConfig: NuxtConfig = {
 
 	srcDir: 'client/',
 
-	buildDir: './dist/nuxt',
+	//buildDir: './dist/nuxt',
 
 	generate: {
 		dir: './dist/nuxt',

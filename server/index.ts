@@ -1,10 +1,10 @@
 import express from 'express'
 import consola from 'consola'
 import useragent from 'express-useragent'
-import serveStatic from 'serve-static'
+//import serveStatic from 'serve-static'
 // @ts-ignore
 import { loadNuxt, build } from 'nuxt'
-import { config } from '@config/config'
+//import { config } from '@config/config'
 import { routes } from '@routes/routes'
 import { connectDatabase } from '@helpers/init-database'
 import { setHeaders } from '@middleware/header'
@@ -57,15 +57,15 @@ const startDevServer = async () => {
 }
 
 const startProdServer = async () => {
-	app.use(serveStatic(__dirname + '/nuxt'))
+	const nuxt = await loadNuxt('start')
+	const { host, port } = nuxt.options.server
 
-	const HOST: any = config.SERVER_HOST
-	const PORT = config.SERVER_PORT
+	app.use(nuxt.render)
 
 	// Listen the server
-	app.listen(PORT, HOST)
+	app.listen(port, host)
 	consola.ready({
-		message: `Server listening on http://${HOST}:${PORT}`,
+		message: `Server listening on http://${host}:${port}`,
 		badge: true,
 	})
 }
