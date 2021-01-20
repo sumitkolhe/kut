@@ -125,7 +125,7 @@ const NuxtAppConfig: NuxtConfig = {
 					secondary: '#111',
 					accent: '#00bbf9',
 					surface: '#f1f1f1',
-					background: '#f1f2f4',
+					background: '#fff',
 				},
 			},
 		},
