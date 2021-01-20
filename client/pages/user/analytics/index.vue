@@ -10,8 +10,8 @@
 				>
 					<v-card
 						color="surface"
-						flat
 						rounded="xl"
+						flat
 						:height="card_height"
 						class="pa-4"
 					>
@@ -91,4 +91,10 @@ export default Vue.extend({
 </script>
 
 <style  scoped>
+.v-card.v-sheet.theme--light {
+	border: 2px solid rgba(0, 0, 0, 0.12) !important;
+}
+.v-card.v-sheet.theme--dark {
+	border: 2px solid rgba(255, 255, 255, 0.12) !important;
+}
 </style>

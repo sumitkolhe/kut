@@ -7,7 +7,7 @@
 		:loading="loading"
 		item-key="short_url"
 		show-expand
-		class="surface"
+		dark
 	>
 		<template v-slot:[`item.data-table-expand`]="{ expand, isExpanded, item }">
 			<v-row>
@@ -93,9 +93,10 @@ export default Vue.extend({
 })
 </script>
 
-<style >
+<style>
 .v-data-table {
 	border-radius: 12px !important;
+	border: 2px solid #424242 !important;
 }
 
 .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {

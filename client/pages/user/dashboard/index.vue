@@ -1,7 +1,26 @@
 <template>
 	<v-row justify="center" align="center" class="mt-2 mt-md-8">
 		<v-col cols="12">
-			<p class="title-text" dark>Create short links quickly</p>
+			<p class="title-text" dark>
+				Create short links quickly
+				<svg
+					data-v-55d53dfe=""
+					viewBox="0 0 24 24"
+					width="26"
+					height="26"
+					stroke="currentColor"
+					stroke-width="2"
+					fill="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					style="vertical-align: middle"
+				>
+					<polygon
+						data-v-55d53dfe=""
+						points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+					></polygon>
+				</svg>
+			</p>
 
 			<v-row justify="center">
 				<v-col cols="12" sm="10" lg="8" xl="6">
@@ -126,7 +145,7 @@ export default Vue.extend({
 
 <style scoped>
 .title-text {
-	font-weight: 500;
+	font-weight: 600;
 	text-align: center;
 	font-size: 22px;
 	letter-spacing: 1px;

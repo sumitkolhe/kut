@@ -37,7 +37,7 @@
 				</v-col>
 			</v-row>
 
-			<v-sheet class="py-8 mt-12" rounded="xl">
+			<v-sheet color="surface" class="py-8 mt-12" rounded="lg">
 				<p class="px-8 text-h6 font-weight-bold">Views</p>
 				<v-row justify="center" class="my-6">
 					<v-col cols="12" md="10">
@@ -45,7 +45,7 @@
 					</v-col>
 				</v-row>
 			</v-sheet>
-			<v-sheet class="py-8 mt-12 mb-10" rounded="xl">
+			<v-sheet color="surface" class="py-8 mt-12 mb-10" rounded="xl">
 				<v-row justify="space-between">
 					<v-col cols="12" md="5">
 						<p class="px-8 text-h6 font-weight-bold">OS</p>
@@ -117,5 +117,11 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
+.v-card.v-sheet.theme--light {
+	border: 2px solid rgba(0, 0, 0, 0.12) !important;
+}
+.v-card.v-sheet.theme--dark {
+	border: 2px solid rgba(255, 255, 255, 0.12) !important;
+}
 </style>
