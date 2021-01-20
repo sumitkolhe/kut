@@ -105,7 +105,11 @@ export default Vue.extend({
 	}),
 
 	methods: {
-		async deleteAccount() {},
+		async deleteAccount() {
+			const email = this.$auth?.user?.email as string
+			await this.$axios.delete('/auth/delete', { data: { email } })
+			this.$auth.logout()
+		},
 	},
 })
 </script>
