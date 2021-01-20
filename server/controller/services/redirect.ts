@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express'
 import { LinkModel } from '@model/link.model'
 import { AnalyticsModel } from '@model/analytics.model'
-import { CreateError } from '@middleware/error-handler'
+//import { CreateError } from '@middleware/error-handler'
 
 export const redirect: RequestHandler = async (req: any, res, next) => {
 	try {
@@ -9,9 +9,7 @@ export const redirect: RequestHandler = async (req: any, res, next) => {
 			alias: req.params.alias,
 		})
 
-		if (!link_details) throw CreateError.NotFound()
-		//if (linkDetails.password) res.send('enter pass')
-		else {
+		if (link_details) {
 			const new_analytic = new AnalyticsModel(req.useragent)
 			await new_analytic.save()
 			await link_details.analytics.push(new_analytic)
@@ -19,6 +17,8 @@ export const redirect: RequestHandler = async (req: any, res, next) => {
 			await link_details.save()
 
 			res.redirect(301, link_details.long_url.toString())
+		} else {
+			next()
 		}
 	} catch (err) {
 		next(err)

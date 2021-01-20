@@ -48,13 +48,13 @@ const start = async () => {
 		await nuxt.ready()
 	}
 
-	app.get('/:alias', (req, res) => {
-		nuxt.renderRoute('/top', { req }).then((result: { html: any }) => {
-			res.send(result.html)
-		})
-	})
-
 	app.use(nuxt.render)
+
+	// app.use('/', (req, res) => {
+	// 	req.url = req.originalUrl
+	// 	nuxt.render(req, res)
+	// })
+
 	app.listen(PORT as number, HOST)
 	consola.ready({
 		message: `Server listening on http://${HOST}:${PORT}`,
