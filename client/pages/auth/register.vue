@@ -4,12 +4,12 @@
 			<img class="logo mb-2" src="../../assets/logo/logo.svg" />
 			<v-card
 				outlined
-				class="mx-md-4 mx-2 mt-4 px-md-8 px-4 py-8"
+				class="mx-md-4 mx-2 mt-4 px-md-8 px-4 py-6"
 				max-width="500px"
 			>
-				<p class="font-weight-bold text-h5 primary--text text-center">
+				<h3 class="font-weight-bold mb-2 primary--text text-center">
 					Sign Up on {{ title }}
-				</p>
+				</h3>
 
 				<p class="mb-6 mt-n1 font-weight-regular text--disabled text-center">
 					Create a new account
@@ -59,7 +59,7 @@
 						Create an account
 					</v-btn>
 
-					<p class="font-weight-medium mt-4 text-center">
+					<p class="font-weight-medium mt-6 text-center">
 						Already have an account?
 						<NuxtLink class="text-decoration-none accent--text" to="login">
 							Login
