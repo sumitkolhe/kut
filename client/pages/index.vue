@@ -1,16 +1,16 @@
 <template>
-	<v-main :style="{ background: '#121212' }">
-		<v-app-bar class="pt-2" elevation="0" height="100" color="primary">
+	<v-main :style="{ background: '#111' }">
+		<v-app-bar class="pt-2" elevation="0" height="100" color="#fff">
 			<v-spacer class="hidden-sm-and-down"></v-spacer>
 
-			<img class="mb-6" src="~/assets/banner/banner-light.svg" />
+			<img class="mb-6" src="~/assets/logo/logo.svg" />
 
 			<v-spacer></v-spacer>
 
 			<v-btn
 				depressed
-				color="rgba(0,0,0,0.06)"
 				large
+				dark
 				class="mx-2 font-weight-bold hidden-sm-and-down"
 				to="auth/login"
 			>
@@ -18,7 +18,7 @@
 			</v-btn>
 			<v-btn
 				depressed
-				color="rgba(0,0,0,0.06)"
+				dark
 				class="mx-2 font-weight-bold hidden-sm-and-down"
 				large
 				to="auth/register"
@@ -41,7 +41,7 @@
 			width="260"
 			fixed
 			app
-			color="#121212"
+			color="#fff"
 		>
 			<v-list dark nav>
 				<v-list-item router exact>Register</v-list-item>
@@ -49,13 +49,13 @@
 			</v-list>
 		</v-navigation-drawer>
 
-		<v-row justify="center" class="pt-12 primary">
+		<v-row justify="center" class="pt-12 background">
 			<v-col align="center">
 				<v-row justify="center" class="mt-sm-12 mt-sm-0">
 					<p class="main-title px-6">Shorten your links quickly</p>
 				</v-row>
 				<v-row justify="center" class="mt-4">
-					<p class="sub-title px-6 text--secondary">
+					<p class="sub-title text--secondary px-6">
 						An Open-Source URL shortener built with powerful tools to help you
 						grow and protect your brand.
 					</p>
@@ -75,8 +75,8 @@
 			<v-col md="2" cols="12" class="mx-4">
 				<v-row class="mt-12">
 					<v-col align="center">
-						<v-avatar color="rgb(255,80,80,0.15)" size="80" class="pa-4">
-							<svg-icon name="clipboard" color="#ff5050" />
+						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
+							<svg-icon name="clipboard" color="#fff" />
 						</v-avatar>
 					</v-col>
 				</v-row>
@@ -92,8 +92,8 @@
 			<v-col md="2" cols="12" class="mx-4">
 				<v-row class="mt-12">
 					<v-col align="center">
-						<v-avatar color="rgb(255,80,80,0.15)" size="80" class="pa-4">
-							<svg-icon name="donut_chart" color="#ff5050" />
+						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
+							<svg-icon name="donut_chart" color="#fff" />
 						</v-avatar>
 					</v-col>
 				</v-row>
@@ -109,8 +109,8 @@
 			<v-col md="2" cols="12" class="mx-4">
 				<v-row justify="center" class="mt-12">
 					<v-col align="center">
-						<v-avatar color="rgb(255,80,80,0.15)" size="80" class="pa-4">
-							<svg-icon name="heart" color="#ff5050" />
+						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
+							<svg-icon name="heart" color="#fff" />
 						</v-avatar>
 					</v-col>
 				</v-row>
@@ -128,7 +128,7 @@
 		<v-row justify="center" class="mb-12">
 			<v-col align="center" cols="12" md="8">
 				<v-card
-					color="#ff5050"
+					color="#fff"
 					class="pa-6 mb-10 mt-6 mx-4"
 					rounded="xl"
 					max-width="960px"
@@ -143,7 +143,7 @@
 								</p>
 							</v-row>
 							<v-row justify="center" class="mt-2">
-								<h3 class="text--secondary font-weight-medium">
+								<h3 class="font-weight-medium text--secondary">
 									Contribute to the project or become a sponsor
 								</h3>
 							</v-row>
@@ -151,7 +151,6 @@
 							<v-row class="mt-8 mb-4" justify="center">
 								<v-btn
 									href="https://github.com/sumitkolhe/reduced"
-									dark
 									target="_blank"
 									x-large
 									outlined
@@ -159,7 +158,7 @@
 									rounded
 								>
 									Contribute
-									<svg-icon class="ml-2" name="github"></svg-icon>
+									<svg-icon class="ml-2" size="28" name="github"></svg-icon>
 								</v-btn>
 							</v-row>
 						</v-col>
@@ -203,7 +202,6 @@ export default Vue.extend({
 	max-width: 700px;
 	letter-spacing: 2px;
 	line-height: 80px;
-	z-index: 99;
 }
 
 .sub-title {
@@ -211,6 +209,5 @@ export default Vue.extend({
 	font-size: 22px;
 	font-weight: 500;
 	max-width: 600px;
-	z-index: 99;
 }
 </style>

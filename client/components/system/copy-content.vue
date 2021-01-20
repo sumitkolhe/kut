@@ -4,7 +4,7 @@
 			<svg-icon
 				v-if="clicked"
 				:key="String(clicked)"
-				color="green"
+				color="success"
 				name="check"
 			/>
 			<svg-icon v-else :key="String(clicked)" color="green" name="copy" />

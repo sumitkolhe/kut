@@ -29,7 +29,7 @@
 		<v-row justify="center" class="mb-8">
 			<v-btn
 				@click="updateLink(payload)"
-				depressed
+				outlined
 				color="primary"
 				:loading="loading"
 			>

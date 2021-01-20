@@ -7,7 +7,7 @@
 				class="mx-md-4 mx-2 mt-4 px-md-8 px-4 py-8"
 				max-width="500px"
 			>
-				<p class="font-weight-bold text-h5 secondary--text text-center">
+				<p class="font-weight-bold text-h5 primary--text text-center">
 					Login in to {{ title }}
 				</p>
 
@@ -62,7 +62,10 @@
 							<v-row justify="center">
 								<p class="font-weight-medium mt-8">
 									Don't have an account?
-									<NuxtLink class="text-decoration-none" to="register">
+									<NuxtLink
+										class="accent--text text-decoration-none"
+										to="register"
+									>
 										Sign Up
 									</NuxtLink>
 								</p>
@@ -70,7 +73,10 @@
 
 							<v-row justify="center">
 								<p class="font-weight-medium mt-2">
-									<NuxtLink class="text-decoration-none" to="forgot-password">
+									<NuxtLink
+										class="text-decoration-none accent--text"
+										to="forgot-password"
+									>
 										Forgot password?
 									</NuxtLink>
 								</p>

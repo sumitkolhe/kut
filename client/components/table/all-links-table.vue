@@ -7,6 +7,7 @@
 		:loading="loading"
 		item-key="short_url"
 		show-expand
+		class="surface"
 	>
 		<template v-slot:[`item.data-table-expand`]="{ expand, isExpanded, item }">
 			<v-row>
@@ -104,5 +105,6 @@ export default Vue.extend({
 .v-data-table > .v-data-table__wrapper > table > thead > tr > th {
 	font-weight: 700 !important;
 	font-size: 15px !important;
+	height: 60px !important;
 }
 </style>

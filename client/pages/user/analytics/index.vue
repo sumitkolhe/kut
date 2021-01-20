@@ -8,7 +8,13 @@
 					v-for="card in info_card"
 					:key="card.card_title"
 				>
-					<v-card flat rounded="xl" :height="card_height" class="pa-4">
+					<v-card
+						color="surface"
+						flat
+						rounded="xl"
+						:height="card_height"
+						class="pa-4"
+					>
 						<v-list-item three-line>
 							<v-list-item-content>
 								<v-list-item-subtitle

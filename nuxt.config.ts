@@ -50,11 +50,6 @@ const NuxtAppConfig: NuxtConfig = {
 
 	components: true,
 
-	server: {
-		port: config.SERVER_PORT,
-		host: config.SERVER_HOST,
-	},
-
 	buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
 
 	modules: [
@@ -70,10 +65,8 @@ const NuxtAppConfig: NuxtConfig = {
 		'~/plugins/chart.ts',
 	],
 
-	publicRuntimeConfig: {
-		axios: {
-			baseURL: `/api`, // server
-		},
+	axios: {
+		baseURL: '/api', // Used as fallback if no runtime config is provided
 	},
 
 	auth: {
@@ -113,18 +106,17 @@ const NuxtAppConfig: NuxtConfig = {
 			disable: false,
 			themes: {
 				dark: {
-					primary: '#ff5050',
-					secondary: '#fff',
-					accent: '#613dc1',
-
+					primary: '#ffffff',
+					secondary: '#613dc1',
+					accent: '#ff5050',
 					surface: '#242424',
 					background: '#121212',
 				},
 				light: {
-					primary: '#ff5050',
-					secondary: '#111',
-					accent: '#00bbf9',
-					surface: '#f1f1f1',
+					primary: '#111111',
+					secondary: '#00bbf9',
+					accent: '#ff5050',
+					surface: '#f7f7f7',
 					background: '#fff',
 				},
 			},

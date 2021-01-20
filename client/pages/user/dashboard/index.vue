@@ -1,10 +1,7 @@
 <template>
 	<v-row justify="center" align="center" class="mt-2 mt-md-8">
 		<v-col cols="12">
-			<p class="title-text" dark>
-				Create short links quickly
-				<svg-icon name="flash" />
-			</p>
+			<p class="title-text" dark>Create short links quickly</p>
 
 			<v-row justify="center">
 				<v-col cols="12" sm="10" lg="8" xl="6">
@@ -20,7 +17,7 @@
 				<v-btn
 					@click="shorten()"
 					depressed
-					color="secondary"
+					color="primary"
 					x-large
 					dark
 					class="font-weight-bold background--text"
@@ -31,7 +28,7 @@
 				</v-btn>
 				<v-btn
 					icon
-					color="primary"
+					color="accent"
 					x-large
 					class="ml-2"
 					@click="show_advanced = !show_advanced"

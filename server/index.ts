@@ -4,7 +4,7 @@ import useragent from 'express-useragent'
 //import serveStatic from 'serve-static'
 // @ts-ignore
 import { loadNuxt, build } from 'nuxt'
-//import { config } from '@config/config'
+import { config } from '@config/config'
 import { routes } from '@routes/routes'
 import { connectDatabase } from '@helpers/init-database'
 import { setHeaders } from '@middleware/header'
@@ -38,39 +38,28 @@ app.use(
 	) => HandleError(err, req, res, next)
 )
 
-const startDevServer = async () => {
-	console.log('dev server')
-	const nuxt = await loadNuxt('dev')
-	const { host, port } = nuxt.options.server
+const start = async () => {
+	const nuxt = await loadNuxt(isDev ? 'dev' : 'start')
+	const HOST = config.SERVER_HOST
+	const PORT = config.SERVER_PORT
+	if (isDev) {
+		build(nuxt)
+	} else {
+		await nuxt.ready()
+	}
 
-	build(nuxt)
-	await nuxt.ready()
+	app.get('/:alias', (req, res) => {
+		nuxt.renderRoute('/top', { req }).then((result: { html: any }) => {
+			res.send(result.html)
+		})
+	})
 
-	// Give nuxt middleware to express
 	app.use(nuxt.render)
-
-	// Listen the server
-	app.listen(port, host)
+	app.listen(PORT as number, HOST)
 	consola.ready({
-		message: `Server listening on http://${host}:${port}`,
+		message: `Server listening on http://${HOST}:${PORT}`,
 		badge: true,
 	})
 }
 
-const startProdServer = async () => {
-	console.log('prod server')
-	const nuxt = await loadNuxt('start')
-	const { host, port } = nuxt.options.server
-
-	app.use(nuxt.render)
-
-	// Listen the server
-	app.listen(port, host)
-	consola.ready({
-		message: `Server listening on http://${host}:${port}`,
-		badge: true,
-	})
-}
-
-if (isDev) startDevServer()
-else startProdServer()
+start()

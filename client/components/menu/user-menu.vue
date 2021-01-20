@@ -10,7 +10,7 @@
 	>
 		<template v-slot:activator="{ on }">
 			<v-btn icon large v-on="on">
-				<v-avatar color="primary" size="38">
+				<v-avatar color="accent" size="38">
 					<span class="white--text headline">
 						{{ user.initials }}
 					</span>
@@ -20,7 +20,7 @@
 		<v-card class="pa-4" rounded="lg">
 			<v-list-item-content class="justify-center">
 				<div class="mx-auto text-center">
-					<v-avatar class="mt-n2 mb-3" size="38" color="primary">
+					<v-avatar class="mt-n2 mb-3" size="38" color="accent">
 						<span class="white--text headline">
 							{{ user.initials }}
 						</span>
@@ -35,7 +35,7 @@
 					</v-row>
 
 					<v-row justify="center" class="mt-6">
-						<v-btn @click="logout()" color="primary" depressed rounded text>
+						<v-btn @click="logout()" color="accent" depressed rounded text>
 							Logout
 						</v-btn>
 					</v-row>

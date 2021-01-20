@@ -84,9 +84,7 @@
 			</template>
 			<template v-slot:append>
 				<v-row class="ma-4" v-if="!mini_variant">
-					<v-btn block color="primary" depressed @click="logout()">
-						Logout
-					</v-btn>
+					<v-btn block depressed color="accent" @click="logout()">Logout</v-btn>
 				</v-row>
 
 				<v-row justify="center" class="pa-6 mb-0" v-show="mini_variant">

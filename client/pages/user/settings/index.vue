@@ -29,10 +29,22 @@
 				<v-card-actions>
 					<v-col align="center">
 						<v-row justify="center">
-							<v-btn color="success" depressed>Submit</v-btn>
+							<v-btn
+								depressed
+								color="primary"
+								dark
+								class="font-weight-bold background--text"
+							>
+								Submit
+							</v-btn>
 						</v-row>
 						<v-row justify="center" class="mt-12 mb-n4">
-							<v-btn depressed @click="show_advanced = !show_advanced">
+							<v-btn
+								depressed
+								outlined
+								color="error"
+								@click="show_advanced = !show_advanced"
+							>
 								Advanced Settings
 							</v-btn>
 						</v-row>
@@ -46,7 +58,7 @@
 							Deleting your account would delete all the links and notes
 							associated with it.
 						</p>
-						<v-btn depressed color="primary" @click="show_dialog = true">
+						<v-btn depressed color="accent" @click="show_dialog = true">
 							Delete Your Account
 						</v-btn>
 					</v-col>

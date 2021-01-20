@@ -1,9 +1,9 @@
 <template>
-	<v-card color="transparent">
-		<v-footer dark color="transparent" padless inset width="100%">
+	<v-card color="transparent" elevation="0">
+		<v-footer dark color="transparent" elevation="0" padless width="100%">
 			<v-col class="text-center" cols="12">
-				<v-row justify="center" class="mt-6 mb-2">
-					<strong>
+				<v-row justify="center" class="mt-6">
+					<p class="font-weight-bold">
 						Made with
 						<svg
 							class="pr-1 beat"
@@ -16,12 +16,10 @@
 							/>
 						</svg>
 						by
-						<a class="mx-2" href="https://sumit.codes">Sumit Kolhe</a>
-						|
-						<a class="mx-2" href="https://sumit.codes">Github</a>
-						|
-						<a class="mx-2" href="https://sumit.codes">Website</a>
-					</strong>
+						<a class="mx-2 text-decoration-none" href="https://sumit.codes">
+							Sumit Kolhe
+						</a>
+					</p>
 				</v-row>
 			</v-col>
 		</v-footer>
