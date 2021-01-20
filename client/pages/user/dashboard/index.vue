@@ -1,13 +1,13 @@
 <template>
 	<v-row justify="center" align="center" class="mt-2 mt-md-8">
-		<v-col cols="12" sm="10" lg="8">
+		<v-col cols="12">
 			<p class="title-text" dark>
 				Create short links quickly
 				<svg-icon name="flash" />
 			</p>
 
 			<v-row justify="center">
-				<v-col cols="12" md="9">
+				<v-col cols="12" sm="10" lg="8" xl="6">
 					<input-field
 						:placeholder="'Enter a URL...'"
 						:type="'text'"
@@ -29,42 +29,37 @@
 				>
 					Shorten
 				</v-btn>
-			</v-row>
-
-			<v-row justify="center" class="mb-6 mt-10">
 				<v-btn
+					icon
 					color="primary"
-					depressed
-					large
-					rounded
+					x-large
+					class="ml-2"
 					@click="show_advanced = !show_advanced"
 				>
-					<svg-icon v-if="show_advanced" name="chevron_up" />
-					<svg-icon v-else name="chevron_down" />
-
-					Advance Options
+					<svg-icon v-if="show_advanced" name="settings_filled" size="30" />
+					<svg-icon v-else name="settings" size="30" />
 				</v-btn>
 			</v-row>
 
 			<v-fade-transition>
 				<v-row justify="center" v-show="show_advanced" class="mt-8">
-					<v-col cols="12" md="9">
+					<v-col cols="12" sm="10" lg="8" xl="6">
 						<input-field
+							class="mt-md-2 mt-0"
 							:placeholder="'Custom Alias'"
 							:type="'text'"
 							v-model="payload.alias"
 						/>
-					</v-col>
 
-					<v-col cols="12" md="9">
 						<input-field
+							class="mt-4"
 							:placeholder="'Password'"
 							:type="'password'"
 							v-model="payload.password"
 						/>
-					</v-col>
-					<v-col cols="12" md="9">
+
 						<input-field
+							class="mt-4"
 							:placeholder="'Description'"
 							:type="'text'"
 							v-model="payload.description"
@@ -74,7 +69,7 @@
 			</v-fade-transition>
 
 			<v-row justify="center" class="mt-12">
-				<v-col cols="12">
+				<v-col cols="12" sm="10" lg="10" xl="8">
 					<recent-links-table :recent_links="recent_links" />
 				</v-col>
 			</v-row>

@@ -1,13 +1,12 @@
 <template>
 	<v-row justify="center" align="center" class="bg">
 		<v-col cols="12" align="center">
+			<img class="logo mb-2" src="../../assets/logo/logo.svg" />
 			<v-card
-				rounded="lg"
-				elevation="16"
-				class="mx-4 mt-4 pa-8"
+				outlined
+				class="mx-md-4 mx-2 mt-4 px-md-8 px-4 py-8"
 				max-width="500px"
 			>
-				<img class="logo mb-2" src="../../assets/logo/logo.svg" />
 				<p class="font-weight-bold text-h5 secondary--text text-center">
 					Sign Up on {{ title }}
 				</p>
@@ -56,11 +55,11 @@
 						color="primary"
 						@click="registerUser"
 					>
-						<v-icon left>mdi-send-outline</v-icon>
+						<svg-icon name="email" class="mr-2"></svg-icon>
 						Create an account
 					</v-btn>
 
-					<p class="font-weight-medium mt-4 text-md-left text-center">
+					<p class="font-weight-medium mt-4 text-center">
 						Already have an account?
 						<NuxtLink class="text-decoration-none primary--text" to="login">
 							Login
@@ -130,9 +129,9 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.bg {
-	background: url('../../assets/bg.svg');
-	background-size: 100%;
+.v-card.v-sheet.theme--light {
+	border: 2px solid rgba(0, 0, 0, 0.1) !important;
+	border-radius: 16px !important;
 }
 .logo {
 	pointer-events: none;

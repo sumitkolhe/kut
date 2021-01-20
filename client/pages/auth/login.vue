@@ -1,13 +1,12 @@
 <template>
 	<v-row justify="center" align="center" class="bg">
 		<v-col cols="12" align="center">
+			<img class="mb-2" src="../../assets/logo/logo.svg" />
 			<v-card
-				rounded="lg"
-				elevation="16"
-				class="mx-4 mt-4 pa-8"
+				outlined
+				class="mx-md-4 mx-2 mt-4 px-md-8 px-4 py-8"
 				max-width="500px"
 			>
-				<img class="mb-2" src="../../assets/logo/logo.svg" />
 				<p class="font-weight-bold text-h5 secondary--text text-center">
 					Login in to {{ title }}
 				</p>
@@ -54,25 +53,28 @@
 						color="primary"
 						@click="loginUser"
 					>
-						<v-icon left>mdi-email</v-icon>
+						<svg-icon name="email" class="mr-2"></svg-icon>
 						Login
 					</v-btn>
 
-					<v-row>
+					<v-row justify="center">
 						<v-col>
-							<p class="font-weight-medium mt-6 text-left">
-								New user?
-								<NuxtLink class="text-decoration-none" to="register">
-									Sign Up
-								</NuxtLink>
-							</p>
-						</v-col>
-						<v-col>
-							<p class="font-weight-medium mt-6 text-right">
-								<NuxtLink class="text-decoration-none" to="forgot-password">
-									Forgot password?
-								</NuxtLink>
-							</p>
+							<v-row justify="center">
+								<p class="font-weight-medium mt-8">
+									Don't have an account?
+									<NuxtLink class="text-decoration-none" to="register">
+										Sign Up
+									</NuxtLink>
+								</p>
+							</v-row>
+
+							<v-row justify="center">
+								<p class="font-weight-medium mt-2">
+									<NuxtLink class="text-decoration-none" to="forgot-password">
+										Forgot password?
+									</NuxtLink>
+								</p>
+							</v-row>
 						</v-col>
 					</v-row>
 				</v-form>
@@ -135,11 +137,11 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.bg {
-	background: url('../../assets/bg.svg');
-	background-size: 100%;
-}
 .logo {
 	pointer-events: none;
+}
+.v-card.v-sheet.theme--light {
+	border: 2px solid rgba(0, 0, 0, 0.1) !important;
+	border-radius: 16px !important;
 }
 </style>

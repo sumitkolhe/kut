@@ -1,12 +1,14 @@
 <template>
-	<v-row
-		justify="center"
-		class="mx-0 mb-8"
-		align="center"
-		v-show="recent_links != ''"
-	>
-		<h3 class="mb-6 mt-4 font-weight-medium">Recently shortened links</h3>
-		<table class="table">
+	<v-row justify="center" class="mx-0 mb-8" align="center">
+		<h3 class="mb-6 mt-md-12 mt-4 font-weight-medium">
+			Recently shortened links
+		</h3>
+		<table class="table" v-show="recent_links == ''">
+			<v-row justify="center" class="py-12">
+				<h3>Oops! Nothing to show here yet.</h3>
+			</v-row>
+		</table>
+		<table class="table" v-show="recent_links != ''">
 			<thead>
 				<tr>
 					<th>Orignal URL</th>

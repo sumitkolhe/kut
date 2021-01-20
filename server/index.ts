@@ -39,6 +39,7 @@ app.use(
 )
 
 const startDevServer = async () => {
+	console.log('dev server')
 	const nuxt = await loadNuxt('dev')
 	const { host, port } = nuxt.options.server
 
@@ -57,6 +58,7 @@ const startDevServer = async () => {
 }
 
 const startProdServer = async () => {
+	console.log('prod server')
 	const nuxt = await loadNuxt('start')
 	const { host, port } = nuxt.options.server
 

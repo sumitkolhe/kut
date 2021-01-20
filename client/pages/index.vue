@@ -9,7 +9,7 @@
 
 			<v-btn
 				depressed
-				color="rgba(0,0,0,0.1)"
+				color="rgba(0,0,0,0.06)"
 				large
 				class="mx-2 font-weight-bold hidden-sm-and-down"
 				to="auth/login"
@@ -18,7 +18,7 @@
 			</v-btn>
 			<v-btn
 				depressed
-				color="rgba(0,0,0,0.1)"
+				color="rgba(0,0,0,0.06)"
 				class="mx-2 font-weight-bold hidden-sm-and-down"
 				large
 				to="auth/register"
@@ -75,14 +75,14 @@
 			<v-col md="2" cols="12" class="mx-4">
 				<v-row class="mt-12">
 					<v-col align="center">
-						<v-avatar color="rgb(255,80,80,0.15)" size="80">
-							<v-icon x-large color="primary">mdi-clipboard-edit</v-icon>
+						<v-avatar color="rgb(255,80,80,0.15)" size="80" class="pa-4">
+							<svg-icon name="clipboard" color="#ff5050" />
 						</v-avatar>
 					</v-col>
 				</v-row>
 				<v-row>
 					<v-col>
-						<p class="font-weight-medium white--text">
+						<p class="font-weight-medium white--text text-center">
 							Create, protect and delete your links and monitor them with
 							detailed statistics.
 						</p>
@@ -92,14 +92,14 @@
 			<v-col md="2" cols="12" class="mx-4">
 				<v-row class="mt-12">
 					<v-col align="center">
-						<v-avatar color="rgb(255,80,80,0.15)" size="80">
-							<v-icon x-large color="primary">mdi-chart-donut</v-icon>
+						<v-avatar color="rgb(255,80,80,0.15)" size="80" class="pa-4">
+							<svg-icon name="donut_chart" color="#ff5050" />
 						</v-avatar>
 					</v-col>
 				</v-row>
 				<v-row>
 					<v-col>
-						<p class="font-weight-medium white--text">
+						<p class="font-weight-medium white--text text-center">
 							Create new shortlinks and manage them. View stats and link
 							analytics
 						</p>
@@ -109,14 +109,14 @@
 			<v-col md="2" cols="12" class="mx-4">
 				<v-row justify="center" class="mt-12">
 					<v-col align="center">
-						<v-avatar color="rgb(255,80,80,0.15)" size="80">
-							<v-icon x-large color="primary">mdi-heart</v-icon>
+						<v-avatar color="rgb(255,80,80,0.15)" size="80" class="pa-4">
+							<svg-icon name="heart" color="#ff5050" />
 						</v-avatar>
 					</v-col>
 				</v-row>
 				<v-row>
 					<v-col>
-						<p class="font-weight-medium white--text">
+						<p class="font-weight-medium white--text text-center">
 							Completely open source and free. You can host it on your own
 							server.
 						</p>
@@ -139,7 +139,7 @@
 								<p class="contribution-text">
 									Its free & open-source
 
-									<v-icon color="#121212" x-large>mdi-heart</v-icon>
+									<svg-icon name="heart" size="46"></svg-icon>
 								</p>
 							</v-row>
 							<v-row justify="center" class="mt-2">
@@ -159,7 +159,7 @@
 									rounded
 								>
 									Contribute
-									<v-icon right>mdi-github</v-icon>
+									<svg-icon class="ml-2" name="github"></svg-icon>
 								</v-btn>
 							</v-row>
 						</v-col>
