@@ -13,7 +13,12 @@ const NuxtAppConfig: NuxtConfig = {
 				name: 'viewport',
 				content: 'width=device-width, initial-scale=1',
 			},
-			{ hid: 'description', name: 'description', content: '' },
+			{
+				hid: 'description',
+				name: 'description',
+				content:
+					'An Open-Source URL shortener built with powerful tools to help you grow and protect your brand.',
+			},
 		],
 		link: [
 			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
