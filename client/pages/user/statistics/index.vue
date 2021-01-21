@@ -45,7 +45,7 @@ import Vue from 'vue'
 export default Vue.extend({
 	data() {
 		return {
-			card_height: '150px',
+			card_height: '180px',
 
 			info_card: [
 				{
@@ -61,6 +61,48 @@ export default Vue.extend({
 					icon: 'mdi-book-edit',
 					icon_bg_color: '#f3f9ff',
 					icon_color: '#0062ff',
+				},
+				{
+					title: 'Total Link Impressions',
+					value: '',
+					icon: 'mdi-cursor-default-click',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
+				},
+				{
+					title: 'Account Created On',
+					value: '',
+					icon: 'mdi-cursor-default-click',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
+				},
+				{
+					title: 'Last Activity',
+					value: '',
+					icon: 'mdi-cursor-default-click',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
+				},
+				{
+					title: 'Password Protected Links',
+					value: '',
+					icon: 'mdi-cursor-default-click',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
+				},
+				{
+					title: 'Total Link Impressions',
+					value: '',
+					icon: 'mdi-cursor-default-click',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
+				},
+				{
+					title: 'Total Link Impressions',
+					value: '',
+					icon: 'mdi-cursor-default-click',
+					icon_bg_color: '#ffeeee',
+					icon_color: '#ff3d3d',
 				},
 				{
 					title: 'Total Link Impressions',

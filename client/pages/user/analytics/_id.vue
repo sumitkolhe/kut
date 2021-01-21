@@ -37,15 +37,20 @@
 				</v-col>
 			</v-row>
 
-			<v-sheet color="surface" class="py-8 mt-12" rounded="lg">
+			<v-card elevation="0" color="surface" class="py-8 mt-12" rounded="lg">
 				<p class="px-8 text-h6 font-weight-bold">Views</p>
 				<v-row justify="center" class="my-6">
 					<v-col cols="12" md="10">
-						<bar-chart legend="bottom" :data="chart_data.views"></bar-chart>
+						<line-chart legend="bottom" :data="chart_data.views"></line-chart>
 					</v-col>
 				</v-row>
-			</v-sheet>
-			<v-sheet color="surface" class="py-8 mt-12 mb-10" rounded="xl">
+			</v-card>
+			<v-card
+				elevation="0"
+				color="surface"
+				class="py-8 mt-12 mb-10"
+				rounded="xl"
+			>
 				<v-row justify="space-between">
 					<v-col cols="12" md="5">
 						<p class="px-8 text-h6 font-weight-bold">OS</p>
@@ -56,7 +61,7 @@
 						<pie-chart legend="bottom" :data="chart_data.browser"></pie-chart>
 					</v-col>
 				</v-row>
-			</v-sheet>
+			</v-card>
 		</v-col>
 	</v-row>
 </template>

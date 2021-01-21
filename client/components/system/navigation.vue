@@ -15,7 +15,7 @@
 			<v-spacer />
 			<theme-switch />
 			<span v-show="!mobile_mode" class="mx-2"></span>
-			<notification-menu v-if="!mobile_mode" />
+			<!-- <notification-menu v-if="!mobile_mode" /> -->
 			<span class="mx-2"></span>
 			<user-menu />
 			<span v-show="!mobile_mode" class="mx-2"></span>
