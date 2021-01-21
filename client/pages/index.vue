@@ -3,7 +3,7 @@
 		<v-app-bar class="pt-2" elevation="0" height="100" color="#fff">
 			<v-spacer class="hidden-sm-and-down"></v-spacer>
 
-			<img class="mb-6" src="~/assets/logo/logo.svg" />
+			<img class="pl-2 mb-6" src="~/assets/logo/logo.svg" />
 
 			<v-spacer></v-spacer>
 
@@ -11,7 +11,7 @@
 				depressed
 				large
 				dark
-				class="mx-2 font-weight-bold hidden-sm-and-down"
+				class="mx-2 mb-5 font-weight-bold hidden-sm-and-down"
 				to="auth/login"
 			>
 				Login
@@ -19,18 +19,16 @@
 			<v-btn
 				depressed
 				dark
-				class="mx-2 font-weight-bold hidden-sm-and-down"
+				class="mx-2 mb-5 font-weight-bold hidden-sm-and-down"
 				large
 				to="auth/register"
 			>
 				Register
 			</v-btn>
 
-			<v-app-bar-nav-icon
-				x-large
-				class="hidden-md-and-up"
-				@click.stop="drawer = !drawer"
-			/>
+			<v-btn class="mb-6" icon @click.stop="drawer = !drawer">
+				<svg-icon color="#111" size="36" name="menu" class="hidden-md-and-up" />
+			</v-btn>
 
 			<v-spacer class="hidden-sm-and-down"></v-spacer>
 		</v-app-bar>
@@ -43,9 +41,9 @@
 			app
 			color="#fff"
 		>
-			<v-list dark nav>
-				<v-list-item router exact>Register</v-list-item>
-				<v-list-item router exact>Login</v-list-item>
+			<v-list nav>
+				<v-list-item>Register</v-list-item>
+				<v-list-item>Login</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
 
@@ -63,7 +61,7 @@
 
 				<v-row justify="center" class="mt-12 mb-md-0 mb-8">
 					<v-col cols="10" sm="8" md="4" lg="3">
-						<v-btn to="/auth/register" x-large outlined depressed>
+						<v-btn to="/auth/register" x-large color="accent" depressed>
 							Get Started Now
 						</v-btn>
 					</v-col>
@@ -73,7 +71,7 @@
 		<img class="mt-2" src="../assets/wave.svg" />
 		<v-row justify="center" class="mb-12 mx-4">
 			<v-col md="2" cols="12" class="mx-4">
-				<v-row class="mt-12">
+				<v-row class="mt-sm-12 mt-6">
 					<v-col align="center">
 						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
 							<svg-icon name="clipboard" color="#fff" />
@@ -90,7 +88,7 @@
 				</v-row>
 			</v-col>
 			<v-col md="2" cols="12" class="mx-4">
-				<v-row class="mt-12">
+				<v-row class="mt-sm-12 mt-6">
 					<v-col align="center">
 						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
 							<svg-icon name="donut_chart" color="#fff" />
@@ -107,7 +105,7 @@
 				</v-row>
 			</v-col>
 			<v-col md="2" cols="12" class="mx-4">
-				<v-row justify="center" class="mt-12">
+				<v-row justify="center" class="mt-sm-12 mt-6">
 					<v-col align="center">
 						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
 							<svg-icon name="heart" color="#fff" />
@@ -128,9 +126,9 @@
 		<v-row justify="center" class="mb-12">
 			<v-col align="center" cols="12" md="8">
 				<v-card
-					color="#fff"
+					color="#f1f1f1"
 					class="pa-6 mb-10 mt-6 mx-4"
-					rounded="xl"
+					rounded="lg"
 					max-width="960px"
 				>
 					<v-row justify="center" align="center" class="px-4">
@@ -139,7 +137,7 @@
 								<p class="contribution-text">
 									Its free & open-source
 
-									<svg-icon name="heart" size="46"></svg-icon>
+									<svg-icon color="#f55" name="heart" size="46"></svg-icon>
 								</p>
 							</v-row>
 							<v-row justify="center" class="mt-2">
@@ -209,5 +207,22 @@ export default Vue.extend({
 	font-size: 22px;
 	font-weight: 500;
 	max-width: 600px;
+}
+
+@media only screen and (max-width: 600px) {
+	.main-title {
+		font-size: 48px;
+		font-weight: 700;
+		max-width: 700px;
+		letter-spacing: 1px;
+		line-height: 65px;
+	}
+
+	.sub-title {
+		padding-top: 12px;
+		font-size: 18px;
+		font-weight: 500;
+		max-width: 600px;
+	}
 }
 </style>

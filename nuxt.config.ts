@@ -31,7 +31,7 @@ const NuxtAppConfig: NuxtConfig = {
 		APP_VERSION: process.env.APP_VERSION || config.APP_VERSION,
 	},
 
-	loading: { color: '#f55555' },
+	loading: { color: '#613dc1' },
 
 	loadingIndicator: {
 		name: 'circle',

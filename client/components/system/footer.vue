@@ -16,8 +16,11 @@
 							/>
 						</svg>
 						by
-						<a class="mx-2 text-decoration-none" href="https://sumit.codes">
-							Sumit Kolhe
+						<a
+							class="mx-2 white--text text-decoration-none"
+							href="https://sumit.codes"
+						>
+							🦊
 						</a>
 					</p>
 				</v-row>
