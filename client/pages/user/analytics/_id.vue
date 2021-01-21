@@ -4,7 +4,7 @@
 			<v-row justify="space-around">
 				<v-col
 					cols="12"
-					md="3"
+					md="4"
 					v-for="card in info_card"
 					:key="card.card_title"
 				>
@@ -78,13 +78,6 @@ export default Vue.extend({
 					icon_color: '#00cc88',
 				},
 				{
-					title: 'Link Description',
-					value: '',
-					icon: 'mdi-card-text',
-					icon_bg_color: '#f3f9ff',
-					icon_color: '#0062ff',
-				},
-				{
 					title: 'Created On',
 					value: '',
 					icon: 'mdi-calendar-text',
@@ -95,8 +88,8 @@ export default Vue.extend({
 					title: 'Short Link',
 					value: '',
 					icon: 'mdi-link',
-					icon_bg_color: '#d8e2dc',
-					icon_color: '#ff5',
+					icon_bg_color: '#f3f9ff',
+					icon_color: '#0062ff',
 				},
 			],
 		}
@@ -110,9 +103,8 @@ export default Vue.extend({
 		let data = this.$store.getters['analytics/GET_ANALYTICS']
 		this.chart_data = data.analytics
 		this.info_card[0].value = data.visit_count
-		this.info_card[1].value = data.description || 'No description provided'
-		this.info_card[2].value = data.created_at
-		this.info_card[3].value = data.short_url
+		this.info_card[1].value = data.created_at
+		this.info_card[2].value = data.short_url
 	},
 })
 </script>

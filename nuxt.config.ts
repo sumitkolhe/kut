@@ -3,7 +3,6 @@ import { config } from './server/config/config'
 
 const NuxtAppConfig: NuxtConfig = {
 	telemetry: false,
-
 	head: {
 		titleTemplate: '%s | Shorten your links easily',
 		title: 'Reduced',
@@ -36,17 +35,9 @@ const NuxtAppConfig: NuxtConfig = {
 		APP_VERSION: process.env.APP_VERSION || config.APP_VERSION,
 	},
 
-	loading: { color: '#613dc1' },
-
-	loadingIndicator: {
-		name: 'circle',
-		color: '#3B8070',
-		background: 'white',
-	},
+	loading: { color: '#f55' },
 
 	srcDir: 'client/',
-
-	//buildDir: './dist/nuxt',
 
 	generate: {
 		dir: './dist/nuxt',
@@ -79,6 +70,7 @@ const NuxtAppConfig: NuxtConfig = {
 		strategies: {
 			local: {
 				token: {
+					prefix: 'access_token.',
 					property: 'access_token',
 					required: true,
 					type: 'Bearer',
@@ -132,7 +124,6 @@ const NuxtAppConfig: NuxtConfig = {
 		extend: function (NuxtAppConfig) {
 			NuxtAppConfig.node = {
 				fs: 'empty',
-				worker_threads: 'empty',
 			}
 		},
 	},
