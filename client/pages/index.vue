@@ -173,7 +173,6 @@
 import Vue from 'vue'
 export default Vue.extend({
 	layout: 'public',
-	middleware: 'redirect',
 
 	data() {
 		return {

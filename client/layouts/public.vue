@@ -8,7 +8,13 @@
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+	beforeCreate() {
+		if (this.$auth.loggedIn) {
+			this.$router.push('/user/dashboard')
+		}
+	},
+})
 </script>
 
 <style scoped>
