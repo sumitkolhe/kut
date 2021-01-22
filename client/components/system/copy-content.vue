@@ -29,7 +29,6 @@ export default Vue.extend({
 
 	methods: {
 		async copy() {
-			console.log('yes')
 			try {
 				this.clicked = true
 				await (this as any).$copyText(this.target)

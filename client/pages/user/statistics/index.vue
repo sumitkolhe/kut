@@ -8,13 +8,7 @@
 					v-for="card in info_card"
 					:key="card.card_title"
 				>
-					<v-card
-						color="surface"
-						rounded="xl"
-						flat
-						:height="card_height"
-						class="pa-4"
-					>
+					<v-card rounded="xl" flat :height="card_height" class="pa-4">
 						<v-list-item three-line>
 							<v-list-item-content>
 								<v-list-item-subtitle
@@ -27,7 +21,7 @@
 								</v-list-item-title>
 							</v-list-item-content>
 
-							<v-list-item-avatar rounded :color="card.icon_bg_color" size="56">
+							<v-list-item-avatar rounded :color="card.icon_bg_color" size="64">
 								<v-icon x-large :color="card.icon_color">
 									{{ card.icon }}
 								</v-icon>
@@ -52,64 +46,65 @@ export default Vue.extend({
 					title: 'Total Shortened Links',
 					value: '',
 					icon: 'mdi-link',
-					icon_bg_color: '#e1fdff',
+					icon_bg_color: 'rgba(0,0,0,.04)',
 					icon_color: '#00cc88',
 				},
 				{
 					title: 'Total Notes Created',
 					value: '',
 					icon: 'mdi-book-edit',
-					icon_bg_color: '#f3f9ff',
+					icon_bg_color: 'rgba(0,0,0,.04)',
 					icon_color: '#0062ff',
-				},
-				{
-					title: 'Total Link Impressions',
-					value: '',
-					icon: 'mdi-cursor-default-click',
-					icon_bg_color: '#ffeeee',
-					icon_color: '#ff3d3d',
 				},
 				{
 					title: 'Account Created On',
 					value: '',
 					icon: 'mdi-cursor-default-click',
-					icon_bg_color: '#ffeeee',
+					icon_bg_color: 'rgba(0,0,0,.04)',
 					icon_color: '#ff3d3d',
 				},
+				{
+					title: 'Total Link Impressions',
+					value: '',
+					icon: 'mdi-cursor-default-click',
+					icon_bg_color: 'rgba(0,0,0,.04)',
+					icon_color: '#454955',
+				},
+
 				{
 					title: 'Last Activity',
 					value: '',
 					icon: 'mdi-cursor-default-click',
-					icon_bg_color: '#ffeeee',
-					icon_color: '#ff3d3d',
+					icon_bg_color: 'rgba(0,0,0,.04)',
+					icon_color: '#9b5de5',
 				},
 				{
 					title: 'Password Protected Links',
 					value: '',
 					icon: 'mdi-cursor-default-click',
-					icon_bg_color: '#ffeeee',
-					icon_color: '#ff3d3d',
+					icon_bg_color: 'rgba(0,0,0,.04)',
+					icon_color: '#00bbf9',
 				},
 				{
 					title: 'Total Link Impressions',
 					value: '',
 					icon: 'mdi-cursor-default-click',
-					icon_bg_color: '#ffeeee',
-					icon_color: '#ff3d3d',
+					icon_bg_color: 'rgba(0,0,0,.04)',
+					icon_color: '#00f5d4',
 				},
 				{
 					title: 'Total Link Impressions',
 					value: '',
 					icon: 'mdi-cursor-default-click',
-					icon_bg_color: '#ffeeee',
-					icon_color: '#ff3d3d',
+					icon_bg_color: 'rgba(0,0,0,.04)',
+					icon_color: '#80b918',
 				},
 				{
 					title: 'Total Link Impressions',
 					value: '',
 					icon: 'mdi-cursor-default-click',
-					icon_bg_color: '#ffeeee',
-					icon_color: '#ff3d3d',
+					icon_bg_color: 'rgba(0,0,0,.04)',
+					icon_color: '#00cecb',
 				},
 			],
 		}

@@ -9,7 +9,14 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-	beforeCreate() {
+	//middleware: 'redirect',
+
+	data() {
+		return {
+			loading: true,
+		}
+	},
+	created() {
 		if (this.$auth.loggedIn) {
 			this.$router.push('/user/dashboard')
 		}

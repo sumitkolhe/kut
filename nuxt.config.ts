@@ -90,7 +90,7 @@ const NuxtAppConfig: NuxtConfig = {
 		redirect: {
 			login: '/auth/login',
 			logout: '/auth/login',
-			home: false,
+			home: '/user/dashboard',
 		},
 	},
 
@@ -113,7 +113,7 @@ const NuxtAppConfig: NuxtConfig = {
 					primary: '#111111',
 					secondary: '#00bbf9',
 					accent: '#ff5050',
-					surface: '#f7f7f7',
+					surface: '#fafafa',
 					background: '#fff',
 				},
 			},
