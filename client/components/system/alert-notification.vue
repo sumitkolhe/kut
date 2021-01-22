@@ -5,6 +5,7 @@
 			:color="color"
 			class="mb-4"
 			timeout="2000"
+			multi-line
 		>
 			<h3>{{ message }}</h3>
 
