@@ -1,11 +1,19 @@
 <template>
 	<v-row justify="center" class="mx-0 mb-8" align="center">
-		<h3 class="mb-6 mt-md-12 mt-4 font-weight-medium">
+		<h3
+			v-show="recent_links != ''"
+			class="mb-6 mt-md-12 mt-4 font-weight-medium"
+		>
 			Recently shortened links
 		</h3>
-		<table class="table" v-show="recent_links == ''">
-			<v-row justify="center" class="py-12">
-				<h3>Oops! Nothing to show here yet.</h3>
+		<table class="table mt-12" v-show="recent_links == ''">
+			<v-row justify="center" class="pt-12 pb-8">
+				<v-col cols="8">
+					<h3 class="text-center">
+						Oops! Nothing to show here yet. Shorten a link and it will appear
+						here
+					</h3>
+				</v-col>
 			</v-row>
 		</table>
 		<table class="table" v-show="recent_links != ''">

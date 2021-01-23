@@ -20,7 +20,7 @@
 						<v-btn
 							depressed
 							class="mt-6 ml-4"
-							color="primary"
+							color="accent"
 							:loading="loading"
 							@click="deleteLink(target)"
 						>

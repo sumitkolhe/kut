@@ -14,7 +14,7 @@ export const config = {
 	SERVER_PROTOCOL: isDev ? 'http' : process.env.SERVER_PROTOCOL || 'https',
 
 	//MongoDB vars
-	DB_NAME: 'user_data',
+	DB_NAME: process.env.DB_NAME ? process.env.DB_NAME : 'user_data',
 	MONGO_URL: process.env.MONGO_URL
 		? process.env.MONGO_URL
 		: 'mongodb://localhost:27017/dev',

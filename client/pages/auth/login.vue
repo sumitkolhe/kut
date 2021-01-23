@@ -131,7 +131,7 @@ export default Vue.extend({
 					if (this.$auth.loggedIn)
 						setTimeout(() => {
 							this.$router.push('/user/dashboard')
-						}, 1000)
+						}, 1500)
 				} catch (error) {
 					this.loading = false
 					;(this as any).$notify.error(error.response.data.message)
