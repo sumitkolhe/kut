@@ -4,7 +4,7 @@ import { config } from '@config/config'
 export const connectDatabase = async () => {
 	await mongoose
 		.connect(config.MONGO_URL, {
-			dbName: 'user_data',
+			dbName: config.DB_NAME,
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useCreateIndex: true,

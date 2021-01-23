@@ -20,6 +20,7 @@ export const login: RequestHandler = async (req, res, next) => {
 
 		if (!user_details) throw CreateError.NotFound('User Does Not Exist')
 
+		if (user_details.is_banned) throw CreateError.NotFound('User is banned')
 		const check_password = await bcrypt.compare(
 			req.body.password,
 			user_details.password.toString()

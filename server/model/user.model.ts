@@ -19,6 +19,10 @@ interface UserDocument extends Document {
 		required: boolean
 		minlength: number
 	}
+	is_banned: {
+		type: boolean
+		required: boolean
+	}
 	user_links: {
 		type: Schema.Types.ObjectId
 		ref: string
@@ -44,6 +48,11 @@ const UserSchema = new Schema(
 			required: true,
 			lowercase: true,
 			unique: true,
+		},
+		is_banned: {
+			type: Boolean,
+			required: true,
+			default: false,
 		},
 		password: {
 			type: String,

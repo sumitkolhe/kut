@@ -5,7 +5,7 @@ const NuxtAppConfig: NuxtConfig = {
 	telemetry: false,
 	head: {
 		titleTemplate: '%s | Shorten your links easily',
-		title: 'Reduced',
+		title: config.APP_NAME,
 		meta: [
 			{ charset: 'utf-8' },
 			{
@@ -62,7 +62,7 @@ const NuxtAppConfig: NuxtConfig = {
 	],
 
 	axios: {
-		baseURL: '/api', // Used as fallback if no runtime config is provided
+		baseURL: '/api',
 	},
 
 	auth: {
