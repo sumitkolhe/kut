@@ -123,7 +123,7 @@ export default Vue.extend({
 				return 'rgba(255, 255, 255,1)'
 			else if ((this as any).$vuetify.theme.dark && !this.mobile_mode)
 				return 'rgba(0, 0, 0, .6)'
-			else return 'rgba(245, 245, 245,.8)'
+			else return 'rgba(245, 245, 245,.7)'
 		},
 	},
 	data() {

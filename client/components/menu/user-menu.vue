@@ -31,11 +31,11 @@
 					</p>
 
 					<v-row justify="center" class="mt-6">
-						<v-btn to="settings" depressed rounded text>Settings</v-btn>
+						<v-btn to="settings" outlined rounded text>Settings</v-btn>
 					</v-row>
 
 					<v-row justify="center" class="mt-6">
-						<v-btn @click="logout()" color="accent" depressed rounded text>
+						<v-btn @click="logout()" color="accent" outlined rounded text>
 							Logout
 						</v-btn>
 					</v-row>
