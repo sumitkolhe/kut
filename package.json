@@ -30,7 +30,7 @@
 		"nuxt-clipboard2": "^0.2.1",
 		"nuxt-vuex-localstorage": "^1.2.7",
 		"particles.js": "^2.0.0",
-		"serve-static": "^1.14.1",
+		"rate-limiter-flexible": "^2.2.1",
 		"vue": "^2.6.12",
 		"vue-chartkick": "^0.6.1"
 	},
@@ -38,7 +38,6 @@
 		"@nuxt/types": "^2.14.12",
 		"@nuxt/typescript-build": "^2.0.4",
 		"@nuxtjs/vuetify": "^1.11.3",
-		"@types/bcrypt": "^3.0.0",
 		"@types/bcryptjs": "^2.4.2",
 		"@types/chart.js": "^2.9.29",
 		"@types/chenfengyuan__vue-qrcode": "^1.0.2",

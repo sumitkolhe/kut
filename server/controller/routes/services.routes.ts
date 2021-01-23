@@ -13,6 +13,7 @@ import {
 	getNotes,
 	updateNote,
 } from '@controller/services/notes'
+import { rateLimit } from '@middleware/rate-limiter'
 
 const router = express.Router()
 
@@ -26,7 +27,7 @@ export const controllerRoutes = {
 	deleteLink: router.delete('/links', verifyToken, deleteLink),
 	notification: router.get('/notification', verifyToken, notification),
 	createNote: router.post('/notes', verifyToken, createNote),
-	shorten: router.post('/shorten', verifyToken, shorten),
+	shorten: router.post('/shorten', verifyToken, rateLimit, shorten),
 	analytics: router.post('/analytics', verifyToken, analytics),
 	redirect: router.get('/:alias', analyticsHandler, redirect),
 }

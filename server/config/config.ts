@@ -17,7 +17,7 @@ export const config = {
 	DB_NAME: process.env.DB_NAME ? process.env.DB_NAME : 'user_data',
 	MONGO_URL: process.env.MONGO_URL
 		? process.env.MONGO_URL
-		: 'mongodb://localhost:27017/dev',
+		: 'mongodb://localhost:27017',
 
 	//Auth Token vars
 	ACCESS_TOKEN_SECRET: 't4gQdVeCKqawXVOazIZ1',

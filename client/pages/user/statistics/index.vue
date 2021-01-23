@@ -8,7 +8,13 @@
 					v-for="card in info_card"
 					:key="card.card_title"
 				>
-					<v-card rounded="xl" flat :height="card_height" class="pa-4">
+					<v-card
+						rounded="xl"
+						flat
+						:min-height="card_height"
+						max-height="auto"
+						class="py-2 px-1"
+					>
 						<v-list-item three-line>
 							<v-list-item-content>
 								<v-list-item-subtitle
@@ -16,7 +22,9 @@
 								>
 									{{ card.title }}
 								</v-list-item-subtitle>
-								<v-list-item-title class="pl-1 text-h4 font-weight-medium">
+								<v-list-item-title
+									class="pl-1 text-h5 font-weight-medium text-wrap"
+								>
 									{{ card.value }}
 								</v-list-item-title>
 							</v-list-item-content>
@@ -36,10 +44,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { convertDate } from '../../../utils/convert-date'
 export default Vue.extend({
 	data() {
 		return {
-			card_height: '180px',
+			card_height: '150px',
 
 			info_card: [
 				{
@@ -57,54 +66,11 @@ export default Vue.extend({
 					icon_color: '#0062ff',
 				},
 				{
-					title: 'Account Created On',
+					title: 'Account Created',
 					value: '',
-					icon: 'mdi-cursor-default-click',
+					icon: 'mdi-account-plus',
 					icon_bg_color: 'rgba(0,0,0,.04)',
 					icon_color: '#ff3d3d',
-				},
-				{
-					title: 'Total Link Impressions',
-					value: '',
-					icon: 'mdi-cursor-default-click',
-					icon_bg_color: 'rgba(0,0,0,.04)',
-					icon_color: '#454955',
-				},
-
-				{
-					title: 'Last Activity',
-					value: '',
-					icon: 'mdi-cursor-default-click',
-					icon_bg_color: 'rgba(0,0,0,.04)',
-					icon_color: '#9b5de5',
-				},
-				{
-					title: 'Password Protected Links',
-					value: '',
-					icon: 'mdi-cursor-default-click',
-					icon_bg_color: 'rgba(0,0,0,.04)',
-					icon_color: '#00bbf9',
-				},
-				{
-					title: 'Total Link Impressions',
-					value: '',
-					icon: 'mdi-cursor-default-click',
-					icon_bg_color: 'rgba(0,0,0,.04)',
-					icon_color: '#00f5d4',
-				},
-				{
-					title: 'Total Link Impressions',
-					value: '',
-					icon: 'mdi-cursor-default-click',
-					icon_bg_color: 'rgba(0,0,0,.04)',
-					icon_color: '#80b918',
-				},
-				{
-					title: 'Total Link Impressions',
-					value: '',
-					icon: 'mdi-cursor-default-click',
-					icon_bg_color: 'rgba(0,0,0,.04)',
-					icon_color: '#00cecb',
 				},
 			],
 		}
@@ -115,7 +81,13 @@ export default Vue.extend({
 			.get('/stats')
 			.then((response: any) => {
 				this.info_card.forEach((item: any, index) => {
-					item.value = Object.values(response.data)[index]
+					if (Object.keys(response.data)[index] == 'account_created') {
+						item.value = convertDate(
+							Object.values(response.data)[index] as any
+						).split('-')[0]
+					} else {
+						item.value = Object.values(response.data)[index]
+					}
 				})
 			})
 			.catch((err: any) => {
