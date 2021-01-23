@@ -23,7 +23,6 @@ export const statistics: RequestHandler = async (req, res, next) => {
 			},
 		])
 
-		console.log(data[0])
 		if (data.length < 0) throw CreateError.NotFound('No data available')
 		res.json(data[0])
 	} catch (err) {
