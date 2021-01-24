@@ -1,22 +1,22 @@
 <template>
 	<v-row justify="center" align="center" class="bg">
 		<v-col cols="12" align="center">
-			<img class="mb-2" src="../../assets/logo/logo.svg" />
+			<img class="mb-2" src="../../assets/banner/banner.svg" />
 			<v-card
 				outlined
 				class="mx-md-4 mx-2 mt-4 px-md-8 px-4 py-6"
 				max-width="500px"
 			>
 				<h3 class="font-weight-bold mb-2 primary--text text-center">
-					Login in to {{ title }}
+					Forgot Password?
 				</h3>
 
 				<p class="mb-6 mt-n1 font-weight-regular text--disabled text-center">
-					Welcome back! login into your account.
+					Enter the email address associated with your account
 				</p>
 
 				<v-form ref="form" v-model="isFormValid" lazy-validation>
-					<p class="mb-2 font-weight-medium">E-mail / Username</p>
+					<p class="mb-2 font-weight-medium">E-mail</p>
 					<v-text-field
 						v-model="login.user_name"
 						:rules="[rules.required, rules.noSpace]"
@@ -25,24 +25,6 @@
 						outlined
 						required
 					></v-text-field>
-					<p class="mb-2 font-weight-medium mt-n1">Password</p>
-					<v-text-field
-						v-model="login.password"
-						:rules="[rules.required, rules.min, rules.noSpace]"
-						:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-						@click:append="showPassword = !showPassword"
-						:type="showPassword ? 'text' : 'password'"
-						placeholder="***********"
-						required
-						outlined
-					></v-text-field>
-
-					<v-checkbox
-						class="mt-n2"
-						label="Remember me"
-						color="primary"
-						value="Remember me"
-					></v-checkbox>
 
 					<v-btn
 						block
@@ -54,33 +36,18 @@
 						@click="loginUser"
 					>
 						<svg-icon name="email" class="mr-2"></svg-icon>
-						Login
+						Reset Password
 					</v-btn>
 
 					<v-row justify="center">
 						<v-col>
 							<v-row justify="center">
 								<p class="font-weight-medium mt-10">
-									Don't have an account?
-									<NuxtLink
-										class="accent--text text-decoration-none"
-										to="register"
-									>
-										Sign Up
+									<NuxtLink class="accent--text text-decoration-none" to="/">
+										Go Back
 									</NuxtLink>
 								</p>
 							</v-row>
-
-							<!-- <v-row justify="center">
-								<p class="font-weight-medium mt-2">
-									<NuxtLink
-										class="text-decoration-none accent--text"
-										to="forgot-password"
-									>
-										Forgot password?
-									</NuxtLink>
-								</p>
-							</v-row> -->
 						</v-col>
 					</v-row>
 				</v-form>
