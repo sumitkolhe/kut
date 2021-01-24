@@ -20,6 +20,8 @@
 					<v-col>
 						<p class="font-weight-bold">New Password</p>
 						<v-text-field
+							disabled
+							placeholder="WORK IN PROGRESS"
 							v-model="payload.long_url"
 							single-line
 							outlined
