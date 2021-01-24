@@ -16,6 +16,7 @@ export default Vue.extend({
 			loading: true,
 		}
 	},
+
 	created() {
 		if (this.$auth.loggedIn) {
 			this.$router.push('/user/dashboard')

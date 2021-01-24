@@ -6,7 +6,7 @@
 		"dev": "nodemon server/index.ts",
 		"dev:js": "nodemon dist/index.js --watch server",
 		"build": "npm run build:client && npm run build:server",
-		"build:client": "cross-env NODE_ENV=production nuxt-ts build",
+		"build:client": "cross-env NODE_ENV=production nuxt-ts generate",
 		"build:server": "cross-env NODE_ENV=production tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./server -o ./dist",
 		"start": "cross-env NODE_ENV=production node dist/index.js",
 		"start:client": "nuxt-ts start"
@@ -31,6 +31,7 @@
 		"nuxt-vuex-localstorage": "^1.2.7",
 		"particles.js": "^2.0.0",
 		"rate-limiter-flexible": "^2.2.1",
+		"serve-static": "^1.14.1",
 		"vue": "^2.6.12",
 		"vue-chartkick": "^0.6.1"
 	},

@@ -3,6 +3,7 @@ import { config } from './server/config/config'
 
 const NuxtAppConfig: NuxtConfig = {
 	telemetry: false,
+	target: 'static',
 	head: {
 		titleTemplate: '%s | Shorten your links easily',
 		title: config.APP_NAME,
@@ -66,7 +67,6 @@ const NuxtAppConfig: NuxtConfig = {
 	},
 
 	auth: {
-		cookie: false,
 		strategies: {
 			local: {
 				token: {
