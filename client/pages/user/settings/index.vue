@@ -71,7 +71,7 @@
 			<v-bottom-sheet v-model="show_dialog">
 				<v-sheet class="text-center" height="180px">
 					<div class="py-3">
-						<p class="font-weight-bold mt-4">
+						<p class="font-weight-bold mt-4 px-4">
 							Do you really want to delete your account? This action cannot be
 							undone.
 						</p>
@@ -87,7 +87,7 @@
 						<v-btn
 							depressed
 							class="mt-6 ml-4"
-							color="primary"
+							color="accent"
 							:loading="loading"
 							@click="deleteAccount()"
 						>
