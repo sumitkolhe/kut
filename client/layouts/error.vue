@@ -167,14 +167,14 @@
 						</g>
 					</svg>
 				</v-row>
-				<v-row justify="center" class="mt-0">
+				<v-row justify="center" class="mt-md-0 mt-n12 px-6">
 					<p class="text-h3 font-weight-bold">Oops! Its a 404.</p>
 				</v-row>
-				<v-row justify="center" class="mt-6">
-					<p class="text-h5">We can't find the page you're looking for.</p>
+				<v-row justify="center" class="mt-md-6 mt-2 px-6">
+					<p class="text-h6">We can't find the page you're looking for.</p>
 				</v-row>
 
-				<v-row justify="center" class="mt-12">
+				<v-row justify="center" class="mt-md-10 mt-4">
 					<NuxtLink to="/user/dashboard">
 						<v-btn outlined large>Go Home</v-btn>
 					</NuxtLink>
