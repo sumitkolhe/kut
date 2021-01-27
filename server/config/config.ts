@@ -19,6 +19,9 @@ export const config = {
 		? process.env.MONGO_URL
 		: 'mongodb://localhost:27017',
 
+	// Registration
+	OPEN_REGISTER: isDev ? true : process.env.OPEN_REGISTER || true,
+
 	//Auth Token vars
 	ACCESS_TOKEN_SECRET: 't4gQdVeCKqawXVOazIZ1',
 	ACCESS_TOKEN_EXPIRATION: '1d',
