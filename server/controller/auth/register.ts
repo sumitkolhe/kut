@@ -6,6 +6,10 @@ import { CreateError } from '@middleware/error-handler'
 
 export const register: RequestHandler = async (req, res, next) => {
 	try {
+
+		if (config.OPEN_REGISTER != true)
+			throw new CreateError(409, 'Unable to register')
+
 		const validated_user_details = await userRegisterSchema.validateAsync(
 			req.body
 		)
