@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import { UserModel } from '@model/user.model'
 import { userRegisterSchema } from '@utils/validators'
 import { CreateError } from '@middleware/error-handler'
+import { config } from '@config/config'
 
 export const register: RequestHandler = async (req, res, next) => {
 	try {
