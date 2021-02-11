@@ -3,6 +3,7 @@
 <br>
 <br>
 <h2 ><b>Reduced</b></h2>
+<h3>  <a href="https://reduced.me">https://reduced.me</a> </h3>
 <p >A powerful & modern custom URL shortener written in TypeScript</p>
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/sumitkolhe/reduced?style=flat-square)
@@ -12,6 +13,7 @@
 </div>
 
 ---
+
 ## 🔥Features
 
 :link: **Link management :** Shorten, modify and delete links easily.
@@ -26,25 +28,19 @@
 
 ---
 
-## 🖥️ Demo
+## 🧰 Built using
 
-[https://reduced.me](https://reduced.me)
-
----
-
-## 🧰 Built with
-
--   **NuxtJS** 
+-   **NuxtJS**
 -   **Vuetify**
--   **Express** 
--   **Nodejs** 
+-   **Express**
+-   **Nodejs**
 -   **MongoDB**
 
 ---
 
 ## :construction_worker: Devlopment
 
-To setup Reduced locally -
+### Local Development
 
 -   Clone the repository or download the latest [release](https://github.com/sumitkolhe/Reduced/releases) to a folder of choice.
 
@@ -52,9 +48,7 @@ To setup Reduced locally -
 $ git clone https://github.com/sumitkolhe/Reduced
 ```
 
-#### :building_construction: Backend Setup
-
--   Install the dependencies for the backend
+-   Install the dependencies
 
 ```
 $ cd Reduced
@@ -62,9 +56,9 @@ $ cd Reduced
 $ npm install
 ```
 
--   Rename the **.sample-env** file to **.env** and fill all the required fields
+-   Rename **.sample-env** file to **.env** and fill all the required fields.
 
--   To start the app
+-   Start the app by running
 
 ```
 $ cd Reduced
@@ -72,8 +66,17 @@ $ cd Reduced
 $ npm run dev
 ```
 
+### Production Build -
 
+```
+$ npm run build
+```
 
+### Run Production Build -
+
+```
+$ npm run start
+```
 
 ---
 
