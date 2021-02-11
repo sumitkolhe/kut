@@ -16,11 +16,11 @@
 
 :link: **Link management :** Shorten, modify and delete links easily.
 
-:heart: **Lightweight and minimalistic design :** Modern minimalistic design that is a treat for the eyes.
+:heart: **Minimalistic design :** Minimal & modern design.
 
-:rainbow: **Support for Custom Aliases :** Choose a custom alias for your links.
+:rainbow: **Custom Aliases :** Set custom aliases for your links.
 
-:iphone: **QR Code Support :** Generates QR Code for shortened links instantly.
+:iphone: **QR Code :** Generate QR Code for shortened links.
 
 :rocket: **Analytics :** View link analytics and statistics.
 
