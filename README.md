@@ -2,9 +2,11 @@
 <img src="./logo.svg" />
 <br>
 <br>
-<h2><b>Reduced</b></h2>
-<a href="https://reduced.me">https://reduced.me</a>
+<h2><b>Reduced</b>
+</h2>
 <p >A powerful & modern custom URL shortener written in TypeScript</p>
+
+<a href="https://reduced.me">https://reduced.me</a>
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/sumitkolhe/reduced?style=flat-square)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/sumitkolhe/reduced?style=flat-square)
