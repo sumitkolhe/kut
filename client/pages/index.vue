@@ -39,11 +39,12 @@
 			width="260"
 			fixed
 			app
-			color="#fff"
 		>
 			<v-list nav>
-				<v-list-item>Register</v-list-item>
-				<v-list-item>Login</v-list-item>
+				<v-list-item to="/auth/register" color="accent">
+					<h3>Register</h3>
+				</v-list-item>
+				<v-list-item to="/auth/register"><h3>Login</h3></v-list-item>
 			</v-list>
 		</v-navigation-drawer>
 

@@ -1,19 +1,16 @@
 <template>
 	<v-row justify="center" align="center" class="bg">
 		<v-col cols="12" align="center">
-			<img class="mb-2" src="../../assets/logo/logo.svg" />
+			<img class="mb-2 mt-n12" src="../../assets/logo/logo.svg" />
 			<v-card
-				outlined
-				class="mx-md-4 mx-2 mt-4 px-md-8 px-4 py-6"
+				flat
+				rounded="lg"
+				class="mx-md-4 mx-2 mt-4 px-md-8 px-4 py-12"
 				max-width="500px"
 			>
-				<h3 class="font-weight-bold mb-2 primary--text text-center">
+				<h2 class="font-weight-bold mb-6 primary--text text-center">
 					Login in to {{ title }}
-				</h3>
-
-				<p class="mb-6 mt-n1 font-weight-regular text--disabled text-center">
-					Welcome back! login into your account.
-				</p>
+				</h2>
 
 				<v-form ref="form" v-model="isFormValid" lazy-validation>
 					<p class="mb-2 font-weight-medium">E-mail / Username</p>
@@ -143,11 +140,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.bg {
+	background-color: rgba(0, 0, 0, 0.05);
+}
 .logo {
 	pointer-events: none;
-}
-.v-card.v-sheet.theme--light {
-	border: 2px solid rgba(0, 0, 0, 0.1) !important;
-	border-radius: 16px !important;
 }
 </style>
