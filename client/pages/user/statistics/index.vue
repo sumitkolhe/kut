@@ -52,18 +52,18 @@ export default Vue.extend({
 
 			info_card: [
 				{
-					title: 'Total Shortened Links',
-					value: '',
-					icon: 'mdi-link',
-					icon_bg_color: 'rgba(0,0,0,.04)',
-					icon_color: '#00cc88',
-				},
-				{
 					title: 'Total Notes Created',
 					value: '',
 					icon: 'mdi-book-edit',
 					icon_bg_color: 'rgba(0,0,0,.04)',
 					icon_color: '#0062ff',
+				},
+				{
+					title: 'Total Shortened Links',
+					value: '',
+					icon: 'mdi-link',
+					icon_bg_color: 'rgba(0,0,0,.04)',
+					icon_color: '#00cc88',
 				},
 				{
 					title: 'Account Created',

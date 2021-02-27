@@ -27,8 +27,15 @@
 			</thead>
 			<tbody>
 				<tr v-for="(link, index) in recent_links" :key="index">
-					<td data-label="Original">
-						<p>{{ link.long_url }}</p>
+					<td data-label="Original" class="limit">
+						<v-tooltip bottom>
+							<template v-slot:activator="{ on, attrs }">
+								<p v-bind="attrs" v-on="on">
+									{{ link.long_url.substring(0, 36) + '..' }}
+								</p>
+							</template>
+							<p>{{ link.long_url }}</p>
+						</v-tooltip>
 					</td>
 
 					<td data-label="Created">

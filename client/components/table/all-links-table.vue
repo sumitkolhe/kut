@@ -15,7 +15,7 @@
 					<svg-icon name="edit" />
 				</v-btn>
 
-				<copy-content :targer="item.short_url" />
+				<copy-content :target="item.short_url" />
 
 				<qr-code :target="item.short_url" />
 
