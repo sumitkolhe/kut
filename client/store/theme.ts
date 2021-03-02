@@ -10,23 +10,16 @@ export const state = () => ({
 
 export const mutations: MutationTree<ThemeState> = {
 	SET_THEME: (state) => {
-		if (state.isThemeDark == false) {
-			window.$nuxt.$root.$vuetify.theme.dark = true
-			state.isThemeDark = true
-			state.renderKey += 1
-		} else if (state.isThemeDark == true) {
-			window.$nuxt.$root.$vuetify.theme.dark = false
-			state.isThemeDark = false
-			state.renderKey += 1
-		}
+		window.$nuxt.$root.$vuetify.theme.dark = !state.isThemeDark
+		state.isThemeDark = !state.isThemeDark
+		localStorage.setItem('isThemeDark', JSON.stringify(state.isThemeDark))
+		state.renderKey += 1
 	},
 
 	INIT_THEME: (state) => {
-		if (state.isThemeDark == true) {
-			window.$nuxt.$root.$vuetify.theme.dark = true
-			state.isThemeDark = true
-		}
-
+		state.isThemeDark =
+			JSON.parse(localStorage.getItem('isThemeDark')!) || false
+		window.$nuxt.$root.$vuetify.theme.dark = state.isThemeDark
 		state.renderKey = 0
 	},
 }
