@@ -4,7 +4,7 @@ application:
     project: 'Reduced'
     organization: 'QoveryCommunity'
     publicly_accessible: true
-    port: 80
+    port: 8080
 routers:
     - name: 'main-reduced'
       routes:
