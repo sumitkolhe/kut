@@ -1,11 +1,13 @@
 ---
 application:
-  name: "reduced"
-  project: "Reduced"
-  organization: "QoveryCommunity"
+    name: 'reduced'
+    project: 'Reduced'
+    organization: 'QoveryCommunity'
+    publicly_accessible: true
+    port: 8080
 routers:
-- name: "main-reduced"
-  routes:
-  - application_name: "reduced"
-    paths:
-    - "/*"
+    - name: 'main-reduced'
+      routes:
+          - application_name: 'reduced'
+            paths:
+                - '/*'
