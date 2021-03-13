@@ -9,7 +9,7 @@ export const config = {
 	APP_VERSION: '2.0.0',
 
 	//Server vars
-	SERVER_HOST: isDev ? 'localhost' : '0.0.0.0',
+	SERVER_HOST: 'localhost',
 	SERVER_PORT: isDev ? 3000 : process.env.PORT || 80,
 	SERVER_PROTOCOL: isDev ? 'http' : process.env.SERVER_PROTOCOL || 'https',
 
