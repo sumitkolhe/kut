@@ -5,11 +5,12 @@ application:
     organization: 'QoveryCommunity'
     publicly_accessible: true
     port: 8080
-    custom_domains:
-        - branch: master
-          domain: reduced.me
+
 routers:
     - name: 'main-reduced'
+      custom_domains:
+          - branch: master
+            domain: reduced.me
       routes:
           - application_name: 'reduced'
             paths:
