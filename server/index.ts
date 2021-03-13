@@ -59,13 +59,12 @@ const startDevServer = async () => {
 const startProdServer = async () => {
 	app.use(serveStatic(__dirname + '/nuxt'))
 	app.get(/.*/, (_req, res) => res.sendFile(__dirname + '/nuxt/404.html'))
-	const HOST: any = config.SERVER_HOST
 	const PORT = config.SERVER_PORT
 
 	// Listen the server
-	app.listen(8080)
+	app.listen(PORT)
 	consola.ready({
-		message: `Server listening on http://${HOST}:${PORT}`,
+		message: `Server listening on PORT:${PORT}`,
 		badge: true,
 	})
 }
