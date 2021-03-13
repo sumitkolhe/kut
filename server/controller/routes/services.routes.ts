@@ -14,6 +14,7 @@ import {
 	updateNote,
 } from '@controller/services/notes'
 import { rateLimit } from '@middleware/rate-limiter'
+import { anonShorten } from '@controller/services/anon-shorten'
 
 const router = express.Router()
 
@@ -28,6 +29,7 @@ export const controllerRoutes = {
 	notification: router.get('/notification', verifyToken, notification),
 	createNote: router.post('/notes', verifyToken, createNote),
 	shorten: router.post('/shorten', verifyToken, rateLimit, shorten),
+	anonshorten: router.post('/anonshorten', rateLimit, anonShorten),
 	analytics: router.post('/analytics', verifyToken, analytics),
 	redirect: router.get('/:alias', analyticsHandler, redirect),
 }

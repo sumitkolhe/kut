@@ -6,12 +6,12 @@ export const generateUniqueAlias = async (): Promise<string> => {
 		let random_alias: string = ''
 		const characterSet = 'abcdefghijklmnopqrstuvwxyz1234567890'
 
-		for (var i = 0; i < config.ALIAS_LENGTH; i++) {
+		for (let i = 0; i < config.ALIAS_LENGTH; i++) {
 			random_alias += characterSet.charAt(
 				Math.floor(Math.random() * characterSet.length)
 			)
 		}
-		var is_alias_available = await LinkModel.findOne({
+		let is_alias_available = await LinkModel.findOne({
 			alias: random_alias,
 		} as any)
 

@@ -7,9 +7,8 @@ import { config } from '@config/config'
 
 export const register: RequestHandler = async (req, res, next) => {
 	try {
-
-		if (config.OPEN_REGISTER != true)
-			throw new CreateError(409, 'Unable to register')
+		if (config.ALLOW_REGISTERATION != true)
+			throw new CreateError(403, 'Registeration is disabled!')
 
 		const validated_user_details = await userRegisterSchema.validateAsync(
 			req.body

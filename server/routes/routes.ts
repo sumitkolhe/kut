@@ -6,6 +6,7 @@ export const routes = express.Router()
 
 routes.use('/', controllerRoutes.redirect)
 routes.use('/api', controllerRoutes.shorten)
+routes.use('/api', controllerRoutes.anonshorten)
 routes.use('/api', controllerRoutes.analytics)
 routes.use('/api', controllerRoutes.statistics)
 routes.use('/api', controllerRoutes.notification)

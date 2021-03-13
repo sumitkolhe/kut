@@ -29,7 +29,7 @@ export const generateLinkPayload = async (req: any) => {
 
 export const generateUpdateLinkPayload = async (req: any) => {
 	//check if alias is untouched (user did not modify it),
-	//if yes, exclude it from payload to avoid duplicate key error
+	//if yes, exclude it from payload to avoid duplicate key error.
 	const is_alias_untouched: boolean = await checkAliasExistence({
 		_id: req.body._id,
 		alias: req.body.alias,
