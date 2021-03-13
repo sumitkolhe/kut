@@ -63,7 +63,7 @@ const startProdServer = async () => {
 	const PORT = config.SERVER_PORT
 
 	// Listen the server
-	app.listen(PORT, HOST)
+	app.listen(8080)
 	consola.ready({
 		message: `Server listening on http://${HOST}:${PORT}`,
 		badge: true,
