@@ -4,7 +4,7 @@
 			<h2 class="font-weight-medium mt-4 mb-10 text-center">
 				All shortened Links
 			</h2>
-			<all-links-table />
+			<TableAllLinksTable />
 		</v-col>
 	</v-row>
 </template>

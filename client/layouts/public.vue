@@ -1,7 +1,7 @@
 <template>
 	<v-app>
 		<nuxt />
-		<alert-notification />
+		<SystemAlertNotification />
 	</v-app>
 </template>
 
@@ -28,6 +28,6 @@ export default Vue.extend({
 <style scoped>
 #app {
 	overflow: hidden;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Inter', sans-serif;
 }
 </style>

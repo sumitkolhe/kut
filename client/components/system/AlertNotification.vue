@@ -16,7 +16,7 @@
 					v-bind="attrs"
 					@click="show_notification = false"
 				>
-					<svg-icon name="close" />
+					<SystemSvgIcon name="close" />
 				</v-btn>
 			</template>
 		</v-snackbar>

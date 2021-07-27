@@ -199,7 +199,7 @@ export default {
 
 <style scoped>
 #app {
-	font-family: 'Montserrat';
+	font-family: 'Inter', sans-serif;
 }
 
 .stars {

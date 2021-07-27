@@ -6,7 +6,6 @@ import { generateLinkPayload } from '@helpers/generate-link-payload'
 export const anonShorten: RequestHandler = async (req, res, next) => {
 	try {
 		const new_link = new LinkModel(await generateLinkPayload(req))
-		console.log(new_link)
 
 		const saved_link = await new_link.save().catch(() => {
 			throw CreateError.BadRequest('Alias is already in use')

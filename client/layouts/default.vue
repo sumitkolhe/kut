@@ -4,9 +4,9 @@
 			<Particles :key="$store.getters['theme/GET_RENDER_KEY']" />
 		</client-only>
 		<v-main class="pt-2 pt-sm-2 pt-xs-2 pt-md-0 pt-lg-0 pt-xl-0">
-			<Navigation />
+			<SystemNavigation />
 			<v-container>
-				<alert-notification />
+				<SystemAlertNotification />
 				<nuxt />
 			</v-container>
 		</v-main>
@@ -30,7 +30,7 @@ export default Vue.extend({
 
 <style scoped>
 #app {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Inter', sans-serif;
 }
 
 div[id^='particles-js'] {

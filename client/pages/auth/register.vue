@@ -52,7 +52,7 @@
 						color="primary"
 						@click="registerUser"
 					>
-						<svg-icon name="email" class="mr-2"></svg-icon>
+						<SystemSvgIcon name="email" class="mr-2"></SystemSvgIcon>
 						Create an account
 					</v-btn>
 

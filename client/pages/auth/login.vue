@@ -50,7 +50,7 @@
 						color="primary"
 						@click="loginUser"
 					>
-						<svg-icon name="email" class="mr-2"></svg-icon>
+						<SystemSvgIcon name="email" class="mr-2"></SystemSvgIcon>
 						Login
 					</v-btn>
 

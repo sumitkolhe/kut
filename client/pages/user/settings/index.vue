@@ -91,7 +91,7 @@
 							:loading="loading"
 							@click="deleteAccount()"
 						>
-							<svg-icon name="delete" />
+							<SystemSvgIcon name="delete" />
 							Delete
 						</v-btn>
 					</v-row>

@@ -8,16 +8,16 @@
 			:height="height"
 		>
 			<v-btn @click="drawer = !drawer" icon v-show="mobile_mode">
-				<svg-icon size="32" name="arrow_right" />
+				<SystemSvgIcon size="32" name="arrow_right" />
 			</v-btn>
 			<h2 v-show="mobile_mode" class="ml-2 font-weight-bold">{{ title }}</h2>
 
 			<v-spacer />
-			<theme-switch />
+			<MenuThemeSwitch />
 			<span v-show="!mobile_mode" class="mx-2"></span>
 			<!-- <notification-menu v-if="!mobile_mode" /> -->
 			<span class="mx-2"></span>
-			<user-menu />
+			<MenuUserMenu />
 			<span v-show="!mobile_mode" class="mx-2"></span>
 		</v-app-bar>
 
@@ -69,12 +69,12 @@
 							<v-list-item-content>
 								<v-list-item-title>
 									<v-btn icon @click.stop="mini_variant = !mini_variant">
-										<svg-icon
+										<SystemSvgIcon
 											size="30"
 											name="chevron_right"
 											v-if="mini_variant"
 										/>
-										<svg-icon v-else size="30" name="chevron_left" />
+										<SystemSvgIcon v-else size="30" name="chevron_left" />
 									</v-btn>
 								</v-list-item-title>
 							</v-list-item-content>
@@ -89,7 +89,7 @@
 
 				<v-row justify="center" class="pa-6 mb-0" v-show="mini_variant">
 					<v-btn icon color="primary" @click="logout()">
-						<svg-icon name="logout" size="40" />
+						<SystemSvgIcon name="logout" size="40" />
 					</v-btn>
 				</v-row>
 			</template>
@@ -141,27 +141,23 @@ export default Vue.extend({
 
 			items: [
 				{
-					icon:
-						'M19,5V7H15V5H19M9,5V11H5V5H9M19,13V19H15V13H19M9,17V19H5V17H9M21,3H13V9H21V3M11,3H3V13H11V3M21,11H13V21H21V11M11,15H3V21H11V15Z',
+					icon: 'M19,5V7H15V5H19M9,5V11H5V5H9M19,13V19H15V13H19M9,17V19H5V17H9M21,3H13V9H21V3M11,3H3V13H11V3M21,11H13V21H21V11M11,15H3V21H11V15Z',
 					title: 'Dashboard',
 					to: '/user/dashboard',
 				},
 
 				{
-					icon:
-						'M3 1C1.89 1 1 1.89 1 3V14C1 15.11 1.89 16 3 16H14C15.11 16 16 15.11 16 14V11H14V14H3V3H14V5H16V3C16 1.89 15.11 1 14 1M9 7C7.89 7 7 7.89 7 9V12H9V9H20V20H9V18H7V20C7 21.11 7.89 22 9 22H20C21.11 22 22 21.11 22 20V9C22 7.89 21.11 7 20 7H9',
+					icon: 'M3 1C1.89 1 1 1.89 1 3V14C1 15.11 1.89 16 3 16H14C15.11 16 16 15.11 16 14V11H14V14H3V3H14V5H16V3C16 1.89 15.11 1 14 1M9 7C7.89 7 7 7.89 7 9V12H9V9H20V20H9V18H7V20C7 21.11 7.89 22 9 22H20C21.11 22 22 21.11 22 20V9C22 7.89 21.11 7 20 7H9',
 					title: 'My Links',
 					to: '/user/my-links',
 				},
 				{
-					icon:
-						'M16,11.78L20.24,4.45L21.97,5.45L16.74,14.5L10.23,10.75L5.46,19H22V21H2V3H4V17.54L9.5,8L16,11.78Z',
+					icon: 'M16,11.78L20.24,4.45L21.97,5.45L16.74,14.5L10.23,10.75L5.46,19H22V21H2V3H4V17.54L9.5,8L16,11.78Z',
 					title: 'Statistics',
 					to: '/user/statistics',
 				},
 				{
-					icon:
-						'M17,4V10L15,8L13,10V4H9V20H19V4H17M3,7V5H5V4C5,2.89 5.9,2 7,2H19C20.05,2 21,2.95 21,4V20C21,21.05 20.05,22 19,22H7C5.95,22 5,21.05 5,20V19H3V17H5V13H3V11H5V7H3M5,5V7H7V5H5M5,19H7V17H5V19M5,13H7V11H5V13Z',
+					icon: 'M17,4V10L15,8L13,10V4H9V20H19V4H17M3,7V5H5V4C5,2.89 5.9,2 7,2H19C20.05,2 21,2.95 21,4V20C21,21.05 20.05,22 19,22H7C5.95,22 5,21.05 5,20V19H3V17H5V13H3V11H5V7H3M5,5V7H7V5H5M5,19H7V17H5V19M5,13H7V11H5V13Z',
 					title: 'Notes',
 					to: '/user/notes',
 				},

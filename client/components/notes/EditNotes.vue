@@ -28,7 +28,7 @@
 			</div>
 			<v-card-actions>
 				<v-btn @click="deleteNote()" icon>
-					<svg-icon name="delete" color="#ff0054" />
+					<SystemSvgIcon name="delete" color="#ff0054" />
 				</v-btn>
 
 				<v-spacer></v-spacer>

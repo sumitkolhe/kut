@@ -1,6 +1,6 @@
 <template>
 	<v-btn icon @click="changeTheme()">
-		<svg-icon size="36" name="sun" />
+		<SystemSvgIcon size="36" name="sun" />
 	</v-btn>
 </template>
 

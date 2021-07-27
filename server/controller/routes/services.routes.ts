@@ -29,7 +29,7 @@ export const controllerRoutes = {
 	notification: router.get('/notification', verifyToken, notification),
 	createNote: router.post('/notes', verifyToken, createNote),
 	shorten: router.post('/shorten', verifyToken, rateLimit, shorten),
-	anonshorten: router.post('/anonshorten', rateLimit, anonShorten),
+	anonshorten: router.post('/anonshorten', anonShorten),
 	analytics: router.post('/analytics', verifyToken, analytics),
 	redirect: router.get('/:alias', analyticsHandler, redirect),
 }

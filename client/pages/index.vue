@@ -27,7 +27,12 @@
 			</v-btn>
 
 			<v-btn class="mb-6" icon @click.stop="drawer = !drawer">
-				<svg-icon color="#111" size="36" name="menu" class="hidden-md-and-up" />
+				<SystemSvgIcon
+					color="#111"
+					size="36"
+					name="menu"
+					class="hidden-md-and-up"
+				/>
 			</v-btn>
 
 			<v-spacer class="hidden-sm-and-down"></v-spacer>
@@ -75,7 +80,7 @@
 				<v-row class="mt-sm-12 mt-6">
 					<v-col align="center">
 						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
-							<svg-icon name="clipboard" color="#fff" />
+							<SystemSvgIcon name="clipboard" color="#fff" />
 						</v-avatar>
 					</v-col>
 				</v-row>
@@ -92,7 +97,7 @@
 				<v-row class="mt-sm-12 mt-6">
 					<v-col align="center">
 						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
-							<svg-icon name="donut_chart" color="#fff" />
+							<SystemSvgIcon name="donut_chart" color="#fff" />
 						</v-avatar>
 					</v-col>
 				</v-row>
@@ -109,7 +114,7 @@
 				<v-row justify="center" class="mt-sm-12 mt-6">
 					<v-col align="center">
 						<v-avatar color="rgb(255,255,255,0.1)" size="80" class="pa-4">
-							<svg-icon name="heart" color="#fff" />
+							<SystemSvgIcon name="heart" color="#fff" />
 						</v-avatar>
 					</v-col>
 				</v-row>
@@ -138,7 +143,11 @@
 								<p class="contribution-text">
 									Its free & open-source
 
-									<svg-icon color="#f55" name="heart" size="46"></svg-icon>
+									<SystemSvgIcon
+										color="#f55"
+										name="heart"
+										size="46"
+									></SystemSvgIcon>
 								</p>
 							</v-row>
 							<v-row justify="center" class="mt-2">
@@ -157,7 +166,11 @@
 									rounded
 								>
 									Contribute
-									<svg-icon class="ml-2" size="28" name="github"></svg-icon>
+									<SystemSvgIcon
+										class="ml-2"
+										size="28"
+										name="github"
+									></SystemSvgIcon>
 								</v-btn>
 							</v-row>
 						</v-col>

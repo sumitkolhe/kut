@@ -10,7 +10,7 @@
 			xl="3"
 			class="d-flex flex-column"
 		>
-			<note :note="note" />
+			<NotesNote :note="note" />
 		</v-col>
 	</v-row>
 </template>

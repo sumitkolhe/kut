@@ -46,8 +46,8 @@
 					</td>
 					<td data-label="Shortened">
 						<v-row justify="center">
-							<copy-content :target="link.short_url" />
-							<qr-code :target="link.short_url" />
+							<SystemCopyContent :target="link.short_url" />
+							<SystemQrCode :target="link.short_url" />
 						</v-row>
 					</td>
 				</tr>

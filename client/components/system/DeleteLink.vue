@@ -1,6 +1,6 @@
 <template>
 	<v-btn class="mr-1" icon @click="openSheet()">
-		<svg-icon name="delete" color="#ff0054" />
+		<SystemSvgIcon name="delete" color="#ff0054" />
 		<v-fade-transition hide-on-leave>
 			<v-bottom-sheet v-model="show_dialog">
 				<v-sheet class="text-center" height="180px">
@@ -24,7 +24,7 @@
 							:loading="loading"
 							@click="deleteLink(target)"
 						>
-							<svg-icon name="delete" />
+							<SystemSvgIcon name="delete" />
 							Delete
 						</v-btn>
 					</v-row>

@@ -45,8 +45,8 @@
 			</v-col>
 		</v-row>
 
-		<all-notes />
-		<edit-note />
+		<NotesAllNotes />
+		<NotesEditNote />
 	</div>
 </template>
 

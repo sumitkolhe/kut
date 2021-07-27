@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-btn class="mr-1" icon @click="showAnalytics()">
-			<svg-icon name="analytics" color="#613dc1" />
+			<SystemSvgIcon name="analytics" color="#613dc1" />
 		</v-btn>
 	</div>
 </template>

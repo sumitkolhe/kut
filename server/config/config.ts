@@ -28,7 +28,7 @@ export const config = {
 	REFRESH_TOKEN_EXPIRATION: '1y',
 
 	//Misc vars
-	ALIAS_LENGTH: process.env.ALIAS_LENGTH ? process.env.ALIAS_LENGTH : 4,
+	ALIAS_LENGTH: process.env.ALIAS_LENGTH ? process.env.ALIAS_LENGTH : 3,
 	WEBSITE_DOMAIN: process.env.WEBSITE_DOMAIN
 		? process.env.WEBSITE_DOMAIN
 		: 'reduced.me',

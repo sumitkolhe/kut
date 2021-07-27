@@ -12,21 +12,21 @@
 		<template v-slot:[`item.data-table-expand`]="{ expand, isExpanded, item }">
 			<v-row>
 				<v-btn class="mr-1" icon @click="expand(!isExpanded)">
-					<svg-icon name="edit" />
+					<SystemSvgIcon name="edit" />
 				</v-btn>
 
-				<copy-content :target="item.short_url" />
+				<SystemCopyContent :target="item.short_url" />
 
-				<qr-code :target="item.short_url" />
+				<SystemQrCode :target="item.short_url" />
 
-				<delete-link :target="item._id" />
+				<SystemDeleteLink :target="item._id" />
 
-				<link-analytics v-show="item.visit_count > 0" :target="item._id" />
+				<SystemLinkAnalytics v-show="item.visit_count > 0" :target="item._id" />
 
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on, attrs }">
 						<v-btn icon v-show="item.password_protected">
-							<svg-icon v-bind="attrs" v-on="on" name="lock" />
+							<SystemSvgIcon v-bind="attrs" v-on="on" name="lock" />
 						</v-btn>
 					</template>
 					<span>Password Protected</span>
@@ -36,7 +36,7 @@
 
 		<template v-slot:expanded-item="{ headers, item }">
 			<td :colspan="headers.length">
-				<update-link @callback="fetchLinks" :target="item" />
+				<SystemUpdateLink @callback="fetchLinks" :target="item" />
 			</td>
 		</template>
 	</v-data-table>

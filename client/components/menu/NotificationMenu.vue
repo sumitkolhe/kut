@@ -2,7 +2,7 @@
 	<v-menu offset-y offset-x left rounded="lg">
 		<template v-slot:activator="{ on, attrs }">
 			<v-btn icon text v-bind="attrs" v-on="on">
-				<svg-icon name="bell" size="32" />
+				<SystemSvgIcon name="bell" size="32" />
 			</v-btn>
 		</template>
 		<v-list>

@@ -24,7 +24,7 @@
 
 			<v-row justify="center">
 				<v-col cols="12" sm="10" lg="8" xl="6">
-					<input-field
+					<SystemInputField
 						:placeholder="'Enter a URL...'"
 						:type="'text'"
 						v-model="payload.long_url"
@@ -52,29 +52,33 @@
 					class="ml-2"
 					@click="show_advanced = !show_advanced"
 				>
-					<svg-icon v-if="show_advanced" name="settings_filled" size="30" />
-					<svg-icon v-else name="settings" size="30" />
+					<SystemSvgIcon
+						v-if="show_advanced"
+						name="settings_filled"
+						size="30"
+					/>
+					<SystemSvgIcon v-else name="settings" size="30" />
 				</v-btn>
 			</v-row>
 
 			<v-fade-transition>
 				<v-row justify="center" v-show="show_advanced" class="mt-8">
 					<v-col cols="12" sm="10" lg="8" xl="6">
-						<input-field
+						<SystemInputField
 							class="mt-md-2 mt-0"
 							:placeholder="'Custom Alias'"
 							:type="'text'"
 							v-model="payload.alias"
 						/>
 
-						<input-field
+						<SystemInputField
 							class="mt-4"
 							:placeholder="'Password'"
 							:type="'password'"
 							v-model="payload.password"
 						/>
 
-						<input-field
+						<SystemInputField
 							class="mt-4"
 							:placeholder="'Description'"
 							:type="'text'"
@@ -86,7 +90,7 @@
 
 			<v-row justify="center" class="mt-12">
 				<v-col cols="12" sm="10" lg="10" xl="8">
-					<recent-links-table :recent_links="recent_links" />
+					<TableRecentLinksTable :recent_links="recent_links" />
 				</v-col>
 			</v-row>
 		</v-col>
