@@ -89,4 +89,4 @@ sw.*
 # Vim swap files
 *.swp
 
-server-dist
+dist

@@ -1,36 +1,42 @@
 {
-	"compilerOptions": {
-		"target": "ES2018",
-		"outDir": "./dist",
-		"module": "commonjs",
-		"strict": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictBindCallApply": true,
-		"strictPropertyInitialization": true,
-		"noImplicitThis": true,
-		"alwaysStrict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"moduleResolution": "node",
-		"baseUrl": "./server",
-		"paths": {
-			"@config/*": ["config/*"],
-			"@middleware/*": ["middleware/*"],
-			"@model/*": ["model/*"],
-			"@routes/*": ["routes/*"],
-			"@helpers/*": ["helpers/*"],
-			"@utils/*": ["utils/*"],
-			"@controller/*": ["controller/*"]
-		}
-	},
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["dom", "esnext"],
+    "allowJs": false,
+    "outDir": "dist",
+    "rootDir": "src/",
+    "removeComments": true,
 
-	"include": ["server/**/*", "@types"],
-	"exclude": ["node_modules", "client", "production", "nuxt.config.ts"]
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noImplicitAny": true,
+
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@server/*": ["src/server/*"]
+    },
+
+    "esModuleInterop": true,
+    /* Experimental Options */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    /* Advanced Options */
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "ts-node": {
+    "files": true
+  },
+  "exclude": ["node_modules", "dist", "src/client"],
+  "include": [
+    "/src/**/*.ts",
+    "**/src/**/*.ts",
+    "**/__tests__/**/*.ts",
+    "/src/**/*.d.ts"
+  ]
 }
