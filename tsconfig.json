@@ -1,42 +1,30 @@
 {
   "compilerOptions": {
-    /* Basic Options */
     "target": "es6",
-    "module": "commonjs",
-    "lib": ["dom", "esnext"],
-    "allowJs": false,
-    "outDir": "dist",
-    "rootDir": "src/",
-    "removeComments": true,
-
-    /* Strict Type-Checking Options */
-    "strict": true,
-    "noImplicitAny": true,
-
-    /* Module Resolution Options */
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "@server/*": ["src/server/*"]
-    },
-
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
     "esModuleInterop": true,
-    /* Experimental Options */
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "outDir": "dist",
+    "rootDir": ".",
+    "removeComments": true,
+    "noImplicitAny": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-
-    /* Advanced Options */
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "useUnknownInCatchVariables": false,
+    "paths": {
+      "@server/*": ["./server/*"]
+    }
   },
-  "ts-node": {
-    "files": true
-  },
-  "exclude": ["node_modules", "dist", "src/client"],
-  "include": [
-    "/src/**/*.ts",
-    "**/src/**/*.ts",
-    "**/__tests__/**/*.ts",
-    "/src/**/*.d.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

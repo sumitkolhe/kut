@@ -26,6 +26,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    'arrow-body-style': ['error', 'as-needed'],
     'import/extensions': 'off',
     'import/no-unresolved': 'error',
     'no-console': 'error',

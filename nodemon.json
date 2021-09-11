@@ -1,8 +1,8 @@
 {
-  "watch": ["server"],
+  "watch": ["src/server"],
   "ext": "ts,js,json",
   "ignore": ["node_modules", "coverage", "dist", ".git"],
-  "exec": "npm run lint && ts-node -r tsconfig-paths/register ./src/server/server.ts",
+  "exec": "npm run lint && ts-node -r tsconfig-paths/register ./server/server.ts",
   "restartable": "rs",
   "env": {
     "NODE_ENV": "development"
