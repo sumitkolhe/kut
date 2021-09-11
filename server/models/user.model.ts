@@ -57,6 +57,6 @@ const UserSchema: Schema = new Schema(
   }
 )
 
-model<UserDocument>('user', UserSchema).ensureIndexes()
+// model<UserDocument>('user', UserSchema).ensureIndexes()
 
 export const UserModel = model<UserDocument>('user', UserSchema)

@@ -7,6 +7,7 @@ import { CssBaseline } from '@geist-ui/react'
 import { PrefersContext, themes, ThemeType } from '../lib/use-prefers'
 import Menu from '../components/navigation/menu'
 import Footer from '../components/footer'
+import Layout from '../components/layout'
 
 const DashboardApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   const [themeType, setThemeType] = useState<ThemeType>('dark')
@@ -41,7 +42,9 @@ const DashboardApp = ({ Component, pageProps }: AppProps): JSX.Element => {
       <CssBaseline />
       <PrefersContext.Provider value={{ themeType, switchTheme }}>
         <Menu />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>{' '}
         <Footer />
       </PrefersContext.Provider>
     </>

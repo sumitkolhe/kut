@@ -15,7 +15,7 @@ const Submenu: React.FC = () => {
 
   return (
     <>
-      <nav className="submenu__wrapper">
+      <nav className="h-9">
         <div className={`submenu ${sticky ? 'submenu_sticky' : ''}`}>
           <div className="submenu__inner">
             <Tabs value={router.asPath} onChange={(route) => router.push(route)}>
