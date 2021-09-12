@@ -14,8 +14,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "outDir": "dist",
     "rootDir": ".",
+    "outDir": "dist",
     "removeComments": true,
     "noImplicitAny": true,
     "experimentalDecorators": true,
@@ -26,5 +26,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "server"]
 }

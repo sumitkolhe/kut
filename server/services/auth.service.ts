@@ -8,6 +8,7 @@ import { signAccessToken, signEmailVerificationToken, signRefreshToken } from '@
 import { Email } from '@server/interfaces/email'
 import { globalConstants } from '@server/constants'
 import { globalConfig } from '@server/config/global'
+import { Logger } from '@server/utils/logger'
 
 export class AuthService {
   static register = async (userRegistrationDetails: Pick<User, 'email' | 'name' | 'password'>): Promise<void> => {
@@ -46,12 +47,13 @@ export class AuthService {
   ): Promise<{ accessToken: string; refreshToken: string }> => {
     const userAlreadyExist = await UserModel.findOne({ email: userLoginDetails.email })
 
+    Logger.info(userLoginDetails.password)
     // checks
     if (!userAlreadyExist) throw CreateError.Conflict('User does not exists')
     if (userAlreadyExist.isBanned) throw CreateError.Unauthorized('User is banned')
     if (!userAlreadyExist.isVerified) throw CreateError.Unauthorized('Email is not verified')
 
-    const passwordMatch = await compare(userLoginDetails.email, userAlreadyExist.email)
+    const passwordMatch = await compare(userLoginDetails.password, userAlreadyExist.password)
 
     if (!passwordMatch) throw CreateError.BadRequest('Incorrect login credentials')
 

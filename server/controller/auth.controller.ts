@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express'
 import { AuthService } from '@server/services/auth.service'
 import { Logger } from '@server/utils/logger'
+import { User } from '@server/interfaces/user'
 import { globalConfig } from '@server/config/global'
 import { CreateError } from '@server/middleware/errorHandler'
 
@@ -8,12 +9,7 @@ export const registerUser: RequestHandler = async (req, res, next) => {
   try {
     if (!globalConfig.allowRegistration) throw new CreateError(403, 'Registration is disabled!')
 
-    const { email, name, password } = req.body
-    const registrationPayload = {
-      email,
-      name,
-      password,
-    }
+    const registrationPayload: Pick<User, 'email' | 'password' | 'name'> = req.body
 
     await AuthService.register(registrationPayload)
 

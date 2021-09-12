@@ -1,14 +1,14 @@
 import { analyticsDetailsInterface } from '@server/interfaces/analytics'
 
-export interface linkDetailsInterface {
+export interface Link {
   alias: string
   longUrl: string
-  shortUrl?: string
-  visitCount?: number
+  shortUrl: string
+  visitCount: number
   password: string
-  passwordProtected?: boolean
+  passwordProtected: boolean
   description: string
-  analytics?: analyticsDetailsInterface
-  createdAt?: Date
-  updatedAt?: Date
+  analytics: analyticsDetailsInterface
+  createdAt: Date
+  updatedAt: Date
 }

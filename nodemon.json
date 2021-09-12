@@ -1,5 +1,5 @@
 {
-  "watch": ["src/server"],
+  "watch": ["*"],
   "ext": "ts,js,json",
   "ignore": ["node_modules", "coverage", "dist", ".git"],
   "exec": "npm run lint && ts-node -r tsconfig-paths/register ./server/server.ts",

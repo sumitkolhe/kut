@@ -3,7 +3,7 @@ import 'tailwindcss/tailwind.css'
 import React, { useCallback, useEffect, useState } from 'react'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import { CssBaseline } from '@geist-ui/react'
+import { CssBaseline, GeistProvider } from '@geist-ui/react'
 import { PrefersContext, themes, ThemeType } from '../lib/use-prefers'
 import Menu from '../components/navigation/menu'
 import Footer from '../components/footer'
@@ -38,15 +38,17 @@ const DashboardApp = ({ Component, pageProps }: AppProps): JSX.Element => {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
-      </Head>
-      <CssBaseline />
-      <PrefersContext.Provider value={{ themeType, switchTheme }}>
-        <Menu />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>{' '}
-        <Footer />
-      </PrefersContext.Provider>
+      </Head>{' '}
+      <GeistProvider themeType={themeType}>
+        <CssBaseline />
+        <PrefersContext.Provider value={{ themeType, switchTheme }}>
+          <Layout>
+            <Menu />
+            <Component {...pageProps} />
+            <Footer />
+          </Layout>
+        </PrefersContext.Provider>
+      </GeistProvider>
     </>
   )
 }

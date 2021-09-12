@@ -8,10 +8,19 @@ import { routes } from '@server/routes/routes'
 import { connectDatabase } from '@server/helpers/connectDatabase'
 import { isDev } from '@server/utils/isDev'
 import { Logger } from '@server/utils/logger'
+// eslint-disable-next-line import/order
 import { expressConfig } from '@server/config/express'
 
 config({ allowEmptyValues: true })
-
+import { CurrentUser } from '@server/interfaces/user'
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Express {
+    interface Request {
+      currentUser: CurrentUser
+    }
+  }
+}
 const dev = isDev()
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
