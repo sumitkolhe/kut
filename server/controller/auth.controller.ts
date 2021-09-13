@@ -1,9 +1,11 @@
 import { RequestHandler } from 'express'
+import { serialize } from 'cookie'
 import { AuthService } from '@server/services/auth.service'
 import { Logger } from '@server/utils/logger'
 import { User } from '@server/interfaces/user'
 import { globalConfig } from '@server/config/global'
 import { CreateError } from '@server/middleware/errorHandler'
+import { isDev } from '@server/utils/isDev'
 
 export const registerUser: RequestHandler = async (req, res, next) => {
   try {
@@ -24,17 +26,18 @@ export const loginUser: RequestHandler = async (req, res, next) => {
   try {
     const { email, password } = req.body
 
-    const loginPayload = {
-      email,
-      password,
-    }
+    const { accessToken } = await AuthService.login({ email, password })
 
-    const { accessToken, refreshToken } = await AuthService.login(loginPayload)
-
-    res.json({
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-    })
+    res.setHeader(
+      'Set-Cookie',
+      serialize('accessToken', accessToken, {
+        httpOnly: true,
+        secure: !isDev(),
+        sameSite: true,
+        path: '/',
+      })
+    )
+    res.json({ message: 'success' })
   } catch (error) {
     Logger.error(`error logging in user. Exception : ${error.message}`)
     next(error)
@@ -46,7 +49,6 @@ export const verifyUser: RequestHandler = async (req, res, next) => {
     const { token } = req.params
 
     await AuthService.verifyUser(token)
-
     res.json('verified')
   } catch (error) {
     Logger.error(`error verifying email. Exception : ${error.message}`)

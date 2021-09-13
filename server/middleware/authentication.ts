@@ -10,11 +10,13 @@ export const checkAuthentication: RequestHandler = (
   next: express.NextFunction
 ) => {
   try {
-    const authHeader = req.headers.authorization
-    const accessToken = authHeader && authHeader.split(' ')[1]
-    if (!accessToken) throw CreateError.Unauthorized('Authorization token not found')
+    const authCookies = req.headers.cookie
+    const accessToken = authCookies.split('=')[1]
+
+    if (!accessToken) throw CreateError.Unauthorized()
 
     const tokenDetails = verify(accessToken, globalConfig.accessTokenSecret) as CurrentUser
+
     req.currentUser = tokenDetails
     next()
   } catch (error) {

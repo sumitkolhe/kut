@@ -4,4 +4,4 @@ import { userInfo } from '@server/controller/user.controller'
 
 export const userRouter = Router()
 
-userRouter.post('/me', checkAuthentication, userInfo)
+userRouter.get('/me', checkAuthentication, userInfo)

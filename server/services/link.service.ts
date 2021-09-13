@@ -5,9 +5,7 @@ import { globalConfig } from '@server/config/global'
 import { LinkModel } from '@server/models/link.model'
 
 export class LinkService {
-  static shortenLink = async (
-    linkPayload: Pick<Link, 'longUrl' | 'alias' | 'description' | 'password'>
-  ): Promise<Pick<Link, 'longUrl' | 'alias' | 'description' | 'password'>> => {
+  static shortenLink = async (linkPayload: Link): Promise<Link> => {
     const uniqueAlias = linkPayload.alias ? linkPayload.alias : await generateUniqueAlias()
 
     const newLink = new LinkModel({
@@ -18,7 +16,8 @@ export class LinkService {
       passwordProtected: linkPayload.password ? true : false,
       password: linkPayload.password,
     })
-    const savedLink: Pick<Link, 'longUrl' | 'alias' | 'description' | 'password'> = await newLink.save().catch(() => {
+
+    const savedLink: Link = await newLink.save().catch(() => {
       throw CreateError.BadRequest('Alias is already in use')
     })
     return savedLink
