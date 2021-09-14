@@ -1,16 +1,19 @@
+/* eslint-disable no-console */
 import React from 'react'
 import { GetServerSideProps } from 'next'
 import { requireAuthentication } from '../../components/auth'
 
-const Page = (): JSX.Element => (
-  <>
-    <h1 className="text-center text-9xl">Trym</h1>
-  </>
-)
+const Page = (context): JSX.Element => {
+  
+  return (
+    <>
+      <h1 className="text-center text-9xl">PROTECTED PAGE {{this.props.me}}</h1>
+    </>
+  )
+}
 
 export default Page
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getServerSideProps: GetServerSideProps = requireAuthentication(async (_ctx) => ({
+export const getServerSideProps: GetServerSideProps = requireAuthentication(async () => ({
   props: {},
 }))
