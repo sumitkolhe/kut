@@ -6,5 +6,5 @@ config({ allowEmptyValues: true })
 export const expressConfig = {
   serverProtocol: isDev() ? 'http' : 'https',
   serverHost: 'localhost',
-  serverPort: isDev() ? 3000 : Number(process.env.PORT) || 80,
+  serverPort: isDev() ? 4000 : Number(process.env.PORT) || 80,
 }
