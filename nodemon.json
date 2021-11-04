@@ -1,12 +1,10 @@
 {
-	"restartable": "rs",
-	"ignore": [".git", "node_modules/**/node_modules"],
-	"verbose": true,
-	"exec": "node -r tsconfig-paths/register -r ts-node/register",
-
-	"watch": ["server/", "nuxt.config.ts", "tsconfig.json", ".env"],
-	"env": {
-		"NODE_ENV": "development"
-	},
-	"ext": "js,json,ts"
+  "watch": ["*"],
+  "ext": "ts,js,json",
+  "ignore": ["node_modules", "coverage", "dist", ".git"],
+  "exec": "npm run lint && ts-node -r tsconfig-paths/register ./server/server.ts",
+  "restartable": "rs",
+  "env": {
+    "NODE_ENV": "development"
+  }
 }
