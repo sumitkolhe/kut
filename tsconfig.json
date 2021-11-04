@@ -22,9 +22,9 @@
     "emitDecoratorMetadata": true,
     "useUnknownInCatchVariables": false,
     "paths": {
-      "@server/*": ["./server/*"]
+      "@server/*": ["src/*"]
     }
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "server"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src"]
 }
