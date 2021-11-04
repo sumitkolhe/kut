@@ -22,7 +22,7 @@
     "emitDecoratorMetadata": true,
     "useUnknownInCatchVariables": false,
     "paths": {
-      "@server/*": ["src/*"]
+      "@src/*": ["src/*"]
     }
   },
   "exclude": ["node_modules"],

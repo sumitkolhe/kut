@@ -6,7 +6,7 @@
 </h2>
 <p >A powerful & modern custom URL shortener written in TypeScript</p>
 
-<a href="https://reduced.me">https://reduced.me</a>
+<a href="<https://reduced.me>">https://reduced.me</a>
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/sumitkolhe/reduced?style=flat-square)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/sumitkolhe/reduced?style=flat-square)
@@ -32,11 +32,11 @@
 
 ## 🧰 Built using
 
--   **NuxtJS**
--   **Vuetify**
--   **Express**
--   **Nodejs**
--   **MongoDB**
+- **NuxtJS**
+- **Vuetify**
+- **Express**
+- **Nodejs**
+- **MongoDB**
 
 ---
 
@@ -44,47 +44,47 @@
 
 ### Local Development
 
--   Clone the repository or download the latest [release](https://github.com/sumitkolhe/Reduced/releases) to a folder of choice.
+- Clone the repository or download the latest [release](https://github.com/sumitkolhe/Reduced/releases) to a folder of choice.
 
 ```
-$ git clone https://github.com/sumitkolhe/Reduced
+git clone https://github.com/sumitkolhe/Reduced
 ```
 
--   Install the dependencies
+- Install the dependencies
 
 ```
-$ cd Reduced
+cd Reduced
 
-$ npm install
+npm install
 ```
 
--   Rename **.sample-env** file to **.env** and fill all the required fields.
+- Rename **.sample-env** file to **.env** and fill all the required fields.
 
--   Start the app by running
+- Start the app by running
 
 ```
-$ cd Reduced
+cd Reduced
 
-$ npm run dev
+npm run dev
 ```
 
 ### Production Build -
 
 ```
-$ npm run build
+npm run build
 ```
 
 ### Run Production Build -
 
 ```
-$ npm run start
+npm run start
 ```
 
 ---
 
 ## ✍️ Authors
 
--   [**Sumit Kolhe**](https://github.com/sumitkolhe) - _Author_
+- [**Sumit Kolhe**](https://github.com/sumitkolhe) - _Author_
 
 ---
 

@@ -4,12 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "dev:client": "next dev",
-    "build:client": "cross-env NODE_ENV=production next build",
-    "build:server": "cross-env NODE_ENV=production tsc --project tsconfig.server.json",
-    "build": "npm run build:client && npm run build:server",
-    "start": "cross-env NODE_ENV=production node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/server/server.js",
-    "lint": "eslint . --ext .ts && npx next lint",
+    "start": "cross-env NODE_ENV=production node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/server.js",
+    "build": "cross-env NODE_ENV=production tsc -p tsconfig.prod.json",
+    "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
   "dependencies": {
