@@ -1,0 +1,10 @@
+{
+  "watch": ["*"],
+  "ext": "ts,js,json",
+  "ignore": ["node_modules", "dashboard", "dist", ".git"],
+  "exec": "npm run lint && ts-node -r tsconfig-paths/register ./src/server.ts",
+  "restartable": "rs",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
