@@ -1,11 +1,9 @@
 import { RequestHandler } from 'express'
-import { serialize } from 'cookie'
 import { AuthService } from 'src/services/auth.service'
 import { Logger } from 'src/utils/logger'
 import { User } from 'src/interfaces/user'
 import { globalConfig } from 'src/config/global'
 import { CreateError } from 'src/middleware/errorHandler'
-import { isDev } from 'src/utils/isDev'
 
 export const registerUser: RequestHandler = async (req, res, next) => {
   try {
@@ -28,16 +26,7 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 
     const { accessToken } = await AuthService.login({ email, password })
 
-    res.setHeader(
-      'Set-Cookie',
-      serialize('accessToken', accessToken, {
-        httpOnly: true,
-        secure: !isDev(),
-        sameSite: true,
-        path: '/',
-      })
-    )
-    res.json({ message: 'success' })
+    res.json({ accessToken })
   } catch (error) {
     Logger.error(`error logging in user. Exception : ${error.message}`)
     next(error)

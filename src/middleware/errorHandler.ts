@@ -12,10 +12,6 @@ export class CreateError extends Error {
     this.message = message
   }
 
-  static NoContent(message?: string): CreateError {
-    return new CreateError(204, message || 'No Content')
-  }
-
   static BadRequest(message?: string): CreateError {
     return new CreateError(400, message || 'Bad Request')
   }
