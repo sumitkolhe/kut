@@ -1,5 +1,5 @@
 <template>
-  <p class="text-xl">trym</p>
+  <span></span>
 </template>
 
 <script lang="ts">

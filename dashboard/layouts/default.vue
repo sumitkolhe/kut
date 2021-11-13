@@ -1,0 +1,23 @@
+<template>
+  <div>
+    <CommonHeader />
+    <main class="flex-grow dark:bg-black">
+      <Nuxt />
+    </main>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({})
+</script>
+
+<style scoped>
+#app {
+  font-family: 'Inter', sans-serif;
+}
+
+::selection {
+  background: var(--geist-cyan);
+}
+</style>

@@ -14,7 +14,7 @@ const NuxtAppConfig: NuxtConfig = {
       {
         hid: 'description',
         name: 'description',
-        content: 'A free URL shortening service ',
+        content: 'A free URL shortening service',
       },
       { name: 'format-detection', content: 'telephone=no' },
     ],
@@ -36,9 +36,19 @@ const NuxtAppConfig: NuxtConfig = {
 
   components: true,
 
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/auth-next'],
 
-  axios: {},
+  buildModules: [
+    '@nuxt/typescript-build',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/composition-api/module',
+    'nuxt-vite',
+  ],
+
+  auth: {
+    // Options
+  },
+
   server: {
     port: '3000',
     host: '0.0.0.0',

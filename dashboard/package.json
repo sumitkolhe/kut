@@ -11,10 +11,12 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
-    "core-js": "^3.19.1",
-    "nuxt": "^2.15.8",
     "@geist-ui/vue": "^3.0.0",
-    "@geist-ui/vue-icons": "^1.0.2"
+    "@geist-ui/vue-icons": "^1.0.2",
+    "@nuxtjs/auth-next": "^5.0.0-1624817847.21691f1",
+    "@nuxtjs/composition-api": "^0.30.0",
+    "core-js": "^3.19.1",
+    "nuxt": "^2.15.8"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.0",
@@ -23,6 +25,7 @@
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/tailwindcss": "^4.2.1",
+    "@vue/runtime-dom": "^3.2.21",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",
