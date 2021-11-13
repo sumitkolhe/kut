@@ -36,17 +36,40 @@ const NuxtAppConfig: NuxtConfig = {
 
   components: true,
 
-  modules: ['@nuxtjs/auth-next'],
+  axios: {
+    baseURL: 'http://localhost:4000/api',
+  },
 
-  buildModules: [
-    '@nuxt/typescript-build',
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/composition-api/module',
-    'nuxt-vite',
-  ],
+  modules: ['@nuxtjs/auth-next', '@nuxtjs/axios'],
+
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss'],
 
   auth: {
-    // Options
+    strategies: {
+      local: {
+        token: {
+          prefix: 'accessToken.',
+          property: 'accessToken',
+          required: true,
+          type: 'Bearer',
+        },
+        user: {
+          property: '',
+          autoFetch: true,
+        },
+        endpoints: {
+          login: { url: 'auth/login', method: 'post' },
+          register: { url: 'auth/register', method: 'post' },
+          user: { url: 'user/me', method: 'get' },
+          logout: false,
+        },
+      },
+    },
+    redirect: {
+      login: '/',
+      logout: '/auth/login',
+      home: '/user/dashboard',
+    },
   },
 
   server: {
@@ -54,7 +77,15 @@ const NuxtAppConfig: NuxtConfig = {
     host: '0.0.0.0',
   },
 
-  build: { transpile: ['@geist-ui/vue'] },
+  build: {
+    transpile: ['@geist-ui/vue'],
+    extractCSS: true,
+    extend: function (NuxtAppConfig) {
+      NuxtAppConfig.node = {
+        fs: 'empty',
+      }
+    },
+  },
 }
 
 export default NuxtAppConfig

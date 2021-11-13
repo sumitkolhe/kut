@@ -15,12 +15,7 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": [
-      "@nuxt/types",
-      "@types/node",
-      "@nuxtjs/auth-next",
-      "unplugin-vue2-script-setup/types"
-    ]
+    "types": ["@nuxt/types", "@types/node", "@nuxtjs/auth-next"]
   },
   "vueCompilerOptions": {
     "experimentalCompatMode": 2

@@ -8,8 +8,8 @@ module.exports = {
         sans: ['Inter'],
       },
       colors: {
-        'geist-background': 'var(--geist-background)',
-        'geist-foreground': 'var(--geist-foreground)',
+        background: 'var(--geist-background)',
+        foreground: 'var(--geist-foreground)',
         accent1: 'var(--accent1)',
         accent2: 'var(--accent2)',
         accent3: 'var(--accent3)',

@@ -4,9 +4,6 @@
       fixed
       w-full
       z-30
-      transition
-      duration-300
-      ease-in-out
       bg-geist-background
       md:opacity-90
       border-b border-accent2
@@ -29,16 +26,22 @@
           >
             <package-icon class="h-10 w-10" />
 
-            <p class="text-2xl font-bold pl-4">Trym</p>
+            <p class="text-2xl font-bold pl-4">TRYM</p>
           </NuxtLink>
         </div>
 
-        <NuxtLink
-          to="/dashboard"
-          class="flex flex-grow justify-end flex-wrap items-center"
-        >
-          <zi-button type="primary" auto> Dashboard </zi-button>
-        </NuxtLink>
+        <div class="inline-flex">
+          <NuxtLink to="/auth/login" class="mx-4">
+            <zi-button auto> Login </zi-button>
+          </NuxtLink>
+
+          <NuxtLink to="/dashboard" class="mx-4">
+            <zi-button auto> Dash </zi-button>
+          </NuxtLink>
+          <!-- <NuxtLink to="/auth/register">
+            <zi-button type="primary" auto> Signup </zi-button>
+          </NuxtLink> -->
+        </div>
       </div>
     </div>
   </header>

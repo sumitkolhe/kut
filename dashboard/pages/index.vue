@@ -1,5 +1,5 @@
 <template>
-  <span></span>
+  <span class="text-green-500">Public Page</span>
 </template>
 
 <script lang="ts">

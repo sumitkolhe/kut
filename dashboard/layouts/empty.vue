@@ -1,15 +1,11 @@
 <template>
   <div>
-    <CommonHeader />
-    <main class="flex-grow dark:bg-black pt-20">
-      <Nuxt />
-    </main>
+    <Nuxt />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import '@nuxtjs/auth-next'
 export default Vue.extend({})
 </script>
 
