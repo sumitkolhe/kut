@@ -5,6 +5,16 @@
 html {
   --background: var(--geist-background);
   --foreground: var(--geist-foreground);
+  --success: var(--geist-success);
+  --success-light: var(--geist-success-light);
+  --success-dark: var(--geist-success-dark);
+  --error: var(--geist-error);
+  --error-light: var(--geist-error-light);
+  --error-dark: var(--geist-error-dark);
+  --alert: var(--geist-alert);
+  --purple: var(--geist-purple);
+  --violet: var(--geist-violet);
+  --cyan: var(--geist-cyan);
   --accent1: var(--accents-1);
   --accent2: var(--accents-2);
   --accent3: var(--accents-3);
