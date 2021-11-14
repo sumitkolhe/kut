@@ -35,12 +35,9 @@
             <zi-button auto> Login </zi-button>
           </NuxtLink>
 
-          <NuxtLink to="/dashboard" class="mx-4">
-            <zi-button auto> Dash </zi-button>
-          </NuxtLink>
-          <!-- <NuxtLink to="/auth/register">
+          <NuxtLink to="/auth/register">
             <zi-button type="primary" auto> Signup </zi-button>
-          </NuxtLink> -->
+          </NuxtLink>
         </div>
       </div>
     </div>

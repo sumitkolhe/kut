@@ -30,19 +30,23 @@ const NuxtAppConfig: NuxtConfig = {
     ],
   },
 
+  components: true,
+
   css: ['./assets/global.css', '@geist-ui/vue/dist/geist-ui.css'],
 
   plugins: ['~plugins/theme'],
 
-  components: true,
+  modules: ['@nuxtjs/auth-next', '@nuxtjs/axios'],
+
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss'],
+
+  router: {
+    middleware: ['auth'],
+  },
 
   axios: {
     baseURL: 'http://localhost:4000/api',
   },
-
-  modules: ['@nuxtjs/auth-next', '@nuxtjs/axios'],
-
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss'],
 
   auth: {
     strategies: {
@@ -52,6 +56,7 @@ const NuxtAppConfig: NuxtConfig = {
           property: 'accessToken',
           required: true,
           type: 'Bearer',
+          global: true,
         },
         user: {
           property: '',
@@ -68,7 +73,7 @@ const NuxtAppConfig: NuxtConfig = {
     redirect: {
       login: '/',
       logout: '/auth/login',
-      home: '/user/dashboard',
+      home: '/dashboard',
     },
   },
 
@@ -79,9 +84,8 @@ const NuxtAppConfig: NuxtConfig = {
 
   build: {
     transpile: ['@geist-ui/vue'],
-    extractCSS: true,
-    extend: function (NuxtAppConfig) {
-      NuxtAppConfig.node = {
+    extend: function (config) {
+      config.node = {
         fs: 'empty',
       }
     },

@@ -1,11 +1,65 @@
 <template>
-  <section class="max-w-5xl mx-auto">
-    <div class="mt-20 flex flex-col max-w-sm mx-auto md:px-0 px-4">
-      <h2 class="mb-12 text-center">Login in to Trym</h2>
-      <zi-button type="primary" shadow class="mb-4">Github</zi-button>
-      <zi-button type="danger" shadow class="mb-6">Google</zi-button>
+  <section
+    class="grid grid-cols-1 lg:grid-cols-2 gap-20 max-w-5xl mx-auto min-h-full"
+  >
+    <div class="space-y-6 mt-20">
+      <a href="/" title="Go to Kutty Home Page">
+        <scissors-icon color="#000" class="h-12 w-12" />
+      </a>
+      <div
+        class="flex space-x-4"
+        v-for="feature in features"
+        :key="feature.title"
+      >
+        <check-in-circle-fill-icon class="h-8 w-8" />
 
-      <span class="border-b border-accent2 mb-6"></span>
+        <div>
+          <h2 class="text-xl font-medium text-foreground">
+            {{ feature.title }}
+          </h2>
+          <p class="mt-1 text-accent7">
+            {{ feature.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="absolute z-0 h-full border border-accent2 md:block hidden"
+      style="left: 50%"
+    ></div>
+    <div class="mt-20 flex flex-col space-x-10 mr-12">
+      <h2 class="pl-10 mb-12 font-bold">Register</h2>
+
+      <button
+        class="
+          bg-foreground
+          p-4
+          text-white
+          rounded-lg
+          hover:bg-accent7
+          mb-6
+          inline-flex
+          justify-center
+        "
+      >
+        <github-icon class="px-6 -ml-6"></github-icon>
+        <span> Continue with Github </span>
+      </button>
+      <button
+        class="
+          bg-errorLight
+          p-4
+          text-white
+          rounded-lg
+          hover:bg-errorDark
+          mb-6
+          inline-flex
+          justify-center
+        "
+      >
+        <github-icon class="px-6 -ml-6"></github-icon>
+        <span> Continue with Google </span>
+      </button>
       <zi-input
         placeholder="Email"
         v-model="loginDetails.email"
