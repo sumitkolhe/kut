@@ -10,8 +10,8 @@ export const checkAuthentication: RequestHandler = (
   next: express.NextFunction
 ) => {
   try {
-    const authorization = req.headers.authorization
-    const accessToken = authorization.split(' ')[1]
+    const authorization = req.headers?.authorization
+    const accessToken = authorization?.split(' ')[1]
 
     if (!accessToken) throw CreateError.Unauthorized()
 

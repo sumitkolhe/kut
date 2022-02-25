@@ -9,16 +9,20 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
+    "noImplicitAny": false,
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@nuxt/types", "@types/node", "@nuxtjs/auth-next"]
-  },
-  "vueCompilerOptions": {
-    "experimentalCompatMode": 2
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "@types/node",
+      "@nuxtjs/auth-next",
+      "@nuxtjs/vuetify"
+    ]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }

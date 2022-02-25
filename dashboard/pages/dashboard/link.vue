@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center" class="mt-12"> Home Page</v-row>
+  <v-row justify="center"> All links</v-row>
 </template>
 
 <script lang="ts">

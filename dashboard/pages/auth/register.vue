@@ -1,134 +1,129 @@
 <template>
-  <section
-    class="grid grid-cols-1 lg:grid-cols-2 gap-20 max-w-5xl mx-auto min-h-full"
-  >
-    <div class="space-y-6 mt-20">
-      <a href="/" title="Go to Kutty Home Page">
-        <scissors-icon color="#000" class="h-12 w-12" />
-      </a>
-      <div
-        class="flex space-x-4"
-        v-for="feature in features"
-        :key="feature.title"
-      >
-        <check-in-circle-fill-icon class="h-8 w-8" />
+  <v-row justify="center" align="center" class="mt-12">
+    <v-col cols="12" md="6">
+      <h2 class="font-weight-bold mb-6 text-center">Log in to Small/ish</h2>
 
-        <div>
-          <h2 class="text-xl font-medium text-foreground">
-            {{ feature.title }}
-          </h2>
-          <p class="mt-1 text-accent7">
-            {{ feature.description }}
-          </p>
-        </div>
-      </div>
-    </div>
-    <div
-      class="absolute z-0 h-full border border-accent2 md:block hidden"
-      style="left: 50%"
-    ></div>
-    <div class="mt-20 flex flex-col space-x-10 mr-12">
-      <h2 class="pl-10 mb-12 font-bold">Register</h2>
+      <v-form ref="loginForm" v-model="isFormValid" lazy-validation>
+        <v-text-field
+          v-model="login.email"
+          :rules="[rules.required, rules.noSpace]"
+          placeholder="Email Address"
+          append-icon="mdi-at"
+          outlined
+          required
+          color="background"
+        ></v-text-field>
+        <v-text-field
+          v-model="login.password"
+          :rules="[rules.required, rules.min, rules.noSpace]"
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+          required
+          outlined
+          color="background"
+          @click:append="showPassword = !showPassword"
+        ></v-text-field>
 
-      <button
-        class="
-          bg-foreground
-          p-4
-          text-white
-          rounded-lg
-          hover:bg-accent7
-          mb-6
-          inline-flex
-          justify-center
-        "
-      >
-        <github-icon class="px-6 -ml-6"></github-icon>
-        <span> Continue with Github </span>
-      </button>
-      <button
-        class="
-          bg-errorLight
-          p-4
-          text-white
-          rounded-lg
-          hover:bg-errorDark
-          mb-6
-          inline-flex
-          justify-center
-        "
-      >
-        <github-icon class="px-6 -ml-6"></github-icon>
-        <span> Continue with Google </span>
-      </button>
-      <zi-input
-        placeholder="Email"
-        v-model="loginDetails.email"
-        size="big"
-      ></zi-input>
-      <span v-if="1 === 1" class="mt-2">okkk</span>
-      <zi-input
-        placeholder="Password"
-        v-model="loginDetails.password"
-        class="mt-6"
-      ></zi-input>
-      <span class="mb-8 mt-2">okkk</span>
-      <zi-button type="success" @click="loginUser">Submit</zi-button>
-    </div>
-  </section>
+        <v-checkbox
+          class="mt-n2"
+          label="Remember me"
+          color="background"
+          value="Remember me"
+        ></v-checkbox>
+
+        <v-btn
+          block
+          large
+          depressed
+          class="foreground--text text-none"
+          :loading="loading"
+          :disabled="!isFormValid"
+          color="background"
+          @click="loginUser"
+        >
+          Login
+        </v-btn>
+
+        <v-row justify="center">
+          <v-col>
+            <v-row justify="center">
+              <p class="font-weight-medium mt-10 background--text">
+                Don't have an account?
+                <NuxtLink
+                  class="success--text text-decoration-none"
+                  to="register"
+                >
+                  Sign Up
+                </NuxtLink>
+              </p>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-form>
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-interface Login {
-  email: string
-  password: string
-}
-
-export default Vue.extend({
+import '@nuxtjs/auth-next'
+import {
+  defineComponent,
+  useContext,
+  ref,
+  useRouter,
+} from '@nuxtjs/composition-api'
+export default defineComponent({
   auth: 'guest',
-  data() {
-    return {
-      features: [
-        {
-          title: 'Free account',
-          description:
-            'Create apps, connect databases and add-on services, and collaborate on your apps, for free.',
-        },
-        {
-          title: 'Free accoun1',
-          description:
-            'Create apps, connect databases and add-on services, and collaborate on your apps, for free.',
-        },
-        {
-          title: 'Free accoun2',
-          description:
-            'Create apps, connect databases and add-on services, and collaborate on your apps, for free.',
-        },
-        {
-          title: 'Free accoun3',
-          description:
-            'Create apps, connect databases and add-on services, and collaborate on your apps, for free.',
-        },
-      ],
+  setup() {
+    const loginForm = ref()
+    const context = useContext()
+    const router = useRouter()
+    const isFormValid = true
+    let loading = false
+    const showPassword = false
 
-      loginDetails: {
-        email: '',
-        password: '',
-      } as Login,
+    const rules = {
+      required: (v: any) => !!v || 'Field is Required',
+      min: (v: any) => v.length >= 6 || 'Must be atleast 6 characters',
+      email: (v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      noSpace: (v: any) =>
+        v.split(' ').length <= 1 || 'Must not contain blank space',
     }
-  },
+    const login = {
+      email: '',
+      password: '',
+    }
 
-  methods: {
-    async loginUser() {
-      try {
-        await this.$auth.loginWith('local', {
-          data: this.loginDetails,
-        })
-      } catch (error) {
-        console.error(error)
+    const loginUser = async () => {
+      if (loginForm.value.validate()) {
+        loading = true
+        try {
+          await context.$auth.loginWith('local', {
+            data: login,
+          })
+          loading = false
+          ;(this as any).$notify.success('Login Successful')
+
+          if (context.$auth.loggedIn)
+            setTimeout(() => {
+              router.push('/dashboard')
+            }, 1500)
+        } catch (error) {
+          loading = false
+        }
       }
-    },
+    }
+
+    return {
+      loginUser,
+      login,
+      loading,
+      rules,
+      showPassword,
+      loginForm,
+      isFormValid,
+    }
   },
 })
 </script>
