@@ -2,11 +2,37 @@ import { fileURLToPath } from 'url'
 import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      title: '',
+      htmlAttrs: {
+        lang: 'en',
+      },
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      meta: [
+        { hid: 'og:title', name: 'og:title', content: '' },
+        { name: 'format-detection', content: 'telephone=no' },
+      ],
+      link: [
+        {
+          rel: 'stylesheet',
+          type: 'text/css',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap',
+        },
+      ],
+    },
+  },
+
   srcDir: 'src',
+
+  modules: ['@nuxtjs/tailwindcss'],
+
   serverMiddleware: [
     { path: '/api', handler: '~/server/server.ts' },
     { path: '/api/**', handler: '~/server/server.ts' },
   ],
+
   alias: {
     configs: fileURLToPath(new URL('./src/server/configs', import.meta.url)),
     controllers: fileURLToPath(new URL('./src/server/controllers', import.meta.url)),
@@ -19,6 +45,7 @@ export default defineNuxtConfig({
     services: fileURLToPath(new URL('./src/server/services', import.meta.url)),
     utils: fileURLToPath(new URL('./src/server/utils', import.meta.url)),
   },
+
   runtimeConfig: {
     dbUrl: process.env.DB_URL,
     dbName: process.env.DB_NAME,

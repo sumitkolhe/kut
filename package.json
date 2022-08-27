@@ -1,5 +1,5 @@
 {
-  "name": "smallish",
+  "name": "app",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -24,6 +24,7 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@kolhe/eslint-config": "^1.1.5",
+    "@nuxtjs/tailwindcss": "^5.3.2",
     "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
