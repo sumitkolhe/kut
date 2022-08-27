@@ -14,7 +14,7 @@ export default async () => {
     }
 
     logger.info('=> using new database connection')
-    return mongoose
+    return await mongoose
       .connect(config.database.dbUrl, {
         bufferCommands: false,
       })
