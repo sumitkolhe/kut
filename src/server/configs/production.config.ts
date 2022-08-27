@@ -5,11 +5,11 @@ const config = useRuntimeConfig()
 export const productionConfig: Config = {
   env: 'production',
   database: {
-    dbName: config.DB_NAME,
-    dbUrl: config.DB_URL,
+    dbName: config.dbName,
+    dbUrl: config.dbUrl,
   },
   cors: {
-    origin: 'my-domain.com',
+    origin: 'trym.in',
     credentials: true,
   },
   log: {
