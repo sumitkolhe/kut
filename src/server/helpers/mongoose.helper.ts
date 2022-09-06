@@ -13,12 +13,14 @@ export default async () => {
       return Promise.resolve()
     }
 
-    logger.info('connected using new db connection')
     const connection = await mongoose.connect(config.database.dbUrl, {
       keepAlive: true,
+      dbName: config.database.dbName,
     })
 
     isConnected = connection.connections[0].readyState
+
+    logger.info('connected using new db connection')
 
     return isConnected
   } catch (error) {

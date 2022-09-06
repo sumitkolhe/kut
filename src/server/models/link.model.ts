@@ -16,7 +16,7 @@ export interface LinkDocument extends Document {
   updatedAt: Date
 }
 
-const LinkSchema = new mongoose.Schema(
+const LinkSchema: Schema = new mongoose.Schema(
   {
     alias: { type: String, required: true, unique: true },
     target: { type: String, required: true },
