@@ -49,6 +49,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     dbUrl: process.env.DB_URL,
     dbName: process.env.DB_NAME,
+    accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
+    accessTokenExpiration: process.env.ACCESS_TOKEN_EXPIRATION,
   },
 
   nitro: {
