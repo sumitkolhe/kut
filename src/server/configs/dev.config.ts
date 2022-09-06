@@ -14,4 +14,8 @@ export const devConfig: Config = {
     format: 'dev',
     level: 'debug',
   },
+  accessToken: {
+    secret: 'erpigepigerpipr34634643',
+    expiresIn: '1d',
+  },
 }

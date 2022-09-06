@@ -16,4 +16,8 @@ export const productionConfig: Config = {
     format: 'tiny',
     level: 'info',
   },
+  accessToken: {
+    secret: config.accessTokenSecret,
+    expiresIn: config.accessTokenExpiration,
+  },
 }
