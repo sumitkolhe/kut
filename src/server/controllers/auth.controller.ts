@@ -1,18 +1,16 @@
-import { LinkModel } from 'models/link.model'
-import { UserModel } from 'models/user.model'
-import bcrypt from 'bcryptjs'
+import { AuthService } from 'services/auth.service'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 
 export class AuthController {
+  private authService = new AuthService()
+
   public login: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      // const mongo = await connectDatabase()
+      const { email, password } = req.body
 
-      // const r = await mongo.db('links-db').collection('test').find()
-      // res.status(200).json(r)
+      const signedAccessToken = await this.authService.login({ email, password })
 
-      const response = await LinkModel.find()
-      res.status(200).json(response)
+      res.json({ status: 'SUCCESS', message: null, data: { accessToken: signedAccessToken } })
     } catch (error) {
       next(error)
     }
@@ -20,23 +18,11 @@ export class AuthController {
 
   public register: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { email, password, firstName, lastName } = req.body
+      const { firstName, lastName, email, password } = req.body
 
-      const ifUserExist = await UserModel.findOne({
-        email,
-      })
+      await this.authService.register({ firstName, lastName, email, password })
 
-      if (ifUserExist) throw new Error('Email already registered')
-
-      const salt = await bcrypt.genSalt(10)
-      const hashedPassword = await bcrypt.hash(password, salt)
-
-      const newUser = new UserModel({ email, password: hashedPassword, firstName, lastName })
-      await newUser.save().catch((err) => {
-        throw new Error(err)
-      })
-
-      res.json({ message: 'User registered successfully' })
+      res.json({ status: 'SUCCESS', message: 'user registered successfully', data: null })
     } catch (error) {
       next(error)
     }
