@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { AuthController } from 'controllers/auth.controller'
 import { validate } from 'middlewares/validate.middleware'
 import { object, string, z } from 'zod'
+import { checkAuthentication } from 'middlewares/auth.middleware'
 import type { Routes } from 'interfaces/routes.interface'
 
 const regsiterationSchema = z.object({
@@ -48,5 +49,6 @@ export class AuthRoute implements Routes {
   private initializeRoutes() {
     this.router.post(`${this.path}/register`, validate(regsiterationSchema), this.authController.register)
     this.router.post(`${this.path}/login`, validate(loginSchema), this.authController.login)
+    this.router.get(`${this.path}/me`, checkAuthentication, this.authController.me)
   }
 }

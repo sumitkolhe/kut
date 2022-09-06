@@ -1,17 +1,23 @@
-import {} from 'dotenv/config'
+/* eslint-disable @typescript-eslint/no-namespace */
 import cors from 'cors'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import { errorMiddleware } from './middlewares/error.middleware'
-import { logger } from './utils/logger'
-import { getConfig } from './configs'
-import type { Config } from './interfaces/config.interface'
-import type { Routes } from './interfaces/routes.interface'
+import { errorMiddleware } from 'middlewares/error.middleware'
+import { getConfig } from 'configs'
+import type { Config } from 'interfaces/config.interface'
+import type { Routes } from 'interfaces/routes.interface'
+
+declare global {
+  namespace Express {
+    interface Request {
+      auth: any
+    }
+  }
+}
 
 export class App {
   public app: express.Application
-  public port: number
   public config: Config
   public env: string
 
@@ -41,12 +47,6 @@ export class App {
 
   private initializeErrorHandling() {
     this.app.use(errorMiddleware)
-  }
-
-  public listen() {
-    this.app.listen(this.port, () => {
-      logger.info(`🚀 Server listening on ${this.port}`)
-    })
   }
 
   public getServer() {

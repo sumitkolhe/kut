@@ -27,4 +27,16 @@ export class AuthController {
       next(error)
     }
   }
+
+  public me: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { email } = req.auth
+
+      const userDetails = await this.authService.me(email)
+
+      res.json({ status: 'SUCCESS', message: null, data: userDetails })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
