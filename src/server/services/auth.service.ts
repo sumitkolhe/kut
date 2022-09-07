@@ -41,7 +41,10 @@ export class AuthService {
   }
 
   public me = async (email: string): Promise<User> => {
-    const userDetails = await UserModel.findOne({ email }, { _id: false, __v: false, userLinks: false, apiKey: false })
+    const userDetails = await UserModel.findOne(
+      { email },
+      { _id: false, __v: false, userLinks: false, apiKey: false, password: false }
+    )
 
     if (!userDetails) throw new HttpExceptionError(404, 'user not found')
 
