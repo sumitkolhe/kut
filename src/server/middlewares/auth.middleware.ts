@@ -10,7 +10,7 @@ export const checkAuthentication: RequestHandler = (req, _res, next) => {
 
   const accessToken = authHeader && authHeader.split(' ')[1]
 
-  if (!accessToken) throw new HttpExceptionError(401, 'authorization token not found')
+  if (!accessToken) throw new HttpExceptionError(401, 'unauthorised')
 
   try {
     const tokenDetails = Jwt.verify(accessToken, config.accessToken.secret)
