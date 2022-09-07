@@ -55,7 +55,6 @@ const UserSchema: Schema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      select: false,
       minlength: 6,
     },
     userLinks: [{ type: mongoose.Schema.Types.ObjectId, ref: LinkModel }],
