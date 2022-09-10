@@ -11,6 +11,12 @@
     "prettify": "prettier --write \"src/**/*.{js,ts,json,vue}\""
   },
   "dependencies": {
+    "@headlessui/vue": "^1.6.7",
+    "@nuxtjs-alt/auth": "^2.0.10",
+    "@nuxtjs-alt/axios": "^1.0.16",
+    "@nuxtjs-alt/http": "^1.2.15",
+    "@pinia/nuxt": "^0.4.2",
+    "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.18.1",
@@ -26,18 +32,21 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@kolhe/eslint-config": "^1.1.5",
     "@nuxtjs/tailwindcss": "^5.3.2",
+    "@tailwindcss/forms": "^0.5.3",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
-    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/morgan": "^1.9.3",
     "@types/node": "^18.7.15",
+    "@vueuse/core": "^9.2.0",
+    "@vueuse/integrations": "^9.2.0",
+    "@vueuse/nuxt": "^9.2.0",
     "eslint": "^8.23.0",
     "husky": "^8.0.1",
-    "nuxt": "3.0.0-rc.8",
+    "nuxt": "3.0.0-rc.9",
+    "nuxt-icon": "^0.1.5",
     "prettier": "^2.7.1",
-    "ts-node": "^10.9.1",
     "typescript": "^4.8.2"
   }
 }
