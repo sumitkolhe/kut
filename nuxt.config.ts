@@ -1,4 +1,5 @@
 import { fileURLToPath } from 'url'
+import fs from 'fs'
 import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
@@ -100,6 +101,19 @@ export default defineNuxtConfig({
       login: '/auth/login',
       logout: '/auth/login',
       home: '/',
+    },
+  },
+
+  hooks: {
+    'vite:extendConfig': (config, { isClient, isServer }) => {
+      const path = `${__dirname}/node_modules/h3/dist/index.mjs`
+      let data = fs.readFileSync(path, 'utf-8')
+      const x = `if(_error.message === 'Cannot set headers after they are sent to the client') return;`
+      const y = `const error = createError(_error);`
+      if (!data.includes(x)) {
+        data = data.replace(y, `${y}${x}`)
+        fs.writeFileSync(path, data)
+      }
     },
   },
 })
