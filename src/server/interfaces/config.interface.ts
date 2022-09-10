@@ -16,4 +16,8 @@ export interface Config {
     secret: string
     expiresIn: string
   }
+  refreshToken: {
+    secret: string
+    expiresIn: string
+  }
 }

@@ -20,4 +20,8 @@ export const productionConfig: Config = {
     secret: config.accessTokenSecret,
     expiresIn: config.accessTokenExpiration,
   },
+  refreshToken: {
+    secret: config.refreshTokenSecret,
+    expiresIn: config.refreshTokenExpiration,
+  },
 }

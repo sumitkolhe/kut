@@ -51,6 +51,8 @@ export default defineNuxtConfig({
     dbName: process.env.DB_NAME,
     accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
     accessTokenExpiration: process.env.ACCESS_TOKEN_EXPIRATION,
+    refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
+    refreshTokenExpiration: process.env.REFRESH_TOKEN_EXPIRATION,
   },
 
   nitro: {

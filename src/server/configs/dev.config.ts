@@ -18,4 +18,8 @@ export const devConfig: Config = {
     secret: 'erpigepigerpipr34634643',
     expiresIn: '1d',
   },
+  refreshToken: {
+    secret: 'soeugh8350238230oighwiogh43803480',
+    expiresIn: '7d',
+  },
 }
