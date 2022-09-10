@@ -1,18 +1,11 @@
 <script lang="ts" setup>
-import { useAxios } from '@vueuse/integrations/useAxios'
-
 definePageMeta({
   auth: 'guest',
 })
-
-const { data, isFinished } = useAxios('https://jsonplaceholder.typicode.com/todos/1')
 </script>
 
 <template>
   <section class="bg-gray-50 h-screen mx-auto">
-    data: {{ data }}
-
-    isFinished:{{ isFinished }}
     <header class="flex items-center justify-center py-5 mb-5 border-b border-gray-200 space-x-2">
       <Icon name="ph:link-break" size="36" class="text-red-500" />
       <p class="text-xl font-medium text-red-500 uppercase">Trym</p>

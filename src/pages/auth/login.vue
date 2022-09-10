@@ -12,10 +12,6 @@ const login = async () => {
   await context.$auth.loginWith('local', {
     body: { email: email.value, password: password.value },
   })
-
-  const authStore = context?.$auth?.$storage?.getStore()
-
-  console.log(authStore?.user)
 }
 </script>
 
