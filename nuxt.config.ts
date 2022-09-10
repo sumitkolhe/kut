@@ -26,7 +26,7 @@ export default defineNuxtConfig({
 
   srcDir: 'src',
 
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs-alt/auth', '@nuxtjs-alt/http', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
 
   serverMiddleware: [
     { path: '/api', handler: '~/server/server.ts' },
@@ -55,5 +55,40 @@ export default defineNuxtConfig({
 
   nitro: {
     plugins: ['~/server/helpers/mongoose.helper.ts'],
+  },
+
+  router: {
+    middleware: ['auth'],
+  },
+  auth: {
+    globalMiddleware: true,
+    strategies: {
+      local: {
+        scheme: 'local',
+        enabled: true,
+        name: '',
+        token: {
+          property: 'data.accessToken',
+          required: true,
+          type: 'Bearer',
+          global: true,
+        },
+        user: {
+          property: '',
+        },
+        endpoints: {
+          user: { url: '/api/auth/me', method: 'get' },
+          login: { url: '/api/auth/login', method: 'post' },
+          logout: false,
+        },
+      },
+    },
+
+    redirect: {
+      callback: '/auth/login',
+      login: '/auth/login',
+      logout: '/auth/login',
+      home: '/',
+    },
   },
 })
