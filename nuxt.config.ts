@@ -57,7 +57,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // plugins: ['~/server/helpers/mongoose.helper.ts'],
+    plugins: ['~/server/helpers/mongoose.helper.ts'],
   },
 
   router: {
