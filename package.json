@@ -13,9 +13,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.0",
     "@nuxtjs-alt/auth": "^2.0.11",
-    "@nuxtjs-alt/axios": "^1.0.19",
     "@nuxtjs-alt/http": "^1.2.15",
-    "@nuxtjs-alt/proxy": "^1.3.5",
     "@pinia/nuxt": "^0.4.2",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
