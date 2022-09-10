@@ -5,6 +5,7 @@ import type { RequestHandler } from 'express'
 
 const config = getConfig()
 
+// verify access token
 export const checkAuthentication: RequestHandler = (req, _res, next) => {
   const authHeader = req.headers['authorization']
 

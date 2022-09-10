@@ -37,6 +37,14 @@ const loginSchema = z.object({
   }),
 })
 
+const refreshTokenSchema = z.object({
+  body: object({
+    refreshToken: string({
+      required_error: 'refresh token is required',
+    }),
+  }),
+})
+
 export class AuthRoute implements Routes {
   public path = '/auth'
   public router = Router()
@@ -49,6 +57,7 @@ export class AuthRoute implements Routes {
   private initializeRoutes() {
     this.router.post(`${this.path}/register`, validate(regsiterationSchema), this.authController.register)
     this.router.post(`${this.path}/login`, validate(loginSchema), this.authController.login)
+    this.router.post(`${this.path}/refresh-token`, validate(refreshTokenSchema), this.authController.refreshToken)
     this.router.get(`${this.path}/me`, checkAuthentication, this.authController.me)
   }
 }
