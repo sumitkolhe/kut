@@ -62,9 +62,11 @@ export default defineNuxtConfig({
   router: {
     middleware: ['auth'],
   },
+
   auth: {
     globalMiddleware: true,
     strategies: {
+      cookie: false,
       local: {
         scheme: 'refresh',
         enabled: true,
@@ -83,6 +85,7 @@ export default defineNuxtConfig({
         user: {
           property: '',
         },
+
         endpoints: {
           user: { url: '/api/auth/me', method: 'get' },
           login: { url: '/api/auth/login', method: 'post' },
