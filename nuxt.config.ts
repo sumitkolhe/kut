@@ -1,5 +1,4 @@
 import { fileURLToPath } from 'url'
-import fs from 'fs'
 import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
@@ -60,60 +59,47 @@ export default defineNuxtConfig({
     plugins: ['~/server/helpers/mongoose.helper.ts'],
   },
 
-  router: {
-    middleware: ['auth'],
-  },
+  // router: {
+  //   middleware: ['auth'],
+  // },
 
-  auth: {
-    globalMiddleware: true,
-    strategies: {
-      cookie: false,
-      local: {
-        scheme: 'refresh',
-        enabled: true,
-        name: '',
-        token: {
-          property: 'data.accessToken',
-          required: true,
-          type: 'Bearer',
-          global: true,
-        },
-        refreshToken: {
-          property: 'data.refreshToken',
-          data: 'refreshToken',
-          maxAge: 60 * 60 * 24 * 30,
-        },
-        user: {
-          property: '',
-        },
+  // auth: {
+  //   globalMiddleware: true,
+  //   strategies: {
+  //     cookie: false,
+  //     local: {
+  //       scheme: 'refresh',
+  //       enabled: true,
+  //       name: '',
+  //       token: {
+  //         property: 'data.accessToken',
+  //         required: true,
+  //         type: 'Bearer',
+  //         global: true,
+  //       },
+  //       refreshToken: {
+  //         property: 'data.refreshToken',
+  //         data: 'refreshToken',
+  //         maxAge: 60 * 60 * 24 * 30,
+  //       },
+  //       user: {
+  //         property: '',
+  //       },
 
-        endpoints: {
-          user: { url: '/api/auth/me', method: 'get' },
-          login: { url: '/api/auth/login', method: 'post' },
-          refresh: { url: '/api/auth/refresh-token', method: 'post' },
-          logout: false,
-        },
-      },
-    },
+  //       endpoints: {
+  //         user: { url: '/api/auth/me', method: 'get' },
+  //         login: { url: '/api/auth/login', method: 'post' },
+  //         refresh: { url: '/api/auth/refresh-token', method: 'post' },
+  //         logout: false,
+  //       },
+  //     },
+  //   },
 
-    redirect: {
-      callback: '/auth/login',
-      login: '/auth/login',
-      logout: '/auth/login',
-      home: '/',
-    },
-  },
-
-  hooks: {
-    'vite:extendConfig': (config, { isClient, isServer }) => {
-      const path = `${__dirname}/node_modules/h3/dist/index.mjs`
-      let data = fs.readFileSync(path, 'utf-8')
-      const x = `if(_error.message === 'Cannot set headers after they are sent to the client') return;`
-      const y = `const error = createError(_error);`
-      if (!data.includes(x)) {
-        data = data.replace(y, `${y}${x}`)
-        fs.writeFileSync(path, data)
-      }
-    },
-  },
+  //   redirect: {
+  //     callback: '/auth/login',
+  //     login: '/auth/login',
+  //     logout: '/auth/login',
+  //     home: '/',
+  //   },
+  // },
 })
