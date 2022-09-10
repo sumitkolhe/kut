@@ -9,7 +9,7 @@ export const productionConfig: Config = {
     dbUrl: config.dbUrl,
   },
   cors: {
-    origin: 'trym.in',
+    origin: true,
     credentials: true,
   },
   log: {

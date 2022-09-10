@@ -11,5 +11,7 @@ const logout = () => {
     hello
 
     <button @click="logout">logout</button>
+
+    <NuxtLink to="/dashboard">Dash</NuxtLink>
   </div>
 </template>
