@@ -59,47 +59,41 @@ export default defineNuxtConfig({
     plugins: ['~/server/helpers/mongoose.helper.ts'],
   },
 
-  // router: {
-  //   middleware: ['auth'],
-  // },
+  auth: {
+    globalMiddleware: true,
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        enabled: true,
+        name: '',
+        token: {
+          property: 'data.accessToken',
+          required: true,
+          type: 'Bearer',
+          global: true,
+        },
+        refreshToken: {
+          property: 'data.refreshToken',
+          data: 'refreshToken',
+          maxAge: 60 * 60 * 24 * 30,
+        },
+        user: {
+          property: '',
+        },
+        endpoints: {
+          user: { url: '/api/auth/me', method: 'get' },
+          login: { url: '/api/auth/login', method: 'post' },
+          refresh: { url: '/api/auth/refresh-token', method: 'post' },
+          logout: false,
+        },
+      },
+    },
 
-  // auth: {
-  //   globalMiddleware: true,
-  //   strategies: {
-  //     cookie: false,
-  //     local: {
-  //       scheme: 'refresh',
-  //       enabled: true,
-  //       name: '',
-  //       token: {
-  //         property: 'data.accessToken',
-  //         required: true,
-  //         type: 'Bearer',
-  //         global: true,
-  //       },
-  //       refreshToken: {
-  //         property: 'data.refreshToken',
-  //         data: 'refreshToken',
-  //         maxAge: 60 * 60 * 24 * 30,
-  //       },
-  //       user: {
-  //         property: '',
-  //       },
-
-  //       endpoints: {
-  //         user: { url: '/api/auth/me', method: 'get' },
-  //         login: { url: '/api/auth/login', method: 'post' },
-  //         refresh: { url: '/api/auth/refresh-token', method: 'post' },
-  //         logout: false,
-  //       },
-  //     },
-  //   },
-
-  //   redirect: {
-  //     callback: '/auth/login',
-  //     login: '/auth/login',
-  //     logout: '/auth/login',
-  //     home: '/',
-  //   },
-  // },
+    redirect: {
+      callback: '/auth/login',
+      login: '/auth/login',
+      logout: '/auth/login',
+      home: '/',
+    },
+  },
 })
