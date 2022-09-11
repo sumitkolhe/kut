@@ -816,32 +816,6 @@
     vite-plugin-checker "^0.5.0"
     vue-bundle-renderer "^0.4.2"
 
-"@nuxtjs-alt/auth@^2.0.11":
-  version "2.0.11"
-  resolved "https://registry.yarnpkg.com/@nuxtjs-alt/auth/-/auth-2.0.11.tgz#e22109237c72e1a655ff96488264663351efdc59"
-  integrity sha512-MmF8EVT4uNeu1alAWjLdOrzSHFYKikDF8Nce1TWSCTsb3+5XYo8MrUOoDr2elddGBwmunXZmcez48FXaXgEAeQ==
-  dependencies:
-    "@nuxt/kit" "^3.0.0-rc.9"
-    "@nuxtjs-alt/http" "^1.2.15"
-    "@pinia/nuxt" ">=0.4.2"
-    body-parser "1.20.0"
-    cookie-es "^0.5.0"
-    defu "^6.1.0"
-    jwt-decode "^3.1.2"
-    ohash "^0.1.5"
-    pathe "^0.3.7"
-    requrl "^3.0.2"
-
-"@nuxtjs-alt/http@^1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@nuxtjs-alt/http/-/http-1.2.15.tgz#f73da17ec94a059de157e5d9bd6d7ac1d0ec9e3e"
-  integrity sha512-33VwEd2NhJZXdd2+Kb3yNHoCXS0PmhJQfdy4rFkaAmVCnYQ0YSujOQaScBzDKnsiIXNRfz6tEybvKmXIp36csA==
-  dependencies:
-    "@nuxt/kit" "^3.0.0-rc.9"
-    "@refactorjs/ofetch" "^0.1.8"
-    defu "^6.1.0"
-    ohash "^0.1.5"
-
 "@nuxtjs/tailwindcss@^5.3.3":
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/@nuxtjs/tailwindcss/-/tailwindcss-5.3.3.tgz#8d03a68915cc4b6e641f40b3b9d80779e12607c2"
@@ -861,23 +835,13 @@
     tailwindcss "^3.1.8"
     ufo "^0.8.5"
 
-"@pinia/nuxt@>=0.4.2", "@pinia/nuxt@^0.4.2":
+"@pinia/nuxt@^0.4.2":
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/@pinia/nuxt/-/nuxt-0.4.2.tgz#83b230843cae3b165baf0cda37ba1299c5f403ba"
   integrity sha512-yPrJVFOTVDsCcwzVvElLmSFB6IKWo+0WpVmVPCZyj/LD2uNYBK8I3lTPHdZ4q/VS2Sj8LkA7aq6S8PFpwguQ0A==
   dependencies:
     "@nuxt/kit" "^3.0.0-rc.9"
     pinia ">=2.0.22"
-
-"@refactorjs/ofetch@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@refactorjs/ofetch/-/ofetch-0.1.8.tgz#9bed83956ae86f66aaceabe2fcf47ff72e7ca774"
-  integrity sha512-n/sJwu5WU4TQBxQWdIDQ1WFEDZD7A7uRT5YNZLLM0+2iQ5tyYo8mL9wQuRXtwTV9DH9FlYOCx/jLhkJd7NO9PQ==
-  dependencies:
-    cookie-es "^0.5.0"
-    defu "^6.1.0"
-    destr "^1.1.1"
-    ohmyfetch "^0.4.18"
 
 "@rollup/plugin-alias@^3.1.9":
   version "3.1.9"
@@ -6252,11 +6216,6 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
-
-requrl@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/requrl/-/requrl-3.0.2.tgz#d376104193b02a2d874dde68454c2db2dfeb0fac"
-  integrity sha512-f3gjR6d8MhOpn46PP+DSJywbmxi95fxQm3coXBFwognjFLla9X6tr8BdNyaIKNOEkaRbRcm0/zYAqN19N1oyhg==
 
 resolve-from@5.0.0, resolve-from@^5.0.0:
   version "5.0.0"
