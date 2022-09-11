@@ -4,14 +4,14 @@ import { defineNuxtConfig } from 'nuxt'
 export default defineNuxtConfig({
   app: {
     head: {
-      title: '',
+      title: 'Trym',
       htmlAttrs: {
         lang: 'en',
       },
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       meta: [
-        { hid: 'og:title', name: 'og:title', content: '' },
+        { hid: 'og:title', name: 'og:title', content: 'Trym' },
         { name: 'format-detection', content: 'telephone=no' },
       ],
       link: [
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
 
   srcDir: 'src',
 
-  modules: ['@nuxtjs-alt/auth', '@nuxtjs-alt/http', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
+  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
 
   serverMiddleware: [
     { path: '/api', handler: '~/server/server.ts' },
@@ -34,6 +34,8 @@ export default defineNuxtConfig({
   ],
 
   alias: {
+    store: fileURLToPath(new URL('./src/store', import.meta.url)),
+    composables: fileURLToPath(new URL('./src/composables', import.meta.url)),
     configs: fileURLToPath(new URL('./src/server/configs', import.meta.url)),
     controllers: fileURLToPath(new URL('./src/server/controllers', import.meta.url)),
     exceptions: fileURLToPath(new URL('./src/server/exceptions', import.meta.url)),
@@ -57,43 +59,5 @@ export default defineNuxtConfig({
 
   nitro: {
     plugins: ['~/server/helpers/mongoose.helper.ts'],
-  },
-
-  auth: {
-    globalMiddleware: true,
-    strategies: {
-      local: {
-        scheme: 'refresh',
-        enabled: true,
-        name: '',
-        token: {
-          property: 'data.accessToken',
-          required: true,
-          type: 'Bearer',
-          global: true,
-        },
-        refreshToken: {
-          property: 'data.refreshToken',
-          data: 'refreshToken',
-          maxAge: 60 * 60 * 24 * 30,
-        },
-        user: {
-          property: '',
-        },
-        endpoints: {
-          user: { url: '/api/auth/me', method: 'get' },
-          login: { url: '/api/auth/login', method: 'post' },
-          refresh: { url: '/api/auth/refresh-token', method: 'post' },
-          logout: false,
-        },
-      },
-    },
-
-    redirect: {
-      callback: '/auth/login',
-      login: '/auth/login',
-      logout: '/auth/login',
-      home: '/',
-    },
   },
 })
