@@ -1,28 +1,13 @@
-<script lang="ts" setup>
-definePageMeta({
-  auth: 'guest',
-})
-
-const context = useNuxtApp()
-
-const email = ref('')
-const password = ref('')
-
-const login = async () => {
-  await context.$auth.loginWith('local', {
-    body: { email: email.value, password: password.value },
-  })
-}
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <section class="bg-gray-50 h-screen mx-auto">
-    <header class="flex items-center justify-center py-4 border-b border-gray-200 space-x-2">
+    <header class="flex items-center justify-center py-5 mb-5 border-b border-gray-200 space-x-2">
       <Icon name="ph:link-break" size="36" class="text-red-500" />
       <p class="text-xl font-medium text-red-500 uppercase">Trym</p>
     </header>
     <div class="w-full md:border max-w-lg mx-auto px-6 pt-6 pb-8 rounded-md bg-gray-50 md:bg-white md:mt-24">
-      <h1 class="text-xl font-medium text-center text-gray-800">Login</h1>
+      <h1 class="text-xl font-medium text-center text-gray-800">Create a new account</h1>
 
       <form class="mt-8 space-y-6">
         <div class="w-full space-y-1">
@@ -30,7 +15,6 @@ const login = async () => {
           <div class="relative">
             <input
               id="icon-suffix"
-              v-model="email"
               type="email"
               placeholder="john@doe.com"
               class="block placeholder:text-gray-400 w-full rounded border-gray-200 pr-9 text-sm transition focus:border-black focus:ring-black disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75"
@@ -46,7 +30,6 @@ const login = async () => {
           <div class="relative">
             <input
               id="icon-prefix"
-              v-model="password"
               type="email"
               placeholder="*********"
               class="block w-full rounded placeholder:text-gray-400 border-gray-200 pr-9 text-sm transition focus:border-black focus:ring-black disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75"
@@ -69,21 +52,20 @@ const login = async () => {
           </div>
 
           <div class="text-sm">
-            <NuxtLink to="/auth/login" class="hover:underline text-red-500">Forgot your password?</NuxtLink>
+            <NuxtLink class="hover:underline text-red-500">Forgot your password?</NuxtLink>
           </div>
         </div>
 
         <button
           type="button"
           class="inline-flex w-full cursor-pointer tracking-wide select-none appearance-none items-center justify-center space-x-1 rounded-md border border-gray-200 bg-black px-3 py-2 text-white transition hover:border-black hover:text-black hover:bg-white focus:outline-none active:bg-gray-100"
-          @click="login"
         >
-          Login
+          Sign up
         </button>
       </form>
       <p class="text-center text-gray-600 mt-4">
-        Don't have an account?
-        <NuxtLink to="/auth/register" class="hover:underline text-red-500">Sign up</NuxtLink>
+        Already have an account?
+        <a href="#" class="text-red-500 hover:text-red-600 hover:underline">Sign in</a>
       </p>
     </div>
   </section>

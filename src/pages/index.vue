@@ -1,17 +1,9 @@
-<script lang="ts" setup>
-const ctx = useNuxtApp()
-
-const logout = () => {
-  ctx.$auth.logout()
-}
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="text-xl">
-    hello
+    <p>Public Page</p>
 
-    <button @click="logout">logout</button>
-
-    <NuxtLink to="/dashboard">Dash</NuxtLink>
+    <NuxtLink to="/dashboard">Dashboard</NuxtLink>
   </div>
 </template>
