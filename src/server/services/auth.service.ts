@@ -2,6 +2,7 @@ import { UserModel } from 'models/user.model'
 import bcrypt from 'bcryptjs'
 import { HttpExceptionError } from 'exceptions/http.exception'
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from 'helpers/token.helper'
+import type { Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
 
 export class AuthService {
@@ -26,9 +27,7 @@ export class AuthService {
     })
   }
 
-  public login = async (
-    user: Pick<User, 'email' | 'password'>
-  ): Promise<{ accessToken: string; refreshToken: string }> => {
+  public login = async (user: Pick<User, 'email' | 'password'>): Promise<Tokens> => {
     const foundUser = await UserModel.findOne({ email: user.email })
 
     if (!foundUser) throw new HttpExceptionError(404, 'user not found')
