@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+definePageMeta({
+  layout: 'public',
+})
+</script>
 
 <template>
   <div class="text-xl">
