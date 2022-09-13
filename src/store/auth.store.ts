@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import { useAxios } from 'composables/axios'
-import { AxiosError } from 'axios'
+import { FetchError } from 'ohmyfetch'
 import type { User } from 'interfaces/user.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
 import type { Tokens } from 'interfaces/token.interface'
@@ -25,9 +24,12 @@ export const useAuthStore = defineStore('authentication', {
       try {
         const router = useRouter()
 
-        const response = await useAxios.post<CustomResponse<Tokens>>('/auth/login', { email, password })
+        const response = await useApi<CustomResponse<Tokens>>('/auth/login', {
+          body: { email, password },
+          method: 'POST',
+        })
 
-        localStorage.setItem('trym.access_token', response.data.data!.accessToken)
+        localStorage.setItem('trym.access_token', response.data!.accessToken)
 
         createToast('Login successful. Redirecting...', { type: 'success' })
 
@@ -35,20 +37,22 @@ export const useAuthStore = defineStore('authentication', {
           router.push('/')
         }, 2000)
       } catch (error) {
-        if (error instanceof AxiosError) {
-          createToast(error.response?.data.message, { type: 'error' })
+        if (error instanceof FetchError) {
+          createToast(error.response?._data.message, { type: 'error' })
         }
       }
     },
 
     async fetchUser() {
       try {
-        const response = await useAxios.get<CustomResponse<User>>('/auth/me')
+        const response = await useApi<CustomResponse<User>>('/api/auth/me', {
+          method: 'GET',
+        })
 
-        this.user = response.data.data!
+        this.user = response.data!
       } catch (error) {
-        if (error instanceof AxiosError) {
-          createToast(error.response?.data.message, { type: 'error' })
+        if (error instanceof FetchError) {
+          createToast(error.response?._data.message, { type: 'error' })
         }
       }
     },
