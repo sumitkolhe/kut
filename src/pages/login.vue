@@ -1,13 +1,41 @@
 <script lang="ts" setup>
 import { useAuthStore } from 'store/auth.store'
+import useValidate from 'vue-tiny-validate'
+import BaseInput from '../components/molecules/base-input.vue'
+import BaseButton from '../components/atoms/base-button.vue'
+import type { Rules } from 'vue-tiny-validate'
 
-const email = ref('')
-const password = ref('')
+definePageMeta({
+  layout: 'public',
+})
 
 const AuthStore = useAuthStore()
 
+const loading = ref(false)
+const loginData = reactive({ email: '', password: '' })
+
+const rules: Rules = reactive({
+  email: {
+    name: 'required',
+    test: (value: string) => value.length > 0,
+    message: 'Email must not be empty.',
+  },
+  password: {
+    name: 'required',
+    test: (value: string) => value.length > 0,
+    message: 'Password must not be empty.',
+  },
+})
+
+const { result } = useValidate(loginData, rules)
+
 const login = async () => {
-  await AuthStore.login(email.value, password.value)
+  result.value.$test()
+  if (!result.value.$invalid) {
+    loading.value = true
+    await AuthStore.login(loginData.email, loginData.password)
+    loading.value = false
+  }
 }
 </script>
 
@@ -17,41 +45,27 @@ const login = async () => {
       <Icon name="ph:link-break" size="36" class="text-red-500" />
       <p class="text-xl font-medium text-red-500 uppercase">Trym</p>
     </header>
+
     <div class="w-full md:border max-w-lg mx-auto px-6 pt-6 pb-8 rounded-md bg-gray-50 md:bg-white md:mt-24">
       <h1 class="text-xl font-medium text-center text-gray-800">Login</h1>
+      <form class="mt-8 space-y-4">
+        <base-input
+          v-model="loginData.email"
+          label="Email"
+          type="email"
+          placeholder="john@doe.com"
+          suffix-icon="ph:at"
+          :errors="result.email.$messages"
+        />
 
-      <form class="mt-8 space-y-6">
-        <div class="w-full space-y-1">
-          <label for="icon-suffix" class="text-sm text-gray-500">Email</label>
-          <div class="relative">
-            <input
-              id="icon-suffix"
-              v-model="email"
-              type="email"
-              placeholder="john@doe.com"
-              class="block placeholder:text-gray-400 w-full rounded border-gray-200 pr-9 text-sm transition focus:border-black focus:ring-black disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75"
-            />
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5">
-              <Icon name="ph:at" size="20" class="text-gray-600" />
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full space-y-1">
-          <label for="icon-prefix" class="text-sm text-gray-500">Password</label>
-          <div class="relative">
-            <input
-              id="icon-prefix"
-              v-model="password"
-              type="password"
-              placeholder="*********"
-              class="block w-full rounded placeholder:text-gray-400 border-gray-200 pr-9 text-sm transition focus:border-black focus:ring-black disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75"
-            />
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5">
-              <Icon name="ph:password" size="20" class="text-gray-600" />
-            </div>
-          </div>
-        </div>
+        <base-input
+          v-model="loginData.password"
+          label="Password"
+          type="password"
+          placeholder="********"
+          suffix-icon="ph:password"
+          :errors="result.password.$messages"
+        />
 
         <div class="flex items-center justify-between">
           <div class="flex items-center">
@@ -69,13 +83,7 @@ const login = async () => {
           </div>
         </div>
 
-        <button
-          type="button"
-          class="inline-flex w-full cursor-pointer tracking-wide select-none appearance-none items-center justify-center space-x-1 rounded-md border border-gray-200 bg-black px-3 py-2 text-white transition hover:border-black hover:text-black hover:bg-white focus:outline-none active:bg-gray-100"
-          @click="login"
-        >
-          Login
-        </button>
+        <base-button :loading="loading" @click="login">Login</base-button>
       </form>
       <p class="text-center text-gray-600 mt-4">
         Don't have an account?
