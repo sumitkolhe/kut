@@ -1,0 +1,204 @@
+.toast-container {
+  --radius: 5px;
+  --stack-gap: 20px;
+  --safe-area-gap: env(safe-area-inset-bottom);
+
+  position: fixed;
+  display: block;
+  max-width: 468px;
+  bottom: calc(var(--safe-area-gap, 0px) + 20px);
+  right: 20px;
+  z-index: 5000;
+  transition: all 0.4s ease;
+
+  & .toast {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 468px;
+    transition: all 0.4s ease;
+    transform: translate3d(0, 86px, 0);
+    opacity: 0;
+
+    & .toast-inner {
+      --toast-bg: none;
+      --toast-fg: #fff;
+      box-sizing: border-box;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px;
+      color: var(--toast-fg);
+      background-color: var(--toast-bg);
+      height: var(--height);
+      transition: all 0.25s ease;
+
+      &.default {
+        --toast-fg: #000;
+        --toast-bg: #fff;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+      }
+
+      &.success {
+        --toast-bg: #0076ff;
+      }
+
+      &.error {
+        --toast-bg: #f04;
+      }
+
+      &.warning {
+        --toast-bg: #f5a623;
+      }
+
+      &.dark {
+        --toast-bg: #000;
+        --toast-fg: #fff;
+        box-shadow: 0 0 0 1px #333;
+
+        & .toast-button {
+          --button-fg: #000;
+          --button-bg: #fff;
+          --button-border: #fff;
+          --button-border-hover: #fff;
+          --button-fg-hover: #fff;
+
+          &.cancel-button {
+            --cancel-button-bg: #000;
+            --cancel-button-fg: #888;
+            --cancel-button-border: #333;
+
+            &:hover {
+              color: #fff;
+              border-color: var(--button-border);
+            }
+          }
+        }
+      }
+    }
+
+    & .toast-text {
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      margin-top: -1px;
+      margin-right: 24px;
+      transition: all 0.3s ease-in;
+    }
+
+    & .toast-button {
+      --button-fg: #000;
+      --button-bg: #fff;
+      --button-border: #fff;
+      --button-border-hover: #fff;
+      --button-fg-hover: #fff;
+      min-width: auto;
+      height: 24px;
+      line-height: 22px;
+      padding: 0 10px;
+      font-size: 14px;
+      background-color: var(--button-bg);
+      color: var(--button-fg);
+      white-space: nowrap;
+      user-select: none;
+      cursor: pointer;
+      vertical-align: middle;
+      border-radius: var(--radius);
+      outline: none;
+      border: 1px solid var(--button-border);
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: var(--button-border-hover);
+        background-color: transparent;
+        color: var(--button-fg-hover);
+      }
+
+      &.cancel-button {
+        --cancel-button-bg: #fff;
+        --cancel-button-fg: #666;
+        --cancel-button-border: #eaeaea;
+        margin-right: 10px;
+        color: var(--cancel-button-fg);
+        border-color: var(--cancel-button-border);
+        background-color: var(--cancel-button-bg);
+
+        &:hover {
+          --cancel-button-fg: #000;
+          --cancel-button-border: #000;
+        }
+      }
+    }
+
+    & .default .toast-button {
+      --button-fg: #fff;
+      --button-bg: #000;
+      --button-border: #000;
+      --button-border-hover: #000;
+      --button-fg-hover: #000;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 1px);
+      width: 100%;
+      /* This for destroy the middle toast, still keep `spread` */
+      height: 1000px;
+      background: transparent;
+    }
+
+    &.toast-1 {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+
+    &:not(:last-child) {
+      --i: calc(var(--index) - 1);
+      transform: translate3d(0, calc(1px - (var(--stack-gap) * var(--i))), 0) scale(calc(1 - 0.05 * var(--i)));
+      opacity: 1;
+
+      & .toast-inner {
+        height: var(--front-height);
+
+        & .toast-text {
+          opacity: 0;
+        }
+      }
+    }
+
+    &.toast-4 {
+      opacity: 0;
+    }
+  }
+}
+
+.toast-container:hover {
+  bottom: calc(var(--safe-area-gap, 0px) + 20px);
+
+  & .toast {
+    transform: translate3d(0, calc(var(--hover-offset-y) - var(--stack-gap) * (var(--index) - 1)), 0);
+
+    & .toast-inner {
+      height: var(--height);
+    }
+
+    & .toast-text {
+      opacity: 1 !important;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .toast-container {
+    max-width: 90vw;
+    right: 5vw;
+
+    & .toast {
+      width: 90vw;
+    }
+  }
+}

@@ -24,6 +24,8 @@ export default defineNuxtConfig({
     },
   },
 
+  css: ['~/assets/toast.css'],
+
   srcDir: 'src',
 
   modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
