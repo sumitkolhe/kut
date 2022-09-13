@@ -1,13 +1,21 @@
 <script lang="ts" setup>
+import { useAuthStore } from 'store/auth.store'
+
 definePageMeta({
   middleware: 'auth',
 })
+
+const AuthStore = useAuthStore()
+
+const fetchData = async () => {
+  await AuthStore.fetchUser()
+}
 </script>
 
 <template>
-  <div class="text-xl">
+  <div class="p-6">
     <p>Protected page</p>
-
-    <NuxtLink to="/">Go to public page</NuxtLink>
+    <!-- <base-button @click="fetchData">logout</base-button> -->
+    <!-- <NuxtLink to="/">Go to public page</NuxtLink> -->
   </div>
 </template>
