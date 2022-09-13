@@ -7308,6 +7308,11 @@ vue-demi@*:
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
   integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
 
+vue-demi@^0.11.2:
+  version "0.11.4"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.11.4.tgz#6101992fe4724cf5634018a16e953f3052e94e2a"
+  integrity sha512-/3xFwzSykLW2HiiLie43a+FFgNOcokbBJ+fzvFXd0r2T8MYohqvphUyDQ8lbAwzQ3Dlcrb1c9ykifGkhSIAk6A==
+
 vue-devtools-stub@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/vue-devtools-stub/-/vue-devtools-stub-0.1.0.tgz#a65b9485edecd4273cedcb8102c739b83add2c81"
@@ -7332,6 +7337,13 @@ vue-router@^4.1.5:
   integrity sha512-IsvoF5D2GQ/EGTs/Th4NQms9gd2NSqV+yylxIyp/OYp8xOwxmU8Kj/74E9DTSYAyH5LX7idVUngN3JSj1X4xcQ==
   dependencies:
     "@vue/devtools-api" "^6.1.4"
+
+vue-tiny-validate@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/vue-tiny-validate/-/vue-tiny-validate-0.2.4.tgz#498f5f79567a66aea3ade36fd915a3e3b8e4a28b"
+  integrity sha512-XD7EBOEYVdCWK917qc/D4tWkbDqsyP4CFygVzEMp03Rs4rmLdrv3lEK/lnqk75sTJAw1o0eviH1zPBthBCr/VA==
+  dependencies:
+    vue-demi "^0.11.2"
 
 vue@^3.2.38:
   version "3.2.38"
