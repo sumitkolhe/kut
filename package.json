@@ -11,7 +11,7 @@
     "prettify": "prettier --write \"src/**/*.{js,ts,json,vue}\""
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.0",
+    "@headlessui/vue": "^1.7.1",
     "@pinia/nuxt": "^0.4.2",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
@@ -24,7 +24,7 @@
     "morgan": "^1.10.0",
     "vue-tiny-validate": "^0.2.4",
     "winston": "^3.8.2",
-    "zod": "^3.19.0"
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
@@ -37,11 +37,11 @@
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/morgan": "^1.9.3",
-    "@types/node": "^18.7.16",
+    "@types/node": "^18.7.17",
     "@vueuse/core": "^9.2.0",
     "@vueuse/integrations": "^9.2.0",
     "@vueuse/nuxt": "^9.2.0",
-    "eslint": "^8.23.0",
+    "eslint": "^8.23.1",
     "husky": "^8.0.1",
     "nuxt": "3.0.0-rc.9",
     "nuxt-icon": "^0.1.5",

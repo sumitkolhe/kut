@@ -35,8 +35,13 @@ export default defineNuxtConfig({
     { path: '/api/**', handler: '~/server/server.ts' },
   ],
 
+  build: {
+    transpile: ['@headlessui/vue'],
+  },
+
   alias: {
     store: fileURLToPath(new URL('./src/store', import.meta.url)),
+    components: fileURLToPath(new URL('./src/components', import.meta.url)),
     composables: fileURLToPath(new URL('./src/composables', import.meta.url)),
     configs: fileURLToPath(new URL('./src/server/configs', import.meta.url)),
     controllers: fileURLToPath(new URL('./src/server/controllers', import.meta.url)),
