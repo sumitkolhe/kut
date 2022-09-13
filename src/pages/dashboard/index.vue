@@ -6,10 +6,6 @@ definePageMeta({
 })
 
 const AuthStore = useAuthStore()
-
-const fetchData = async () => {
-  await AuthStore.fetchUser()
-}
 </script>
 
 <template>
