@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
-    "prettify": "prettier --write \"src/**/*.{js,ts,json,vue}\""
+    "prettify": "prettier --write \"src/**/*.{js,ts,json,vue}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.1",
@@ -42,7 +43,7 @@
     "@vueuse/integrations": "^9.2.0",
     "@vueuse/nuxt": "^9.2.0",
     "eslint": "^8.23.1",
-    "husky": "^8.0.1",
+    "husky": "^7.0.0",
     "nuxt": "3.0.0-rc.9",
     "nuxt-icon": "^0.1.5",
     "prettier": "^2.7.1",
