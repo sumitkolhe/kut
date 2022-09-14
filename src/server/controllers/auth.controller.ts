@@ -1,11 +1,16 @@
 import { AuthService } from 'services/auth.service'
+import { EmailService } from 'services/email.service'
 import type { User } from 'interfaces/user.interface'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'interfaces/response.interface'
 import type { Token, Tokens } from 'interfaces/token.interface'
 
 export class AuthController {
-  private authService = new AuthService()
+  private authService: AuthService
+
+  constructor() {
+    this.authService = new AuthService()
+  }
 
   public login: RequestHandler = async (req: Request, res: Response<CustomResponse<Tokens>>, next: NextFunction) => {
     try {
@@ -54,6 +59,22 @@ export class AuthController {
       const { accessToken } = await this.authService.refreshToken(refreshToken)
 
       return res.json({ status: 'SUCCESS', message: null, data: { accessToken } })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public verifyAccount: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<null>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { token } = req.query
+
+      await this.authService.verifyAccount(token as string)
+
+      return res.json({ status: 'SUCCESS', message: 'account verified successfully', data: null })
     } catch (error) {
       next(error)
     }
