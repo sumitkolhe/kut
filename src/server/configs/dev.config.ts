@@ -14,13 +14,19 @@ export const devConfig: Config = {
     format: 'dev',
     level: 'debug',
   },
-  accessToken: {
-    secret: 'erpigepigerpipr34634643',
-    expiresIn: '1d',
-  },
-  refreshToken: {
-    secret: 'soeugh8350238230oighwiogh43803480',
-    expiresIn: '7d',
+  token: {
+    access: {
+      secret: 'erpigepigerpipr34634643',
+      expiresIn: '1d',
+    },
+    refresh: {
+      secret: 'soeugh8350238230oighwiogh43803480',
+      expiresIn: '7d',
+    },
+    accountVerification: {
+      secret: 'ifnew9823rh9283hf208g3h2308gh203gh2038gh230',
+      expiresIn: '7d',
+    },
   },
   email: {
     apiKey: '',
