@@ -1,5 +1,4 @@
 import { AuthService } from 'services/auth.service'
-import { EmailService } from 'services/email.service'
 import type { User } from 'interfaces/user.interface'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'interfaces/response.interface'
