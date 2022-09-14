@@ -12,13 +12,19 @@ export interface Config {
     format: 'combined' | 'common' | 'dev' | 'short' | 'tiny'
     level: 'error' | 'warn' | 'info' | 'http' | 'debug'
   }
-  accessToken: {
-    secret: string
-    expiresIn: string
-  }
-  refreshToken: {
-    secret: string
-    expiresIn: string
+  token: {
+    access: {
+      secret: string
+      expiresIn: string
+    }
+    refresh: {
+      secret: string
+      expiresIn: string
+    }
+    verification: {
+      secret: string
+      expiresIn: string
+    }
   }
   email: {
     apiKey: string

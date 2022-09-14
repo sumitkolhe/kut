@@ -62,6 +62,8 @@ export default defineNuxtConfig({
     accessTokenExpiration: process.env.ACCESS_TOKEN_EXPIRATION,
     refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
     refreshTokenExpiration: process.env.REFRESH_TOKEN_EXPIRATION,
+    verificationTokenSecret: process.env.VERIFICATION_TOKEN_SECRET,
+    verificationTokenExpiration: process.env.VERIFICATION_TOKEN_EXPIRATION,
     emailApiKey: process.env.SIB_EMAIL_API_KEY,
   },
 

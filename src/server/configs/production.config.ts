@@ -16,13 +16,19 @@ export const productionConfig: Config = {
     format: 'tiny',
     level: 'info',
   },
-  accessToken: {
-    secret: config.accessTokenSecret,
-    expiresIn: config.accessTokenExpiration,
-  },
-  refreshToken: {
-    secret: config.refreshTokenSecret,
-    expiresIn: config.refreshTokenExpiration,
+  token: {
+    access: {
+      secret: config.accessTokenSecret,
+      expiresIn: config.accessTokenExpiration,
+    },
+    refresh: {
+      secret: config.refreshTokenSecret,
+      expiresIn: config.refreshTokenExpiration,
+    },
+    verification: {
+      secret: config.verificationTokenSecret,
+      expiresIn: config.verificationTokenExpiration,
+    },
   },
   email: {
     apiKey: config.emailApiKey,
