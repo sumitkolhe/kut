@@ -20,5 +20,9 @@ export interface Config {
     secret: string
     expiresIn: string
   }
-  emailApiKey: string
+  email: {
+    apiKey: string
+    senderName: string
+    senderEmail: string
+  }
 }
