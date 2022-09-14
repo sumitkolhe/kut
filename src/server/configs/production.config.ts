@@ -25,9 +25,9 @@ export const productionConfig: Config = {
       secret: config.refreshTokenSecret,
       expiresIn: config.refreshTokenExpiration,
     },
-    verification: {
-      secret: config.verificationTokenSecret,
-      expiresIn: config.verificationTokenExpiration,
+    accountVerification: {
+      secret: config.accountVerificationTokenSecret,
+      expiresIn: config.accountVerificationTokenExpiration,
     },
   },
   email: {

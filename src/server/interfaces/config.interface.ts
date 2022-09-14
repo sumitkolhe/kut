@@ -21,7 +21,7 @@ export interface Config {
       secret: string
       expiresIn: string
     }
-    verification: {
+    accountVerification: {
       secret: string
       expiresIn: string
     }
