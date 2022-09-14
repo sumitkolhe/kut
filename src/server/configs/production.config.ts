@@ -24,4 +24,5 @@ export const productionConfig: Config = {
     secret: config.refreshTokenSecret,
     expiresIn: config.refreshTokenExpiration,
   },
+  emailApiKey: config.emailApiKey,
 }

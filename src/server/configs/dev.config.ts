@@ -22,4 +22,5 @@ export const devConfig: Config = {
     secret: 'soeugh8350238230oighwiogh43803480',
     expiresIn: '7d',
   },
+  emailApiKey: '',
 }
