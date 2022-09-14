@@ -48,7 +48,7 @@ const updateValue = (event: any) => {
         :disabled="props.disabled"
         :class="[
           props.errors.length > 0
-            ? 'border-red-500 placeholder:text-red-500 placeholder:opacity-50 focus:border-red-500 focus:ring-red-500'
+            ? 'border-error placeholder:text-error placeholder:opacity-50 focus:border-error focus:ring-error'
             : 'border-gray-200 placeholder:text-gray-400 focus:border-black focus:ring-black ',
           props.prefixIcon ? 'pl-9' : '',
           props.suffixIcon ? 'pr-9' : '',
@@ -61,7 +61,7 @@ const updateValue = (event: any) => {
         <Icon :name="props.suffixIcon" size="20" class="text-gray-600" />
       </div>
     </div>
-    <div class="text-xs text-red-500 tracking-normal font-light h-2">
+    <div class="text-xs text-error tracking-normal font-light h-2">
       <p v-show="props.errors.length > 0">{{ props.errors[0] }}</p>
     </div>
   </div>
