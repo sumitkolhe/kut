@@ -14,7 +14,7 @@ export const checkAuthentication: RequestHandler = (req, _res, next) => {
   if (!accessToken) throw new HttpExceptionError(401, 'unauthorised')
 
   try {
-    const tokenDetails = Jwt.verify(accessToken, config.accessToken.secret)
+    const tokenDetails = Jwt.verify(accessToken, config.token.access.secret)
 
     req.auth = tokenDetails
 
