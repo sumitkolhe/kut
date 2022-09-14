@@ -1,8 +1,10 @@
+type Status = 400 | 401 | 403 | 404 | 409 | 422 | 429 | 500
+
 export class HttpExceptionError extends Error {
-  public status: number
+  public status: Status
   public message!: string
 
-  constructor(status: number, message: string) {
+  constructor(status: Status, message: string) {
     super(message)
     this.status = status
     this.name = 'HttpExceptionError'
