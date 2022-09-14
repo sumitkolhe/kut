@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 import { logger } from 'utils/logger'
-import { getConfig } from 'configs'
+import { useConfig } from 'configs'
 
-const config = getConfig()
+const config = useConfig()
 
 let isConnected: mongoose.ConnectionStates
 

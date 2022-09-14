@@ -1,9 +1,9 @@
 import { HttpExceptionError } from 'exceptions/http.exception'
 import Jwt from 'jsonwebtoken'
-import { getConfig } from 'configs'
+import { useConfig } from 'configs'
 import type { RequestHandler } from 'express'
 
-const config = getConfig()
+const config = useConfig()
 
 // verify access token
 export const checkAuthentication: RequestHandler = (req, _res, next) => {

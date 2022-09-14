@@ -4,7 +4,7 @@ import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import { errorMiddleware } from 'middlewares/error.middleware'
-import { getConfig } from 'configs'
+import { useConfig } from 'configs'
 import type { Config } from 'interfaces/config.interface'
 import type { Routes } from 'interfaces/routes.interface'
 
@@ -22,7 +22,7 @@ export class App {
   public env: string
 
   constructor(routes: Routes[]) {
-    this.config = getConfig()
+    this.config = useConfig()
     this.app = express()
     this.env = this.config.env
 
