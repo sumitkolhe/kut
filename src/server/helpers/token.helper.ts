@@ -16,6 +16,16 @@ export const signRefreshToken = async (data: string | object | Buffer) => {
   })
 }
 
+export const signAccountVerificationToken = async (data: string | object | Buffer) => {
+  return Jwt.sign(data, config.token.accountVerification.secret, {
+    expiresIn: config.token.accountVerification.expiresIn,
+  })
+}
+
 export const verifyRefreshToken = async (refreshToken: string): Promise<JwtPayload> => {
   return Jwt.verify(refreshToken, config.token.refresh.secret) as JwtPayload
+}
+
+export const verifyAccountVerificationToken = async (verificationToken: string): Promise<JwtPayload> => {
+  return Jwt.verify(verificationToken, config.token.accountVerification.secret) as JwtPayload
 }
