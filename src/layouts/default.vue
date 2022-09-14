@@ -9,6 +9,7 @@ definePageMeta({
 
 <template>
   <main>
+    <NuxtLoadingIndicator color="#f55" :height="4" />
     <Header />
     <Navigation />
     <div class="max-w-screen-xl mx-auto">
