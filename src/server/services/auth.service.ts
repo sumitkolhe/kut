@@ -1,11 +1,23 @@
 import { UserModel } from 'models/user.model'
 import bcrypt from 'bcryptjs'
 import { HttpExceptionError } from 'exceptions/http.exception'
-import { signAccessToken, signRefreshToken, verifyRefreshToken } from 'helpers/token.helper'
+import {
+  signAccessToken,
+  signRefreshToken,
+  verifyAccountVerificationToken,
+  verifyRefreshToken,
+} from 'helpers/token.helper'
+import { EmailService } from 'services/email.service'
 import type { Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
 
 export class AuthService {
+  private emailService: EmailService
+
+  constructor() {
+    this.emailService = new EmailService()
+  }
+
   public register = async (user: Pick<User, 'email' | 'password' | 'firstName' | 'lastName'>): Promise<void> => {
     const ifUserExist = await UserModel.findOne({ email: user.email })
 
@@ -23,8 +35,10 @@ export class AuthService {
     })
 
     await newUser.save().catch(() => {
-      throw new HttpExceptionError(500, 'something went wrong')
+      throw new HttpExceptionError(500, 'error creating user')
     })
+
+    await this.emailService.sendVerificationEmail(user.email, user.firstName)
   }
 
   public login = async (user: Pick<User, 'email' | 'password'>): Promise<Tokens> => {
@@ -54,7 +68,9 @@ export class AuthService {
   }
 
   public refreshToken = async (refreshToken: string): Promise<{ accessToken: string }> => {
-    const decodedToken = await verifyRefreshToken(refreshToken)
+    const decodedToken = await verifyRefreshToken(refreshToken).catch(() => {
+      throw new HttpExceptionError(400, 'invalid refresh token')
+    })
 
     const foundUser = await UserModel.findOne({ email: decodedToken.email })
 
@@ -63,5 +79,19 @@ export class AuthService {
     const signedAccessToken = await signAccessToken({ email: decodedToken.email })
 
     return { accessToken: signedAccessToken }
+  }
+
+  public verifyAccount = async (verificationToken: string): Promise<void> => {
+    const decodedToken = await verifyAccountVerificationToken(verificationToken).catch(() => {
+      throw new HttpExceptionError(400, 'invalid verification token')
+    })
+
+    const foundUser = await UserModel.findOne({ email: decodedToken.email })
+
+    if (!foundUser) throw new HttpExceptionError(404, 'user not found')
+
+    await foundUser.updateOne({
+      $set: { isVerified: true },
+    })
   }
 }
