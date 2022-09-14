@@ -9,7 +9,7 @@ const AuthStore = useAuthStore()
   <header class="bg-white w-full py-2">
     <div class="max-w-screen-xl mx-auto flex flex-row justify-between">
       <div class="flex items-center space-x-3">
-        <Icon name="ph:link-simple-horizontal-break-bold" size="32" />
+        <Icon name="gridicons:link" size="36" class="text-red-500" />
         <p class="font-medium uppercase text-lg">Trym</p>
       </div>
 
