@@ -49,7 +49,7 @@ const updateValue = (event: any) => {
         :class="[
           props.errors.length > 0
             ? 'border-error placeholder:text-error placeholder:opacity-50 focus:border-error focus:ring-error'
-            : 'border-gray-200 placeholder:text-gray-400 focus:border-black focus:ring-black ',
+            : 'border-gray-200 placeholder:text-gray-300 focus:border-black focus:ring-black ',
           props.prefixIcon ? 'pl-9' : '',
           props.suffixIcon ? 'pr-9' : '',
         ]"

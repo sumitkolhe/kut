@@ -11,7 +11,7 @@ const AuthStore = useAuthStore()
 <template>
   <div class="p-6">
     <p>Protected page</p>
-    <!-- <base-button @click="fetchData">logout</base-button> -->
+    <button @click="AuthStore.fetchUser()">logout</button>
     <!-- <NuxtLink to="/">Go to public page</NuxtLink> -->
   </div>
 </template>
