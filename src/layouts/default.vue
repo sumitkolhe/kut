@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Navigation from 'components/molecules/navigation.vue'
-import Header from '../components/organisms/header.vue'
+import Footer from 'components/organisms/footer.vue'
+import Header from 'components/organisms/header.vue'
 
 definePageMeta({
   middleware: 'auth',
@@ -11,10 +12,12 @@ definePageMeta({
   <main>
     <NuxtLoadingIndicator color="#f55" :height="4" />
     <Header />
+
     <Navigation />
     <div class="max-w-screen-xl mx-auto">
       <slot />
     </div>
+    <Footer />
   </main>
 </template>
 
