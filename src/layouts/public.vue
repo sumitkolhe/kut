@@ -5,9 +5,3 @@
     <slot />
   </main>
 </template>
-
-<style>
-* {
-  font-family: 'Inter', sans-serif !important;
-}
-</style>
