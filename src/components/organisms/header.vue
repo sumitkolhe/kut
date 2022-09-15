@@ -8,10 +8,10 @@ const AuthStore = useAuthStore()
 <template>
   <header class="bg-white w-full py-2">
     <div class="max-w-screen-xl mx-auto flex flex-row justify-between">
-      <div class="flex items-center space-x-3">
+      <NuxtLink class="flex items-center space-x-3" to="/dashboard">
         <Icon name="gridicons:link" size="36" class="text-red-500" />
         <p class="font-medium uppercase text-lg">Trym</p>
-      </div>
+      </NuxtLink>
 
       <div class="flex items-center">
         <Menu as="div" class="relative inline-block text-left">
