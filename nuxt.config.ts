@@ -1,5 +1,4 @@
 import { fileURLToPath } from 'url'
-import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
   app: {
@@ -23,22 +22,19 @@ export default defineNuxtConfig({
       ],
     },
   },
-
-  css: ['~/assets/toast.css'],
-
   srcDir: 'src',
-
+  css: ['~/assets/toast.css'],
   modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
-
   serverMiddleware: [
     { path: '/api', handler: '~/server/server.ts' },
     { path: '/api/**', handler: '~/server/server.ts' },
   ],
-
+  nitro: {
+    plugins: ['~/server/helpers/mongoose.helper.ts'],
+  },
   build: {
     transpile: ['@headlessui/vue'],
   },
-
   alias: {
     store: fileURLToPath(new URL('./src/store', import.meta.url)),
     components: fileURLToPath(new URL('./src/components', import.meta.url)),
@@ -54,7 +50,6 @@ export default defineNuxtConfig({
     services: fileURLToPath(new URL('./src/server/services', import.meta.url)),
     utils: fileURLToPath(new URL('./src/server/utils', import.meta.url)),
   },
-
   runtimeConfig: {
     dbUrl: process.env.DB_URL,
     dbName: process.env.DB_NAME,
@@ -65,9 +60,5 @@ export default defineNuxtConfig({
     accountVerificationTokenSecret: process.env.ACCOUNT_VERIFICATION_TOKEN_SECRET,
     accountVerificationTokenExpiration: process.env.ACCOUNT_VERIFICATION_TOKEN_EXPIRATION,
     emailApiKey: process.env.SIB_EMAIL_API_KEY,
-  },
-
-  nitro: {
-    plugins: ['~/server/helpers/mongoose.helper.ts'],
   },
 })
