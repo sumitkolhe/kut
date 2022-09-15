@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useAuthStore } from 'store/auth.store'
 import useValidate from 'vue-tiny-validate'
-import BaseInput from '../components/molecules/base-input.vue'
-import BaseButton from '../components/atoms/base-button.vue'
+import BaseInput from 'components/molecules/base-input.vue'
+import BaseButton from 'components/atoms/base-button.vue'
 import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({
