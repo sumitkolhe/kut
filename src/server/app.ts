@@ -31,6 +31,7 @@ export class App {
 
     this.initializeMiddlewares()
     this.initializeRoutes(routes)
+    this.initializeRouteFallback()
     this.initializeErrorHandling()
   }
 
@@ -50,9 +51,6 @@ export class App {
             data: null,
           })
         },
-        onDelayedResponse() {
-          console.log(`Attempted to call  after timeout`)
-        },
       })
     )
   }
@@ -60,6 +58,16 @@ export class App {
   private initializeRoutes(routes: Routes[]) {
     routes.forEach((route) => {
       this.app.use('/', route.router)
+    })
+  }
+
+  private initializeRouteFallback() {
+    this.app.use((req, res) => {
+      res.status(404).json({
+        status: 'FAILED',
+        message: 'route not found',
+        data: null,
+      })
     })
   }
 
