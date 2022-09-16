@@ -2,6 +2,7 @@
 import Navigation from 'components/molecules/navigation.vue'
 import Footer from 'components/organisms/footer.vue'
 import Header from 'components/organisms/header.vue'
+import Drawer from '~~/src/components/molecules/drawer.vue'
 
 definePageMeta({
   middleware: 'auth',
@@ -14,7 +15,8 @@ definePageMeta({
     <Header />
 
     <Navigation />
-    <div class="max-w-screen-xl mx-auto">
+    <Drawer />
+    <div class="max-w-screen-xl mx-auto md:px-0 px-6 h-screen">
       <slot />
     </div>
     <Footer />
@@ -27,6 +29,16 @@ definePageMeta({
 }
 
 body {
-  @apply bg-gray-50;
+  @apply bg-gray-50 dark:bg-gray-800;
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>
