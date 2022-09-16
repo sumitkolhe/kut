@@ -29,7 +29,7 @@ export const devConfig: Config = {
     },
   },
   email: {
-    apiKey: '',
+    apiKey: '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',
     senderEmail: 'no-reply@trym.in',
     senderName: 'Trym',
   },
