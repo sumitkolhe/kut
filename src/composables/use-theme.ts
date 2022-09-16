@@ -1,7 +1,5 @@
 import { onMounted, watch } from 'vue'
 
-export type Theme = 'light' | 'dark'
-
 export const useTheme = () => {
   const isDarkTheme = ref(false)
 
@@ -12,8 +10,8 @@ export const useTheme = () => {
 
   watch(isDarkTheme, (pre) => {
     if (typeof window === 'undefined' || !window.localStorage) return
-    localStorage.setItem('theme', String(pre))
-    const root = document.querySelector('body') as HTMLElement
+    localStorage.setItem('isDarkTheme', String(pre))
+    const root = document.querySelector('html') as HTMLElement
     root.setAttribute('class', isDarkTheme.value ? 'dark' : '')
   })
 
