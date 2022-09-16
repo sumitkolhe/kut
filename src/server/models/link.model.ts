@@ -1,5 +1,7 @@
-import mongoose from 'mongoose'
-import type { Document, Schema } from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
+import { AnalyticsModel } from 'models/analytics.model'
+import { TagModel } from 'models/tag.model'
+import type { Document } from 'mongoose'
 
 export interface LinkDocument extends Document {
   alias: string
@@ -12,6 +14,7 @@ export interface LinkDocument extends Document {
   }
   description: string
   analytics: { type: Schema.Types.ObjectId; ref: string }
+  tags: { type: Schema.Types.ObjectId; ref: string }
   createdAt: Date
   updatedAt: Date
 }
@@ -35,10 +38,10 @@ const LinkSchema: Schema = new mongoose.Schema(
       },
     },
     description: { type: String, default: null },
+    analytics: [{ type: Schema.Types.ObjectId, ref: AnalyticsModel }],
+    tags: [{ type: Schema.Types.ObjectId, ref: TagModel }],
   },
   { timestamps: true }
 )
-
-// LinkSchema.index({ alias: 1 }, { unique: true })
 
 export const LinkModel = mongoose.model<LinkDocument>('link', LinkSchema)
