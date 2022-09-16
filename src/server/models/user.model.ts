@@ -64,6 +64,4 @@ const UserSchema: Schema = new mongoose.Schema(
   }
 )
 
-// model<UserDocument>('user', UserSchema).ensureIndexes()
-
 export const UserModel = mongoose.model<UserDocument>('user', UserSchema)
