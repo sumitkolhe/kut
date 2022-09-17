@@ -8,9 +8,11 @@ export interface LinkDocument extends Document {
   target: string
   shortUrl: string
   visitCount: number
-  protected: {
-    enabled: boolean
+  meta: {
     password: string
+    validFrom: Date
+    validTill: Date
+    maxVisits: number
   }
   description: string
   analytics: { type: Schema.Types.ObjectId; ref: string }
@@ -23,21 +25,31 @@ const LinkSchema: Schema = new mongoose.Schema(
   {
     alias: { type: String, required: true, unique: true },
     target: { type: String, required: true },
-    shortUrl: { type: String },
-    visitCount: { type: Number, default: 0 },
-    protected: {
-      enabled: {
-        type: Number,
-        required: false,
-      },
+    shortUrl: { type: String, required: true },
+    visitCount: { type: Number, default: 0, required: false },
+    meta: {
       password: {
         type: String,
         required: false,
-        select: false,
+        default: null,
+      },
+      validFrom: {
+        type: Date,
+        required: false,
+        default: Date.now(),
+      },
+      validTill: {
+        type: Date,
+        required: false,
+        default: null,
+      },
+      maxVisits: {
+        type: Number,
+        required: false,
         default: null,
       },
     },
-    description: { type: String, default: null },
+    description: { type: String, required: false, default: null },
     analytics: [{ type: Schema.Types.ObjectId, ref: AnalyticsModel }],
     tags: [{ type: Schema.Types.ObjectId, ref: TagModel }],
   },
