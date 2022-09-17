@@ -8,13 +8,13 @@ export interface LinkDocument extends Document {
   target: string
   shortUrl: string
   visitCount: number
+  description: string
   meta: {
     password: string
     validFrom: Date
     validTill: Date
     maxVisits: number
   }
-  description: string
   analytics: { type: Schema.Types.ObjectId; ref: string }
   tags: { type: Schema.Types.ObjectId; ref: string }
   createdAt: Date
@@ -27,6 +27,7 @@ const LinkSchema: Schema = new mongoose.Schema(
     target: { type: String, required: true },
     shortUrl: { type: String, required: true },
     visitCount: { type: Number, default: 0, required: false },
+    description: { type: String, required: false, default: null },
     meta: {
       password: {
         type: String,
@@ -49,7 +50,6 @@ const LinkSchema: Schema = new mongoose.Schema(
         default: null,
       },
     },
-    description: { type: String, required: false, default: null },
     analytics: [{ type: Schema.Types.ObjectId, ref: AnalyticsModel }],
     tags: [{ type: Schema.Types.ObjectId, ref: TagModel }],
   },
