@@ -1,23 +1,18 @@
 import { LinkModel } from 'models/link.model'
 import { HttpExceptionError } from 'exceptions/http.exception'
-import { AuthService } from 'services/auth.service'
 import { UserModel } from 'models/user.model'
 import { createShortLink } from 'utils/link'
 import type { LinkDocument } from 'models/link.model'
 import type { Link } from 'interfaces/link.interface'
 
 export class LinkService {
-  private authService: AuthService
-
-  constructor() {
-    this.authService = new AuthService()
-  }
-
   public shorten = async (
     email: string,
     linkPayload: Partial<Pick<Link, 'target' | 'alias' | 'description' | 'meta'>>
   ) => {
+    // if alias is not provided, generate new alias
     const alias = linkPayload.alias ? linkPayload.alias : await this.generateUniqueAlias()
+
     const newLink: LinkDocument = new LinkModel({
       alias,
       target: linkPayload.target,
