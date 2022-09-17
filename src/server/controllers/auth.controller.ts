@@ -25,7 +25,7 @@ export class AuthController {
 
   public register: RequestHandler = async (req: Request, res: Response<CustomResponse<null>>, next: NextFunction) => {
     try {
-      const { firstName, lastName, email, password } = req.body
+      const { firstName, lastName, email, password }: User = req.body
 
       await this.authService.register({ firstName, lastName, email, password })
 
