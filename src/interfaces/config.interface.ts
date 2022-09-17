@@ -31,4 +31,5 @@ export interface Config {
     senderName: string
     senderEmail: string
   }
+  domain: string
 }

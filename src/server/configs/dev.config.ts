@@ -33,4 +33,5 @@ export const devConfig: Config = {
     senderEmail: 'no-reply@trym.in',
     senderName: 'Trym',
   },
+  domain: 'trym.in',
 }
