@@ -2,6 +2,7 @@ import { LinkModel } from 'models/link.model'
 import { HttpExceptionError } from 'exceptions/http.exception'
 import { UserModel } from 'models/user.model'
 import { createShortLink } from 'utils/link'
+// import { AnalyticsModel } from 'models/analytics.model'
 import type { LinkDocument } from 'models/link.model'
 import type { Link } from 'interfaces/link.interface'
 
@@ -35,6 +36,19 @@ export class LinkService {
     })
 
     return savedLink
+  }
+
+  public redirect = async (alias: string) => {
+    const link: LinkDocument | null = await LinkModel.findOne({ alias })
+
+    // const new_analytic = new AnalyticsModel(req.useragent)
+    // await new_analytic.save()
+    // await link_details.analytics.push(new_analytic)
+    // link_details.visit_count++
+    // await link_details.save()
+
+    if (link) return link.target.toString()
+    else throw new HttpExceptionError(404, 'link does not exist')
   }
 
   private generateUniqueAlias = async (): Promise<string> => {

@@ -34,4 +34,16 @@ export class LinkController {
       next(error)
     }
   }
+
+  public redirect: RequestHandler = async (req: Request, res: Response<CustomResponse<any>>, next: NextFunction) => {
+    try {
+      const { alias } = req.params
+
+      const redirectionLink = await this.linkService.redirect(alias)
+
+      return res.redirect(301, redirectionLink)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
