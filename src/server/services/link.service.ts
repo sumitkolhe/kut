@@ -47,8 +47,9 @@ export class LinkService {
     // link_details.visit_count++
     // await link_details.save()
 
-    if (link) return link.target.toString()
-    else throw new HttpExceptionError(404, 'link does not exist')
+    if (!link) throw new HttpExceptionError(404, 'link does not exist')
+
+    return link.target.toString()
   }
 
   private generateUniqueAlias = async (): Promise<string> => {
