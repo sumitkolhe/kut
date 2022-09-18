@@ -1,1 +1,11 @@
-<template>Settings</template>
+<script lang="ts" setup>
+definePageMeta({
+  middleware: 'auth',
+})
+</script>
+
+<template>
+  <div class="p-6">
+    <p>Settings</p>
+  </div>
+</template>
