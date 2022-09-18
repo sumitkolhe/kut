@@ -24,7 +24,14 @@ interface AnalyticsDocument extends Document {
     platform: string
     source: string
   }
-  location: unknown
+  location: {
+    country: string
+    city: string
+    timezone: string
+    latitude: string
+    longitude: string
+    region: string
+  }
 }
 
 const AnalyticsSchema: Schema = new mongoose.Schema({
@@ -50,7 +57,14 @@ const AnalyticsSchema: Schema = new mongoose.Schema({
     platform: String,
     source: String,
   },
-  location: Object,
+  location: {
+    country: String,
+    city: String,
+    timezone: String,
+    latitude: String,
+    longitude: String,
+    region: String,
+  },
 })
 
 export const AnalyticsModel = mongoose.model<AnalyticsDocument>('analytics', AnalyticsSchema)
