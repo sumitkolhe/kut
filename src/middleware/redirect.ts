@@ -4,9 +4,9 @@ export default defineNuxtRouteMiddleware(async () => {
   try {
     const route = useRoute()
 
-    const link = await useApi<CustomResponse<null>>(`/link/${route.params.alias}`)
+    if (!route.params.alias) return await navigateTo('/')
 
-    console.log(link)
+    const link = await useApi<CustomResponse<null>>(`/link/${route.params.alias}`)
 
     return await navigateTo(link.data, { external: true, redirectCode: 301 })
   } catch {
