@@ -49,7 +49,17 @@ export class LinkService {
 
     if (!link) throw new HttpExceptionError(404, 'link does not exist')
 
+    // if validTill exists and validFrom and validTill are not within limit, throw error
+    if (link.meta.validTill && (link.meta.validFrom > new Date() || link.meta.validTill < new Date()))
+      throw new HttpExceptionError(400, 'link is not active')
+
+    if (link.meta.maxVisits && link.meta.maxVisits <= link.visitCount)
+      throw new HttpExceptionError(400, 'maximum link view limit reached')
+
+    // if (link.meta.password && password && link.meta.password === password)
     return link.target.toString()
+
+    // throw new HttpExceptionError(400, 'something went wrong')
   }
 
   private generateUniqueAlias = async (): Promise<string> => {
