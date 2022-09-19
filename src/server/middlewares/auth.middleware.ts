@@ -7,9 +7,10 @@ const config = useConfig()
 
 // verify access token
 export const checkAuthentication: RequestHandler = (req, _res, next) => {
-  const authHeader = req.headers['authorization']
+  // const authHeader = req.headers['authorization']
+  // const accessToken = authHeader && authHeader.split(' ')[1]
 
-  const accessToken = authHeader && authHeader.split(' ')[1]
+  const accessToken = req.cookies.accessToken
 
   if (!accessToken) throw new HttpExceptionError(401, 'unauthorised')
 
