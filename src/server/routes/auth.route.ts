@@ -19,5 +19,6 @@ export class AuthRoute implements Routes {
     this.router.post(`${this.path}/refresh-token`, validate(refreshTokenSchema), this.authController.refreshToken)
     this.router.get(`${this.path}/verify`, validate(verifyAccountSchema), this.authController.verifyAccount)
     this.router.get(`${this.path}/me`, checkAuthentication, this.authController.me)
+    this.router.get(`${this.path}/logout`, checkAuthentication, this.authController.logout)
   }
 }
