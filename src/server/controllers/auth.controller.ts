@@ -35,8 +35,8 @@ export class AuthController {
   public logout: RequestHandler = async (req: Request, res: Response<CustomResponse<null>>, next: NextFunction) => {
     try {
       return res
-        .clearCookie('accessToken')
-        .clearCookie('refreshToken')
+        .clearCookie('accessToken', { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
+        .clearCookie('refreshToken', { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
         .json({ status: 'SUCCESS', message: 'user logged out', data: null })
     } catch (error) {
       next(error)
