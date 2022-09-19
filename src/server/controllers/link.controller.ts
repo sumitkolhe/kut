@@ -41,7 +41,7 @@ export class LinkController {
 
       const redirectionLink = await this.linkService.redirect(alias)
 
-      return res.redirect(301, redirectionLink)
+      return res.json({ status: 'SUCCESS', message: null, data: redirectionLink })
     } catch (error) {
       next(error)
     }
