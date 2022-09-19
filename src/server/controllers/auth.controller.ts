@@ -17,7 +17,27 @@ export class AuthController {
 
       const { accessToken, refreshToken } = await this.authService.login({ email, password })
 
-      return res.json({ status: 'SUCCESS', message: null, data: { accessToken, refreshToken } })
+      return res
+        .cookie('accessToken', accessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+        })
+        .cookie('refreshToken', refreshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+        })
+        .json({ status: 'SUCCESS', message: null, data: { accessToken, refreshToken } })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public logout: RequestHandler = async (req: Request, res: Response<CustomResponse<null>>, next: NextFunction) => {
+    try {
+      return res
+        .clearCookie('accessToken')
+        .clearCookie('refreshToken')
+        .json({ status: 'SUCCESS', message: 'user logged out', data: null })
     } catch (error) {
       next(error)
     }
@@ -57,7 +77,12 @@ export class AuthController {
 
       const { accessToken } = await this.authService.refreshToken(refreshToken)
 
-      return res.json({ status: 'SUCCESS', message: null, data: { accessToken } })
+      return res
+        .cookie('accessToken', accessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+        })
+        .json({ status: 'SUCCESS', message: null, data: { accessToken } })
     } catch (error) {
       next(error)
     }
