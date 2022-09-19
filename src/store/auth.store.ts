@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { FetchError } from 'ohmyfetch'
+import type { Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
-import type { Tokens } from 'interfaces/token.interface'
 
 export const useAuthStore = defineStore('authentication', {
   state: () => ({
@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('authentication', {
           method: 'POST',
         })
 
-        localStorage.setItem('trym.access_token', response.data!.accessToken)
+        useState('accessToken').value = response.data?.accessToken
 
         createToast('Login successful. Redirecting...', { type: 'success' })
 
@@ -45,7 +45,7 @@ export const useAuthStore = defineStore('authentication', {
 
     async fetchUser() {
       try {
-        const response = await useApi<CustomResponse<User>>('/api/auth/me', {
+        const response = await useApi<CustomResponse<User>>('/auth/me', {
           method: 'GET',
         })
 
@@ -61,9 +61,11 @@ export const useAuthStore = defineStore('authentication', {
       try {
         const router = useRouter()
 
-        localStorage.clear()
+        await useApi<CustomResponse<null>>('/auth/logout', {
+          method: 'GET',
+        })
 
-        return router.push('/login')
+        router.push('/login')
       } catch (error) {
         if (error instanceof Error) {
           createToast(error.message, { type: 'error' })
