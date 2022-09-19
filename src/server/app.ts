@@ -7,6 +7,7 @@ import { errorMiddleware } from 'middlewares/error.middleware'
 import { useConfig } from 'configs'
 import timeout from 'express-timeout-handler'
 import useragent from 'express-useragent'
+import cookieParser from 'cookie-parser'
 import type { Response } from 'express'
 import type { Config } from 'interfaces/config.interface'
 import type { Routes } from 'interfaces/routes.interface'
@@ -39,6 +40,7 @@ export class App {
   private initializeMiddlewares() {
     this.app.use(helmet())
     this.app.use(useragent.express())
+    this.app.use(cookieParser())
     this.app.use(morgan(this.config.log.format))
     this.app.use(cors({ origin: this.config.cors.origin, credentials: this.config.cors.credentials }))
     this.app.use(express.json())
