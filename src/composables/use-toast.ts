@@ -52,6 +52,8 @@ export class Toast {
   }
 
   insert(): void {
+    if (typeof window === 'undefined' || !window.document) return
+
     const el = document.createElement('div')
     el.className = 'toast'
     el.setAttribute('aria-live', 'assertive')
