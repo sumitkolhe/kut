@@ -1,14 +1,16 @@
 import { AuthService } from 'services/auth.service'
 import type { User } from 'interfaces/user.interface'
-import type { NextFunction, Request, RequestHandler, Response } from 'express'
+import type { CookieOptions, NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'interfaces/response.interface'
 import type { Token, Tokens } from 'interfaces/token.interface'
 
 export class AuthController {
   private authService: AuthService
+  private cookieOptions: CookieOptions
 
   constructor() {
     this.authService = new AuthService()
+    this.cookieOptions = { httpOnly: true, path: '/', secure: process.env.NODE_ENV === 'production' }
   }
 
   public login: RequestHandler = async (req: Request, res: Response<CustomResponse<Tokens>>, next: NextFunction) => {
@@ -18,14 +20,8 @@ export class AuthController {
       const { accessToken, refreshToken } = await this.authService.login({ email, password })
 
       return res
-        .cookie('accessToken', accessToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-        })
-        .cookie('refreshToken', refreshToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-        })
+        .cookie('accessToken', accessToken, this.cookieOptions)
+        .cookie('refreshToken', refreshToken, this.cookieOptions)
         .json({ status: 'SUCCESS', message: null, data: { accessToken, refreshToken } })
     } catch (error) {
       next(error)
@@ -35,8 +31,8 @@ export class AuthController {
   public logout: RequestHandler = async (req: Request, res: Response<CustomResponse<null>>, next: NextFunction) => {
     try {
       return res
-        .clearCookie('accessToken', { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
-        .clearCookie('refreshToken', { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
+        .clearCookie('accessToken', this.cookieOptions)
+        .clearCookie('refreshToken', this.cookieOptions)
         .json({ status: 'SUCCESS', message: 'user logged out', data: null })
     } catch (error) {
       next(error)
