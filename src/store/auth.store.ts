@@ -24,12 +24,13 @@ export const useAuthStore = defineStore('authentication', {
       try {
         const router = useRouter()
 
-        const response = await useApi<CustomResponse<Tokens>>('/auth/login', {
+        const response = await useRequest<CustomResponse<Tokens>>('/auth/login', {
           body: { email, password },
           method: 'POST',
         })
 
         useState('accessToken').value = response.data?.accessToken
+        useState('refreshToken').value = response.data?.refreshToken
 
         createToast('Login successful. Redirecting...', { type: 'success' })
 
@@ -45,7 +46,7 @@ export const useAuthStore = defineStore('authentication', {
 
     async fetchUser() {
       try {
-        const response = await useApi<CustomResponse<User>>('/auth/me', {
+        const response = await useRequest<CustomResponse<User>>('/auth/me', {
           method: 'GET',
         })
 
@@ -61,7 +62,7 @@ export const useAuthStore = defineStore('authentication', {
       try {
         const router = useRouter()
 
-        await useApi<CustomResponse<null>>('/auth/logout', {
+        await useRequest<CustomResponse<null>>('/auth/logout', {
           method: 'GET',
         })
 
