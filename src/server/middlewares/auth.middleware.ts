@@ -1,6 +1,7 @@
 import { HttpExceptionError } from 'exceptions/http.exception'
 import Jwt from 'jsonwebtoken'
 import { useConfig } from 'configs'
+import { ErrorType } from 'interfaces/error.interface'
 import type { RequestHandler } from 'express'
 
 const config = useConfig()
@@ -12,7 +13,7 @@ export const checkAuthentication: RequestHandler = (req, _res, next) => {
 
   const accessToken = req.cookies.accessToken
 
-  if (!accessToken) throw new HttpExceptionError(401, 'unauthorised')
+  if (!accessToken) throw new HttpExceptionError(401, ErrorType.unauthorised)
 
   try {
     const tokenDetails = Jwt.verify(accessToken, config.token.access.secret)

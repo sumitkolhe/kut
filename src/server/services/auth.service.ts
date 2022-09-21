@@ -8,6 +8,7 @@ import {
   verifyRefreshToken,
 } from 'helpers/token.helper'
 import { EmailService } from 'services/email.service'
+import { ErrorType } from 'interfaces/error.interface'
 import type { Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
 
@@ -21,7 +22,7 @@ export class AuthService {
   public register = async (user: Pick<User, 'email' | 'password' | 'firstName' | 'lastName'>): Promise<void> => {
     const ifUserExist = await UserModel.findOne({ email: user.email })
 
-    if (ifUserExist) throw new HttpExceptionError(409, 'email address is already registered')
+    if (ifUserExist) throw new HttpExceptionError(409, ErrorType.emailAlreadyExists)
 
     const salt = await bcrypt.genSalt(10)
 
@@ -44,11 +45,11 @@ export class AuthService {
   public login = async (user: Pick<User, 'email' | 'password'>): Promise<Tokens> => {
     const foundUser = await UserModel.findOne({ email: user.email })
 
-    if (!foundUser) throw new HttpExceptionError(404, 'user not found')
+    if (!foundUser) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
     const comparePassword = await bcrypt.compare(user.password, foundUser.password.toString())
 
-    if (!comparePassword) throw new HttpExceptionError(400, 'incorrect login credentials')
+    if (!comparePassword) throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
 
     const signedAccessToken = await signAccessToken({ email: user.email })
     const signedRefreshToken = await signRefreshToken({ email: user.email })
@@ -62,19 +63,19 @@ export class AuthService {
       { _id: false, __v: false, userLinks: false, apiKey: false, password: false }
     )
 
-    if (!userDetails) throw new HttpExceptionError(404, 'user not found')
+    if (!userDetails) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
     return userDetails.toObject<User>()
   }
 
   public refreshToken = async (refreshToken: string): Promise<{ accessToken: string }> => {
     const decodedToken = await verifyRefreshToken(refreshToken).catch(() => {
-      throw new HttpExceptionError(400, 'invalid refresh token')
+      throw new HttpExceptionError(400, ErrorType.invalidRefreshToken)
     })
 
     const foundUser = await UserModel.findOne({ email: decodedToken.email })
 
-    if (!foundUser) throw new HttpExceptionError(404, 'user not found')
+    if (!foundUser) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
     const signedAccessToken = await signAccessToken({ email: decodedToken.email })
 
@@ -83,12 +84,12 @@ export class AuthService {
 
   public verifyAccount = async (verificationToken: string): Promise<void> => {
     const decodedToken = await verifyAccountVerificationToken(verificationToken).catch(() => {
-      throw new HttpExceptionError(400, 'invalid verification token')
+      throw new HttpExceptionError(400, ErrorType.invalidVerifyToken)
     })
 
     const foundUser = await UserModel.findOne({ email: decodedToken.email })
 
-    if (!foundUser) throw new HttpExceptionError(404, 'user not found')
+    if (!foundUser) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
     await foundUser.updateOne({
       $set: { isVerified: true },

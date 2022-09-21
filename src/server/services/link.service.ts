@@ -3,6 +3,7 @@ import { HttpExceptionError } from 'exceptions/http.exception'
 import { UserModel } from 'models/user.model'
 import { createShortLink } from 'utils/link'
 // import { AnalyticsModel } from 'models/analytics.model'
+import { ErrorType } from 'interfaces/error.interface'
 import type { LinkDocument } from 'models/link.model'
 import type { Link } from 'interfaces/link.interface'
 
@@ -28,7 +29,7 @@ export class LinkService {
     })
 
     const savedLink = await newLink.save().catch(() => {
-      throw new HttpExceptionError(400, 'alias is already in use')
+      throw new HttpExceptionError(400, ErrorType.aliasAlreadyUsed)
     })
 
     await UserModel.findOneAndUpdate({ email }, { $push: { userLinks: savedLink } }).catch(() => {
@@ -47,7 +48,7 @@ export class LinkService {
     // link_details.visit_count++
     // await link_details.save()
 
-    if (!link) throw new HttpExceptionError(404, 'link does not exist')
+    if (!link) throw new HttpExceptionError(404, ErrorType.linkNotFound)
 
     // if validTill exists and validFrom and validTill are not within limit, throw error
     if (link.meta.validTill && (link.meta.validFrom > new Date() || link.meta.validTill < new Date()))
