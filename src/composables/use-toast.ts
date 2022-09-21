@@ -78,6 +78,7 @@ export class Toast {
     inner.append(text)
 
     if (cancel) {
+      if (typeof window === 'undefined' || !window.document) return
       const button = document.createElement('button')
       button.className = 'toast-button cancel-button'
       button.textContent = cancel
@@ -87,6 +88,7 @@ export class Toast {
     }
 
     if (action) {
+      if (typeof window === 'undefined' || !window.document) return
       const button = document.createElement('button')
       button.className = 'toast-button'
       button.textContent = action.text
@@ -133,6 +135,7 @@ export class Toast {
   }
 
   setContainer(): void {
+    if (typeof window === 'undefined' || !window.document) return
     container = document.querySelector('.toast-container') as HTMLDivElement
     if (!container) {
       container = document.createElement('div')
