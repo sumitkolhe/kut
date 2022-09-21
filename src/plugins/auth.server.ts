@@ -1,7 +1,9 @@
 export default defineNuxtPlugin(() => {
-  const cookie = useCookie('accessToken')
+  const accessToken = useCookie('accessToken')
+  const refreshToken = useCookie('refreshToken')
 
-  if (!cookie.value) return
+  if (!accessToken.value) return
 
-  useState<string>('accessToken').value = cookie.value
+  useState<string>('accessToken').value = accessToken.value
+  useState<string>('refreshToken').value = refreshToken.value
 })
