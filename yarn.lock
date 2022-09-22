@@ -5322,10 +5322,10 @@ nuxi@3.0.0-rc.10:
   optionalDependencies:
     fsevents "~2.3.2"
 
-nuxt-icon@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/nuxt-icon/-/nuxt-icon-0.1.5.tgz#a0cc5a9869755c6388e93a576a4aee8d30d9713e"
-  integrity sha512-ecq41pjcH7wBV+yil6MqtNOlng81QE/wfcrfKDwm8Z4EyLccd1rUG5peauaR8cb3YaUShGKbjyDgJgD0tPefrg==
+nuxt-icon@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/nuxt-icon/-/nuxt-icon-0.1.6.tgz#141c5929f23e10058a52ecc40143f7f3cd427624"
+  integrity sha512-kxw2a1VcLpqzFp0q84AhRykXOnVO5p8dEIPF0GWbFiAOK0pn1acCbTVRbgKm4sD3H+g1v3Gm8OYvl71TCDDkqg==
   dependencies:
     "@iconify/vue" "^3.2.1"
     "@nuxt/kit" "^3.0.0-rc.9"
