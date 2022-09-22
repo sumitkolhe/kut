@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { FetchError } from 'ohmyfetch'
-import type { Token, Tokens } from 'interfaces/token.interface'
+import type { Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
 
@@ -29,8 +29,10 @@ export const useAuthStore = defineStore('authentication', {
           method: 'POST',
         })
 
-        useState('accessToken').value = response.data?.accessToken
-        useState('refreshToken').value = response.data?.refreshToken
+        const { accessToken, refreshToken } = useToken()
+
+        accessToken.value = response.data!.accessToken!
+        refreshToken.value = response.data!.refreshToken!
 
         createToast('Login successful. Redirecting...', { type: 'success' })
 
@@ -76,9 +78,9 @@ export const useAuthStore = defineStore('authentication', {
 
     async refreshToken() {
       try {
-        const refreshToken = useState('refreshToken')
+        const { refreshToken } = useToken()
 
-        const response = await $fetch.raw<CustomResponse<Token>>('/api/auth/refresh-token', {
+        const response = await $fetch.raw('/api/auth/refresh-token', {
           method: 'POST',
           body: { refreshToken: refreshToken.value },
         })
