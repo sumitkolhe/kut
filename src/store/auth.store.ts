@@ -58,21 +58,6 @@ export const useAuthStore = defineStore('authentication', {
       }
     },
 
-    async refreshToken() {
-      const refreshToken = useState('refreshToken')
-
-      const response = await $fetch.raw<CustomResponse<Token>>('/api/auth/refresh-token', {
-        method: 'POST',
-        body: { refreshToken: refreshToken.value },
-      })
-
-      if (response.status === 400) await this.logout()
-
-      const accessToken = response._data?.data?.accessToken
-
-      useState('accessToken').value = accessToken!
-    },
-
     async logout() {
       try {
         const router = useRouter()
@@ -86,6 +71,23 @@ export const useAuthStore = defineStore('authentication', {
         if (error instanceof Error) {
           createToast(error.message, { type: 'error' })
         }
+      }
+    },
+
+    async refreshToken() {
+      try {
+        const refreshToken = useState('refreshToken')
+
+        const response = await $fetch.raw<CustomResponse<Token>>('/api/auth/refresh-token', {
+          method: 'POST',
+          body: { refreshToken: refreshToken.value },
+        })
+
+        const { accessToken } = useToken()
+
+        accessToken.value = response._data!.data!.accessToken!
+      } catch {
+        await this.logout()
       }
     },
   },
