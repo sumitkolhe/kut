@@ -33,7 +33,7 @@ export class LinkService {
     })
 
     await UserModel.findOneAndUpdate({ email }, { $push: { userLinks: savedLink } }).catch(() => {
-      throw new HttpExceptionError(400, 'cannot update user links')
+      throw new HttpExceptionError(500, 'cannot update user links')
     })
 
     return savedLink
@@ -52,10 +52,10 @@ export class LinkService {
 
     // if validTill exists and validFrom and validTill are not within limit, throw error
     if (link.meta.validTill && (link.meta.validFrom > new Date() || link.meta.validTill < new Date()))
-      throw new HttpExceptionError(400, 'link is not active')
+      throw new HttpExceptionError(403, 'link is not active')
 
     if (link.meta.maxVisits && link.meta.maxVisits <= link.visitCount)
-      throw new HttpExceptionError(400, 'maximum link view limit reached')
+      throw new HttpExceptionError(403, 'maximum link view limit reached')
 
     // if (link.meta.password && password && link.meta.password === password)
     return link.target.toString()

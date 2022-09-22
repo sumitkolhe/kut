@@ -49,7 +49,7 @@ export class AuthService {
 
     const comparePassword = await bcrypt.compare(user.password, foundUser.password.toString())
 
-    if (!comparePassword) throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
+    if (!comparePassword) throw new HttpExceptionError(403, ErrorType.incorrectLoginCredentials)
 
     const signedAccessToken = await signAccessToken({ email: user.email })
     const signedRefreshToken = await signRefreshToken({ email: user.email })
@@ -70,7 +70,7 @@ export class AuthService {
 
   public refreshToken = async (refreshToken: string): Promise<{ accessToken: string }> => {
     const decodedToken = await verifyRefreshToken(refreshToken).catch(() => {
-      throw new HttpExceptionError(400, ErrorType.invalidRefreshToken)
+      throw new HttpExceptionError(401, ErrorType.invalidRefreshToken)
     })
 
     const foundUser = await UserModel.findOne({ email: decodedToken.email })
@@ -84,7 +84,7 @@ export class AuthService {
 
   public verifyAccount = async (verificationToken: string): Promise<void> => {
     const decodedToken = await verifyAccountVerificationToken(verificationToken).catch(() => {
-      throw new HttpExceptionError(400, ErrorType.invalidVerifyToken)
+      throw new HttpExceptionError(401, ErrorType.invalidVerifyToken)
     })
 
     const foundUser = await UserModel.findOne({ email: decodedToken.email })
