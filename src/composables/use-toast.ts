@@ -126,13 +126,6 @@ export class Toast {
 
     sortToast()
   }
-  /**
-   * @deprecated Please use `destroy`
-   */
-  destory(): void {
-    typoWarning('destory')
-    this.destroy()
-  }
 
   setContainer(): void {
     if (typeof window === 'undefined' || !window.document) return
@@ -179,13 +172,6 @@ export function destroyAllToasts(): void {
     instance.destroy()
   })
 }
-/**
- * @deprecated Please use `destroyAllToasts`
- */
-export function destoryAllToasts(): void {
-  typoWarning('destoryAllToasts')
-  destroyAllToasts()
-}
 
 function sortToast(): void {
   const toasts = Array.from(instances).reverse().slice(0, 4)
@@ -212,8 +198,4 @@ function sortToast(): void {
       el.style.removeProperty('--hover-offset-y')
     }
   })
-}
-
-function typoWarning(method: string) {
-  console.warn('[vercel-toast]:', `\`${method}\` is a typo function, please use \`${method.replace('or', 'ro')}\``)
 }
