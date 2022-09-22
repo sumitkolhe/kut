@@ -10,7 +10,12 @@ export class AuthController {
 
   constructor() {
     this.authService = new AuthService()
-    this.cookieOptions = { httpOnly: true, path: '/', secure: process.env.NODE_ENV === 'production' }
+    this.cookieOptions = {
+      httpOnly: true,
+      path: '/',
+      sameSite: 'strict',
+      secure: process.env.NODE_ENV === 'production',
+    }
   }
 
   public login: RequestHandler = async (req: Request, res: Response<CustomResponse<Tokens>>, next: NextFunction) => {
