@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { FetchError } from 'ohmyfetch'
-import type { Tokens } from 'interfaces/token.interface'
+import type { Token, Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
 
@@ -80,7 +80,7 @@ export const useAuthStore = defineStore('authentication', {
       try {
         const { refreshToken } = useToken()
 
-        const response = await $fetch.raw('/api/auth/refresh-token', {
+        const response = await $fetch.raw<CustomResponse<Token>>('/api/auth/refresh-token', {
           method: 'POST',
           body: { refreshToken: refreshToken.value },
         })
