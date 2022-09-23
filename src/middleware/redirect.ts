@@ -1,9 +1,9 @@
 import type { CustomResponse } from 'interfaces/response.interface'
 
 export default defineNuxtRouteMiddleware(async () => {
-  try {
-    const route = useRoute()
+  const route = useRoute()
 
+  try {
     if (!route.params.alias) return await navigateTo('/')
 
     const link = await useRequest<CustomResponse<null>>(`/link/${route.params.alias}`)
