@@ -2,6 +2,7 @@ import type { CustomResponse } from 'interfaces/response.interface'
 
 export default defineNuxtRouteMiddleware(async () => {
   const route = useRoute()
+  const app = useNuxtApp()
 
   try {
     if (!route.params.alias) return await navigateTo('/')
@@ -9,7 +10,5 @@ export default defineNuxtRouteMiddleware(async () => {
     const link = await useRequest<CustomResponse<null>>(`/link/${route.params.alias}`)
 
     return await navigateTo(link.data, { external: true, redirectCode: 301 })
-  } catch {
-    return navigateTo('/')
-  }
+  } catch {}
 })
