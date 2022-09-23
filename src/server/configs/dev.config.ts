@@ -33,5 +33,8 @@ export const devConfig: Config = {
     senderEmail: 'no-reply@trym.in',
     senderName: 'Trym',
   },
-  domain: 'trym.in',
+  domain: {
+    protocol: 'http',
+    url: 'localhost:3000',
+  },
 }

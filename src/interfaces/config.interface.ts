@@ -31,5 +31,8 @@ export interface Config {
     senderName: string
     senderEmail: string
   }
-  domain: string
+  domain: {
+    protocol: 'http' | 'https'
+    url: string
+  }
 }
