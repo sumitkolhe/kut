@@ -36,7 +36,7 @@ export const productionConfig: Config = {
     senderName: 'Trym',
   },
   domain: {
-    protocol: 'http',
+    protocol: 'https',
     url: 'trym.in',
   },
 }
