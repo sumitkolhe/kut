@@ -51,6 +51,7 @@ export default defineNuxtConfig({
     utils: fileURLToPath(new URL('./src/server/utils', import.meta.url)),
   },
   runtimeConfig: {
+    apiBaseUrl: process.env.API_BASE_URL,
     dbUrl: process.env.DB_URL,
     dbName: process.env.DB_NAME,
     accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
