@@ -13,8 +13,20 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
       </NuxtLink>
 
       <Menu />
-      <Icon v-if="!isDrawerVisible" name="line-md:menu" class="dark:text-gray-50" size="24" @click="toggleDrawer()" />
-      <Icon v-else name="line-md:close" size="24" class="dark:text-gray-50" @click="toggleDrawer()" />
+      <Icon
+        v-if="!isDrawerVisible"
+        name="line-md:menu"
+        class="dark:text-gray-50"
+        size="24"
+        @click="toggleDrawer()"
+      />
+      <Icon
+        v-else
+        name="line-md:close"
+        size="24"
+        class="dark:text-gray-50"
+        @click="toggleDrawer()"
+      />
     </div>
   </header>
 </template>

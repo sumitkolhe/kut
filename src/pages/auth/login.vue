@@ -46,7 +46,9 @@ const login = async () => {
       <p class="text-xl font-medium text-red-500 uppercase">Trym</p>
     </header>
 
-    <div class="w-full md:border max-w-lg mx-auto px-6 pt-6 pb-8 rounded-md bg-gray-50 md:bg-white md:mt-24">
+    <div
+      class="w-full md:border max-w-lg mx-auto px-6 pt-6 pb-8 rounded-md bg-gray-50 md:bg-white md:mt-24"
+    >
       <h1 class="text-xl font-medium text-center text-gray-800">Login</h1>
       <form class="mt-8 space-y-4">
         <base-input
@@ -79,7 +81,9 @@ const login = async () => {
           </div>
 
           <div class="text-sm">
-            <nuxt-link to="/login" class="hover:underline text-red-500">Forgot your password?</nuxt-link>
+            <nuxt-link to="/login" class="hover:underline text-red-500"
+              >Forgot your password?</nuxt-link
+            >
           </div>
         </div>
 

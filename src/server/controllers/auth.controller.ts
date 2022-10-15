@@ -18,7 +18,11 @@ export class AuthController {
     }
   }
 
-  public login: RequestHandler = async (req: Request, res: Response<CustomResponse<Tokens>>, next: NextFunction) => {
+  public login: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<Tokens>>,
+    next: NextFunction
+  ) => {
     try {
       const { email, password } = req.body
 
@@ -33,7 +37,11 @@ export class AuthController {
     }
   }
 
-  public logout: RequestHandler = async (req: Request, res: Response<CustomResponse<null>>, next: NextFunction) => {
+  public logout: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<null>>,
+    next: NextFunction
+  ) => {
     try {
       return res
         .clearCookie('accessToken', this.cookieOptions)
@@ -44,7 +52,11 @@ export class AuthController {
     }
   }
 
-  public register: RequestHandler = async (req: Request, res: Response<CustomResponse<null>>, next: NextFunction) => {
+  public register: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<null>>,
+    next: NextFunction
+  ) => {
     try {
       const { firstName, lastName, email, password }: User = req.body
 
@@ -56,7 +68,11 @@ export class AuthController {
     }
   }
 
-  public me: RequestHandler = async (req: Request, res: Response<CustomResponse<User>>, next: NextFunction) => {
+  public me: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<User>>,
+    next: NextFunction
+  ) => {
     try {
       const { email } = req.auth
 

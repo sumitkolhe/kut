@@ -28,6 +28,8 @@ export const verifyRefreshToken = async (refreshToken: string): Promise<JwtPaylo
   return Jwt.verify(refreshToken, config.token.refresh.secret) as JwtPayload
 }
 
-export const verifyAccountVerificationToken = async (verificationToken: string): Promise<JwtPayload> => {
+export const verifyAccountVerificationToken = async (
+  verificationToken: string
+): Promise<JwtPayload> => {
   return Jwt.verify(verificationToken, config.token.accountVerification.secret) as JwtPayload
 }

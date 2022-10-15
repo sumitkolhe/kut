@@ -7,7 +7,9 @@ definePageMeta({
 </script>
 
 <template>
-  <section class="mx-auto h-screen flex flex-row items-center justify-center space-x-32 max-w-screen-xl">
+  <section
+    class="mx-auto h-screen flex flex-row items-center justify-center space-x-32 max-w-screen-xl"
+  >
     <!-- <header class="flex items-center justify-center py-5 mb-5 border-b border-gray-200 space-x-2">
       <icon name="ph:link-break" size="36" class="text-red-500" />
       <p class="text-xl font-medium text-red-500 uppercase">Kut</p>
@@ -20,13 +22,20 @@ definePageMeta({
         <base-input label="First Name" type="text" placeholder="john" suffix-icon="ph:at" />
         <base-input label="Last Name" type="text" placeholder="doe" suffix-icon="ph:at" />
         <base-input label="Email" type="email" placeholder="john@doe.com" suffix-icon="ph:at" />
-        <base-input label="Password" type="password" placeholder="********" suffix-icon="ph:password" />
+        <base-input
+          label="Password"
+          type="password"
+          placeholder="********"
+          suffix-icon="ph:password"
+        />
         <base-button> Sign up</base-button>
       </form>
 
       <p class="text-center text-gray-600 mt-4">
         Already have an account?
-        <nuxt-link to="/login" class="text-red-500 hover:text-red-600 hover:underline">Sign in</nuxt-link>
+        <nuxt-link to="/login" class="text-red-500 hover:text-red-600 hover:underline"
+          >Sign in</nuxt-link
+        >
       </p>
     </div>
 
@@ -71,7 +80,8 @@ definePageMeta({
         <div>
           <h2 class="text-xl font-medium text-purple-700">Free account</h2>
           <p class="mt-1 text-gray-700">
-            Create apps, connect databases and add-on services, and collaborate on your apps, for free.
+            Create apps, connect databases and add-on services, and collaborate on your apps, for
+            free.
           </p>
         </div>
       </div>
@@ -91,7 +101,8 @@ definePageMeta({
         <div>
           <h2 class="text-xl font-medium text-purple-700">Your app platform</h2>
           <p class="mt-1 text-gray-700">
-            A platform for apps, with app management & instant scaling, for development and production.
+            A platform for apps, with app management & instant scaling, for development and
+            production.
           </p>
         </div>
       </div>
@@ -111,7 +122,8 @@ definePageMeta({
         <div>
           <h2 class="text-xl font-medium text-purple-700">Deploy now</h2>
           <p class="mt-1 text-gray-700">
-            Go from code to running app in minutes. Deploy, scale, and deliver your app to the world.
+            Go from code to running app in minutes. Deploy, scale, and deliver your app to the
+            world.
           </p>
         </div>
       </div>
@@ -131,7 +143,8 @@ definePageMeta({
         <div>
           <h2 class="text-xl font-medium text-purple-700">Free account</h2>
           <p class="mt-1 text-gray-700">
-            Create apps, connect databases and add-on services, and collaborate on your apps, for free.
+            Create apps, connect databases and add-on services, and collaborate on your apps, for
+            free.
           </p>
         </div>
       </div>

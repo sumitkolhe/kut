@@ -19,7 +19,9 @@ export class AuthService {
     this.emailService = new EmailService()
   }
 
-  public register = async (user: Pick<User, 'email' | 'password' | 'firstName' | 'lastName'>): Promise<void> => {
+  public register = async (
+    user: Pick<User, 'email' | 'password' | 'firstName' | 'lastName'>
+  ): Promise<void> => {
     const ifUserExist = await UserModel.findOne({ email: user.email })
 
     if (ifUserExist) throw new HttpExceptionError(409, ErrorType.emailAlreadyExists)

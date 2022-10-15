@@ -8,7 +8,12 @@ interface ValidationError {
   location: string | undefined
 }
 
-export const errorMiddleware = (error: HttpExceptionError, req: Request, res: Response, next: NextFunction) => {
+export const errorMiddleware = (
+  error: HttpExceptionError,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     if (isCelebrateError(error)) {
       const message: ValidationError[] = []

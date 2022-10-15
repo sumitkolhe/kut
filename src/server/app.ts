@@ -40,7 +40,9 @@ export class App {
     this.app.use(helmet())
     this.app.use(useragent.express())
     this.app.use(morgan(this.config.log.format))
-    this.app.use(cors({ origin: this.config.cors.origin, credentials: this.config.cors.credentials }))
+    this.app.use(
+      cors({ origin: this.config.cors.origin, credentials: this.config.cors.credentials })
+    )
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(

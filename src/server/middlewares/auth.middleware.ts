@@ -23,7 +23,8 @@ export const checkAuthentication: RequestHandler = (req, _res, next) => {
     let errorMessage = error
 
     if (error instanceof Error) {
-      errorMessage = error.name === 'JsonWebTokenError' ? 'invalid authentication token' : error.message
+      errorMessage =
+        error.name === 'JsonWebTokenError' ? 'invalid authentication token' : error.message
     }
     throw new HttpExceptionError(401, errorMessage as string)
   }

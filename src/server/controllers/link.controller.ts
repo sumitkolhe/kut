@@ -10,7 +10,11 @@ export class LinkController {
     this.linkService = new LinkService()
   }
 
-  public shorten: RequestHandler = async (req: Request, res: Response<CustomResponse<any>>, next: NextFunction) => {
+  public shorten: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<any>>,
+    next: NextFunction
+  ) => {
     try {
       const { email } = req.auth
       const {
@@ -25,7 +29,12 @@ export class LinkController {
         },
       }: Link = req.body
 
-      const link: Partial<Link> = { alias, target, description, meta: { password, validFrom, validTill, maxVisits } }
+      const link: Partial<Link> = {
+        alias,
+        target,
+        description,
+        meta: { password, validFrom, validTill, maxVisits },
+      }
 
       const shortenedLink = await this.linkService.shorten(email, link)
 
@@ -35,7 +44,11 @@ export class LinkController {
     }
   }
 
-  public redirect: RequestHandler = async (req: Request, res: Response<CustomResponse<any>>, next: NextFunction) => {
+  public redirect: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<any>>,
+    next: NextFunction
+  ) => {
     try {
       const { alias } = req.params
 
