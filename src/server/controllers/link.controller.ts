@@ -1,4 +1,4 @@
-import { LinkService } from 'services/link.service'
+import { LinkService } from 'server/services/link.service'
 import type { Link } from 'interfaces/link.interface'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'interfaces/response.interface'
@@ -54,7 +54,11 @@ export class LinkController {
 
       const redirectionLink = await this.linkService.redirect(alias)
 
-      return res.json({ status: 'SUCCESS', message: null, data: redirectionLink })
+      return res.json({
+        status: 'SUCCESS',
+        message: null,
+        data: redirectionLink,
+      })
     } catch (error) {
       next(error)
     }

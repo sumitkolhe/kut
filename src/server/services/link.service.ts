@@ -1,10 +1,10 @@
-import { LinkModel } from 'models/link.model'
-import { HttpExceptionError } from 'exceptions/http.exception'
-import { UserModel } from 'models/user.model'
-import { createShortLink } from 'utils/link'
+import { LinkModel } from 'server/models/link.model'
+import { HttpExceptionError } from 'server/exceptions/http.exception'
+import { UserModel } from 'server/models/user.model'
+import { createShortLink } from 'server/utils/link'
 // import { AnalyticsModel } from 'models/analytics.model'
 import { ErrorType } from 'interfaces/error.interface'
-import type { LinkDocument } from 'models/link.model'
+import type { LinkDocument } from 'server/models/link.model'
 import type { Link } from 'interfaces/link.interface'
 
 export class LinkService {

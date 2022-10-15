@@ -1,13 +1,13 @@
-import { UserModel } from 'models/user.model'
+import { UserModel } from 'server/models/user.model'
 import bcrypt from 'bcryptjs'
-import { HttpExceptionError } from 'exceptions/http.exception'
+import { HttpExceptionError } from 'server/exceptions/http.exception'
 import {
   signAccessToken,
   signRefreshToken,
   verifyAccountVerificationToken,
   verifyRefreshToken,
-} from 'helpers/token.helper'
-import { EmailService } from 'services/email.service'
+} from 'server/helpers/token.helper'
+import { EmailService } from 'server/services/email.service'
 import { ErrorType } from 'interfaces/error.interface'
 import type { Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
@@ -62,7 +62,13 @@ export class AuthService {
   public me = async (email: string): Promise<User> => {
     const userDetails = await UserModel.findOne(
       { email },
-      { _id: false, __v: false, userLinks: false, apiKey: false, password: false }
+      {
+        _id: false,
+        __v: false,
+        userLinks: false,
+        apiKey: false,
+        password: false,
+      }
     )
 
     if (!userDetails) throw new HttpExceptionError(404, ErrorType.userNotFound)
@@ -79,7 +85,9 @@ export class AuthService {
 
     if (!foundUser) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    const signedAccessToken = await signAccessToken({ email: decodedToken.email })
+    const signedAccessToken = await signAccessToken({
+      email: decodedToken.email,
+    })
 
     return { accessToken: signedAccessToken }
   }

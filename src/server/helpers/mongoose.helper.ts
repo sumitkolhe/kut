@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import { logger } from 'utils/logger'
-import { useConfig } from 'configs'
+import { logger } from 'server/utils/logger'
+import { useConfig } from 'server/configs'
 
 const config = useConfig()
 

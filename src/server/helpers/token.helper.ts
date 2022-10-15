@@ -1,5 +1,5 @@
 import Jwt from 'jsonwebtoken'
-import { useConfig } from 'configs'
+import { useConfig } from 'server/configs'
 import type { JwtPayload } from 'jsonwebtoken'
 
 type JwtToken = string | object | Buffer

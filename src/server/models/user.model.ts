@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { LinkModel } from 'models/link.model'
+import { LinkModel } from 'server/models/link.model'
 import type { Document, Schema } from 'mongoose'
 
 export interface UserDocument extends Document {

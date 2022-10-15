@@ -1,9 +1,9 @@
-import { HttpExceptionError } from 'exceptions/http.exception'
+import { HttpExceptionError } from 'server/exceptions/http.exception'
 import Jwt from 'jsonwebtoken'
-import { useConfig } from 'configs'
+import { useConfig } from 'server/configs'
 import { ErrorType } from 'interfaces/error.interface'
+import { getCookies } from 'server/utils/cookie'
 import type { RequestHandler } from 'express'
-import { getCookies } from '~~/src/server/utils/cookie'
 
 const config = useConfig()
 

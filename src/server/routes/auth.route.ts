@@ -1,12 +1,12 @@
 import { Router } from 'express'
-import { AuthController } from 'controllers/auth.controller'
-import { checkAuthentication } from 'middlewares/auth.middleware'
+import { AuthController } from 'server/controllers/auth.controller'
+import { checkAuthentication } from 'server/middlewares/auth.middleware'
 import {
   loginSchema,
   refreshTokenSchema,
   registerationSchema,
   verifyAccountSchema,
-} from 'helpers/validator.helper'
+} from 'server/helpers/validator.helper'
 import type { Routes } from 'interfaces/routes.interface'
 
 export class AuthRoute implements Routes {

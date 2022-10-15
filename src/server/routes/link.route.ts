@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { LinkController } from 'controllers/link.controller'
-import { checkAuthentication } from 'middlewares/auth.middleware'
+import { LinkController } from 'server/controllers/link.controller'
+import { checkAuthentication } from 'server/middlewares/auth.middleware'
 import type { Routes } from 'interfaces/routes.interface'
 
 export class LinkRoute implements Routes {

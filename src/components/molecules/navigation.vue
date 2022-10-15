@@ -2,7 +2,11 @@
 const tabs = [
   { name: 'Overview', href: '/dashboard', icon: 'ph:dots-nine-bold' },
   { name: 'Links', href: '/dashboard/links', icon: 'ph:link' },
-  { name: 'Statistics', href: '/dashboard/stats', icon: 'ph:math-operations-duotone' },
+  {
+    name: 'Statistics',
+    href: '/dashboard/stats',
+    icon: 'ph:math-operations-duotone',
+  },
   { name: 'Settings', href: '/dashboard/settings', icon: 'ph:command-duotone' },
 ]
 </script>

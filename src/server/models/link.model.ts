@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
-import { AnalyticsModel } from 'models/analytics.model'
-import { TagModel } from 'models/tag.model'
+import { AnalyticsModel } from 'server/models/analytics.model'
+import { TagModel } from 'server/models/tag.model'
 import type { Document } from 'mongoose'
 
 export interface LinkDocument extends Document {

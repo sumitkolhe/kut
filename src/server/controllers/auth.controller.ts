@@ -1,4 +1,4 @@
-import { AuthService } from 'services/auth.service'
+import { AuthService } from 'server/services/auth.service'
 import type { User } from 'interfaces/user.interface'
 import type { CookieOptions, NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'interfaces/response.interface'
@@ -26,12 +26,19 @@ export class AuthController {
     try {
       const { email, password } = req.body
 
-      const { accessToken, refreshToken } = await this.authService.login({ email, password })
+      const { accessToken, refreshToken } = await this.authService.login({
+        email,
+        password,
+      })
 
       return res
         .cookie('accessToken', accessToken, this.cookieOptions)
         .cookie('refreshToken', refreshToken, this.cookieOptions)
-        .json({ status: 'SUCCESS', message: null, data: { accessToken, refreshToken } })
+        .json({
+          status: 'SUCCESS',
+          message: null,
+          data: { accessToken, refreshToken },
+        })
     } catch (error) {
       next(error)
     }
@@ -62,7 +69,11 @@ export class AuthController {
 
       await this.authService.register({ firstName, lastName, email, password })
 
-      return res.json({ status: 'SUCCESS', message: 'user registered successfully', data: null })
+      return res.json({
+        status: 'SUCCESS',
+        message: 'user registered successfully',
+        data: null,
+      })
     } catch (error) {
       next(error)
     }
@@ -115,7 +126,11 @@ export class AuthController {
 
       await this.authService.verifyAccount(token as string)
 
-      return res.json({ status: 'SUCCESS', message: 'account verified successfully', data: null })
+      return res.json({
+        status: 'SUCCESS',
+        message: 'account verified successfully',
+        data: null,
+      })
     } catch (error) {
       next(error)
     }

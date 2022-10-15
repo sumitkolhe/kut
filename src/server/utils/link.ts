@@ -1,4 +1,4 @@
-import { useConfig } from 'configs'
+import { useConfig } from 'server/configs'
 
 export const createShortLink = (alias: string) => {
   const config = useConfig()

@@ -3,8 +3,8 @@ import cors from 'cors'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import { errorMiddleware } from 'middlewares/error.middleware'
-import { useConfig } from 'configs'
+import { errorMiddleware } from 'server/middlewares/error.middleware'
+import { useConfig } from 'server/configs'
 import timeout from 'express-timeout-handler'
 import useragent from 'express-useragent'
 import type { Response } from 'express'
@@ -41,7 +41,10 @@ export class App {
     this.app.use(useragent.express())
     this.app.use(morgan(this.config.log.format))
     this.app.use(
-      cors({ origin: this.config.cors.origin, credentials: this.config.cors.credentials })
+      cors({
+        origin: this.config.cors.origin,
+        credentials: this.config.cors.credentials,
+      })
     )
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
