@@ -42,7 +42,7 @@ const login = async () => {
 <template>
   <section class="bg-gray-50 h-screen mx-auto">
     <header class="flex items-center justify-center py-4 border-b border-gray-200 space-x-2">
-      <Icon name="ph:link-break" size="36" class="text-red-500" />
+      <icon name="ph:link-break" size="36" class="text-red-500" />
       <p class="text-xl font-medium text-red-500 uppercase">Trym</p>
     </header>
 
@@ -79,7 +79,7 @@ const login = async () => {
           </div>
 
           <div class="text-sm">
-            <NuxtLink to="/login" class="hover:underline text-red-500">Forgot your password?</NuxtLink>
+            <nuxt-link to="/login" class="hover:underline text-red-500">Forgot your password?</nuxt-link>
           </div>
         </div>
 
@@ -87,7 +87,7 @@ const login = async () => {
       </form>
       <p class="text-center text-gray-600 mt-4">
         Don't have an account?
-        <NuxtLink to="/register" class="hover:underline text-red-500">Sign up</NuxtLink>
+        <nuxt-link to="/register" class="hover:underline text-red-500">Sign up</nuxt-link>
       </p>
     </div>
   </section>
