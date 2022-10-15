@@ -2,7 +2,7 @@
 import Navigation from 'components/molecules/navigation.vue'
 import Footer from 'components/organisms/footer.vue'
 import Header from 'components/organisms/header.vue'
-import Drawer from '~~/src/components/molecules/drawer.vue'
+import Drawer from 'components/molecules/drawer.vue'
 
 definePageMeta({
   middleware: 'auth',
