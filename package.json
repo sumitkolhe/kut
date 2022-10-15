@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
-    "prettify": "prettier --write \"src/**/*.{js,ts,json,vue}\"",
+    "format": "prettier --write \"src/**/*.{js,ts,json,vue}\"",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "express-useragent": "^1.0.15",
     "helmet": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
     "vue-tiny-validate": "^0.2.4",
