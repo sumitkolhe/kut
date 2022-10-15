@@ -1,49 +1,45 @@
-import { object, string, z } from 'zod'
+import { Joi, Modes, Segments, celebrate } from 'celebrate'
 
-export const regsiterationSchema = z.object({
-  body: object({
-    firstName: string({
-      required_error: 'first name is required',
+export const registerationSchema = celebrate(
+  {
+    [Segments.BODY]: Joi.object().keys({
+      firstName: Joi.string(),
+      lastName: Joi.string(),
+      email: Joi.string().email(),
+      password: Joi.string(),
     }),
+  },
+  { abortEarly: false },
+  { mode: Modes.FULL }
+)
 
-    lastName: string({
-      required_error: 'last name is required',
+export const loginSchema = celebrate(
+  {
+    [Segments.BODY]: Joi.object().keys({
+      email: Joi.string().email().required(),
+      password: Joi.string().min(6).required(),
     }),
+  },
+  { abortEarly: false },
+  { mode: Modes.FULL }
+)
 
-    email: string({
-      required_error: 'email is required',
-    }).email('invalid email address'),
-
-    password: string({
-      required_error: 'password is required',
-    }).min(6, 'password too short - should be 6 chars minimum'),
-  }),
-})
-
-export const loginSchema = z.object({
-  body: object({
-    email: string({
-      required_error: 'email is required',
-    }).email('invalid email address'),
-
-    password: string({
-      required_error: 'password is required',
-    }).min(6, 'password too short - should be 6 chars minimum'),
-  }),
-})
-
-export const refreshTokenSchema = z.object({
-  body: object({
-    refreshToken: string({
-      required_error: 'refresh token is required',
+export const refreshTokenSchema = celebrate(
+  {
+    [Segments.BODY]: Joi.object().keys({
+      refreshToken: Joi.string().required(),
     }),
-  }),
-})
+  },
+  { abortEarly: false },
+  { mode: Modes.FULL }
+)
 
-export const verifyAccountSchema = z.object({
-  query: object({
-    token: string({
-      required_error: 'token is required',
+export const verifyAccountSchema = celebrate(
+  {
+    [Segments.QUERY]: Joi.object().keys({
+      token: Joi.string().required(),
     }),
-  }),
-})
+  },
+  { abortEarly: false },
+  { mode: Modes.FULL }
+)

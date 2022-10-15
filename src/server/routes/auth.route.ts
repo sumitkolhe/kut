@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { AuthController } from 'controllers/auth.controller'
 import { checkAuthentication } from 'middlewares/auth.middleware'
-import { loginSchema, registerationSchema } from 'helpers/validator.helper'
+import { loginSchema, refreshTokenSchema, registerationSchema, verifyAccountSchema } from 'helpers/validator.helper'
 import type { Routes } from 'interfaces/routes.interface'
 
 export class AuthRoute implements Routes {
@@ -15,8 +15,8 @@ export class AuthRoute implements Routes {
   private initializeRoutes() {
     this.router.post(`${this.path}/register`, registerationSchema, this.authController.register)
     this.router.post(`${this.path}/login`, loginSchema, this.authController.login)
-    this.router.post(`${this.path}/refresh-token`, this.authController.refreshToken)
-    this.router.get(`${this.path}/verify`, this.authController.verifyAccount)
+    this.router.post(`${this.path}/refresh-token`, refreshTokenSchema, this.authController.refreshToken)
+    this.router.get(`${this.path}/verify`, verifyAccountSchema, this.authController.verifyAccount)
     this.router.get(`${this.path}/me`, checkAuthentication, this.authController.me)
     this.router.get(`${this.path}/logout`, this.authController.logout)
   }
