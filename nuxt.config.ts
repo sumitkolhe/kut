@@ -40,6 +40,7 @@ export default defineNuxtConfig({
     composables: fileURLToPath(new URL('./src/composables', import.meta.url)),
     interfaces: fileURLToPath(new URL('./src/interfaces', import.meta.url)),
     store: fileURLToPath(new URL('./src/store', import.meta.url)),
+    utils: fileURLToPath(new URL('./src/utils', import.meta.url)),
     server: fileURLToPath(new URL('./src/server', import.meta.url)),
   },
   runtimeConfig: {

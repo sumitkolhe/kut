@@ -5,4 +5,4 @@ import { App } from './app'
 
 const app = new App([new AuthRoute(), new LinkRoute()])
 
-export default app.getServer()
+export default fromNodeMiddleware(app.getServer())
