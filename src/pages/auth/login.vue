@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useAuthStore } from 'store/auth.store'
 import useValidate from 'vue-tiny-validate'
 import BaseInput from 'components/molecules/base-input.vue'
 import BaseButton from 'components/atoms/base-button.vue'
@@ -9,7 +8,7 @@ definePageMeta({
   layout: 'public',
 })
 
-const AuthStore = useAuthStore()
+const { $auth } = useNuxtApp()
 
 const loading = ref(false)
 const loginData = reactive({ email: '', password: '' })
@@ -33,7 +32,9 @@ const login = async () => {
   result.value.$test()
   if (!result.value.$invalid) {
     loading.value = true
-    await AuthStore.login(loginData.email, loginData.password)
+    await $auth
+      .login(loginData.email, loginData.password)
+      .then(() => useRouter().push('/dashboard'))
     loading.value = false
   }
 }
@@ -81,9 +82,9 @@ const login = async () => {
           </div>
 
           <div class="text-sm">
-            <nuxt-link to="/login" class="hover:underline text-red-500"
-              >Forgot your password?</nuxt-link
-            >
+            <nuxt-link to="/auth/login" class="hover:underline text-red-500">
+              Forgot your password?
+            </nuxt-link>
           </div>
         </div>
 

@@ -55,7 +55,8 @@ export const useAuthStore = defineStore('authentication', {
         this.user = response.data!
       } catch (error) {
         if (error instanceof FetchError) {
-          createToast(error.response?._data.message, { type: 'error' })
+          const { $logger } = useNuxtApp()
+          $logger.info(error.message)
         }
       }
     },
@@ -68,10 +69,11 @@ export const useAuthStore = defineStore('authentication', {
           method: 'GET',
         })
 
-        router.push('/login')
+        router.push('/auth/login')
       } catch (error) {
-        if (error instanceof Error) {
-          createToast(error.message, { type: 'error' })
+        if (error instanceof FetchError) {
+          const { $logger } = useNuxtApp()
+          $logger.info(error.message)
         }
       }
     },
