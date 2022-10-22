@@ -42,6 +42,7 @@ export default defineNuxtPlugin(() => {
               updatedAt: new Date(),
             } as User)
         ),
+
         isLoggedIn: useState('auth.isLoggedIn', () => false),
 
         async login(email: string, password: string) {
@@ -54,6 +55,22 @@ export default defineNuxtPlugin(() => {
             accessToken.value = response.data!.accessToken!
             refreshToken.value = response.data!.refreshToken!
             this.isLoggedIn.value = true
+          } catch (error) {
+            if (error instanceof FetchError) {
+              const { $logger } = useNuxtApp()
+              $logger.error(error.message)
+            }
+          }
+        },
+
+        async register(email: string, password: string) {
+          try {
+            const response = await useRequest<CustomResponse<null>>('/auth/register', {
+              body: { email, password },
+              method: 'POST',
+            })
+
+            console.log(response)
           } catch (error) {
             if (error instanceof FetchError) {
               const { $logger } = useNuxtApp()
