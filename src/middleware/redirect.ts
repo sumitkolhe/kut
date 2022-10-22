@@ -1,9 +1,9 @@
 import type { CustomResponse } from 'interfaces/response.interface'
 
-// redirect to external page using alias
 export default defineNuxtRouteMiddleware(async () => {
   const route = useRoute()
   const config = useRuntimeConfig()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const nuxtApp = useNuxtApp()
 
   const baseURL = config.apiBaseUrl
