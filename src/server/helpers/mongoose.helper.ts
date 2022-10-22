@@ -24,6 +24,6 @@ export default async () => {
 
     return isConnected
   } catch (error) {
-    console.error('database connection failed.', error)
+    logger.error('database connection failed.', error)
   }
 }
