@@ -65,9 +65,9 @@ export class AuthController {
     next: NextFunction
   ) => {
     try {
-      const { firstName, lastName, email, password }: User = req.body
+      const { email, password }: User = req.body
 
-      await this.authService.register({ firstName, lastName, email, password })
+      await this.authService.register({ email, password })
 
       return res.json({
         status: 'SUCCESS',

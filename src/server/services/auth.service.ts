@@ -19,9 +19,7 @@ export class AuthService {
     this.emailService = new EmailService()
   }
 
-  public register = async (
-    user: Pick<User, 'email' | 'password' | 'firstName' | 'lastName'>
-  ): Promise<void> => {
+  public register = async (user: Pick<User, 'email' | 'password'>): Promise<void> => {
     const ifUserExist = await UserModel.findOne({ email: user.email })
 
     if (ifUserExist) throw new HttpExceptionError(409, ErrorType.emailAlreadyExists)
@@ -33,15 +31,13 @@ export class AuthService {
     const newUser = new UserModel({
       email: user.email,
       password: hashedPassword,
-      firstName: user.firstName,
-      lastName: user.lastName,
     })
 
     await newUser.save().catch(() => {
       throw new HttpExceptionError(500, 'error creating user')
     })
 
-    await this.emailService.sendVerificationEmail(user.email, user.firstName)
+    await this.emailService.sendVerificationEmail(user.email, user.email) // TODO: change to user
   }
 
   public login = async (user: Pick<User, 'email' | 'password'>): Promise<Tokens> => {
