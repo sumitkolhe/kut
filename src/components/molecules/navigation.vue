@@ -5,16 +5,18 @@ const tabs = [
   {
     name: 'Statistics',
     href: '/dashboard/stats',
-    icon: 'ph:math-operations-duotone',
+    icon: 'ph:graph',
   },
-  { name: 'Settings', href: '/dashboard/settings', icon: 'ph:command-duotone' },
+  { name: 'Settings', href: '/dashboard/settings', icon: 'lucide:settings-2' },
 ]
 </script>
 
 <template>
-  <nav class="border-b sticky top-0 dark:border-gray-700 border-gray-200 bg-white dark:bg-gray-900">
+  <nav
+    class="border-b sticky px-4 top-0 dark:border-gray-700 border-gray-200 bg-white dark:bg-gray-900"
+  >
     <div
-      class="max-w-screen-xl px-6 md:px-0 mx-auto flex flex-row space-x-8 text-gray-500 overflow-x-scroll no-scrollbar"
+      class="max-w-screen-xl mx-auto flex flex-row space-x-8 text-gray-500 overflow-x-scroll no-scrollbar"
     >
       <NuxtLink
         v-for="tab in tabs"

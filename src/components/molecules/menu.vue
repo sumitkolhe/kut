@@ -6,9 +6,9 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <MenuButton
-        class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+        class="w-8 h-8 rounded-full border border-gray-200 bg-white text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
       >
-        Options
+        S
       </MenuButton>
     </div>
 
@@ -21,14 +21,14 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
       leave-to-class="transform opacity-0 scale-95"
     >
       <MenuItems
-        class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
-        <div class="py-1">
+        <div class="p-2">
           <MenuItem v-slot="{ active }">
             <a
               href="#"
               :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                active ? 'bg-gray-200 text-gray-900 rounded' : 'text-gray-700',
                 'block px-4 py-2 text-sm',
               ]"
               >Edit</a
@@ -38,67 +38,25 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
             <a
               href="#"
               :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                active ? 'bg-gray-200 text-gray-900 rounded' : 'text-gray-700',
                 'block px-4 py-2 text-sm',
               ]"
-              >Duplicate</a
             >
+              Duplicate
+            </a>
           </MenuItem>
         </div>
-        <div class="py-1">
+
+        <div class="p-2">
           <MenuItem v-slot="{ active }">
-            <a
-              href="#"
+            <button
               :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm',
+                active ? 'bg-red-100 text-gray-900 rounded' : 'text-gray-700',
+                'block px-4 py-2 text-sm w-full text-left',
               ]"
-              >Archive</a
             >
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm',
-              ]"
-              >Move</a
-            >
-          </MenuItem>
-        </div>
-        <div class="py-1">
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm',
-              ]"
-              >Share</a
-            >
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm',
-              ]"
-              >Add to favorites</a
-            >
-          </MenuItem>
-        </div>
-        <div class="py-1">
-          <MenuItem v-slot="{ active }">
-            <a
-              href="#"
-              :class="[
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm',
-              ]"
-              >Delete</a
-            >
+              Logout
+            </button>
           </MenuItem>
         </div>
       </MenuItems>

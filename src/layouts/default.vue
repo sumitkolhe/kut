@@ -11,12 +11,11 @@ definePageMeta({
 
 <template>
   <main>
-    <NuxtLoadingIndicator color="#f55" :height="4" />
+    <NuxtLoadingIndicator color="#f55" :height="3" />
     <Header />
-
     <Navigation />
     <Drawer />
-    <div class="max-w-screen-xl mx-auto md:px-0 px-6 h-screen">
+    <div class="max-w-screen-xl mx-auto px-4 xl:px-0 h-full">
       <slot />
     </div>
     <Footer />

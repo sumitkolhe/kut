@@ -47,7 +47,7 @@ const login = async () => {
     </header>
 
     <div
-      class="w-full md:border max-w-lg mx-auto px-6 pt-6 pb-8 rounded-md bg-gray-50 md:bg-white md:mt-24"
+      class="w-full md:border max-w-lg mx-auto pt-6 pb-8 rounded-md bg-gray-50 md:bg-white md:mt-24"
     >
       <h1 class="text-xl font-medium text-center text-gray-800">Login</h1>
       <form class="mt-8 space-y-4">
