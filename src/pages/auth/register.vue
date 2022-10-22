@@ -35,7 +35,7 @@ const { createAccountPoints } = useAppConfig()
 
       <p class="text-center text-gray-600 mt-4">
         Already have an account?
-        <nuxt-link to="/login" class="text-red-500 hover:text-red-600 hover:underline"
+        <nuxt-link to="/auth/login" class="text-red-500 hover:text-red-600 hover:underline"
           >Sign in</nuxt-link
         >
       </p>
