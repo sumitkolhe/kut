@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Spinner from '~~/src/components/atoms/spinner.vue'
 const props = defineProps({
   disabled: {
     type: Boolean,
@@ -39,15 +40,18 @@ const props = defineProps({
       props.prefixIcon ? 'pl-10' : '',
       props.suffixIcon ? 'pr-10' : '',
     ]"
-    class="px-4 py-2 inline-flex relative w-full disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-300 disabled:border-gray-200 cursor-pointer tracking-wide select-none appearance-none items-center justify-center rounded-md border focus:outline-none"
+    class="px-4 py-2 inline-flex relative w-full disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-300 disabled:border-gray-200 cursor-pointer tracking-wide select-none appearance-none items-center justify-center rounded-[5px] border border-transparent focus:outline-none"
     v-bind="$attrs"
   >
     <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
-      <Icon :name="props.prefixIcon" size="20" />
+      <icon :name="props.prefixIcon" size="20" />
     </div>
-    <p><slot /></p>
+    <spinner v-if="loading" class="mr-2" />
+    <p>
+      <slot />
+    </p>
     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-      <Icon :name="props.suffixIcon" size="20" />
+      <icon :name="props.suffixIcon" size="20" />
     </div>
   </button>
 </template>
