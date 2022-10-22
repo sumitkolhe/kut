@@ -22,19 +22,30 @@ export default defineNuxtConfig({
       ],
     },
   },
+
+  nuxtIcon: {
+    size: '24px',
+  },
+
   srcDir: 'src',
+
   css: ['~/assets/toast.css'],
+
   modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
+
   serverMiddleware: [
     { path: '/api', handler: '~/server/server.ts' },
     { path: '/api/**', handler: '~/server/server.ts' },
   ],
+
   nitro: {
     plugins: ['~/server/helpers/mongoose.helper.ts'],
   },
+
   build: {
     transpile: ['@headlessui/vue'],
   },
+
   alias: {
     components: fileURLToPath(new URL('./src/components', import.meta.url)),
     composables: fileURLToPath(new URL('./src/composables', import.meta.url)),
@@ -43,6 +54,7 @@ export default defineNuxtConfig({
     utils: fileURLToPath(new URL('./src/utils', import.meta.url)),
     server: fileURLToPath(new URL('./src/server', import.meta.url)),
   },
+
   runtimeConfig: {
     apiBaseUrl: process.env.API_BASE_URL,
     dbUrl: process.env.DB_URL,
