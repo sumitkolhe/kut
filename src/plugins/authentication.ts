@@ -14,7 +14,10 @@ export default defineNuxtPlugin(() => {
   addRouteMiddleware('auth', async () => {
     const { $auth } = useNuxtApp()
 
-    if (!accessToken.value) return navigateTo('/auth/login')
+    if (!accessToken.value) {
+      $auth.isLoggedIn.value = false
+      return navigateTo('/auth/login')
+    }
 
     const { payload } = useJwt(accessToken.value)
 
@@ -101,7 +104,7 @@ export default defineNuxtPlugin(() => {
             await useRequest<CustomResponse<null>>('/auth/logout', {
               method: 'GET',
             })
-
+            this.isLoggedIn.value = false
             router.push('/auth/login')
           } catch (error) {
             if (error instanceof FetchError) {
