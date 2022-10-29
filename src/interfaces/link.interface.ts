@@ -8,6 +8,7 @@ export interface Link {
     validFrom: Date
     validTill: Date | null
     maxVisits: number | null
+    active: boolean
   }
   description: string
   analytics: []

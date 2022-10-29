@@ -14,6 +14,7 @@ export interface LinkDocument extends Document {
     validFrom: Date
     validTill: Date
     maxVisits: number
+    active: boolean
   }
   analytics: { type: Schema.Types.ObjectId; ref: string }
   tags: { type: Schema.Types.ObjectId; ref: string }
@@ -48,6 +49,11 @@ const LinkSchema: Schema = new mongoose.Schema(
         type: Number,
         required: false,
         default: null,
+      },
+      active: {
+        type: Boolean,
+        required: false,
+        default: true,
       },
     },
     analytics: [{ type: Schema.Types.ObjectId, ref: AnalyticsModel }],
