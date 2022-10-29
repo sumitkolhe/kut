@@ -16,6 +16,10 @@ import BaseButton from 'components/atoms/base-button.vue'
       placeholder="Enter a URL"
       class="block w-full rounded-tr rounded-br border-gray-200 border-r border-t border-b focus:ring-0 text-sm transition focus:border-gray-900 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75"
     />
+    <BaseButton class="w-auto ml-4" type="secondary">
+      <Icon name="lucide:settings" size="24" class="text-gray-400" />
+    </BaseButton>
+
     <BaseButton class="w-auto px-8 ml-4">Shorten</BaseButton>
   </div>
 </template>
