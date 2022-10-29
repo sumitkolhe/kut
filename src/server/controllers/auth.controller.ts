@@ -95,6 +95,26 @@ export class AuthController {
     }
   }
 
+  public resendVerificationEmail: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<User>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { email } = req.auth
+
+      await this.authService.resendEmailVerification(email)
+
+      return res.json({
+        status: 'SUCCESS',
+        message: 'verification email sent successfully',
+        data: null,
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
   public refreshToken: RequestHandler = async (
     req: Request,
     res: Response<CustomResponse<Token>>,

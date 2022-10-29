@@ -122,6 +122,18 @@ export default defineNuxtPlugin(() => {
             await this.logout()
           }
         },
+
+        async resendVerificationEmail() {
+          try {
+            await useRequest<CustomResponse<null>>('/auth/resend-verification-email', {
+              method: 'POST',
+            })
+          } catch (error) {
+            if (error instanceof FetchError) {
+              logger.info(error.message)
+            }
+          }
+        },
       },
     },
   }

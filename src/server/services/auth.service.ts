@@ -88,6 +88,23 @@ export class AuthService {
     return { accessToken: signedAccessToken }
   }
 
+  public resendEmailVerification = async (email: string): Promise<void> => {
+    const userDetails = await UserModel.findOne(
+      { email },
+      {
+        _id: false,
+        __v: false,
+        userLinks: false,
+        apiKey: false,
+        password: false,
+      }
+    )
+
+    if (!userDetails) throw new HttpExceptionError(404, ErrorType.userNotFound)
+
+    await this.emailService.sendVerificationEmail(userDetails.email, userDetails.email) // TODO: change to user
+  }
+
   public verifyAccount = async (verificationToken: string): Promise<void> => {
     const decodedToken = await verifyAccountVerificationToken(verificationToken).catch(() => {
       throw new HttpExceptionError(403, ErrorType.invalidVerifyToken)
