@@ -28,7 +28,7 @@ definePageMeta({
 }
 
 body {
-  @apply bg-gray-50 dark:bg-gray-800;
+  @apply bg-gray-100 dark:bg-gray-800;
 }
 
 /* Chrome, Safari and Opera */

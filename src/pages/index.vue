@@ -2,11 +2,12 @@
 import BaseButton from 'components/atoms/base-button.vue'
 definePageMeta({
   layout: 'public',
+  middleware: ['auth'],
 })
 
 const { $auth } = useNuxtApp()
 
-const isLoggedIn = computed(() => $auth.user.value.email !== '')
+const isLoggedIn = computed(() => ($auth.user.value.email ? true : false))
 </script>
 
 <template>

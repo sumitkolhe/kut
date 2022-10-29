@@ -3,7 +3,7 @@ const { isDarkTheme } = useTheme()
 </script>
 
 <template>
-  <footer class="bg-gray-100 dark:bg-gray-900 bottom-0 w-full border-t dark:border-gray-700 px-4">
+  <footer class="bg-white dark:bg-gray-900 bottom-0 w-full border-t dark:border-gray-700 px-4">
     <div class="max-w-screen-xl flex flex-col space-y-4 md:space-y-6 mx-auto py-10 overflow-hidden">
       <!-- Logo  -->
       <div class="flex flex-col md:flex-row items-center justify-between space-y-4">
