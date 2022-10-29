@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Spinner from '~~/src/components/atoms/spinner.vue'
+import Spinner from 'components/atoms/spinner.vue'
 const props = defineProps({
   disabled: {
     type: Boolean,
