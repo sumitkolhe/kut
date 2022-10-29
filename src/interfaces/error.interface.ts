@@ -1,7 +1,7 @@
 export enum ErrorType {
   unauthorised = 'Unauthorised',
   invalidRefreshToken = 'Invalid refresh token',
-  invalidVerifyToken = 'Invalid verify token',
+  invalidVerifyToken = 'Invalid email verification token',
   emailAlreadyExists = 'Email address is already registered',
   userNotFound = 'User not found',
   incorrectLoginCredentials = 'Incorrect login credentials',
