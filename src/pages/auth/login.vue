@@ -44,21 +44,23 @@ const login = async () => {
   <section class="bg-gray-100 flex justify-center min-h-screen">
     <!-- Inner container  -->
     <div
-      class="max-w-2xl w-full w-full flex flex-col md:m-8 lg:m-16 lg:flex-row shadow-xl border rounded-lg bg-white"
+      class="max-w-2xl w-full flex flex-col md:m-8 lg:m-16 lg:flex-row shadow-xl border rounded-lg bg-white"
     >
       <!-- Login Form  -->
       <div
         class="w-full space-y-8 justify-center flex-col items-center flex px-6 py-10 md:p-10 xl:p-16"
       >
-        <div class="flex flex-col items-center space-y-4 w-full">
-          <h1 class="text-2xl xl:text-3xl font-extrabold mb-4">Log in</h1>
-          <base-button class="py-3 hover:bg-gray-700 hover:text-white">
-            Log in with Github
+        <h1 class="text-2xl xl:text-3xl font-extrabold mb-4">Log in</h1>
+        <div
+          class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full justify-center"
+        >
+          <base-button class="py-3 md:text-base hover:bg-gray-700 hover:text-white">
+            Sign up with Github
           </base-button>
           <base-button
             class="py-3 bg-red-500 hover:bg-red-600 hover:border-red-600 hover:text-white"
           >
-            Log in with Google
+            Sign up with Google
           </base-button>
         </div>
 

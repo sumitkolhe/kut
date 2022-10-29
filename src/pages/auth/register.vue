@@ -49,8 +49,10 @@ const register = async () => {
       <div
         class="w-full lg:w-1/2 space-y-8 justify-center flex-col items-center flex px-6 py-10 md:p-10 xl:p-24"
       >
-        <div class="flex flex-col items-center space-y-4 w-full">
-          <h1 class="text-2xl xl:text-3xl font-extrabold mb-4">Create Account</h1>
+        <h1 class="text-2xl xl:text-3xl font-extrabold mb-4">Create Account</h1>
+        <div
+          class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full justify-center"
+        >
           <base-button class="py-3 hover:bg-gray-700 hover:text-white">
             Sign up with Github
           </base-button>
