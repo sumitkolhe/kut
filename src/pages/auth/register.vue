@@ -43,7 +43,7 @@ const register = async () => {
   <section class="bg-gray-100 flex justify-center min-h-screen">
     <!-- Inner container  -->
     <div
-      class="max-w-screen-2xl flex flex-col md:m-8 lg:m-12 lg:flex-row shadow-xl border rounded-lg bg-white"
+      class="max-w-screen-2xl flex flex-col md:m-8 lg:m-16 lg:flex-row shadow-xl border rounded-lg bg-white"
     >
       <!-- Register Form  -->
       <div

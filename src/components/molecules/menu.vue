@@ -50,6 +50,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
         <div class="p-2">
           <MenuItem v-slot="{ active }">
             <button
+              type="button"
               :class="[
                 active ? 'bg-red-100 text-gray-900 rounded' : 'text-gray-700',
                 'block px-4 py-2 text-sm w-full text-left',

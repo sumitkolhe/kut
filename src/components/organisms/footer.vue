@@ -26,6 +26,7 @@ const { isDarkTheme } = useTheme()
             <select
               id="icon-prefix"
               v-model="isDarkTheme"
+              label="theme"
               name="icon-prefix"
               class="block cursor-pointer bg-white text-gray-900 dark:text-gray-50 dark:bg-gray-900 w-full truncate rounded border-gray-200 dark:border-gray-700 py-2 px-10 text-sm transition focus:border-gray-200 focus:dark:border-gray-700 focus:ring-0"
             >
