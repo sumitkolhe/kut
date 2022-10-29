@@ -1,4 +1,5 @@
 import { FetchError } from 'ohmyfetch'
+import { logger } from 'utils/logger'
 import { useJwt } from '@vueuse/integrations/useJwt'
 import type { Token, Tokens } from 'interfaces/token.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
@@ -14,15 +15,20 @@ export default defineNuxtPlugin(() => {
   addRouteMiddleware('auth', async () => {
     const { $auth } = useNuxtApp()
 
+    // if not access token present, logout the user
     if (!accessToken.value) {
-      $auth.isLoggedIn.value = false
       return navigateTo('/auth/login')
     }
 
+    // decode the token to get expiry and refresh it if token already expired
     const { payload } = useJwt(accessToken.value)
 
     if (payload.value!.exp! < Date.now() / 1000) {
       return await $auth.refreshToken()
+    }
+
+    if (Object.keys($auth.user.value).length === 0) {
+      await $auth.fetchUser()
     }
   })
 
@@ -32,21 +38,19 @@ export default defineNuxtPlugin(() => {
         user: useState(
           'auth.user',
           () =>
-            ({
-              email: '',
-              password: '',
-              firstName: '',
-              lastName: '',
-              apiKey: '',
-              isBanned: false,
-              isVerified: false,
-              userLinks: [],
-              createdAt: new Date(),
-              updatedAt: new Date(),
-            } as User)
+            ({} as Partial<
+              Pick<
+                User,
+                | 'email'
+                | 'firstName'
+                | 'lastName'
+                | 'isBanned'
+                | 'isVerified'
+                | 'createdAt'
+                | 'updatedAt'
+              >
+            >)
         ),
-
-        isLoggedIn: useState('auth.isLoggedIn', () => false),
 
         async login(email: string, password: string) {
           try {
@@ -57,27 +61,22 @@ export default defineNuxtPlugin(() => {
 
             accessToken.value = response.data!.accessToken!
             refreshToken.value = response.data!.refreshToken!
-            this.isLoggedIn.value = true
           } catch (error) {
             if (error instanceof FetchError) {
-              const { $logger } = useNuxtApp()
-              $logger.error(error.message)
+              logger.error(error.message)
             }
           }
         },
 
         async register(email: string, password: string) {
           try {
-            const response = await useRequest<CustomResponse<null>>('/auth/register', {
+            await useRequest<CustomResponse<null>>('/auth/register', {
               body: { email, password },
               method: 'POST',
             })
-
-            console.log(response)
           } catch (error) {
             if (error instanceof FetchError) {
-              const { $logger } = useNuxtApp()
-              $logger.error(error.message)
+              logger.error(error.message)
             }
           }
         },
@@ -91,8 +90,7 @@ export default defineNuxtPlugin(() => {
             this.user.value = response.data!
           } catch (error) {
             if (error instanceof FetchError) {
-              const { $logger } = useNuxtApp()
-              $logger.info(error.message)
+              logger.info(error.message)
             }
           }
         },
@@ -104,12 +102,10 @@ export default defineNuxtPlugin(() => {
             await useRequest<CustomResponse<null>>('/auth/logout', {
               method: 'GET',
             })
-            this.isLoggedIn.value = false
-            router.push('/auth/login')
+            router.replace('/auth/login')
           } catch (error) {
             if (error instanceof FetchError) {
-              const { $logger } = useNuxtApp()
-              $logger.info(error.message)
+              logger.info(error.message)
             }
           }
         },
