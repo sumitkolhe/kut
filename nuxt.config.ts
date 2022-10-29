@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['@headlessui/vue'],
+    transpile: ['@headlessui/vue', 'vue-tiny-validate'],
   },
 
   alias: {

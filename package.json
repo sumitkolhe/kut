@@ -6,7 +6,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "start": "node -C production .output/server/index.mjs",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{js,ts,json,vue}\"",
     "prepare": "husky install"
