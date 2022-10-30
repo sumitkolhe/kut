@@ -1,5 +1,5 @@
 export interface Link {
-  alias: string
+  alias: string | null
   target: string
   shortUrl: string
   visitCount: number
