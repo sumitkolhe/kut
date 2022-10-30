@@ -52,7 +52,7 @@ export class LinkService {
       options: {
         limit,
         skip: offset,
-        sort: { created_at: -1 },
+        sort: { createdAt: -1 },
       },
     })
 
