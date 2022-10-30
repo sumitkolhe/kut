@@ -35,8 +35,8 @@ const props = defineProps({
     type="button"
     :class="[
       props.type === 'primary'
-        ? 'border-gray-200 border bg-gray-900 text-white transition hover:border-black hover:text-black hover:bg-white'
-        : 'border-gray-200 border bg-white text-black transition hover:border-black hover:text-black hover:bg-white active:bg-gray-200 focus:bg-gray-200',
+        ? 'border-gray-200 dark:bg-gray-50 dark:text-gray-900 border bg-gray-900 text-white transition hover:border-gray-900 hover:text-gray-900 dark:hover:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-900 dark:hover:border-gray-50'
+        : 'border-gray-200 dark:bg-gray-900 dark:hover:border-gray-200 dark:border-gray-700 border bg-white text-black transition hover:border-gray-900 hover:text-black hover:bg-white active:bg-gray-200 focus:bg-gray-200',
       props.prefixIcon ? 'pl-10' : '',
       props.suffixIcon ? 'pr-10' : '',
     ]"

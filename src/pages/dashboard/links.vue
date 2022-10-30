@@ -7,15 +7,16 @@ definePageMeta({
 </script>
 
 <template>
-  <section class="my-8 gap-6 w-full">
+  <section class="my-6 md:my-8 gap-6 w-full">
     <ShortenLink />
-
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 my-8 gap-4">
-      <div v-for="i in [1, 2, 3, 4, 5, 6, 7]" :key="i" class="p-4 border bg-white rounded">
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 my-8 bg-white divide-y dark:divide-gray-700 rounded border dark:border-gray-700"
+    >
+      <div v-for="i in [1, 2, 3, 4, 5, 6, 7]" :key="i" class="p-4 dark:bg-gray-900 bg-white">
         link 1
       </div>
     </div>
-    <div class="flex justify-end">
+    <!-- <div class="flex justify-end">
       <nav class="inline-flex rounded-md shadow-sm border" aria-label="Pagination">
         <a
           href="#"
@@ -24,7 +25,7 @@ definePageMeta({
           <span class="sr-only">Previous</span>
           <Icon name="material-symbols:chevron-left-rounded" size="24" />
         </a>
-        <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+
         <a
           href="#"
           aria-current="page"
@@ -50,6 +51,6 @@ definePageMeta({
           <Icon name="material-symbols:chevron-right-rounded" size="24" />
         </a>
       </nav>
-    </div>
+    </div> -->
   </section>
 </template>

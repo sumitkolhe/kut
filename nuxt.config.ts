@@ -23,10 +23,6 @@ export default defineNuxtConfig({
     },
   },
 
-  nuxtIcon: {
-    size: '24px',
-  },
-
   srcDir: 'src',
 
   css: ['~/assets/toast.css'],
