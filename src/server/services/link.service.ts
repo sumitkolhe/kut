@@ -25,6 +25,7 @@ export class LinkService {
         validFrom: linkPayload.meta?.validFrom,
         validTill: linkPayload.meta?.validTill,
         maxVisits: linkPayload.meta?.maxVisits,
+        active: linkPayload.meta?.active,
       },
     })
 
@@ -37,6 +38,25 @@ export class LinkService {
     })
 
     return savedLink
+  }
+
+  public getAllLinks = async (email: string, offset = 0, limit = 10) => {
+    const result = await UserModel.findOne(
+      { email },
+      {
+        select: ['userLinks'],
+        _id: false,
+      }
+    ).populate({
+      path: 'userLinks',
+      options: {
+        limit,
+        skip: offset,
+        sort: { created_at: -1 },
+      },
+    })
+
+    return result?.userLinks
   }
 
   public redirect = async (alias: string) => {

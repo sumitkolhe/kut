@@ -10,7 +10,7 @@ export interface Link {
     maxVisits: number | null
     active: boolean
   }
-  description: string
+  description: string | null
   analytics: []
   tags: []
   createdAt: Date
