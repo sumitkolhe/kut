@@ -1,19 +1,58 @@
 <script lang="ts" setup>
 import ShortenLink from 'components/molecules/shorten-link.vue'
+import { useLinkStore } from 'store/link.store'
+import { useTimeAgo } from '@vueuse/core'
 
 definePageMeta({
   middleware: ['auth', 'verify-email'],
 })
+
+// store
+const LinkStore = useLinkStore()
+
+onMounted(async () => await LinkStore.fetchAllLinks())
+
+const allLinks = computed(() => LinkStore.allLinks)
 </script>
 
 <template>
   <section class="my-6 md:my-8 gap-6 w-full">
     <ShortenLink />
-    <div
-      class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 my-8 bg-white divide-y dark:divide-gray-700 rounded border dark:border-gray-700"
-    >
-      <div v-for="i in [1, 2, 3, 4, 5, 6, 7]" :key="i" class="p-4 dark:bg-gray-900 bg-white">
-        link 1
+
+    <p class="py-2 mt-6 font-medium">Recent Links</p>
+    <div class="divide-y dark:divide-gray-700 rounded border dark:border-gray-700">
+      <div
+        v-for="(link, index) in allLinks"
+        :key="index"
+        class="p-4 grid items-center grid-cols-1 sm:grid-cols-2 gap-6 lg:grid-cols-4 dark:bg-gray-900 bg-gray-50"
+      >
+        <div>
+          <p class="text-sm font-medium text-red-500 truncate hover:underline">
+            {{ link.target }}
+          </p>
+          <p class="mt-2 flex items-center text-sm text-gray-400">
+            <span class="truncate hover:underline">{{ link.shortUrl }}</span>
+          </p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <p class="text-xl">{{ link.visitCount }}</p>
+          <p class="text-gray-500">views</p>
+        </div>
+
+        <div>
+          <p class="text-sm text-gray-500">
+            Created
+            <span>{{ useTimeAgo(link.createdAt).value }}</span>
+          </p>
+          <p class="mt-2 text-sm text-gray-500">
+            Updated
+            <span>{{ useTimeAgo(link.createdAt).value }}</span>
+          </p>
+        </div>
+
+        <div>
+          <Icon name="ic:twotone-lock" />
+        </div>
       </div>
     </div>
     <!-- <div class="flex justify-end">

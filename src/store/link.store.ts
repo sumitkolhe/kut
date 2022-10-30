@@ -1,14 +1,40 @@
 import { defineStore } from 'pinia'
+import { FetchError } from 'ohmyfetch'
+import { logger } from 'utils/logger'
+import type { CustomResponse } from 'interfaces/response.interface'
 import type { Link } from 'interfaces/link.interface'
 
-export const useTagsStore = defineStore('links', {
-  state: () => ({}),
+export const useLinkStore = defineStore('links', {
+  state: () => ({
+    allLinks: [] as Link[],
+  }),
   actions: {
     async shortenLink(linkPayload: Pick<Link, 'alias' | 'target' | 'meta' | 'description'>) {
-      const response = await useRequest('/link/shorten', {
-        body: linkPayload,
-        method: 'POST',
-      })
+      try {
+        const response = await useRequest('/link/shorten', {
+          body: linkPayload,
+          method: 'POST',
+        })
+
+        console.log(response)
+      } catch (error) {
+        if (error instanceof FetchError) {
+          logger.error(error.message)
+        }
+      }
+    },
+
+    async fetchAllLinks() {
+      try {
+        const response = await useRequest<CustomResponse<Link[]>>('/link', {
+          method: 'GET',
+        })
+        this.allLinks = response.data!
+      } catch (error) {
+        if (error instanceof FetchError) {
+          logger.error(error.message)
+        }
+      }
     },
   },
   getters: {},

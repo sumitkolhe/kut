@@ -2,9 +2,35 @@
 import BaseButton from 'components/atoms/base-button.vue'
 import BaseInput from 'components/atoms/base-input.vue'
 import { Switch } from '@headlessui/vue'
+import { useLinkStore } from 'store/link.store'
+import type { Link } from 'interfaces/link.interface'
 
+// store
+const LinkStore = useLinkStore()
+
+// refs
 const showAdvancedOptions = ref(false)
 const enabled = ref(false)
+const loading = ref(false)
+
+const linkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'description'>>({
+  alias: null,
+  target: '',
+  description: null,
+  meta: {
+    password: null,
+    validFrom: new Date(),
+    validTill: null,
+    maxVisits: null,
+    active: true,
+  },
+})
+
+const shortenLink = async () => {
+  loading.value = true
+  await LinkStore.shortenLink(linkPayload)
+  loading.value = false
+}
 </script>
 
 <template>
@@ -19,7 +45,11 @@ const enabled = ref(false)
           https://
         </span>
 
-        <BaseInput class="rounded-tl-none rounded-bl-none" />
+        <BaseInput
+          v-model="linkPayload.target"
+          placeholder="Enter a url..."
+          class="rounded-tl-none rounded-bl-none"
+        />
       </div>
 
       <!-- buttons  -->
@@ -36,7 +66,9 @@ const enabled = ref(false)
           />
         </BaseButton>
 
-        <BaseButton class="w-full md:w-auto px-8">Shorten</BaseButton>
+        <BaseButton :loading="loading" class="w-full md:w-auto px-8" @click="shortenLink">
+          Shorten
+        </BaseButton>
       </div>
     </div>
 
@@ -54,7 +86,7 @@ const enabled = ref(false)
         <div class="relative mt-6 grid grid-cols-1 lg:grid-cols-2 gap-x-16">
           <div class="flex items-center py-3 justify-between">
             <p
-              class="text-sm font-medium tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Alias
             </p>
@@ -63,7 +95,7 @@ const enabled = ref(false)
           </div>
           <div class="flex items-center py-3 justify-between">
             <p
-              class="text-sm font-medium tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Description
             </p>
@@ -71,7 +103,7 @@ const enabled = ref(false)
           </div>
           <div class="flex items-center py-3 justify-between">
             <p
-              class="text-sm font-medium tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Password
             </p>
@@ -79,7 +111,7 @@ const enabled = ref(false)
           </div>
           <div class="flex items-center py-3 justify-between">
             <p
-              class="text-sm font-medium tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Max Visits
             </p>
@@ -87,7 +119,7 @@ const enabled = ref(false)
           </div>
           <div class="flex items-center py-3 justify-between">
             <p
-              class="text-sm font-medium tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Valid From
             </p>
@@ -95,7 +127,7 @@ const enabled = ref(false)
           </div>
           <div class="flex items-center py-3 justify-between">
             <p
-              class="text-sm font-medium tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Valid Till
             </p>
@@ -103,7 +135,7 @@ const enabled = ref(false)
           </div>
           <div class="flex items-center justify-between py-3">
             <p
-              class="text-sm font-medium tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Disable Link
             </p>
