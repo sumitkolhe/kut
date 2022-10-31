@@ -1,7 +1,7 @@
 import { LinkModel } from 'server/models/link.model'
 import { HttpExceptionError } from 'server/exceptions/http.exception'
 import { UserModel } from 'server/models/user.model'
-import { createShortLink } from 'server/utils/link'
+import { createShortLink, verifyTargetLink } from 'server/utils/link'
 // import { AnalyticsModel } from 'models/analytics.model'
 import { ErrorType } from 'interfaces/error.interface'
 import type { LinkDocument } from 'server/models/link.model'
@@ -17,7 +17,7 @@ export class LinkService {
 
     const newLink: LinkDocument = new LinkModel({
       alias,
-      target: linkPayload.target,
+      target: verifyTargetLink(linkPayload.target as string),
       shortUrl: createShortLink(alias),
       description: linkPayload.description,
       meta: {
