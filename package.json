@@ -7,12 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "start": "node -C production .output/server/index.mjs",
-    "lint": "eslint . --ext \".ts,.js,.vue,.json\"",
+    "lint": "eslint . --ext \".ts,.js,.vue,.json\" --fix",
     "format": "prettier --write \"src/**/*.{js,ts,json,vue}\"",
-    "postinstall": "npx simple-git-hooks"
+    "postinstall": "npx simple-git-hooks && nuxt prepare"
   },
   "simple-git-hooks": {
-    "pre-commit": "yarn lint && yarn pretty",
+    "pre-commit": "yarn lint && yarn format",
     "commit-msg": "yarn commitlint --edit $1"
   },
   "dependencies": {
