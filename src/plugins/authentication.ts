@@ -23,13 +23,20 @@ export default defineNuxtPlugin(() => {
     // decode the token to get expiry and refresh it if token already expired
     const { payload } = useJwt(accessToken.value)
 
-    if (payload.value!.exp! < Date.now() / 1000) {
+    if (payload.value && payload.value.exp! < Date.now() / 1000) {
       return await $auth.refreshToken()
     }
 
-    if (Object.keys($auth.user.value).length === 0) {
+    if (!$auth.loggedIn) {
       await $auth.fetchUser()
     }
+  })
+
+  const loggedIn = useState('auth.loggedIn')
+
+  watch(useState<User>('auth.user'), (userData) => {
+    if (userData.email) loggedIn.value = true
+    else loggedIn.value = false
   })
 
   return {
@@ -51,6 +58,7 @@ export default defineNuxtPlugin(() => {
               >
             >)
         ),
+        loggedIn: useState('auth.loggedIn', () => false).value,
 
         async login(email: string, password: string) {
           try {
@@ -102,7 +110,7 @@ export default defineNuxtPlugin(() => {
             await useRequest<CustomResponse<null>>('/auth/logout', {
               method: 'GET',
             })
-            router.replace('/auth/login')
+            router.replace('/')
           } catch (error) {
             if (error instanceof FetchError) {
               logger.info(error.message)

@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import useValidate from 'vue-tiny-validate'
 import BaseInput from 'components/molecules/base-input.vue'
-import BaseButton from 'components/atoms/base-button.vue'
+import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
 import type { Rules } from 'vue-tiny-validate'
 
-definePageMeta({
-  layout: 'public',
-})
+definePageMeta({})
 
 const { $auth } = useNuxtApp()
 
@@ -41,16 +39,14 @@ const login = async () => {
 </script>
 
 <template>
-  <section class="bg-gray-100 flex justify-center min-h-screen">
+  <section class="dark:bg-gray-800 bg-gray-100 flex justify-center items-center min-h-screen">
     <!-- Inner container  -->
     <div
-      class="max-w-2xl w-full flex flex-col md:m-8 lg:m-16 lg:flex-row shadow-xl border rounded-lg bg-white"
+      class="max-w-2xl w-full flex flex-col h-fit mt-16 lg:flex-row dark:border-gray-700 rounded-lg"
     >
       <!-- Login Form  -->
-      <div
-        class="w-full space-y-8 justify-center flex-col items-center flex px-6 py-10 md:p-10 xl:p-16"
-      >
-        <h1 class="text-2xl xl:text-3xl font-extrabold mb-4">Log in</h1>
+      <div class="w-full space-y-8 justify-center flex-col items-center flex py-10 md:p-10 xl:p-14">
+        <h1 class="text-2xl xl:text-3xl font-extrabold mb-4 dark:text-gray-200">Log in</h1>
         <div
           class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full justify-center"
         >
@@ -66,7 +62,7 @@ const login = async () => {
 
         <div class="border-b flex w-full justify-center">
           <p
-            class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-2"
+            class="leading-none px-2 inline-block text-sm dark:text-gray-200 text-gray-600 tracking-wide font-medium dark:bg-gray-800 bg-white transform translate-y-2"
           >
             Or Log in with an e-mail
           </p>

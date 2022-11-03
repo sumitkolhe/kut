@@ -1,19 +1,16 @@
 <script lang="ts" setup>
-import BaseButton from 'components/atoms/base-button.vue'
+import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
 definePageMeta({
-  layout: 'public',
   middleware: ['auth'],
 })
 
 const { $auth } = useNuxtApp()
-
-const isLoggedIn = computed(() => ($auth.user.value.email ? true : false))
 </script>
 
 <template>
   <div class="flex flex-col min-h-screen overflow-hidden">
     <ClientOnly>
-      <header
+      <!-- <header
         class="fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out bg-white backdrop-blur-sm shadow-lg"
       >
         <div class="max-w-6xl mx-auto px-5 sm:px-6">
@@ -27,7 +24,7 @@ const isLoggedIn = computed(() => ($auth.user.value.email ? true : false))
 
             <nav class="flex flex-grow">
               <ul
-                v-if="!isLoggedIn"
+                v-if="$auth.loggedIn"
                 class="flex flex-grow justify-end flex-wrap items-center space-x-4"
               >
                 <li>
@@ -57,7 +54,7 @@ const isLoggedIn = computed(() => ($auth.user.value.email ? true : false))
             </nav>
           </div>
         </div>
-      </header>
+      </header> -->
     </ClientOnly>
     <!-- <main class="flex-grow">
       <HeroHome />

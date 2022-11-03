@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
 const { isDrawerVisible } = useDrawer()
 </script>
 
@@ -7,16 +8,15 @@ const { isDrawerVisible } = useDrawer()
     <Transition name="slide-fade">
       <aside
         v-show="isDrawerVisible"
-        class="flex-col md:hidden top-14 z-50 flex h-screen w-full fixed bg-gray-50 dark:bg-gray-900"
+        class="flex-col md:hidden z-[999999] flex h-screen w-full fixed bg-gray-50 dark:bg-gray-900"
       >
-        <section class="h-full flex shrink-0 border-b-[1px]">
-          <!-- <div class="flex items-center justify-between flex-1 px-6">
-            <span class="font-semibold"> Trym </span>
+        <div class="h-16 dark:bg-gray-900 bg-gray-50">header</div>
 
-            <button type="button" title="Show Drawer" class="sm:hidden" @click="toggleDrawer()">
-              <Icon size="24" name="line-md:close" />
-            </button>
-          </div> -->
+        <section class="h-screen flex border-t dark:border-gray-700">
+          <div class="flex flex-col w-full p-4 space-y-3">
+            <BaseButton type="secondary">Login</BaseButton>
+            <BaseButton>Register</BaseButton>
+          </div>
         </section>
       </aside>
     </Transition>

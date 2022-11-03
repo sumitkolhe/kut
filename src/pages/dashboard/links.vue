@@ -3,6 +3,11 @@ import ShortenLink from 'components/molecules/shorten-link.vue'
 import { useLinkStore } from 'store/link.store'
 import { useTimeAgo } from '@vueuse/core'
 
+import { ref } from 'vue'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+
+const open = ref(true)
+
 definePageMeta({
   middleware: ['auth', 'verify-email'],
 })
@@ -19,23 +24,31 @@ const allLinks = computed(() => LinkStore.allLinks)
   <section class="my-6 md:my-8 gap-6 w-full">
     <ShortenLink />
 
-    <p class="py-2 mt-6 font-medium">Recent Links</p>
+    <p class="py-2 mt-6 font-medium dark:text-gray-200">Recent Links</p>
     <div class="divide-y dark:divide-gray-700 rounded border dark:border-gray-700">
       <div
         v-for="(link, index) in allLinks"
         :key="index"
-        class="p-4 grid items-center grid-cols-1 sm:grid-cols-2 gap-6 lg:grid-cols-4 dark:bg-gray-900 bg-gray-50"
+        class="p-4 grid items-center grid-cols-1 last:rounded-b first:rounded-t sm:grid-cols-2 gap-6 lg:grid-cols-4 dark:bg-gray-900 bg-gray-50"
       >
         <div>
-          <p class="text-sm font-medium text-red-500 truncate hover:underline">
+          <NuxtLink
+            target="_blank"
+            :to="link.target"
+            class="text-sm font-medium text-red-500 truncate hover:underline"
+          >
             {{ link.target }}
-          </p>
-          <p class="mt-2 flex items-center text-sm text-gray-400">
+          </NuxtLink>
+          <NuxtLink
+            target="_blank"
+            :to="link.shortUrl"
+            class="mt-2 flex items-center text-sm text-gray-400"
+          >
             <span class="truncate hover:underline">{{ link.shortUrl }}</span>
-          </p>
+          </NuxtLink>
         </div>
         <div class="flex items-center space-x-2">
-          <p class="text-xl">{{ link.visitCount }}</p>
+          <p class="text-xl dark:text-gray-200">{{ link.visitCount }}</p>
           <p class="text-gray-500">views</p>
         </div>
 
@@ -55,41 +68,39 @@ const allLinks = computed(() => LinkStore.allLinks)
         </div>
       </div>
     </div>
-    <!-- <div class="flex justify-end">
-      <nav class="inline-flex rounded-md shadow-sm border" aria-label="Pagination">
-        <a
-          href="#"
-          class="relative inline-flex items-center rounded-l-md bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-        >
-          <span class="sr-only">Previous</span>
-          <Icon name="material-symbols:chevron-left-rounded" size="24" />
-        </a>
 
-        <a
-          href="#"
-          aria-current="page"
-          class="relative z-10 inline-flex items-center bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20"
-          >1</a
+    <TransitionRoot as="template" :show="open">
+      <Dialog as="div" class="relative z-[999999999]" @close="open = false">
+        <TransitionChild
+          as="template"
+          enter="ease-in-out duration-500"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="ease-in-out duration-500"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
         >
+          <div class="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" />
+        </TransitionChild>
 
-        <span
-          class="relative inline-flex items-center bg-white px-4 py-2 text-sm font-medium text-gray-700"
-          >...</span
-        >
-        <a
-          href="#"
-          class="relative hidden items-center bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 md:inline-flex"
-          >8</a
-        >
-
-        <a
-          href="#"
-          class="relative inline-flex items-center rounded-r-md bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-        >
-          <span class="sr-only">Next</span>
-          <Icon name="material-symbols:chevron-right-rounded" size="24" />
-        </a>
-      </nav>
-    </div> -->
+        <div class="pointer-events-none fixed bottom-0 flex w-full h-auto rounded-t rounded-xl">
+          <TransitionChild
+            as="template"
+            enter="transform transition ease-in-out duration-500 sm:duration-700"
+            enter-from="translate-y-full"
+            enter-to="translate-y-0"
+            leave="transform transition ease-in-out duration-500 sm:duration-700"
+            leave-from="translate-y-0"
+            leave-to="translate-y-full"
+          >
+            <DialogPanel
+              class="pointer-events-auto relative dark:text-gray-200 w-screen rounded-t-lg dark:bg-gray-900 bg-gray-50 dark:border-gray-700 dark:border-t"
+            >
+              <div class="py-6">ok</div>
+            </DialogPanel>
+          </TransitionChild>
+        </div>
+      </Dialog>
+    </TransitionRoot>
   </section>
 </template>

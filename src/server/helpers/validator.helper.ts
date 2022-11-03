@@ -6,7 +6,7 @@ export const registerationSchema = celebrate(
       // firstName: Joi.string(),
       // lastName: Joi.string(),
       email: Joi.string().email(),
-      password: Joi.string(),
+      password: Joi.string().min(6),
     }),
   },
   { abortEarly: false },

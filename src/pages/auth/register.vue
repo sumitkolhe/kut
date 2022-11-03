@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-import BaseButton from 'components/atoms/base-button.vue'
+import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
 import BaseInput from 'components/molecules/base-input.vue'
 import useValidate from 'vue-tiny-validate'
 import type { Rules } from 'vue-tiny-validate'
-definePageMeta({
-  layout: 'public',
-})
+definePageMeta({})
 
 const { createAccountPoints } = useAppConfig()
 const { $auth } = useNuxtApp()
@@ -40,16 +38,14 @@ const register = async () => {
 </script>
 
 <template>
-  <section class="bg-gray-100 flex justify-center min-h-screen">
+  <section class="bg-gray-100 dark:bg-gray-800 flex justify-center min-h-screen">
     <!-- Inner container  -->
-    <div
-      class="max-w-screen-2xl flex flex-col md:m-8 lg:m-16 lg:flex-row shadow-xl border rounded-lg bg-white"
-    >
+    <div class="max-w-screen-2xl flex flex-col lg:flex-row">
       <!-- Register Form  -->
       <div
-        class="w-full lg:w-1/2 space-y-8 justify-center flex-col items-center flex px-6 py-10 md:p-10 xl:p-24"
+        class="w-full lg:w-1/2 space-y-8 mt-16 md:mt-0 justify-center flex-col items-center flex px-6 py-10 md:p-10 xl:p-24"
       >
-        <h1 class="text-2xl xl:text-3xl font-extrabold mb-4">Create Account</h1>
+        <h1 class="text-2xl xl:text-3xl font-extrabold mb-4 dark:text-gray-200">Create Account</h1>
         <div
           class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full justify-center"
         >
@@ -65,7 +61,7 @@ const register = async () => {
 
         <div class="border-b flex w-full justify-center">
           <p
-            class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-2"
+            class="leading-none px-2 inline-block text-sm text-gray-600 dark:text-gray-300 tracking-wide font-medium bg-gray-50 dark:bg-gray-800 transform translate-y-2"
           >
             Or sign up with an e-mail
           </p>
@@ -99,7 +95,7 @@ const register = async () => {
       </div>
       <!-- Features  -->
       <div
-        class="bg-gray-100 w-full lg:w-1/2 space-y-8 justify-center flex-col items-start flex py-12 px-6 md:p-10 xl:p-16 rounded-tr-lg rounded-br-lg"
+        class="bg-gray-100 dark:bg-gray-800 w-full lg:w-1/2 space-y-8 justify-center flex-col items-start flex py-12 px-6 md:p-10 xl:p-16 rounded-tr-lg rounded-br-lg"
       >
         <div
           v-for="feature in createAccountPoints"
@@ -109,8 +105,10 @@ const register = async () => {
           <Icon name="ph:check-circle-duotone" size="32" class="text-red-500" />
 
           <div class="space-y-1">
-            <p class="text-lg font-medium text-black text-left">{{ feature.title }}</p>
-            <p class="text-black text-left">
+            <p class="text-lg font-medium text-gray-900 dark:text-gray-200 text-left">
+              {{ feature.title }}
+            </p>
+            <p class="text-gray-900 dark:text-gray-300 text-left">
               {{ feature.description }}
             </p>
           </div>

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import BaseButton from 'components/atoms/base-button.vue'
+import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
 definePageMeta({
-  layout: 'public',
   middleware: ['auth'],
 })
 

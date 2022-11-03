@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import BaseButton from 'components/atoms/base-button.vue'
-import BaseInput from 'components/atoms/base-input.vue'
+import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
+import BaseInput from 'components/atoms/inputs/base-input.vue'
 import { Switch } from '@headlessui/vue'
 import { useLinkStore } from 'store/link.store'
 import type { Link } from 'interfaces/link.interface'
