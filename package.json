@@ -7,9 +7,13 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "start": "node -C production .output/server/index.mjs",
-    "lint": "eslint .",
+    "lint": "eslint . --ext \".ts,.js,.vue,.json\"",
     "format": "prettier --write \"src/**/*.{js,ts,json,vue}\"",
-    "prepare": "husky install"
+    "postinstall": "npx simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "yarn lint && yarn pretty",
+    "commit-msg": "yarn commitlint --edit $1"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.3",
@@ -45,10 +49,10 @@
     "@vueuse/integrations": "^9.4.0",
     "@vueuse/nuxt": "^9.4.0",
     "eslint": "^8.26.0",
-    "husky": "^8.0.1",
     "nuxt": "^3.0.0-rc.12",
     "nuxt-icon": "^0.1.7",
     "prettier": "^2.7.1",
+    "simple-git-hooks": "^2.8.1",
     "typescript": "^4.8.4"
   }
 }
