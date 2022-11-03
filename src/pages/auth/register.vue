@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
+import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import BaseInput from 'components/molecules/base-input.vue'
 import useValidate from 'vue-tiny-validate'
 import type { Rules } from 'vue-tiny-validate'
@@ -38,30 +38,30 @@ const register = async () => {
 </script>
 
 <template>
-  <section class="bg-gray-100 dark:bg-gray-800 flex justify-center min-h-screen">
+  <section class="flex justify-center min-h-screen bg-gray-100 dark:bg-gray-800">
     <!-- Inner container  -->
-    <div class="max-w-screen-2xl flex flex-col lg:flex-row">
+    <div class="flex flex-col max-w-screen-2xl lg:flex-row">
       <!-- Register Form  -->
       <div
-        class="w-full lg:w-1/2 space-y-8 mt-16 md:mt-0 justify-center flex-col items-center flex px-6 py-10 md:p-10 xl:p-24"
+        class="flex flex-col items-center justify-center w-full px-6 py-10 mt-16 space-y-8 lg:w-1/2 md:mt-0 md:p-10 xl:p-24"
       >
-        <h1 class="text-2xl xl:text-3xl font-extrabold mb-4 dark:text-gray-200">Create Account</h1>
+        <h1 class="mb-4 text-2xl font-extrabold xl:text-3xl dark:text-gray-200">Create Account</h1>
         <div
-          class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full justify-center"
+          class="flex flex-col items-center justify-center w-full space-y-4 md:flex-row md:space-y-0 md:space-x-4"
         >
-          <base-button class="py-3 hover:bg-gray-700 hover:text-white">
+          <primary-button class="py-3 hover:bg-gray-700 hover:text-white">
             Sign up with Github
-          </base-button>
-          <base-button
+          </primary-button>
+          <primary-button
             class="py-3 bg-red-500 hover:bg-red-600 hover:border-red-600 hover:text-white"
           >
             Sign up with Google
-          </base-button>
+          </primary-button>
         </div>
 
-        <div class="border-b flex w-full justify-center">
+        <div class="flex justify-center w-full border-b">
           <p
-            class="leading-none px-2 inline-block text-sm text-gray-600 dark:text-gray-300 tracking-wide font-medium bg-gray-50 dark:bg-gray-800 transform translate-y-2"
+            class="inline-block px-2 text-sm font-medium leading-none tracking-wide text-gray-600 transform translate-y-2 dark:text-gray-300 bg-gray-50 dark:bg-gray-800"
           >
             Or sign up with an e-mail
           </p>
@@ -86,29 +86,29 @@ const register = async () => {
             suffix-icon="ph:password"
             :errors="result.password.$messages"
           />
-          <base-button :loading="loading" class="py-3" @click="register">Sign up</base-button>
+          <primary-button :loading="loading" class="py-3" @click="register">Sign up</primary-button>
         </form>
         <p class="text-center text-gray-600">
           Already have an account?
-          <nuxt-link to="/auth/login" class="hover:underline text-red-500">Log in</nuxt-link>
+          <nuxt-link to="/auth/login" class="text-red-500 hover:underline">Log in</nuxt-link>
         </p>
       </div>
       <!-- Features  -->
       <div
-        class="bg-gray-100 dark:bg-gray-800 w-full lg:w-1/2 space-y-8 justify-center flex-col items-start flex py-12 px-6 md:p-10 xl:p-16 rounded-tr-lg rounded-br-lg"
+        class="flex flex-col items-start justify-center w-full px-6 py-12 space-y-8 bg-gray-100 rounded-tr-lg rounded-br-lg dark:bg-gray-800 lg:w-1/2 md:p-10 xl:p-16"
       >
         <div
           v-for="feature in createAccountPoints"
           :key="feature.title"
-          class="flex space-x-3 items-start justify-start"
+          class="flex items-start justify-start space-x-3"
         >
           <Icon name="ph:check-circle-duotone" size="32" class="text-red-500" />
 
           <div class="space-y-1">
-            <p class="text-lg font-medium text-gray-900 dark:text-gray-200 text-left">
+            <p class="text-lg font-medium text-left text-gray-900 dark:text-gray-200">
               {{ feature.title }}
             </p>
-            <p class="text-gray-900 dark:text-gray-300 text-left">
+            <p class="text-left text-gray-900 dark:text-gray-300">
               {{ feature.description }}
             </p>
           </div>

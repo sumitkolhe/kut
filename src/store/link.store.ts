@@ -11,12 +11,10 @@ export const useLinkStore = defineStore('links', {
   actions: {
     async shortenLink(linkPayload: Pick<Link, 'alias' | 'target' | 'meta' | 'description'>) {
       try {
-        const response = await useRequest('/link/shorten', {
+        await useRequest('/link/shorten', {
           body: linkPayload,
           method: 'POST',
         })
-
-        console.log(response)
       } catch (error) {
         if (error instanceof FetchError) {
           logger.error(error.message)

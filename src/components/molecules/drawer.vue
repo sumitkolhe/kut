@@ -1,26 +1,28 @@
 <script lang="ts" setup>
-import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
+import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
+
 const { isDrawerVisible } = useDrawer()
 </script>
 
 <template>
-  <Teleport to="body">
-    <Transition name="slide-fade">
+  <teleport to="body">
+    <transition name="slide-fade">
       <aside
         v-show="isDrawerVisible"
         class="flex-col md:hidden z-[999999] flex h-screen w-full fixed bg-gray-50 dark:bg-gray-900"
       >
         <div class="h-16 dark:bg-gray-900 bg-gray-50">header</div>
 
-        <section class="h-screen flex border-t dark:border-gray-700">
+        <section class="flex h-screen border-t dark:border-gray-700">
           <div class="flex flex-col w-full p-4 space-y-3">
-            <BaseButton type="secondary">Login</BaseButton>
-            <BaseButton>Register</BaseButton>
+            <secondary-button>Login</secondary-button>
+            <primary-button>Register</primary-button>
           </div>
         </section>
       </aside>
-    </Transition>
-  </Teleport>
+    </transition>
+  </teleport>
 </template>
 
 <style scoped>

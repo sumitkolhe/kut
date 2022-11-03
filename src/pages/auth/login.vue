@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import useValidate from 'vue-tiny-validate'
 import BaseInput from 'components/molecules/base-input.vue'
-import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
+import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({})
@@ -39,20 +39,20 @@ const login = async () => {
 </script>
 
 <template>
-  <section class="dark:bg-gray-800 bg-gray-100 flex justify-center items-center min-h-screen">
+  <section class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800">
     <!-- Inner container  -->
     <div
-      class="max-w-2xl w-full flex flex-col h-fit mt-16 lg:flex-row dark:border-gray-700 rounded-lg"
+      class="flex flex-col w-full max-w-2xl mt-16 rounded-lg h-fit lg:flex-row dark:border-gray-700"
     >
       <!-- Login Form  -->
-      <div class="w-full space-y-8 justify-center flex-col items-center flex py-10 md:p-10 xl:p-14">
-        <h1 class="text-2xl xl:text-3xl font-extrabold mb-4 dark:text-gray-200">Log in</h1>
-        <div
-          class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full justify-center"
+      <div class="flex flex-col items-center justify-center w-full py-10 space-y-8 md:p-10 xl:p-14">
+        <h1 class="mb-4 text-2xl font-extrabold xl:text-3xl dark:text-gray-200">Log in</h1>
+        <!-- <div
+          class="flex flex-col items-center justify-center w-full space-y-4 md:flex-row md:space-y-0 md:space-x-4"
         >
-          <base-button class="py-3 md:text-base hover:bg-gray-700 hover:text-white">
+          <primary-button class="py-3 md:text-base hover:bg-gray-700 hover:text-white">
             Sign up with Github
-          </base-button>
+          </primary-button>
           <base-button
             class="py-3 bg-red-500 hover:bg-red-600 hover:border-red-600 hover:text-white"
           >
@@ -60,15 +60,15 @@ const login = async () => {
           </base-button>
         </div>
 
-        <div class="border-b flex w-full justify-center">
+        <div class="flex justify-center w-full border-b">
           <p
-            class="leading-none px-2 inline-block text-sm dark:text-gray-200 text-gray-600 tracking-wide font-medium dark:bg-gray-800 bg-white transform translate-y-2"
+            class="inline-block px-2 text-sm font-medium leading-none tracking-wide text-gray-600 transform translate-y-2 bg-white dark:text-gray-200 dark:bg-gray-800"
           >
             Or Log in with an e-mail
           </p>
-        </div>
+        </div> -->
 
-        <form class="w-full space-y-4">
+        <form class="flex flex-col items-center w-full space-y-4">
           <base-input
             v-model="loginData.email"
             label="Email"
@@ -85,11 +85,13 @@ const login = async () => {
             suffix-icon="ph:password"
             :errors="result.password.$messages"
           />
-          <base-button :loading="loading" class="py-3" @click="login">Log in</base-button>
+          <primary-button :loading="loading" class="px-6 w-fit" @click="login"
+            >Log in</primary-button
+          >
         </form>
         <p class="text-center text-gray-600">
           Don't have an account?
-          <nuxt-link to="/auth/register" class="hover:underline text-red-500">Register</nuxt-link>
+          <nuxt-link to="/auth/register" class="text-red-500 hover:underline">Register</nuxt-link>
         </p>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useLinkStore } from 'store/link.store'
 import { useTimeAgo } from '@vueuse/core'
 
 import { ref } from 'vue'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 const open = ref(true)
 
@@ -21,15 +21,15 @@ const allLinks = computed(() => LinkStore.allLinks)
 </script>
 
 <template>
-  <section class="my-6 md:my-8 gap-6 w-full">
+  <section class="w-full gap-6 my-6 md:my-8">
     <ShortenLink />
 
     <p class="py-2 mt-6 font-medium dark:text-gray-200">Recent Links</p>
-    <div class="divide-y dark:divide-gray-700 rounded border dark:border-gray-700">
+    <div class="border divide-y rounded dark:divide-gray-700 dark:border-gray-700">
       <div
         v-for="(link, index) in allLinks"
         :key="index"
-        class="p-4 grid items-center grid-cols-1 last:rounded-b first:rounded-t sm:grid-cols-2 gap-6 lg:grid-cols-4 dark:bg-gray-900 bg-gray-50"
+        class="grid items-center grid-cols-1 gap-6 p-4 last:rounded-b first:rounded-t sm:grid-cols-2 lg:grid-cols-4 dark:bg-gray-900 bg-gray-50"
       >
         <div>
           <NuxtLink
@@ -42,7 +42,7 @@ const allLinks = computed(() => LinkStore.allLinks)
           <NuxtLink
             target="_blank"
             :to="link.shortUrl"
-            class="mt-2 flex items-center text-sm text-gray-400"
+            class="flex items-center mt-2 text-sm text-gray-400"
           >
             <span class="truncate hover:underline">{{ link.shortUrl }}</span>
           </NuxtLink>
@@ -80,10 +80,10 @@ const allLinks = computed(() => LinkStore.allLinks)
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" />
+          <div class="fixed inset-0 transition-opacity bg-gray-800 bg-opacity-75" />
         </TransitionChild>
 
-        <div class="pointer-events-none fixed bottom-0 flex w-full h-auto rounded-t rounded-xl">
+        <div class="fixed bottom-0 flex w-full h-auto rounded-t pointer-events-none rounded-xl">
           <TransitionChild
             as="template"
             enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -94,7 +94,7 @@ const allLinks = computed(() => LinkStore.allLinks)
             leave-to="translate-y-full"
           >
             <DialogPanel
-              class="pointer-events-auto relative dark:text-gray-200 w-screen rounded-t-lg dark:bg-gray-900 bg-gray-50 dark:border-gray-700 dark:border-t"
+              class="relative w-screen rounded-t-lg pointer-events-auto dark:text-gray-200 dark:bg-gray-900 bg-gray-50 dark:border-gray-700 dark:border-t"
             >
               <div class="py-6">ok</div>
             </DialogPanel>

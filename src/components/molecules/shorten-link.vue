@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import BaseButton from '~~/src/components/atoms/buttons/primary-button.vue'
+import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 import BaseInput from 'components/atoms/inputs/base-input.vue'
 import { Switch } from '@headlessui/vue'
 import { useLinkStore } from 'store/link.store'
@@ -34,18 +35,18 @@ const shortenLink = async () => {
 </script>
 
 <template>
-  <div class="relative flex w-full flex-col">
-    <div class="flex space-y-3 md:space-y-0 md:space-x-2 flex-col md:flex-row">
+  <div class="relative flex flex-col w-full">
+    <div class="flex flex-col space-y-3 md:space-y-0 md:space-x-2 md:flex-row">
       <!-- Link input field  -->
-      <div class="w-full flex">
+      <div class="flex w-full">
         <label for="link" class="sr-only">Enter Link</label>
         <span
-          class="flex dark:bg-gray-700 dark:text-gray-300 items-center rounded-l border-t border-l border-b dark:border-gray-700 border-gray-200 bg-gray-100 px-3 text-sm text-gray-500"
+          class="flex items-center px-3 text-sm text-gray-500 bg-gray-100 border-t border-b border-l border-gray-200 rounded-l dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700"
         >
           https://
         </span>
 
-        <BaseInput
+        <base-input
           v-model="linkPayload.target"
           placeholder="Enter a url..."
           class="rounded-tl-none rounded-bl-none"
@@ -54,88 +55,84 @@ const shortenLink = async () => {
 
       <!-- buttons  -->
       <div class="flex space-x-2">
-        <BaseButton
-          class="w-auto"
-          type="secondary"
-          @click="showAdvancedOptions = !showAdvancedOptions"
-        >
-          <Icon
+        <secondary-button class="w-auto" @click="showAdvancedOptions = !showAdvancedOptions">
+          <icon
             name="lucide:settings"
             class="text-gray-400 transition-all duration-200"
             :class="[showAdvancedOptions ? '' : '-rotate-90']"
           />
-        </BaseButton>
+        </secondary-button>
 
-        <BaseButton :loading="loading" class="w-full md:w-auto px-8" @click="shortenLink">
+        <primary-button :loading="loading" class="w-full px-8 md:w-auto" @click="shortenLink">
           Shorten
-        </BaseButton>
+        </primary-button>
       </div>
     </div>
 
     <!-- Advanced Options  -->
-    <Transition name="slide-fade">
+    <transition name="slide-fade">
       <div
         v-if="showAdvancedOptions"
-        class="w-full border p-4 md:p-6 rounded-md my-4 bg-white flex flex-col dark:bg-gray-900 dark:border-gray-700"
+        class="flex flex-col w-full p-4 my-4 bg-white border rounded-md md:p-6 dark:bg-gray-900 dark:border-gray-700"
       >
         <div class="space-y-1">
           <p class="font-medium text-gray-900 dark:text-gray-200">Advance Options</p>
           <p class="text-sm text-gray-500">Customize link parameters as per your needs</p>
         </div>
 
-        <div class="relative mt-6 grid grid-cols-1 lg:grid-cols-2 gap-x-16">
-          <div class="flex items-center py-3 justify-between">
+        <div class="relative grid grid-cols-1 mt-6 lg:grid-cols-2 gap-x-16">
+          <div class="flex items-center justify-between py-3">
             <p
-              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="p-2 text-sm tracking-wide bg-gray-100 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Alias
             </p>
 
-            <BaseInput class="w-3/5" placeholder="Enter alias" />
-          </div>
-          <div class="flex items-center py-3 justify-between">
-            <p
-              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-            >
-              Description
-            </p>
-            <BaseInput class="w-3/5" placeholder="Enter description" />
-          </div>
-          <div class="flex items-center py-3 justify-between">
-            <p
-              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-            >
-              Password
-            </p>
-            <BaseInput class="w-3/5" placeholder="Enter password" />
-          </div>
-          <div class="flex items-center py-3 justify-between">
-            <p
-              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-            >
-              Max Visits
-            </p>
-            <BaseInput class="w-3/5" placeholder="Enter maximum no. of visits" />
-          </div>
-          <div class="flex items-center py-3 justify-between">
-            <p
-              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-            >
-              Valid From
-            </p>
-            <BaseInput class="w-3/5" placeholder="Enter valid from date" />
-          </div>
-          <div class="flex items-center py-3 justify-between">
-            <p
-              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-            >
-              Valid Till
-            </p>
-            <BaseInput class="w-3/5" placeholder="Enter valid till date" />
+            <base-input class="w-3/5" placeholder="Enter alias" />
           </div>
           <div class="flex items-center justify-between py-3">
             <p
-              class="text-sm tracking-wide bg-gray-100 border rounded p-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              class="p-2 text-sm tracking-wide bg-gray-100 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+            >
+              Description
+            </p>
+            <base-input class="w-3/5" placeholder="Enter description" />
+          </div>
+          <div class="flex items-center justify-between py-3">
+            <p
+              class="p-2 text-sm tracking-wide bg-gray-100 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+            >
+              Password
+            </p>
+            <base-input class="w-3/5" placeholder="Enter password" />
+          </div>
+          <div class="flex items-center justify-between py-3">
+            <p
+              class="p-2 text-sm tracking-wide bg-gray-100 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+            >
+              Max Visits
+            </p>
+            <base-input class="w-3/5" placeholder="Enter maximum no. of visits" />
+          </div>
+          <div class="flex items-center justify-between py-3">
+            <p
+              class="p-2 text-sm tracking-wide bg-gray-100 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+            >
+              Valid From
+            </p>
+            <base-input class="w-3/5" placeholder="Enter valid from date" />
+          </div>
+          <div class="flex items-center justify-between py-3">
+            <p
+              class="p-2 text-sm tracking-wide bg-gray-100 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+            >
+              Valid Till
+            </p>
+            <base-input class="w-3/5" placeholder="Enter valid till date" />
+          </div>
+          <div class="flex items-center justify-between py-3">
+            <p
+              class="p-2 text-sm tracking-wide bg-gray-100 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
             >
               Disable Link
             </p>
@@ -162,7 +159,7 @@ const shortenLink = async () => {
                     ]"
                     aria-hidden="true"
                   >
-                    <Icon name="ph:x-bold" class="text-gray-400" size="10" />
+                    <icon name="ph:x-bold" class="text-gray-400" size="10" />
                   </span>
                   <span
                     :class="[
@@ -173,7 +170,7 @@ const shortenLink = async () => {
                     ]"
                     aria-hidden="true"
                   >
-                    <Icon name="ph:check-bold" class="text-red-500" size="10" />
+                    <icon name="ph:check-bold" class="text-red-500" size="10" />
                   </span>
                 </span>
               </Switch>
@@ -181,7 +178,7 @@ const shortenLink = async () => {
           </div>
         </div>
       </div>
-    </Transition>
+    </transition>
   </div>
 </template>
 

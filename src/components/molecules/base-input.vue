@@ -25,18 +25,20 @@ const props = defineProps({
     default: '',
     required: false,
   },
-  modelValue: String || Number,
+  modelValue: {
+    type: String || Number,
+    default: () => null,
+    required: false,
+  },
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-const updateValue = (e: Event) => {
-  emit('update:modelValue', (<HTMLInputElement>e.target).value)
-}
+const updateValue = (e: Event) => emit('update:modelValue', (e.target as HTMLInputElement).value)
 </script>
 
 <template>
-  <div class="w-full bg-transparent space-y-1 flex flex-col px-0 border-none py-0">
+  <div class="flex flex-col w-full px-0 py-0 space-y-1 bg-transparent border-none">
     <label class="text-sm text-gray-500">{{ props.label }}</label>
     <div class="relative">
       <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5">
@@ -61,7 +63,7 @@ const updateValue = (e: Event) => {
         <Icon :name="props.suffixIcon" size="20" class="text-gray-600" />
       </div>
     </div>
-    <div class="text-xs text-error tracking-normal font-light h-2">
+    <div class="h-2 text-xs font-light tracking-normal text-error">
       <p v-show="props.errors.length > 0">{{ props.errors[0] }}</p>
     </div>
   </div>
