@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "trym",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -23,14 +23,14 @@
     "helmet": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
-    "mongoose": "^6.7.0",
+    "mongoose": "^6.7.1",
     "morgan": "^1.10.0",
     "vue-tiny-validate": "^0.2.4",
     "winston": "^3.8.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0",
     "@kolhe/eslint-config": "^1.1.8",
     "@nuxtjs/tailwindcss": "^6.1.2",
     "@tailwindcss/forms": "^0.5.3",
@@ -40,7 +40,7 @@
     "@types/express-useragent": "^1.0.2",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/morgan": "^1.9.3",
-    "@types/node": "^18.11.7",
+    "@types/node": "^18.11.9",
     "@vueuse/core": "^9.4.0",
     "@vueuse/integrations": "^9.4.0",
     "@vueuse/nuxt": "^9.4.0",
