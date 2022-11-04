@@ -30,7 +30,6 @@ export class App {
     this.config = useConfig()
     this.app = express()
     this.env = this.config.env
-
     this.initializeMiddlewares()
     this.initializeRoutes(routes)
     this.initializeRouteFallback()
