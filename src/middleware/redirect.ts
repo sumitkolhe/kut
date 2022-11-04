@@ -10,7 +10,15 @@ export default defineNuxtRouteMiddleware(async () => {
 
   let link
   try {
-    link = await $fetch<CustomResponse<null>>(`${baseURL}/api/link/${route.params.alias}`)
+    const headers = useRequestHeaders()
+    const userAgent = headers?.['user-agent'] ?? navigator.userAgent
+
+    link = await $fetch<CustomResponse<null>>(`${baseURL}/api/link/${route.params.alias}`, {
+      headers: {
+        'user-agent': userAgent,
+      },
+    })
+
     return navigateTo(link.data, { external: true, redirectCode: 301 })
   } catch {
     link = null

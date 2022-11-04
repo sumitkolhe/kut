@@ -2,8 +2,10 @@ import { LinkModel } from 'server/models/link.model'
 import { HttpExceptionError } from 'server/exceptions/http.exception'
 import { UserModel } from 'server/models/user.model'
 import { createShortLink, verifyTargetLink } from 'server/utils/link'
-// import { AnalyticsModel } from 'models/analytics.model'
 import { ErrorType } from 'interfaces/error.interface'
+import { AnalyticsModel } from 'server/models/analytics.model'
+import { logger } from 'server/utils/logger'
+import type { Analytics } from 'interfaces/analytics.interface'
 import type { LinkDocument } from 'server/models/link.model'
 import type { Link } from 'interfaces/link.interface'
 
@@ -34,7 +36,7 @@ export class LinkService {
     })
 
     await UserModel.findOneAndUpdate({ email }, { $push: { userLinks: savedLink } }).catch(() => {
-      throw new HttpExceptionError(500, 'cannot update user links')
+      logger.error('cannot update user links')
     })
 
     return savedLink
@@ -59,16 +61,22 @@ export class LinkService {
     return result?.userLinks
   }
 
-  public redirect = async (alias: string) => {
+  public redirect = async (alias: string, analytics: Analytics | undefined) => {
     const link: LinkDocument | null = await LinkModel.findOne({ alias })
 
-    // const new_analytic = new AnalyticsModel(req.useragent)
-    // await new_analytic.save()
-    // await link_details.analytics.push(new_analytic)
-    // link_details.visit_count++
-    // await link_details.save()
-
     if (!link) throw new HttpExceptionError(404, ErrorType.linkNotFound)
+
+    const newAnalytics = new AnalyticsModel(analytics)
+    await newAnalytics.save()
+
+    if (link) {
+      await LinkModel.findOneAndUpdate(
+        { alias },
+        { $push: { analytics: newAnalytics }, $inc: { visitCount: 1 } }
+      ).catch(() => {
+        logger.error('cannot update link analytics')
+      })
+    }
 
     // if validTill exists and validFrom and validTill are not within limit, throw error
     if (

@@ -69,8 +69,9 @@ export class LinkController {
   ) => {
     try {
       const { alias } = req.params
+      const { analytics } = req
 
-      const redirectionLink = await this.linkService.redirect(alias)
+      const redirectionLink = await this.linkService.redirect(alias, analytics)
 
       return res.json({
         status: 'SUCCESS',

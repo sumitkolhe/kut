@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import cors from 'cors'
 import express from 'express'
-import helmet from 'helmet'
 import morgan from 'morgan'
 import { errorMiddleware } from 'server/middlewares/error.middleware'
 import { useConfig } from 'server/configs'
 import timeout from 'express-timeout-handler'
 import useragent from 'express-useragent'
+import type { Analytics } from 'interfaces/analytics.interface'
 import type { Response } from 'express'
 import type { Config } from 'interfaces/config.interface'
 import type { Routes } from 'interfaces/routes.interface'
@@ -16,6 +16,7 @@ declare global {
     interface Request {
       auth: any
       timedout: boolean
+      analytics?: Analytics | undefined
     }
   }
 }
@@ -37,7 +38,6 @@ export class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(helmet())
     this.app.use(useragent.express())
     this.app.use(morgan(this.config.log.format))
     this.app.use(
