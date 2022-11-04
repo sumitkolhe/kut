@@ -3,11 +3,6 @@ import ShortenLink from 'components/molecules/shorten-link.vue'
 import { useLinkStore } from 'store/link.store'
 import { useTimeAgo } from '@vueuse/core'
 
-import { ref } from 'vue'
-import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-
-const open = ref(true)
-
 definePageMeta({
   middleware: ['auth', 'verify-email'],
 })
@@ -68,39 +63,5 @@ const allLinks = computed(() => LinkStore.allLinks)
         </div>
       </div>
     </div>
-
-    <TransitionRoot as="template" :show="open">
-      <Dialog as="div" class="relative z-[999999999]" @close="open = false">
-        <TransitionChild
-          as="template"
-          enter="ease-in-out duration-500"
-          enter-from="opacity-0"
-          enter-to="opacity-100"
-          leave="ease-in-out duration-500"
-          leave-from="opacity-100"
-          leave-to="opacity-0"
-        >
-          <div class="fixed inset-0 transition-opacity bg-gray-800 bg-opacity-75" />
-        </TransitionChild>
-
-        <div class="fixed bottom-0 flex w-full h-auto rounded-t pointer-events-none rounded-xl">
-          <TransitionChild
-            as="template"
-            enter="transform transition ease-in-out duration-500 sm:duration-700"
-            enter-from="translate-y-full"
-            enter-to="translate-y-0"
-            leave="transform transition ease-in-out duration-500 sm:duration-700"
-            leave-from="translate-y-0"
-            leave-to="translate-y-full"
-          >
-            <DialogPanel
-              class="relative w-screen rounded-t-lg pointer-events-auto dark:text-gray-200 dark:bg-gray-900 bg-gray-50 dark:border-gray-700 dark:border-t"
-            >
-              <div class="py-6">ok</div>
-            </DialogPanel>
-          </TransitionChild>
-        </div>
-      </Dialog>
-    </TransitionRoot>
   </section>
 </template>

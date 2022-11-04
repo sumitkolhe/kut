@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import useValidate from 'vue-tiny-validate'
-import BaseInput from 'components/molecules/base-input.vue'
+import BaseInput from 'components/atoms/inputs/base-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import type { Rules } from 'vue-tiny-validate'
 
@@ -85,9 +85,7 @@ const login = async () => {
             suffix-icon="ph:password"
             :errors="result.password.$messages"
           />
-          <primary-button :loading="loading" class="px-6 w-fit" @click="login"
-            >Log in</primary-button
-          >
+          <primary-button :loading="loading" @click="login"> Log in </primary-button>
         </form>
         <p class="text-center text-gray-600">
           Don't have an account?

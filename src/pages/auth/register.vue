@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
-import BaseInput from 'components/molecules/base-input.vue'
+import BaseInput from 'components/atoms/inputs/base-input.vue'
 import useValidate from 'vue-tiny-validate'
 import type { Rules } from 'vue-tiny-validate'
 definePageMeta({})
