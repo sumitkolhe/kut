@@ -43,3 +43,14 @@ export const verifyAccountSchema = celebrate(
   { abortEarly: false },
   { mode: Modes.FULL }
 )
+
+export const allLinksSchema = celebrate(
+  {
+    [Segments.QUERY]: Joi.object().keys({
+      offset: Joi.number().default(0),
+      limit: Joi.number().default(10),
+    }),
+  },
+  { abortEarly: false },
+  { mode: Modes.FULL }
+)

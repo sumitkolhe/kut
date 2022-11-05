@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { LinkController } from 'server/controllers/link.controller'
 import { checkAuthentication } from 'server/middlewares/auth.middleware'
 import { analyticsHandler } from 'server/middlewares/analytics.middleware'
+import { allLinksSchema } from 'server/helpers/validator.helper'
 import type { Routes } from 'interfaces/routes.interface'
 
 export class LinkRoute implements Routes {
@@ -14,7 +15,12 @@ export class LinkRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, checkAuthentication, this.linkController.allLinks)
+    this.router.get(
+      `${this.path}`,
+      checkAuthentication,
+      allLinksSchema,
+      this.linkController.allLinks
+    )
     this.router.post(`${this.path}/shorten`, checkAuthentication, this.linkController.shorten)
     this.router.get(`${this.path}/:alias`, analyticsHandler, this.linkController.redirect)
   }

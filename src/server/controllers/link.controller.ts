@@ -47,7 +47,12 @@ export class LinkController {
 
   public allLinks: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<any>>,
+    res: Response<
+      CustomResponse<{
+        links: Link[]
+        total: number | null
+      }>
+    >,
     next: NextFunction
   ) => {
     try {

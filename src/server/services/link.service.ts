@@ -42,7 +42,14 @@ export class LinkService {
     return savedLink
   }
 
-  public getAllLinks = async (email: string, offset = 0, limit = 10) => {
+  public getAllLinks = async (
+    email: string,
+    offset: number,
+    limit: number
+  ): Promise<{
+    links: Link[]
+    total: number | null
+  }> => {
     const result = await UserModel.findOne(
       { email },
       {
@@ -52,13 +59,22 @@ export class LinkService {
     ).populate({
       path: 'userLinks',
       options: {
-        limit,
-        skip: offset,
         sort: { createdAt: -1 },
+        skip: offset,
+        limit,
       },
     })
 
-    return result?.userLinks
+    const count = await UserModel.aggregate([
+      { $match: { email } },
+      { $unwind: '$userLinks' },
+      { $count: 'total' },
+    ])
+
+    return {
+      links: result?.userLinks as unknown as Link[],
+      total: (count[0]?.total as number) || null,
+    }
   }
 
   public redirect = async (alias: string, analytics: Analytics | undefined) => {
