@@ -66,17 +66,7 @@ export class LinkService {
 
     if (!link) throw new HttpExceptionError(404, ErrorType.linkNotFound)
 
-    const newAnalytics = new AnalyticsModel(analytics)
-    await newAnalytics.save()
-
-    if (link) {
-      await LinkModel.findOneAndUpdate(
-        { alias },
-        { $push: { analytics: newAnalytics }, $inc: { visitCount: 1 } }
-      ).catch(() => {
-        logger.error('cannot update link analytics')
-      })
-    }
+    if (!link.meta.active) throw new HttpExceptionError(403, 'link is not active')
 
     // if validTill exists and validFrom and validTill are not within limit, throw error
     if (
@@ -89,9 +79,20 @@ export class LinkService {
       throw new HttpExceptionError(403, 'maximum link view limit reached')
 
     // if (link.meta.password && password && link.meta.password === password)
-    return link.target.toString()
 
-    // throw new HttpExceptionError(400, 'something went wrong')
+    const newAnalytics = new AnalyticsModel(analytics)
+    await newAnalytics.save()
+
+    if (link) {
+      await LinkModel.findOneAndUpdate(
+        { alias },
+        { $push: { analytics: newAnalytics }, $inc: { visitCount: 1 } }
+      ).catch(() => {
+        logger.error('cannot update link analytics')
+      })
+    }
+
+    return link.target.toString()
   }
 
   private generateUniqueAlias = async (): Promise<string> => {

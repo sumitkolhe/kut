@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
-import BaseInput from 'components/atoms/inputs/base-input.vue'
+import TextInput from 'components/atoms/inputs/text-input.vue'
 import useValidate from 'vue-tiny-validate'
 import type { Rules } from 'vue-tiny-validate'
 definePageMeta({})
@@ -70,7 +70,7 @@ const register = async () => {
         <form class="w-full space-y-4">
           <!-- <base-input label="First Name" type="text" placeholder="john" suffix-icon="ph:at" />
               <base-input label="Last Name" type="text" placeholder="doe" suffix-icon="ph:at" /> -->
-          <base-input
+          <text-input
             v-model="registerData.email"
             label="Email"
             type="email"
@@ -78,7 +78,7 @@ const register = async () => {
             suffix-icon="ph:at"
             :errors="result.email.$messages"
           />
-          <base-input
+          <text-input
             v-model="registerData.password"
             label="Password"
             type="password"

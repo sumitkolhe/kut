@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import useValidate from 'vue-tiny-validate'
-import BaseInput from 'components/atoms/inputs/base-input.vue'
+import TextInput from 'components/atoms/inputs/text-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import type { Rules } from 'vue-tiny-validate'
 
@@ -69,7 +69,7 @@ const login = async () => {
         </div> -->
 
         <form class="flex flex-col items-center w-full space-y-4">
-          <base-input
+          <text-input
             v-model="loginData.email"
             label="Email"
             type="email"
@@ -77,7 +77,7 @@ const login = async () => {
             suffix-icon="ph:at"
             :errors="result.email.$messages"
           />
-          <base-input
+          <text-input
             v-model="loginData.password"
             label="Password"
             type="password"
