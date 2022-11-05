@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import Navigation from 'components/molecules/navigation.vue'
-import Footer from 'components/organisms/footer.vue'
+import AppFooter from 'components/organisms/app-footer.vue'
 import Drawer from 'components/molecules/drawer.vue'
-import Header from 'components/organisms/header.vue'
+import DashboardHeader from 'components/organisms/dashboard-header.vue'
 
 definePageMeta({
   middleware: 'auth',
@@ -12,13 +12,13 @@ definePageMeta({
 <template>
   <main>
     <NuxtLoadingIndicator color="#f55" :height="3" />
-    <Header />
-    <Navigation v-if="$route.fullPath.includes('dashboard')" />
-    <Drawer />
-    <div class="max-w-screen-xl mx-auto px-4 xl:px-0 h-full">
+    <dashboard-header />
+    <navigation v-if="$route.fullPath.includes('dashboard')" />
+    <drawer />
+    <div class="h-full max-w-screen-xl px-4 mx-auto xl:px-0">
       <slot />
     </div>
-    <Footer />
+    <app-footer />
   </main>
 </template>
 
