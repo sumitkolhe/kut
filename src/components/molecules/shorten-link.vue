@@ -104,11 +104,15 @@ const shortenLink = async () => {
             />
           </secondary-button>
         </div>
-        <div>
-          <primary-button :loading="loading" class="w-full px-8 md:w-auto" @click="shortenLink">
-            Shorten
-          </primary-button>
-        </div>
+
+        <primary-button
+          suffix-icon="octicon:paper-airplane-24"
+          :loading="loading"
+          class="w-full md:w-auto"
+          @click="shortenLink"
+        >
+          Shorten
+        </primary-button>
       </div>
     </div>
 

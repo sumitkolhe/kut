@@ -3,6 +3,7 @@ import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 definePageMeta({
   middleware: ['auth'],
+  layout: 'public',
 })
 
 const { $auth } = useNuxtApp()

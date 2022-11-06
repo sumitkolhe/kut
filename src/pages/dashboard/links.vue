@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import ShortenLink from 'components/molecules/shorten-link.vue'
+import LinkCard from 'components/molecules/link-card.vue'
 import { useLinkStore } from 'store/link.store'
-import { useTimeAgo } from '@vueuse/core'
 
 definePageMeta({
   middleware: ['auth', 'verify-email'],
@@ -21,47 +21,35 @@ const allLinks = computed(() => LinkStore.allLinks)
 
     <p class="py-2 mt-6 font-medium dark:text-gray-200">Recent Links</p>
     <div class="border divide-y rounded dark:divide-gray-700 dark:border-gray-700">
-      <div
-        v-for="(link, index) in allLinks"
+      <link-card
+        v-for="(link, index) in allLinks.slice(0, 5)"
         :key="index"
-        class="grid items-center grid-cols-1 gap-6 p-4 last:rounded-b first:rounded-t sm:grid-cols-2 lg:grid-cols-4 dark:bg-gray-900 bg-gray-50"
+        :target="link.target"
+        :short-url="link.shortUrl"
+        :visit-count="link.visitCount"
+        :created-at="link.createdAt"
+        :updated-at="link.updatedAt"
+      ></link-card>
+    </div>
+
+    <div class="flex items-center items-end justify-end gap-3 my-4">
+      <button
+        class="inline-flex items-center justify-center w-8 h-8 border border-gray-200 rounded bg-gray-50"
       >
-        <div>
-          <NuxtLink
-            target="_blank"
-            :to="link.target"
-            class="text-sm font-medium text-red-500 truncate hover:underline"
-          >
-            {{ link.target }}
-          </NuxtLink>
-          <NuxtLink
-            target="_blank"
-            :to="link.shortUrl"
-            class="flex items-center mt-2 text-sm text-gray-400"
-          >
-            <span class="truncate hover:underline">{{ link.shortUrl }}</span>
-          </NuxtLink>
-        </div>
-        <div class="flex items-center space-x-2">
-          <p class="text-xl dark:text-gray-200">{{ link.visitCount }}</p>
-          <p class="text-gray-500">views</p>
-        </div>
+        <Icon name="line-md:chevron-left" size="16" />
+      </button>
 
-        <div>
-          <p class="text-sm text-gray-500">
-            Created
-            <span>{{ useTimeAgo(link.createdAt).value }}</span>
-          </p>
-          <p class="mt-2 text-sm text-gray-500">
-            Updated
-            <span>{{ useTimeAgo(link.createdAt).value }}</span>
-          </p>
-        </div>
+      <p class="text-sm">
+        3
+        <span class="mx-0.25">/</span>
+        12
+      </p>
 
-        <div>
-          <Icon name="ic:twotone-lock" />
-        </div>
-      </div>
+      <button
+        class="inline-flex items-center justify-center w-8 h-8 border border-gray-200 rounded bg-gray-50"
+      >
+        <Icon name="line-md:chevron-right" size="16" />
+      </button>
     </div>
   </section>
 </template>

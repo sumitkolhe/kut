@@ -3,7 +3,10 @@ import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import TextInput from 'components/atoms/inputs/text-input.vue'
 import useValidate from 'vue-tiny-validate'
 import type { Rules } from 'vue-tiny-validate'
-definePageMeta({})
+
+definePageMeta({
+  layout: 'public',
+})
 
 const { createAccountPoints } = useAppConfig()
 const { $auth } = useNuxtApp()
@@ -43,10 +46,10 @@ const register = async () => {
     <div class="flex flex-col max-w-screen-2xl lg:flex-row">
       <!-- Register Form  -->
       <div
-        class="flex flex-col items-center justify-center w-full px-6 py-10 mt-16 space-y-8 lg:w-1/2 md:mt-0 md:p-10 xl:p-24"
+        class="flex flex-col items-center justify-center w-full min-h-screen px-4 space-y-8 md:h-full lg:w-1/2 md:mt-0 md:p-10 xl:p-24"
       >
-        <h1 class="mb-4 text-2xl font-extrabold xl:text-3xl dark:text-gray-200">Create Account</h1>
-        <div
+        <h1 class="mb-4 text-2xl font-medium xl:text-3xl dark:text-gray-200">Create Account</h1>
+        <!-- <div
           class="flex flex-col items-center justify-center w-full space-y-4 md:flex-row md:space-y-0 md:space-x-4"
         >
           <primary-button class="py-3 hover:bg-gray-700 hover:text-white">
@@ -65,7 +68,7 @@ const register = async () => {
           >
             Or sign up with an e-mail
           </p>
-        </div>
+        </div> -->
 
         <form class="w-full space-y-4">
           <!-- <base-input label="First Name" type="text" placeholder="john" suffix-icon="ph:at" />
@@ -86,7 +89,7 @@ const register = async () => {
             suffix-icon="ph:password"
             :errors="result.password.$messages"
           />
-          <primary-button :loading="loading" class="py-3" @click="register">Sign up</primary-button>
+          <primary-button :loading="loading" @click="register">Sign up</primary-button>
         </form>
         <p class="text-center text-gray-600">
           Already have an account?

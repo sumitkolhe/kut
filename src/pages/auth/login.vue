@@ -4,7 +4,9 @@ import TextInput from 'components/atoms/inputs/text-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import type { Rules } from 'vue-tiny-validate'
 
-definePageMeta({})
+definePageMeta({
+  layout: 'public',
+})
 
 const { $auth } = useNuxtApp()
 
@@ -41,12 +43,12 @@ const login = async () => {
 <template>
   <section class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800">
     <!-- Inner container  -->
-    <div
-      class="flex flex-col w-full max-w-2xl mt-16 rounded-lg h-fit lg:flex-row dark:border-gray-700"
-    >
+    <div class="flex flex-col w-full max-w-2xl rounded-lg h-fit lg:flex-row dark:border-gray-700">
       <!-- Login Form  -->
-      <div class="flex flex-col items-center justify-center w-full py-10 space-y-8 md:p-10 xl:p-14">
-        <h1 class="mb-4 text-2xl font-extrabold xl:text-3xl dark:text-gray-200">Log in</h1>
+      <div class="flex flex-col items-center justify-center w-full p-4 space-y-8 md:p-10 xl:p-14">
+        <h1 class="mb-4 text-2xl font-medium tracking-wide xl:text-3xl dark:text-gray-200">
+          Log in
+        </h1>
         <!-- <div
           class="flex flex-col items-center justify-center w-full space-y-4 md:flex-row md:space-y-0 md:space-x-4"
         >
