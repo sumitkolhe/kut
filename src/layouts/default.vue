@@ -10,7 +10,7 @@ definePageMeta({
 </script>
 
 <template>
-  <main>
+  <main class="no-select">
     <NuxtLoadingIndicator color="#f55" :height="3" />
     <dashboard-header />
     <navigation v-if="$route.fullPath.includes('dashboard')" />
@@ -25,6 +25,20 @@ definePageMeta({
 <style>
 * {
   font-family: 'Inter', sans-serif !important;
+}
+
+.no-select {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.no-select:focus {
+  outline: none !important;
 }
 
 body {

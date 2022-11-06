@@ -7,7 +7,6 @@ import AppFooter from 'components/organisms/app-footer.vue'
   <main>
     <app-header />
     <NuxtLoadingIndicator color="#f55" :height="3" />
-
     <slot />
     <app-footer />
   </main>
