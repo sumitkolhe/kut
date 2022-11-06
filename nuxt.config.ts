@@ -29,10 +29,7 @@ export default defineNuxtConfig({
 
   modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
 
-  serverMiddleware: [
-    { path: '/api', handler: '~/server/server.ts' },
-    { path: '/api/**', handler: '~/server/server.ts' },
-  ],
+  serverHandlers: [{ handler: '~/server/server.ts' }],
 
   nitro: {
     plugins: ['~/server/helpers/mongoose.helper.ts'],
