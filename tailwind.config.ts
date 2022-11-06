@@ -1,7 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+export default <Config>{
   darkMode: 'class',
-  content: [],
+  content: ['./src/**/*.vue'],
   theme: {
     extend: {
       fontFamily: {
