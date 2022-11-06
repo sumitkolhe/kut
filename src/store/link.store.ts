@@ -22,12 +22,16 @@ export const useLinkStore = defineStore('links', {
       }
     },
 
-    async fetchAllLinks() {
+    async fetchAllLinks(offset = 0, limit = 5) {
       try {
-        const response = await useRequest<CustomResponse<Link[]>>('/link', {
-          method: 'GET',
-        })
-        this.allLinks = response.data!
+        const response = await useRequest<CustomResponse<{ links: Link[]; total: number }>>(
+          '/link',
+          {
+            method: 'GET',
+            query: { limit, offset },
+          }
+        )
+        this.allLinks = response.data!.links!
       } catch (error) {
         if (error instanceof FetchError) {
           logger.error(error.message)

@@ -48,7 +48,7 @@ export class LinkService {
     limit: number
   ): Promise<{
     links: Link[]
-    total: number | null
+    total: number
   }> => {
     const result = await UserModel.findOne(
       { email },
@@ -72,8 +72,8 @@ export class LinkService {
     ])
 
     return {
-      links: result?.userLinks as unknown as Link[],
-      total: (count[0]?.total as number) || null,
+      links: (result?.userLinks as unknown as Link[]) || [],
+      total: (count[0]?.total as number) || 0,
     }
   }
 

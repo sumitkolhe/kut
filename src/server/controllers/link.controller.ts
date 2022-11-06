@@ -50,7 +50,7 @@ export class LinkController {
     res: Response<
       CustomResponse<{
         links: Link[]
-        total: number | null
+        total: number
       }>
     >,
     next: NextFunction
