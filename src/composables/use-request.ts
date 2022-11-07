@@ -1,7 +1,7 @@
 import { $fetch } from 'ohmyfetch'
 
 export const useRequest = $fetch.create({
-  baseURL: '/api',
+  baseURL: '/api/v1',
   credentials: 'include',
   async onResponseError({ response }) {
     if (response.status === 401 && response._data.message === 'jwt expired') {

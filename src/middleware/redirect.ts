@@ -13,7 +13,7 @@ export default defineNuxtRouteMiddleware(async () => {
     const headers = useRequestHeaders()
     const userAgent = headers?.['user-agent'] ?? navigator.userAgent
 
-    link = await $fetch<CustomResponse<null>>(`${baseURL}/api/link/${route.params.alias}`, {
+    link = await $fetch<CustomResponse<null>>(`${baseURL}/api/v1/link/${route.params.alias}`, {
       headers: {
         'user-agent': userAgent,
       },
