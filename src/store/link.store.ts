@@ -7,6 +7,7 @@ import type { Link } from 'interfaces/link.interface'
 export const useLinkStore = defineStore('links', {
   state: () => ({
     allLinks: [] as Link[],
+    totalCount: 0,
   }),
   actions: {
     async shortenLink(linkPayload: Pick<Link, 'alias' | 'target' | 'meta' | 'description'>) {
@@ -32,6 +33,7 @@ export const useLinkStore = defineStore('links', {
           }
         )
         this.allLinks = response.data!.links!
+        this.totalCount = response.data!.total!
       } catch (error) {
         if (error instanceof FetchError) {
           logger.error(error.message)
