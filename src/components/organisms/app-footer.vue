@@ -9,7 +9,7 @@ const { isDarkTheme } = useTheme()
       <div class="flex flex-col items-center justify-between space-y-4 md:flex-row">
         <NuxtLink class="flex items-center space-x-3" to="/dashboard">
           <Icon name="gridicons:link" size="36" class="text-red-500" />
-          <p class="text-lg font-medium uppercase dark:text-gray-50">Trym</p>
+          <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
         </NuxtLink>
 
         <div class="order-1 w-auto cursor-pointer">
@@ -54,7 +54,7 @@ const { isDarkTheme } = useTheme()
         </div>
 
         <div class="order-3 md:order-1">
-          <p class="text-sm text-center text-gray-400">&copy; 2020 Trym. All rights reserved.</p>
+          <p class="text-sm text-center text-gray-400">&copy; 2020 Kut. All rights reserved.</p>
         </div>
       </div>
     </div>

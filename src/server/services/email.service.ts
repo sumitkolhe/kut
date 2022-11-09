@@ -30,7 +30,7 @@ export class EmailService {
         },
         to: [{ email, name }],
         params: {
-          VERIFICATION_LINK: `https://trym.in/api/auth/verify?token=${emailVerificationToken}`,
+          VERIFICATION_LINK: `https://kut.sh/api/auth/verify?token=${emailVerificationToken}`,
         },
       },
       method: 'POST',

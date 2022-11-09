@@ -3,7 +3,7 @@ import type { Config } from 'interfaces/config.interface'
 export const devConfig: Config = {
   env: 'development',
   database: {
-    dbName: 'trym-db-dev',
+    dbName: 'kut-db-dev',
     dbUrl: 'mongodb://localhost:27017',
   },
   cors: {
@@ -30,8 +30,8 @@ export const devConfig: Config = {
   },
   email: {
     apiKey: '',
-    senderEmail: 'no-reply@trym.in',
-    senderName: 'Trym',
+    senderEmail: 'no-reply@kut.sh',
+    senderName: 'Kut',
   },
   domain: {
     protocol: 'http',

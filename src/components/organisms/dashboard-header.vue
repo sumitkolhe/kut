@@ -9,7 +9,7 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
     <div class="max-w-screen-xl mx-auto flex flex-row justify-between items-center">
       <NuxtLink class="flex items-center space-x-3" to="/dashboard">
         <Icon name="gridicons:link" size="36" class="text-red-500" />
-        <p class="font-medium uppercase text-lg dark:text-gray-50">Trym</p>
+        <p class="font-medium uppercase text-lg dark:text-gray-50">Kut</p>
       </NuxtLink>
 
       <div class="hidden md:block">

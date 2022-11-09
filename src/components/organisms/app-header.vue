@@ -12,7 +12,7 @@ const { $auth } = useNuxtApp()
     <div class="flex flex-row items-center justify-between max-w-screen-xl mx-auto">
       <NuxtLink class="flex items-center space-x-3" to="/">
         <Icon name="gridicons:link" size="36" class="text-red-500" />
-        <p class="text-lg font-medium uppercase dark:text-gray-50">Trym</p>
+        <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
         {{ $auth.loggedIn }}
       </NuxtLink>
       <div v-if="$auth.loggedIn" class="flex flex-row w-auto space-x-4">

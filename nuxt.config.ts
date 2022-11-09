@@ -3,14 +3,14 @@ import { fileURLToPath } from 'url'
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Trym',
+      title: 'Kut',
       htmlAttrs: {
         lang: 'en',
       },
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       meta: [
-        { hid: 'og:title', name: 'og:title', content: 'Trym' },
+        { hid: 'og:title', name: 'og:title', content: 'Kut' },
         { name: 'format-detection', content: 'telephone=no' },
       ],
       link: [

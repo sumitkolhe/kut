@@ -32,11 +32,11 @@ export const productionConfig: Config = {
   },
   email: {
     apiKey: config.emailApiKey,
-    senderEmail: 'no-reply@trym.in',
-    senderName: 'Trym',
+    senderEmail: 'no-reply@kut.sh',
+    senderName: 'Kut',
   },
   domain: {
     protocol: 'https',
-    url: 'trym.in',
+    url: 'kut.sh',
   },
 }
