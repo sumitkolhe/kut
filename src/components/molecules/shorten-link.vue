@@ -117,7 +117,7 @@ const shortenLink = async () => {
     </div>
 
     <transition-root as="template" :show="advancedOptions">
-      <Dialog as="div" class="relative z-[999999999]">
+      <Dialog as="div" class="relative z-50">
         <transition-child
           as="template"
           enter="ease-in-out duration-500"
@@ -140,7 +140,7 @@ const shortenLink = async () => {
           leave-to="translate-y-full md:translate-x-full md:translate-y-0"
         >
           <dialog-panel
-            class="fixed flex flex-col justify-between overflow-y-auto max-h-[75%] h-full md:max-h-screen w-screen md:w-[50%] lg:w-[33%] md:right-0 bottom-0 bg-gray-50 dark:bg-gray-900 rounded-t-lg md:rounded-t-none md:border-t-0 border-t border-l-0 md:border-l dark:border-gray-700"
+            class="fixed flex flex-col justify-between overflow-y-auto max-h-[75%] h-full md:max-h-screen w-screen md:w-[50%] lg:w-[33%] md:right-0 bottom-0 bg-gray-50 dark:bg-gray-900 rounded-t-lg md:rounded-t-none md:border-t-0 dark:border-t border-l-0 md:border-l dark:border-gray-700"
           >
             <div class="p-4 space-y-1 md:p-6">
               <p class="font-medium text-gray-900 dark:text-gray-200">Advance Options</p>

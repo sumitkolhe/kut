@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
+
+const { $auth } = useNuxtApp()
 </script>
 
 <template>
@@ -11,13 +13,19 @@ import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
       <NuxtLink class="flex items-center space-x-3" to="/">
         <Icon name="gridicons:link" size="36" class="text-red-500" />
         <p class="text-lg font-medium uppercase dark:text-gray-50">Trym</p>
+        {{ $auth.loggedIn }}
       </NuxtLink>
-      <div class="flex flex-row w-auto space-x-4">
+      <div v-if="$auth.loggedIn" class="flex flex-row w-auto space-x-4">
         <NuxtLink to="/auth/login">
           <secondary-button class="w-auto">Login</secondary-button>
         </NuxtLink>
         <NuxtLink to="/auth/register">
           <primary-button class="w-auto">Sign up</primary-button>
+        </NuxtLink>
+      </div>
+      <div v-else>
+        <NuxtLink to="/dashboard">
+          <primary-button class="w-auto">Dashboard</primary-button>
         </NuxtLink>
       </div>
     </div>

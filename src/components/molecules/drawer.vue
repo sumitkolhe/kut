@@ -9,7 +9,7 @@ const { isDrawerVisible } = useDrawer()
   <teleport to="body">
     <aside
       v-show="isDrawerVisible"
-      class="flex-col md:hidden z-[999999] flex h-screen w-full fixed bg-gray-50 dark:bg-gray-900"
+      class="flex-col md:hidden z-50 flex h-screen w-full fixed bg-gray-50 dark:bg-gray-900"
     >
       <div class="h-16 dark:bg-gray-900 bg-gray-50">header</div>
 

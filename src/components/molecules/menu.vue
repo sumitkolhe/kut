@@ -5,7 +5,7 @@ const { $auth } = useNuxtApp()
 </script>
 
 <template>
-  <Menu as="div" class="relative inline-block text-left z-[9999999999]">
+  <Menu as="div" class="relative inline-block text-left z-40">
     <div>
       <MenuButton>
         <Icon name="ph:user-circle-duotone" size="28" />
