@@ -6,10 +6,8 @@ const { $auth } = useNuxtApp()
 </script>
 
 <template>
-  <header
-    class="fixed z-50 w-full px-4 py-3 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-900"
-  >
-    <div class="flex flex-row items-center justify-between max-w-screen-xl mx-auto">
+  <header class="fixed z-50 w-full px-4 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+    <div class="flex flex-row items-center justify-between max-w-screen-xl h-16 mx-auto">
       <NuxtLink class="flex items-center space-x-3" to="/">
         <Icon name="gridicons:link" size="36" class="text-red-500" />
         <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>

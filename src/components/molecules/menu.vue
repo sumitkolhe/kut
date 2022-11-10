@@ -7,7 +7,7 @@ const { $auth } = useNuxtApp()
 <template>
   <Menu as="div" class="relative inline-block text-left z-40">
     <div>
-      <MenuButton>
+      <MenuButton class="dark:text-gray-200">
         <Icon name="ph:user-circle-duotone" size="28" />
       </MenuButton>
     </div>
@@ -21,7 +21,7 @@ const { $auth } = useNuxtApp()
       leave-to-class="transform scale-95 opacity-0"
     >
       <MenuItems
-        class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg dark:divide-gray-700 dark:bg-gray-900 ring-1 dark:ring-gray-700 ring-black ring-opacity-5 focus:outline-none"
+        class="absolute right-0 z-[60] w-56 mt-2 origin-top-right bg-gray-50 divide-y divide-gray-200 rounded-md shadow-lg dark:divide-gray-700 dark:bg-gray-900 ring-1 dark:ring-gray-700 ring-black ring-opacity-5 focus:outline-none"
       >
         <div class="p-2">
           <MenuItem v-slot="{ active }">

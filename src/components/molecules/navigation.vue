@@ -13,10 +13,10 @@ const tabs = [
 
 <template>
   <nav
-    class="border-b z-50 sticky px-4 top-0 dark:border-gray-700 border-gray-200 bg-white dark:bg-gray-900"
+    class="border-b z-0 sticky px-4 top-0 dark:border-gray-700 border-gray-200 bg-white dark:bg-gray-900"
   >
     <div
-      class="max-w-screen-xl mx-auto flex flex-row space-x-8 text-gray-500 overflow-x-scroll no-scrollbar"
+      class="max-w-screen-xl mx-auto h-12 flex flex-row space-x-8 text-gray-500 overflow-x-scroll no-scrollbar"
     >
       <NuxtLink
         v-for="tab in tabs"

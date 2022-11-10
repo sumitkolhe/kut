@@ -5,8 +5,8 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
 </script>
 
 <template>
-  <header class="bg-white dark:bg-gray-900 w-full py-3 px-4">
-    <div class="max-w-screen-xl mx-auto flex flex-row justify-between items-center">
+  <header class="bg-gray-50 dark:bg-gray-900 w-full px-4">
+    <div class="max-w-screen-xl mx-auto flex flex-row h-16 justify-between items-center">
       <NuxtLink class="flex items-center space-x-3" to="/dashboard">
         <Icon name="gridicons:link" size="36" class="text-red-500" />
         <p class="font-medium uppercase text-lg dark:text-gray-50">Kut</p>

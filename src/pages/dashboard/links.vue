@@ -29,41 +29,50 @@ const { currentPage, pageCount, prev, next } = useOffsetPagination({
   <section class="w-full gap-6 my-6 md:my-8">
     <ShortenLink />
 
-    <p class="py-2 mt-6 font-medium dark:text-gray-200">Recent Links</p>
-    <div class="border divide-y rounded dark:divide-gray-700 dark:border-gray-700">
-      <link-card
-        v-for="(link, index) in allLinks.slice(0, 5)"
-        :key="index"
-        :target="link.target"
-        :short-url="link.shortUrl"
-        :visit-count="link.visitCount"
-        :created-at="link.createdAt"
-        :updated-at="link.updatedAt"
-      ></link-card>
-    </div>
-    <div class="flex justify-end">
-      {{ totalLinks }}
-      <div class="flex items-center items-end justify-end gap-3 my-4">
-        <button
-          class="inline-flex items-center justify-center w-8 h-8 border border-gray-200 rounded bg-gray-50"
-          @click="next"
-        >
-          <Icon name="line-md:chevron-left" size="16" />
-        </button>
-
-        <p class="text-sm">
-          {{ currentPage }}
-          <span class="mx-0.25">/</span>
-          {{ pageCount }}
-        </p>
-
-        <button
-          class="inline-flex items-center justify-center w-8 h-8 border border-gray-200 rounded bg-gray-50"
-          @click="prev"
-        >
-          <Icon name="line-md:chevron-right" size="16" />
-        </button>
+    <div v-if="allLinks.length < 0">
+      <p class="py-2 mt-6 font-medium dark:text-gray-200">Recent Links</p>
+      <div class="border divide-y rounded dark:divide-gray-700 dark:border-gray-700">
+        <link-card
+          v-for="(link, index) in allLinks.slice(0, 5)"
+          :key="index"
+          :target="link.target"
+          :short-url="link.shortUrl"
+          :visit-count="link.visitCount"
+          :created-at="link.createdAt"
+          :updated-at="link.updatedAt"
+        ></link-card>
       </div>
+      <div class="flex justify-end">
+        <div class="flex items-center items-end justify-end gap-3 my-4">
+          <button
+            class="inline-flex items-center justify-center w-8 h-8 border border-gray-200 rounded bg-gray-50"
+            @click="next"
+          >
+            <Icon name="line-md:chevron-left" size="16" />
+          </button>
+
+          <p class="text-sm">
+            {{ currentPage }}
+            <span class="mx-0.25">/</span>
+            {{ pageCount }}
+          </p>
+
+          <button
+            class="inline-flex items-center justify-center w-8 h-8 border border-gray-200 rounded bg-gray-50"
+            @click="prev"
+          >
+            <Icon name="line-md:chevron-right" size="16" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      v-else
+      class="border relative bg-gray-50 my-6 rounded px-4 py-6 h-64 dark:bg-gray-900 dark:border-gray-700 flex items-center flex-col justify-center"
+    >
+      <Icon name="ph:link-break-duotone" size="44" class="opacity-50 dark:text-gray-400" />
+      <p class="mt-4 mb-1 font-medium dark:text-gray-200">No Links</p>
+      <p class="text-gray-400 dark:text-gray-500 font-light">Get started by creating a new link.</p>
     </div>
   </section>
 </template>
