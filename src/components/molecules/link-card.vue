@@ -33,7 +33,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="grid items-center grid-cols-1 gap-6 p-4 last:rounded-b first:rounded-t sm:grid-cols-2 lg:grid-cols-4 dark:bg-gray-900 bg-gray-50"
+    class="grid items-center place-items-center grid-cols-1 gap-6 p-4 last:rounded-b first:rounded-t sm:grid-cols-2 lg:grid-cols-4 dark:bg-gray-900 bg-gray-50"
   >
     <div>
       <NuxtLink
@@ -72,7 +72,7 @@ const props = defineProps({
 
     <div>
       <Tooltip text="hello">
-        <Icon name="ic:twotone-lock" />
+        <Icon name="line-md:arrow-right" />
       </Tooltip>
     </div>
   </div>

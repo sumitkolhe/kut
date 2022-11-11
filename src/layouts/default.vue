@@ -15,7 +15,7 @@ definePageMeta({
     <dashboard-header />
     <navigation v-if="$route.fullPath.includes('dashboard')" />
     <drawer />
-    <div class="h-full max-w-screen-xl min-h-screen -mb-36 px-4 mx-auto xl:px-0">
+    <div class="h-full max-w-screen-xl min-h-screen lg:-mb-36 px-4 mx-auto xl:px-0">
       <slot />
     </div>
     <app-footer />
