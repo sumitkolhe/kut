@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import ShortenLink from 'components/molecules/shorten-link.vue'
 import LinkCard from 'components/molecules/link-card.vue'
+import IconButton from 'components/atoms/buttons/icon-button.vue'
 import { useLinkStore } from 'store/link.store'
 import { useOffsetPagination } from '@vueuse/core'
 
@@ -11,17 +12,27 @@ definePageMeta({
 // store
 const LinkStore = useLinkStore()
 
-onMounted(async () => await LinkStore.fetchAllLinks())
-
+const totalCount = computed(() => LinkStore.totalCount)
 const allLinks = computed(() => LinkStore.allLinks)
-const totalLinks = computed(() => LinkStore.totalCount)
 
-const { currentPage, pageCount, prev, next } = useOffsetPagination({
-  total: totalLinks.value,
+onMounted(async () => await LinkStore.fetchAllLinks(0, 5))
+
+// functions
+const getPaginatedLinks = async ({
+  currentPage,
+  currentPageSize,
+}: {
+  currentPage: number
+  currentPageSize: number
+}) => {
+  await LinkStore.fetchAllLinks((currentPage - 1) * 5, currentPageSize)
+}
+
+const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffsetPagination({
+  total: totalCount,
   page: 1,
   pageSize: 5,
-  onPageChange: () => LinkStore.fetchAllLinks(0, currentPage.value),
-  onPageSizeChange: () => LinkStore.fetchAllLinks(),
+  onPageChange: getPaginatedLinks,
 })
 </script>
 
@@ -29,7 +40,7 @@ const { currentPage, pageCount, prev, next } = useOffsetPagination({
   <section class="w-full gap-6 my-6 md:my-8">
     <ShortenLink />
 
-    <div v-if="allLinks.length < 0">
+    <div v-if="allLinks.length > 0">
       <p class="py-2 mt-6 font-medium dark:text-gray-200">Recent Links</p>
       <div class="border divide-y rounded dark:divide-gray-700 dark:border-gray-700">
         <link-card
@@ -42,27 +53,16 @@ const { currentPage, pageCount, prev, next } = useOffsetPagination({
           :updated-at="link.updatedAt"
         ></link-card>
       </div>
-      <div class="flex justify-end">
-        <div class="flex items-center items-end justify-end gap-3 my-4">
-          <button
-            class="inline-flex items-center justify-center w-8 h-8 border border-gray-200 rounded bg-gray-50"
-            @click="next"
-          >
-            <Icon name="line-md:chevron-left" size="16" />
-          </button>
-
-          <p class="text-sm">
+      <div class="flex justify-center md:justify-end">
+        <div class="flex items-center items-end justify-end gap-3 mt-6 mb-0">
+          <icon-button :disabled="isFirstPage" icon="line-md:chevron-left" @click="prev" />
+          <p class="text-sm dark:text-gray-400">
             {{ currentPage }}
             <span class="mx-0.25">/</span>
             {{ pageCount }}
           </p>
 
-          <button
-            class="inline-flex items-center justify-center w-8 h-8 border border-gray-200 rounded bg-gray-50"
-            @click="prev"
-          >
-            <Icon name="line-md:chevron-right" size="16" />
-          </button>
+          <icon-button :disabled="isLastPage" icon="line-md:chevron-right" @click="next" />
         </div>
       </div>
     </div>
