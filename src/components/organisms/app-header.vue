@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Logo from 'components/atoms/logo.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 
@@ -9,7 +10,8 @@ const { $auth } = useNuxtApp()
   <header class="fixed z-50 w-full px-4 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
     <div class="flex flex-row items-center justify-between max-w-screen-xl h-16 mx-auto">
       <NuxtLink class="flex items-center space-x-3" to="/">
-        <Icon name="gridicons:link" size="36" class="text-red-500" />
+        <Logo />
+
         <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
         {{ $auth.loggedIn }}
       </NuxtLink>

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Logo from 'components/atoms/logo.vue'
 import Menu from 'components/molecules/menu.vue'
 
 const { toggleDrawer, isDrawerVisible } = useDrawer()
@@ -8,7 +9,7 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
   <header class="bg-gray-50 dark:bg-gray-900 w-full px-4">
     <div class="max-w-screen-xl mx-auto flex flex-row h-16 justify-between items-center">
       <NuxtLink class="flex items-center space-x-3" to="/dashboard">
-        <Icon name="gridicons:link" size="36" class="text-red-500" />
+        <Logo />
         <p class="font-medium uppercase text-lg dark:text-gray-50">Kut</p>
       </NuxtLink>
 

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Logo from 'components/atoms/logo.vue'
 const { isDarkTheme } = useTheme()
 </script>
 
@@ -8,7 +9,7 @@ const { isDarkTheme } = useTheme()
       <!-- Logo  -->
       <div class="flex flex-col items-center justify-between space-y-4 md:flex-row">
         <NuxtLink class="flex items-center space-x-3" to="/dashboard">
-          <Icon name="gridicons:link" size="36" class="text-red-500" />
+          <Logo />
           <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
         </NuxtLink>
 
