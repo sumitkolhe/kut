@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 definePageMeta({
   layout: 'public',
-  middleware: 'redirect',
+  middleware: ['alias-redirect'],
 })
 </script>
 

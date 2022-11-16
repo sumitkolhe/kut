@@ -2,13 +2,14 @@
 import useValidate from 'vue-tiny-validate'
 import TextInput from 'components/atoms/inputs/text-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import { useAuthStore } from 'store/auth.store'
 import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({
   layout: 'public',
 })
 
-const { $auth } = useNuxtApp()
+const { loginUser } = useAuthStore()
 
 const loading = ref(false)
 const loginData = reactive({ email: '', password: '' })
@@ -32,9 +33,8 @@ const login = async () => {
   result.value.$test()
   if (!result.value.$invalid) {
     loading.value = true
-    await $auth
-      .login(loginData.email, loginData.password)
-      .then(() => useRouter().push('/dashboard'))
+    await loginUser(loginData.email, loginData.password)
+    useRouter().push('/dashboard')
     loading.value = false
   }
 }

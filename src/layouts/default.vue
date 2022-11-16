@@ -1,20 +1,16 @@
 <script lang="ts" setup>
-import Navigation from 'components/molecules/navigation.vue'
 import AppFooter from 'components/organisms/app-footer.vue'
-import Drawer from 'components/molecules/drawer.vue'
+import DashboardDrawer from 'components/organisms/dashboard-drawer.vue'
 import DashboardHeader from 'components/organisms/dashboard-header.vue'
-
-definePageMeta({
-  middleware: 'auth',
-})
+import Navigation from 'components/molecules/navigation.vue'
 </script>
 
 <template>
   <main class="no-select">
     <NuxtLoadingIndicator color="#f55" :height="3" />
     <dashboard-header />
-    <navigation v-if="$route.fullPath.includes('dashboard')" />
-    <drawer />
+    <navigation />
+    <dashboard-drawer />
     <div class="h-full max-w-screen-xl min-h-screen lg:-mb-36 px-4 mx-auto xl:px-0">
       <slot />
     </div>

@@ -19,12 +19,12 @@ const props = defineProps({
     required: false,
   },
   createdAt: {
-    type: Date,
+    type: String,
     default: () => null,
     required: false,
   },
   updatedAt: {
-    type: Date,
+    type: String,
     default: () => null,
     required: false,
   },
@@ -37,6 +37,7 @@ const props = defineProps({
   >
     <div>
       <NuxtLink
+        v-slice="20"
         target="_blank"
         :to="props.target"
         class="text-sm font-medium text-red-500 truncate hover:underline"

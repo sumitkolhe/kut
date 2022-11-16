@@ -2,8 +2,6 @@
 import Logo from 'components/atoms/logo.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
-
-const { $auth } = useNuxtApp()
 </script>
 
 <template>
@@ -13,9 +11,8 @@ const { $auth } = useNuxtApp()
         <Logo />
 
         <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
-        {{ $auth.loggedIn }}
       </NuxtLink>
-      <div v-if="$auth.loggedIn" class="flex flex-row w-auto space-x-4">
+      <div class="flex flex-row w-auto space-x-4">
         <NuxtLink to="/auth/login">
           <secondary-button class="w-auto">Login</secondary-button>
         </NuxtLink>
@@ -23,11 +20,11 @@ const { $auth } = useNuxtApp()
           <primary-button class="w-auto">Sign up</primary-button>
         </NuxtLink>
       </div>
-      <div v-else>
+      <!-- <div v-else>
         <NuxtLink to="/dashboard">
           <primary-button class="w-auto">Dashboard</primary-button>
         </NuxtLink>
-      </div>
+      </div> -->
     </div>
   </header>
 </template>

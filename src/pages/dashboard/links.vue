@@ -6,7 +6,7 @@ import { useLinkStore } from 'store/link.store'
 import { useOffsetPagination } from '@vueuse/core'
 
 definePageMeta({
-  middleware: ['auth', 'verify-email'],
+  middleware: ['auth'],
 })
 
 // store
@@ -15,7 +15,9 @@ const LinkStore = useLinkStore()
 const totalCount = computed(() => LinkStore.totalCount)
 const allLinks = computed(() => LinkStore.allLinks)
 
-onMounted(async () => await LinkStore.fetchAllLinks(0, 5))
+onMounted(async () => {
+  await LinkStore.fetchAllLinks(0, 5)
+})
 
 // functions
 const getPaginatedLinks = async ({
@@ -49,8 +51,8 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
           :target="link.target"
           :short-url="link.shortUrl"
           :visit-count="link.visitCount"
-          :created-at="link.createdAt"
-          :updated-at="link.updatedAt"
+          :created-at="link.createdAt.toString()"
+          :updated-at="link.updatedAt.toString()"
         ></link-card>
       </div>
       <div class="flex justify-center md:justify-end">

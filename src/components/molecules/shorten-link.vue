@@ -95,7 +95,6 @@ const shortenLink = async () => {
             placeholder="Enter a url..."
             @keyup.enter="shortenLink"
           />
-
           <secondary-button class="w-fit h-fit" @click="openAdvancedOptions">
             <icon
               name="octicon:settings-24"

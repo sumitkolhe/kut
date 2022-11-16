@@ -2,14 +2,15 @@
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import TextInput from 'components/atoms/inputs/text-input.vue'
 import useValidate from 'vue-tiny-validate'
+import { useAuthStore } from 'store/auth.store'
 import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({
   layout: 'public',
 })
 
+const { registerUser } = useAuthStore()
 const { createAccountPoints } = useAppConfig()
-const { $auth } = useNuxtApp()
 
 const loading = ref(false)
 const registerData = reactive({ email: '', password: '' })
@@ -33,8 +34,7 @@ const register = async () => {
   result.value.$test()
   if (!result.value.$invalid) {
     loading.value = true
-    await $auth.register(registerData.email, registerData.password)
-
+    await registerUser(registerData.email, registerData.password)
     loading.value = false
   }
 }

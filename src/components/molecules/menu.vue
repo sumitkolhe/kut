@@ -1,7 +1,8 @@
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { useAuthStore } from 'store/auth.store'
 
-const { $auth } = useNuxtApp()
+const { logout } = useAuthStore()
 </script>
 
 <template>
@@ -50,7 +51,7 @@ const { $auth } = useNuxtApp()
                   : 'text-red-400 dark:text-red-500',
                 'block px-4 py-2 text-sm w-full text-left',
               ]"
-              @click="$auth.logout()"
+              @click="logout()"
             >
               Logout
             </button>
