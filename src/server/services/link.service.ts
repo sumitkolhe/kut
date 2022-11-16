@@ -121,6 +121,11 @@ export class LinkService {
 
     const isAliasAvailable = await LinkModel.findOne({ alias: randomAlias })
 
-    return isAliasAvailable ? await this.generateUniqueAlias() : randomAlias
+    if (isAliasAvailable) {
+      const alias = await this.generateUniqueAlias()
+      return alias
+    } else {
+      return randomAlias
+    }
   }
 }
