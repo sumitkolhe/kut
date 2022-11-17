@@ -111,6 +111,16 @@ export class LinkService {
     return link.target.toString()
   }
 
+  public delete = async (email: string, alias: string) => {
+    const deletedLink = await LinkModel.findOneAndDelete({ alias })
+
+    await UserModel.findOneAndUpdate(
+      { email },
+      { $pull: { userLinks: deletedLink?.id } },
+      { multi: true }
+    )
+  }
+
   private generateUniqueAlias = async (): Promise<string> => {
     let randomAlias = ''
     const characterSet = 'abcdefghijklmnopqrstuvwxyz1234567890'

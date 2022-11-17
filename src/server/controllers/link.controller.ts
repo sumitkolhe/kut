@@ -45,7 +45,7 @@ export class LinkController {
     }
   }
 
-  public allLinks: RequestHandler = async (
+  public getLinks: RequestHandler = async (
     req: Request,
     res: Response<
       CustomResponse<{
@@ -62,6 +62,23 @@ export class LinkController {
       const shortenedLink = await this.linkService.getAllLinks(email, Number(offset), Number(limit))
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public deleteLink: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<null>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { email } = req.auth
+      const { alias } = req.params
+
+      await this.linkService.delete(email, alias)
+
+      return res.json({ status: 'SUCCESS', message: 'link deleted successfully', data: null })
     } catch (error) {
       next(error)
     }
