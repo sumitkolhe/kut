@@ -30,6 +30,10 @@ const getPaginatedLinks = async ({
   await LinkStore.fetchAllLinks((currentPage - 1) * 5, currentPageSize)
 }
 
+const deleteLink = async (id: string) => {
+  console.log(id)
+}
+
 const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffsetPagination({
   total: totalCount,
   page: 1,
@@ -44,15 +48,28 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
 
     <div v-if="allLinks.length > 0">
       <p class="py-2 mt-6 font-medium dark:text-gray-200">Recent Links</p>
+      <!-- <div class="p-4 bg-gray-50">
+        <div
+          class="flex bg-gray-100 rounded-md py-3 px-4 border text-xs text-gray-400 justify-between space-x-4 uppercase border-200"
+        >
+          <p>Short Link</p>
+          <p>Short Link</p>
+          <p>Short Link</p>
+        </div>
+      </div> -->
+
       <div class="border divide-y rounded dark:divide-gray-700 dark:border-gray-700">
         <link-card
           v-for="(link, index) in allLinks.slice(0, 5)"
           :key="index"
+          :alias="link.alias!"
+          :description="link.description || ''"
           :target="link.target"
           :short-url="link.shortUrl"
           :visit-count="link.visitCount"
           :created-at="link.createdAt.toString()"
           :updated-at="link.updatedAt.toString()"
+          @delete-link="deleteLink"
         ></link-card>
       </div>
       <div class="flex justify-center md:justify-end">
