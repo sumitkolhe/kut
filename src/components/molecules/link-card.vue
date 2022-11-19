@@ -48,7 +48,7 @@ const deleteLink = (alias: string) => {
 
 <template>
   <div
-    class="flex flex-col gap-4 lg:flex-row justify-between w-full p-4 md:px-6 md:py-6 last:rounded-b first:rounded-t dark:bg-gray-900 bg-gray-50"
+    class="flex flex-col gap-4 lg:flex-row items-center justify-between w-full p-4 md:px-6 md:py-6 last:rounded-b first:rounded-t dark:bg-gray-900 bg-gray-50"
   >
     <div class="space-y-1">
       <p class="text-xs text-gray-300 tracking-wider uppercase">Short Link</p>
