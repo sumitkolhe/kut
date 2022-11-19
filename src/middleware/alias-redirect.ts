@@ -2,11 +2,9 @@ import type { CustomResponse } from 'interfaces/response.interface'
 
 export default defineNuxtRouteMiddleware(async () => {
   const route = useRoute()
-  const config = useRuntimeConfig()
+  const { apiBaseUrl } = useRuntimeConfig()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const nuxtApp = useNuxtApp()
-
-  const baseURL = config.apiBaseUrl
 
   let link
   try {
@@ -17,7 +15,7 @@ export default defineNuxtRouteMiddleware(async () => {
       headers: {
         'user-agent': userAgent,
       },
-      baseURL,
+      baseURL: apiBaseUrl,
       method: 'GET',
     })
 

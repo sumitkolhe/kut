@@ -1,8 +1,11 @@
 import { useJwt } from '@vueuse/integrations/useJwt'
 import { useAuthStore } from 'store/auth.store'
+import type { User } from 'interfaces/user.interface'
+import type { CustomResponse } from 'interfaces/response.interface'
 
 export default defineNuxtRouteMiddleware(async () => {
-  const router = useRouter()
+  const route = useRoute()
+  const { apiBaseUrl } = useRuntimeConfig()
   const AuthStore = useAuthStore()
   const { accessToken, refreshToken } = useToken()
 
@@ -16,13 +19,22 @@ export default defineNuxtRouteMiddleware(async () => {
 
   if (payload.value && payload.value.exp! < Date.now() / 1000) {
     await AuthStore.refreshToken(refreshToken.value!)
-    return
   }
 
-  // fetch user data if not already present
-  if (!AuthStore?.user?.email) {
-    await AuthStore.fetchUser().catch(() => router.replace('/'))
+  try {
+    if (!AuthStore?.user?.email) {
+      const user = await $fetch<CustomResponse<User>>('/api/v1/auth/me', {
+        baseURL: apiBaseUrl,
+        headers: {
+          Cookie: `accessToken=${accessToken.value}`,
+        },
+      })
+      AuthStore.user = user.data!
+    }
+  } catch (error) {
+    if (error instanceof Error) logger.error(error.message)
   }
 
-  if (AuthStore?.user?.isVerified === false) return navigateTo('/auth/verify-email')
+  if (AuthStore?.user?.isVerified === false && !route.path.includes('auth'))
+    return navigateTo('/auth/verify-email')
 })
