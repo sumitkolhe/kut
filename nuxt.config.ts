@@ -71,13 +71,12 @@ export default defineNuxtConfig({
           maxAge: 60 * 60 * 24 * 30,
         },
         user: {
-          property: '',
+          autoFetch: true,
         },
         endpoints: {
           user: { url: '/api/v1/auth/me', method: 'get' },
           login: { url: '/api/v1/auth/login', method: 'post' },
           refresh: { url: '/api/v1/auth/refresh-token', method: 'post' },
-          logout: false,
         },
       },
     },
