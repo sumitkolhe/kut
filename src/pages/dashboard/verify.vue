@@ -1,13 +1,8 @@
 <script lang="ts" setup>
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
-import { storeToRefs } from 'pinia'
 import { useAuthStore } from 'store/auth.store'
-definePageMeta({
-  middleware: ['auth'],
-})
 
 const { resendVerificationEmail } = useAuthStore()
-const { user } = storeToRefs(useAuthStore())
 </script>
 
 <template>
@@ -20,7 +15,7 @@ const { user } = storeToRefs(useAuthStore())
       </div>
       <p class="mb-2 text-lg text-zinc-500">
         We’ve sent you a verification link to the email address
-        <span class="font-medium text-red-500"> {{ user.email }} </span>
+        <!-- <span class="font-medium text-red-500"> {{ user.email }} </span> -->
       </p>
 
       <div class="flex flex-col items-center mx-12">

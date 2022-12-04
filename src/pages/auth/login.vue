@@ -34,7 +34,6 @@ const login = async () => {
   if (!result.value.$invalid) {
     loading.value = true
     await loginUser(loginData.email, loginData.password)
-    useRouter().push('/dashboard')
     loading.value = false
   }
 }

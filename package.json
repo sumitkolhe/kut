@@ -17,6 +17,9 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.4",
+    "@nuxtjs-alt/auth": "^2.1.7",
+    "@nuxtjs-alt/http": "^1.5.4",
+    "@nuxtjs-alt/proxy": "^2.1.2",
     "@pinia/nuxt": "^0.4.3",
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.1",
