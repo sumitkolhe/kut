@@ -30,7 +30,7 @@ export class EmailService {
         },
         to: [{ email, name }],
         params: {
-          VERIFICATION_LINK: `https://kut.sh/api/auth/verify?token=${emailVerificationToken}`,
+          VERIFICATION_LINK: `https://kut.sh/api/v1/auth/verify?token=${emailVerificationToken}`,
         },
       },
       method: 'POST',

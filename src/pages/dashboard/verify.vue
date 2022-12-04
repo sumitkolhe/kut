@@ -3,7 +3,6 @@ import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from 'store/auth.store'
 definePageMeta({
-  layout: 'public',
   middleware: ['auth'],
 })
 

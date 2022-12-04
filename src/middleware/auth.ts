@@ -35,6 +35,6 @@ export default defineNuxtRouteMiddleware(async () => {
     if (error instanceof Error) logger.error(error.message)
   }
 
-  if (AuthStore?.user?.isVerified === false && !route.path.includes('auth'))
-    return navigateTo('/auth/verify-email')
+  if (AuthStore?.user?.isVerified === false && !route.path.includes('dashboard/verify'))
+    return navigateTo('/dashboard/verify')
 })
