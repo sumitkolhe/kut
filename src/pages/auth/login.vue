@@ -33,7 +33,10 @@ const login = async () => {
   result.value.$test()
   if (!result.value.$invalid) {
     loading.value = true
-    await loginUser(loginData.email, loginData.password)
+    await loginUser(loginData.email, loginData.password).then(() => {
+      const router = useRouter()
+      router.replace('/dashboard')
+    })
     loading.value = false
   }
 }

@@ -6,7 +6,7 @@ import { useLinkStore } from 'store/link.store'
 import { useOffsetPagination } from '@vueuse/core'
 
 definePageMeta({
-  middleware: ['auth'],
+  middleware: ['verify-user'],
 })
 
 // store
