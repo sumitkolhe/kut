@@ -7,6 +7,7 @@ import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({
   layout: 'public',
+  auth: 'guest',
 })
 
 const { loginUser } = useAuthStore()
@@ -34,8 +35,8 @@ const login = async () => {
   if (!result.value.$invalid) {
     loading.value = true
     await loginUser(loginData.email, loginData.password).then(() => {
-      const router = useRouter()
-      router.replace('/dashboard')
+      // const router = useRouter()
+      // router.replace('/dashboard')
     })
     loading.value = false
   }
@@ -71,7 +72,7 @@ const login = async () => {
             Or Log in with an e-mail
           </p>
         </div> -->
-
+        {{ $auth.user }}
         <form class="flex flex-col items-center w-full space-y-4">
           <text-input
             v-model="loginData.email"

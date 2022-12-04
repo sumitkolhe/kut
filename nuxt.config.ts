@@ -56,7 +56,7 @@ export default defineNuxtConfig({
     globalMiddleware: true,
     strategies: {
       local: {
-        scheme: 'refresh',
+        scheme: 'local',
         enabled: true,
         name: '',
         token: {
@@ -71,6 +71,7 @@ export default defineNuxtConfig({
           maxAge: 60 * 60 * 24 * 30,
         },
         user: {
+          property: 'data',
           autoFetch: true,
         },
         endpoints: {
