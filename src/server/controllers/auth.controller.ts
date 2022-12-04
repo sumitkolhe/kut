@@ -31,14 +31,16 @@ export class AuthController {
         password,
       })
 
-      return res
-        .cookie('accessToken', accessToken, this.cookieOptions)
-        .cookie('refreshToken', refreshToken, this.cookieOptions)
-        .json({
-          status: 'SUCCESS',
-          message: null,
-          data: { accessToken, refreshToken },
-        })
+      return (
+        res
+          // .cookie('accessToken', accessToken, this.cookieOptions)
+          // .cookie('refreshToken', refreshToken, this.cookieOptions)
+          .json({
+            status: 'SUCCESS',
+            message: null,
+            data: { accessToken, refreshToken },
+          })
+      )
     } catch (error) {
       next(error)
     }
@@ -125,12 +127,14 @@ export class AuthController {
 
       const { accessToken } = await this.authService.refreshToken(refreshToken)
 
-      return res
-        .cookie('accessToken', accessToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-        })
-        .json({ status: 'SUCCESS', message: null, data: { accessToken } })
+      return (
+        res
+          // .cookie('accessToken', accessToken, {
+          //   httpOnly: true,
+          //   secure: process.env.NODE_ENV === 'production',
+          // })
+          .json({ status: 'SUCCESS', message: null, data: { accessToken } })
+      )
     } catch (error) {
       next(error)
     }
