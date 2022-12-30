@@ -2,16 +2,14 @@ import { HttpExceptionError } from 'server/exceptions/http.exception'
 import Jwt from 'jsonwebtoken'
 import { useConfig } from 'server/configs'
 import { ErrorType } from 'interfaces/error.interface'
+import { getCookies } from 'server/utils/cookie'
 import type { RequestHandler } from 'express'
 
 const config = useConfig()
 
 // verify access token
 export const checkAuthentication: RequestHandler = (req, _res, next) => {
-  // const accessToken = getCookies(req.headers.cookie)?.accessToken
-  const authHeader = req.headers['authorization']
-
-  const accessToken = authHeader && authHeader.split(' ')[1]
+  const accessToken = getCookies(req.headers.cookie)?.accessToken
 
   if (!accessToken) throw new HttpExceptionError(401, ErrorType.unauthorised)
 

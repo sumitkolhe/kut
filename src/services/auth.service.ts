@@ -1,16 +1,14 @@
 import { ApiService } from 'services/api.service'
-import type { Auth } from '@nuxtjs-alt/auth/dist/runtime'
+import type { User } from 'interfaces/user.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
-import type { Tokens } from 'interfaces/token.interface'
+import type { Token, Tokens } from 'interfaces/token.interface'
 
 export class AuthService extends ApiService {
   private base: string
-  private auth: Auth
 
   constructor() {
     super()
     this.base = '/auth'
-    this.auth = useNuxtApp().$auth
   }
 
   public async register(email: string, password: string) {
@@ -21,13 +19,29 @@ export class AuthService extends ApiService {
   }
 
   public async login(email: string, password: string) {
-    return this.auth.loginWith('local', {
+    return this.http<CustomResponse<Tokens>>(`${this.base}/login`, {
       body: { email, password },
+      method: 'POST',
+    })
+  }
+
+  public async fetchUser() {
+    return this.http<CustomResponse<User>>(`${this.base}/me`, {
+      method: 'GET',
     })
   }
 
   public async logout() {
-    return this.auth.logout()
+    return this.http<CustomResponse<null>>(`${this.base}/logout`, {
+      method: 'GET',
+    })
+  }
+
+  public async refreshAccessToken(refreshToken: string) {
+    return this.http<CustomResponse<Token>>(`${this.base}/refresh-token`, {
+      method: 'POST',
+      body: { refreshToken },
+    })
   }
 
   public async resendVerificationEmail() {
