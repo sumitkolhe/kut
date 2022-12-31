@@ -136,12 +136,14 @@ const createShortLink = async () => {
               label="Alias"
               placeholder="Enter alias"
               :model-value="alias"
+              prefix-icon="ph:pencil-simple-line-duotone"
               @input="$emit('update:alias', $event.target.value)"
             />
 
             <text-input
               :model-value="description"
               label="Description"
+              prefix-icon="ph:notepad-duotone"
               placeholder="Enter description"
               @input="$emit('update:description', $event.target.value)"
             />
@@ -149,6 +151,7 @@ const createShortLink = async () => {
             <text-input
               :model-value="password"
               label="Password"
+              prefix-icon="ph:password-duotone"
               placeholder="Enter password"
               @input="$emit('update:password', $event.target.value)"
             />
@@ -156,6 +159,7 @@ const createShortLink = async () => {
             <text-input
               :model-value="maxVisits"
               label="Max. Visits"
+              prefix-icon="ph:hand-pointing-duotone"
               placeholder="Enter maximum no. of visits"
               @input="$emit('update:maxVisits', $event.target.value)"
             />
@@ -185,9 +189,7 @@ const createShortLink = async () => {
             </div>
           </div>
 
-          <div
-            class="sticky bottom-0 flex w-full justify-end space-x-6 border-t bg-gray-100 bg-opacity-20 p-6 backdrop-blur"
-          >
+          <div class="sticky bottom-0 flex w-full justify-end space-x-6 border-t bg-gray-100 p-6">
             <secondary-button class="w-auto" @click="$emit('update:openPanel', false)">
               Cancel
             </secondary-button>

@@ -75,7 +75,7 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
 <template>
   <section class="my-6 w-full gap-6 md:my-8">
     <div class="relative flex w-full flex-col">
-      <div class="flex flex-col space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+      <div class="flex flex-row space-x-2">
         <text-input
           v-model="search"
           prefix-icon="ph:magnifying-glass-duotone"
@@ -84,10 +84,17 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
         <primary-button
           suffix-icon="ph:plus-duotone"
           :loading="loading"
-          class="w-full md:w-36"
+          class="hidden w-full md:block md:w-36"
           @click="showLinkPanel = true"
         >
           Add Link
+        </primary-button>
+        <primary-button
+          :loading="loading"
+          class="w-fit text-gray-100 hover:text-gray-900 md:hidden"
+          @click="showLinkPanel = true"
+        >
+          <icon name="ph:plus" class="transition-all duration-200" />
         </primary-button>
       </div>
 
