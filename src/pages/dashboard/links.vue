@@ -22,7 +22,7 @@ onMounted(() => {
 })
 
 // refs
-const showAdvancedOptions = ref(false)
+const showLinkPanel = ref(false)
 const loading = ref(false)
 const search = ref('')
 
@@ -42,11 +42,10 @@ const linkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'descripti
 // functions
 const createLink = async () => {
   loading.value = true
-  await shortenLink(linkPayload).then(() => {
-    fetchAllLinks()
-    showAdvancedOptions.value = false
+  await shortenLink(linkPayload).then(async () => {
+    loading.value = false
+    showLinkPanel.value = false
   })
-  loading.value = false
 }
 
 const deleteSelectedLink = async (alias: string | null) => {
@@ -86,7 +85,7 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
           suffix-icon="ph:plus-duotone"
           :loading="loading"
           class="w-full md:w-36"
-          @click="showAdvancedOptions = true"
+          @click="showLinkPanel = true"
         >
           Add Link
         </primary-button>
@@ -101,7 +100,7 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
         v-model:valid-till="linkPayload.meta.validTill"
         v-model:password="linkPayload.meta.password"
         v-model:max-visits="linkPayload.meta.maxVisits"
-        v-model:open-panel="showAdvancedOptions"
+        v-model:open-panel="showLinkPanel"
         :loading="loading"
         @create-link="createLink"
       />
@@ -112,10 +111,10 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
 
       <div class="space-y-3">
         <link-card
-          v-for="(link, index) in allLinks.slice(0, 5)"
-          :key="index"
+          v-for="link in allLinks.slice(0, 5)"
+          :key="link.alias?.toString()"
           :alias="link.alias"
-          :description="link.description || ''"
+          :description="link.description"
           :target="link.target"
           :short-url="link.shortUrl"
           :visit-count="link.visitCount"

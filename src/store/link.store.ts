@@ -11,7 +11,9 @@ export const useLinkStore = defineStore('links', {
   actions: {
     async shortenLink(linkPayload: Pick<Link, 'alias' | 'target' | 'meta' | 'description'>) {
       try {
-        await this.$http.link.shorten(linkPayload)
+        const response = await this.$http.link.shorten(linkPayload)
+
+        if (response.data) this.allLinks.unshift(response.data)
       } catch (error) {
         if (error instanceof FetchError) {
           logger.error(error.message)

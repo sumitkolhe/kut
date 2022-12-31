@@ -11,13 +11,10 @@ export class LinkService extends ApiService {
   }
 
   public async shorten(linkPayload: Pick<Link, 'alias' | 'target' | 'meta' | 'description'>) {
-    return this.http<CustomResponse<Pick<Link, 'alias' | 'target' | 'meta' | 'description'>>>(
-      `${this.base}/shorten`,
-      {
-        body: linkPayload,
-        method: 'POST',
-      }
-    )
+    return this.http<CustomResponse<Link>>(`${this.base}/shorten`, {
+      body: linkPayload,
+      method: 'POST',
+    })
   }
 
   public async fetchLinks(offset = 0, limit = 5) {

@@ -24,7 +24,7 @@ const props = defineProps({
     required: false,
   },
   description: {
-    type: String,
+    type: [String, null] as PropType<string | null>,
     default: () => '',
     required: false,
   },
@@ -69,7 +69,7 @@ const openQrCode = ref(false)
     <div
       class="flex w-full flex-row items-center justify-between lg:flex-col lg:items-start lg:space-y-1"
     >
-      <p class="text-xs uppercase tracking-wider text-gray-300">Original Link</p>
+      <p class="text-xs uppercase tracking-wider text-gray-300">Target</p>
       <NuxtLink
         v-slice="20"
         target="_blank"
