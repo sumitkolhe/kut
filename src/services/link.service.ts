@@ -34,9 +34,8 @@ export class LinkService extends ApiService {
     })
   }
 
-  public async deleteLink(email: string, password: string) {
-    return this.http<CustomResponse<Link>>(`${this.base}/`, {
-      body: { email, password },
+  public async deleteLink(alias: string) {
+    return this.http<CustomResponse<Link>>(`${this.base}/${alias}`, {
       method: 'DELETE',
     })
   }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useTimeAgo } from '@vueuse/core'
 import LinkMenu from 'components/molecules/menus/link-menu.vue'
-import QrCode from 'components/molecules/qr-code.vue'
+import QrCode from 'components/molecules/panels/qr-code.vue'
 
 // emits
 const emits = defineEmits(['delete-link', 'edit-link'])
@@ -110,20 +110,11 @@ const editLink = (alias: string) => {
       </p>
     </div>
 
-    <div class="flex w-full items-center justify-end">
-      <div
-        class="flex w-full flex-row items-center justify-between space-x-4 dark:border-gray-700 dark:bg-gray-800 md:w-fit"
-      >
-        <div
-          title="QR Code"
-          class="cursor-pointer rounded p-1 hover:bg-red-500 hover:bg-opacity-20"
-        >
-          <Icon name="ph:qr-code-duotone" class="text-red-500" @click="openQrCode = true" />
-          <qr-code :is-open="openQrCode" :link="props.shortUrl" @close="openQrCode = false" />
-        </div>
-
-        <link-menu @edit-link="editLink(props.alias)" @delete-link="deleteLink(props.alias)" />
-      </div>
+    <div
+      class="flex flex w-full w-full flex-row items-center items-center justify-end justify-between space-x-4 md:w-fit"
+    >
+      <qr-code :is-open="openQrCode" :link="props.shortUrl" @close="openQrCode = false" />
+      <link-menu @edit-link="editLink(props.alias)" @delete-link="deleteLink(props.alias)" />
     </div>
   </div>
 </template>

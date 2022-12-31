@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ShortenLink from 'components/molecules/shorten-link.vue'
+import ShortenLink from 'components/molecules/panels/shorten-link.vue'
 import IconButton from 'components/atoms/buttons/icon-button.vue'
 import { useLinkStore } from 'store/link.store'
 import { useOffsetPagination } from '@vueuse/core'
@@ -11,7 +11,7 @@ definePageMeta({
 })
 
 // store
-const { fetchAllLinks } = useLinkStore()
+const { fetchAllLinks, deleteLink } = useLinkStore()
 const { totalCount, allLinks } = storeToRefs(useLinkStore())
 
 onMounted(async () => {
@@ -29,8 +29,8 @@ const getPaginatedLinks = async ({
   await fetchAllLinks((currentPage - 1) * 5, currentPageSize)
 }
 
-const deleteLink = async (id: string) => {
-  console.log(id)
+const deleteSelectedLink = async (alias: string) => {
+  await deleteLink(alias)
 }
 
 const editLink = async (id: string) => {
@@ -63,7 +63,7 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
           :visit-count="link.visitCount"
           :created-at="link.createdAt.toString()"
           :updated-at="link.updatedAt.toString()"
-          @delete-link="deleteLink"
+          @delete-link="deleteSelectedLink(link.alias!)"
           @edit-link="editLink"
         />
       </div>

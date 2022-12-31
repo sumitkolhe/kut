@@ -11,9 +11,19 @@ import {
 } from '@headlessui/vue'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
+// emits
+const emits = defineEmits(['delete-link', 'edit-link'])
+
+// refs
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const smallerThanLg = breakpoints.smaller('lg')
 const showPanel = ref(false)
+
+// functions
+const deleteLink = () => {
+  emits('delete-link')
+  showPanel.value = false
+}
 </script>
 
 <template>
@@ -36,7 +46,7 @@ const showPanel = ref(false)
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" />
+          <div class="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur transition-opacity" />
         </transition-child>
 
         <transition-child
@@ -49,11 +59,11 @@ const showPanel = ref(false)
           leave-to="translate-y-full"
         >
           <dialog-panel
-            class="fixed bottom-0 right-0 flex h-auto w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-t bg-gray-50 dark:border-t dark:border-gray-700 dark:bg-gray-900"
+            class="fixed bottom-0 right-0 flex h-auto w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-t bg-gray-50 focus:outline-none dark:border-t dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
           >
-            <div class="flex flex-col space-y-2 p-2">
+            <div class="flex flex-col space-y-2 p-3">
               <button
-                class="group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-gray-200"
+                class="group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-700"
                 @click="$emit('edit-link')"
               >
                 <icon name="ph:pencil-duotone" />
@@ -62,7 +72,7 @@ const showPanel = ref(false)
 
               <button
                 class="group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-red-500 hover:text-gray-100"
-                @click="$emit('delete-link')"
+                @click="deleteLink"
               >
                 <icon name="ph:trash-duotone" />
                 <p>Delete</p>
@@ -76,8 +86,12 @@ const showPanel = ref(false)
     <div v-else title="Options" class="flex w-full justify-end">
       <Menu as="div" class="relative inline-block text-left">
         <div>
-          <menu-button class="rounded p-1 hover:bg-gray-200">
-            <icon name="ph:dots-three-vertical-bold" class="text-gray-900 dark:text-gray-200" />
+          <menu-button class="rounded p-1 hover:bg-gray-200 hover:bg-opacity-20">
+            <icon
+              name="ph:dots-three-vertical-bold"
+              class="text-gray-900 dark:text-gray-200"
+              size="26"
+            />
           </menu-button>
         </div>
 
@@ -90,23 +104,28 @@ const showPanel = ref(false)
           leave-to-class="transform scale-95 opacity-0"
         >
           <menu-items
-            class="absolute right-0 z-50 mt-4 w-screen origin-top-right divide-y divide-gray-100 rounded-md border bg-gray-50 shadow-lg focus:outline-none md:w-44"
+            class="absolute right-0 z-50 mt-4 w-screen origin-top-right divide-y divide-gray-100 rounded-md border bg-gray-50 shadow-lg focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 md:w-44"
           >
             <div class="flex flex-col space-y-1 p-2">
               <menu-item>
                 <button
-                  class="group flex w-full items-center rounded p-2 text-sm hover:bg-gray-200"
+                  title="Edit Link"
+                  class="group flex w-full items-center space-x-4 rounded p-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-700"
                   @click="$emit('edit-link')"
                 >
-                  Edit
+                  <icon name="ph:pencil-duotone" />
+
+                  <p>Edit</p>
                 </button>
               </menu-item>
               <menu-item>
                 <button
-                  class="group flex w-full items-center rounded p-2 text-sm hover:bg-red-500 hover:text-gray-100"
-                  @click="$emit('delete-link')"
+                  title="Delete Link"
+                  class="group flex w-full items-center space-x-4 rounded p-2 text-sm hover:bg-red-500 hover:text-gray-100"
+                  @click="deleteLink"
                 >
-                  Delete
+                  <icon name="ph:trash-duotone" />
+                  <p>Delete</p>
                 </button>
               </menu-item>
             </div>

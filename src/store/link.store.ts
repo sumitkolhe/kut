@@ -31,6 +31,17 @@ export const useLinkStore = defineStore('links', {
         }
       }
     },
+
+    async deleteLink(alias: string) {
+      try {
+        await this.$http.link.deleteLink(alias)
+        this.fetchAllLinks()
+      } catch (error) {
+        if (error instanceof FetchError) {
+          logger.error(error.message)
+        }
+      }
+    },
   },
   getters: {},
 })

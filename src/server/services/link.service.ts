@@ -112,8 +112,10 @@ export class LinkService {
   }
 
   public delete = async (email: string, alias: string) => {
+    // delete link from links collection
     const deletedLink = await LinkModel.findOneAndDelete({ alias })
 
+    // remove link reference from users collection object
     await UserModel.findOneAndUpdate(
       { email },
       { $pull: { userLinks: deletedLink?.id } },
