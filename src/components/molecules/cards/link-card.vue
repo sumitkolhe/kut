@@ -2,14 +2,15 @@
 import { useTimeAgo } from '@vueuse/core'
 import LinkMenu from 'components/molecules/menus/link-menu.vue'
 import QrCode from 'components/molecules/panels/qr-code.vue'
+import type { PropType } from 'vue'
 
 // emits
-const emits = defineEmits(['delete-link', 'edit-link'])
+defineEmits(['delete-link', 'edit-link'])
 
 // props
 const props = defineProps({
   alias: {
-    type: String,
+    type: [String, null] as PropType<string | null>,
     required: true,
   },
   target: {
@@ -46,16 +47,6 @@ const props = defineProps({
 
 // ref
 const openQrCode = ref(false)
-
-// functions
-const deleteLink = (alias: string) => {
-  console.log(alias)
-  emits('delete-link', alias)
-}
-
-const editLink = (alias: string) => {
-  emits('edit-link', alias)
-}
 </script>
 
 <template>
@@ -114,7 +105,7 @@ const editLink = (alias: string) => {
       class="flex flex w-full w-full flex-row items-center items-center justify-end justify-between space-x-4 md:w-fit"
     >
       <qr-code :is-open="openQrCode" :link="props.shortUrl" @close="openQrCode = false" />
-      <link-menu @edit-link="editLink(props.alias)" @delete-link="deleteLink(props.alias)" />
+      <link-menu @edit-link="$emit('edit-link')" @delete-link="$emit('delete-link')" />
     </div>
   </div>
 </template>

@@ -9,6 +9,11 @@ import type { PropType } from 'vue'
 
 // props
 const props = defineProps({
+  loading: {
+    type: Boolean,
+    default: () => false,
+    required: true,
+  },
   openPanel: {
     type: Boolean,
     required: true,
@@ -68,7 +73,6 @@ const emits = defineEmits([
 ])
 
 // refs
-const loading = ref(false)
 
 const rules: Rules = reactive({
   target: {

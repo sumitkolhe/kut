@@ -39,21 +39,22 @@ const linkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'descripti
   },
 })
 
+// functions
 const createLink = async () => {
   loading.value = true
   await shortenLink(linkPayload).then(() => {
     fetchAllLinks()
+    showAdvancedOptions.value = false
   })
   loading.value = false
 }
 
-// functions
-const deleteSelectedLink = async (alias: string) => {
-  await deleteLink(alias)
+const deleteSelectedLink = async (alias: string | null) => {
+  if (alias) await deleteLink(alias)
 }
 
-const editLink = async (id: string) => {
-  console.log(id)
+const editSelectedLink = async (alias: string | null) => {
+  console.log(alias)
 }
 
 const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffsetPagination({
@@ -101,6 +102,7 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
         v-model:password="linkPayload.meta.password"
         v-model:max-visits="linkPayload.meta.maxVisits"
         v-model:open-panel="showAdvancedOptions"
+        :loading="loading"
         @create-link="createLink"
       />
     </div>
@@ -112,15 +114,15 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
         <link-card
           v-for="(link, index) in allLinks.slice(0, 5)"
           :key="index"
-          :alias="link.alias!"
+          :alias="link.alias"
           :description="link.description || ''"
           :target="link.target"
           :short-url="link.shortUrl"
           :visit-count="link.visitCount"
           :created-at="link.createdAt.toString()"
           :updated-at="link.updatedAt.toString()"
-          @delete-link="deleteSelectedLink(link.alias!)"
-          @edit-link="editLink"
+          @delete-link="deleteSelectedLink(link.alias)"
+          @edit-link="editSelectedLink(link.alias)"
         />
       </div>
 
