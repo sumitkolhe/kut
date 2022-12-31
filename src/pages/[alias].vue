@@ -10,18 +10,22 @@ const route = useRoute()
 const headers = useRequestHeaders()
 const userAgent = headers?.['user-agent'] ?? navigator.userAgent
 
-const data = await $fetch<CustomResponse<null>>(`${apiBaseUrl}/api/v1/link/${route.params.alias}`, {
-  headers: {
-    'user-agent': userAgent,
-  },
-})
+const { data } = await useFetch<CustomResponse<null>>(
+  `${apiBaseUrl}/api/v1/link/${route.params.alias}`,
+  {
+    headers: {
+      'user-agent': userAgent,
+    },
+  }
+)
 
-navigateTo(data!.data, { external: true, redirectCode: 301 })
+if (!data.value?.data || data.value.data === '') {
+  throw createError({ statusCode: 404, statusMessage: 'Link does not exist' })
+} else navigateTo(data.value.data, { external: true, redirectCode: 301 })
 </script>
 
 <template>
   <div class="text-xl">
-    {{ route.params.alias }}
-    <p>Redirection page</p>
+    <p>Redirecting...</p>
   </div>
 </template>
