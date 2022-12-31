@@ -18,7 +18,7 @@ const { isDarkTheme } = useTheme()
       v-model="isDarkTheme"
       label="theme"
       name="icon-prefix"
-      class="block w-full px-10 py-2 text-sm text-gray-900 truncate transition bg-white border-gray-200 rounded cursor-pointer dark:text-gray-50 dark:bg-gray-900 dark:border-gray-700 focus:border-gray-200 focus:dark:border-gray-700 focus:ring-0"
+      class="block w-full cursor-pointer truncate rounded border-gray-200 bg-white px-10 py-2 text-sm text-gray-900 transition focus:border-gray-200 focus:ring-0 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50 focus:dark:border-gray-700"
     >
       <option :value="false">Light</option>
       <option :value="true">Dark</option>

@@ -11,7 +11,7 @@ import Navigation from 'components/molecules/navigation.vue'
     <dashboard-header />
     <navigation />
     <dashboard-drawer />
-    <div class="h-full max-w-screen-xl min-h-screen lg:-mb-36 px-4 mx-auto xl:px-0">
+    <div class="mx-auto h-full min-h-screen max-w-screen-xl px-4 lg:-mb-36 xl:px-0">
       <slot />
     </div>
     <app-footer />

@@ -30,6 +30,8 @@
     "morgan": "^1.10.0",
     "open-graph-scraper": "^5.0.2",
     "pinia": "^2.0.28",
+    "prettier-plugin-tailwindcss": "^0.2.1",
+    "qrcode": "^1.5.1",
     "vue-tiny-validate": "^0.2.4",
     "winston": "^3.8.2"
   },

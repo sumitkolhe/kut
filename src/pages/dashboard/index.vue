@@ -28,18 +28,18 @@ const overview = [
 </script>
 
 <template>
-  <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-6 md:my-8 gap-6">
+  <section class="my-6 grid grid-cols-1 gap-6 md:my-8 md:grid-cols-3 lg:grid-cols-4">
     <div
       v-for="item in overview"
       :key="item.title"
-      class="border p-6 items-center flex-row w-auto rounded-md hover:dark:border-gray-50 dark:border-gray-700 dark:bg-gray-900 bg-white hover:shadow-lg transition-all duration-100 flex justify-between"
+      class="flex w-auto flex-row items-center justify-between rounded-md border bg-white p-6 transition-all duration-100 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900 hover:dark:border-gray-50"
     >
       <div class="space-y-4">
-        <p class="font-medium dark:text-gray-200 text-gray-800">{{ item.title }}</p>
+        <p class="font-medium text-gray-800 dark:text-gray-200">{{ item.title }}</p>
         <p class="text-2xl font-medium dark:text-gray-200">{{ item.value }}</p>
       </div>
       <div
-        class="dark:bg-gray-900 dark:border-gray-600 bg-gray-100 border-[2px] items-center flex rounded-full p-3"
+        class="flex items-center rounded-full border-[2px] bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-900"
       >
         <Icon :name="item.icon" size="32" class="dark:text-gray-600" />
       </div>

@@ -7,7 +7,7 @@ definePageMeta({
 
 <template>
   <div
-    class="flex flex-col min-h-screen p-32 px-6 space-y-6 overflow-hidden bg-white dark:bg-black"
+    class="flex min-h-screen flex-col space-y-6 overflow-hidden bg-white p-32 px-6 dark:bg-black"
   >
     Index
   </div>

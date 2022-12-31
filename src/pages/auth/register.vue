@@ -42,14 +42,14 @@ const register = async () => {
 </script>
 
 <template>
-  <section class="flex justify-center min-h-screen bg-gray-100 dark:bg-gray-800">
+  <section class="flex min-h-screen justify-center bg-gray-100 dark:bg-gray-800">
     <!-- Inner container  -->
-    <div class="flex flex-col max-w-screen-2xl lg:flex-row">
+    <div class="flex max-w-screen-2xl flex-col lg:flex-row">
       <!-- Register Form  -->
       <div
-        class="flex flex-col items-center justify-center w-full min-h-screen px-4 space-y-8 md:h-full lg:w-1/2 md:mt-0 md:p-10 xl:p-24"
+        class="flex min-h-screen w-full flex-col items-center justify-center space-y-8 px-4 md:mt-0 md:h-full md:p-10 lg:w-1/2 xl:p-24"
       >
-        <h1 class="mb-4 text-2xl font-medium xl:text-3xl dark:text-gray-200">Create Account</h1>
+        <h1 class="mb-4 text-2xl font-medium dark:text-gray-200 xl:text-3xl">Create Account</h1>
         <!-- <div
           class="flex flex-col items-center justify-center w-full space-y-4 md:flex-row md:space-y-0 md:space-x-4"
         >
@@ -99,7 +99,7 @@ const register = async () => {
       </div>
       <!-- Features  -->
       <div
-        class="flex flex-col items-start justify-center w-full px-6 py-12 space-y-8 bg-gray-100 rounded-tr-lg rounded-br-lg dark:bg-gray-800 lg:w-1/2 md:p-10 xl:p-16"
+        class="flex w-full flex-col items-start justify-center space-y-8 rounded-tr-lg rounded-br-lg bg-gray-100 px-6 py-12 dark:bg-gray-800 md:p-10 lg:w-1/2 xl:p-16"
       >
         <div
           v-for="feature in createAccountPoints"
@@ -109,7 +109,7 @@ const register = async () => {
           <Icon name="ph:check-circle-duotone" size="32" class="text-red-500" />
 
           <div class="space-y-1">
-            <p class="text-lg font-medium text-left text-gray-900 dark:text-gray-200">
+            <p class="text-left text-lg font-medium text-gray-900 dark:text-gray-200">
               {{ feature.title }}
             </p>
             <p class="text-left text-gray-900 dark:text-gray-300">

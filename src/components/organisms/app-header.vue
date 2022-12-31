@@ -5,14 +5,14 @@ import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 </script>
 
 <template>
-  <header class="fixed z-50 w-full px-4 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-row items-center justify-between max-w-screen-xl h-16 mx-auto">
+  <header class="fixed z-50 w-full border-b bg-gray-50 px-4 dark:border-gray-700 dark:bg-gray-900">
+    <div class="mx-auto flex h-16 max-w-screen-xl flex-row items-center justify-between">
       <NuxtLink class="flex items-center space-x-3" to="/">
         <Logo />
 
         <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
       </NuxtLink>
-      <div class="flex flex-row w-auto space-x-4">
+      <div class="flex w-auto flex-row space-x-4">
         <NuxtLink to="/auth/login">
           <secondary-button class="w-auto">Login</secondary-button>
         </NuxtLink>

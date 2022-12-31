@@ -83,10 +83,10 @@ const shortenLink = async () => {
 </script>
 
 <template>
-  <div class="relative flex flex-col w-full">
-    <div class="flex flex-col space-y-3 md:space-y-0 md:space-x-2 md:flex-row">
+  <div class="relative flex w-full flex-col">
+    <div class="flex flex-col space-y-3 md:flex-row md:space-y-0 md:space-x-2">
       <!-- Link input field  -->
-      <div class="flex flex-col w-full space-x-0 space-y-4 md:space-x-2 md:space-y-0 md:flex-row">
+      <div class="flex w-full flex-col space-x-0 space-y-4 md:flex-row md:space-x-2 md:space-y-0">
         <div class="flex w-full space-x-2">
           <text-input
             v-model="linkPayload.target"
@@ -95,7 +95,7 @@ const shortenLink = async () => {
             placeholder="Enter a url..."
             @keyup.enter="shortenLink"
           />
-          <secondary-button class="w-fit h-fit" @click="openAdvancedOptions">
+          <secondary-button class="h-fit w-fit" @click="openAdvancedOptions">
             <icon
               name="octicon:settings-24"
               class="text-gray-400 transition-all duration-200"
@@ -126,7 +126,7 @@ const shortenLink = async () => {
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 transition-opacity bg-gray-800 bg-opacity-75" />
+          <div class="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" />
         </transition-child>
 
         <transition-child
@@ -139,14 +139,14 @@ const shortenLink = async () => {
           leave-to="translate-y-full md:translate-x-full md:translate-y-0"
         >
           <dialog-panel
-            class="fixed flex flex-col justify-between overflow-y-auto max-h-[75%] h-full md:max-h-screen w-screen md:w-[50%] lg:w-[33%] md:right-0 bottom-0 bg-gray-50 dark:bg-gray-900 rounded-t-lg md:rounded-t-none md:border-t-0 dark:border-t border-l-0 md:border-l dark:border-gray-700"
+            class="fixed bottom-0 flex h-full max-h-[75%] w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-l-0 bg-gray-50 dark:border-t dark:border-gray-700 dark:bg-gray-900 md:right-0 md:max-h-screen md:w-[50%] md:rounded-t-none md:border-t-0 md:border-l lg:w-[33%]"
           >
-            <div class="p-4 space-y-1 md:p-6">
+            <div class="space-y-1 p-4 md:p-6">
               <p class="font-medium text-gray-900 dark:text-gray-200">Advance Options</p>
               <p class="text-sm text-gray-500">Customize link parameters</p>
             </div>
 
-            <div class="flex flex-col p-4 space-y-6 md:p-6">
+            <div class="flex flex-col space-y-6 p-4 md:p-6">
               <div class="">
                 <text-input v-model="linkPayload.alias" label="Alias" placeholder="Enter alias" />
               </div>
@@ -193,7 +193,7 @@ const shortenLink = async () => {
               </div>
             </div>
             <div
-              class="bottom-0 flex flex-row items-center justify-end w-full p-4 space-x-4 border-t dark:border-gray-700 md:p-6"
+              class="bottom-0 flex w-full flex-row items-center justify-end space-x-4 border-t p-4 dark:border-gray-700 md:p-6"
             >
               <secondary-button class="w-auto" @click="closeAdvancedOptions">
                 Cancel

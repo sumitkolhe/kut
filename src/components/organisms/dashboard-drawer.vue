@@ -13,12 +13,12 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
       <transition name="slide-fade">
         <aside
           v-show="isDrawerVisible"
-          class="flex-col md:hidden z-50 inset-0 flex h-screen w-full fixed bg-gray-50 dark:bg-gray-900 px-4"
+          class="fixed inset-0 z-50 flex h-screen w-full flex-col bg-gray-50 px-4 dark:bg-gray-900 md:hidden"
         >
-          <div class="dark:bg-gray-900 bg-gray-50 flex items-center justify-between">
+          <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-900">
             <NuxtLink class="flex items-center space-x-3" to="/dashboard">
               <Logo />
-              <p class="font-medium uppercase text-lg dark:text-gray-50">Kut</p>
+              <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
             </NuxtLink>
 
             <Icon
@@ -37,7 +37,7 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
             />
           </div>
           <section class="flex h-screen dark:border-gray-700">
-            <div class="flex flex-col w-full py-4 space-y-3">
+            <div class="flex w-full flex-col space-y-3 py-4">
               <secondary-button>New Link</secondary-button>
               <primary-button>Logout</primary-button>
               <theme-switch />
