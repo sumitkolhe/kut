@@ -13,17 +13,17 @@ const tabs = [
 
 <template>
   <nav
-    class="border-b z-0 sticky px-4 top-0 dark:border-gray-700 border-gray-200 bg-white dark:bg-gray-900"
+    class="sticky top-0 z-50 border-b border-gray-200 bg-white px-4 dark:border-gray-700 dark:bg-gray-900"
   >
     <div
-      class="max-w-screen-xl mx-auto h-12 flex flex-row space-x-8 text-gray-500 overflow-x-scroll no-scrollbar"
+      class="no-scrollbar mx-auto flex h-12 max-w-screen-xl flex-row space-x-8 overflow-x-scroll text-gray-500"
     >
       <NuxtLink
         v-for="tab in tabs"
         :key="tab.name"
         :to="tab.href"
         active-class="border-black dark:border-gray-50 border-b-[2px] text-black dark:text-gray-50"
-        class="inline-flex py-4 h-12 hover:text-gray-600 hover:dark:text-gray-300"
+        class="inline-flex h-12 py-4 hover:text-gray-600 hover:dark:text-gray-300"
       >
         <Icon :name="tab.icon" size="20" class="mr-2" />
         <p class="text-sm">{{ tab.name }}</p>

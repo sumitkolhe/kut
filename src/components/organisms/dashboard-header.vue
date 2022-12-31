@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 import Logo from 'components/atoms/logo.vue'
-import Menu from 'components/molecules/menu.vue'
+import ProfileMenu from 'components/molecules/menus/profile-menu.vue'
 
 const { toggleDrawer, isDrawerVisible } = useDrawer()
 </script>
 
 <template>
-  <header class="bg-gray-50 dark:bg-gray-900 w-full px-4">
-    <div class="max-w-screen-xl mx-auto flex flex-row h-16 justify-between items-center">
+  <header class="w-full bg-gray-50 px-4 dark:bg-gray-900">
+    <div class="mx-auto flex h-16 max-w-screen-xl flex-row items-center justify-between">
       <NuxtLink class="flex items-center space-x-3" to="/dashboard">
         <Logo />
-        <p class="font-medium uppercase text-lg dark:text-gray-50">Kut</p>
+        <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
       </NuxtLink>
 
       <div class="hidden md:block">
-        <Menu />
+        <profile-menu />
       </div>
       <div class="md:hidden">
         <Icon
