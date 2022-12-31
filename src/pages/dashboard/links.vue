@@ -1,22 +1,21 @@
 <script lang="ts" setup>
 import ShortenLink from 'components/molecules/shorten-link.vue'
-import LinkCard from 'components/molecules/link-card.vue'
 import IconButton from 'components/atoms/buttons/icon-button.vue'
 import { useLinkStore } from 'store/link.store'
 import { useOffsetPagination } from '@vueuse/core'
+import { storeToRefs } from 'pinia'
+import LinkCard from 'components/molecules/cards/link-card.vue'
 
 definePageMeta({
   middleware: ['verify-user'],
 })
 
 // store
-const LinkStore = useLinkStore()
-
-const totalCount = computed(() => LinkStore.totalCount)
-const allLinks = computed(() => LinkStore.allLinks)
+const { fetchAllLinks } = useLinkStore()
+const { totalCount, allLinks } = storeToRefs(useLinkStore())
 
 onMounted(async () => {
-  await LinkStore.fetchAllLinks(0, 5)
+  await fetchAllLinks(0, 5)
 })
 
 // functions
@@ -27,10 +26,14 @@ const getPaginatedLinks = async ({
   currentPage: number
   currentPageSize: number
 }) => {
-  await LinkStore.fetchAllLinks((currentPage - 1) * 5, currentPageSize)
+  await fetchAllLinks((currentPage - 1) * 5, currentPageSize)
 }
 
 const deleteLink = async (id: string) => {
+  console.log(id)
+}
+
+const editLink = async (id: string) => {
   console.log(id)
 }
 
@@ -43,22 +46,13 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
 </script>
 
 <template>
-  <section class="w-full gap-6 my-6 md:my-8">
-    <ShortenLink />
+  <section class="my-6 w-full gap-6 md:my-8">
+    <shorten-link />
 
     <div v-if="allLinks.length > 0">
-      <p class="py-2 mt-6 font-medium dark:text-gray-200">Recent Links</p>
-      <!-- <div class="p-4 bg-gray-50">
-        <div
-          class="flex bg-gray-100 rounded-md py-3 px-4 border text-xs text-gray-400 justify-between space-x-4 uppercase border-200"
-        >
-          <p>Short Link</p>
-          <p>Short Link</p>
-          <p>Short Link</p>
-        </div>
-      </div> -->
+      <p class="mt-6 py-3 font-medium dark:text-gray-200">My Links</p>
 
-      <div class="border divide-y rounded dark:divide-gray-700 dark:border-gray-700">
+      <div class="space-y-3">
         <link-card
           v-for="(link, index) in allLinks.slice(0, 5)"
           :key="index"
@@ -70,28 +64,30 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
           :created-at="link.createdAt.toString()"
           :updated-at="link.updatedAt.toString()"
           @delete-link="deleteLink"
-        ></link-card>
+          @edit-link="editLink"
+        />
       </div>
+
       <div class="flex justify-center md:justify-end">
-        <div class="flex items-center items-end justify-end gap-3 mt-6 mb-0">
+        <div class="mt-6 mb-0 flex items-end items-center justify-end gap-3">
           <icon-button :disabled="isFirstPage" icon="line-md:chevron-left" @click="prev" />
           <p class="text-sm dark:text-gray-400">
             {{ currentPage }}
             <span class="mx-0.25">/</span>
             {{ pageCount }}
           </p>
-
           <icon-button :disabled="isLastPage" icon="line-md:chevron-right" @click="next" />
         </div>
       </div>
     </div>
+
     <div
       v-else
-      class="border relative bg-gray-50 my-6 rounded px-4 py-6 h-64 dark:bg-gray-900 dark:border-gray-700 flex items-center flex-col justify-center"
+      class="relative my-6 flex h-64 flex-col items-center justify-center rounded border bg-gray-50 px-4 py-6 dark:border-gray-700 dark:bg-gray-900"
     >
-      <Icon name="ph:link-break-duotone" size="44" class="opacity-50 dark:text-gray-400" />
+      <icon name="ph:link-break-duotone" size="44" class="opacity-50 dark:text-gray-400" />
       <p class="mt-4 mb-1 font-medium dark:text-gray-200">No Links</p>
-      <p class="text-gray-400 dark:text-gray-500 font-light">Get started by creating a new link.</p>
+      <p class="font-light text-gray-400 dark:text-gray-500">Get started by creating a new link.</p>
     </div>
   </section>
 </template>

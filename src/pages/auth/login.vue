@@ -7,7 +7,6 @@ import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({
   layout: 'public',
-  auth: 'guest',
 })
 
 const { loginUser } = useAuthStore()
@@ -35,8 +34,8 @@ const login = async () => {
   if (!result.value.$invalid) {
     loading.value = true
     await loginUser(loginData.email, loginData.password).then(() => {
-      // const router = useRouter()
-      // router.replace('/dashboard')
+      const router = useRouter()
+      router.replace('/dashboard')
     })
     loading.value = false
   }
@@ -44,12 +43,12 @@ const login = async () => {
 </script>
 
 <template>
-  <section class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800">
+  <section class="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-800">
     <!-- Inner container  -->
-    <div class="flex flex-col w-full max-w-2xl rounded-lg h-fit lg:flex-row dark:border-gray-700">
+    <div class="flex h-fit w-full max-w-2xl flex-col rounded-lg dark:border-gray-700 lg:flex-row">
       <!-- Login Form  -->
-      <div class="flex flex-col items-center justify-center w-full p-4 space-y-8 md:p-10 xl:p-14">
-        <h1 class="mb-4 text-2xl font-medium tracking-wide xl:text-3xl dark:text-gray-200">
+      <div class="flex w-full flex-col items-center justify-center space-y-8 p-4 md:p-10 xl:p-14">
+        <h1 class="mb-4 text-2xl font-medium tracking-wide dark:text-gray-200 xl:text-3xl">
           Log in
         </h1>
         <!-- <div
@@ -72,8 +71,8 @@ const login = async () => {
             Or Log in with an e-mail
           </p>
         </div> -->
-        {{ $auth.user }}
-        <form class="flex flex-col items-center w-full space-y-4">
+
+        <form class="flex w-full flex-col items-center space-y-4">
           <text-input
             v-model="loginData.email"
             label="Email"

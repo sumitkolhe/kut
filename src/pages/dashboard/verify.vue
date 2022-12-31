@@ -2,25 +2,19 @@
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import { useAuthStore } from 'store/auth.store'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import type { User } from 'interfaces/user.interface'
 
 const { resendVerificationEmail } = useAuthStore()
-const { $auth } = useNuxtApp()
 
-const user = computed(() => $auth.$storage.getStore()?.user?.data as User)
+// const user = computed(() => $auth.$storage.getStore()?.user?.data as User)
 
-const isVerified = computed(() => user.value?.isVerified || false)
-
-const route = useRoute()
-
-onMounted(() => {
-  if (user.value && isVerified.value === true && route.path.includes('/dashboard/verify'))
-    return useRouter().replace('/dashboard')
-})
+// onMounted(() => {
+//   if (user.value && isVerified.value === true && route.path.includes('/dashboard/verify'))
+//     return useRouter().replace('/dashboard')
+// })
 </script>
 
 <template>
-  <section class="w-full flex items-center justify-center">
+  <section class="flex w-full items-center justify-center">
     <client-only>
       <TransitionRoot appear :show="true" as="template">
         <Dialog as="div" class="relative z-10">
@@ -48,17 +42,17 @@ onMounted(() => {
                 leave-to="opacity-0 scale-95"
               >
                 <DialogPanel
-                  class="max-w-xl p-16 px-8 shadow-2xl text-center bg-gray-100 rounded-md md:border md:bg-white"
+                  class="max-w-xl rounded-md bg-gray-100 p-16 px-8 text-center shadow-2xl md:border md:bg-white"
                 >
-                  <div class="mb-2 text-4xl font-bold md:text-2xl text-zinc-800">
+                  <div class="mb-2 text-4xl font-bold text-zinc-800 md:text-2xl">
                     <p>Check your inbox</p>
                   </div>
                   <p class="mb-2 text-lg text-zinc-500">
                     We’ve sent you a verification link to the email address
                     <!-- <span class="font-medium text-red-500"> {{ user.email }} </span> -->
                   </p>
-                  <div class="flex flex-col items-center mx-12">
-                    <primary-button class="w-auto mt-6" @click="resendVerificationEmail()">
+                  <div class="mx-12 flex flex-col items-center">
+                    <primary-button class="mt-6 w-auto" @click="resendVerificationEmail()">
                       Resend Verification Email
                     </primary-button>
                   </div>
