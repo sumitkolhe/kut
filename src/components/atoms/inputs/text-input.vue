@@ -23,7 +23,7 @@ const props = defineProps({
     required: false,
   },
   modelValue: {
-    type: String as PropType<string | number | Date | null>,
+    type: [String, Number, Date, null] as PropType<string | number | Date | null>,
     default: () => null,
     required: true,
   },
