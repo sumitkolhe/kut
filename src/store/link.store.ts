@@ -21,6 +21,9 @@ export const useLinkStore = defineStore('links', {
 
     async fetchAllLinks(offset = 0, limit = 5) {
       try {
+        this.allLinks = []
+        this.totalCount = 0
+
         const response = await this.$http.link.fetchLinks(offset, limit)
 
         this.allLinks = response.data!.links!
@@ -35,7 +38,6 @@ export const useLinkStore = defineStore('links', {
     async deleteLink(alias: string) {
       try {
         await this.$http.link.deleteLink(alias)
-        this.fetchAllLinks()
       } catch (error) {
         if (error instanceof FetchError) {
           logger.error(error.message)
@@ -43,5 +45,4 @@ export const useLinkStore = defineStore('links', {
       }
     },
   },
-  getters: {},
 })
