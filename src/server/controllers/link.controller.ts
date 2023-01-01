@@ -10,7 +10,7 @@ export class LinkController {
     this.linkService = new LinkService()
   }
 
-  public shorten: RequestHandler = async (
+  public createLink: RequestHandler = async (
     req: Request,
     res: Response<CustomResponse<any>>,
     next: NextFunction
@@ -37,7 +37,7 @@ export class LinkController {
         meta: { password, validFrom, validTill, maxVisits, active },
       }
 
-      const shortenedLink = await this.linkService.shorten(email, link)
+      const shortenedLink = await this.linkService.createLink(email, link)
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
     } catch (error) {
@@ -45,7 +45,7 @@ export class LinkController {
     }
   }
 
-  public getLinks: RequestHandler = async (
+  public getAllLinks: RequestHandler = async (
     req: Request,
     res: Response<
       CustomResponse<{
@@ -63,7 +63,7 @@ export class LinkController {
         email,
         Number(offset),
         Number(limit),
-        search
+        search as string
       )
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
@@ -81,7 +81,7 @@ export class LinkController {
       const { email } = req.auth
       const { alias } = req.params
 
-      await this.linkService.delete(email, alias)
+      await this.linkService.deleteLink(email, alias)
 
       return res.json({ status: 'SUCCESS', message: 'link deleted successfully', data: null })
     } catch (error) {
@@ -89,7 +89,7 @@ export class LinkController {
     }
   }
 
-  public redirect: RequestHandler = async (
+  public getLink: RequestHandler = async (
     req: Request,
     res: Response<CustomResponse<any>>,
     next: NextFunction
@@ -98,12 +98,32 @@ export class LinkController {
       const { alias } = req.params
       const { analytics } = req
 
-      const redirectionLink = await this.linkService.redirect(alias, analytics)
+      const link = await this.linkService.getLinkByAlias(alias, analytics)
 
       return res.json({
         status: 'SUCCESS',
         message: null,
-        data: redirectionLink,
+        data: link,
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public linkStatistics: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<any>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { alias } = req.params
+
+      const statistics = await this.linkService.statistics(alias)
+
+      return res.json({
+        status: 'SUCCESS',
+        message: null,
+        data: statistics,
       })
     } catch (error) {
       next(error)

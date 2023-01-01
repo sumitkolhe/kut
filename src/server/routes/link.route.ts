@@ -21,15 +21,21 @@ export class LinkRoute implements Routes {
       checkAuthentication,
       checkAccountVerification,
       allLinksSchema,
-      this.linkController.getLinks
+      this.linkController.getAllLinks
     )
     this.router.post(
       `${this.path}/shorten`,
       checkAuthentication,
       checkAccountVerification,
-      this.linkController.shorten
+      this.linkController.createLink
     )
-    this.router.get(`${this.path}/:alias`, analyticsHandler, this.linkController.redirect)
+    this.router.get(
+      `${this.path}/stats/:alias`,
+      checkAuthentication,
+      checkAccountVerification,
+      this.linkController.linkStatistics
+    )
+    this.router.get(`${this.path}/:alias`, analyticsHandler, this.linkController.getLink)
     this.router.delete(`${this.path}/:alias`, checkAuthentication, this.linkController.deleteLink)
   }
 }

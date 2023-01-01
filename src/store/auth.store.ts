@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('authentication-store', {
 
     async registerUser(email: string, password: string) {
       try {
-        await this.$http.auth.login(email, password)
+        await this.$http.auth.register(email, password)
       } catch (error) {
         if (error instanceof Error) logger.error(error.message)
       }
