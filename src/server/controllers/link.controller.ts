@@ -57,9 +57,14 @@ export class LinkController {
   ) => {
     try {
       const { email } = req.auth
-      const { offset, limit } = req.query
+      const { offset, limit, search } = req.query
 
-      const shortenedLink = await this.linkService.getAllLinks(email, Number(offset), Number(limit))
+      const shortenedLink = await this.linkService.getAllLinks(
+        email,
+        Number(offset),
+        Number(limit),
+        search
+      )
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
     } catch (error) {

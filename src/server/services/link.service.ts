@@ -45,7 +45,8 @@ export class LinkService {
   public getAllLinks = async (
     email: string,
     offset: number,
-    limit: number
+    limit: number,
+    search: string
   ): Promise<{
     links: Link[]
     total: number
@@ -58,6 +59,7 @@ export class LinkService {
       }
     ).populate({
       path: 'userLinks',
+      match: search ? { $text: { $search: search } } : {},
       options: {
         sort: { createdAt: -1 },
         skip: offset,

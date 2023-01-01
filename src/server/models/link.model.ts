@@ -62,4 +62,11 @@ const LinkSchema: Schema = new mongoose.Schema(
   { timestamps: true }
 )
 
+LinkSchema.index({
+  alias: 'text',
+  target: 'text',
+  shortUrl: 'text',
+  description: 'text',
+})
+
 export const LinkModel = mongoose.model<LinkDocument>('link', LinkSchema)
