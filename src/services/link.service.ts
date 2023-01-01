@@ -25,7 +25,7 @@ export class LinkService extends ApiService {
   }
 
   public async updateLink() {
-    return this.http<CustomResponse<Link>>(`${this.base}/shorten`, {
+    return this.http<CustomResponse<Link>>(`${this.base}/`, {
       body: {},
       method: 'POST',
     })

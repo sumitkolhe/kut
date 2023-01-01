@@ -6,8 +6,8 @@ import { storeToRefs } from 'pinia'
 import LinkCard from 'components/molecules/cards/link-card.vue'
 import TextInput from 'components/atoms/inputs/text-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
-import linkOptions from 'components/molecules/panels/link-options.vue'
-import QrCode from 'components/molecules/panels/qr-code.vue'
+import QrCodePanel from 'components/molecules/panels/qr-code-panel.vue'
+import CreateLinkPanel from 'components/molecules/panels/create-link-panel.vue'
 import type { Link } from 'interfaces/link.interface'
 
 definePageMeta({
@@ -113,9 +113,8 @@ const showQrCode = (url: string) => {
           <icon name="ph:plus" class="transition-all duration-200" />
         </primary-button>
       </div>
-      {{ currentPage }} {{ pageCount }} {{ isFirstPage }}{{ isLastPage }}
 
-      <link-options
+      <create-link-panel
         v-model:active="linkPayload.meta.active"
         v-model:alias="linkPayload.alias"
         v-model:description="linkPayload.description"
@@ -127,7 +126,7 @@ const showQrCode = (url: string) => {
         v-model:open-panel="showLinkPanel"
         :loading="loading"
         @create-link="createLink"
-      />
+      ></create-link-panel>
     </div>
 
     <div v-if="allLinks.length > 0">
@@ -150,7 +149,7 @@ const showQrCode = (url: string) => {
         />
       </div>
 
-      <QrCode :is-open="openQrCode" :link="qrCode" @close="openQrCode = false" />
+      <qr-code-panel :is-open="openQrCode" :link="qrCode" @close="openQrCode = false" />
 
       <div class="flex justify-center md:justify-end">
         <div class="mt-6 mb-0 flex items-end items-center justify-end gap-3">

@@ -2,11 +2,6 @@
 const tabs = [
   { name: 'Overview', href: '/dashboard', icon: 'ph:dots-nine-bold' },
   { name: 'Links', href: '/dashboard/links', icon: 'ph:link' },
-  {
-    name: 'Statistics',
-    href: '/dashboard/stats',
-    icon: 'ph:graph',
-  },
   { name: 'Settings', href: '/dashboard/settings', icon: 'lucide:settings-2' },
 ]
 </script>
