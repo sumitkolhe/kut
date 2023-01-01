@@ -11,7 +11,7 @@ import QrCode from 'components/molecules/panels/qr-code.vue'
 import type { Link } from 'interfaces/link.interface'
 
 definePageMeta({
-  middleware: ['verify-user'],
+  middleware: ['verify-user', 'auth'],
 })
 
 // store
@@ -43,6 +43,10 @@ const linkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'descripti
 })
 
 // functions
+const debouncedSearch = useDebounceFn(() => {
+  fetchAllLinks(0, 5, search.value)
+}, 500)
+
 const createLink = async () => {
   loading.value = true
   await shortenLink(linkPayload).then(async () => {
@@ -79,10 +83,6 @@ const showQrCode = (url: string) => {
   qrCode.value = url
   openQrCode.value = true
 }
-
-const debouncedSearch = useDebounceFn(() => {
-  fetchAllLinks(0, 5, search.value)
-}, 500)
 </script>
 
 <template>
@@ -113,6 +113,7 @@ const debouncedSearch = useDebounceFn(() => {
           <icon name="ph:plus" class="transition-all duration-200" />
         </primary-button>
       </div>
+      {{ currentPage }} {{ pageCount }} {{ isFirstPage }}{{ isLastPage }}
 
       <link-options
         v-model:active="linkPayload.meta.active"

@@ -2,10 +2,6 @@ import { useJwt } from '@vueuse/integrations/useJwt'
 import { useAuthStore } from 'store/auth.store'
 
 export default defineNuxtRouteMiddleware(async () => {
-  const route = useRoute()
-
-  if (route.path.includes('auth') || '/'.includes(route.path)) return
-
   const { logout } = useAuthStore()
   const { accessToken } = useToken()
 
