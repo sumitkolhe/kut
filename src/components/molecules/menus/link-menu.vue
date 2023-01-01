@@ -63,7 +63,7 @@ const deleteLink = () => {
           >
             <div class="flex flex-col space-y-2 p-3">
               <button
-                class="group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                class="no-select group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-700"
                 @click="$emit('edit-link')"
               >
                 <icon name="ph:pencil-duotone" />
@@ -71,7 +71,7 @@ const deleteLink = () => {
               </button>
 
               <button
-                class="group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-red-500 hover:text-gray-100"
+                class="no-select group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-red-500 hover:text-gray-100"
                 @click="deleteLink"
               >
                 <icon name="ph:trash-duotone" />

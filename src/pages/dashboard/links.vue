@@ -7,6 +7,7 @@ import LinkCard from 'components/molecules/cards/link-card.vue'
 import TextInput from 'components/atoms/inputs/text-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import linkOptions from 'components/molecules/panels/link-options.vue'
+import QrCode from 'components/molecules/panels/qr-code.vue'
 import type { Link } from 'interfaces/link.interface'
 
 definePageMeta({
@@ -25,6 +26,8 @@ onMounted(() => {
 const showLinkPanel = ref(false)
 const loading = ref(false)
 const search = ref('')
+const qrCode = ref()
+const openQrCode = ref(false)
 
 const linkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'description'>>({
   alias: null,
@@ -70,6 +73,12 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
     fetchAllLinks((currentPage - 1) * 5, currentPageSize)
   },
 })
+
+const showQrCode = (url: string) => {
+  console.log(url)
+  qrCode.value = url
+  openQrCode.value = true
+}
 </script>
 
 <template>
@@ -129,8 +138,11 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
           :updated-at="link.updatedAt.toString()"
           @delete-link="deleteSelectedLink(link.alias)"
           @edit-link="editSelectedLink(link.alias)"
+          @qr-code="showQrCode"
         />
       </div>
+
+      <QrCode :is-open="openQrCode" :link="qrCode" @close="openQrCode = false" />
 
       <div class="flex justify-center md:justify-end">
         <div class="mt-6 mb-0 flex items-end items-center justify-end gap-3">

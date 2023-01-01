@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { useTimeAgo } from '@vueuse/core'
 import LinkMenu from 'components/molecules/menus/link-menu.vue'
-import QrCode from 'components/molecules/panels/qr-code.vue'
 import type { PropType } from 'vue'
 
 // emits
-defineEmits(['delete-link', 'edit-link'])
+defineEmits(['delete-link', 'edit-link', 'qr-code'])
 
 // props
 const props = defineProps({
@@ -44,9 +43,6 @@ const props = defineProps({
     required: false,
   },
 })
-
-// ref
-const openQrCode = ref(false)
 </script>
 
 <template>
@@ -104,7 +100,15 @@ const openQrCode = ref(false)
     <div
       class="flex flex w-full w-full flex-row items-center items-center justify-end justify-between space-x-4 md:w-fit"
     >
-      <qr-code :is-open="openQrCode" :link="props.shortUrl" @close="openQrCode = false" />
+      <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-500 hover:bg-opacity-20">
+        <icon
+          name="ph:qr-code-duotone"
+          class="text-red-500"
+          size="26"
+          @click="$emit('qr-code', props.shortUrl)"
+        />
+      </div>
+
       <link-menu @edit-link="$emit('edit-link')" @delete-link="$emit('delete-link')" />
     </div>
   </div>
