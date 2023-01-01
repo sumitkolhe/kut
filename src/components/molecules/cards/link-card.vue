@@ -100,7 +100,7 @@ const props = defineProps({
     <div
       class="flex flex w-full w-full flex-row items-center items-center justify-end justify-between space-x-4 md:w-fit"
     >
-      <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-500 hover:bg-opacity-20">
+      <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
         <icon
           name="ph:qr-code-duotone"
           class="text-red-500"

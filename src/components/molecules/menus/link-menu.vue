@@ -86,12 +86,8 @@ const deleteLink = () => {
     <div v-else title="Options" class="flex w-full justify-end">
       <Menu as="div" class="relative inline-block text-left">
         <div>
-          <menu-button class="rounded p-1 hover:bg-gray-200 hover:bg-opacity-20">
-            <icon
-              name="ph:dots-three-vertical-bold"
-              class="text-gray-900 dark:text-gray-200"
-              size="26"
-            />
+          <menu-button class="rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
+            <icon name="ph:dots-three-vertical-bold" class="text-red-500" size="26" />
           </menu-button>
         </div>
 
