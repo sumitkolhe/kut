@@ -25,7 +25,7 @@ onMounted(() => {
 // refs
 const showLinkPanel = ref(false)
 const loading = ref(false)
-const search = ref('')
+const search = ref()
 const qrCode = ref()
 const openQrCode = ref(false)
 
@@ -79,6 +79,10 @@ const showQrCode = (url: string) => {
   qrCode.value = url
   openQrCode.value = true
 }
+
+const debouncedSearch = useDebounceFn(() => {
+  fetchAllLinks(0, 5, search.value)
+}, 500)
 </script>
 
 <template>
@@ -87,9 +91,12 @@ const showQrCode = (url: string) => {
       <div class="flex flex-row space-x-2">
         <text-input
           v-model="search"
+          clearable
           prefix-icon="ph:magnifying-glass-duotone"
           placeholder="Search..."
+          @update:model-value="debouncedSearch"
         />
+
         <primary-button
           suffix-icon="ph:plus-duotone"
           :loading="loading"

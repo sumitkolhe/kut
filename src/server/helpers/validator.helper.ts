@@ -49,7 +49,7 @@ export const allLinksSchema = celebrate(
     [Segments.QUERY]: Joi.object().keys({
       offset: Joi.number().default(0),
       limit: Joi.number().default(10),
-      search: Joi.string(),
+      search: Joi.optional(),
     }),
   },
   { abortEarly: false },

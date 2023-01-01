@@ -17,9 +17,9 @@ export class LinkService extends ApiService {
     })
   }
 
-  public async fetchLinks(offset = 0, limit = 5) {
+  public async fetchLinks(offset = 0, limit = 5, search?: string) {
     return this.http<CustomResponse<{ links: Link[]; total: number }>>(`${this.base}`, {
-      query: { limit, offset },
+      query: { limit, offset, search },
       method: 'GET',
     })
   }

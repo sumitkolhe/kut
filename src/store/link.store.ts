@@ -21,12 +21,12 @@ export const useLinkStore = defineStore('links', {
       }
     },
 
-    async fetchAllLinks(offset = 0, limit = 5) {
+    async fetchAllLinks(offset = 0, limit = 5, search?: string) {
       try {
         this.allLinks = []
         this.totalCount = 0
 
-        const response = await this.$http.link.fetchLinks(offset, limit)
+        const response = await this.$http.link.fetchLinks(offset, limit, search)
 
         this.allLinks = response.data!.links!
         this.totalCount = response.data!.total!
