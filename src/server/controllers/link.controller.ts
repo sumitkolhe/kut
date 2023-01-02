@@ -95,10 +95,31 @@ export class LinkController {
     next: NextFunction
   ) => {
     try {
+      const { email } = req.auth
+      const { alias } = req.params
+
+      const link = await this.linkService.getLink(email, alias as string)
+
+      return res.json({
+        status: 'SUCCESS',
+        message: null,
+        data: link,
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public redirectLink: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<any>>,
+    next: NextFunction
+  ) => {
+    try {
       const { alias } = req.params
       const { analytics } = req
 
-      const link = await this.linkService.getLinkByAlias(alias, analytics)
+      const link = await this.linkService.redirectLink(alias, analytics)
 
       return res.json({
         status: 'SUCCESS',

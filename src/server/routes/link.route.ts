@@ -27,7 +27,12 @@ export class LinkRoute implements Routes {
       checkAuthentication,
       this.linkController.linkStatistics
     )
-    this.router.get(`${this.path}/:alias`, analyticsHandler, this.linkController.getLink)
+    this.router.get(
+      `${this.path}/redirect/:alias`,
+      analyticsHandler,
+      this.linkController.redirectLink
+    )
+    this.router.get(`${this.path}/:alias`, checkAuthentication, this.linkController.getLink)
     this.router.delete(`${this.path}/:alias`, checkAuthentication, this.linkController.deleteLink)
   }
 }
