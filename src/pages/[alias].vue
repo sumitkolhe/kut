@@ -11,7 +11,7 @@ const headers = useRequestHeaders()
 const userAgent = headers?.['user-agent'] ?? navigator.userAgent
 
 const { data } = await useFetch<CustomResponse<null>>(
-  `${apiBaseUrl}/api/v1/link/${route.params.alias}`,
+  `${apiBaseUrl}/api/v1/links/redirect/${route.params.alias}`,
   {
     headers: {
       'user-agent': userAgent,
