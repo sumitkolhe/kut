@@ -74,7 +74,21 @@ export class LinkService {
     }
   }
 
-  public getLinkByAlias = async (alias: string, analytics: Analytics | undefined) => {
+  public getLink = async (email: string, alias: string) => {
+    const result = await UserModel.findOne({ email }).populate({
+      path: 'userLinks',
+      match: { alias },
+      select: { tags: 0, analytics: 0, __v: 0 },
+    })
+
+    const user = result?.toObject()
+
+    const link = user?.userLinks[0] as Link[]
+
+    return link ? link : null
+  }
+
+  public redirectLink = async (alias: string, analytics: Analytics | undefined) => {
     const link: LinkDocument | null = await LinkModel.findOne({ alias })
 
     if (!link) throw new HttpExceptionError(404, ErrorType.linkNotFound)
