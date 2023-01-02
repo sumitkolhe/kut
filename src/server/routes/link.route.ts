@@ -3,11 +3,10 @@ import { LinkController } from 'server/controllers/link.controller'
 import { checkAuthentication } from 'server/middlewares/auth.middleware'
 import { analyticsHandler } from 'server/middlewares/analytics.middleware'
 import { allLinksSchema } from 'server/helpers/validator.helper'
-import { checkAccountVerification } from 'server/middlewares/verification.middleware'
 import type { Routes } from 'interfaces/routes.interface'
 
 export class LinkRoute implements Routes {
-  public path = '/link'
+  public path = '/links'
   public router = Router()
   public linkController = new LinkController()
 
@@ -19,20 +18,13 @@ export class LinkRoute implements Routes {
     this.router.get(
       `${this.path}`,
       checkAuthentication,
-      checkAccountVerification,
       allLinksSchema,
       this.linkController.getAllLinks
     )
-    this.router.post(
-      `${this.path}/shorten`,
-      checkAuthentication,
-      checkAccountVerification,
-      this.linkController.createLink
-    )
+    this.router.post(`${this.path}/shorten`, checkAuthentication, this.linkController.createLink)
     this.router.get(
       `${this.path}/stats/:alias`,
       checkAuthentication,
-      checkAccountVerification,
       this.linkController.linkStatistics
     )
     this.router.get(`${this.path}/:alias`, analyticsHandler, this.linkController.getLink)

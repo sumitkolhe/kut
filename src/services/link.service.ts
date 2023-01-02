@@ -7,7 +7,7 @@ export class LinkService extends ApiService {
 
   constructor() {
     super()
-    this.base = '/link'
+    this.base = '/links'
   }
 
   public async shorten(linkPayload: Pick<Link, 'alias' | 'target' | 'meta' | 'description'>) {

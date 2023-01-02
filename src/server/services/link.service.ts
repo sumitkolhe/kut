@@ -51,14 +51,9 @@ export class LinkService {
     links: Link[]
     total: number
   }> => {
-    const result = await UserModel.findOne(
-      { email },
-      {
-        select: ['userLinks'],
-        _id: false,
-      }
-    ).populate({
+    const result = await UserModel.findOne({ email }).populate({
       path: 'userLinks',
+      select: { tags: 0, analytics: 0, __v: 0 },
       match: search ? { $text: { $search: search } } : {},
       options: {
         sort: { createdAt: -1 },
