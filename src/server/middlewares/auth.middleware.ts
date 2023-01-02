@@ -38,6 +38,6 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
       errorMessage =
         error.name === 'JsonWebTokenError' ? ErrorType.invalidAuthenticationToken : error.message
     }
-    throw new HttpExceptionError(401, errorMessage as string)
+    next(new HttpExceptionError(401, errorMessage as string))
   }
 }
