@@ -91,7 +91,7 @@ export class LinkController {
 
   public getLink: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<any>>,
+    res: Response<CustomResponse<Link>>,
     next: NextFunction
   ) => {
     try {

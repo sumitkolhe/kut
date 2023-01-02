@@ -83,7 +83,7 @@ export class LinkService {
 
     const user = result?.toObject()
 
-    const link = user?.userLinks[0] as Link[]
+    const link = user?.userLinks[0] as Link
 
     return link ? link : null
   }
