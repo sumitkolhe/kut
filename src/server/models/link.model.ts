@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import { AnalyticsModel } from 'server/models/analytics.model'
 import { TagModel } from 'server/models/tag.model'
+import { StatisticsModel } from 'server/models/statistics.model'
 import type { Document, Schema } from 'mongoose'
 
 export interface LinkDocument extends Document {
@@ -56,7 +56,7 @@ const LinkSchema: Schema = new mongoose.Schema(
         default: true,
       },
     },
-    analytics: [{ type: mongoose.Schema.Types.ObjectId, ref: AnalyticsModel }],
+    analytics: [{ type: mongoose.Schema.Types.ObjectId, ref: StatisticsModel }],
     tags: [{ type: mongoose.Schema.Types.ObjectId, ref: TagModel }],
   },
   { timestamps: true }

@@ -3,13 +3,19 @@ import { HttpExceptionError } from 'server/exceptions/http.exception'
 import { UserModel } from 'server/models/user.model'
 import { createShortLink, verifyTargetLink } from 'server/utils/link'
 import { ErrorType } from 'interfaces/error.interface'
-import { AnalyticsModel } from 'server/models/analytics.model'
 import { logger } from 'server/utils/logger'
+import { StatisticsModel } from 'server/models/statistics.model'
 import type { Analytics } from 'interfaces/analytics.interface'
 import type { LinkDocument } from 'server/models/link.model'
 import type { Link } from 'interfaces/link.interface'
 
 export class LinkService {
+  private linkModel: typeof LinkModel
+
+  constructor() {
+    this.linkModel = LinkModel
+  }
+
   public createLink = async (
     email: string,
     linkPayload: Partial<Pick<Link, 'target' | 'alias' | 'description' | 'meta'>>
@@ -17,7 +23,7 @@ export class LinkService {
     // if alias is not provided, generate new alias
     const alias = linkPayload.alias ? linkPayload.alias : await this.generateUniqueAlias()
 
-    const newLink: LinkDocument = new LinkModel({
+    const newLink: LinkDocument = new this.linkModel({
       alias,
       target: verifyTargetLink(linkPayload.target as string),
       shortUrl: createShortLink(alias),
@@ -89,7 +95,7 @@ export class LinkService {
   }
 
   public redirectLink = async (alias: string, analytics: Analytics | undefined) => {
-    const link: LinkDocument | null = await LinkModel.findOne({ alias })
+    const link: LinkDocument | null = await this.linkModel.findOne({ alias })
 
     if (!link) throw new HttpExceptionError(404, ErrorType.linkNotFound)
 
@@ -107,16 +113,15 @@ export class LinkService {
 
     // if (link.meta.password && password && link.meta.password === password)
 
-    const newAnalytics = new AnalyticsModel(analytics)
-    await newAnalytics.save()
+    const newStats = new StatisticsModel(analytics)
+    await newStats.save()
 
     if (link) {
-      await LinkModel.findOneAndUpdate(
-        { alias },
-        { $push: { analytics: newAnalytics }, $inc: { visitCount: 1 } }
-      ).catch(() => {
-        logger.error('cannot update link analytics')
-      })
+      await this.linkModel
+        .findOneAndUpdate({ alias }, { $push: { analytics: newStats }, $inc: { visitCount: 1 } })
+        .catch(() => {
+          logger.error('cannot update link analytics')
+        })
     }
 
     return link.target.toString()
@@ -124,7 +129,7 @@ export class LinkService {
 
   public deleteLink = async (email: string, alias: string) => {
     // delete link from links collection
-    const deletedLink = await LinkModel.findOneAndDelete({ alias })
+    const deletedLink = await this.linkModel.findOneAndDelete({ alias })
 
     // remove link reference from users collection object
     await UserModel.findOneAndUpdate(
@@ -132,152 +137,6 @@ export class LinkService {
       { $pull: { userLinks: deletedLink?.id } },
       { multi: true }
     )
-  }
-
-  public statistics = async (alias: string) => {
-    const analytics = await LinkModel.aggregate([
-      { $match: { alias } },
-      {
-        $lookup: {
-          from: 'analytics',
-          localField: 'analytics',
-          foreignField: '_id',
-          as: 'analytics',
-        },
-      },
-      { $unwind: '$analytics' },
-      {
-        $group: {
-          _id: null,
-          visitCount: { $first: '$visitCount' },
-          description: { $first: '$description' },
-          alias: { $first: '$alias' },
-          shortUrl: { $first: '$shortUrl' },
-          target: { $first: '$target' },
-          createdAt: { $first: '$createdAt' },
-
-          windows: {
-            $sum: { $cond: ['$analytics.os.windows', 1, 0] },
-          },
-          linux: {
-            $sum: { $cond: ['$analytics.os.linux', 1, 0] },
-          },
-          mac: {
-            $sum: { $cond: ['$analytics.os.mac', 1, 0] },
-          },
-          android: {
-            $sum: { $cond: ['$analytics.os.android', 1, 0] },
-          },
-          opera: {
-            $sum: { $cond: ['$analytics.browser.opera', 1, 0] },
-          },
-          ie: {
-            $sum: { $cond: ['$analytics.browser.ie', 1, 0] },
-          },
-          edge: {
-            $sum: { $cond: ['$analytics.browser.edge', 1, 0] },
-          },
-          safari: {
-            $sum: {
-              $cond: ['$analytics.browser.safari', 1, 0],
-            },
-          },
-          firefox: {
-            $sum: {
-              $cond: ['$analytics.browser.firefox', 1, 0],
-            },
-          },
-          chrome: {
-            $sum: {
-              $cond: ['$analytics.browser.chrome', 1, 0],
-            },
-          },
-        },
-      },
-      {
-        $addFields: {
-          analytics: {
-            os: {
-              windows: '$windows',
-              linux: '$linux',
-              mac: '$mac',
-              android: '$android',
-            },
-            browser: {
-              opera: '$opera',
-              ie: '$ie',
-              edge: '$edge',
-              safari: '$safari',
-              firefox: '$firefox',
-              chrome: '$chrome',
-            },
-          },
-          windows: '$$REMOVE',
-          linux: '$$REMOVE',
-          mac: '$$REMOVE',
-          android: '$$REMOVE',
-          opera: '$$REMOVE',
-          ie: '$$REMOVE',
-          edge: '$$REMOVE',
-          safari: '$$REMOVE',
-          firefox: '$$REMOVE',
-          chrome: '$$REMOVE',
-        },
-      },
-    ])
-
-    const views = await LinkModel.aggregate([
-      { $match: { alias } },
-      {
-        $lookup: {
-          from: 'analytics',
-          let: {
-            analytics: '$analytics',
-          },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $in: ['$_id', '$$analytics'],
-                },
-              },
-            },
-            {
-              $group: {
-                _id: {
-                  $substr: ['$visitDate', 0, 35],
-                },
-                v: {
-                  $sum: 1,
-                },
-              },
-            },
-            {
-              $project: {
-                _id: 0,
-                k: '$_id',
-                v: 1,
-              },
-            },
-          ],
-          as: 'visitData',
-        },
-      },
-      {
-        $addFields: {
-          visitData: {
-            $arrayToObject: '$visitData',
-          },
-        },
-      },
-    ])
-
-    if (analytics.length > 0) {
-      analytics[0].analytics.views = views[0]?.visitData
-      return analytics[0]
-    } else {
-      return null
-    }
   }
 
   private generateUniqueAlias = async (): Promise<string> => {
@@ -288,7 +147,7 @@ export class LinkService {
       randomAlias += characterSet.charAt(Math.floor(Math.random() * characterSet.length))
     }
 
-    const isAliasAvailable = await LinkModel.findOne({ alias: randomAlias })
+    const isAliasAvailable = await this.linkModel.findOne({ alias: randomAlias })
 
     return isAliasAvailable ? await this.generateUniqueAlias() : randomAlias
   }

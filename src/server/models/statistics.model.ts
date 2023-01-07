@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import type { Document, Schema } from 'mongoose'
 
-interface AnalyticsDocument extends Document {
+interface StatisticsDocument extends Document {
   visitDate: { type: Date; required: boolean }
   os: {
     windows: boolean
@@ -34,7 +34,7 @@ interface AnalyticsDocument extends Document {
   }
 }
 
-const AnalyticsSchema: Schema = new mongoose.Schema({
+const StatisticsSchema: Schema = new mongoose.Schema({
   visitDate: { type: Date, default: Date.now, required: true },
   os: {
     windows: Boolean,
@@ -67,4 +67,4 @@ const AnalyticsSchema: Schema = new mongoose.Schema({
   },
 })
 
-export const AnalyticsModel = mongoose.model<AnalyticsDocument>('analytics', AnalyticsSchema)
+export const StatisticsModel = mongoose.model<StatisticsDocument>('statistics', StatisticsSchema)
