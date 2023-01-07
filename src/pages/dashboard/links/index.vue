@@ -11,7 +11,7 @@ import CreateLinkPanel from 'components/molecules/panels/create-link-panel.vue'
 import type { Link } from 'interfaces/link.interface'
 
 definePageMeta({
-  middleware: ['verify-user', 'auth'],
+  middleware: ['auth'],
 })
 
 // store
@@ -79,7 +79,6 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
 })
 
 const showQrCode = (url: string) => {
-  console.log(url)
   qrCode.value = url
   openQrCode.value = true
 }
@@ -130,7 +129,7 @@ const showQrCode = (url: string) => {
     </div>
 
     <div v-if="allLinks.length > 0">
-      <p class="mt-6 py-3 font-medium dark:text-gray-200">My Links</p>
+      <p class="mt-6 py-3 font-medium uppercase text-gray-600 dark:text-gray-200">My Links</p>
 
       <div class="space-y-3">
         <link-card
