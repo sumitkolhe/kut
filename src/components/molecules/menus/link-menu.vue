@@ -28,12 +28,9 @@ const deleteLink = () => {
 
 <template>
   <div>
-    <icon
-      v-if="smallerThanLg"
-      class="text-red-500"
-      name="ph:faders-horizontal-duotone"
-      @click="showPanel = true"
-    />
+    <button @click="showPanel = true">
+      <icon v-if="smallerThanLg" class="text-red-500" name="ph:faders-horizontal-duotone" />
+    </button>
 
     <transition-root v-if="smallerThanLg" as="template" :show="showPanel">
       <Dialog as="div" class="relative z-50" @close="showPanel = false">

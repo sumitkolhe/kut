@@ -43,23 +43,35 @@ const props = defineProps({
     required: false,
   },
 })
+
+const { copy, copied, text } = useClipboard({ source: props.shortUrl })
+
+watch(copied, (clicked) => {
+  if (clicked) createToast(`${text.value} copied to clipboard`, { type: 'success' })
+})
 </script>
 
 <template>
   <div
-    class="flex w-full flex-col items-center justify-between gap-y-4 rounded border border-gray-200 bg-gray-50 p-4 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-500 md:px-6 md:py-5 lg:flex-row"
+    class="flex w-full flex-col items-center gap-y-4 rounded-md border bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900 md:px-6 md:py-5 lg:flex-row"
   >
     <div
       class="flex w-full flex-row items-center justify-between lg:flex-col lg:items-start lg:space-y-1"
     >
       <p class="text-xs uppercase tracking-wider text-gray-300">Short Link</p>
-      <NuxtLink
-        target="_blank"
-        :to="props.shortUrl"
-        class="flex items-center text-sm text-gray-500"
-      >
-        <span title="Shortened Link" class="truncate hover:underline">{{ props.shortUrl }}</span>
-      </NuxtLink>
+
+      <div class="flex items-center space-x-2">
+        <NuxtLink
+          target="_blank"
+          :to="props.shortUrl"
+          class="flex items-center text-sm text-gray-500"
+        >
+          <span title="Shortened Link" class="truncate hover:underline">{{ props.shortUrl }}</span>
+        </NuxtLink>
+        <button class="active:text-red-500" @click.stop="copy()">
+          <Icon name="ph:copy-duotone" />
+        </button>
+      </div>
     </div>
 
     <div
@@ -82,8 +94,14 @@ const props = defineProps({
       <p class="text-xs uppercase tracking-wider text-gray-300">Views</p>
 
       <p class="text-gray-500">
-        <span class="text-sm dark:text-gray-200">{{ props.visitCount }}</span>
-        {{ props.visitCount > 1 ? 'views' : 'view' }}
+        <NuxtLink
+          v-slice="20"
+          :to="`/dashboard/links/${props.alias}`"
+          class="truncate text-sm text-gray-500 hover:underline"
+        >
+          <span class="text-sm dark:text-gray-200">{{ props.visitCount }}</span>
+          {{ props.visitCount > 1 ? 'views' : 'view' }}
+        </NuxtLink>
       </p>
     </div>
 
@@ -97,9 +115,7 @@ const props = defineProps({
       </p>
     </div>
 
-    <div
-      class="flex flex w-full w-full flex-row items-center items-center justify-end justify-between space-x-4 md:w-fit"
-    >
+    <div class="flex w-full flex-row items-center justify-between space-x-4 md:w-fit">
       <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
         <icon
           name="ph:qr-code-duotone"

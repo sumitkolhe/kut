@@ -2,6 +2,10 @@
 import Logo from 'components/atoms/logo.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
+import { useAuthStore } from 'store/auth.store'
+import { storeToRefs } from 'pinia'
+
+const { isLoggedIn } = storeToRefs(useAuthStore())
 </script>
 
 <template>
@@ -12,7 +16,14 @@ import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 
         <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
       </NuxtLink>
-      <div class="flex w-auto flex-row space-x-4">
+
+      <div v-if="isLoggedIn">
+        <NuxtLink to="/dashboard">
+          <primary-button class="w-auto">Dashboard</primary-button>
+        </NuxtLink>
+      </div>
+
+      <div v-else class="flex w-auto flex-row space-x-4">
         <NuxtLink to="/auth/login">
           <secondary-button class="w-auto">Login</secondary-button>
         </NuxtLink>
@@ -20,11 +31,6 @@ import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
           <primary-button class="w-auto">Sign up</primary-button>
         </NuxtLink>
       </div>
-      <!-- <div v-else>
-        <NuxtLink to="/dashboard">
-          <primary-button class="w-auto">Dashboard</primary-button>
-        </NuxtLink>
-      </div> -->
     </div>
   </header>
 </template>
