@@ -28,7 +28,13 @@ export default defineNuxtConfig({
 
   css: ['~/assets/toast.css'],
 
-  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
+  modules: [
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@vueuse/nuxt',
+    'nuxt-icon',
+  ],
 
   serverHandlers: [
     { route: '/api', handler: '~/server/server.ts' },

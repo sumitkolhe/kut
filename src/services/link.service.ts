@@ -24,6 +24,12 @@ export class LinkService extends ApiService {
     })
   }
 
+  public async fetchLink(alias: string) {
+    return this.http<CustomResponse<Link>>(`${this.base}/${alias}`, {
+      method: 'GET',
+    })
+  }
+
   public async updateLink() {
     return this.http<CustomResponse<Link>>(`${this.base}/`, {
       body: {},

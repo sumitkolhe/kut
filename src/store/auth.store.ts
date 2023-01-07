@@ -5,6 +5,7 @@ import type { User } from 'interfaces/user.interface'
 export const useAuthStore = defineStore('authentication-store', {
   state: () => ({
     user: {} as Omit<User, 'apiKey' | 'userLinks'>,
+    isLoggedIn: false,
   }),
   actions: {
     async loginUser(email: string, password: string) {
@@ -17,6 +18,8 @@ export const useAuthStore = defineStore('authentication-store', {
         refreshToken.value = response.data!.refreshToken
 
         await this.fetchUser()
+
+        this.isLoggedIn = true
       } catch (error) {
         if (error instanceof Error) logger.error(error.message)
       }
@@ -43,10 +46,7 @@ export const useAuthStore = defineStore('authentication-store', {
     async logout() {
       try {
         await this.$http.auth.logout()
-
-        const router = useRouter()
-
-        router.replace('/')
+        this.isLoggedIn = false
       } catch (error) {
         if (error instanceof Error) logger.error(error.message)
       }
@@ -72,5 +72,10 @@ export const useAuthStore = defineStore('authentication-store', {
         if (error instanceof Error) logger.error(error.message)
       }
     },
+  },
+
+  persist: {
+    key: 'isLoggedIn',
+    paths: ['isLoggedIn'],
   },
 })

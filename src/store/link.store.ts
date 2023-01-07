@@ -6,6 +6,7 @@ import type { Link } from 'interfaces/link.interface'
 export const useLinkStore = defineStore('links', {
   state: () => ({
     allLinks: [] as Link[],
+    link: {} as Link,
     totalCount: 0,
   }),
   actions: {
@@ -30,6 +31,18 @@ export const useLinkStore = defineStore('links', {
 
         this.allLinks = response.data!.links!
         this.totalCount = response.data!.total!
+      } catch (error) {
+        if (error instanceof FetchError) {
+          logger.error(error.message)
+        }
+      }
+    },
+
+    async fetchLinkByAlias(alias: string) {
+      try {
+        const response = await this.$http.link.fetchLink(alias)
+
+        this.link = response.data!
       } catch (error) {
         if (error instanceof FetchError) {
           logger.error(error.message)
