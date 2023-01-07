@@ -1,5 +1,6 @@
 import { $fetch } from 'ohmyfetch'
 import type { $Fetch } from 'ohmyfetch'
+import { useAuthStore } from '~~/src/store/auth.store'
 
 export class ApiService {
   private baseUrl = '/api/v1'
@@ -8,9 +9,12 @@ export class ApiService {
   constructor() {
     this.http = $fetch.create({
       baseURL: this.baseUrl,
-      async onRequest({ options }) {
-        options.headers = {
-          authorization: `${localStorage.getItem('auth._token.local')}`,
+
+      async onResponseError({ response }) {
+        if (response.status === 401) {
+          const { logout } = useAuthStore()
+          await logout()
+          navigateTo('/auth/login')
         }
       },
     })
