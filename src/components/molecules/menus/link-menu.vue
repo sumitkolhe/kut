@@ -28,7 +28,7 @@ const deleteLink = () => {
 
 <template>
   <div>
-    <button @click="showPanel = true">
+    <button class="flex" @click="showPanel = true">
       <icon v-if="smallerThanLg" class="text-red-500" name="ph:faders-horizontal-duotone" />
     </button>
 

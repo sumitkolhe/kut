@@ -15,22 +15,20 @@ const props = defineProps({
   },
   link: {
     type: String,
-    default: () => '',
-    required: false,
+    required: true,
   },
 })
 
-const qrcode = useQRCode(props.link, {
-  scale: 100,
+const qrCodeImage = useQRCode(props.link, {
+  scale: 10,
   color: { light: '#fff', dark: '#000' },
   renderOptions: { quality: 1 },
 })
 
 const downloadQrCode = () => {
-  const linkSource = qrcode.value
+  const linkSource = qrCodeImage.value
   const downloadLink = document.createElement('a')
   document.body.append(downloadLink)
-
   downloadLink.href = linkSource
   downloadLink.target = '_self'
   downloadLink.download = props.link
@@ -71,14 +69,24 @@ const downloadQrCode = () => {
           <div
             class="flex flex h-full flex-col items-center justify-center space-y-6 bg-gray-100 p-12 dark:bg-gray-800"
           >
-            {{ qrcode }}
-            <img :src="qrcode" alt="qr code" class="w-[75%] rounded-md border" />
+            <img
+              v-if="props.link"
+              :src="qrCodeImage"
+              alt="qr code"
+              class="w-[75%] rounded-md border"
+            />
           </div>
 
           <div
             class="bottom-0 flex w-full flex-row items-center justify-end space-x-4 border-t p-4 dark:border-gray-700 md:p-6"
           >
-            <primary-button class="w-fit" @click="downloadQrCode">Export</primary-button>
+            <primary-button
+              suffix-icon="ph:arrow-circle-down"
+              class="w-fit"
+              @click="downloadQrCode"
+            >
+              Export
+            </primary-button>
           </div>
         </dialog-panel>
       </transition-child>

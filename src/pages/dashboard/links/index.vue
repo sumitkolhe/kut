@@ -148,7 +148,12 @@ const showQrCode = (url: string) => {
         />
       </div>
 
-      <qr-code-panel :is-open="openQrCode" :link="qrCode" @close="openQrCode = false" />
+      <qr-code-panel
+        :key="qrCode"
+        :is-open="openQrCode"
+        :link="qrCode"
+        @close="openQrCode = false"
+      />
 
       <div class="flex justify-center md:justify-end">
         <div class="mt-6 mb-0 flex items-end items-center justify-end gap-3">
