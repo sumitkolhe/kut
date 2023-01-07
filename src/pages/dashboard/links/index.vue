@@ -149,6 +149,7 @@ const showQrCode = (url: string) => {
       </div>
 
       <qr-code-panel
+        v-if="qrCode"
         :key="qrCode"
         :is-open="openQrCode"
         :link="qrCode"
