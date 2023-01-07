@@ -15,6 +15,6 @@ export default defineNuxtRouteMiddleware(async () => {
 
   if (payload.value && payload.value.exp! < Date.now() / 1000) {
     await logout()
-    return
+    return navigateTo('/auth/login')
   }
 })
