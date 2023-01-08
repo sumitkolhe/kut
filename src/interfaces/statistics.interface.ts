@@ -1,3 +1,5 @@
+export type StatisticsPeriod = '1h' | '1d' | '7d' | '30d' | '180d' | 'all'
+
 export interface Statistics {
   visitDate?: Date
   os: {

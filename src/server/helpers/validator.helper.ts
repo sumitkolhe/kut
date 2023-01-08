@@ -55,3 +55,13 @@ export const allLinksSchema = celebrate(
   { abortEarly: false },
   { mode: Modes.FULL }
 )
+
+export const statisticsVisitsSchema = celebrate(
+  {
+    [Segments.QUERY]: Joi.object().keys({
+      period: Joi.string().default('1d'),
+    }),
+  },
+  { abortEarly: false },
+  { mode: Modes.FULL }
+)

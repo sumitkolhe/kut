@@ -29,7 +29,7 @@ const data = computed(() => Object.values(linkViews.value))
         :to="`https://kut.sh/${route.params.alias}`"
         class="my-4 flex w-fit cursor-pointer items-center space-x-3 rounded border bg-gray-50 py-2 px-4"
       >
-        <p>https://kut.sh/{{ route.params.alias }}</p>
+        <p class="text-sm md:text-base">https://kut.sh/{{ route.params.alias }}</p>
         <Icon name="ph:arrow-right" size="20" />
       </nuxt-link>
       <div class="rounded border bg-gray-50 p-4">

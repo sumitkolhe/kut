@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { LinkModel } from 'server/models/link.model'
 
 export class StatisticsService {
@@ -141,9 +142,24 @@ export class StatisticsService {
     }
   }
 
-  public getVisitStats = async (alias: string) => {
+  public getVisitStats = async (
+    alias: string,
+    period: '1h' | '1d' | '7d' | '30d' | '180d' | 'all'
+  ) => {
+    const currentDate = dayjs().toDate()
+    let pastDate = dayjs().toDate()
+
+    if (period === '1h') pastDate = dayjs().subtract(1, 'h').toDate()
+    else if (period === '1d') pastDate = dayjs().subtract(1, 'd').toDate()
+    else if (period === '7d') pastDate = dayjs().subtract(7, 'd').toDate()
+    else if (period === '30d') pastDate = dayjs().subtract(30, 'd').toDate()
+    else if (period === '180d') pastDate = dayjs().subtract(180, 'd').toDate()
+    else if (period === 'all') pastDate = dayjs().subtract(10, 'y').toDate()
+
     const views = await LinkModel.aggregate([
-      { $match: { alias } },
+      {
+        $match: { alias },
+      },
       {
         $lookup: {
           from: 'statistics',
@@ -153,9 +169,7 @@ export class StatisticsService {
           pipeline: [
             {
               $match: {
-                $expr: {
-                  $in: ['$_id', '$$statistics'],
-                },
+                $and: [{ visitDate: { $lte: currentDate } }, { visitDate: { $gte: pastDate } }],
               },
             },
             {

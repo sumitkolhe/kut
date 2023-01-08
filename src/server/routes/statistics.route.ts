@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { checkAuthentication } from 'server/middlewares/auth.middleware'
 import { StatisticsController } from 'server/controllers/statistics.controller'
+import { statisticsVisitsSchema } from 'server/helpers/validator.helper'
 import type { Routes } from 'interfaces/routes.interface'
 
 export class StatisticsRoute implements Routes {
@@ -17,6 +18,7 @@ export class StatisticsRoute implements Routes {
     this.router.get(
       `${this.path}/:alias/visits`,
       checkAuthentication,
+      statisticsVisitsSchema,
       this.statisticsController.visitStats
     )
   }
