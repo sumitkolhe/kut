@@ -61,9 +61,9 @@ export const useLinkStore = defineStore('links', {
       }
     },
 
-    async fetchLinkViewStats(alias: string) {
+    async fetchLinkViewStats(alias: string, period?: string) {
       try {
-        const views = await this.$http.statistics.linkViews(alias)
+        const views = await this.$http.statistics.linkViews(alias, period)
 
         this.linkViews = views.data!
       } catch (error) {

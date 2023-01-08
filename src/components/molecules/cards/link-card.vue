@@ -121,7 +121,9 @@ const props = defineProps({
         />
       </div>
 
-      <link-menu @edit-link="$emit('edit-link')" @delete-link="$emit('delete-link')" />
+      <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
+        <link-menu @edit-link="$emit('edit-link')" @delete-link="$emit('delete-link')" />
+      </div>
     </div>
   </div>
 </template>

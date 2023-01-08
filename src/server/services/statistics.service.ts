@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import { LinkModel } from 'server/models/link.model'
+import type { StatisticsPeriod } from 'interfaces/statistics.interface'
 
 export class StatisticsService {
   public statistics = async (alias: string) => {
@@ -142,19 +143,30 @@ export class StatisticsService {
     }
   }
 
-  public getVisitStats = async (
-    alias: string,
-    period: '1h' | '1d' | '7d' | '30d' | '180d' | 'all'
-  ) => {
+  public getVisitStats = async (alias: string, period: StatisticsPeriod) => {
     const currentDate = dayjs().toDate()
     let pastDate = dayjs().toDate()
+    let dateSplit = 35
 
-    if (period === '1h') pastDate = dayjs().subtract(1, 'h').toDate()
-    else if (period === '1d') pastDate = dayjs().subtract(1, 'd').toDate()
-    else if (period === '7d') pastDate = dayjs().subtract(7, 'd').toDate()
-    else if (period === '30d') pastDate = dayjs().subtract(30, 'd').toDate()
-    else if (period === '180d') pastDate = dayjs().subtract(180, 'd').toDate()
-    else if (period === 'all') pastDate = dayjs().subtract(10, 'y').toDate()
+    if (period === '1h') {
+      pastDate = dayjs().subtract(1, 'h').toDate()
+      dateSplit = 16
+    } else if (period === '24h') {
+      pastDate = dayjs().subtract(24, 'h').toDate()
+      dateSplit = 13
+    } else if (period === '7d') {
+      pastDate = dayjs().subtract(7, 'd').toDate()
+      dateSplit = 10
+    } else if (period === '30d') {
+      pastDate = dayjs().subtract(30, 'd').toDate()
+      dateSplit = 10
+    } else if (period === '180d') {
+      pastDate = dayjs().subtract(180, 'd').toDate()
+      dateSplit = 10
+    } else if (period === 'all') {
+      pastDate = dayjs().subtract(10, 'y').toDate()
+      dateSplit = 10
+    }
 
     const views = await LinkModel.aggregate([
       {
@@ -175,7 +187,7 @@ export class StatisticsService {
             {
               $group: {
                 _id: {
-                  $substr: ['$visitDate', 0, 35],
+                  $substr: ['$visitDate', 0, dateSplit],
                 },
                 v: {
                   $sum: 1,
@@ -202,7 +214,9 @@ export class StatisticsService {
       },
     ])
 
-    if (views.length > 0 && views[0].visitData) {
+    console.log(views[0].visitData)
+
+    if (views.length > 0 && views[0].visitData && Object.keys(views[0].visitData).length > 0) {
       return views[0]?.visitData
     }
     return null

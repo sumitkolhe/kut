@@ -9,8 +9,9 @@ export class StatisticsService extends ApiService {
     this.base = '/stats'
   }
 
-  public async linkViews(alias: string) {
+  public async linkViews(alias: string, period?: string) {
     return this.http<CustomResponse<Record<string, number>>>(`${this.base}/${alias}/visits`, {
+      query: { period },
       method: 'GET',
     })
   }
