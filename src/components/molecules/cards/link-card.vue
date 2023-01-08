@@ -4,7 +4,7 @@ import LinkMenu from 'components/molecules/menus/link-menu.vue'
 import type { PropType } from 'vue'
 
 // emits
-defineEmits(['delete-link', 'edit-link', 'qr-code'])
+defineEmits(['delete-link', 'edit-link', 'qr-code', 'copy-link'])
 
 // props
 const props = defineProps({
@@ -43,12 +43,6 @@ const props = defineProps({
     required: false,
   },
 })
-
-const { copy, copied, text } = useClipboard({ source: props.shortUrl })
-
-watch(copied, (clicked) => {
-  if (clicked) createToast(`${text.value} copied to clipboard`, { type: 'success' })
-})
 </script>
 
 <template>
@@ -60,18 +54,13 @@ watch(copied, (clicked) => {
     >
       <p class="text-xs uppercase tracking-wider text-gray-300">Short Link</p>
 
-      <div class="flex items-center space-x-2">
-        <NuxtLink
-          target="_blank"
-          :to="props.shortUrl"
-          class="flex items-center text-sm text-gray-500"
-        >
-          <span title="Shortened Link" class="truncate hover:underline">{{ props.shortUrl }}</span>
-        </NuxtLink>
-        <button class="active:text-red-500" @click.stop="copy()">
-          <Icon name="ph:copy-duotone" />
-        </button>
-      </div>
+      <NuxtLink
+        target="_blank"
+        :to="props.shortUrl"
+        class="flex items-center text-sm text-gray-500"
+      >
+        <span title="Shortened Link" class="truncate hover:underline">{{ props.shortUrl }}</span>
+      </NuxtLink>
     </div>
 
     <div
@@ -116,6 +105,13 @@ watch(copied, (clicked) => {
     </div>
 
     <div class="flex w-full flex-row items-center justify-between space-x-4 md:w-fit">
+      <div
+        title="Copy Link"
+        class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
+      >
+        <icon name="ph:copy" class="text-red-500" size="26" @click="$emit('copy-link')" />
+      </div>
+
       <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
         <icon
           name="ph:qr-code-duotone"

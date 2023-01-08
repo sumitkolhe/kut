@@ -12,6 +12,7 @@ import type { Link } from 'interfaces/link.interface'
 
 definePageMeta({
   middleware: ['auth'],
+  breadcrumbs: 'Links',
 })
 
 // store
@@ -82,6 +83,12 @@ const showQrCode = (url: string) => {
   qrCode.value = url
   openQrCode.value = true
 }
+
+const { copy, copied, text } = useClipboard()
+
+watch(copied, (clicked) => {
+  if (clicked) createToast(`${text.value} copied to clipboard`, { type: 'success' })
+})
 </script>
 
 <template>
@@ -142,6 +149,7 @@ const showQrCode = (url: string) => {
           :visit-count="link.visitCount"
           :created-at="link.createdAt.toString()"
           :updated-at="link.updatedAt.toString()"
+          @copy-link="copy(link.shortUrl)"
           @delete-link="deleteSelectedLink(link.alias)"
           @edit-link="editSelectedLink(link.alias)"
           @qr-code="showQrCode"
