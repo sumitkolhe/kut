@@ -66,7 +66,9 @@ watch(period, async (newPeriod) => {
     <client-only>
       <div class="mb-4 flex items-center justify-between">
         <div class="flex space-x-4">
-          <div class="flex items-center rounded border bg-gray-50 px-2 text-lg">
+          <div
+            class="flex items-center rounded border bg-gray-50 px-2 text-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+          >
             <p>{{ totalVisits }} <span class="text-sm">clicks</span></p>
           </div>
 
@@ -81,7 +83,7 @@ watch(period, async (newPeriod) => {
 
       <div
         v-if="values.length > 0"
-        class="min-h-[300px] items-center justify-center rounded border bg-gray-50 p-4"
+        class="min-h-[300px] items-center justify-center rounded border bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900"
       >
         <v-frappe-chart
           type="line"

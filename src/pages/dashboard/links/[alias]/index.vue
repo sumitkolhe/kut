@@ -13,6 +13,39 @@ const { fetchLinkByAlias } = useLinkStore()
 const { link } = storeToRefs(useLinkStore())
 
 onMounted(() => fetchLinkByAlias(route.params.alias as string))
+
+const linkStats = computed(() => [
+  { name: 'Alias', value: link.value.alias },
+  { name: 'Short URL', value: link.value.shortUrl },
+  { name: 'Description', value: link.value?.description ? link.value.description : '-' },
+  { name: 'Target', value: link.value.target },
+  { name: 'Visit Count', value: link.value.visitCount },
+  {
+    name: 'Max Visits',
+    value: link.value.meta?.maxVisits
+      ? useDateFormat(link.value.meta?.maxVisits, 'YYYY-MM-DD HH:mm:ss A').value
+      : '-',
+  },
+  {
+    name: 'Valid From',
+    value: link.value.meta?.validFrom
+      ? useDateFormat(link.value.meta?.validFrom, 'YYYY-MM-DD HH:mm:ss A').value
+      : '-',
+  },
+  {
+    name: 'Expiry',
+    value: link.value.meta?.validTill
+      ? useDateFormat(link.value.meta?.validTill, 'YYYY-MM-DD HH:mm:ss A').value
+      : '-',
+  },
+  { name: 'Password', value: link.value.meta?.password ? link.value.meta.password : '-' },
+  { name: 'Active', value: link.value.meta?.active ? link.value.meta.active : '-' },
+  { name: 'Created At', value: useDateFormat(link.value.createdAt, 'YYYY-MM-DD HH:mm:ss A').value },
+  {
+    name: 'Updated At',
+    value: useDateFormat(link.value.updatedAt, 'YYYY-MM-DD HH:mm:ss A').value,
+  },
+])
 </script>
 
 <template>
@@ -21,64 +54,14 @@ onMounted(() => fetchLinkByAlias(route.params.alias as string))
       v-if="link.alias"
       class="grid grid-cols-1 gap-4 md:my-8 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
     >
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Target</p>
-        <p v-slice="25" class="text-lg font-medium">{{ link.target }}</p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Short Url</p>
-        <p class="text-lg font-medium">{{ link.shortUrl }}</p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Alias</p>
-        <p class="text-lg font-medium">{{ link.alias }}</p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Description</p>
-        <p class="text-lg font-medium">{{ link?.description || '-' }}</p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Total Visits</p>
-        <p class="text-lg font-medium">{{ link.visitCount }}</p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Maximum Visits</p>
-        <p class="text-lg font-medium">{{ link.meta?.maxVisits || '-' }}</p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Valid From</p>
-        <p class="text-lg font-medium">
-          {{ useDateFormat(link.meta?.validFrom, 'YYYY-MM-DD HH:mm:ss A').value || '-' }}
-        </p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Expiry Date</p>
-        <p class="text-lg font-medium">
-          {{
-            link.meta?.validTill
-              ? useDateFormat(link.meta?.validTill, 'YYYY-MM-DD HH:mm:ss A').value
-              : '-'
-          }}
-        </p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Password Protected</p>
-        <p class="text-lg font-medium">{{ link.meta?.password || '-' }}</p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Active</p>
-        <p class="text-lg font-medium capitalize">{{ link.meta?.active || '-' }}</p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Created On</p>
-        <p class="text-lg font-medium">
-          {{ useDateFormat(link.createdAt, 'YYYY-MM-DD HH:mm:ss A').value || '-' }}
-        </p>
-      </div>
-      <div class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg">
-        <p class="text-gray-500">Updated On</p>
-        <p class="text-lg font-medium">
-          {{ useDateFormat(link.updatedAt, 'YYYY-MM-DD HH:mm:ss A').value || '-' }}
+      <div
+        v-for="(stat, index) of linkStats"
+        :key="index"
+        class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900"
+      >
+        <p class="text-gray-500">{{ stat.name }}</p>
+        <p v-slice="25" class="text-lg font-medium dark:text-gray-200">
+          {{ stat.value }}
         </p>
       </div>
     </div>
