@@ -2,68 +2,61 @@ import { LinkModel } from 'server/models/link.model'
 
 export class StatisticsService {
   public statistics = async (alias: string) => {
-    const analytics = await LinkModel.aggregate([
+    const stats = await LinkModel.aggregate([
       { $match: { alias } },
       {
         $lookup: {
-          from: 'analytics',
-          localField: 'analytics',
+          from: 'statistics',
+          localField: 'statistics',
           foreignField: '_id',
-          as: 'analytics',
+          as: 'statistics',
         },
       },
-      { $unwind: '$analytics' },
+      { $unwind: '$statistics' },
       {
         $group: {
           _id: null,
-          // visitCount: { $first: '$visitCount' },
-          // description: { $first: '$description' },
-          // alias: { $first: '$alias' },
-          // shortUrl: { $first: '$shortUrl' },
-          // target: { $first: '$target' },
-          // createdAt: { $first: '$createdAt' },
-
           windows: {
-            $sum: { $cond: ['$analytics.os.windows', 1, 0] },
+            $sum: { $cond: ['$statistics.os.windows', 1, 0] },
           },
           linux: {
-            $sum: { $cond: ['$analytics.os.linux', 1, 0] },
+            $sum: { $cond: ['$statistics.os.linux', 1, 0] },
           },
           mac: {
-            $sum: { $cond: ['$analytics.os.mac', 1, 0] },
+            $sum: { $cond: ['$statistics.os.mac', 1, 0] },
           },
           android: {
-            $sum: { $cond: ['$analytics.os.android', 1, 0] },
+            $sum: { $cond: ['$statistics.os.android', 1, 0] },
           },
           opera: {
-            $sum: { $cond: ['$analytics.browser.opera', 1, 0] },
+            $sum: { $cond: ['$statistics.browser.opera', 1, 0] },
           },
           ie: {
-            $sum: { $cond: ['$analytics.browser.ie', 1, 0] },
+            $sum: { $cond: ['$statistics.browser.ie', 1, 0] },
           },
           edge: {
-            $sum: { $cond: ['$analytics.browser.edge', 1, 0] },
+            $sum: { $cond: ['$statistics.browser.edge', 1, 0] },
           },
           safari: {
             $sum: {
-              $cond: ['$analytics.browser.safari', 1, 0],
+              $cond: ['$statistics.browser.safari', 1, 0],
             },
           },
           firefox: {
             $sum: {
-              $cond: ['$analytics.browser.firefox', 1, 0],
+              $cond: ['$statistics.browser.firefox', 1, 0],
             },
           },
           chrome: {
             $sum: {
-              $cond: ['$analytics.browser.chrome', 1, 0],
+              $cond: ['$statistics.browser.chrome', 1, 0],
             },
           },
         },
       },
       {
         $addFields: {
-          analytics: {
+          statistics: {
             os: {
               windows: '$windows',
               linux: '$linux',
@@ -98,15 +91,15 @@ export class StatisticsService {
       { $match: { alias } },
       {
         $lookup: {
-          from: 'analytics',
+          from: 'statistics',
           let: {
-            analytics: '$analytics',
+            statistics: '$statistics',
           },
           pipeline: [
             {
               $match: {
                 $expr: {
-                  $in: ['$_id', '$$analytics'],
+                  $in: ['$_id', '$$statistics'],
                 },
               },
             },
@@ -140,11 +133,64 @@ export class StatisticsService {
       },
     ])
 
-    if (analytics.length > 0) {
-      analytics[0].analytics.views = views[0]?.visitData
-      return analytics[0]
+    if (stats.length > 0) {
+      stats[0].statistics.views = views[0]?.visitData
+      return stats[0]
     } else {
       return null
     }
+  }
+
+  public getVisitStats = async (alias: string) => {
+    const views = await LinkModel.aggregate([
+      { $match: { alias } },
+      {
+        $lookup: {
+          from: 'statistics',
+          let: {
+            statistics: '$statistics',
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $in: ['$_id', '$$statistics'],
+                },
+              },
+            },
+            {
+              $group: {
+                _id: {
+                  $substr: ['$visitDate', 0, 35],
+                },
+                v: {
+                  $sum: 1,
+                },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                k: '$_id',
+                v: 1,
+              },
+            },
+          ],
+          as: 'visitData',
+        },
+      },
+      {
+        $addFields: {
+          visitData: {
+            $arrayToObject: '$visitData',
+          },
+        },
+      },
+    ])
+
+    if (views.length > 0 && views[0].visitData) {
+      return views[0]?.visitData
+    }
+    return null
   }
 }

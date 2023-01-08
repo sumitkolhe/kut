@@ -117,34 +117,14 @@ export class LinkController {
   ) => {
     try {
       const { alias } = req.params
-      const { analytics } = req
+      const { statistics } = req
 
-      const link = await this.linkService.redirectLink(alias, analytics)
+      const link = await this.linkService.redirectLink(alias, statistics)
 
       return res.json({
         status: 'SUCCESS',
         message: null,
         data: link,
-      })
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  public linkStatistics: RequestHandler = async (
-    req: Request,
-    res: Response<CustomResponse<any>>,
-    next: NextFunction
-  ) => {
-    try {
-      const { alias } = req.params
-
-      const statistics = await this.linkService.statistics(alias)
-
-      return res.json({
-        status: 'SUCCESS',
-        message: null,
-        data: statistics,
       })
     } catch (error) {
       next(error)
