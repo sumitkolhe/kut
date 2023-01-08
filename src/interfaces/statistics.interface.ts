@@ -1,4 +1,4 @@
-export interface Analytics {
+export interface Statistics {
   visitDate?: Date
   os: {
     windows: Boolean | undefined

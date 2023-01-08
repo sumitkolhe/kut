@@ -11,7 +11,7 @@ export interface Link {
     active: boolean
   }
   description: string | null
-  analytics: []
+  statistics: []
   tags: []
   createdAt: Date
   updatedAt: Date

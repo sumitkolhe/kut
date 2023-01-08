@@ -5,7 +5,7 @@ import { createShortLink, verifyTargetLink } from 'server/utils/link'
 import { ErrorType } from 'interfaces/error.interface'
 import { logger } from 'server/utils/logger'
 import { StatisticsModel } from 'server/models/statistics.model'
-import type { Analytics } from 'interfaces/analytics.interface'
+import type { Statistics } from '~~/src/interfaces/statistics.interface'
 import type { LinkDocument } from 'server/models/link.model'
 import type { Link } from 'interfaces/link.interface'
 
@@ -59,7 +59,7 @@ export class LinkService {
   }> => {
     const result = await UserModel.findOne({ email }).populate({
       path: 'userLinks',
-      select: { tags: 0, analytics: 0, __v: 0 },
+      select: { tags: 0, statistics: 0, __v: 0 },
       match: search ? { $text: { $search: search } } : {},
       options: {
         sort: { createdAt: -1 },
@@ -84,7 +84,7 @@ export class LinkService {
     const result = await UserModel.findOne({ email }).populate({
       path: 'userLinks',
       match: { alias },
-      select: { tags: 0, analytics: 0, __v: 0 },
+      select: { tags: 0, statistics: 0, __v: 0 },
     })
 
     const user = result?.toObject()
@@ -94,7 +94,7 @@ export class LinkService {
     return link ? link : null
   }
 
-  public redirectLink = async (alias: string, analytics: Analytics | undefined) => {
+  public redirectLink = async (alias: string, statistics: Statistics | undefined) => {
     const link: LinkDocument | null = await this.linkModel.findOne({ alias })
 
     if (!link) throw new HttpExceptionError(404, ErrorType.linkNotFound)
@@ -113,14 +113,14 @@ export class LinkService {
 
     // if (link.meta.password && password && link.meta.password === password)
 
-    const newStats = new StatisticsModel(analytics)
+    const newStats = new StatisticsModel(statistics)
     await newStats.save()
 
     if (link) {
       await this.linkModel
-        .findOneAndUpdate({ alias }, { $push: { analytics: newStats }, $inc: { visitCount: 1 } })
+        .findOneAndUpdate({ alias }, { $push: { statistics: newStats }, $inc: { visitCount: 1 } })
         .catch(() => {
-          logger.error('cannot update link analytics')
+          logger.error('cannot update link statistics')
         })
     }
 

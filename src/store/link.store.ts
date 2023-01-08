@@ -7,6 +7,7 @@ export const useLinkStore = defineStore('links', {
   state: () => ({
     allLinks: [] as Link[],
     link: {} as Link,
+    linkViews: {} as Record<string, number>,
     totalCount: 0,
   }),
   actions: {
@@ -53,6 +54,18 @@ export const useLinkStore = defineStore('links', {
     async deleteLink(alias: string) {
       try {
         await this.$http.link.deleteLink(alias)
+      } catch (error) {
+        if (error instanceof FetchError) {
+          logger.error(error.message)
+        }
+      }
+    },
+
+    async fetchLinkViewStats(alias: string) {
+      try {
+        const views = await this.$http.statistics.linkViews(alias)
+
+        this.linkViews = views.data!
       } catch (error) {
         if (error instanceof FetchError) {
           logger.error(error.message)

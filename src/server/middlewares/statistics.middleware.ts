@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 
-export const analyticsHandler = (req: Request, _res: Response, next: NextFunction) => {
-  req.analytics = {
+export const statisticsHandler = (req: Request, _res: Response, next: NextFunction) => {
+  req.statistics = {
     os: {
       windows: req?.useragent?.isWindows,
       linux: req?.useragent?.isLinux,
