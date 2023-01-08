@@ -28,7 +28,11 @@ const deleteLink = () => {
 
 <template>
   <div>
-    <button class="flex" @click="showPanel = true">
+    <button
+      title="Options"
+      class="flex rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
+      @click="showPanel = true"
+    >
       <icon v-if="smallerThanLg" class="text-red-500" name="ph:faders-horizontal-duotone" />
     </button>
 
@@ -83,7 +87,7 @@ const deleteLink = () => {
     <div v-else title="Options" class="flex w-full justify-end">
       <Menu as="div" class="relative inline-block text-left">
         <div>
-          <menu-button class="rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
+          <menu-button title="Options" class="rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
             <icon name="ph:dots-three-vertical-bold" class="text-red-500" size="26" />
           </menu-button>
         </div>
