@@ -7,7 +7,6 @@ import StatsMenu from 'components/molecules/menus/stats-menu.vue'
 
 definePageMeta({
   middleware: ['auth'],
-  layout: 'links',
 })
 
 // global

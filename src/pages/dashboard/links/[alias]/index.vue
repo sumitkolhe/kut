@@ -4,7 +4,6 @@ import { storeToRefs } from 'pinia'
 
 definePageMeta({
   middleware: ['auth'],
-  layout: 'links',
 })
 
 const route = useRoute()

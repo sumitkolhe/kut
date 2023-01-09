@@ -12,7 +12,6 @@ import type { Link } from 'interfaces/link.interface'
 
 definePageMeta({
   middleware: ['auth'],
-  breadcrumbs: 'Links',
 })
 
 // store
@@ -210,6 +209,14 @@ watch(copied, (clicked) => {
         <p class="font-light text-gray-400 dark:text-gray-500">
           Get started by creating a new link.
         </p>
+        <primary-button
+          suffix-icon="ph:plus-duotone"
+          :loading="loading"
+          class="mt-6 w-fit"
+          @click="showLinkPanel = true"
+        >
+          Add Link
+        </primary-button>
       </div>
     </div>
   </section>

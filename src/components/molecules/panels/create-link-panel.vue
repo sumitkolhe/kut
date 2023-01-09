@@ -94,7 +94,7 @@ const createShortLink = async () => {
 
 <template>
   <transition-root as="template" :show="openPanel">
-    <Dialog as="div" class="relative z-50">
+    <Dialog as="div" class="relative z-[70]">
       <transition-child
         as="template"
         enter="ease-in-out duration-500"
