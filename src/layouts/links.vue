@@ -6,7 +6,7 @@ import LinksNavigation from 'components/molecules/navigation/links-navigation.vu
 </script>
 
 <template>
-  <main class="no-select">
+  <main>
     <NuxtLoadingIndicator color="#f55" :height="3" />
     <dashboard-header />
     <links-navigation />

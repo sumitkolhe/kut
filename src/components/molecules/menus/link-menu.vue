@@ -106,7 +106,7 @@ const deleteLink = () => {
                   class="group flex w-full items-center space-x-4 rounded p-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-700"
                   @click="$emit('edit-link')"
                 >
-                  <icon name="ph:pencil-duotone" />
+                  <icon name="ph:pencil" size="20" />
 
                   <p>Edit</p>
                 </button>
@@ -117,7 +117,7 @@ const deleteLink = () => {
                   class="group flex w-full items-center space-x-4 rounded p-2 text-sm hover:bg-red-500 hover:text-gray-100"
                   @click="deleteLink"
                 >
-                  <icon name="ph:trash-duotone" />
+                  <icon name="ph:trash" size="20" />
                   <p>Delete</p>
                 </button>
               </menu-item>

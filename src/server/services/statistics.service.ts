@@ -3,7 +3,24 @@ import { LinkModel } from 'server/models/link.model'
 import type { StatisticsPeriod } from 'interfaces/statistics.interface'
 
 export class StatisticsService {
-  public statistics = async (alias: string) => {
+  public getDeviceStats = async (alias: string, period: StatisticsPeriod) => {
+    const currentDate = dayjs().toDate()
+    let pastDate = dayjs().toDate()
+
+    if (period === '1h') {
+      pastDate = dayjs().subtract(1, 'h').toDate()
+    } else if (period === '24h') {
+      pastDate = dayjs().subtract(24, 'h').toDate()
+    } else if (period === '7d') {
+      pastDate = dayjs().subtract(7, 'd').toDate()
+    } else if (period === '30d') {
+      pastDate = dayjs().subtract(30, 'd').toDate()
+    } else if (period === '180d') {
+      pastDate = dayjs().subtract(180, 'd').toDate()
+    } else if (period === 'all') {
+      pastDate = dayjs().subtract(10, 'y').toDate()
+    }
+
     const stats = await LinkModel.aggregate([
       { $match: { alias } },
       {
@@ -15,6 +32,21 @@ export class StatisticsService {
         },
       },
       { $unwind: '$statistics' },
+      // {
+      //   $match: {
+      //     'statistics.visitDate': { $and: [{ $lte: currentDate, $gte: pastDate }] },
+      //   },
+      // },
+
+      {
+        $match: {
+          $and: [
+            { 'statistics.visitDate': { $lte: currentDate } },
+            { 'statistics.visitDate': { $gte: pastDate } },
+          ],
+        },
+      },
+
       {
         $group: {
           _id: null,
@@ -89,55 +121,8 @@ export class StatisticsService {
       },
     ])
 
-    const views = await LinkModel.aggregate([
-      { $match: { alias } },
-      {
-        $lookup: {
-          from: 'statistics',
-          let: {
-            statistics: '$statistics',
-          },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $in: ['$_id', '$$statistics'],
-                },
-              },
-            },
-            {
-              $group: {
-                _id: {
-                  $substr: ['$visitDate', 0, 35],
-                },
-                v: {
-                  $sum: 1,
-                },
-              },
-            },
-            {
-              $project: {
-                _id: 0,
-                k: '$_id',
-                v: 1,
-              },
-            },
-          ],
-          as: 'visitData',
-        },
-      },
-      {
-        $addFields: {
-          visitData: {
-            $arrayToObject: '$visitData',
-          },
-        },
-      },
-    ])
-
     if (stats.length > 0) {
-      stats[0].statistics.views = views[0]?.visitData
-      return stats[0]
+      return stats.map((link) => link.statistics)[0]
     } else {
       return null
     }
@@ -213,8 +198,6 @@ export class StatisticsService {
         },
       },
     ])
-
-    console.log(views[0].visitData)
 
     if (views.length > 0 && views[0].visitData && Object.keys(views[0].visitData).length > 0) {
       return views[0]?.visitData

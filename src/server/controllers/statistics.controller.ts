@@ -29,4 +29,24 @@ export class StatisticsController {
       next(error)
     }
   }
+
+  public deviceStats: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<any>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { alias } = req.params
+      const { period } = req.query
+
+      const visitStats = await this.statisticsService.getDeviceStats(
+        alias,
+        period as StatisticsPeriod
+      )
+
+      return res.json({ status: 'SUCCESS', message: null, data: visitStats })
+    } catch (error) {
+      next(error)
+    }
+  }
 }

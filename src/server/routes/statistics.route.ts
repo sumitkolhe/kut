@@ -21,5 +21,11 @@ export class StatisticsRoute implements Routes {
       statisticsVisitsSchema,
       this.statisticsController.visitStats
     )
+    this.router.get(
+      `${this.path}/:alias/device`,
+      checkAuthentication,
+      statisticsVisitsSchema,
+      this.statisticsController.deviceStats
+    )
   }
 }
