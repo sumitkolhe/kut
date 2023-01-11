@@ -38,7 +38,7 @@ const downloadQrCode = () => {
 
 <template>
   <transition-root appear :show="isOpen" as="template" @close="$emit('close')">
-    <Dialog as="div" class="relative z-50">
+    <Dialog as="div" class="relative z-[70]">
       <transition-child
         as="template"
         enter="ease-in-out duration-500"
