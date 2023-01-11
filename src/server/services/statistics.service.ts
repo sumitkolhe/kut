@@ -1,8 +1,53 @@
 import dayjs from 'dayjs'
 import { LinkModel } from 'server/models/link.model'
+import { UserModel } from 'server/models/user.model'
 import type { StatisticsPeriod } from 'interfaces/statistics.interface'
 
 export class StatisticsService {
+  public getOverviewStats = async (email: string) => {
+    const currentDate = dayjs().toDate()
+
+    const overview = await UserModel.aggregate([
+      { $match: { email } },
+      {
+        $lookup: {
+          from: 'links',
+          localField: 'userLinks',
+          foreignField: '_id',
+          as: 'userLinks',
+        },
+      },
+      { $unwind: '$userLinks' },
+      {
+        $group: {
+          _id: null,
+          totalLinks: {
+            $sum: { $cond: ['$userLinks', 1, 0] },
+          },
+          disabledLinks: {
+            $sum: { $cond: ['$userLinks.meta.active', 0, 1] },
+          },
+          expiredLinks: {
+            $sum: { $cmp: ['$userLinks.meta.validTill', currentDate] },
+          },
+          totalVisits: {
+            $sum: '$userLinks.visitCount',
+          },
+          protectedLinks: {
+            $sum: { $cond: ['$userLinks.meta.password', 1, 0] },
+          },
+        },
+      },
+      { $project: { _id: 0 } },
+    ])
+
+    if (overview.length > 0) {
+      return overview[0]
+    } else {
+      return null
+    }
+  }
+
   public getDeviceStats = async (alias: string, period: StatisticsPeriod) => {
     const currentDate = dayjs().toDate()
     let pastDate = dayjs().toDate()
@@ -32,11 +77,6 @@ export class StatisticsService {
         },
       },
       { $unwind: '$statistics' },
-      // {
-      //   $match: {
-      //     'statistics.visitDate': { $and: [{ $lte: currentDate, $gte: pastDate }] },
-      //   },
-      // },
 
       {
         $match: {

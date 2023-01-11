@@ -10,6 +10,22 @@ export class StatisticsController {
     this.statisticsService = new StatisticsService()
   }
 
+  public overviewStats: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<any>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { email } = req.auth
+
+      const visitStats = await this.statisticsService.getOverviewStats(email)
+
+      return res.json({ status: 'SUCCESS', message: null, data: visitStats })
+    } catch (error) {
+      next(error)
+    }
+  }
+
   public visitStats: RequestHandler = async (
     req: Request,
     res: Response<CustomResponse<any>>,

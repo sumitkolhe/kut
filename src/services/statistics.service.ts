@@ -15,4 +15,10 @@ export class StatisticsService extends ApiService {
       method: 'GET',
     })
   }
+
+  public async overview() {
+    return this.http<CustomResponse<Record<string, number>>>(`${this.base}/overview`, {
+      method: 'GET',
+    })
+  }
 }

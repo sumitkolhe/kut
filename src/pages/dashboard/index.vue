@@ -1,36 +1,35 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+import { useLinkStore } from 'store/link.store'
+
 definePageMeta({
   middleware: ['auth'],
 })
 
-const overview = [
-  {
-    title: 'Total Links',
-    value: '56',
-    icon: 'ph:link-break-duotone',
-  },
-  {
-    title: 'Total Visits',
-    value: '230',
-    icon: 'ph:navigation-arrow-duotone',
-  },
-  {
-    title: 'Protected Links',
-    value: '6',
-    icon: 'ph:lock-simple-duotone',
-  },
-  {
-    title: 'Total Tags',
-    value: '5',
-    icon: 'ph:tag-duotone',
-  },
-]
+const { fetchOverviewStats } = useLinkStore()
+const { overviewStats } = storeToRefs(useLinkStore())
+
+onMounted(() => fetchOverviewStats())
+
+const stats = computed(() => {
+  if (overviewStats.value) {
+    return Object?.keys(overviewStats.value).map((s) => {
+      return {
+        title: s,
+        value: overviewStats.value[s],
+        icon: 'ph:link-break-duotone',
+      }
+    })
+  } else {
+    return []
+  }
+})
 </script>
 
 <template>
   <section class="my-6 grid grid-cols-1 gap-6 md:my-8 md:grid-cols-3 lg:grid-cols-4">
     <div
-      v-for="item in overview"
+      v-for="item in stats"
       :key="item.title"
       class="flex w-auto flex-row items-center justify-between rounded-md border bg-white p-6 transition-all duration-100 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900 hover:dark:border-gray-50"
     >

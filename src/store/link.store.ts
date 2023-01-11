@@ -8,6 +8,7 @@ export const useLinkStore = defineStore('links', {
     allLinks: [] as Link[],
     link: {} as Link,
     linkViews: {} as Record<string, number>,
+    overviewStats: {} as Record<string, number>,
     totalCount: 0,
   }),
   actions: {
@@ -66,6 +67,18 @@ export const useLinkStore = defineStore('links', {
         const views = await this.$http.statistics.linkViews(alias, period)
 
         this.linkViews = views.data!
+      } catch (error) {
+        if (error instanceof FetchError) {
+          logger.error(error.message)
+        }
+      }
+    },
+
+    async fetchOverviewStats() {
+      try {
+        const views = await this.$http.statistics.overview()
+
+        this.overviewStats = views.data!
       } catch (error) {
         if (error instanceof FetchError) {
           logger.error(error.message)
