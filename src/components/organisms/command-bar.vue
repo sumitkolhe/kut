@@ -49,21 +49,14 @@ const commandItems = [
   },
 ]
 
-const keys = useMagicKeys()
-const cmdK = keys['dead']
-const escape = keys['escape']
+const { dead, escape } = useMagicKeys()
 
-watch(cmdK, (newCmd, oldCmd) => {
-  console.log(newCmd, oldCmd, 'cmd')
-  if (newCmd) {
-    visible.value = true
-  }
+watch(dead, () => {
+  visible.value = true
 })
 
 watch(escape, (esc) => {
-  if (esc) {
-    visible.value = false
-  }
+  if (esc) visible.value = false
 })
 
 // functions
@@ -159,7 +152,6 @@ div [command-dialog-wrapper] {
 .vercel [command-root] {
   max-width: 640px;
   width: 100%;
-  padding: 8px;
   background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
