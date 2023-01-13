@@ -47,18 +47,14 @@ definePageMeta({
               <NuxtLink to="/auth/register" class="p-2">
                 <primary-button
                   prefix-icon="octicon:paper-airplane-24"
-                  class="rounded-full drop-shadow-xl"
+                  class="py-4 drop-shadow-xl"
                   type="primary"
                 >
                   Start for free
                 </primary-button>
               </NuxtLink>
               <a href="https://docs.krat.es" target="_blank" class="p-2">
-                <secondary-button
-                  prefix-icon="ph:star"
-                  class="rounded-full drop-shadow-xl"
-                  type="normal"
-                >
+                <secondary-button prefix-icon="ph:star" class="py-4 drop-shadow-xl" type="normal">
                   Star on github
                 </secondary-button>
               </a>

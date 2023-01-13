@@ -33,6 +33,7 @@
     "pinia": "^2.0.28",
     "prettier-plugin-tailwindcss": "^0.2.1",
     "qrcode": "^1.5.1",
+    "vue-command-palette": "^0.1.4",
     "vue-frappe-chart": "^0.1.10",
     "vue-tiny-validate": "^0.2.4",
     "winston": "^3.8.2"

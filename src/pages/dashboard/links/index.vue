@@ -72,13 +72,7 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
   total: totalCount,
   page: 1,
   pageSize: 5,
-  onPageChange: async ({
-    currentPage,
-    currentPageSize,
-  }: {
-    currentPage: number
-    currentPageSize: number
-  }) => {
+  onPageChange: async ({ currentPage, currentPageSize }) => {
     linksLoader.value = true
     await fetchAllLinks((currentPage - 1) * 5, currentPageSize)
     linksLoader.value = false
