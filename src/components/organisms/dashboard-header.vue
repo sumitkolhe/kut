@@ -8,10 +8,12 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
 <template>
   <header class="w-full bg-gray-50 px-4 dark:bg-gray-900">
     <div class="mx-auto flex h-16 max-w-screen-xl flex-row items-center justify-between">
-      <NuxtLink class="flex items-center space-x-3" to="/dashboard">
-        <Logo />
-        <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
-      </NuxtLink>
+      <div class="flex items-center space-x-6">
+        <NuxtLink class="flex items-center space-x-3" to="/dashboard">
+          <Logo />
+          <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
+        </NuxtLink>
+      </div>
 
       <div class="hidden md:block">
         <profile-menu />
