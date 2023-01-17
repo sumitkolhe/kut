@@ -2,9 +2,11 @@
 import { ref } from 'vue'
 import { useMagicKeys } from '@vueuse/core'
 import { Command } from 'vue-command-palette'
+import { useAuthStore } from 'store/auth.store'
 
 // globals
 const { changeTheme } = useTheme()
+const { logout } = useAuthStore()
 
 // refs
 const visible = ref(false)
@@ -31,7 +33,7 @@ const commandItems = [
         label: 'Github',
         shortcut: ['⇧', 'D'],
         action: () => {
-          //
+          navigateTo('https://github.com/sumitkolhe/kut', { external: true })
         },
       },
     ],
@@ -44,6 +46,12 @@ const commandItems = [
         label: 'Change Theme',
         shortcut: ['G', 'T'],
         action: () => changeTheme(),
+      },
+      {
+        icon: 'ph:arrow-line-right-light',
+        label: 'Logout',
+        shortcut: [],
+        action: async () => await logout(),
       },
     ],
   },
@@ -58,15 +66,10 @@ watch(dead, () => {
 watch(escape, (esc) => {
   if (esc) visible.value = false
 })
-
-// functions
-const handleSelectItem = (item: any) => {
-  console.log(item)
-}
 </script>
 
 <template>
-  <Command.Dialog :visible="visible" theme="vercel" @select-item="handleSelectItem">
+  <Command.Dialog :visible="visible" theme="vercel">
     <template #header>
       <!-- <div command-vercel-label>
         <label command-vercel-badge> Home </label>
@@ -237,13 +240,14 @@ div [command-dialog-wrapper] {
 }
 
 .vercel [command-list] {
-  height: min(330px, 260px);
+  height: min(330px, calc(var(--command-list-height)));
   max-height: 400px;
   overflow: auto;
   overscroll-behavior: contain;
   transition: 100ms ease;
   transition-property: height;
   padding: 0px 8px;
+  margin-bottom: 12px;
 }
 
 .vercel [command-vercel-shortcuts] {
