@@ -19,20 +19,35 @@ const { fetchAllLinks, deleteLink, shortenLink } = useLinkStore()
 const { totalCount, allLinks } = storeToRefs(useLinkStore())
 
 onMounted(async () => {
-  linksLoader.value = true
+  allLinksLoader.value = true
   await fetchAllLinks(0, 5)
-  linksLoader.value = false
+  allLinksLoader.value = false
 })
 
 // refs
-const showLinkPanel = ref(false)
-const loading = ref(false)
-const linksLoader = ref(false)
+const showCreateLinkPanel = ref(false)
+const showEditLinkPanel = ref(false)
+const createLinkLoader = ref(false)
+const updateLinkLoader = ref(false)
+const allLinksLoader = ref(false)
 const search = ref()
 const qrCode = ref()
 const openQrCode = ref(false)
 
-const linkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'description'>>({
+const createLinkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'description'>>({
+  alias: null,
+  target: '',
+  description: null,
+  meta: {
+    password: null,
+    validFrom: new Date(),
+    validTill: null,
+    maxVisits: null,
+    active: true,
+  },
+})
+
+const editLinkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'description'>>({
   alias: null,
   target: '',
   description: null,
@@ -47,16 +62,16 @@ const linkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'descripti
 
 // functions
 const debouncedSearch = useDebounceFn(async () => {
-  linksLoader.value = true
+  allLinksLoader.value = true
   await fetchAllLinks(0, 5, search.value)
-  linksLoader.value = false
+  allLinksLoader.value = false
 }, 500)
 
 const createLink = async () => {
-  loading.value = true
-  await shortenLink(linkPayload).then(async () => {
-    loading.value = false
-    showLinkPanel.value = false
+  createLinkLoader.value = true
+  await shortenLink(createLinkPayload).then(async () => {
+    createLinkLoader.value = false
+    showCreateLinkPanel.value = false
   })
 }
 
@@ -64,8 +79,14 @@ const deleteSelectedLink = async (alias: string | null) => {
   if (alias) await deleteLink(alias)
 }
 
-const editSelectedLink = async (alias: string | null) => {
-  console.log(alias)
+const editSelectedLink = async () => {
+  updateLinkLoader.value = true
+  // await shortenLink(createLinkPayload).then(async () => {
+  //   createLinkLoader.value = false
+  //   showCreateLinkPanel.value = false
+  // })
+  updateLinkLoader.value = false
+  showEditLinkPanel.value = false
 }
 
 const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffsetPagination({
@@ -73,15 +94,28 @@ const { currentPage, pageCount, prev, next, isFirstPage, isLastPage } = useOffse
   page: 1,
   pageSize: 5,
   onPageChange: async ({ currentPage, currentPageSize }) => {
-    linksLoader.value = true
+    allLinksLoader.value = true
     await fetchAllLinks((currentPage - 1) * 5, currentPageSize)
-    linksLoader.value = false
+    allLinksLoader.value = false
   },
 })
 
 const showQrCode = (url: string) => {
   qrCode.value = url
   openQrCode.value = true
+}
+
+const openEditLinkPanel = (link: Link) => {
+  editLinkPayload.alias = link.alias
+  editLinkPayload.target = link.target
+  editLinkPayload.description = link.description
+  editLinkPayload.meta.password = link.meta.password
+  editLinkPayload.meta.validFrom = link.meta.validFrom
+  editLinkPayload.meta.validTill = link.meta.validTill
+  editLinkPayload.meta.maxVisits = link.meta.maxVisits
+  editLinkPayload.meta.active = link.meta.active
+
+  showEditLinkPanel.value = true
 }
 
 const { copy, copied, text } = useClipboard()
@@ -105,37 +139,37 @@ watch(copied, (clicked) => {
 
         <primary-button
           suffix-icon="ph:plus-duotone"
-          :loading="loading"
+          :loading="createLinkLoader"
           class="hidden w-full md:block md:w-36"
-          @click="showLinkPanel = true"
+          @click="showCreateLinkPanel = true"
         >
           Add Link
         </primary-button>
         <primary-button
-          :loading="loading"
+          :loading="createLinkLoader"
           class="w-fit text-gray-100 hover:text-gray-900 md:hidden"
-          @click="showLinkPanel = true"
+          @click="showCreateLinkPanel = true"
         >
           <icon name="ph:plus" class="transition-all duration-200" />
         </primary-button>
       </div>
 
       <create-link-panel
-        v-model:active="linkPayload.meta.active"
-        v-model:alias="linkPayload.alias"
-        v-model:description="linkPayload.description"
-        v-model:target="linkPayload.target"
-        v-model:valid-from="linkPayload.meta.validFrom"
-        v-model:valid-till="linkPayload.meta.validTill"
-        v-model:password="linkPayload.meta.password"
-        v-model:max-visits="linkPayload.meta.maxVisits"
-        v-model:open-panel="showLinkPanel"
-        :loading="loading"
+        v-model:active="createLinkPayload.meta.active"
+        v-model:alias="createLinkPayload.alias"
+        v-model:description="createLinkPayload.description"
+        v-model:target="createLinkPayload.target"
+        v-model:valid-from="createLinkPayload.meta.validFrom"
+        v-model:valid-till="createLinkPayload.meta.validTill"
+        v-model:password="createLinkPayload.meta.password"
+        v-model:max-visits="createLinkPayload.meta.maxVisits"
+        v-model:open-panel="showCreateLinkPanel"
+        :loading="createLinkLoader"
         @create-link="createLink"
       ></create-link-panel>
     </div>
 
-    <div v-if="linksLoader" class="my-6 flex w-full flex-col gap-6 md:my-8">
+    <div v-if="allLinksLoader" class="my-6 flex w-full flex-col gap-6 md:my-8">
       <div
         v-for="i in [1, 2, 3, 4]"
         :key="i"
@@ -168,7 +202,7 @@ watch(copied, (clicked) => {
             :updated-at="link.updatedAt.toString()"
             @copy-link="copy(link.shortUrl)"
             @delete-link="deleteSelectedLink(link.alias)"
-            @edit-link="editSelectedLink(link.alias)"
+            @edit-link="openEditLinkPanel(link)"
             @qr-code="showQrCode"
           />
         </div>
@@ -180,6 +214,21 @@ watch(copied, (clicked) => {
           :link="qrCode"
           @close="openQrCode = false"
         />
+
+        <!-- update link panel  -->
+        <create-link-panel
+          v-model:active="editLinkPayload.meta.active"
+          v-model:alias="editLinkPayload.alias"
+          v-model:description="editLinkPayload.description"
+          v-model:target="editLinkPayload.target"
+          v-model:valid-from="editLinkPayload.meta.validFrom"
+          v-model:valid-till="editLinkPayload.meta.validTill"
+          v-model:password="editLinkPayload.meta.password"
+          v-model:max-visits="editLinkPayload.meta.maxVisits"
+          v-model:open-panel="showEditLinkPanel"
+          :loading="updateLinkLoader"
+          @create-link="editSelectedLink"
+        ></create-link-panel>
 
         <div class="flex justify-center md:justify-end">
           <div class="mt-6 mb-0 flex items-end items-center justify-end gap-3">
@@ -205,9 +254,9 @@ watch(copied, (clicked) => {
         </p>
         <primary-button
           suffix-icon="ph:plus-duotone"
-          :loading="loading"
+          :loading="createLinkLoader"
           class="mt-6 w-fit"
-          @click="showLinkPanel = true"
+          @click="showCreateLinkPanel = true"
         >
           Add Link
         </primary-button>
