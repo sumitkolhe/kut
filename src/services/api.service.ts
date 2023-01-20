@@ -9,6 +9,7 @@ export class ApiService {
   constructor() {
     this.http = $fetch.create({
       baseURL: this.baseUrl,
+      credentials: 'same-origin',
 
       async onResponseError({ response }) {
         if (response.status === 401) {
