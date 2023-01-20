@@ -18,18 +18,12 @@ definePageMeta({
 const { fetchAllLinks, deleteLink, shortenLink } = useLinkStore()
 const { totalCount, allLinks } = storeToRefs(useLinkStore())
 
-onMounted(async () => {
-  allLinksLoader.value = true
-  await fetchAllLinks(0, 5)
-  allLinksLoader.value = false
-})
-
 // refs
 const showCreateLinkPanel = ref(false)
 const showEditLinkPanel = ref(false)
 const createLinkLoader = ref(false)
 const updateLinkLoader = ref(false)
-const allLinksLoader = ref(false)
+const allLinksLoader = ref(true)
 const search = ref()
 const qrCode = ref()
 const openQrCode = ref(false)
@@ -58,6 +52,12 @@ const editLinkPayload = reactive<Pick<Link, 'alias' | 'target' | 'meta' | 'descr
     maxVisits: null,
     active: true,
   },
+})
+
+onMounted(async () => {
+  allLinksLoader.value = true
+  await fetchAllLinks(0, 5)
+  allLinksLoader.value = false
 })
 
 // functions
@@ -169,18 +169,19 @@ watch(copied, (clicked) => {
       ></create-link-panel>
     </div>
 
-    <div v-if="allLinksLoader" class="my-6 flex w-full flex-col gap-6 md:my-8">
+    <div v-if="allLinksLoader" class="my-6 flex w-full flex-col gap-3 md:my-8">
+      <div class="w-32 animate-pulse rounded-md border bg-gray-200 p-4"></div>
       <div
         v-for="i in [1, 2, 3, 4]"
         :key="i"
-        class="w-full animate-pulse space-y-2 rounded-md border bg-gray-50 p-5"
+        class="w-full animate-pulse rounded-md border bg-gray-50 p-5"
       >
         <div class="flex-1 space-y-6">
           <div class="grid grid-cols-3 gap-4">
-            <div class="col-span-1 h-2 rounded-full bg-gray-300"></div>
+            <div class="col-span-1 h-2 rounded-full bg-gray-200"></div>
           </div>
 
-          <div class="col-span-1 h-2 rounded-full bg-gray-300"></div>
+          <div class="col-span-1 h-2 rounded-full bg-gray-200"></div>
         </div>
       </div>
     </div>

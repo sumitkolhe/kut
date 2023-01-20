@@ -61,7 +61,7 @@ watch(period, async (newPeriod) => {
 </script>
 
 <template>
-  <section class="my-6">
+  <section class="my-6 md:my-8">
     <client-only>
       <div class="mb-4 flex items-center justify-between">
         <div class="flex space-x-4">
@@ -82,7 +82,7 @@ watch(period, async (newPeriod) => {
 
       <div
         v-if="values.length > 0"
-        class="min-h-[300px] items-center justify-center rounded border bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900"
+        class="min-h-[300px] items-center justify-center rounded border bg-gray-50 p-2 dark:border-gray-700 dark:bg-gray-900"
       >
         <v-frappe-chart
           type="line"
