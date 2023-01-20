@@ -48,11 +48,8 @@ const linkStats = computed(() => [
 </script>
 
 <template>
-  <section class="my-6">
-    <div
-      v-if="link.alias"
-      class="grid grid-cols-1 gap-4 md:my-8 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
-    >
+  <section class="my-6 md:my-8">
+    <div v-if="link.alias" class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
       <div
         v-for="(stat, index) of linkStats"
         :key="index"
@@ -65,6 +62,7 @@ const linkStats = computed(() => [
       </div>
     </div>
 
+    <!-- skeleton loader  -->
     <div v-else class="grid grid-cols-1 gap-4 md:my-8 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
       <div
         v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
@@ -74,10 +72,10 @@ const linkStats = computed(() => [
         <div class="flex-1 space-y-8 py-1">
           <div class="space-y-3">
             <div class="grid grid-cols-3 gap-4">
-              <div class="col-span-1 h-3 rounded-full bg-gray-300"></div>
+              <div class="col-span-1 h-3 rounded-full bg-gray-200"></div>
             </div>
           </div>
-          <div class="col-span-1 h-3 rounded-full bg-gray-300"></div>
+          <div class="col-span-1 h-3 rounded-full bg-gray-200"></div>
         </div>
       </div>
     </div>
