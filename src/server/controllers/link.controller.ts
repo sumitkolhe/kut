@@ -10,6 +10,54 @@ export class LinkController {
     this.linkService = new LinkService()
   }
 
+  public getAllLinks: RequestHandler = async (
+    req: Request,
+    res: Response<
+      CustomResponse<{
+        links: Link[]
+        total: number
+      }>
+    >,
+    next: NextFunction
+  ) => {
+    try {
+      const { email } = req.auth
+      const { offset, limit, search } = req.query
+
+      const shortenedLink = await this.linkService.getAllLinks(
+        email,
+        Number(offset),
+        Number(limit),
+        search as string
+      )
+
+      return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public getLink: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<Link>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { email } = req.auth
+      const { alias } = req.params
+
+      const link = await this.linkService.getLink(email, alias as string)
+
+      return res.json({
+        status: 'SUCCESS',
+        message: null,
+        data: link,
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
   public createLink: RequestHandler = async (
     req: Request,
     res: Response<CustomResponse<any>>,
@@ -45,26 +93,17 @@ export class LinkController {
     }
   }
 
-  public getAllLinks: RequestHandler = async (
+  public updateLink: RequestHandler = async (
     req: Request,
-    res: Response<
-      CustomResponse<{
-        links: Link[]
-        total: number
-      }>
-    >,
+    res: Response<CustomResponse<any>>,
     next: NextFunction
   ) => {
     try {
       const { email } = req.auth
-      const { offset, limit, search } = req.query
+      const { alias } = req.params
+      const linkPayload: Link = req.body
 
-      const shortenedLink = await this.linkService.getAllLinks(
-        email,
-        Number(offset),
-        Number(limit),
-        search as string
-      )
+      const shortenedLink = await this.linkService.updateLink(email, alias, linkPayload)
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
     } catch (error) {
@@ -84,27 +123,6 @@ export class LinkController {
       await this.linkService.deleteLink(email, alias)
 
       return res.json({ status: 'SUCCESS', message: 'link deleted successfully', data: null })
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  public getLink: RequestHandler = async (
-    req: Request,
-    res: Response<CustomResponse<Link>>,
-    next: NextFunction
-  ) => {
-    try {
-      const { email } = req.auth
-      const { alias } = req.params
-
-      const link = await this.linkService.getLink(email, alias as string)
-
-      return res.json({
-        status: 'SUCCESS',
-        message: null,
-        data: link,
-      })
     } catch (error) {
       next(error)
     }

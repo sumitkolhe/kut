@@ -48,6 +48,68 @@ export class LinkService {
     return savedLink
   }
 
+  public updateLink = async (
+    email: string,
+    alias: string,
+    linkPayload: Partial<Pick<Link, 'target' | 'alias' | 'description' | 'meta'>>
+  ) => {
+    const result = await UserModel.findOne({ email }).populate({
+      path: 'userLinks',
+      match: { alias },
+    })
+
+    console.log(linkPayload)
+
+    if (result?.userLinks) {
+      const updatedLink = await this.linkModel.updateOne(
+        { alias },
+        {
+          alias,
+          target: verifyTargetLink(linkPayload.target as string),
+          shortUrl: createShortLink(alias),
+          description: linkPayload.description,
+          meta: {
+            password: linkPayload.meta?.password,
+            validFrom: linkPayload.meta?.validFrom
+              ? new Date(linkPayload.meta?.validFrom)
+              : new Date(),
+            validTill: linkPayload.meta?.validTill
+              ? new Date(linkPayload.meta.validTill)
+              : new Date(),
+            maxVisits: linkPayload.meta?.maxVisits,
+            active: linkPayload.meta?.active,
+          },
+        }
+      )
+
+      console.log(updatedLink)
+    }
+
+    // const newLink: LinkDocument = new this.linkModel({
+    //   alias,
+    //   target: verifyTargetLink(linkPayload.target as string),
+    //   shortUrl: createShortLink(alias),
+    //   description: linkPayload.description,
+    //   meta: {
+    //     password: linkPayload.meta?.password,
+    //     validFrom: linkPayload.meta?.validFrom,
+    //     validTill: linkPayload.meta?.validTill,
+    //     maxVisits: linkPayload.meta?.maxVisits,
+    //     active: linkPayload.meta?.active,
+    //   },
+    // })
+
+    // const savedLink = await newLink.save().catch(() => {
+    //   throw new HttpExceptionError(400, ErrorType.aliasAlreadyUsed)
+    // })
+
+    // await UserModel.findOneAndUpdate({ email }, { $push: { userLinks: savedLink } }).catch(() => {
+    //   logger.error('cannot update user links')
+    // })
+
+    // return savedLink
+  }
+
   public getAllLinks = async (
     email: string,
     offset: number,
@@ -94,6 +156,18 @@ export class LinkService {
     return link ? link : null
   }
 
+  public deleteLink = async (email: string, alias: string) => {
+    // delete link from links collection
+    const deletedLink = await this.linkModel.findOneAndDelete({ alias })
+
+    // remove link reference from users collection object
+    await UserModel.findOneAndUpdate(
+      { email },
+      { $pull: { userLinks: deletedLink?.id } },
+      { multi: true }
+    )
+  }
+
   public redirectLink = async (alias: string, statistics: Statistics | undefined) => {
     const link: LinkDocument | null = await this.linkModel.findOne({ alias })
 
@@ -125,18 +199,6 @@ export class LinkService {
     }
 
     return link.target.toString()
-  }
-
-  public deleteLink = async (email: string, alias: string) => {
-    // delete link from links collection
-    const deletedLink = await this.linkModel.findOneAndDelete({ alias })
-
-    // remove link reference from users collection object
-    await UserModel.findOneAndUpdate(
-      { email },
-      { $pull: { userLinks: deletedLink?.id } },
-      { multi: true }
-    )
   }
 
   private generateUniqueAlias = async (): Promise<string> => {
