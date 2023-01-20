@@ -1,5 +1,7 @@
 import type { Config } from 'interfaces/config.interface'
 
+const config = useRuntimeConfig()
+
 export const devConfig: Config = {
   env: 'development',
   database: {
@@ -29,8 +31,7 @@ export const devConfig: Config = {
     },
   },
   email: {
-    apiKey:
-      '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',
+    apiKey: config.emailApiKey,
     senderEmail: 'no-reply@kut.sh',
     senderName: 'Kut',
   },
