@@ -21,14 +21,13 @@ export class LinkController {
     next: NextFunction
   ) => {
     try {
-      const { email } = req.auth
-      const { offset, limit, search } = req.query
+      const { userId } = req.auth
+      const { offset, limit } = req.query
 
       const shortenedLink = await this.linkService.getAllLinks(
-        email,
+        userId,
         Number(offset),
-        Number(limit),
-        search as string
+        Number(limit)
       )
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
@@ -43,10 +42,10 @@ export class LinkController {
     next: NextFunction
   ) => {
     try {
-      const { email } = req.auth
+      const { userId } = req.auth
       const { alias } = req.params
 
-      const link = await this.linkService.getLink(email, alias as string)
+      const link = await this.linkService.getLink(userId, alias as string)
 
       return res.json({
         status: 'SUCCESS',
@@ -64,7 +63,8 @@ export class LinkController {
     next: NextFunction
   ) => {
     try {
-      const { email } = req.auth
+      const { userId } = req.auth
+
       const {
         alias,
         target,
@@ -85,7 +85,7 @@ export class LinkController {
         meta: { password, validFrom, validTill, maxVisits, active },
       }
 
-      const shortenedLink = await this.linkService.createLink(email, link)
+      const shortenedLink = await this.linkService.createLink(userId, link)
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
     } catch (error) {
@@ -99,13 +99,11 @@ export class LinkController {
     next: NextFunction
   ) => {
     try {
-      const { email } = req.auth
-      const { alias } = req.params
-      const linkPayload: Link = req.body
-
-      const shortenedLink = await this.linkService.updateLink(email, alias, linkPayload)
-
-      return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
+      // const { email } = req.auth
+      // const { alias } = req.params
+      // const linkPayload: Link = req.body
+      // const shortenedLink = await this.linkService.updateLink(email, alias, linkPayload)
+      // return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
     } catch (error) {
       next(error)
     }
@@ -117,10 +115,10 @@ export class LinkController {
     next: NextFunction
   ) => {
     try {
-      const { email } = req.auth
+      const { userId } = req.auth
       const { alias } = req.params
 
-      await this.linkService.deleteLink(email, alias)
+      await this.linkService.deleteLink(userId, alias)
 
       return res.json({ status: 'SUCCESS', message: 'link deleted successfully', data: null })
     } catch (error) {

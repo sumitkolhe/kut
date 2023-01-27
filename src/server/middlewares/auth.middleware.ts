@@ -25,7 +25,7 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
       next(new HttpExceptionError(403, ErrorType.accountNotVerified))
     } else if (user && user.isVerified) {
       req.auth = {
-        id: user.id,
+        userId: user.id,
         email: user.email,
       }
 

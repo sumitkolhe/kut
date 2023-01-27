@@ -14,7 +14,10 @@ import type { Routes } from 'interfaces/routes.interface'
 declare global {
   namespace Express {
     interface Request {
-      auth: any
+      auth: {
+        userId: string
+        email: string
+      }
       timedout: boolean
       statistics?: Statistics | undefined
     }
