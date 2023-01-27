@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { LinkModel } from 'server/models/link.model'
 import type { Document, Schema } from 'mongoose'
 
 export interface UserDocument extends Document {
@@ -10,10 +9,6 @@ export interface UserDocument extends Document {
   isBanned: boolean
   isVerified: boolean
   apiKey: string
-  userLinks: {
-    type: Schema.Types.ObjectId
-    ref: string
-  }
   createdAt: Date
   updatedAt: Date
 }
@@ -57,7 +52,6 @@ const UserSchema: Schema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
-    userLinks: [{ type: mongoose.Schema.Types.ObjectId, ref: LinkModel }],
   },
   {
     timestamps: true,

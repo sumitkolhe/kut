@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import type { Document, Schema } from 'mongoose'
 
 interface StatisticsDocument extends Document {
+  linkId: Schema.Types.ObjectId
   visitDate: { type: Date; required: boolean }
   os: {
     windows: boolean
@@ -35,6 +36,7 @@ interface StatisticsDocument extends Document {
 }
 
 const StatisticsSchema: Schema = new mongoose.Schema({
+  linkId: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true },
   visitDate: { type: Date, default: Date.now, required: true },
   os: {
     windows: Boolean,

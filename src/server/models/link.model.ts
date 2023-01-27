@@ -1,9 +1,8 @@
 import mongoose from 'mongoose'
-import { TagModel } from 'server/models/tag.model'
-import { StatisticsModel } from 'server/models/statistics.model'
 import type { Document, Schema } from 'mongoose'
 
 export interface LinkDocument extends Document {
+  userId: Schema.Types.ObjectId
   alias: string
   target: string
   shortUrl: string
@@ -16,14 +15,13 @@ export interface LinkDocument extends Document {
     maxVisits: number
     active: boolean
   }
-  statistics: { type: Schema.Types.ObjectId; ref: string }
-  tags: { type: Schema.Types.ObjectId; ref: string }
   createdAt: Date
   updatedAt: Date
 }
 
 const LinkSchema: Schema = new mongoose.Schema(
   {
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true },
     alias: { type: String, required: true, unique: true },
     target: { type: String, required: true },
     shortUrl: { type: String, required: true },
@@ -56,8 +54,6 @@ const LinkSchema: Schema = new mongoose.Schema(
         default: true,
       },
     },
-    statistics: [{ type: mongoose.Schema.Types.ObjectId, ref: StatisticsModel }],
-    tags: [{ type: mongoose.Schema.Types.ObjectId, ref: TagModel }],
   },
   { timestamps: true }
 )
