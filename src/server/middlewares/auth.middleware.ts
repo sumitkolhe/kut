@@ -15,20 +15,20 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
   if (!accessToken) throw new HttpExceptionError(401, ErrorType.unauthorised)
 
   try {
-    const tokenDetails = Jwt.verify(accessToken, config.token.access.secret)
+    const tokenDetails = Jwt.verify(accessToken, config.token.access.secret) as Jwt.JwtPayload
 
-    req.auth = tokenDetails
-
-    // get user details
-    const { email } = req.auth
-
-    const user = await UserModel.findOne({ email })
+    const user = await UserModel.findOne({ email: tokenDetails.email })
 
     if (!user) {
       next(new HttpExceptionError(401, ErrorType.userNotFound))
     } else if (user && !user.isVerified) {
       next(new HttpExceptionError(403, ErrorType.accountNotVerified))
     } else if (user && user.isVerified) {
+      req.auth = {
+        id: user.id,
+        email: user.email,
+      }
+
       next()
     }
   } catch (error) {
