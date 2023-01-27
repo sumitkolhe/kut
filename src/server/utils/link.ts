@@ -18,5 +18,5 @@ export const verifyTargetLink = (target: string) => {
   //valid URL but http/https protocol not present
   else if (link_without_protocol.test(link)) return `https://${link}`
   //Invalid Url
-  else throw new HttpExceptionError(400, 'Invalid target link')
+  else throw new HttpExceptionError(400, 'invalid target link')
 }
