@@ -1,7 +1,7 @@
 import { logger } from 'server/utils/logger'
 import { useConfig } from 'server/configs'
 import { signAccountVerificationToken } from 'server/helpers/token.helper'
-import { $fetch } from 'ohmyfetch'
+import { $fetch } from 'ofetch'
 import type { Config } from 'interfaces/config.interface'
 
 export class EmailService {

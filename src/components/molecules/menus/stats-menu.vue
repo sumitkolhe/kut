@@ -97,7 +97,7 @@ const emitChange = (period: Period) => {
     <Listbox v-else :model-value="selectedPeriod" @update:modelValue="emitChange">
       <div class="relative mt-1">
         <ListboxButton
-          class="relative flex w-full w-56 cursor-pointer flex-row items-center justify-between rounded border bg-white px-4 py-2 text-left focus:outline-none sm:text-sm"
+          class="relative flex w-56 cursor-pointer flex-row items-center justify-between rounded border bg-white px-4 py-2 text-left focus:outline-none sm:text-sm"
         >
           <Icon name="ph:calendar-blank" size="20" />
           <p class="block truncate text-sm">{{ selectedPeriod.name }}</p>

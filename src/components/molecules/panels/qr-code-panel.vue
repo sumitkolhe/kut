@@ -67,7 +67,7 @@ const downloadQrCode = () => {
             <p class="text-xl font-medium text-gray-900 dark:text-gray-200">Download QR Code</p>
           </div>
           <div
-            class="flex flex h-full flex-col items-center justify-center space-y-6 bg-gray-100 p-12 dark:bg-gray-800"
+            class="flex h-full flex-col items-center justify-center space-y-6 bg-gray-100 p-12 dark:bg-gray-800"
           >
             <img
               v-if="props.link"

@@ -45,7 +45,7 @@ const stats = computed(() => [
     <div
       v-for="stat in stats"
       :key="stat.title"
-      class="flex w-auto flex-row items-center justify-between rounded-md border bg-white p-6 transition-all duration-100 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900 hover:dark:border-gray-50"
+      class="flex w-auto flex-row items-center justify-between rounded-md border bg-white p-6 shadow-sm transition-all duration-100 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900 hover:dark:border-gray-50"
     >
       <div class="space-y-4">
         <p class="font-medium text-gray-800 dark:text-gray-200">{{ stat.title }}</p>

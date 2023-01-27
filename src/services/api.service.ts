@@ -1,5 +1,5 @@
-import { $fetch } from 'ohmyfetch'
-import type { $Fetch } from 'ohmyfetch'
+import { $fetch } from 'ofetch'
+import type { $Fetch } from 'ofetch'
 import { useAuthStore } from '~~/src/store/auth.store'
 
 export class ApiService {

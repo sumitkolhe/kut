@@ -5,6 +5,8 @@ export default defineNuxtRouteMiddleware(async () => {
   const { logout } = useAuthStore()
   const { accessToken } = useToken()
 
+  console.log(accessToken.value)
+
   // if access token is not present, logout the user
   if (!accessToken.value) {
     return navigateTo('/')

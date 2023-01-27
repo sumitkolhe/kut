@@ -232,7 +232,7 @@ watch(copied, (clicked) => {
         ></create-link-panel>
 
         <div class="flex justify-center md:justify-end">
-          <div class="mt-6 mb-0 flex items-end items-center justify-end gap-3">
+          <div class="mt-6 mb-0 flex items-end justify-end gap-3">
             <icon-button :disabled="isFirstPage" icon="line-md:chevron-left" @click="prev" />
             <p class="text-sm dark:text-gray-400">
               {{ currentPage }}
