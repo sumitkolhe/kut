@@ -36,7 +36,7 @@ interface StatisticsDocument extends Document {
 }
 
 const StatisticsSchema: Schema = new mongoose.Schema({
-  linkId: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true },
+  linkId: { type: mongoose.Schema.Types.ObjectId, required: true, unique: false },
   visitDate: { type: Date, default: Date.now, required: true },
   os: {
     windows: Boolean,

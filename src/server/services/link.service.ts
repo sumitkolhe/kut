@@ -25,6 +25,7 @@ export class LinkService {
   }> => {
     const allLinks = await this.linkModel
       .find({ userId })
+      .select({ __v: 0, _id: 0, userId: 0, meta: 0 })
       .sort({ createdAt: -1 })
       .skip(offset)
       .limit(limit)
@@ -38,7 +39,9 @@ export class LinkService {
   }
 
   public getLink = async (userId: string, alias: string) => {
-    const link = await this.linkModel.findOne({ userId, alias })
+    const link = await this.linkModel
+      .findOne({ userId, alias })
+      .select({ __v: 0, userId: 0, _id: 0, meta: { password: 0 } })
 
     return link ? (link?.toObject() as Link) : null
   }
@@ -49,6 +52,7 @@ export class LinkService {
   ) => {
     // if alias is not provided, generate new alias
     const alias = linkPayload.alias ? linkPayload.alias : await this.generateUniqueAlias()
+
     const verifiedTarget = verifyTargetLink(linkPayload.target as string)
 
     const newLink: LinkDocument = new this.linkModel({
@@ -157,16 +161,15 @@ export class LinkService {
 
     // if (link.meta.password && password && link.meta.password === password)
 
-    const newStats = new StatisticsModel(statistics)
-    await newStats.save()
+    // increment visit count
+    await link.updateOne({ $inc: { visitCount: 1 } })
 
-    if (link) {
-      await this.linkModel
-        .findOneAndUpdate({ alias }, { $push: { statistics: newStats }, $inc: { visitCount: 1 } })
-        .catch(() => {
-          logger.error('cannot update link statistics')
-        })
-    }
+    // add statistics for link visit
+    const newStats = new StatisticsModel({ linkId: link.id, ...statistics })
+
+    await newStats.save().catch(() => {
+      logger.error('cannot update link statistics')
+    })
 
     return link.target.toString()
   }
