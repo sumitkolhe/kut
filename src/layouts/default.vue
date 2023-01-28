@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import AppFooter from 'components/organisms/app-footer.vue'
 import DashboardDrawer from 'components/organisms/dashboard-drawer.vue'
 import DashboardHeader from 'components/organisms/dashboard-header.vue'
 import DashboardNavigation from 'components/molecules/navigation/dashboard-navigation.vue'
@@ -18,7 +17,6 @@ const { isDrawerVisible } = useDrawer()
     <div class="mx-auto max-w-screen-xl px-6 lg:-mb-36 xl:px-0">
       <slot />
     </div>
-    <app-footer class="hidden lg:block" />
   </main>
 </template>
 

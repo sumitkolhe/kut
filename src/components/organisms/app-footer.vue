@@ -3,9 +3,7 @@ import Logo from 'components/atoms/logo.vue'
 </script>
 
 <template>
-  <footer
-    class="fixed bottom-0 z-50 w-full border-t bg-white px-6 dark:border-gray-700 dark:bg-gray-900"
-  >
+  <footer class="z-50 w-full border-t bg-gray-50 px-6 dark:border-gray-700 dark:bg-gray-900">
     <div
       class="mx-auto flex max-w-screen-xl flex-row items-center justify-between overflow-hidden py-4"
     >
@@ -20,7 +18,7 @@ import Logo from 'components/atoms/logo.vue'
       <nuxt-link
         to="https://github.com/sumitkolhe/kut"
         target="_blank"
-        class="cursor-pointer text-gray-900 hover:text-gray-500"
+        class="cursor-pointer text-gray-900 hover:text-gray-400"
       >
         <icon name="iconoir:github" size="24" />
       </nuxt-link>

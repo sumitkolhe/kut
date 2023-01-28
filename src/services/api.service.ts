@@ -15,7 +15,6 @@ export class ApiService {
         if (response.status === 401) {
           const { logout } = useAuthStore()
           await logout()
-          navigateTo('/auth/login')
         }
       },
     })

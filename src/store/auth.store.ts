@@ -45,8 +45,10 @@ export const useAuthStore = defineStore('authentication-store', {
 
     async logout() {
       try {
+        const router = useRouter()
         await this.$http.auth.logout()
         this.isLoggedIn = false
+        router.replace('/')
       } catch (error) {
         if (error instanceof Error) logger.error(error.message)
       }

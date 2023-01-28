@@ -12,54 +12,95 @@ definePageMeta({
     if (isLoggedIn.value) navigateTo('/dashboard')
   },
 })
+
+const features = [
+  {
+    title: 'Self Host',
+    icon: 'ph:cloud',
+    description: 'Use Kut as it is or host your own instance easily.',
+  },
+  {
+    title: 'Free',
+    icon: 'ph:coin',
+    description: 'Kut is completely free to use.',
+  },
+  {
+    title: 'Analytics that matter',
+    icon: 'ph:chart-bar',
+    description:
+      'Kut provides powerful analytics for your links, including geolocation, device, browser, and referrer information.',
+  },
+  {
+    title: 'Powerful link builder',
+    icon: 'ph:link',
+    description:
+      'Build your links with UTM parameters, password protection, expiration dates, iOS/Android targeting, etc.',
+  },
+  {
+    title: 'Free QR Code',
+    icon: 'ph:qr-code',
+    description:
+      "QR codes and short links are like peas in a pod. That's why we've built a QR code exporter right into Kut.",
+  },
+]
 </script>
 
 <template>
-  <div
-    class="flex min-h-screen flex-col space-y-6 overflow-hidden bg-white p-32 px-6 dark:bg-black"
-  >
-    <div class="mx-auto mt-10 max-w-5xl px-4">
-      <div class="pb-12 md:pb-20">
-        <div class="text-center">
-          <h1
-            class="leading-tighter mb-4 text-5xl font-bold tracking-tight dark:text-white md:text-6xl"
-            data-aos="zoom-y-out"
-          >
-            The only
-          </h1>
-          <h1
-            class="leading-tighter mb-2 bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-5xl font-bold tracking-tight text-transparent md:mb-4 md:text-6xl"
-          >
-            URL Shortener
-          </h1>
-          <h1
-            class="leading-tighter mb-4 text-5xl font-bold leading-tight tracking-tight dark:text-white md:text-6xl"
-          >
-            you'll ever need
-          </h1>
-          <div class="mx-auto my-14 max-w-3xl">
-            <p class="mb-8 text-lg text-gray-500 sm:text-xl">
-              Kut is an open-source link management tool for modern marketing teams to create,
-              share, and track short links.
-            </p>
+  <div class="flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900">
+    <div class="my-36 flex flex-col items-center md:my-44">
+      <div
+        class="flex flex-col items-center space-y-4 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
+      >
+        <h1 class="leading-tighter dark:text-white">The only</h1>
+        <h1
+          class="animate-text leading-tighter bg-gradient-to-r from-amber-500 via-red-500 to-purple-500 bg-clip-text text-transparent"
+        >
+          URL Shortener
+        </h1>
+        <h1 class="leading-tighter dark:text-white">you'll ever need</h1>
+      </div>
 
-            <div class="flex flex-wrap justify-center sm:mt-20 md:space-x-4">
-              <NuxtLink to="/auth/register" class="p-2">
-                <primary-button
-                  prefix-icon="octicon:paper-airplane-24"
-                  class="py-3 drop-shadow-xl"
-                  type="primary"
-                >
-                  Start for free
-                </primary-button>
-              </NuxtLink>
-              <a href="https://docs.krat.es" target="_blank" class="p-2">
-                <secondary-button prefix-icon="ph:star" class="py-3 drop-shadow-xl" type="normal">
-                  Star on github
-                </secondary-button>
-              </a>
-            </div>
-          </div>
+      <p class="my-14 max-w-3xl text-center text-xl font-light text-gray-500 lg:text-2xl">
+        Kut is an open-source, modern link shortening and management service to easily create,
+        manage and track short links.
+      </p>
+
+      <div class="flex flex-wrap justify-center space-x-4">
+        <NuxtLink to="/auth/register" class="p-2">
+          <primary-button
+            prefix-icon="octicon:paper-airplane-24"
+            class="h-12 drop-shadow-xl"
+            type="primary"
+          >
+            Start for free
+          </primary-button>
+        </NuxtLink>
+        <a href="https://docs.krat.es" target="_blank" class="p-2">
+          <secondary-button prefix-icon="ph:star" class="h-12 drop-shadow-xl" type="normal">
+            Star on github
+          </secondary-button>
+        </a>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center justify-center md:my-20">
+      <h2 class="text-3xl font-bold md:text-4xl lg:text-5xl">All the features you'll need.</h2>
+      <p class="my-4 text-xl text-gray-600">
+        Everything you need to create unlimited short links and share them on every platform.
+      </p>
+
+      <div class="my-12 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12 lg:grid-cols-3">
+        <div
+          v-for="feature in features"
+          :key="feature.title"
+          class="flex flex-col items-center rounded-md border p-6"
+        >
+          <icon :name="feature.icon" size="40" class="m-2" />
+
+          <h4 class="mb-2 mt-4 text-lg font-medium">{{ feature.title }}</h4>
+          <p class="text-center font-normal text-gray-500">
+            {{ feature.description }}
+          </p>
         </div>
       </div>
     </div>
