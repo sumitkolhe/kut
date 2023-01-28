@@ -12,7 +12,7 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
   const accessToken = getCookies(req.headers.cookie)?.accessToken
 
   // if no access token provided
-  if (!accessToken) throw new HttpExceptionError(401, ErrorType.unauthorised)
+  if (!accessToken) return next(new HttpExceptionError(401, ErrorType.unauthorised))
 
   try {
     const tokenDetails = Jwt.verify(accessToken, config.token.access.secret) as Jwt.JwtPayload
@@ -20,16 +20,16 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
     const user = await UserModel.findOne({ email: tokenDetails.email })
 
     if (!user) {
-      next(new HttpExceptionError(401, ErrorType.userNotFound))
+      return next(new HttpExceptionError(401, ErrorType.userNotFound))
     } else if (user && !user.isVerified) {
-      next(new HttpExceptionError(403, ErrorType.accountNotVerified))
+      return next(new HttpExceptionError(403, ErrorType.accountNotVerified))
     } else if (user && user.isVerified) {
       req.auth = {
         userId: user.id,
         email: user.email,
       }
 
-      next()
+      return next()
     }
   } catch (error) {
     let errorMessage = error
