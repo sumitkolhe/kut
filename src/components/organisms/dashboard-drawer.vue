@@ -1,10 +1,28 @@
 <script lang="ts" setup>
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
-import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
-import ThemeSwitch from 'components/molecules/theme-switch.vue'
-import Logo from 'components/atoms/logo.vue'
+import { useAuthStore } from 'store/auth.store'
 
-const { toggleDrawer, isDrawerVisible } = useDrawer()
+const router = useRouter()
+const { isDrawerVisible } = useDrawer()
+const { logout } = useAuthStore()
+
+const navItems = [
+  {
+    title: 'Dashboard',
+    icon: 'ph:house-simple',
+    action: () => router.push('/dashboard'),
+  },
+  {
+    title: 'Settings',
+    icon: 'lucide:settings-2',
+    action: () => router.push('/dashboard/settings'),
+  },
+  {
+    title: 'Github',
+    icon: 'iconoir:github',
+    action: () => navigateTo('https://github.com/sumitkolhe/kut', { external: true }),
+  },
+]
 </script>
 
 <template>
@@ -13,36 +31,19 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
       <transition name="slide-fade">
         <aside
           v-show="isDrawerVisible"
-          class="fixed inset-0 z-50 flex h-screen w-full flex-col bg-gray-50 px-4 dark:bg-gray-900 md:hidden"
+          class="fixed inset-0 top-16 z-50 flex h-screen w-full flex-col overflow-y-hidden bg-gray-50 py-4 px-6 dark:bg-gray-900 md:hidden"
         >
-          <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-900">
-            <NuxtLink class="flex items-center space-x-3" to="/dashboard">
-              <Logo />
-              <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
-            </NuxtLink>
-
-            <Icon
-              v-if="!isDrawerVisible"
-              name="line-md:menu"
-              class="dark:text-gray-50"
-              size="24"
-              @click="toggleDrawer()"
-            />
-            <Icon
-              v-else
-              name="line-md:close"
-              size="24"
-              class="dark:text-gray-50"
-              @click="toggleDrawer()"
-            />
+          <div
+            v-for="item in navItems"
+            :key="item.title"
+            class="text-md flex cursor-pointer items-center space-x-4 border-b px-2 py-4 font-normal hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+            @click="item.action"
+          >
+            <icon :name="item.icon" size="20" />
+            <p>{{ item.title }}</p>
           </div>
-          <section class="flex h-screen dark:border-gray-700">
-            <div class="flex w-full flex-col space-y-3 py-4">
-              <secondary-button>New Link</secondary-button>
-              <primary-button>Logout</primary-button>
-              <theme-switch />
-            </div>
-          </section>
+
+          <primary-button class="my-6" @click="logout">Logout</primary-button>
         </aside>
       </transition>
     </teleport>
@@ -51,9 +52,16 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
 
 <style scoped>
 .slide-fade-enter-active {
-  transition: all 0.3s;
+  transition: all 0.2s ease-out;
 }
+
 .slide-fade-leave-active {
-  transition: all 0.3s;
+  transition: all 0.2s cubic-bezier(0.5, 0.5, 0.5, 0.5);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(5px);
+  opacity: 0;
 }
 </style>

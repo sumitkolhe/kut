@@ -24,7 +24,7 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
           <icon
             v-if="!isDrawerVisible"
             name="line-md:menu"
-            class="dark:text-gray-50"
+            class="dark:text-gray-300"
             size="24"
             @click="toggleDrawer()"
           />
@@ -32,7 +32,7 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
             v-else
             name="line-md:close"
             size="24"
-            class="dark:text-gray-50"
+            class="dark:text-gray-300"
             @click="toggleDrawer()"
           />
         </div>
