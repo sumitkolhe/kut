@@ -18,13 +18,14 @@ export class LinkService {
   public getAllLinks = async (
     userId: string,
     offset: number,
-    limit: number
+    limit: number,
+    search: string
   ): Promise<{
     links: Link[]
     total: number
   }> => {
     const allLinks = await this.linkModel
-      .find({ userId })
+      .find({ $and: [{ userId }, search ? { $text: { $search: search } } : {}] })
       .select({ __v: 0, _id: 0, userId: 0, meta: 0 })
       .sort({ createdAt: -1 })
       .skip(offset)
