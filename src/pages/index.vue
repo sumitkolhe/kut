@@ -47,17 +47,17 @@ const features = [
 
 <template>
   <div class="flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900">
-    <div class="my-36 flex flex-col items-center md:my-44">
+    <div class="my-36 flex flex-col items-center text-center md:my-44">
       <div
-        class="flex flex-col items-center space-y-4 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
+        class="flex flex-col items-center justify-center space-y-4 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
       >
-        <h1 class="leading-tighter dark:text-white">The only</h1>
+        <h1 class="leading-tighter dark:text-gray-50">The only</h1>
         <h1
           class="animate-text leading-tighter bg-gradient-to-r from-amber-500 via-red-500 to-purple-500 bg-clip-text text-transparent"
         >
           URL Shortener
         </h1>
-        <h1 class="leading-tighter dark:text-white">you'll ever need</h1>
+        <h1 class="leading-tighter dark:text-gray-50">you need.</h1>
       </div>
 
       <p class="my-14 max-w-3xl text-center text-xl font-light text-gray-500 lg:text-2xl">
@@ -65,7 +65,7 @@ const features = [
         manage and track short links.
       </p>
 
-      <div class="flex flex-wrap justify-center space-x-4">
+      <div class="flex flex-wrap justify-center md:space-x-4">
         <NuxtLink to="/auth/register" class="p-2">
           <primary-button
             prefix-icon="octicon:paper-airplane-24"

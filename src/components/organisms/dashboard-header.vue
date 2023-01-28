@@ -20,7 +20,7 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
         <theme-switch />
         <profile-menu class="hidden md:block" />
 
-        <div class="md:hidden">
+        <div class="cursor-pointer md:hidden">
           <icon
             v-if="!isDrawerVisible"
             name="line-md:menu"
