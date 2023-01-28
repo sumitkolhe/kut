@@ -46,7 +46,7 @@ const register = async () => {
     <div class="flex max-w-screen-2xl flex-col lg:flex-row">
       <!-- Register Form  -->
       <div
-        class="flex min-h-screen w-full flex-col items-center justify-center space-y-8 px-4 md:mt-0 md:h-full md:p-10 lg:w-1/2 xl:p-24"
+        class="flex min-h-screen w-full flex-col items-center justify-center space-y-8 px-6 md:mt-0 md:h-full md:p-10 lg:w-1/2 xl:p-24"
       >
         <h1 class="mb-4 text-2xl font-medium dark:text-gray-200 xl:text-3xl">Create Account</h1>
         <!-- <div

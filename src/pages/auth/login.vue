@@ -47,7 +47,7 @@ const login = async () => {
     <!-- Inner container  -->
     <div class="flex h-fit w-full max-w-2xl flex-col rounded-lg dark:border-gray-700 lg:flex-row">
       <!-- Login Form  -->
-      <div class="flex w-full flex-col items-center justify-center space-y-8 p-4 md:p-10 xl:p-14">
+      <div class="flex w-full flex-col items-center justify-center space-y-8 px-6 md:p-10 xl:p-14">
         <h1 class="mb-4 text-2xl font-medium tracking-wide dark:text-gray-200 xl:text-3xl">
           Log in
         </h1>

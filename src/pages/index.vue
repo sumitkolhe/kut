@@ -46,8 +46,8 @@ const features = [
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900">
-    <div class="my-36 flex max-w-screen-xl flex-col items-center text-center md:my-44">
+  <div class="flex flex-col items-center justify-center bg-gray-50 px-6 dark:bg-gray-900">
+    <div class="my-32 flex max-w-screen-xl flex-col items-center text-center md:my-44">
       <div
         class="flex flex-col items-center justify-center space-y-4 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
       >
@@ -83,13 +83,15 @@ const features = [
       </div>
     </div>
 
-    <div class="flex max-w-screen-xl flex-col items-center justify-center md:my-20">
-      <h2 class="text-3xl font-bold md:text-4xl lg:text-5xl">All the features you'll need.</h2>
-      <p class="my-4 text-xl text-gray-600">
+    <div class="my-6 flex max-w-screen-xl flex-col items-center justify-center md:my-20">
+      <h2 class="text-center text-3xl font-bold md:text-4xl lg:text-5xl">
+        All the features you need.
+      </h2>
+      <p class="my-4 text-center text-lg text-gray-600 md:text-xl">
         Everything you need to create unlimited short links and share them on every platform.
       </p>
 
-      <div class="my-12 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12 lg:grid-cols-3">
+      <div class="my-6 grid grid-cols-1 gap-6 md:my-12 md:grid-cols-2 md:gap-12 lg:grid-cols-3">
         <div
           v-for="feature in features"
           :key="feature.title"
