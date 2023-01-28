@@ -26,6 +26,10 @@ const props = defineProps({
     default: () => '',
     required: false,
   },
+  loading: {
+    type: Boolean,
+    default: () => false,
+  },
   modelValue: {
     type: [String, Number, Date, null] as PropType<string | number | Date | null>,
     default: () => null,
@@ -44,8 +48,18 @@ const clearText = () => emit('update:modelValue', null)
   <div class="flex w-full flex-col border-none bg-transparent p-0">
     <label v-if="props.label" class="mb-1 text-sm text-gray-500">{{ props.label }}</label>
     <div class="relative">
-      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
-        <Icon :name="props.prefixIcon" size="20" class="text-gray-400" />
+      <div
+        v-if="props.loading"
+        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5"
+      >
+        <icon
+          name="line-md:loading-twotone-loop"
+          size="20"
+          class="text-gray-600 dark:text-gray-300"
+        />
+      </div>
+      <div v-else class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
+        <icon :name="props.prefixIcon" size="20" class="text-gray-400" />
       </div>
       <input
         type="text"
@@ -68,10 +82,10 @@ const clearText = () => emit('update:modelValue', null)
         class="absolute inset-y-0 right-0 flex cursor-pointer items-center"
         @click="clearText"
       >
-        <Icon name="ph:x-circle" size="20" class="text-gray-400" />
+        <icon name="ph:x-circle" size="20" class="text-gray-400" />
       </div>
       <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5">
-        <Icon :name="props.suffixIcon" size="20" class="text-gray-400" />
+        <icon :name="props.suffixIcon" size="20" class="text-gray-400" />
       </div>
     </div>
     <div

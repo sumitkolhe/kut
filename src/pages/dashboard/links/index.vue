@@ -24,6 +24,7 @@ const showEditLinkPanel = ref(false)
 const createLinkLoader = ref(false)
 const updateLinkLoader = ref(false)
 const allLinksLoader = ref(true)
+const searchLinksLoader = ref(false)
 const search = ref()
 const qrCode = ref()
 const openQrCode = ref(false)
@@ -62,9 +63,9 @@ onMounted(async () => {
 
 // functions
 const debouncedSearch = useDebounceFn(async () => {
-  allLinksLoader.value = true
+  searchLinksLoader.value = true
   await fetchAllLinks(0, 5, search.value)
-  allLinksLoader.value = false
+  searchLinksLoader.value = false
 }, 500)
 
 const createLink = async () => {
@@ -132,6 +133,7 @@ watch(copied, (clicked) => {
         <text-input
           v-model="search"
           clearable
+          :loading="searchLinksLoader"
           prefix-icon="ph:magnifying-glass-duotone"
           placeholder="Search..."
           @update:model-value="debouncedSearch"
