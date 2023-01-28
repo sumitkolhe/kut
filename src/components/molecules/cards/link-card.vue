@@ -82,15 +82,9 @@ const props = defineProps({
     >
       <p class="text-xs uppercase tracking-wider text-gray-300">Views</p>
 
-      <p class="text-gray-500">
-        <NuxtLink
-          v-slice="20"
-          :to="`/dashboard/links/${props.alias}`"
-          class="truncate text-sm text-gray-500 hover:underline"
-        >
-          <span class="text-sm dark:text-gray-200">{{ props.visitCount }}</span>
-          {{ props.visitCount > 1 ? 'views' : 'view' }}
-        </NuxtLink>
+      <p class="truncate text-sm text-gray-500">
+        <span class="text-sm dark:text-gray-200">{{ props.visitCount }}</span>
+        {{ props.visitCount > 1 ? 'views' : 'view' }}
       </p>
     </div>
 
@@ -105,6 +99,13 @@ const props = defineProps({
     </div>
 
     <div class="flex w-full flex-row items-center justify-between space-x-4 md:w-fit">
+      <nuxt-link
+        :to="`/dashboard/links/${props.alias}`"
+        title="Link Statistics"
+        class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
+      >
+        <icon name="ph:chart-pie-slice-duotone" class="text-red-500" size="26" />
+      </nuxt-link>
       <div
         title="Copy Link"
         class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
@@ -121,7 +122,10 @@ const props = defineProps({
         />
       </div>
 
-      <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
+      <div
+        title="Edit Link"
+        class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
+      >
         <link-menu @edit-link="$emit('edit-link')" @delete-link="$emit('delete-link')" />
       </div>
     </div>

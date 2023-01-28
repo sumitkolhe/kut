@@ -8,7 +8,7 @@ const { logout } = useAuthStore()
 <template>
   <Menu as="div" class="relative z-[60] inline-block text-left">
     <div>
-      <MenuButton class="text-gray-500 dark:text-gray-500">
+      <MenuButton class="text-gray-800 dark:text-gray-300">
         <Icon name="ph:user-circle" size="28" />
       </MenuButton>
     </div>

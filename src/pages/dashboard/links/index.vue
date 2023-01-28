@@ -128,7 +128,7 @@ watch(copied, (clicked) => {
 <template>
   <section class="my-6 w-full gap-6 md:my-8">
     <div class="relative flex w-full flex-col">
-      <div class="flex flex-row space-x-2">
+      <div class="flex flex-row space-x-3">
         <text-input
           v-model="search"
           clearable

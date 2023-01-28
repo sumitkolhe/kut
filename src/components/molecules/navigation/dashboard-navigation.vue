@@ -17,7 +17,7 @@ const subTabs = computed(() => [
 
 <template>
   <nav
-    class="sticky top-0 z-50 border-b border-gray-200 bg-white px-4 dark:border-gray-700 dark:bg-gray-900"
+    class="sticky top-0 z-50 border-b border-gray-200 bg-white px-6 dark:border-gray-700 dark:bg-gray-900"
   >
     <div
       v-if="!$route.params.alias"
