@@ -16,9 +16,9 @@ export class StatisticsController {
     next: NextFunction
   ) => {
     try {
-      const { email } = req.auth
+      const { userId } = req.auth
 
-      const visitStats = await this.statisticsService.getOverviewStats(email)
+      const visitStats = await this.statisticsService.getOverviewStats(userId)
 
       return res.json({ status: 'SUCCESS', message: null, data: visitStats })
     } catch (error) {
@@ -32,10 +32,12 @@ export class StatisticsController {
     next: NextFunction
   ) => {
     try {
+      const { userId } = req.auth
       const { alias } = req.params
       const { period } = req.query
 
       const visitStats = await this.statisticsService.getVisitStats(
+        userId,
         alias,
         period as StatisticsPeriod
       )
@@ -52,10 +54,13 @@ export class StatisticsController {
     next: NextFunction
   ) => {
     try {
+      const { userId } = req.auth
+
       const { alias } = req.params
       const { period } = req.query
 
       const visitStats = await this.statisticsService.getDeviceStats(
+        userId,
         alias,
         period as StatisticsPeriod
       )

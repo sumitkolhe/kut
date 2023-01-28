@@ -21,7 +21,7 @@ export interface LinkDocument extends Document {
 
 const LinkSchema: Schema = new mongoose.Schema(
   {
-    userId: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true, unique: false },
     alias: { type: String, required: true, unique: true },
     target: { type: String, required: true },
     shortUrl: { type: String, required: true },
