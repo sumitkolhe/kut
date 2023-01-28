@@ -7,11 +7,9 @@ import AppFooter from 'components/organisms/app-footer.vue'
   <main>
     <app-header />
     <NuxtLoadingIndicator color="#f55" :height="3" />
-    <div class="mx-auto max-w-screen-xl px-6">
-      <!-- <div class="bg"></div> -->
+    <!-- <div class="bg"></div> -->
+    <slot />
 
-      <slot />
-    </div>
     <app-footer />
   </main>
 </template>
@@ -33,7 +31,6 @@ import AppFooter from 'components/organisms/app-footer.vue'
   z-index: 0;
   height: 100%;
   filter: blur(100px) saturate(150%);
-
   opacity: 0.1;
 }
 </style>

@@ -13,8 +13,6 @@ const { isLoggedIn } = storeToRefs(useAuthStore())
     <div class="mx-auto flex h-16 max-w-screen-xl flex-row items-center justify-between">
       <NuxtLink class="flex items-center space-x-3" to="/">
         <Logo />
-
-        <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
       </NuxtLink>
 
       <div v-if="isLoggedIn">

@@ -12,7 +12,6 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
       <div class="flex items-center space-x-6">
         <nuxt-link class="flex items-center space-x-3" to="/dashboard">
           <logo />
-          <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
         </nuxt-link>
       </div>
 

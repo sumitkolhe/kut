@@ -47,7 +47,7 @@ const features = [
 
 <template>
   <div class="flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900">
-    <div class="my-36 flex flex-col items-center text-center md:my-44">
+    <div class="my-36 flex max-w-screen-xl flex-col items-center text-center md:my-44">
       <div
         class="flex flex-col items-center justify-center space-y-4 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
       >
@@ -83,7 +83,7 @@ const features = [
       </div>
     </div>
 
-    <div class="flex flex-col items-center justify-center md:my-20">
+    <div class="flex max-w-screen-xl flex-col items-center justify-center md:my-20">
       <h2 class="text-3xl font-bold md:text-4xl lg:text-5xl">All the features you'll need.</h2>
       <p class="my-4 text-xl text-gray-600">
         Everything you need to create unlimited short links and share them on every platform.
@@ -93,7 +93,7 @@ const features = [
         <div
           v-for="feature in features"
           :key="feature.title"
-          class="flex flex-col items-center rounded-md border p-6"
+          class="flex flex-col items-center rounded-md border p-6 hover:shadow-lg"
         >
           <icon :name="feature.icon" size="40" class="m-2" />
 

@@ -10,7 +10,6 @@ import Logo from 'components/atoms/logo.vue'
       <div class="flex items-center space-x-6">
         <nuxt-link class="flex items-center" to="/dashboard">
           <logo />
-          <p class="text-lg font-medium uppercase dark:text-gray-50">Kut</p>
         </nuxt-link>
         <p class="text-center text-sm text-gray-400">&copy; 2020 Kut. All rights reserved.</p>
       </div>
