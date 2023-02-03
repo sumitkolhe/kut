@@ -3,14 +3,14 @@ import { fileURLToPath } from 'url'
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Kut',
+      title: 'Kut - A modern link management tool',
       htmlAttrs: {
         lang: 'en',
       },
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       meta: [
-        { hid: 'og:title', name: 'og:title', content: 'Kut' },
+        { hid: 'og:title', name: 'og:title', content: 'Kut - A modern link management tool' },
         { name: 'format-detection', content: 'telephone=no' },
       ],
       link: [
@@ -34,6 +34,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     'nuxt-icon',
+    '@pinia-plugin-persistedstate/nuxt',
   ],
 
   serverHandlers: [
