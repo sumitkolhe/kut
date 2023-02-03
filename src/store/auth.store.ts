@@ -78,8 +78,14 @@ export const useAuthStore = defineStore('authentication-store', {
     },
   },
 
-  persist: {
-    key: 'kut.accessToken',
-    paths: ['accessToken'],
-  },
+  persist: [
+    {
+      key: 'kut.accessToken',
+      paths: ['accessToken'],
+    },
+    {
+      key: 'kut.currentUser',
+      paths: ['user.email'],
+    },
+  ],
 })
