@@ -23,10 +23,16 @@ const { user } = storeToRefs(useAuthStore())
       </div>
 
       <div v-else class="flex w-auto flex-row space-x-4">
-        <nuxt-link v-if="route.path.includes('/auth/register')" to="/auth/login">
+        <nuxt-link
+          v-if="route.path.includes('/auth/register') || route.path === '/'"
+          to="/auth/login"
+        >
           <secondary-button class="w-auto">Login</secondary-button>
         </nuxt-link>
-        <nuxt-link v-else to="/auth/register">
+        <nuxt-link
+          v-if="route.path.includes('/auth/login') || route.path === '/'"
+          to="/auth/register"
+        >
           <primary-button class="w-auto">Sign up</primary-button>
         </nuxt-link>
       </div>

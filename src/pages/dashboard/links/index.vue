@@ -188,7 +188,7 @@ watch(copied, (clicked) => {
       <div v-if="allLinks.length > 0">
         <p class="mt-6 py-3 font-medium uppercase text-gray-600 dark:text-gray-200">My Links</p>
 
-        <div class="space-y-3">
+        <div class="space-y-6 lg:space-y-4">
           <link-card
             v-for="link in allLinks.slice(0, 5)"
             :key="link.alias?.toString()"
