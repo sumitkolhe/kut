@@ -2,9 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useLinkStore } from 'store/link.store'
 
-definePageMeta({
-  middleware: ['auth'],
-})
+definePageMeta({})
 
 const { fetchOverviewStats } = useLinkStore()
 const { overviewStats } = storeToRefs(useLinkStore())

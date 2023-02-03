@@ -6,10 +6,11 @@ import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 
 definePageMeta({
   layout: 'public',
+  auth: 'guest',
   middleware: () => {
-    const { isLoggedIn } = storeToRefs(useAuthStore())
+    const { user } = storeToRefs(useAuthStore())
 
-    if (isLoggedIn.value) navigateTo('/dashboard')
+    if (user.value?.email) navigateTo('/dashboard')
   },
 })
 
@@ -69,14 +70,14 @@ const features = [
         <NuxtLink to="/auth/register" class="p-2">
           <primary-button
             prefix-icon="octicon:paper-airplane-24"
-            class="h-12 drop-shadow-xl"
+            class="h-12 w-44 drop-shadow-xl"
             type="primary"
           >
             Start for free
           </primary-button>
         </NuxtLink>
         <a href="https://docs.krat.es" target="_blank" class="p-2">
-          <secondary-button prefix-icon="ph:star" class="h-12 drop-shadow-xl" type="normal">
+          <secondary-button prefix-icon="ph:star" class="h-12 w-44 drop-shadow-xl" type="normal">
             Star on github
           </secondary-button>
         </a>

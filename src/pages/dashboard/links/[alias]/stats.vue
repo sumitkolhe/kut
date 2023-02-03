@@ -5,10 +5,6 @@ import { storeToRefs } from 'pinia'
 import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 import StatsMenu from 'components/molecules/menus/stats-menu.vue'
 
-definePageMeta({
-  middleware: ['auth'],
-})
-
 // global
 const route = useRoute()
 

@@ -7,6 +7,7 @@ import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({
   layout: 'public',
+  auth: 'guest',
 })
 
 const { registerUser } = useAuthStore()

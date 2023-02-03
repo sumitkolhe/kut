@@ -1,4 +1,5 @@
 import { $fetch } from 'ofetch'
+import { storeToRefs } from 'pinia'
 import type { $Fetch } from 'ofetch'
 import { useAuthStore } from '~~/src/store/auth.store'
 
@@ -9,13 +10,19 @@ export class ApiService {
   constructor() {
     this.http = $fetch.create({
       baseURL: this.baseUrl,
-      credentials: 'same-origin',
 
       async onResponseError({ response }) {
         if (response.status === 401) {
           const { logout } = useAuthStore()
-          await logout()
+          return logout()
         }
+      },
+
+      onRequest({ options }) {
+        const { accessToken } = storeToRefs(useAuthStore())
+
+        options.headers = new Headers(options.headers)
+        options.headers.set('Authorization', `Bearer ${accessToken.value}`)
       },
     })
   }

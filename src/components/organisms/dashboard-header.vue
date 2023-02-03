@@ -2,8 +2,12 @@
 import Logo from 'components/atoms/logo.vue'
 import ProfileMenu from 'components/molecules/menus/profile-menu.vue'
 import ThemeSwitch from 'components/molecules/theme-switch.vue'
+import { useAuthStore } from 'store/auth.store'
 
+const { fetchUser } = useAuthStore()
 const { toggleDrawer, isDrawerVisible } = useDrawer()
+
+onMounted(() => fetchUser())
 </script>
 
 <template>

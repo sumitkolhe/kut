@@ -7,8 +7,10 @@ import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({
   layout: 'public',
+  auth: 'guest',
 })
 
+const router = useRouter()
 const { loginUser } = useAuthStore()
 
 const loading = ref(false)
@@ -31,13 +33,19 @@ const { result } = useValidate(loginData, rules)
 
 const login = async () => {
   result.value.$test()
-  if (!result.value.$invalid) {
-    loading.value = true
-    await loginUser(loginData.email, loginData.password).then(() => {
-      const router = useRouter()
-      router.replace('/dashboard')
-    })
+
+  if (result.value.$invalid) return
+
+  loading.value = true
+
+  const { error } = await loginUser(loginData.email, loginData.password)
+
+  if (error) {
     loading.value = false
+    return createToast('Invalid credentials', { type: 'error', timeout: 3000 })
+  } else {
+    loading.value = false
+    router.push('/dashboard')
   }
 }
 </script>

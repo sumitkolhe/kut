@@ -3,6 +3,7 @@ import type { CustomResponse } from 'interfaces/response.interface'
 
 definePageMeta({
   layout: 'public',
+  auth: 'guest',
 })
 
 const { apiBaseUrl } = useRuntimeConfig()

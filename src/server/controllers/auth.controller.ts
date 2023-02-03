@@ -31,14 +31,11 @@ export class AuthController {
         password,
       })
 
-      return res
-        .cookie('accessToken', accessToken, this.cookieOptions)
-        .cookie('refreshToken', refreshToken, this.cookieOptions)
-        .json({
-          status: 'SUCCESS',
-          message: null,
-          data: { accessToken, refreshToken },
-        })
+      return res.json({
+        status: 'SUCCESS',
+        message: null,
+        data: { accessToken, refreshToken },
+      })
     } catch (error) {
       next(error)
     }

@@ -2,10 +2,6 @@
 import { useLinkStore } from 'store/link.store'
 import { storeToRefs } from 'pinia'
 
-definePageMeta({
-  middleware: ['auth'],
-})
-
 const route = useRoute()
 
 const { fetchLinkByAlias } = useLinkStore()

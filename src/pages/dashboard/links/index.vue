@@ -10,10 +10,6 @@ import QrCodePanel from 'components/molecules/panels/qr-code-panel.vue'
 import CreateLinkPanel from 'components/molecules/panels/create-link-panel.vue'
 import type { Link } from 'interfaces/link.interface'
 
-definePageMeta({
-  middleware: ['auth'],
-})
-
 // store
 const { fetchAllLinks, deleteLink, shortenLink } = useLinkStore()
 const { totalCount, allLinks } = storeToRefs(useLinkStore())

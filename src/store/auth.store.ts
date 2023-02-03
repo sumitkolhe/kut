@@ -2,26 +2,27 @@ import { defineStore } from 'pinia'
 import { logger } from 'utils/logger'
 import type { User } from 'interfaces/user.interface'
 
+interface State {
+  user: Omit<User, 'apiKey' | 'userLinks'> | null
+  accessToken: string | null
+}
+
 export const useAuthStore = defineStore('authentication-store', {
-  state: () => ({
-    user: {} as Omit<User, 'apiKey' | 'userLinks'>,
-    isLoggedIn: false,
+  state: (): State => ({
+    user: null,
+    accessToken: null,
   }),
   actions: {
     async loginUser(email: string, password: string) {
       try {
-        const response = await this.$http.auth.login(email, password)
+        const { data } = await this.$http.auth.login(email, password)
 
-        const { accessToken, refreshToken } = useToken()
+        if (data?.accessToken) this.accessToken = data.accessToken
 
-        accessToken.value = response.data!.accessToken
-        refreshToken.value = response.data!.refreshToken
-
-        await this.fetchUser()
-
-        this.isLoggedIn = true
+        return { error: null }
       } catch (error) {
         if (error instanceof Error) logger.error(error.message)
+        return { error }
       }
     },
 
@@ -45,9 +46,10 @@ export const useAuthStore = defineStore('authentication-store', {
 
     async logout() {
       try {
+        this.accessToken = null
+        this.user = null
+
         const router = useRouter()
-        await this.$http.auth.logout()
-        this.isLoggedIn = false
         router.replace('/')
       } catch (error) {
         if (error instanceof Error) logger.error(error.message)
@@ -77,7 +79,7 @@ export const useAuthStore = defineStore('authentication-store', {
   },
 
   persist: {
-    key: 'isLoggedIn',
-    paths: ['isLoggedIn'],
+    key: 'kut.accessToken',
+    paths: ['accessToken'],
   },
 })
