@@ -16,7 +16,7 @@
     "commit-msg": "yarn commitlint --edit $1"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.7",
+    "@headlessui/vue": "^1.7.8",
     "@pinia/nuxt": "^0.4.6",
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.1",
@@ -29,8 +29,8 @@
     "jwt-decode": "^3.1.2",
     "mongoose": "^6.9.0",
     "morgan": "^1.10.0",
-    "open-graph-scraper": "^5.0.3",
-    "pinia": "^2.0.29",
+    "open-graph-scraper": "^5.0.4",
+    "pinia": "^2.0.30",
     "prettier-plugin-tailwindcss": "^0.2.2",
     "qrcode": "^1.5.1",
     "vue-command-palette": "^0.1.4",
@@ -42,7 +42,7 @@
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@kolhe/eslint-config": "^1.1.8",
-    "@nuxtjs/tailwindcss": "^6.3.0",
+    "@nuxtjs/tailwindcss": "^6.3.1",
     "@pinia-plugin-persistedstate/nuxt": "^1.0.0",
     "@tailwindcss/forms": "^0.5.3",
     "@types/bcryptjs": "^2.4.2",
@@ -52,15 +52,15 @@
     "@types/jsonwebtoken": "^9.0.1",
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.11.18",
-    "@vueuse/core": "^9.11.1",
-    "@vueuse/integrations": "^9.11.1",
-    "@vueuse/nuxt": "^9.11.1",
-    "eslint": "^8.32.0",
+    "@vueuse/core": "^9.12.0",
+    "@vueuse/integrations": "^9.12.0",
+    "@vueuse/nuxt": "^9.12.0",
+    "eslint": "^8.33.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nuxt": "^3.1.1",
+    "nuxt": "^3.1.2",
     "nuxt-icon": "^0.2.10",
     "prettier": "^2.8.3",
     "simple-git-hooks": "^2.8.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }
