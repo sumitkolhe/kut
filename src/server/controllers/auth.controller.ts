@@ -1,21 +1,14 @@
 import { AuthService } from 'server/services/auth.service'
 import type { User } from 'interfaces/user.interface'
-import type { CookieOptions, NextFunction, Request, RequestHandler, Response } from 'express'
+import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'interfaces/response.interface'
 import type { Token, Tokens } from 'interfaces/token.interface'
 
 export class AuthController {
   private authService: AuthService
-  private cookieOptions: CookieOptions
 
   constructor() {
     this.authService = new AuthService()
-    this.cookieOptions = {
-      httpOnly: true,
-      path: '/',
-      sameSite: 'strict',
-      secure: process.env.NODE_ENV === 'production',
-    }
   }
 
   public login: RequestHandler = async (
@@ -107,12 +100,7 @@ export class AuthController {
 
       const { accessToken } = await this.authService.refreshToken(refreshToken)
 
-      return res
-        .cookie('accessToken', accessToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-        })
-        .json({ status: 'SUCCESS', message: null, data: { accessToken } })
+      return res.json({ status: 'SUCCESS', message: null, data: { accessToken } })
     } catch (error) {
       next(error)
     }
