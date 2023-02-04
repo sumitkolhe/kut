@@ -7,10 +7,15 @@ import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const { user } = storeToRefs(useAuthStore())
+
+const { y } = useWindowScroll()
 </script>
 
 <template>
-  <header class="fixed z-50 w-full border-b bg-gray-50 px-6 dark:border-gray-700 dark:bg-gray-900">
+  <header
+    :class="[y >= 10 ? 'shadow-md transition-all duration-200' : '']"
+    class="fixed z-50 w-full border-b bg-gray-50 px-6 dark:border-gray-700 dark:bg-gray-900"
+  >
     <div class="mx-auto flex h-16 max-w-screen-xl flex-row items-center justify-between">
       <nuxt-link class="flex items-center space-x-3" to="/">
         <logo />

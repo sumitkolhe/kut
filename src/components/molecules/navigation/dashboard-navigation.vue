@@ -13,10 +13,14 @@ const subTabs = computed(() => [
   { name: 'Info', href: `/dashboard/links/${alias.value}/`, icon: 'ph:info' },
   { name: 'Stats', href: `/dashboard/links/${alias.value}/stats`, icon: 'ph:chart-bar' },
 ])
+
+const { y } = useWindowScroll()
 </script>
 
 <template>
   <nav
+    ref="element"
+    :class="[y >= 60 ? 'shadow-md transition-all duration-200' : '']"
     class="sticky top-0 z-50 border-b border-gray-200 bg-white px-6 dark:border-gray-700 dark:bg-gray-900"
   >
     <div
@@ -42,6 +46,7 @@ const subTabs = computed(() => [
       <button @click="$router.push('/dashboard/links')">
         <Icon name="ph:arrow-circle-left-fill" class="mt-1 text-gray-400 hover:text-gray-900" />
       </button>
+
       <NuxtLink
         v-for="tab in subTabs"
         :key="tab.name"
