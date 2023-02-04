@@ -76,6 +76,18 @@ export const useAuthStore = defineStore('authentication-store', {
         if (error instanceof Error) logger.error(error.message)
       }
     },
+
+    async verifyEmail(token: string) {
+      try {
+        const response = await this.$http.auth.verifyEmail(token)
+
+        if (response.status === 'SUCCESS') return { error: null, data: response.data }
+        else return { error: response.message, data: null }
+      } catch (error: any) {
+        logger.error(error.message)
+        return { error: error.message, data: null }
+      }
+    },
   },
 
   persist: [

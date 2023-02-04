@@ -1,5 +1,5 @@
 export interface CustomResponse<T> {
-  status: string
+  status: 'SUCCESS' | 'FAILED'
   message: string | null
   data: T | null
 }

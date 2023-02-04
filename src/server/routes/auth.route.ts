@@ -30,7 +30,11 @@ export class AuthRoute implements Routes {
       checkAuthentication,
       this.authController.resendVerificationEmail
     )
-    this.router.get(`${this.path}/verify`, verifyAccountSchema, this.authController.verifyAccount)
+    this.router.post(
+      `${this.path}/verify-email`,
+      verifyAccountSchema,
+      this.authController.verifyAccount
+    )
     this.router.get(`${this.path}/me`, checkAuthentication, this.authController.me)
   }
 }

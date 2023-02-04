@@ -43,4 +43,11 @@ export class AuthService extends ApiService {
       method: 'POST',
     })
   }
+
+  public async verifyEmail(token: string) {
+    return this.http<CustomResponse<null>>(`${this.base}/verify-email`, {
+      method: 'POST',
+      query: { token },
+    })
+  }
 }
