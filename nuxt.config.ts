@@ -22,6 +22,14 @@ export default defineNuxtConfig({
         },
       ],
     },
+    pageTransition: {
+      name: 'fade-in',
+      mode: 'out-in',
+    },
+    layoutTransition: {
+      name: 'layout',
+      mode: 'out-in',
+    },
   },
 
   srcDir: 'src',
