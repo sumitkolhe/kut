@@ -2,7 +2,6 @@
 import { useAuthStore } from 'store/auth.store'
 import { storeToRefs } from 'pinia'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
-import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 
 definePageMeta({
   layout: 'public',
@@ -67,7 +66,7 @@ const features = [
       </p>
 
       <div
-        class="flex w-full flex-col justify-center space-y-6 md:max-w-lg md:flex-row md:space-y-0 md:space-x-8"
+        class="flex w-full flex-col justify-center space-y-6 sm:max-w-lg md:flex-row md:space-y-0 md:space-x-8"
       >
         <nuxt-link to="/auth/register">
           <primary-button class="px-8 py-[14px] drop-shadow-xl md:py-3 md:px-10" type="primary">
@@ -79,12 +78,11 @@ const features = [
             <div
               class="animate-text absolute -inset-1.5 rounded-lg bg-gradient-to-r from-amber-600 via-red-600 to-purple-600 opacity-60 blur-md transition duration-500 group-hover:opacity-80 group-hover:duration-200"
             ></div>
-            <secondary-button
-              class="border-pink-500 py-[14px] px-8 hover:border-pink-700 md:py-3 md:px-10"
-              type="normal"
+            <button
+              class="relative w-full rounded border border-pink-500 bg-gray-50 py-[14px] px-8 hover:border-pink-700 md:py-3 md:px-10"
             >
               <p class="text-base">Star on github</p>
-            </secondary-button>
+            </button>
           </div>
         </nuxt-link>
       </div>
