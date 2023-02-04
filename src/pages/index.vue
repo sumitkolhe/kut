@@ -66,21 +66,17 @@ const features = [
         manage and track short links.
       </p>
 
-      <div class="flex flex-wrap justify-center md:space-x-4">
-        <NuxtLink to="/auth/register" class="p-2">
-          <primary-button
-            prefix-icon="octicon:paper-airplane-24"
-            class="h-12 w-44 drop-shadow-xl"
-            type="primary"
-          >
+      <div class="flex w-full flex-col justify-center md:space-x-4">
+        <nuxt-link to="/auth/register" class="p-2">
+          <primary-button class="h-12 drop-shadow-xl" type="primary">
             Start for free
           </primary-button>
-        </NuxtLink>
-        <a href="https://docs.krat.es" target="_blank" class="p-2">
-          <secondary-button prefix-icon="ph:star" class="h-12 w-44 drop-shadow-xl" type="normal">
+        </nuxt-link>
+        <nuxt-link href="https://docs.krat.es" target="_blank" class="p-2">
+          <secondary-button class="h-12 drop-shadow-xl" type="normal">
             Star on github
           </secondary-button>
-        </a>
+        </nuxt-link>
       </div>
     </div>
 
