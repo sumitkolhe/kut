@@ -13,7 +13,7 @@ const { y } = useWindowScroll()
 
 <template>
   <header
-    :class="[y >= 10 ? 'shadow-md transition-all duration-200' : '']"
+    :class="[y >= 10 ? 'bg-opacity-50 shadow backdrop-blur transition-all duration-200' : '']"
     class="fixed z-50 w-full border-b bg-gray-50 px-6 dark:border-gray-700 dark:bg-gray-900"
   >
     <div class="mx-auto flex h-16 max-w-screen-xl flex-row items-center justify-between">

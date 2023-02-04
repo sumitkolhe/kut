@@ -20,7 +20,7 @@ const { y } = useWindowScroll()
 <template>
   <nav
     ref="element"
-    :class="[y >= 60 ? 'shadow-md transition-all duration-200' : '']"
+    :class="[y >= 60 ? 'shadow transition-all duration-200' : '']"
     class="sticky top-0 z-50 border-b border-gray-200 bg-white px-6 dark:border-gray-700 dark:bg-gray-900"
   >
     <div
