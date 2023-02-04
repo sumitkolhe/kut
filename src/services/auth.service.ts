@@ -31,12 +31,6 @@ export class AuthService extends ApiService {
     })
   }
 
-  public async logout() {
-    return this.http<CustomResponse<null>>(`${this.base}/logout`, {
-      method: 'GET',
-    })
-  }
-
   public async refreshAccessToken(refreshToken: string) {
     return this.http<CustomResponse<Token>>(`${this.base}/refresh-token`, {
       method: 'POST',

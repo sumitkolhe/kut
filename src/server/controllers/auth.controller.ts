@@ -41,21 +41,6 @@ export class AuthController {
     }
   }
 
-  public logout: RequestHandler = async (
-    req: Request,
-    res: Response<CustomResponse<null>>,
-    next: NextFunction
-  ) => {
-    try {
-      return res
-        .clearCookie('accessToken', this.cookieOptions)
-        .clearCookie('refreshToken', this.cookieOptions)
-        .json({ status: 'SUCCESS', message: 'user logged out', data: null })
-    } catch (error) {
-      next(error)
-    }
-  }
-
   public register: RequestHandler = async (
     req: Request,
     res: Response<CustomResponse<null>>,

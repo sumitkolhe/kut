@@ -32,6 +32,5 @@ export class AuthRoute implements Routes {
     )
     this.router.get(`${this.path}/verify`, verifyAccountSchema, this.authController.verifyAccount)
     this.router.get(`${this.path}/me`, checkAuthentication, this.authController.me)
-    this.router.get(`${this.path}/logout`, this.authController.logout)
   }
 }
