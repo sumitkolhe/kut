@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import useValidate from 'vue-tiny-validate'
 import TextInput from 'components/atoms/inputs/text-input.vue'
+import PasswordInput from 'components/atoms/inputs/password-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import { useAuthStore } from 'store/auth.store'
 import type { Rules } from 'vue-tiny-validate'
@@ -53,9 +54,9 @@ const login = async () => {
 <template>
   <section class="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-800">
     <!-- Inner container  -->
-    <div class="flex h-fit w-full max-w-2xl flex-col rounded-lg dark:border-gray-700 lg:flex-row">
+    <div class="flex h-fit w-full max-w-xl flex-col rounded-lg dark:border-gray-700 lg:flex-row">
       <!-- Login Form  -->
-      <div class="flex w-full flex-col items-center justify-center space-y-8 px-6 md:p-10 xl:p-14">
+      <div class="flex w-full flex-col items-center justify-center space-y-6 px-6 md:p-10 xl:p-14">
         <h1 class="mb-4 text-2xl font-medium tracking-wide dark:text-gray-200 xl:text-3xl">
           Log in
         </h1>
@@ -80,29 +81,39 @@ const login = async () => {
           </p>
         </div> -->
 
-        <form class="flex w-full flex-col items-center space-y-4">
-          <text-input
-            v-model="loginData.email"
-            label="Email"
-            type="email"
-            placeholder="john@doe.com"
-            suffix-icon="ph:at"
-            :errors="result.email.$messages"
-          />
-          <text-input
-            v-model="loginData.password"
-            label="Password"
-            type="password"
-            placeholder="********"
-            suffix-icon="ph:password"
-            :errors="result.password.$messages"
-          />
+        <form class="flex w-full flex-col items-center space-y-8">
+          <div class="w-full space-y-4">
+            <text-input
+              v-model="loginData.email"
+              label="Email"
+              type="email"
+              placeholder="john@doe.com"
+              suffix-icon="ph:at"
+              :errors="result.email.$messages"
+            />
+            <password-input
+              v-model="loginData.password"
+              label="Password"
+              placeholder="********"
+              suffix-icon="ph:password"
+              :errors="result.password.$messages"
+            />
+          </div>
+
           <primary-button :loading="loading" @click="login"> Log in </primary-button>
         </form>
-        <p class="text-center text-gray-600">
-          Don't have an account?
-          <nuxt-link to="/auth/register" class="text-red-500 hover:underline">Register</nuxt-link>
-        </p>
+
+        <div class="space-y-3">
+          <p class="text-center text-gray-600">
+            Don't have an account?
+            <nuxt-link to="/auth/register" class="text-red-500 hover:underline">Sign up</nuxt-link>
+          </p>
+          <p class="text-center text-gray-600">
+            <nuxt-link to="/auth/forgot-password" class="text-red-500 hover:underline">
+              Forgot password?
+            </nuxt-link>
+          </p>
+        </div>
       </div>
     </div>
   </section>
