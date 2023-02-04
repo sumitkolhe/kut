@@ -20,14 +20,21 @@ const loginData = reactive({ email: '', password: '' })
 const rules: Rules = reactive({
   email: {
     name: 'required',
-    test: (value: string) => value.length > 0,
-    message: 'Email must not be empty.',
+    test: (value: string) => value.length > 0 && /\S+@\S+\.\S+/.test(value?.toLowerCase()),
+    message: 'Email must be valid',
   },
-  password: {
-    name: 'required',
-    test: (value: string) => value.length > 0,
-    message: 'Password must not be empty.',
-  },
+  password: [
+    {
+      name: 'required',
+      test: (value: string) => value.length > 0,
+      message: 'Password must not be empty.',
+    },
+    {
+      name: 'required',
+      test: (value: string) => value.length >= 6,
+      message: 'Password must be atleast 6 characters long.',
+    },
+  ],
 })
 
 const { result } = useValidate(loginData, rules)

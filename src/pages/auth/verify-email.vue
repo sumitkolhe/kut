@@ -63,7 +63,9 @@ onMounted(async () => {
       <p class="text-xl font-medium tracking-wide dark:text-gray-200 md:text-2xl">
         Your email is now verified
       </p>
-      <primary-button>Go to login page</primary-button>
+      <nuxt-link to="/auth/login">
+        <primary-button>Go to login page</primary-button>
+      </nuxt-link>
     </div>
   </section>
 </template>

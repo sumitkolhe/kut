@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { logger } from 'utils/logger'
+import type { FetchError } from 'ofetch'
 import type { User } from 'interfaces/user.interface'
 
 interface State {
@@ -15,22 +16,27 @@ export const useAuthStore = defineStore('authentication-store', {
   actions: {
     async loginUser(email: string, password: string) {
       try {
-        const { data } = await this.$http.auth.login(email, password)
+        const response = await this.$http.auth.login(email, password)
 
-        if (data?.accessToken) this.accessToken = data.accessToken
+        if (response.data?.accessToken) this.accessToken = response.data.accessToken
 
         return { error: null }
-      } catch (error) {
-        if (error instanceof Error) logger.error(error.message)
-        return { error }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error.message)
+        return { error: error.data.message || error.message }
       }
     },
 
     async registerUser(email: string, password: string) {
       try {
         await this.$http.auth.register(email, password)
-      } catch (error) {
-        if (error instanceof Error) logger.error(error.message)
+
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error.message)
+        return { error: error.data.message || error.message }
       }
     },
 
@@ -39,8 +45,12 @@ export const useAuthStore = defineStore('authentication-store', {
         const response = await this.$http.auth.fetchUser()
 
         this.user = response.data!
-      } catch (error) {
-        if (error instanceof Error) logger.error(error.message)
+
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error.message)
+        return { error: error.data.message || error.message }
       }
     },
 
@@ -72,20 +82,24 @@ export const useAuthStore = defineStore('authentication-store', {
     async resendVerificationEmail() {
       try {
         await this.$http.auth.resendVerificationEmail()
-      } catch (error) {
-        if (error instanceof Error) logger.error(error.message)
+
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error.message)
+        return { error: error.data.message || error.message }
       }
     },
 
     async verifyEmail(token: string) {
       try {
-        const response = await this.$http.auth.verifyEmail(token)
+        await this.$http.auth.verifyEmail(token)
 
-        if (response.status === 'SUCCESS') return { error: null, data: response.data }
-        else return { error: response.message, data: null }
-      } catch (error: any) {
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
         logger.error(error.message)
-        return { error: error.message, data: null }
+        return { error: error.data.message || error.message }
       }
     },
   },

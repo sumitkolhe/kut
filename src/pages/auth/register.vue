@@ -19,24 +19,47 @@ const registerData = reactive({ email: '', password: '' })
 const rules: Rules = reactive({
   email: {
     name: 'required',
-    test: (value: string) => value.length > 0,
-    message: 'Email must not be empty.',
+    test: (value: string) => value.length > 0 && /\S+@\S+\.\S+/.test(value?.toLowerCase()),
+    message: 'Email must be valid',
   },
-  password: {
-    name: 'required',
-    test: (value: string) => value.length > 0,
-    message: 'Password must not be empty.',
-  },
+  password: [
+    {
+      name: 'required',
+      test: (value: string) => value.length > 0,
+      message: 'Password must not be empty.',
+    },
+    {
+      name: 'required',
+      test: (value: string) => value.length >= 6,
+      message: 'Password must be atleast 6 characters long.',
+    },
+  ],
 })
 
 const { result } = useValidate(registerData, rules)
 
 const register = async () => {
   result.value.$test()
-  if (!result.value.$invalid) {
-    loading.value = true
-    await registerUser(registerData.email, registerData.password)
+
+  if (result.value.$invalid) return
+
+  loading.value = true
+  const { error } = await registerUser(registerData.email, registerData.password)
+
+  if (error) {
     loading.value = false
+    createToast(error, { type: 'error', timeout: 3000 })
+  } else {
+    createToast('User registered successfully, redirecting...', {
+      type: 'success',
+      timeout: 2000,
+    })
+    loading.value = false
+
+    setTimeout(() => {
+      const router = useRouter()
+      router.push('/auth/login')
+    }, 2000)
   }
 }
 </script>
@@ -90,7 +113,7 @@ const register = async () => {
             />
           </div>
 
-          <primary-button :loading="loading" @click="register"> Log in </primary-button>
+          <primary-button :loading="loading" @click="register"> Sign Up </primary-button>
         </form>
         <p class="text-center text-gray-600">
           Already have an account?
