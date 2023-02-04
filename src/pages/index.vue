@@ -70,17 +70,17 @@ const features = [
         class="flex w-full flex-col justify-center space-y-6 md:max-w-lg md:flex-row md:space-y-0 md:space-x-8"
       >
         <nuxt-link to="/auth/register">
-          <primary-button class="px-8 py-3.5 drop-shadow-xl md:px-10 md:py-3" type="primary">
+          <primary-button class="px-8 py-[14px] drop-shadow-xl md:py-3 md:px-10" type="primary">
             <p class="text-base">Start for free</p>
           </primary-button>
         </nuxt-link>
         <nuxt-link href="https://docs.krat.es" target="_blank">
           <div class="group relative">
             <div
-              class="animate-tilt absolute -inset-1 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 opacity-40 blur-md transition duration-500 group-hover:opacity-75 group-hover:duration-200"
+              class="animate-text absolute -inset-1.5 rounded-lg bg-gradient-to-r from-amber-600 via-red-600 to-purple-600 opacity-60 blur-md transition duration-500 group-hover:opacity-80 group-hover:duration-200"
             ></div>
             <secondary-button
-              class="border-pink-400 py-3.5 px-8 hover:border-pink-600 md:px-10 md:py-3"
+              class="border-pink-500 py-[14px] px-8 hover:border-pink-700 md:py-3 md:px-10"
               type="normal"
             >
               <p class="text-base">Star on github</p>
