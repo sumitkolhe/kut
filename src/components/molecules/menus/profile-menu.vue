@@ -30,8 +30,8 @@ const { logout } = useAuthStore()
               to="/dashboard/settings"
               :class="[
                 active
-                  ? 'rounded bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
-                  : 'text-gray-700 dark:text-gray-500',
+                  ? 'rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100'
+                  : 'text-gray-700 dark:text-gray-200',
                 'block px-4 py-2 text-sm',
               ]"
               active-class=""
@@ -47,7 +47,7 @@ const { logout } = useAuthStore()
               type="button"
               :class="[
                 active
-                  ? 'rounded bg-red-500 text-gray-50 dark:bg-red-500 dark:bg-opacity-20 dark:text-red-600'
+                  ? 'rounded bg-red-500 text-gray-50 dark:bg-red-500 dark:text-gray-200'
                   : 'text-red-400 dark:text-red-500',
                 'block w-full px-4 py-2 text-left text-sm',
               ]"
