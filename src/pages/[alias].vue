@@ -7,12 +7,15 @@ definePageMeta({
   auth: 'guest',
 })
 
+const {
+  public: { apiBaseUrl },
+} = useRuntimeConfig()
 const route = useRoute()
 const headers = useRequestHeaders()
 const userAgent = headers?.['user-agent'] ?? navigator.userAgent
 
-const { data, error } = await useFetch<CustomResponse<null>>(
-  `/api/v1/links/redirect/${route.params.alias}`,
+const { data, error } = await useFetch<CustomResponse<string>>(
+  `${apiBaseUrl}/api/v1/links/redirect/${route.params.alias}`,
   {
     method: 'POST',
     headers: {
@@ -22,7 +25,7 @@ const { data, error } = await useFetch<CustomResponse<null>>(
 )
 
 if (!error.value && data.value?.data) {
-  navigateTo(data.value?.data, { redirectCode: 301 })
+  navigateTo(data.value?.data, { redirectCode: 301, external: true })
 } else if (error?.value?.data.message === ErrorType.linkNotFound) {
   throw createError({ statusCode: 404, statusMessage: 'Link does not exist' })
 } else if (
@@ -31,8 +34,14 @@ if (!error.value && data.value?.data) {
 ) {
   throw createError({ statusCode: 404, statusMessage: 'Link is inactive' })
 } else if (error.value?.data.message === ErrorType.linkPasswordProtected) {
-  navigateTo(`/protected/${route.params.alias}`, { redirectCode: 301 })
+  navigateTo(`/protected/${route.params.alias}`, { redirectCode: 301, external: true })
 } else {
-  navigateTo('/', { redirectCode: 301 })
+  navigateTo('/', { redirectCode: 301, external: true })
 }
 </script>
+
+<template>
+  <div class="flex min-h-screen items-center justify-center bg-gray-50 px-6 dark:bg-gray-900">
+    Redirecting...
+  </div>
+</template>
