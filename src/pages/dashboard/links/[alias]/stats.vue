@@ -2,7 +2,6 @@
 import { VFrappeChart } from 'vue-frappe-chart'
 import { useLinkStore } from 'store/link.store'
 import { storeToRefs } from 'pinia'
-import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 import StatsMenu from 'components/molecules/menus/stats-menu.vue'
 
 // global
@@ -62,15 +61,19 @@ watch(period, async (newPeriod) => {
       <div class="mb-4 flex items-center justify-between">
         <div class="flex space-x-4">
           <div
-            class="flex items-center rounded border bg-gray-50 px-2 text-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+            class="flex items-center rounded border bg-gray-50 px-4 text-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200"
           >
             <p>{{ totalVisits }} <span class="text-sm">clicks</span></p>
           </div>
 
-          <nuxt-link target="_blank" :to="`https://kut.sh/${route.params.alias}`">
-            <secondary-button suffix-icon="ph:arrow-right">
-              <p class="text-sm md:text-base">https://kut.sh/{{ route.params.alias }}</p>
-            </secondary-button>
+          <nuxt-link
+            class="rounded border bg-gray-50 py-2 px-4 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-400"
+            target="_blank"
+            :to="`https://kut.sh/${route.params.alias}`"
+          >
+            <p class="text-sm dark:text-gray-200 md:text-base">
+              https://kut.sh/{{ route.params.alias }}
+            </p>
           </nuxt-link>
         </div>
         <stats-menu @update:model-value="updatePeriod" />
@@ -90,7 +93,7 @@ watch(period, async (newPeriod) => {
       </div>
       <div
         v-else
-        class="flex min-h-[300px] items-center justify-center rounded border bg-gray-50 p-4"
+        class="flex min-h-[300px] items-center justify-center rounded border bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900"
       >
         <p class="text-xl text-gray-500">No data available for last {{ period }}</p>
       </div>
