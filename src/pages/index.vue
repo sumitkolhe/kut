@@ -9,7 +9,7 @@ definePageMeta({
   middleware: () => {
     const { user } = storeToRefs(useAuthStore())
 
-    if (user.value?.email) navigateTo('/dashboard')
+    if (user.value?.email) return navigateTo('/dashboard')
   },
 })
 
@@ -69,17 +69,21 @@ const features = [
         class="flex w-full flex-col justify-center space-y-6 sm:max-w-lg md:flex-row md:space-y-0 md:space-x-8"
       >
         <nuxt-link to="/auth/register">
-          <primary-button class="px-8 py-[14px] drop-shadow-xl md:py-3 md:px-10" type="primary">
+          <primary-button
+            class="!rounded-md px-8 !py-[14px] drop-shadow-xl md:py-3 md:px-10"
+            type="primary"
+          >
             <p class="text-base">Start for free</p>
           </primary-button>
         </nuxt-link>
-        <nuxt-link href="https://docs.krat.es" target="_blank">
+
+        <nuxt-link href="https://github.com/sumitkolhe/kut" target="_blank">
           <div class="group relative">
             <div
               class="animate-text absolute -inset-1.5 rounded-lg bg-gradient-to-r from-amber-600 via-red-600 to-purple-600 opacity-60 blur-md transition duration-500 group-hover:opacity-80 group-hover:duration-200"
             ></div>
             <button
-              class="relative w-full rounded border border-pink-500 bg-gray-50 py-[14px] px-8 hover:border-pink-700 md:py-3 md:px-10"
+              class="relative w-full rounded-md border border-pink-500 bg-gray-50 py-[14px] px-8 hover:border-pink-700 dark:bg-gray-900 dark:text-gray-200 md:py-3 md:px-10"
             >
               <p class="text-base">Star on github</p>
             </button>
@@ -89,7 +93,7 @@ const features = [
     </div>
 
     <div class="my-6 flex max-w-screen-xl flex-col items-center justify-center md:my-20">
-      <h2 class="text-center text-3xl font-bold md:text-4xl lg:text-5xl">
+      <h2 class="text-center text-3xl font-bold dark:text-gray-200 md:text-4xl lg:text-5xl">
         All the features you need.
       </h2>
       <p class="my-4 text-center text-lg text-gray-600 md:text-xl">
@@ -100,11 +104,11 @@ const features = [
         <div
           v-for="feature in features"
           :key="feature.title"
-          class="flex flex-col items-center rounded-md border p-6 hover:shadow-lg"
+          class="flex flex-col items-center rounded-md border p-6 hover:shadow-lg dark:border-gray-700"
         >
-          <icon :name="feature.icon" size="40" class="m-2" />
+          <icon :name="feature.icon" size="40" class="m-2 dark:text-gray-200" />
 
-          <h4 class="mb-2 mt-4 text-lg font-medium">{{ feature.title }}</h4>
+          <h4 class="mb-2 mt-4 text-lg font-medium dark:text-gray-100">{{ feature.title }}</h4>
           <p class="text-center font-normal text-gray-500">
             {{ feature.description }}
           </p>

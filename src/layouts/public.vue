@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import AppHeader from 'components/organisms/app-header.vue'
+import AppDrawer from 'components/organisms/app-drawer.vue'
 import AppFooter from 'components/organisms/app-footer.vue'
 </script>
 
 <template>
   <main class="no-select">
     <app-header />
+    <app-drawer />
     <NuxtLoadingIndicator color="#f55" :height="3" />
-
     <slot />
-
     <app-footer />
   </main>
 </template>

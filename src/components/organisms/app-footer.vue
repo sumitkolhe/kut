@@ -7,7 +7,7 @@ import Logo from 'components/atoms/logo.vue'
     <div
       class="mx-auto flex max-w-screen-xl flex-row items-center justify-between overflow-hidden py-4"
     >
-      <div class="flex items-center space-x-6">
+      <div class="flex items-center space-x-4 md:space-x-6">
         <nuxt-link class="flex items-center" to="/dashboard">
           <logo />
         </nuxt-link>
@@ -19,7 +19,7 @@ import Logo from 'components/atoms/logo.vue'
         target="_blank"
         class="cursor-pointer text-gray-900 hover:text-gray-400"
       >
-        <icon name="iconoir:github" size="24" />
+        <icon name="iconoir:github" size="24" class="dark:text-gray-200" />
       </nuxt-link>
     </div>
   </footer>

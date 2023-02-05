@@ -2,11 +2,10 @@
 import Logo from 'components/atoms/logo.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
-import { useAuthStore } from 'store/auth.store'
-import { storeToRefs } from 'pinia'
+import ThemeSwitch from 'components/molecules/theme-switch.vue'
 
 const route = useRoute()
-const { user } = storeToRefs(useAuthStore())
+const { toggleDrawer, isDrawerVisible } = useDrawer()
 
 const { y } = useWindowScroll()
 </script>
@@ -21,25 +20,44 @@ const { y } = useWindowScroll()
         <logo />
       </nuxt-link>
 
-      <div v-if="user?.email">
-        <nuxt-link to="/dashboard">
-          <primary-button class="w-auto">Dashboard</primary-button>
-        </nuxt-link>
-      </div>
+      <div class="flex items-center space-x-6">
+        <div class="flex space-x-6">
+          <theme-switch />
 
-      <div v-else class="flex w-auto flex-row space-x-4">
-        <nuxt-link
-          v-if="route.path.includes('/auth/register') || route.path === '/'"
-          to="/auth/login"
-        >
-          <secondary-button class="w-auto">Login</secondary-button>
-        </nuxt-link>
-        <nuxt-link
-          v-if="route.path.includes('/auth/login') || route.path === '/'"
-          to="/auth/register"
-        >
-          <primary-button class="w-auto">Sign up</primary-button>
-        </nuxt-link>
+          <div class="cursor-pointer md:hidden">
+            <icon
+              v-if="!isDrawerVisible"
+              name="line-md:menu"
+              class="dark:text-gray-300"
+              size="24"
+              @click="toggleDrawer()"
+            />
+            <icon
+              v-else
+              name="line-md:close"
+              size="24"
+              class="dark:text-gray-300"
+              @click="toggleDrawer()"
+            />
+          </div>
+        </div>
+
+        <div class="hidden md:flex">
+          <div class="flex w-auto flex-row space-x-4">
+            <nuxt-link
+              v-if="route.path.includes('/auth/register') || route.path === '/'"
+              to="/auth/login"
+            >
+              <secondary-button class="w-auto">Login</secondary-button>
+            </nuxt-link>
+            <nuxt-link
+              v-if="route.path.includes('/auth/login') || route.path === '/'"
+              to="/auth/register"
+            >
+              <primary-button class="w-auto">Sign up</primary-button>
+            </nuxt-link>
+          </div>
+        </div>
       </div>
     </div>
   </header>
