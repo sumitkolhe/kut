@@ -60,16 +60,15 @@ const drawerAction = (target: { link: string; external: boolean }) => {
 
 <style scoped>
 .slide-fade-enter-active {
-  transition: all 0.2s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.2s cubic-bezier(0.5, 0.5, 0.5, 0.5);
+  transition: all 0.3s cubic-bezier(0.5, 0.5, 0.5, 0.5);
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(5px);
   opacity: 0;
 }
 </style>

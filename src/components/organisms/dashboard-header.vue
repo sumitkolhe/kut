@@ -2,10 +2,10 @@
 import Logo from 'components/atoms/logo.vue'
 import ProfileMenu from 'components/molecules/menus/profile-menu.vue'
 import ThemeSwitch from 'components/molecules/theme-switch.vue'
+import DrawerSwitch from 'components/molecules/drawer-switch.vue'
 import { useAuthStore } from 'store/auth.store'
 
 const { fetchUser } = useAuthStore()
-const { toggleDrawer, isDrawerVisible } = useDrawer()
 
 onMounted(() => fetchUser())
 </script>
@@ -22,23 +22,7 @@ onMounted(() => fetchUser())
       <div class="flex space-x-6">
         <theme-switch />
         <profile-menu class="hidden md:block" />
-
-        <div class="cursor-pointer md:hidden">
-          <icon
-            v-if="!isDrawerVisible"
-            name="line-md:menu"
-            class="dark:text-gray-300"
-            size="24"
-            @click="toggleDrawer()"
-          />
-          <icon
-            v-else
-            name="line-md:close"
-            size="24"
-            class="dark:text-gray-300"
-            @click="toggleDrawer()"
-          />
-        </div>
+        <drawer-switch />
       </div>
     </div>
   </header>

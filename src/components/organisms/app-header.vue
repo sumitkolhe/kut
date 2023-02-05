@@ -3,9 +3,9 @@ import Logo from 'components/atoms/logo.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
 import ThemeSwitch from 'components/molecules/theme-switch.vue'
+import DrawerSwitch from 'components/molecules/drawer-switch.vue'
 
 const route = useRoute()
-const { toggleDrawer, isDrawerVisible } = useDrawer()
 
 const { y } = useWindowScroll()
 </script>
@@ -27,23 +27,7 @@ const { y } = useWindowScroll()
       <div class="flex items-center space-x-8">
         <div class="flex space-x-6">
           <theme-switch />
-
-          <div class="cursor-pointer md:hidden">
-            <icon
-              v-if="!isDrawerVisible"
-              name="line-md:menu"
-              class="dark:text-gray-300"
-              size="24"
-              @click="toggleDrawer()"
-            />
-            <icon
-              v-else
-              name="line-md:close"
-              size="24"
-              class="dark:text-gray-300"
-              @click="toggleDrawer()"
-            />
-          </div>
+          <drawer-switch />
         </div>
 
         <div class="hidden md:flex">
