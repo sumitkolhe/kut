@@ -97,7 +97,7 @@ const emitChange = (period: Period) => {
     <Listbox v-else :model-value="selectedPeriod" @update:modelValue="emitChange">
       <div class="relative mt-1">
         <ListboxButton
-          class="relative flex w-56 cursor-pointer flex-row items-center justify-between rounded border bg-white px-4 py-2 text-left focus:outline-none sm:text-sm"
+          class="relative flex w-56 cursor-pointer flex-row items-center justify-between rounded border bg-gray-50 px-4 py-2 text-left focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 sm:text-sm"
         >
           <Icon name="ph:calendar-blank" size="20" />
           <p class="block truncate text-sm">{{ selectedPeriod.name }}</p>
@@ -110,7 +110,7 @@ const emitChange = (period: Period) => {
           leave-to-class="opacity-0"
         >
           <ListboxOptions
-            class="absolute z-[50] mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+            class="absolute z-[50] mt-2 max-h-64 w-full space-y-1 overflow-auto rounded-md border-gray-800 bg-gray-50 p-2 text-base shadow-lg ring-opacity-5 focus:outline-none dark:bg-gray-900"
           >
             <ListboxOption
               v-for="period in options"
@@ -121,13 +121,15 @@ const emitChange = (period: Period) => {
             >
               <li
                 :class="[
-                  active ? 'bg-red-100 text-red-500' : 'text-gray-900',
-                  'relative w-full cursor-default select-none',
+                  active
+                    ? 'rounded bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-red-500'
+                    : '',
+                  'relative w-full cursor-default select-none rounded',
                 ]"
               >
                 <div
-                  class="flex items-center justify-between px-4 py-2"
-                  :class="[selected ? 'bg-red-300' : '']"
+                  class="flex items-center justify-between rounded px-4 py-2 dark:text-gray-200"
+                  :class="[selected ? 'bg-red-500 text-gray-50' : '']"
                 >
                   <p>{{ period.name }}</p>
                   <Icon v-if="selected" name="ph:check" size="20" />
