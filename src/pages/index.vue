@@ -73,7 +73,7 @@ const features = [
             class="!rounded-md px-8 !py-[14px] drop-shadow-xl md:py-3 md:px-10"
             type="primary"
           >
-            <p class="text-base">Start for free</p>
+            <span class="text-base"> Start for free </span>
           </primary-button>
         </nuxt-link>
 

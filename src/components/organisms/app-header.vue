@@ -20,7 +20,7 @@ const { y } = useWindowScroll()
         <logo />
       </nuxt-link>
 
-      <div class="flex items-center space-x-6">
+      <div class="flex items-center space-x-8">
         <div class="flex space-x-6">
           <theme-switch />
 

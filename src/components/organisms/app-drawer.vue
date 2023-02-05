@@ -1,24 +1,38 @@
 <script lang="ts" setup>
-const router = useRouter()
-const { isDrawerVisible } = useDrawer()
+const { isDrawerVisible, toggleDrawer } = useDrawer()
 
 const navItems = [
   {
     title: 'Log in',
     icon: 'ph:sign-in',
-    action: () => router.push('/dashboard'),
+    target: { link: '/auth/login', external: false },
   },
   {
     title: 'Sign up',
     icon: 'ph:user-circle',
-    action: () => router.push('/dashboard/settings'),
+    target: { link: '/auth/register', external: false },
   },
   {
     title: 'Github',
     icon: 'iconoir:github',
-    action: () => navigateTo('https://github.com/sumitkolhe/kut', { external: true }),
+    target: { link: 'https://github.com/sumitkolhe/kut', external: true },
   },
 ]
+
+const drawerAction = (target: { link: string; external: boolean }) => {
+  const { link, external } = target
+
+  if (external === true) {
+    navigateTo(link, { external })
+  } else {
+    const router = useRouter()
+
+    setTimeout(() => {
+      toggleDrawer()
+    }, 100)
+    router.push(link)
+  }
+}
 </script>
 
 <template>
@@ -33,7 +47,7 @@ const navItems = [
             v-for="item in navItems"
             :key="item.title"
             class="text-md flex cursor-pointer items-center space-x-4 border-b px-2 py-4 font-normal hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
-            @click="item.action"
+            @click="drawerAction(item.target)"
           >
             <icon :name="item.icon" size="20" />
             <p>{{ item.title }}</p>

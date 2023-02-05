@@ -59,8 +59,7 @@ export const useAuthStore = defineStore('authentication-store', {
         this.accessToken = null
         this.user = null
 
-        const router = useRouter()
-        router.replace('/')
+        navigateTo('/')
       } catch (error) {
         if (error instanceof Error) logger.error(error.message)
       }
