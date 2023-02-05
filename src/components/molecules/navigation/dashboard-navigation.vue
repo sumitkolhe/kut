@@ -41,7 +41,7 @@ const { y } = useWindowScroll()
 
     <div
       v-else
-      class="no-scrollbar text-gray-00 mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll"
+      class="no-scrollbar mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll text-gray-400"
     >
       <button @click="$router.push('/dashboard/links')">
         <Icon name="ph:arrow-circle-left" class="mt-1 text-gray-400 hover:text-gray-900" />

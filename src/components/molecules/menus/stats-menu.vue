@@ -49,7 +49,7 @@ const emitChange = (period: Period) => {
       class="flex rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
       @click="showPanel = true"
     >
-      <icon v-if="smallerThanLg" class="text-red-500" name="ph:calendar-blank" />
+      <icon v-if="smallerThanLg" class="text-red-500" name="line-md:calendar" />
     </button>
 
     <transition-root v-if="smallerThanLg" as="template" :show="showPanel">
@@ -97,9 +97,9 @@ const emitChange = (period: Period) => {
     <Listbox v-else :model-value="selectedPeriod" @update:modelValue="emitChange">
       <div class="relative mt-1">
         <ListboxButton
-          class="relative flex w-56 cursor-pointer flex-row items-center justify-between rounded border bg-gray-50 px-4 py-2 text-left focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 sm:text-sm"
+          class="relative flex w-fit cursor-pointer flex-row items-center justify-between space-x-4 rounded border bg-gray-50 px-4 py-2 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 sm:text-sm"
         >
-          <Icon name="ph:calendar-blank" size="20" />
+          <Icon name="line-md:calendar" class="text-gray-600" size="20" />
           <p class="block truncate text-sm">{{ selectedPeriod.name }}</p>
           <Icon name="mdi:chevron-down" />
         </ListboxButton>
