@@ -9,4 +9,8 @@ export enum ErrorType {
   incorrectLoginCredentials = 'incorrect login credentials',
   aliasAlreadyUsed = 'alias is already used',
   linkNotFound = 'link not found',
+  linkInactive = 'link is inactive',
+  linkViewLimitReached = 'link view limit reached',
+  incorrectlinkPassword = 'incorrect link password',
+  linkPasswordProtected = 'link is password protected',
 }

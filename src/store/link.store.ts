@@ -51,6 +51,18 @@ export const useLinkStore = defineStore('links', {
       }
     },
 
+    async redirectProtectedLink(alias: string, useragent: string, password: string) {
+      try {
+        const response = await this.$http.link.redirectProtectedLink(alias, useragent, password)
+
+        return { error: null, data: response.data }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error?.message)
+        return { error: error?.data?.message || error?.message, data: null }
+      }
+    },
+
     async deleteLink(alias: string) {
       try {
         await this.$http.link.deleteLink(alias)

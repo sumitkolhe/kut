@@ -28,7 +28,7 @@ export class LinkController {
         userId,
         Number(offset),
         Number(limit),
-        search
+        search as string
       )
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
@@ -134,9 +134,10 @@ export class LinkController {
   ) => {
     try {
       const { alias } = req.params
+      const { password } = req.body
       const { statistics } = req
 
-      const link = await this.linkService.redirectLink(alias, statistics)
+      const link = await this.linkService.redirectLink(alias, statistics, password)
 
       return res.json({
         status: 'SUCCESS',

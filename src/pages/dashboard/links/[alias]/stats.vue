@@ -71,7 +71,11 @@ watch(period, async (newPeriod) => {
             target="_blank"
             :to="`https://kut.sh/${route.params.alias}`"
           >
-            <p class="text-sm dark:text-gray-200 md:text-base">
+            <p
+              v-slice="20"
+              :title="`https://kut.sh/${route.params.alias}`"
+              class="text-sm dark:text-gray-200 md:text-base"
+            >
               https://kut.sh/{{ route.params.alias }}
             </p>
           </nuxt-link>

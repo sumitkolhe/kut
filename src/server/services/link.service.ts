@@ -144,23 +144,30 @@ export class LinkService {
     await this.linkModel.findOneAndDelete({ userId, alias })
   }
 
-  public redirectLink = async (alias: string, statistics: Statistics | undefined) => {
+  public redirectLink = async (
+    alias: string,
+    statistics: Statistics | undefined,
+    password?: string
+  ) => {
     const link: LinkDocument | null = await this.linkModel.findOne({ alias })
 
     if (!link) throw new HttpExceptionError(404, ErrorType.linkNotFound)
-    if (!link.meta.active) throw new HttpExceptionError(403, 'link is not active')
+    if (!link.meta.active) throw new HttpExceptionError(403, ErrorType.linkInactive)
 
     // if validTill exists and validFrom and validTill are not within limit, throw error
-    if (
-      link.meta.validTill &&
-      (link.meta.validFrom > new Date() || link.meta.validTill < new Date())
-    )
-      throw new HttpExceptionError(403, 'link is not active')
+    const isValidDate = link.meta.validFrom > new Date() || link.meta.validTill < new Date()
+
+    if (link.meta.validTill && isValidDate)
+      throw new HttpExceptionError(403, ErrorType.linkInactive)
 
     if (link.meta.maxVisits && link.meta.maxVisits <= link.visitCount)
-      throw new HttpExceptionError(403, 'maximum link view limit reached')
+      throw new HttpExceptionError(403, ErrorType.linkViewLimitReached)
 
-    // if (link.meta.password && password && link.meta.password === password)
+    // check if link is password protected
+    if (link.meta.password && !password)
+      throw new HttpExceptionError(403, ErrorType.linkPasswordProtected)
+    else if (link.meta.password && password && link.meta.password !== password)
+      throw new HttpExceptionError(403, ErrorType.incorrectlinkPassword)
 
     // increment visit count
     await link.updateOne({ $inc: { visitCount: 1 } })

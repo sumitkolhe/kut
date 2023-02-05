@@ -30,9 +30,12 @@ export class LinkService extends ApiService {
     })
   }
 
-  public async updateLink() {
-    return this.http<CustomResponse<Link>>(`${this.base}/`, {
-      body: {},
+  public async redirectProtectedLink(alias: string, useragent: string, password: string) {
+    return this.http<CustomResponse<string>>(`${this.base}/redirect/${alias}`, {
+      body: { password },
+      headers: {
+        'user-agent': useragent,
+      },
       method: 'POST',
     })
   }

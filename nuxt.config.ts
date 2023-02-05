@@ -69,7 +69,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    apiBaseUrl: process.env.API_BASE_URL,
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL,
+    },
     dbUrl: process.env.DB_URL,
     dbName: process.env.DB_NAME,
     accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,

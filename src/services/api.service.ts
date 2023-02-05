@@ -1,7 +1,7 @@
 import { $fetch } from 'ofetch'
 import { storeToRefs } from 'pinia'
+import { useAuthStore } from 'store/auth.store'
 import type { $Fetch } from 'ofetch'
-import { useAuthStore } from '~~/src/store/auth.store'
 
 export class ApiService {
   private baseUrl = '/api/v1'

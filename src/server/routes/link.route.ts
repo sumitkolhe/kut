@@ -24,7 +24,7 @@ export class LinkRoute implements Routes {
       this.linkController.getAllLinks
     )
     this.router.post(`${this.path}/shorten`, checkAuthentication, this.linkController.createLink)
-    this.router.get(
+    this.router.post(
       `${this.path}/redirect/:alias`,
       statisticsHandler,
       this.linkController.redirectLink

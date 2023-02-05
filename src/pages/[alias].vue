@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ErrorType } from 'interfaces/error.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
 
 definePageMeta({
@@ -6,27 +7,32 @@ definePageMeta({
   auth: 'guest',
 })
 
-const { apiBaseUrl } = useRuntimeConfig()
 const route = useRoute()
 const headers = useRequestHeaders()
 const userAgent = headers?.['user-agent'] ?? navigator.userAgent
 
-const { data } = await useFetch<CustomResponse<null>>(
-  `${apiBaseUrl}/api/v1/links/redirect/${route.params.alias}`,
+const { data, error } = await useFetch<CustomResponse<null>>(
+  `/api/v1/links/redirect/${route.params.alias}`,
   {
+    method: 'POST',
     headers: {
       'user-agent': userAgent,
     },
   }
 )
 
-if (!data.value?.data || data.value.data === '') {
+if (!error.value && data.value?.data) {
+  navigateTo(data.value?.data, { redirectCode: 301 })
+} else if (error?.value?.data.message === ErrorType.linkNotFound) {
   throw createError({ statusCode: 404, statusMessage: 'Link does not exist' })
-} else navigateTo(data.value.data, { external: true, redirectCode: 301 })
+} else if (
+  error.value?.data.message === ErrorType.linkInactive ||
+  error.value?.data.message === ErrorType.linkViewLimitReached
+) {
+  throw createError({ statusCode: 404, statusMessage: 'Link is inactive' })
+} else if (error.value?.data.message === ErrorType.linkPasswordProtected) {
+  navigateTo(`/protected/${route.params.alias}`, { redirectCode: 301 })
+} else {
+  navigateTo('/', { redirectCode: 301 })
+}
 </script>
-
-<template>
-  <div class="text-xl">
-    <p>Redirecting...</p>
-  </div>
-</template>

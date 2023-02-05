@@ -102,7 +102,6 @@ const login = async () => {
               v-model="loginData.password"
               label="Password"
               placeholder="********"
-              suffix-icon="ph:password"
               :errors="result.password.$messages"
             />
           </div>
