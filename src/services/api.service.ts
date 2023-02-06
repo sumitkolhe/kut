@@ -13,8 +13,10 @@ export class ApiService {
 
       async onResponseError({ response }) {
         if (response.status === 401) {
-          const { logout } = useAuthStore()
-          return logout()
+          const { refreshAccessToken } = useAuthStore()
+          const { refreshToken } = storeToRefs(useAuthStore())
+
+          await refreshAccessToken(refreshToken.value)
         }
       },
 

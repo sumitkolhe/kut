@@ -6,19 +6,24 @@ import type { User } from 'interfaces/user.interface'
 interface State {
   user: Omit<User, 'apiKey' | 'userLinks'> | null
   accessToken: string | null
+  refreshToken: string | null
 }
 
 export const useAuthStore = defineStore('authentication-store', {
   state: (): State => ({
     user: null,
     accessToken: null,
+    refreshToken: null,
   }),
   actions: {
     async loginUser(email: string, password: string) {
       try {
         const response = await this.$http.auth.login(email, password)
 
-        if (response.data?.accessToken) this.accessToken = response.data.accessToken
+        if (response.data?.accessToken) {
+          this.accessToken = response.data.accessToken
+          this.refreshToken = response.data.refreshToken
+        }
 
         return { error: null }
       } catch (err) {
@@ -54,7 +59,7 @@ export const useAuthStore = defineStore('authentication-store', {
       }
     },
 
-    async logout() {
+    logout() {
       try {
         this.accessToken = null
         this.user = null
@@ -65,16 +70,16 @@ export const useAuthStore = defineStore('authentication-store', {
       }
     },
 
-    async refreshToken(refreshToken: string) {
+    async refreshAccessToken(refreshToken: string | null) {
       try {
+        if (!refreshToken) return this.logout()
+
         const response = await this.$http.auth.refreshAccessToken(refreshToken)
 
-        const { accessToken } = useToken()
-
-        accessToken.value = response.data!.accessToken
+        if (response.data?.accessToken) this.accessToken = response.data?.accessToken
       } catch (error) {
         if (error instanceof Error) logger.error(error.message)
-        await this.logout()
+        this.logout()
       }
     },
 
@@ -107,6 +112,10 @@ export const useAuthStore = defineStore('authentication-store', {
     {
       key: 'kut.accessToken',
       paths: ['accessToken'],
+    },
+    {
+      key: 'kut.refreshToken',
+      paths: ['refreshToken'],
     },
     {
       key: 'kut.currentUser',
