@@ -62,6 +62,7 @@ export const useAuthStore = defineStore('authentication-store', {
     logout() {
       try {
         this.accessToken = null
+        this.refreshToken = null
         this.user = null
 
         navigateTo('/')
