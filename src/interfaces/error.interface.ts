@@ -1,6 +1,7 @@
 export enum ErrorType {
   unauthorised = 'unauthorised',
   accountNotVerified = 'account not verified',
+  userBanned = 'user is banned',
   invalidAuthenticationToken = 'invalid authentication token',
   invalidRefreshToken = 'invalid refresh token',
   invalidVerifyToken = 'invalid email verification token',

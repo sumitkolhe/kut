@@ -6,7 +6,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (to && to.meta.auth && to.meta.auth === 'guest') return
 
   const { logout } = useAuthStore()
-  const { accessToken } = storeToRefs(useAuthStore())
+  const { accessToken, user } = storeToRefs(useAuthStore())
 
   // if access token is not present, logout the user
   if (!accessToken.value) return logout()
@@ -15,6 +15,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const { payload } = useJwt(accessToken.value)
 
   if (payload.value && payload.value.exp! < Date.now() / 1000) return logout()
+
+  if (!user.value?.isVerified && !to.path.includes('unverified')) return '/unverified'
 
   return
 })

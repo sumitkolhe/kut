@@ -120,7 +120,7 @@ export const useAuthStore = defineStore('authentication-store', {
     },
     {
       key: 'kut.currentUser',
-      paths: ['user.email'],
+      paths: ['user.email', 'user.isVerified', 'user.isBanned'],
     },
   ],
 })

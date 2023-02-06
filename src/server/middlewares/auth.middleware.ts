@@ -22,16 +22,16 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
 
     if (!user) {
       return next(new HttpExceptionError(401, ErrorType.userNotFound))
-    } else if (user && !user.isVerified) {
-      return next(new HttpExceptionError(403, ErrorType.accountNotVerified))
-    } else if (user && user.isVerified) {
-      req.auth = {
-        userId: user.id,
-        email: user.email,
-      }
-
-      return next()
     }
+
+    req.auth = {
+      userId: user.id,
+      email: user.email,
+      isVerified: user.isVerified,
+      isBanned: user.isBanned,
+    }
+
+    return next()
   } catch (error) {
     let errorMessage = error
 

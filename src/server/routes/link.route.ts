@@ -4,6 +4,7 @@ import { checkAuthentication } from 'server/middlewares/auth.middleware'
 import { allLinksSchema } from 'server/helpers/validator.helper'
 import { StatisticsController } from 'server/controllers/statistics.controller'
 import { statisticsHandler } from 'server/middlewares/statistics.middleware'
+import { checkEmailVerification } from 'server/middlewares/verifcation.middleware'
 import type { Routes } from 'interfaces/routes.interface'
 
 export class LinkRoute implements Routes {
@@ -20,17 +21,38 @@ export class LinkRoute implements Routes {
     this.router.get(
       `${this.path}`,
       checkAuthentication,
+      checkEmailVerification,
       allLinksSchema,
       this.linkController.getAllLinks
     )
-    this.router.post(`${this.path}/shorten`, checkAuthentication, this.linkController.createLink)
+    this.router.post(
+      `${this.path}/shorten`,
+      checkAuthentication,
+      checkEmailVerification,
+      this.linkController.createLink
+    )
     this.router.post(
       `${this.path}/redirect/:alias`,
       statisticsHandler,
       this.linkController.redirectLink
     )
-    this.router.get(`${this.path}/:alias`, checkAuthentication, this.linkController.getLink)
-    this.router.put(`${this.path}/:alias`, checkAuthentication, this.linkController.updateLink)
-    this.router.delete(`${this.path}/:alias`, checkAuthentication, this.linkController.deleteLink)
+    this.router.get(
+      `${this.path}/:alias`,
+      checkAuthentication,
+      checkEmailVerification,
+      this.linkController.getLink
+    )
+    this.router.put(
+      `${this.path}/:alias`,
+      checkAuthentication,
+      checkEmailVerification,
+      this.linkController.updateLink
+    )
+    this.router.delete(
+      `${this.path}/:alias`,
+      checkAuthentication,
+      checkEmailVerification,
+      this.linkController.deleteLink
+    )
   }
 }
