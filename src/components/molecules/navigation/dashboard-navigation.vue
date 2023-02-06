@@ -4,8 +4,8 @@ const route = useRoute()
 const alias = computed(() => route.params.alias)
 
 const tabs = computed(() => [
-  { name: 'Overview', href: '/dashboard', icon: 'ph:dots-nine-bold' },
-  { name: 'Links', href: '/dashboard/links', icon: 'ph:link' },
+  { name: 'Links', href: '/dashboard', icon: 'ph:link' },
+  { name: 'Stats', href: '/dashboard/stats', icon: 'ph:dots-nine-bold' },
   { name: 'Settings', href: '/dashboard/settings', icon: 'lucide:settings-2' },
 ])
 

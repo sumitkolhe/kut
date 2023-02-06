@@ -115,7 +115,7 @@ const openEditLinkPanel = (link: Link) => {
   showEditLinkPanel.value = true
 }
 
-const { copy, copied, text } = useClipboard()
+const { copy, copied, text } = useClipboard({ legacy: true })
 
 watch(copied, (clicked) => {
   if (clicked) createToast(`${text.value} copied to clipboard`, { type: 'success' })

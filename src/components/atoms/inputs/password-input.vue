@@ -21,7 +21,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const inputMasked = ref(false)
+const inputMasked = ref(true)
 
 const updateValue = (e: Event) => emit('update:modelValue', (e.target as HTMLInputElement).value)
 </script>

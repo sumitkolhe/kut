@@ -59,7 +59,9 @@ const props = defineProps({
         :to="props.shortUrl"
         class="flex items-center text-sm text-gray-500"
       >
-        <span title="Shortened Link" class="truncate hover:underline">{{ props.shortUrl }}</span>
+        <span v-slice="30" :title="props.shortUrl" class="truncate hover:underline">
+          {{ props.shortUrl }}
+        </span>
       </NuxtLink>
     </div>
 
@@ -68,7 +70,7 @@ const props = defineProps({
     >
       <p class="text-xs uppercase tracking-wider text-gray-300">Target</p>
       <NuxtLink
-        v-slice="20"
+        v-slice="30"
         target="_blank"
         :to="props.target"
         class="truncate text-sm text-gray-500 hover:underline"
