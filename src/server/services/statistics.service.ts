@@ -179,7 +179,7 @@ export class StatisticsService {
 
     const views = await LinkModel.aggregate([
       {
-        $match: { alias, userId },
+        $match: { alias, userId: new Types.ObjectId(userId) },
       },
       {
         $lookup: {
