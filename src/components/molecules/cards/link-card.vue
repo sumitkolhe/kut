@@ -102,11 +102,11 @@ const props = defineProps({
 
     <div class="flex w-full flex-row items-center justify-between space-x-4 md:w-fit">
       <nuxt-link
-        :to="`/dashboard/links/${props.alias}`"
+        :to="`/dashboard/${props.alias}`"
         title="Link Statistics"
         class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
       >
-        <icon name="ph:chart-pie-slice-duotone" class="text-red-500" size="26" />
+        <icon name="ph:chart-line-up-duotone" class="text-red-500" size="26" />
       </nuxt-link>
       <div
         title="Copy Link"

@@ -10,8 +10,8 @@ const tabs = computed(() => [
 ])
 
 const subTabs = computed(() => [
-  { name: 'Info', href: `/dashboard/links/${alias.value}/`, icon: 'ph:info' },
-  { name: 'Stats', href: `/dashboard/links/${alias.value}/stats`, icon: 'ph:chart-bar' },
+  { name: 'Info', href: `/dashboard/${alias.value}/`, icon: 'ph:info' },
+  { name: 'Stats', href: `/dashboard/${alias.value}/stats`, icon: 'ph:chart-bar' },
 ])
 
 const { y } = useWindowScroll()
@@ -43,7 +43,7 @@ const { y } = useWindowScroll()
       v-else
       class="no-scrollbar mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll text-gray-400"
     >
-      <button @click="$router.push('/dashboard/links')">
+      <button @click="$router.push('/dashboard')">
         <Icon name="ph:arrow-circle-left" class="mt-1 text-gray-400 hover:text-gray-900" />
       </button>
 

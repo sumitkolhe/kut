@@ -7,7 +7,7 @@ import LinkCard from 'components/molecules/cards/link-card.vue'
 import TextInput from 'components/atoms/inputs/text-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import QrCodePanel from 'components/molecules/panels/qr-code-panel.vue'
-import CreateLinkPanel from 'components/molecules/panels/create-link-panel.vue'
+import LinkPanel from 'components/molecules/panels/link-panel.vue'
 import type { Link } from 'interfaces/link.interface'
 
 // store
@@ -152,7 +152,7 @@ watch(copied, (clicked) => {
         </primary-button>
       </div>
 
-      <create-link-panel
+      <link-panel
         v-model:active="createLinkPayload.meta.active"
         v-model:alias="createLinkPayload.alias"
         v-model:description="createLinkPayload.description"
@@ -164,7 +164,7 @@ watch(copied, (clicked) => {
         v-model:open-panel="showCreateLinkPanel"
         :loading="createLinkLoader"
         @create-link="createLink"
-      ></create-link-panel>
+      ></link-panel>
     </div>
 
     <div v-if="allLinksLoader" class="my-6 flex w-full flex-col gap-3 md:my-8">
@@ -215,7 +215,7 @@ watch(copied, (clicked) => {
         />
 
         <!-- update link panel  -->
-        <create-link-panel
+        <link-panel
           v-model:active="editLinkPayload.meta.active"
           v-model:alias="editLinkPayload.alias"
           v-model:description="editLinkPayload.description"
@@ -227,7 +227,7 @@ watch(copied, (clicked) => {
           v-model:open-panel="showEditLinkPanel"
           :loading="updateLinkLoader"
           @create-link="editSelectedLink"
-        ></create-link-panel>
+        ></link-panel>
 
         <div class="flex justify-center md:justify-end">
           <div class="mt-6 mb-0 flex items-end justify-end gap-3">
