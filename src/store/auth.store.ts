@@ -5,6 +5,7 @@ import type { User } from 'interfaces/user.interface'
 
 interface State {
   user: Omit<User, 'apiKey' | 'userLinks'> | null
+  isLoggedIn: boolean
   accessToken: string | null
   refreshToken: string | null
 }
@@ -12,6 +13,7 @@ interface State {
 export const useAuthStore = defineStore('authentication-store', {
   state: (): State => ({
     user: null,
+    isLoggedIn: false,
     accessToken: null,
     refreshToken: null,
   }),
@@ -23,6 +25,7 @@ export const useAuthStore = defineStore('authentication-store', {
         if (response.data?.accessToken) {
           this.accessToken = response.data.accessToken
           this.refreshToken = response.data.refreshToken
+          this.isLoggedIn = true
         }
 
         return { error: null }
@@ -50,6 +53,7 @@ export const useAuthStore = defineStore('authentication-store', {
         const response = await this.$http.auth.fetchUser()
 
         this.user = response.data!
+        this.isLoggedIn = true
 
         return { error: null }
       } catch (err) {
@@ -61,6 +65,7 @@ export const useAuthStore = defineStore('authentication-store', {
 
     logout() {
       try {
+        this.isLoggedIn = false
         this.accessToken = null
         this.refreshToken = null
         this.user = null
@@ -119,8 +124,8 @@ export const useAuthStore = defineStore('authentication-store', {
       paths: ['refreshToken'],
     },
     {
-      key: 'kut.currentUser',
-      paths: ['user.email', 'user.isVerified', 'user.isBanned'],
+      key: 'kut.isLoggedIn',
+      paths: ['isLoggedIn'],
     },
   ],
 })

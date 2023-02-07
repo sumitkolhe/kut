@@ -29,6 +29,7 @@
     "jwt-decode": "^3.1.2",
     "mongoose": "^6.9.0",
     "morgan": "^1.10.0",
+    "nocache": "^3.0.4",
     "open-graph-scraper": "^5.0.4",
     "pinia": "^2.0.30",
     "prettier-plugin-tailwindcss": "^0.2.2",

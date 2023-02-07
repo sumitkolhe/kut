@@ -7,9 +7,9 @@ definePageMeta({
   layout: 'public',
   auth: 'guest',
   middleware: () => {
-    const { user } = storeToRefs(useAuthStore())
+    const { isLoggedIn } = storeToRefs(useAuthStore())
 
-    if (user.value?.email) return navigateTo('/dashboard')
+    if (isLoggedIn.value && isLoggedIn.value === true) return navigateTo('/dashboard')
   },
 })
 

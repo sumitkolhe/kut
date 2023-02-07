@@ -6,6 +6,7 @@ import { errorMiddleware } from 'server/middlewares/error.middleware'
 import { useConfig } from 'server/configs'
 import timeout from 'express-timeout-handler'
 import useragent from 'express-useragent'
+import nocache from 'nocache'
 import type { Statistics } from 'interfaces/statistics.interface'
 import type { Response } from 'express'
 import type { Config } from 'interfaces/config.interface'
@@ -17,6 +18,8 @@ declare global {
       auth: {
         userId: string
         email: string
+        isVerified: boolean
+        isBanned: boolean
       }
       timedout: boolean
       statistics?: Statistics | undefined
@@ -50,6 +53,7 @@ export class App {
     )
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    this.app.use(nocache())
     this.app.use(
       timeout.handler({
         timeout: 9000,
