@@ -6,9 +6,11 @@ import type { Config } from 'interfaces/config.interface'
 
 export class EmailService {
   public emailConfig: Config['email']
+  public domainConfig: Config['domain']
 
   constructor() {
     this.emailConfig = useConfig().email
+    this.domainConfig = useConfig().domain
   }
 
   public sendVerificationEmail = async (email: string, name: string): Promise<void> => {
@@ -30,7 +32,7 @@ export class EmailService {
         },
         to: [{ email, name }],
         params: {
-          VERIFICATION_LINK: `https://kut.sh/auth/verify-email?token=${emailVerificationToken}`,
+          VERIFICATION_LINK: `${this.domainConfig.protocol}://${this.domainConfig.url}/auth/verify-email?token=${emailVerificationToken}`,
         },
       },
       method: 'POST',
