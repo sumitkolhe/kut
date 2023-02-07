@@ -7,7 +7,7 @@ export const checkEmailVerification: RequestHandler = async (req, _res, next) =>
     const { isVerified, isBanned } = req.auth
 
     if (!isVerified) {
-      return next(new HttpExceptionError(401, ErrorType.accountNotVerified))
+      return next(new HttpExceptionError(403, ErrorType.accountNotVerified))
     } else if (isBanned) {
       return next(new HttpExceptionError(403, ErrorType.userBanned))
     }
