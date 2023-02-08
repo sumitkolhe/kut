@@ -14,6 +14,6 @@ export const checkEmailVerification: RequestHandler = async (req, _res, next) =>
 
     return next()
   } catch (error) {
-    next(new HttpExceptionError(401, error as string))
+    next(new HttpExceptionError(403, error as string))
   }
 }
