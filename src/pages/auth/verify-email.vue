@@ -17,7 +17,7 @@ const { verifyEmail } = useAuthStore()
 
 const verificationToken = computed(() => route.query.token?.toString())
 const loading = ref(false)
-const verified = ref(false)
+const verified = ref()
 
 onMounted(async () => {
   loading.value = true
@@ -42,30 +42,26 @@ onMounted(async () => {
       </p>
     </div>
 
-    <div
-      v-else-if="!loading && !verified"
-      class="flex flex-col items-center justify-center space-y-6"
-    >
-      <icon name="line-md:close-circle-twotone" class="text-red-500" size="64" />
-      <div class="flex flex-col items-center space-y-2">
-        <p class="text-xl font-medium tracking-wide dark:text-gray-200 md:text-2xl xl:text-3xl">
-          Verification Failed
-        </p>
-        <p>Please try resending the verification email</p>
+    <div v-else>
+      <div v-if="!verified" class="flex flex-col items-center justify-center space-y-6">
+        <icon name="line-md:close-circle-twotone" class="text-red-500" size="64" />
+        <div class="flex flex-col items-center space-y-2">
+          <p class="text-xl font-medium tracking-wide dark:text-gray-200 md:text-2xl xl:text-3xl">
+            Verification Failed
+          </p>
+          <p>Please try resending the verification email</p>
+        </div>
       </div>
-    </div>
 
-    <div
-      v-else-if="!loading && verified"
-      class="flex flex-col items-center justify-center space-y-6"
-    >
-      <icon name="line-md:confirm-circle-twotone" class="text-green-500" size="64" />
-      <p class="text-xl font-medium tracking-wide dark:text-gray-200 md:text-2xl">
-        Your email is now verified
-      </p>
-      <nuxt-link to="/auth/login">
-        <primary-button>Go to login page</primary-button>
-      </nuxt-link>
+      <div v-else-if="verified" class="flex flex-col items-center justify-center space-y-6">
+        <icon name="line-md:confirm-circle-twotone" class="text-green-500" size="64" />
+        <p class="text-xl font-medium tracking-wide dark:text-gray-200 md:text-2xl">
+          Your email is now verified
+        </p>
+        <nuxt-link to="/auth/login">
+          <primary-button>Go to login page</primary-button>
+        </nuxt-link>
+      </div>
     </div>
   </section>
 </template>
