@@ -37,6 +37,6 @@ export const devConfig: Config = {
   },
   domain: {
     protocol: 'http',
-    url: '192.168.0.150:3000',
+    url: '0.0.0.0:3000',
   },
 }

@@ -13,6 +13,8 @@ export default async () => {
       return Promise.resolve()
     }
 
+    mongoose.set('strictQuery', true)
+
     const connection = await mongoose.connect(config.database.dbUrl, {
       keepAlive: true,
       dbName: config.database.dbName,
