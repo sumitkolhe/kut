@@ -1,21 +1,20 @@
 import { $fetch } from 'ofetch'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from 'store/auth.store'
+import { ErrorType } from 'interfaces/error.interface'
 import type { $Fetch } from 'ofetch'
-import { ErrorType } from '~~/src/interfaces/error.interface'
 
 export class ApiService {
-  private baseUrl = '/api/v1'
-  protected http: $Fetch
+  public http: $Fetch
 
-  constructor() {
+  constructor(baseURL: string) {
     this.http = $fetch.create({
-      baseURL: this.baseUrl,
+      baseURL: `${baseURL}/api/v1`,
 
       async onResponseError({ response }) {
         if (
-          response.status === 401 &&
-          response._data.message === ErrorType.invalidAuthenticationToken
+          response?.status === 401 &&
+          response?._data?.message === ErrorType.invalidAuthenticationToken
         ) {
           const { refreshAccessToken } = useAuthStore()
           const { refreshToken } = storeToRefs(useAuthStore())

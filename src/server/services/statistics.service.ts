@@ -143,8 +143,6 @@ export class StatisticsService {
       },
     ])
 
-    console.log(stats)
-
     if (stats.length > 0) {
       return stats.map((link) => link.statistics)[0]
     } else {

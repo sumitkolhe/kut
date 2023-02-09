@@ -1,11 +1,16 @@
-import { ApiService } from 'services/api.service'
+import type { $Fetch } from 'ofetch'
 import type { CustomResponse } from 'interfaces/response.interface'
 
-export class StatisticsService extends ApiService {
+export class StatisticsService {
+  private http: $Fetch
   private base: string
 
   constructor() {
-    super()
+    const {
+      $apiService: { http },
+    } = useNuxtApp()
+
+    this.http = http
     this.base = '/stats'
   }
 

@@ -1,12 +1,17 @@
-import { ApiService } from 'services/api.service'
 import type { Link } from 'interfaces/link.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
+import type { $Fetch } from 'ofetch'
 
-export class LinkService extends ApiService {
+export class LinkService {
+  private http: $Fetch
   private base: string
 
   constructor() {
-    super()
+    const {
+      $apiService: { http },
+    } = useNuxtApp()
+
+    this.http = http
     this.base = '/links'
   }
 

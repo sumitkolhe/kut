@@ -1,16 +1,11 @@
-import { AuthService } from 'services/auth.service'
-import { LinkService } from 'services/link.service'
-import { StatisticsService } from 'services/statistics.service'
-import type { PiniaPluginContext } from 'pinia'
+import { ApiService } from 'services/api.service'
 
-function HttpServicePlugin({ store }: PiniaPluginContext) {
-  store.$http = {
-    auth: markRaw(new AuthService()),
-    link: markRaw(new LinkService()),
-    statistics: markRaw(new StatisticsService()),
+export default defineNuxtPlugin(() => {
+  const {
+    public: { apiBaseUrl },
+  } = useRuntimeConfig()
+
+  return {
+    provide: { apiService: new ApiService(apiBaseUrl) },
   }
-}
-
-export default defineNuxtPlugin(({ $pinia }) => {
-  $pinia.use(HttpServicePlugin)
 })

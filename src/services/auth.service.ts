@@ -1,13 +1,18 @@
-import { ApiService } from 'services/api.service'
 import type { User } from 'interfaces/user.interface'
 import type { CustomResponse } from 'interfaces/response.interface'
 import type { Token, Tokens } from 'interfaces/token.interface'
+import type { $Fetch } from 'ofetch'
 
-export class AuthService extends ApiService {
+export class AuthService {
+  private http: $Fetch
   private base: string
 
   constructor() {
-    super()
+    const {
+      $apiService: { http },
+    } = useNuxtApp()
+
+    this.http = http
     this.base = '/auth'
   }
 
