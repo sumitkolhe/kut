@@ -28,6 +28,8 @@ const resendEmail = async () => {
   if (error) {
     loading.value = false
     return createToast(error, { type: 'error' })
+  } else {
+    createToast('Verification email sent successfully', { type: 'success' })
   }
 
   loading.value = false

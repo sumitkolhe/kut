@@ -7,6 +7,7 @@ import {
   verifyAccountVerificationToken,
   verifyRefreshToken,
 } from 'server/helpers/token.helper'
+import { logger } from 'server/utils/logger'
 import { EmailService } from 'server/services/email.service'
 import { ErrorType } from 'interfaces/error.interface'
 import type { Tokens } from 'interfaces/token.interface'
@@ -102,7 +103,12 @@ export class AuthService {
 
     if (!userDetails) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    await this.emailService.sendVerificationEmail(userDetails.email, userDetails.email) // TODO: change to user
+    await this.emailService
+      .sendVerificationEmail(userDetails.email, userDetails.email) // TODO: change to user
+      .catch((error) => {
+        logger.error('error sending verification email', error)
+        throw new HttpExceptionError(500, ErrorType.somethingWentWrong)
+      })
   }
 
   public verifyAccount = async (verificationToken: string): Promise<void> => {

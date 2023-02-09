@@ -1,4 +1,3 @@
-import { logger } from 'server/utils/logger'
 import { useConfig } from 'server/configs'
 import { signAccountVerificationToken } from 'server/helpers/token.helper'
 import { $fetch } from 'ofetch'
@@ -36,8 +35,6 @@ export class EmailService {
         },
       },
       method: 'POST',
-    }).catch((error) => {
-      logger.error('error sending verification email', error)
     })
   }
 }

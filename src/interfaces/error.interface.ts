@@ -14,4 +14,5 @@ export enum ErrorType {
   linkViewLimitReached = 'link view limit reached',
   incorrectlinkPassword = 'incorrect link password',
   linkPasswordProtected = 'link is password protected',
+  somethingWentWrong = 'something went wrong',
 }
