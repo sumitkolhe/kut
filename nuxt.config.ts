@@ -43,6 +43,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-icon',
     '@pinia-plugin-persistedstate/nuxt',
+    '@nuxt/devtools',
   ],
 
   serverHandlers: [
