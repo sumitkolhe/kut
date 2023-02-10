@@ -20,10 +20,6 @@ export class ApiService {
           const { refreshToken } = storeToRefs(useAuthStore())
 
           await refreshAccessToken(refreshToken.value)
-        } else if (response.status === 401) {
-          const { logout } = useAuthStore()
-
-          return logout()
         }
       },
 
