@@ -13,27 +13,27 @@ const stats = computed(() => [
   {
     title: 'Total Links',
     icon: 'ph:link',
-    value: overviewStats.value.totalLinks,
+    value: overviewStats?.value?.totalLinks,
   },
   {
     title: 'Expired Links',
     icon: 'ph:skull',
-    value: overviewStats.value.expiredLinks,
+    value: overviewStats?.value?.expiredLinks,
   },
   {
     title: 'Disabled Links',
     icon: 'ph:x',
-    value: overviewStats.value.disabledLinks,
+    value: overviewStats?.value?.disabledLinks,
   },
   {
     title: 'Protected Links',
     icon: 'ph:lock',
-    value: overviewStats.value.protectedLinks,
+    value: overviewStats?.value?.protectedLinks,
   },
   {
     title: 'Total Visits',
     icon: 'ph:navigation-arrow',
-    value: overviewStats.value.totalVisits,
+    value: overviewStats?.value?.totalVisits,
   },
 ])
 </script>
