@@ -167,7 +167,7 @@ export class LinkService {
     if (link.meta.password && !password)
       throw new HttpExceptionError(403, ErrorType.linkPasswordProtected)
     else if (link.meta.password && password && link.meta.password !== password)
-      throw new HttpExceptionError(403, ErrorType.incorrectlinkPassword)
+      throw new HttpExceptionError(400, ErrorType.incorrectlinkPassword)
 
     // increment visit count
     await link.updateOne({ $inc: { visitCount: 1 } })
