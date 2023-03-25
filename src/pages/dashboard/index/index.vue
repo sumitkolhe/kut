@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import IconButton from 'components/atoms/buttons/icon-button.vue'
 import { useLinkStore } from 'store/link.store'
 import { useOffsetPagination } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
@@ -8,6 +7,7 @@ import TextInput from 'components/atoms/inputs/text-input.vue'
 import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
 import QrCodePanel from 'components/molecules/panels/qr-code-panel.vue'
 import LinkPanel from 'components/molecules/panels/link-panel.vue'
+import Paginator from 'components/molecules/paginator.vue'
 import type { Link } from 'interfaces/link.interface'
 
 // store
@@ -66,10 +66,15 @@ const debouncedSearch = useDebounceFn(async () => {
 
 const createLink = async () => {
   createLinkLoader.value = true
-  await shortenLink(createLinkPayload).then(async () => {
-    createLinkLoader.value = false
-    showCreateLinkPanel.value = false
-  })
+  const { error } = await shortenLink(createLinkPayload)
+
+  if (error) {
+    createToast(error, { type: 'error' })
+  } else {
+    createToast('link created successfully', { type: 'success' })
+  }
+  createLinkLoader.value = false
+  showCreateLinkPanel.value = false
 }
 
 const deleteSelectedLink = async (alias: string | null) => {
@@ -163,7 +168,7 @@ watch(copied, (clicked) => {
         v-model:max-visits="createLinkPayload.meta.maxVisits"
         v-model:open-panel="showCreateLinkPanel"
         :loading="createLinkLoader"
-        @create-link="createLink"
+        @save-link="createLink"
       ></link-panel>
     </div>
 
@@ -216,6 +221,8 @@ watch(copied, (clicked) => {
 
         <!-- update link panel  -->
         <link-panel
+          v-if="editLinkPayload.alias"
+          :key="editLinkPayload.alias!"
           v-model:active="editLinkPayload.meta.active"
           v-model:alias="editLinkPayload.alias"
           v-model:description="editLinkPayload.description"
@@ -226,19 +233,18 @@ watch(copied, (clicked) => {
           v-model:max-visits="editLinkPayload.meta.maxVisits"
           v-model:open-panel="showEditLinkPanel"
           :loading="updateLinkLoader"
-          @create-link="editSelectedLink"
+          @save-link="editSelectedLink"
         ></link-panel>
 
         <div class="flex justify-center md:justify-end">
-          <div class="mt-6 mb-0 flex items-end justify-end gap-3">
-            <icon-button :disabled="isFirstPage" icon="line-md:chevron-left" @click="prev" />
-            <p class="text-sm dark:text-gray-400">
-              {{ currentPage }}
-              <span class="mx-0.25">/</span>
-              {{ pageCount }}
-            </p>
-            <icon-button :disabled="isLastPage" icon="line-md:chevron-right" @click="next" />
-          </div>
+          <Paginator
+            :is-first-page="isFirstPage"
+            :is-last-page="isLastPage"
+            :current-page="currentPage"
+            :page-count="pageCount"
+            @next-page="next"
+            @prev-page="prev"
+          />
         </div>
       </div>
 
