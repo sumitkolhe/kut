@@ -3,24 +3,37 @@ import { FetchError } from 'ofetch'
 import { logger } from 'utils/logger'
 import type { Link } from 'interfaces/link.interface'
 
+interface State {
+  allLinks: Link[]
+  link: Link | null
+  linkViews: Record<string, number> | null
+  overviewStats: Record<string, number> | null
+  target: string | null
+  totalCount: number
+}
+
 export const useLinkStore = defineStore('links', {
-  state: () => ({
-    allLinks: [] as Link[],
-    link: {} as Link,
-    linkViews: {} as Record<string, number>,
-    overviewStats: {} as Record<string, number>,
+  state: (): State => ({
+    allLinks: [],
+    link: null,
+    linkViews: null,
+    overviewStats: null,
+    target: null,
     totalCount: 0,
   }),
+
   actions: {
     async shortenLink(linkPayload: Pick<Link, 'alias' | 'target' | 'meta' | 'description'>) {
       try {
         const response = await this.$http.link.shorten(linkPayload)
 
         if (response.data) this.allLinks.unshift(response.data)
-      } catch (error) {
-        if (error instanceof FetchError) {
-          logger.error(error.message)
-        }
+
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error?.message)
+        return { error: error?.data?.message || error?.message }
       }
     },
 
@@ -32,10 +45,12 @@ export const useLinkStore = defineStore('links', {
 
         this.allLinks = response.data!.links!
         this.totalCount = response.data!.total!
-      } catch (error) {
-        if (error instanceof FetchError) {
-          logger.error(error.message)
-        }
+
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error?.message)
+        return { error: error?.data?.message || error?.message }
       }
     },
 
@@ -44,10 +59,12 @@ export const useLinkStore = defineStore('links', {
         const response = await this.$http.link.fetchLink(alias)
 
         this.link = response.data!
-      } catch (error) {
-        if (error instanceof FetchError) {
-          logger.error(error.message)
-        }
+
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error?.message)
+        return { error: error?.data?.message || error?.message }
       }
     },
 
@@ -55,7 +72,9 @@ export const useLinkStore = defineStore('links', {
       try {
         const response = await this.$http.link.redirectProtectedLink(alias, useragent, password)
 
-        return { error: null, data: response.data }
+        this.target = response.data
+
+        return { error: null }
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
@@ -66,10 +85,12 @@ export const useLinkStore = defineStore('links', {
     async deleteLink(alias: string) {
       try {
         await this.$http.link.deleteLink(alias)
-      } catch (error) {
-        if (error instanceof FetchError) {
-          logger.error(error.message)
-        }
+
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error?.message)
+        return { error: error?.data?.message || error?.message, data: null }
       }
     },
 
