@@ -16,8 +16,8 @@
     "commit-msg": "yarn commitlint --edit $1"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.12",
-    "@pinia/nuxt": "^0.4.7",
+    "@headlessui/vue": "^1.7.13",
+    "@pinia/nuxt": "^0.4.8",
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.1",
     "cors": "^2.8.5",
@@ -31,8 +31,8 @@
     "morgan": "^1.10.0",
     "nocache": "^3.0.4",
     "open-graph-scraper": "^5.2.3",
-    "pinia": "^2.0.33",
-    "prettier-plugin-tailwindcss": "^0.2.5",
+    "pinia": "^2.0.34",
+    "prettier-plugin-tailwindcss": "^0.2.7",
     "qrcode": "^1.5.1",
     "vue-command-palette": "^0.1.4",
     "vue-frappe-chart": "^0.1.10",
@@ -40,11 +40,11 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.5.0",
-    "@commitlint/config-conventional": "^17.4.4",
+    "@commitlint/cli": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.1",
     "@kolhe/eslint-config": "^1.1.8",
-    "@nuxt/devtools": "^0.2.5",
-    "@nuxtjs/tailwindcss": "^6.6.4",
+    "@nuxt/devtools": "^0.4.0",
+    "@nuxtjs/tailwindcss": "^6.6.6",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@tailwindcss/forms": "^0.5.3",
     "@types/bcryptjs": "^2.4.2",
@@ -53,16 +53,16 @@
     "@types/express-useragent": "^1.0.2",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/morgan": "^1.9.4",
-    "@types/node": "^18.15.8",
-    "@vueuse/core": "^9.13.0",
-    "@vueuse/integrations": "^9.13.0",
-    "@vueuse/nuxt": "^9.13.0",
-    "eslint": "^8.36.0",
+    "@types/node": "^18.15.11",
+    "@vueuse/core": "^10.0.2",
+    "@vueuse/integrations": "^10.0.2",
+    "@vueuse/nuxt": "^10.0.2",
+    "eslint": "^8.38.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nuxt": "^3.3.2",
+    "nuxt": "^3.4.1",
     "nuxt-icon": "^0.3.3",
     "prettier": "^2.8.7",
     "simple-git-hooks": "^2.8.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.4"
   }
 }
