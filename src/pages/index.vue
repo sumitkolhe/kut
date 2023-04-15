@@ -16,29 +16,35 @@ definePageMeta({
 const features = [
   {
     title: 'Self Host',
-    icon: 'ph:cloud',
+    icon: '/features/host-your-own.svg',
     description: 'Use Kut as it is or host your own instance easily.',
   },
   {
     title: 'Free',
-    icon: 'ph:coin',
+    icon: '/features/free.svg',
     description: 'Kut is completely free to use.',
   },
   {
     title: 'Analytics that matter',
-    icon: 'ph:chart-bar',
+    icon: '/features/analytics.svg',
     description:
       'Kut provides powerful analytics for your links, including geolocation, device, browser, and referrer information.',
   },
   {
     title: 'Powerful link builder',
-    icon: 'ph:link',
+    icon: '/features/powerful-link-builder.svg',
     description:
       'Build your links with UTM parameters, password protection, expiration dates, iOS/Android targeting, etc.',
   },
   {
     title: 'Free QR Code',
-    icon: 'ph:qr-code',
+    icon: '/features/qr-code.svg',
+    description:
+      "QR codes and short links are like peas in a pod. That's why we've built a QR code exporter right into Kut.",
+  },
+  {
+    title: 'Open Source',
+    icon: '/features/open-source.svg',
     description:
       "QR codes and short links are like peas in a pod. That's why we've built a QR code exporter right into Kut.",
   },
@@ -53,7 +59,7 @@ const features = [
       >
         <h1 class="leading-tighter dark:text-gray-50">The only</h1>
         <h1
-          class="animate-text leading-tighter bg-gradient-to-r from-amber-500 via-red-500 to-purple-500 bg-clip-text text-transparent"
+          class="leading-tighter animate-text bg-gradient-to-r from-amber-500 via-red-500 to-purple-500 bg-clip-text text-transparent"
         >
           URL Shortener
         </h1>
@@ -66,11 +72,11 @@ const features = [
       </p>
 
       <div
-        class="flex w-full flex-col justify-center space-y-6 sm:max-w-lg md:flex-row md:space-y-0 md:space-x-8"
+        class="flex w-full flex-col justify-center space-y-6 sm:max-w-lg md:flex-row md:space-x-8 md:space-y-0"
       >
         <nuxt-link to="/auth/register">
           <primary-button
-            class="!rounded-md px-8 !py-[14px] drop-shadow-xl md:py-3 md:px-10"
+            class="!rounded-md !py-[12px] px-8 drop-shadow-xl md:px-10 md:py-3"
             type="primary"
           >
             <span class="text-base"> Start for free </span>
@@ -80,10 +86,10 @@ const features = [
         <nuxt-link href="https://github.com/sumitkolhe/kut" target="_blank">
           <div class="group relative">
             <div
-              class="animate-text absolute -inset-1.5 rounded-lg bg-gradient-to-r from-amber-600 via-red-600 to-purple-600 opacity-60 blur-md transition duration-500 group-hover:opacity-80 group-hover:duration-200"
+              class="absolute -inset-1.5 animate-text rounded-lg bg-gradient-to-r from-amber-600 via-red-600 to-purple-600 opacity-60 blur-md transition duration-500 group-hover:opacity-80 group-hover:duration-200"
             ></div>
             <button
-              class="relative w-full rounded-md border border-pink-500 bg-gray-50 py-[14px] px-8 hover:border-pink-700 dark:bg-gray-900 dark:text-gray-200 md:py-3 md:px-10"
+              class="relative w-full rounded-md border border-pink-500 bg-gray-50 px-8 py-[12px] hover:border-pink-700 dark:bg-gray-900 dark:text-gray-200 md:px-10 md:py-[12px]"
             >
               <p class="text-base">Star on github</p>
             </button>
@@ -104,9 +110,12 @@ const features = [
         <div
           v-for="feature in features"
           :key="feature.title"
-          class="flex flex-col items-center rounded-md border p-6 hover:shadow-lg dark:border-gray-700"
+          class="flex flex-col items-center rounded-md p-6"
         >
-          <icon :name="feature.icon" size="40" class="m-2 dark:text-gray-200" />
+          <img
+            :src="feature.icon"
+            class="m-2 h-44 w-44 dark:text-gray-200 md:h-56 md:w-56 xl:h-64 xl:w-64"
+          />
 
           <h4 class="mb-2 mt-4 text-lg font-medium dark:text-gray-100">{{ feature.title }}</h4>
           <p class="text-center font-normal text-gray-500">
