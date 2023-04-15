@@ -67,7 +67,7 @@ const clearText = () => emit('update:modelValue', null)
         :value="modelValue"
         :class="[
           props.errors.length > 0
-            ? 'border-error  dark:border-error  focus:border-error focus:ring-error dark:focus:ring-error dark:focus:border-error placeholder:opacity-50'
+            ? 'border-error  placeholder:opacity-50  focus:border-error focus:ring-error dark:border-error dark:focus:border-error dark:focus:ring-error'
             : 'border-gray-200  focus:border-black focus:ring-black',
           props.prefixIcon ? 'pl-10' : '',
           props.suffixIcon ? 'pr-10' : '',
@@ -90,7 +90,7 @@ const clearText = () => emit('update:modelValue', null)
     </div>
     <div
       v-if="props.errors.length > 0"
-      class="text-error h-4 py-1 text-xs font-light tracking-normal"
+      class="h-4 py-1 text-xs font-light tracking-normal text-error"
     >
       <p>{{ props.errors[0] }}</p>
     </div>

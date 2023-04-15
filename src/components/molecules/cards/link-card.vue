@@ -100,13 +100,13 @@ const props = defineProps({
       </p>
     </div>
 
-    <div class="flex w-full flex-row items-center justify-between space-x-4 md:w-fit">
+    <div class="flex w-full flex-row items-center justify-between space-x-4 lg:w-fit">
       <nuxt-link
         :to="`/dashboard/${props.alias}`"
         title="Link Statistics"
         class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
       >
-        <icon name="ph:chart-line-up-duotone" class="text-red-500" size="26" />
+        <icon name="ph:chart-line-up" class="text-red-500" size="26" />
       </nuxt-link>
       <div
         title="Copy Link"
@@ -117,7 +117,7 @@ const props = defineProps({
 
       <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
         <icon
-          name="ph:qr-code-duotone"
+          name="ph:qr-code"
           class="text-red-500"
           size="26"
           @click="$emit('qr-code', props.shortUrl)"

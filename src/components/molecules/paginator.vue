@@ -31,7 +31,7 @@ const next = () => emit('next-page')
 </script>
 
 <template>
-  <div class="mt-6 mb-0 flex items-center justify-end gap-3">
+  <div class="mb-0 mt-6 flex items-center justify-end gap-3">
     <icon-button :disabled="isFirstPage" icon="line-md:chevron-left" @click="prev" />
     <p class="text-sm dark:text-gray-400">
       {{ currentPage }}

@@ -45,7 +45,7 @@ const drawerAction = (target: { link: string; external: boolean }) => {
       <transition name="slide-fade">
         <aside
           v-show="isDrawerVisible"
-          class="fixed inset-0 top-16 z-50 flex h-screen w-full flex-col overflow-y-hidden bg-gray-50 py-4 px-6 dark:bg-gray-900 md:hidden"
+          class="fixed inset-0 top-16 z-50 flex h-screen w-full flex-col overflow-y-hidden bg-gray-50 px-6 py-4 dark:bg-gray-900 md:hidden"
         >
           <div
             v-for="item in navItems"

@@ -67,7 +67,7 @@ watch(period, async (newPeriod) => {
           </div>
 
           <nuxt-link
-            class="rounded border bg-gray-50 py-2 px-4 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-400"
+            class="rounded border bg-gray-50 px-4 py-2 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-400"
             target="_blank"
             :to="`https://kut.sh/${route.params.alias}`"
           >

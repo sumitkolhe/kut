@@ -135,13 +135,13 @@ watch(copied, (clicked) => {
           v-model="search"
           clearable
           :loading="searchLinksLoader"
-          prefix-icon="ph:magnifying-glass-duotone"
+          prefix-icon="ph:magnifying-glass"
           placeholder="Search..."
           @update:model-value="debouncedSearch"
         />
 
         <primary-button
-          suffix-icon="ph:plus-duotone"
+          suffix-icon="ph:plus"
           :loading="createLinkLoader"
           class="hidden w-full md:block md:w-36"
           @click="showCreateLinkPanel = true"
@@ -252,13 +252,13 @@ watch(copied, (clicked) => {
         v-else
         class="relative my-6 flex h-64 flex-col items-center justify-center rounded border bg-gray-50 px-4 py-6 dark:border-gray-700 dark:bg-gray-900"
       >
-        <icon name="ph:link-break-duotone" size="44" class="opacity-50 dark:text-gray-400" />
-        <p class="mt-4 mb-1 font-medium dark:text-gray-200">No Links</p>
+        <icon name="ph:link-break" size="44" class="opacity-50 dark:text-gray-400" />
+        <p class="mb-1 mt-4 font-medium dark:text-gray-200">No Links</p>
         <p class="font-light text-gray-400 dark:text-gray-500">
           Get started by creating a new link.
         </p>
         <primary-button
-          suffix-icon="ph:plus-duotone"
+          suffix-icon="ph:plus"
           :loading="createLinkLoader"
           class="mt-6 w-fit"
           @click="showCreateLinkPanel = true"

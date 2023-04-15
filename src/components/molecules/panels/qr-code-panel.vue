@@ -61,7 +61,7 @@ const downloadQrCode = () => {
         leave-to="translate-y-full md:translate-x-full md:translate-y-0"
       >
         <dialog-panel
-          class="max-h-auto fixed bottom-0 flex w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-l-0 bg-gray-50 dark:border-t dark:border-gray-700 dark:bg-gray-900 md:right-0 md:h-full md:max-h-screen md:w-[50%] md:rounded-t-none md:border-t-0 md:border-l lg:w-[33%]"
+          class="max-h-auto fixed bottom-0 flex w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-l-0 bg-gray-50 dark:border-t dark:border-gray-700 dark:bg-gray-900 md:right-0 md:h-full md:max-h-screen md:w-[50%] md:rounded-t-none md:border-l md:border-t-0 lg:w-[33%]"
         >
           <div class="space-y-1 border-b p-4 dark:border-gray-700 md:p-6">
             <p class="text-xl font-medium text-gray-900 dark:text-gray-200">Download QR Code</p>

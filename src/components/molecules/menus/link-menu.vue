@@ -29,7 +29,7 @@ const deleteLink = () => {
 <template>
   <div class="flex">
     <button title="Options" @click="showPanel = true">
-      <icon v-if="smallerThanLg" class="text-red-500" name="ph:faders-horizontal-duotone" />
+      <icon v-if="smallerThanLg" class="text-red-500" name="ph:faders-horizontal" />
     </button>
 
     <transition-root v-if="smallerThanLg" as="template" :show="showPanel">
@@ -63,7 +63,7 @@ const deleteLink = () => {
                 class="no-select group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-700"
                 @click="$emit('edit-link')"
               >
-                <icon name="ph:pencil-duotone" />
+                <icon name="ph:pencil" />
                 <p>Edit</p>
               </button>
 
@@ -71,7 +71,7 @@ const deleteLink = () => {
                 class="no-select group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-red-500 hover:text-gray-100"
                 @click="deleteLink"
               >
-                <icon name="ph:trash-duotone" />
+                <icon name="ph:trash" />
                 <p>Delete</p>
               </button>
             </div>
