@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
-import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import PrimaryButton from 'components/atoms/button/primary-button.vue'
 
 // emits
 defineEmits(['close'])

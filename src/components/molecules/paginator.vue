@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import IconButton from 'components/atoms/buttons/icon-button.vue'
+import IconButton from 'components/atoms/button/icon-button.vue'
 
 defineProps({
   isFirstPage: {

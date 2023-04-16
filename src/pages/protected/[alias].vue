@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useLinkStore } from 'store/link.store'
-import PasswordInput from 'components/atoms/inputs/password-input.vue'
-import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import PasswordInput from 'components/atoms/input/password-input.vue'
+import PrimaryButton from 'components/atoms/button/primary-button.vue'
 import useValidate from 'vue-tiny-validate'
 import type { Rules } from 'vue-tiny-validate'
 

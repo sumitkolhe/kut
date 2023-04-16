@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import Logo from 'components/atoms/logo.vue'
-import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
-import SecondaryButton from 'components/atoms/buttons/secondary-button.vue'
-import ThemeSwitch from 'components/molecules/theme-switch.vue'
-import DrawerSwitch from 'components/molecules/drawer-switch.vue'
+import PrimaryButton from 'components/atoms/button/primary-button.vue'
+import SecondaryButton from 'components/atoms/button/secondary-button.vue'
+import ThemeSwitch from 'components/molecules/switch/theme-switch.vue'
+import DrawerSwitch from 'components/molecules/switch/drawer-switch.vue'
 
 const route = useRoute()
 

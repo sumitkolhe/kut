@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
-import TextInput from 'components/atoms/inputs/text-input.vue'
+import PrimaryButton from 'components/atoms/button/primary-button.vue'
+import TextInput from 'components/atoms/input/text-input.vue'
 import useValidate from 'vue-tiny-validate'
 import { useAuthStore } from 'store/auth.store'
-import PasswordInput from 'components/atoms/inputs/password-input.vue'
+import PasswordInput from 'components/atoms/input/password-input.vue'
 import type { Rules } from 'vue-tiny-validate'
 
 definePageMeta({

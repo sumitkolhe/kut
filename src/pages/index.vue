@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useAuthStore } from 'store/auth.store'
 import { storeToRefs } from 'pinia'
-import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import PrimaryButton from 'components/atoms/button/primary-button.vue'
 
 definePageMeta({
   layout: 'public',

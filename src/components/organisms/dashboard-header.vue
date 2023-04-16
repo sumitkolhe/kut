@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import Logo from 'components/atoms/logo.vue'
 import ProfileMenu from 'components/molecules/menus/profile-menu.vue'
-import ThemeSwitch from 'components/molecules/theme-switch.vue'
-import DrawerSwitch from 'components/molecules/drawer-switch.vue'
-import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import PrimaryButton from 'components/atoms/button/primary-button.vue'
 import { useAuthStore } from 'store/auth.store'
 import { storeToRefs } from 'pinia'
 import {
@@ -14,6 +12,8 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
+import DrawerSwitch from 'components/molecules/switch/drawer-switch.vue'
+import ThemeSwitch from 'components/molecules/switch/theme-switch.vue'
 
 const { resendVerificationEmail } = useAuthStore()
 const { user } = storeToRefs(useAuthStore())

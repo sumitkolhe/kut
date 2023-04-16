@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import PrimaryButton from 'components/atoms/button/primary-button.vue'
 import { useAuthStore } from 'store/auth.store'
 
 definePageMeta({
