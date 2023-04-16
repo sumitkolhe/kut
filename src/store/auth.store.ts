@@ -17,6 +17,7 @@ export const useAuthStore = defineStore('authentication-store', {
     accessToken: null,
     refreshToken: null,
   }),
+
   actions: {
     async loginUser(email: string, password: string) {
       try {

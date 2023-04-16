@@ -26,7 +26,7 @@ export class LinkService {
   }> => {
     const allLinks = await this.linkModel
       .find({ $and: [{ userId }, search ? { $text: { $search: search } } : {}] })
-      .select({ __v: 0, _id: 0, userId: 0, meta: 0 })
+      .select({ __v: 0, _id: 0, userId: 0 })
       .sort({ createdAt: -1 })
       .skip(offset)
       .limit(limit)
@@ -42,7 +42,7 @@ export class LinkService {
   public getLink = async (userId: string, alias: string) => {
     const link = await this.linkModel
       .findOne({ userId, alias })
-      .select({ __v: 0, userId: 0, _id: 0, meta: { password: 0 } })
+      .select({ __v: 0, userId: 0, _id: 0 })
 
     return link ? (link?.toObject() as Link) : null
   }
