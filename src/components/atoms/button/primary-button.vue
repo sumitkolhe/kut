@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Spinner from 'components/atoms/spinner.vue'
-
 const props = defineProps({
   loading: {
     type: Boolean,
@@ -37,7 +35,7 @@ const props = defineProps({
     >
       <icon :name="props.prefixIcon" size="20" />
     </div>
-    <spinner v-if="loading" />
+    <icon v-if="loading" name="svg-spinners:270-ring-with-bg" />
     <p v-else class="text-sm">
       <slot />
     </p>
