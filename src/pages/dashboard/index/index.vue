@@ -250,7 +250,7 @@ watch(copied, (clicked) => {
 
       <div
         v-else
-        class="relative my-6 flex h-64 flex-col items-center justify-center rounded border bg-gray-50 px-4 py-6 dark:border-gray-700 dark:bg-gray-900"
+        class="relative my-6 flex h-64 w-full flex-col items-center justify-center rounded border bg-gray-50 px-4 py-6 dark:border-gray-700 dark:bg-gray-900"
       >
         <icon name="ph:link-break" size="44" class="opacity-50 dark:text-gray-400" />
         <p class="mb-1 mt-4 font-medium dark:text-gray-200">No Links</p>
@@ -260,7 +260,7 @@ watch(copied, (clicked) => {
         <primary-button
           suffix-icon="ph:plus"
           :loading="createLinkLoader"
-          class="mt-6 w-fit"
+          class="mt-6 w-auto"
           @click="showCreateLinkPanel = true"
         >
           Add Link
