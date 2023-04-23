@@ -5,7 +5,7 @@ import type { CustomResponse } from 'interfaces/response.interface'
 import type { Token, Tokens } from 'interfaces/token.interface'
 
 export class AuthController {
-  private authService: AuthService
+  private readonly authService: AuthService
 
   constructor() {
     this.authService = new AuthService()

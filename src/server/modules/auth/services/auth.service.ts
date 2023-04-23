@@ -1,17 +1,17 @@
 import bcrypt from 'bcryptjs'
 import { ErrorType } from 'interfaces/error.interface'
-import { UserModel } from 'server/modules/users/models/user.model'
+import { UserModel } from 'server/modules/auth/models/user.model'
 import { EmailService } from 'server/modules/auth/services/email.service'
 import { logger } from 'server/common/utils/logger'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
-import type { Tokens } from 'interfaces/token.interface'
-import type { User } from 'interfaces/user.interface'
 import {
   signAccessToken,
   signRefreshToken,
   verifyAccountVerificationToken,
   verifyRefreshToken,
-} from '~/server/modules/auth/utils/token.util'
+} from 'server/modules/auth/utils/token.util'
+import type { Tokens } from 'interfaces/token.interface'
+import type { User } from 'interfaces/user.interface'
 
 export class AuthService {
   private emailService: EmailService
@@ -34,8 +34,9 @@ export class AuthService {
       password: hashedPassword,
     })
 
-    await newUser.save().catch(() => {
-      throw new HttpExceptionError(500, 'error creating user')
+    await newUser.save().catch((error) => {
+      logger.error(`error creating user: ${error}`)
+      throw new HttpExceptionError(500, `error creating user`)
     })
 
     await this.emailService.sendVerificationEmail(user.email, user.email) // TODO: change to user

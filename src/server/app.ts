@@ -75,7 +75,7 @@ export class App {
   }
 
   private initializeRouteFallback() {
-    this.app.use((req, res) => {
+    this.app.use((_req, res) => {
       res.status(404).json({
         status: 'FAILED',
         message: 'route not found',

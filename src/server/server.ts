@@ -1,7 +1,7 @@
 import 'dotenv/config'
-import { AuthRoute } from 'server/common/routes/auth.route'
-import { LinkRoute } from 'server/common/routes/link.route'
-import { StatisticsRoute } from 'server/common/routes/statistics.route'
+import { StatisticsRoute } from 'server/modules/statistics/routes/statistics.route'
+import { AuthRoute } from 'server/modules/auth/routes/auth.route'
+import { LinkRoute } from 'server/modules/links/routes/link.route'
 import { App } from './app'
 
 const app = new App([new AuthRoute(), new LinkRoute(), new StatisticsRoute()])

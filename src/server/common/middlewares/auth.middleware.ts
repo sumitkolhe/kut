@@ -1,9 +1,9 @@
 import Jwt from 'jsonwebtoken'
 import { ErrorType } from 'interfaces/error.interface'
-import { UserModel } from 'server/modules/users/models/user.model'
+import { HttpExceptionError } from 'server/common/exceptions/http.exception'
+import { useConfig } from 'server/common/configs'
 import type { RequestHandler } from 'express'
-import { HttpExceptionError } from '~/server/common/exceptions/http.exception'
-import { useConfig } from '~/server/common/configs'
+import { userRepository } from '~/server/modules/auth/repositories/user.repository'
 
 const config = useConfig()
 
@@ -18,8 +18,8 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
   try {
     const tokenDetails = Jwt.verify(accessToken, config.token.access.secret) as Jwt.JwtPayload
 
-    const user = await UserModel.findOne({ email: tokenDetails.email })
-
+    const user = await userRepository.findByEmail(tokenDetails.email)
+    console.log('user', user)
     if (!user) {
       return next(new HttpExceptionError(401, ErrorType.userNotFound))
     }
