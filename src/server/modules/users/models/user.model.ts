@@ -1,27 +1,6 @@
 import mongoose from 'mongoose'
+import type { User } from 'interfaces/user.interface'
 import type { Document, Schema } from 'mongoose'
-
-export interface UserDocument extends Document {
-  email: string
-  profile: {
-    firstName: string
-    lastName: string
-    picture: string
-    name: string
-  }
-  password: string
-  isBanned: boolean
-  isVerified: boolean
-  apiKeys: {
-    key: string
-    issuedOn: string
-    expirationDate: Date
-    name: string
-    lastUsedOn: Date
-  }
-  createdAt: Date
-  updatedAt: Date
-}
 
 const UserSchema: Schema = new mongoose.Schema(
   {
@@ -103,4 +82,4 @@ const UserSchema: Schema = new mongoose.Schema(
   }
 )
 
-export const UserModel = mongoose.model<UserDocument>('user', UserSchema)
+export const UserModel = mongoose.model<User & Document>('user', UserSchema)
