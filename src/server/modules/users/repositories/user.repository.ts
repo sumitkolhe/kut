@@ -1,6 +1,6 @@
-import { UserModel } from 'server/modules/auth/models/user.model'
 import { BaseRepository } from 'server/common/classes/base-repository.class'
-import type { UserDocument } from 'server/modules/auth/models/user.model'
+import type { UserDocument } from '~/server/modules/users/models/user.model'
+import { UserModel } from '~/server/modules/users/models/user.model'
 
 export class UserRepository extends BaseRepository<UserDocument> {
   constructor() {

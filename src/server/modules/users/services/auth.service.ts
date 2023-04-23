@@ -1,21 +1,20 @@
 import bcrypt from 'bcryptjs'
 import { ErrorType } from 'interfaces/error.interface'
-import { UserModel } from 'server/modules/auth/models/user.model'
-import { EmailService } from 'server/modules/auth/services/email.service'
 import { logger } from 'server/common/utils/logger'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
+import { UserModel } from 'server/modules/users/models/user.model'
+import { EmailService } from 'server/modules/users/services/email.service'
 import {
   signAccessToken,
   signRefreshToken,
   verifyAccountVerificationToken,
   verifyRefreshToken,
-} from 'server/modules/auth/utils/token.util'
+} from 'server/modules/users/utils/token.util'
 import type { Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
 
 export class AuthService {
-  private emailService: EmailService
-
+  private readonly emailService: EmailService
   constructor() {
     this.emailService = new EmailService()
   }

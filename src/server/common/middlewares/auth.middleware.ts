@@ -3,7 +3,7 @@ import { ErrorType } from 'interfaces/error.interface'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { useConfig } from 'server/common/configs'
 import type { RequestHandler } from 'express'
-import { userRepository } from '~/server/modules/auth/repositories/user.repository'
+import { userRepository } from '~/server/modules/users/repositories/user.repository'
 
 const config = useConfig()
 

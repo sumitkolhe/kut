@@ -1,7 +1,7 @@
 import { ErrorType } from 'interfaces/error.interface'
-import { UserModel } from 'server/modules/auth/models/user.model'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import type { User } from 'interfaces/user.interface'
+import { UserModel } from '~/server/modules/users/models/user.model'
 
 export class UserService {
   public me = async (email: string): Promise<User> => {

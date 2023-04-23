@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import { checkAuthentication } from 'server/common/middlewares/auth.middleware'
-import { AuthController } from 'server/modules/auth/controllers/auth.controller'
 import {
   loginSchema,
   refreshTokenSchema,
@@ -8,6 +7,7 @@ import {
   verifyAccountSchema,
 } from 'server/common/helpers/validator.helper'
 import type { Routes } from 'interfaces/routes.interface'
+import { AuthController } from '~/server/modules/users/controllers/auth.controller'
 
 export class AuthRoute implements Routes {
   public path = '/auth'
