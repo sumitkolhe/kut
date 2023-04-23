@@ -1,7 +1,7 @@
 import { $fetch } from 'ofetch'
 import { useConfig } from 'server/common/configs'
+import { signAccountVerificationToken } from 'server/modules/users/utils/token.util'
 import type { Config } from 'interfaces/config.interface'
-import { signAccountVerificationToken } from '~/server/modules/users/utils/token.util'
 
 export class EmailService {
   public emailConfig: Config['email']
