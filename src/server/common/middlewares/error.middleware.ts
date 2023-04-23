@@ -28,7 +28,7 @@ export const errorMiddleware = (
         })
       }
 
-      logger.error(`[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`)
+      logger.error(`[${req.method}] [${req.path}] [${status}], ${message}`)
 
       res.status(status).json({
         status: 'FAILED',
@@ -39,7 +39,7 @@ export const errorMiddleware = (
       const status = error.status || 500
       const message = error.message || 'Something went wrong'
 
-      logger.error(`[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`)
+      logger.error(`[${req.method}] [${req.path}] [${status}], ${message}`)
 
       res.status(status).json({
         status: 'FAILED',

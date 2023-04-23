@@ -1,59 +1,31 @@
-import bcrypt from 'bcryptjs'
 import { ErrorType } from 'interfaces/error.interface'
-import { logger } from 'server/common/utils/logger'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { UserModel } from 'server/modules/users/models/user.model'
-import { EmailService } from 'server/modules/users/services/email.service'
 import {
   signAccessToken,
-  signRefreshToken,
   verifyAccountVerificationToken,
   verifyRefreshToken,
 } from 'server/modules/users/utils/token.util'
+import { RegisterUserUseCase } from 'server/modules/users/use-cases/register/register.use-case'
+import { LoginUserUseCase } from 'server/modules/users/use-cases/login/login.use-case'
 import type { Tokens } from 'interfaces/token.interface'
 import type { User } from 'interfaces/user.interface'
 
 export class AuthService {
-  private readonly emailService: EmailService
+  private readonly registerUserUseCase: RegisterUserUseCase
+  private readonly loginUserUseCase: LoginUserUseCase
+
   constructor() {
-    this.emailService = new EmailService()
+    this.registerUserUseCase = new RegisterUserUseCase()
+    this.loginUserUseCase = new LoginUserUseCase()
   }
 
   public register = async (user: Pick<User, 'email' | 'password'>): Promise<void> => {
-    const ifUserExist = await UserModel.findOne({ email: user.email })
-
-    if (ifUserExist) throw new HttpExceptionError(409, ErrorType.emailAlreadyExists)
-
-    const salt = await bcrypt.genSalt(10)
-
-    const hashedPassword = await bcrypt.hash(user.password, salt)
-
-    const newUser = new UserModel({
-      email: user.email,
-      password: hashedPassword,
-    })
-
-    await newUser.save().catch((error) => {
-      logger.error(`error creating user: ${error}`)
-      throw new HttpExceptionError(500, `error creating user`)
-    })
-
-    await this.emailService.sendVerificationEmail(user.email, user.email) // TODO: change to user
+    return this.registerUserUseCase.execute(user)
   }
 
   public login = async (user: Pick<User, 'email' | 'password'>): Promise<Tokens> => {
-    const foundUser = await UserModel.findOne({ email: user.email })
-
-    if (!foundUser) throw new HttpExceptionError(404, ErrorType.userNotFound)
-
-    const comparePassword = await bcrypt.compare(user.password, foundUser.password.toString())
-
-    if (!comparePassword) throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
-
-    const signedAccessToken = await signAccessToken({ email: user.email })
-    const signedRefreshToken = await signRefreshToken({ email: user.email })
-
-    return { accessToken: signedAccessToken, refreshToken: signedRefreshToken }
+    return this.loginUserUseCase.execute(user)
   }
 
   public me = async (email: string): Promise<User> => {
@@ -103,12 +75,12 @@ export class AuthService {
 
     if (!userDetails) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    await this.emailService
-      .sendVerificationEmail(userDetails.email, userDetails.email) // TODO: change to user
-      .catch((error) => {
-        logger.error('error sending verification email', error)
-        throw new HttpExceptionError(500, ErrorType.somethingWentWrong)
-      })
+    // await this.emailService
+    //   .sendVerificationEmail(userDetails.email, userDetails.email) // TODO: change to user
+    //   .catch((error) => {
+    //     logger.error('error sending verification email', error)
+    //     throw new HttpExceptionError(500, ErrorType.somethingWentWrong)
+    //   })
   }
 
   public verifyAccount = async (verificationToken: string): Promise<void> => {

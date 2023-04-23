@@ -10,6 +10,10 @@ export class UserRepository extends BaseRepository<UserDocument> {
   async findByEmail(email: string): Promise<UserDocument | null> {
     return this.model.findOne({ email }).exec()
   }
+
+  async createUser(email: string, password: string): Promise<UserDocument> {
+    return this.model.create({ email, password })
+  }
 }
 
 export const userRepository = new UserRepository()
