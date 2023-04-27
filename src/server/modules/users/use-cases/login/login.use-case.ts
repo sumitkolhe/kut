@@ -5,8 +5,11 @@ import bcrypt from 'bcryptjs'
 import { signAccessToken, signRefreshToken } from 'server/modules/users/utils/token.util'
 import type { User } from 'interfaces/user.interface'
 import type { IUseCase } from 'server/common/types/use-case.type'
+import type { Tokens } from 'interfaces/token.interface'
 
-export class LoginUserUseCase implements IUseCase<any, any> {
+type LoginUserUseCaseParams = Pick<User, 'email' | 'password'>
+
+export class LoginUserUseCase implements IUseCase<LoginUserUseCaseParams, Tokens> {
   private userRepository: UserRepository
 
   constructor() {

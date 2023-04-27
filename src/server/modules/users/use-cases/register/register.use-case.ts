@@ -5,7 +5,9 @@ import bcrypt from 'bcryptjs'
 import type { User } from 'interfaces/user.interface'
 import type { IUseCase } from 'server/common/types/use-case.type'
 
-export class RegisterUserUseCase implements IUseCase<any, any> {
+type RegisterUserUseCaseParams = Pick<User, 'email' | 'password'>
+
+export class RegisterUserUseCase implements IUseCase<RegisterUserUseCaseParams, void> {
   private userRepository: UserRepository
 
   constructor() {
