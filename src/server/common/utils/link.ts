@@ -1,5 +1,5 @@
-import { useConfig } from '~/server/common/configs'
-import { HttpExceptionError } from '~/server/common/exceptions/http.exception'
+import { useConfig } from 'server/common/configs'
+import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 
 export const createShortLink = (alias: string) => {
   const config = useConfig()

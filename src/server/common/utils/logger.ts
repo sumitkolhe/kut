@@ -1,5 +1,5 @@
 import winston from 'winston'
-import { useConfig } from '~/server/common/configs'
+import { useConfig } from 'server/common/configs'
 
 const config = useConfig()
 
