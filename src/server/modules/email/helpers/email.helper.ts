@@ -14,7 +14,7 @@ export const sendEmail = ({
     email: { apiKey, senderEmail, senderName },
   } = useConfig()
 
-  return $fetch('https://api.sendinblue.com/v3/smtp/email', {
+  return $fetch('https://api.brevo.com/v3/smtp/email', {
     retry: 2,
     headers: {
       Accept: 'application/json',
