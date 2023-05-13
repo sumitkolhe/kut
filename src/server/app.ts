@@ -34,27 +34,25 @@ export class App {
 
   constructor(routes: Routes[]) {
     this.config = useConfig()
-    this.app = express()
     this.env = this.config.env
+    this.app = express()
     this.initializeMiddlewares()
     this.initializeRoutes(routes)
     this.initializeRouteFallback()
-    this.initializeErrorHandling()
+    this.initializeErrorHandler()
   }
 
   private initializeMiddlewares() {
-    this.app.use(useragent.express())
-    this.app.use(morgan(this.config.log.format))
-    this.app.use(
+    const middlewares = [
+      useragent.express(),
+      morgan(this.config.log.format),
       cors({
         origin: this.config.cors.origin,
         credentials: this.config.cors.credentials,
-      })
-    )
-    this.app.use(express.json())
-    this.app.use(express.urlencoded({ extended: true }))
-    this.app.use(nocache())
-    this.app.use(
+      }),
+      express.json(),
+      express.urlencoded({ extended: true }),
+      nocache(),
       timeout.handler({
         timeout: 9000,
         onTimeout(req: Request, res: Response) {
@@ -64,8 +62,10 @@ export class App {
             data: null,
           })
         },
-      })
-    )
+      }),
+    ]
+
+    this.app.use(middlewares)
   }
 
   private initializeRoutes(routes: Routes[]) {
@@ -84,7 +84,7 @@ export class App {
     })
   }
 
-  private initializeErrorHandling() {
+  private initializeErrorHandler() {
     this.app.use(errorMiddleware)
   }
 
