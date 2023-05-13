@@ -1,13 +1,39 @@
-import { AccountVerificationEmailUseCase } from 'server/modules/email/use-cases/account-verification/account-verification-email.use-case'
+import { $fetch } from 'ofetch'
+import { useConfig } from 'server/common/configs'
 
 export class EmailService {
-  private accountVerificationEmailUsecase: AccountVerificationEmailUseCase
+  public sendEmail = ({
+    templateId,
+    toEmail,
+    params,
+  }: {
+    templateId: number
+    toEmail: string
+    params: Record<string, string>
+  }) => {
+    const {
+      email: { apiKey, senderEmail, senderName },
+    } = useConfig()
 
-  constructor() {
-    this.accountVerificationEmailUsecase = new AccountVerificationEmailUseCase()
-  }
-
-  public sendAccountVerificationEmail = async (email: string): Promise<void> => {
-    return this.accountVerificationEmailUsecase.execute(email)
+    return $fetch('https://api.brevo.com/v3/smtp/email', {
+      retry: 2,
+      headers: {
+        Accept: 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json',
+      },
+      body: {
+        templateId,
+        sender: {
+          name: senderName,
+          email: senderEmail,
+        },
+        to: [{ email: toEmail }],
+        params: {
+          ...params,
+        },
+      },
+      method: 'POST',
+    })
   }
 }

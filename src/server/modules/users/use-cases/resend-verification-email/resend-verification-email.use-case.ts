@@ -1,7 +1,7 @@
-import { AccountVerificationEmailUseCase } from 'server/modules/email/use-cases/account-verification/account-verification-email.use-case'
 import { UserRepository } from 'server/modules/users/repositories/user.repository'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { ErrorType } from 'interfaces/error.interface'
+import { AccountVerificationEmailUseCase } from 'server/modules/users/use-cases/send-verification-email/send-verification-email.use-case'
 import type { IUseCase } from 'server/common/types/use-case.type'
 import type { Token } from 'interfaces/token.interface'
 

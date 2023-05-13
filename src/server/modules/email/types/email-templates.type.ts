@@ -1,4 +1,4 @@
 export enum EmailTemplate {
-  accountVerification = 1,
-  passwordReset = 2,
+  accountVerification = 2,
+  passwordReset = 3,
 }

@@ -19,7 +19,6 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
     const tokenDetails = Jwt.verify(accessToken, config.token.access.secret) as Jwt.JwtPayload
 
     const user = await userRepository.findByEmail(tokenDetails.email)
-    console.log('user', user)
     if (!user) {
       return next(new HttpExceptionError(401, ErrorType.userNotFound))
     }
