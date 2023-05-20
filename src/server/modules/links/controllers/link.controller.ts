@@ -1,7 +1,7 @@
 import { LinkService } from 'server/modules/links/services/link.service'
-import type { Link } from 'interfaces/link.interface'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'server/common/types/response.interface'
+import type { LinkDto } from 'server/modules/links/dto/link.dto'
 
 export class LinkController {
   private linkService: LinkService
@@ -14,7 +14,7 @@ export class LinkController {
     req: Request,
     res: Response<
       CustomResponse<{
-        links: Link[]
+        links: LinkDto[]
         total: number
       }>
     >,
@@ -24,14 +24,14 @@ export class LinkController {
       const { userId } = req.auth
       const { offset, limit, search } = req.query
 
-      const shortenedLink = await this.linkService.getAllLinks(
+      const allLinks = await this.linkService.getAllLinks(
         userId,
         Number(offset),
         Number(limit),
         search as string
       )
 
-      return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
+      return res.json({ status: 'SUCCESS', message: null, data: allLinks })
     } catch (error) {
       next(error)
     }
@@ -39,7 +39,7 @@ export class LinkController {
 
   public getLink: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<Link>>,
+    res: Response<CustomResponse<LinkDto>>,
     next: NextFunction
   ) => {
     try {
@@ -48,11 +48,7 @@ export class LinkController {
 
       const link = await this.linkService.getLink(userId, alias as string)
 
-      return res.json({
-        status: 'SUCCESS',
-        message: null,
-        data: link,
-      })
+      return res.json({ status: 'SUCCESS', message: null, data: link })
     } catch (error) {
       next(error)
     }
@@ -65,28 +61,20 @@ export class LinkController {
   ) => {
     try {
       const { userId } = req.auth
-
       const {
         alias,
         target,
         description,
-        meta: { password, validFrom, validTill, maxVisits, active } = {
-          password: null,
-          validFrom: new Date(),
-          validTill: null,
-          maxVisits: null,
-          active: true,
-        },
-      }: Link = req.body
+        meta: { password, validFrom, validTill, maxVisits, active } = {},
+      }: LinkDto = req.body
 
-      const link: Partial<Link> = {
+      const shortenedLink = await this.linkService.createLink({
+        userId,
         alias,
         target,
         description,
         meta: { password, validFrom, validTill, maxVisits, active },
-      }
-
-      const shortenedLink = await this.linkService.createLink(userId, link)
+      })
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
     } catch (error) {

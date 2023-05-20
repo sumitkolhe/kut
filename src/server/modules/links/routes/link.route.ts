@@ -5,6 +5,7 @@ import { checkEmailVerification } from 'server/common/middlewares/verifcation.mi
 import { StatisticsController } from 'server/modules/statistics/controllers/statistics.controller'
 import { allLinksSchema } from 'server/common/helpers/validator.helper'
 import { LinkController } from 'server/modules/links/controllers/link.controller'
+import { createLinkSchema } from 'server/modules/links/helpers/validation.helper'
 import type { Routes } from 'server/common/types/routes.interface'
 
 export class LinkRoute implements Routes {
@@ -29,6 +30,7 @@ export class LinkRoute implements Routes {
       `${this.path}/shorten`,
       checkAuthentication,
       checkEmailVerification,
+      createLinkSchema,
       this.linkController.createLink
     )
     this.router.post(
