@@ -1,6 +1,8 @@
 import { createShortLink, sanitizeTargetLink } from 'server/modules/links/utils/link.util'
 import { LinkRepository } from 'server/modules/links/repositories/link.repository'
 import { GenerateAliasUseCase } from 'server/modules/links/use-cases/generate-alias/generate-alias.use-case'
+import { ErrorType } from 'interfaces/error.interface'
+import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import type { CreateLinkInput } from 'server/modules/links/dto/link.dto'
 import type { IUseCase } from 'server/common/types/use-case.type'
 
@@ -14,6 +16,10 @@ export class CreateLinkUseCase implements IUseCase<CreateLinkInput> {
   }
 
   async execute(linkInput: Omit<CreateLinkInput, 'shortUrl'>) {
+    const linkAlreadyExists = await this.linkRepository.linkExists(linkInput.alias)
+
+    if (linkAlreadyExists) throw new HttpExceptionError(400, ErrorType.aliasAlreadyUsed)
+
     const { userId, target, description, meta } = linkInput
 
     const uniqueAlias = linkInput.alias

@@ -40,6 +40,10 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDtoWithDefaults>
     return links
   }
 
+  async linkExists(alias: string) {
+    return this.model.exists({ alias })
+  }
+
   async getTotalLinks(userId: ObjectId) {
     return this.model.countDocuments({ userId })
   }
@@ -53,7 +57,6 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDtoWithDefaults>
   }
 
   async createLink(linkPayload: CreateLinkInput) {
-    console.log(linkPayload)
     return await this.model.insertOne({
       userId: linkPayload.userId,
       alias: linkPayload.alias,
