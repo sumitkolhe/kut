@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { Types } from 'mongoose'
 import { LinkModel } from 'server/modules/links/models/link.model'
 import { StatisticsModel } from 'server/modules/statistics/models/statistics.model'
-import type { StatisticsPeriod } from 'interfaces/statistics.interface'
+import type { StatisticsPeriod } from '~/server/common/types/statistics.interface'
 
 export class StatisticsService {
   public getOverviewStats = async (userId: string) => {
