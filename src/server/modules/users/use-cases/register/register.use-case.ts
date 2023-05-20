@@ -16,7 +16,7 @@ export class RegisterUserUseCase implements IUseCase<UserRegisterDto, void> {
   }
 
   async execute({ email, password }: UserRegisterDto) {
-    const doesUserExist = await this.userRepository.findByEmail(email)
+    const doesUserExist = await this.userRepository.exists(email)
 
     if (doesUserExist) throw new HttpExceptionError(409, ErrorType.userAlreadyExists)
 

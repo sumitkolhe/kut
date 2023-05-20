@@ -16,6 +16,10 @@ export class UserRepository extends BaseRepository<UserDto, UserDtoWithDefaults>
     return this.model.findOne({ email })
   }
 
+  async exists(email: string) {
+    return this.model.exists({ email })
+  }
+
   async createUser(email: string, password: string) {
     return this.model.insertOne({ email, password })
   }
