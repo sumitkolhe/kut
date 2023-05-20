@@ -1,8 +1,8 @@
 import { AuthService } from 'server/modules/users/services/auth.service'
-import type { User } from 'server/modules/users/models/user.model'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'server/common/types/response.interface'
-import type { Token, Tokens } from 'interfaces/token.interface'
+import type { UserRegisterDto } from 'server/modules/users/dto/register.dto'
+import type { AccessTokenDto, AuthTokenDto } from 'server/modules/users/dto/token.dto'
 
 export class AuthController {
   private readonly authService: AuthService
@@ -16,7 +16,7 @@ export class AuthController {
     next: NextFunction
   ) => {
     try {
-      const { email, password }: User[0] = req.body
+      const { email, password }: UserRegisterDto = req.body
 
       await this.authService.register({ email, password })
 
@@ -32,7 +32,7 @@ export class AuthController {
 
   public login: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<Tokens>>,
+    res: Response<CustomResponse<AuthTokenDto>>,
     next: NextFunction
   ) => {
     try {
@@ -55,7 +55,7 @@ export class AuthController {
 
   public resendVerificationEmail: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<User>>,
+    res: Response<CustomResponse<null>>,
     next: NextFunction
   ) => {
     try {
@@ -75,7 +75,7 @@ export class AuthController {
 
   public refreshToken: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<Token>>,
+    res: Response<CustomResponse<AccessTokenDto>>,
     next: NextFunction
   ) => {
     try {
@@ -97,7 +97,7 @@ export class AuthController {
     try {
       const { token } = req.query
 
-      await this.authService.verifyAccount(token as string)
+      await this.authService.verifyAccount({ verificationToken: token as string })
 
       return res.json({
         status: 'SUCCESS',

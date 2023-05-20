@@ -1,11 +1,11 @@
 import { UserRepository } from 'server/modules/users/repositories/user.repository'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { ErrorType } from 'interfaces/error.interface'
-import type { ObjectId, WithId } from 'mongodb'
+import type { ObjectId } from 'mongodb'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { User } from 'server/modules/users/models/user.model'
+import type { UserDto } from 'server/modules/users/dto/user.dto'
 
-export class MeUseCase implements IUseCase<ObjectId, WithId<User[0]>> {
+export class MeUseCase implements IUseCase<ObjectId, UserDto> {
   private userRepository: UserRepository
 
   constructor() {

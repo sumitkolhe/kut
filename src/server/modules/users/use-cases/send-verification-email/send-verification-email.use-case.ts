@@ -3,10 +3,10 @@ import { EmailTemplate } from 'server/modules/email/types/email-templates.type'
 import { useConfig } from 'server/common/configs'
 import { signAccountVerificationToken } from 'server/modules/users/utils/token.util'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { Token } from 'interfaces/token.interface'
+import type { VerificationTokenDto } from 'server/modules/users/dto/token.dto'
 import type { Config } from 'server/common/types/config.type'
 
-export class AccountVerificationEmailUseCase implements IUseCase<String, Token> {
+export class AccountVerificationEmailUseCase implements IUseCase<String, VerificationTokenDto> {
   private emailService: EmailService
   private domainConfig: Config['domain']
 

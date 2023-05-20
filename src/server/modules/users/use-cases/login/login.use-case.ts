@@ -3,25 +3,23 @@ import { UserRepository } from 'server/modules/users/repositories/user.repositor
 import { ErrorType } from 'interfaces/error.interface'
 import bcrypt from 'bcryptjs'
 import { signAccessToken, signRefreshToken } from 'server/modules/users/utils/token.util'
-import type { User } from 'interfaces/user.interface'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { Tokens } from 'interfaces/token.interface'
+import type { UserLoginDto } from 'server/modules/users/dto/login.dto'
+import type { AuthTokenDto } from 'server/modules/users/dto/token.dto'
 
-type LoginUserUseCaseParams = Pick<User, 'email' | 'password'>
-
-export class LoginUserUseCase implements IUseCase<LoginUserUseCaseParams, Tokens> {
+export class LoginUserUseCase implements IUseCase<UserLoginDto, AuthTokenDto> {
   private userRepository: UserRepository
 
   constructor() {
     this.userRepository = new UserRepository()
   }
 
-  async execute({ email, password }: Pick<User, 'email' | 'password'>) {
+  async execute({ email, password }: UserLoginDto) {
     const doesUserExist = await this.userRepository.findByEmail(email)
 
     if (!doesUserExist) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    const doesPasswordMatch = await bcrypt.compare(password, doesUserExist.password.toString())
+    const doesPasswordMatch = await bcrypt.compare(password, doesUserExist.password)
 
     if (!doesPasswordMatch) throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
 

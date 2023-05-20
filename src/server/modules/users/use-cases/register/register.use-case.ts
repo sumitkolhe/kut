@@ -2,25 +2,20 @@ import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { UserRepository } from 'server/modules/users/repositories/user.repository'
 import { ErrorType } from 'interfaces/error.interface'
 import bcrypt from 'bcryptjs'
-import { EmailService } from 'server/modules/email/services/email.service'
 import { AccountVerificationEmailUseCase } from 'server/modules/users/use-cases/send-verification-email/send-verification-email.use-case'
-import type { User } from 'interfaces/user.interface'
 import type { IUseCase } from 'server/common/types/use-case.type'
+import type { UserRegisterDto } from 'server/modules/users/dto/register.dto'
 
-type RegisterUserUseCaseParams = Pick<User, 'email' | 'password'>
-
-export class RegisterUserUseCase implements IUseCase<RegisterUserUseCaseParams, void> {
+export class RegisterUserUseCase implements IUseCase<UserRegisterDto, void> {
   private userRepository: UserRepository
-  private emailService: EmailService
   private accountVerificationEmailUsecase: AccountVerificationEmailUseCase
 
   constructor() {
     this.userRepository = new UserRepository()
-    this.emailService = new EmailService()
     this.accountVerificationEmailUsecase = new AccountVerificationEmailUseCase()
   }
 
-  async execute({ email, password }: Pick<User, 'email' | 'password'>) {
+  async execute({ email, password }: UserRegisterDto) {
     const doesUserExist = await this.userRepository.findByEmail(email)
 
     if (doesUserExist) throw new HttpExceptionError(409, ErrorType.userAlreadyExists)

@@ -1,7 +1,8 @@
-import type { User } from 'server/modules/users/models/user.model'
 import type { CustomResponse } from 'server/common/types/response.interface'
-import type { Token, Tokens } from 'interfaces/token.interface'
 import type { $Fetch } from 'ofetch'
+import type { UserRegisterDto } from 'server/modules/users/dto/register.dto'
+import type { AuthTokenDto, RefreshTokenDto } from 'server/modules/users/dto/token.dto'
+import type { UserDto } from 'server/modules/users/dto/user.dto'
 
 export class AuthService {
   private http: $Fetch
@@ -17,27 +18,29 @@ export class AuthService {
   }
 
   public async register(email: string, password: string) {
-    return this.http<CustomResponse<Tokens>>(`${this.base}/register`, {
+    return this.http<CustomResponse<UserRegisterDto>>(`${this.base}/register`, {
       body: { email, password },
       method: 'POST',
     })
   }
 
   public async login(email: string, password: string) {
-    return this.http<CustomResponse<Tokens>>(`${this.base}/login`, {
+    return this.http<CustomResponse<AuthTokenDto>>(`${this.base}/login`, {
       body: { email, password },
       method: 'POST',
     })
   }
 
   public async fetchUser() {
-    return this.http<CustomResponse<User[0]>>(`${this.base}/me`, {
-      method: 'GET',
-    })
+    return useAsyncData(() =>
+      this.http<CustomResponse<UserDto>>(`user/me`, {
+        method: 'GET',
+      })
+    )
   }
 
   public async refreshAccessToken(refreshToken: string) {
-    return this.http<CustomResponse<Token>>(`${this.base}/refresh-token`, {
+    return this.http<CustomResponse<RefreshTokenDto>>(`${this.base}/refresh-token`, {
       method: 'POST',
       body: { refreshToken },
     })

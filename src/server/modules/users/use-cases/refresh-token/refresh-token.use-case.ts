@@ -3,9 +3,9 @@ import { UserRepository } from 'server/modules/users/repositories/user.repositor
 import { ErrorType } from 'interfaces/error.interface'
 import { signAccessToken, verifyRefreshToken } from 'server/modules/users/utils/token.util'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { Token } from 'interfaces/token.interface'
+import type { AccessTokenDto } from 'server/modules/users/dto/token.dto'
 
-export class RefreshTokenUseCase implements IUseCase<String, Token> {
+export class RefreshTokenUseCase implements IUseCase<String, AccessTokenDto> {
   private userRepository: UserRepository
 
   constructor() {

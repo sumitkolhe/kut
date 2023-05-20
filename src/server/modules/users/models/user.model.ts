@@ -1,7 +1,7 @@
 import { schema, types } from 'papr'
 import { papr } from 'server/common/helpers/mongo.helper'
 
-const UserSchema = schema(
+export const UserSchema = schema(
   {
     profile: types.object(
       {
@@ -41,5 +41,4 @@ const UserSchema = schema(
   }
 )
 
-export type User = typeof UserSchema
 export const UserModel = papr.model('user', UserSchema)
