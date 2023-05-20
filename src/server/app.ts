@@ -17,7 +17,7 @@ declare global {
   namespace Express {
     interface Request {
       auth: {
-        userId: string | ObjectId
+        userId: ObjectId
         email: string
         isVerified: boolean
         isBanned: boolean

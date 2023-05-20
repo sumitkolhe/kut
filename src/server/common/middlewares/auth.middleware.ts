@@ -8,7 +8,6 @@ import { userRepository } from '~/server/modules/users/repositories/user.reposit
 const config = useConfig()
 
 export const checkAuthentication: RequestHandler = async (req, _res, next) => {
-  // const accessToken = getCookies(req.headers.cookie)?.accessToken
   const authHeader = req.headers['authorization']
   const accessToken = authHeader && authHeader.split(' ')[1]
 
@@ -18,13 +17,14 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
   try {
     const tokenDetails = Jwt.verify(accessToken, config.token.access.secret) as Jwt.JwtPayload
 
-    const user = await userRepository.findByEmail(tokenDetails.email)
+    const user = await userRepository.findById(tokenDetails.id)
+
     if (!user) {
       return next(new HttpExceptionError(401, ErrorType.userNotFound))
     }
 
     req.auth = {
-      userId: user.id,
+      userId: user._id,
       email: user.email,
       isVerified: user.isVerified,
       isBanned: user.isBanned,
