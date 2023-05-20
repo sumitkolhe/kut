@@ -16,16 +16,23 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDtoWithDefaults>
     userId: ObjectId,
     { offset, limit, search }: { offset: number; limit: number; search: string }
   ) {
-    // .find is not async, .toArray is.
-    const allLinks = await this.model.collection
-      .find({
-        $and: [{ userId }, search ? { $text: { $search: search } } : {}],
-      })
-      .sort({ createdAt: -1 })
-      .skip(offset)
-      .limit(limit)
+    const allLinks = await this.model.find(
+      {
+        $and: [
+          { userId },
+          {
+            $or: [search ? { $text: { $search: search } } : {}],
+          },
+        ],
+      },
+      {
+        limit,
+        skip: offset,
+        sort: { createdAt: -1 },
+      }
+    )
 
-    return allLinks.toArray()
+    return allLinks
   }
 
   async getUserLinkByAlias(userId: ObjectId, alias: string) {
