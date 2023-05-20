@@ -1,5 +1,5 @@
 import { schema, types } from 'papr'
-import { papr } from 'server/common/helpers/mongoose.helper'
+import { papr } from 'server/common/helpers/mongo.helper'
 
 const UserSchema = schema(
   {
