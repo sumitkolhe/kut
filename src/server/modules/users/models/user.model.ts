@@ -41,4 +41,4 @@ export const UserSchema = schema(
   }
 )
 
-export const UserModel = papr.model('user', UserSchema)
+export const UserModel = papr.model('users', UserSchema)
