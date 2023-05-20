@@ -1,4 +1,4 @@
-import type { Config } from 'interfaces/config.interface'
+import type { Config } from 'server/common/types/config.type'
 
 const config = useRuntimeConfig()
 

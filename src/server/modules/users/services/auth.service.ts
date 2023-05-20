@@ -3,9 +3,9 @@ import { LoginUserUseCase } from 'server/modules/users/use-cases/login/login.use
 import { RefreshTokenUseCase } from 'server/modules/users/use-cases/refresh-token/refresh-token.use-case'
 import { ResendAccountVerificationEmailUseCase } from 'server/modules/users/use-cases/resend-verification-email/resend-verification-email.use-case'
 import { VerifyAccountUseCase } from 'server/modules/users/use-cases/verify-account/verify-account.use-case'
+import type { User } from 'server/modules/users/models/user.model'
 import type { ObjectId } from 'mongodb'
 import type { Tokens } from 'interfaces/token.interface'
-import type { User } from 'interfaces/user.interface'
 
 export class AuthService {
   private readonly registerUserUseCase: RegisterUserUseCase
@@ -22,11 +22,11 @@ export class AuthService {
     this.verifyAccountUseCase = new VerifyAccountUseCase()
   }
 
-  public register = async (user: Pick<User, 'email' | 'password'>): Promise<void> => {
+  public register = async (user: Pick<User[0], 'email' | 'password'>): Promise<void> => {
     return this.registerUserUseCase.execute(user)
   }
 
-  public login = async (user: Pick<User, 'email' | 'password'>): Promise<Tokens> => {
+  public login = async (user: Pick<User[0], 'email' | 'password'>): Promise<Tokens> => {
     return this.loginUserUseCase.execute(user)
   }
 

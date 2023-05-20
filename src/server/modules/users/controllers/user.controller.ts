@@ -1,8 +1,8 @@
 import { UserService } from 'server/modules/users/services/user.service'
 import { ObjectId } from 'mongodb'
-import type { User } from 'interfaces/user.interface'
+import type { User } from 'server/modules/users/models/user.model'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
-import type { CustomResponse } from 'interfaces/response.interface'
+import type { CustomResponse } from 'server/common/types/response.interface'
 
 export class UserController {
   private readonly userService: UserService
@@ -12,7 +12,7 @@ export class UserController {
 
   public me: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<User>>,
+    res: Response<CustomResponse<User[0]>>,
     next: NextFunction
   ) => {
     try {

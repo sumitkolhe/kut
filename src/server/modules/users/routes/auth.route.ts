@@ -6,8 +6,8 @@ import {
   registerationSchema,
   verifyAccountSchema,
 } from 'server/common/helpers/validator.helper'
-import type { Routes } from 'interfaces/routes.interface'
-import { AuthController } from '~/server/modules/users/controllers/auth.controller'
+import { AuthController } from 'server/modules/users/controllers/auth.controller'
+import type { Routes } from 'server/common/types/routes.interface'
 
 export class AuthRoute implements Routes {
   public path = '/auth'

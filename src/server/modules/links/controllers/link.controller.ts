@@ -1,7 +1,7 @@
 import { LinkService } from 'server/modules/links/services/link.service'
 import type { Link } from 'interfaces/link.interface'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
-import type { CustomResponse } from 'interfaces/response.interface'
+import type { CustomResponse } from 'server/common/types/response.interface'
 
 export class LinkController {
   private linkService: LinkService

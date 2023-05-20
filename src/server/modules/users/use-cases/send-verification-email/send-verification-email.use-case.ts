@@ -4,7 +4,7 @@ import { useConfig } from 'server/common/configs'
 import { signAccountVerificationToken } from 'server/modules/users/utils/token.util'
 import type { IUseCase } from 'server/common/types/use-case.type'
 import type { Token } from 'interfaces/token.interface'
-import type { Config } from 'interfaces/config.interface'
+import type { Config } from 'server/common/types/config.type'
 
 export class AccountVerificationEmailUseCase implements IUseCase<String, Token> {
   private emailService: EmailService

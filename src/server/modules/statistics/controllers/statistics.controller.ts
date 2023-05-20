@@ -1,6 +1,6 @@
 import { StatisticsService } from 'server/modules/statistics/services/statistics.service'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
-import type { CustomResponse } from 'interfaces/response.interface'
+import type { CustomResponse } from 'server/common/types/response.interface'
 import type { StatisticsPeriod } from 'interfaces/statistics.interface'
 
 export class StatisticsController {

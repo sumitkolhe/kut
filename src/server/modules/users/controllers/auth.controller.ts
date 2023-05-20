@@ -1,7 +1,7 @@
 import { AuthService } from 'server/modules/users/services/auth.service'
-import type { User } from 'interfaces/user.interface'
+import type { User } from 'server/modules/users/models/user.model'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
-import type { CustomResponse } from 'interfaces/response.interface'
+import type { CustomResponse } from 'server/common/types/response.interface'
 import type { Token, Tokens } from 'interfaces/token.interface'
 
 export class AuthController {
@@ -16,7 +16,7 @@ export class AuthController {
     next: NextFunction
   ) => {
     try {
-      const { email, password }: User = req.body
+      const { email, password }: User[0] = req.body
 
       await this.authService.register({ email, password })
 

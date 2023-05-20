@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch'
-import type { CustomResponse } from 'interfaces/response.interface'
+import type { CustomResponse } from 'server/common/types/response.interface'
 
 export class StatisticsService {
   private http: $Fetch

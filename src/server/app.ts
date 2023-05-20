@@ -10,8 +10,8 @@ import { errorMiddleware } from 'server/common/middlewares/error.middleware'
 import type { ObjectId } from 'mongodb'
 import type { Statistics } from 'interfaces/statistics.interface'
 import type { Response } from 'express'
-import type { Config } from 'interfaces/config.interface'
-import type { Routes } from 'interfaces/routes.interface'
+import type { Config } from 'server/common/types/config.type'
+import type { Routes } from 'server/common/types/routes.interface'
 
 declare global {
   namespace Express {

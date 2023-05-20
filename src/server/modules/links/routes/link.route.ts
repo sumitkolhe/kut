@@ -1,11 +1,11 @@
 import { Router } from 'express'
-import type { Routes } from 'interfaces/routes.interface'
-import { checkAuthentication } from '~/server/common/middlewares/auth.middleware'
-import { statisticsHandler } from '~/server/common/middlewares/statistics.middleware'
-import { checkEmailVerification } from '~/server/common/middlewares/verifcation.middleware'
-import { StatisticsController } from '~/server/modules/statistics/controllers/statistics.controller'
-import { allLinksSchema } from '~/server/common/helpers/validator.helper'
-import { LinkController } from '~/server/modules/links/controllers/link.controller'
+import { checkAuthentication } from 'server/common/middlewares/auth.middleware'
+import { statisticsHandler } from 'server/common/middlewares/statistics.middleware'
+import { checkEmailVerification } from 'server/common/middlewares/verifcation.middleware'
+import { StatisticsController } from 'server/modules/statistics/controllers/statistics.controller'
+import { allLinksSchema } from 'server/common/helpers/validator.helper'
+import { LinkController } from 'server/modules/links/controllers/link.controller'
+import type { Routes } from 'server/common/types/routes.interface'
 
 export class LinkRoute implements Routes {
   public path = '/links'
