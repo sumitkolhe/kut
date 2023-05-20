@@ -52,7 +52,7 @@ export default defineNuxtConfig({
   ],
 
   nitro: {
-    plugins: ['~/server/helpers/mongoose.helper.ts'],
+    plugins: ['~/server/common/helpers/mongo.helper.ts'],
   },
 
   build: {

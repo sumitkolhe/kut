@@ -1,5 +1,5 @@
-import type { User } from 'interfaces/user.interface'
-import type { CustomResponse } from 'interfaces/response.interface'
+import type { User } from 'server/modules/users/models/user.model'
+import type { CustomResponse } from 'server/common/types/response.interface'
 import type { Token, Tokens } from 'interfaces/token.interface'
 import type { $Fetch } from 'ofetch'
 
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   public async fetchUser() {
-    return this.http<CustomResponse<User>>(`${this.base}/me`, {
+    return this.http<CustomResponse<User[0]>>(`${this.base}/me`, {
       method: 'GET',
     })
   }

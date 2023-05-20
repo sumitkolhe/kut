@@ -72,7 +72,7 @@ const features = [
       </p>
 
       <div
-        class="flex w-full flex-col justify-center space-y-6 sm:max-w-lg md:flex-row md:space-x-8 md:space-y-0"
+        class="flex w-full flex-col justify-center space-y-6 px-12 sm:max-w-lg md:flex-row md:space-x-8 md:space-y-0"
       >
         <nuxt-link to="/auth/register">
           <primary-button

@@ -2,21 +2,22 @@
 import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
-import { errorMiddleware } from 'server/middlewares/error.middleware'
-import { useConfig } from 'server/configs'
 import timeout from 'express-timeout-handler'
 import useragent from 'express-useragent'
 import nocache from 'nocache'
+import { useConfig } from 'server/common/configs'
+import { errorMiddleware } from 'server/common/middlewares/error.middleware'
+import type { ObjectId } from 'mongodb'
 import type { Statistics } from 'interfaces/statistics.interface'
 import type { Response } from 'express'
-import type { Config } from 'interfaces/config.interface'
-import type { Routes } from 'interfaces/routes.interface'
+import type { Config } from 'server/common/types/config.type'
+import type { Routes } from 'server/common/types/routes.interface'
 
 declare global {
   namespace Express {
     interface Request {
       auth: {
-        userId: string
+        userId: ObjectId
         email: string
         isVerified: boolean
         isBanned: boolean
@@ -34,27 +35,25 @@ export class App {
 
   constructor(routes: Routes[]) {
     this.config = useConfig()
-    this.app = express()
     this.env = this.config.env
+    this.app = express()
     this.initializeMiddlewares()
     this.initializeRoutes(routes)
     this.initializeRouteFallback()
-    this.initializeErrorHandling()
+    this.initializeErrorHandler()
   }
 
   private initializeMiddlewares() {
-    this.app.use(useragent.express())
-    this.app.use(morgan(this.config.log.format))
-    this.app.use(
+    const middlewares = [
+      useragent.express(),
+      morgan(this.config.log.format),
       cors({
         origin: this.config.cors.origin,
         credentials: this.config.cors.credentials,
-      })
-    )
-    this.app.use(express.json())
-    this.app.use(express.urlencoded({ extended: true }))
-    this.app.use(nocache())
-    this.app.use(
+      }),
+      express.json(),
+      express.urlencoded({ extended: true }),
+      nocache(),
       timeout.handler({
         timeout: 9000,
         onTimeout(req: Request, res: Response) {
@@ -64,8 +63,10 @@ export class App {
             data: null,
           })
         },
-      })
-    )
+      }),
+    ]
+
+    this.app.use(middlewares)
   }
 
   private initializeRoutes(routes: Routes[]) {
@@ -75,7 +76,7 @@ export class App {
   }
 
   private initializeRouteFallback() {
-    this.app.use((req, res) => {
+    this.app.use((_req, res) => {
       res.status(404).json({
         status: 'FAILED',
         message: 'route not found',
@@ -84,7 +85,7 @@ export class App {
     })
   }
 
-  private initializeErrorHandling() {
+  private initializeErrorHandler() {
     this.app.use(errorMiddleware)
   }
 

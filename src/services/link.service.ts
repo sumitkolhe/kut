@@ -1,5 +1,5 @@
 import type { Link } from 'interfaces/link.interface'
-import type { CustomResponse } from 'interfaces/response.interface'
+import type { CustomResponse } from 'server/common/types/response.interface'
 import type { $Fetch } from 'ofetch'
 
 export class LinkService {

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import useValidate from 'vue-tiny-validate'
-import TextInput from 'components/atoms/inputs/text-input.vue'
-import PasswordInput from 'components/atoms/inputs/password-input.vue'
-import PrimaryButton from 'components/atoms/buttons/primary-button.vue'
+import TextInput from 'components/atoms/input/text-input.vue'
+import PasswordInput from 'components/atoms/input/password-input.vue'
+import PrimaryButton from 'components/atoms/button/primary-button.vue'
 import { useAuthStore } from 'store/auth.store'
 import type { Rules } from 'vue-tiny-validate'
 
@@ -56,6 +56,12 @@ const login = async () => {
     router.push('/dashboard')
   }
 }
+
+const githubLogin = () => {
+  const loginUrl = `https://github.com/login/oauth/authorize?client_id=19a5d1e1b27c48cd21c7&redirect_uri=https://localhost:3000/auth/github&scope=read:user%20user:email&allow_signup=true`
+
+  return navigateTo(loginUrl, { external: true })
+}
 </script>
 
 <template>
@@ -67,26 +73,29 @@ const login = async () => {
         <h1 class="mb-4 text-2xl font-medium tracking-wide dark:text-gray-200 xl:text-3xl">
           Log in
         </h1>
-        <!-- <div
-          class="flex flex-col items-center justify-center w-full space-y-4 md:flex-row md:space-y-0 md:space-x-4"
+        <div
+          class="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0"
         >
-          <primary-button class="py-3 md:text-base hover:bg-gray-700 hover:text-white">
+          <primary-button
+            class="py-3 hover:bg-gray-700 hover:text-white md:text-base"
+            @click="githubLogin"
+          >
             Sign up with Github
           </primary-button>
-          <base-button
-            class="py-3 bg-red-500 hover:bg-red-600 hover:border-red-600 hover:text-white"
+          <!-- <base-button
+            class="bg-red-500 py-3 hover:border-red-600 hover:bg-red-600 hover:text-white"
           >
             Sign up with Google
-          </base-button>
+          </base-button> -->
         </div>
 
-        <div class="flex justify-center w-full border-b">
+        <div class="flex w-full justify-center border-b">
           <p
-            class="inline-block px-2 text-sm font-medium leading-none tracking-wide text-gray-600 transform translate-y-2 bg-white dark:text-gray-200 dark:bg-gray-800"
+            class="inline-block translate-y-2 transform bg-white px-2 text-sm font-medium leading-none tracking-wide text-gray-600 dark:bg-gray-800 dark:text-gray-200"
           >
             Or Log in with an e-mail
           </p>
-        </div> -->
+        </div>
 
         <form class="flex w-full flex-col items-center space-y-8">
           <div class="w-full space-y-4">
