@@ -3,6 +3,7 @@ import { UserRepository } from 'server/modules/users/repositories/user.repositor
 import { ErrorType } from 'interfaces/error.interface'
 import bcrypt from 'bcryptjs'
 import { EmailService } from 'server/modules/email/services/email.service'
+import { AccountVerificationEmailUseCase } from 'server/modules/users/use-cases/send-verification-email/send-verification-email.use-case'
 import type { User } from 'interfaces/user.interface'
 import type { IUseCase } from 'server/common/types/use-case.type'
 
@@ -11,10 +12,12 @@ type RegisterUserUseCaseParams = Pick<User, 'email' | 'password'>
 export class RegisterUserUseCase implements IUseCase<RegisterUserUseCaseParams, void> {
   private userRepository: UserRepository
   private emailService: EmailService
+  private accountVerificationEmailUsecase: AccountVerificationEmailUseCase
 
   constructor() {
     this.userRepository = new UserRepository()
     this.emailService = new EmailService()
+    this.accountVerificationEmailUsecase = new AccountVerificationEmailUseCase()
   }
 
   async execute({ email, password }: Pick<User, 'email' | 'password'>) {
@@ -26,13 +29,8 @@ export class RegisterUserUseCase implements IUseCase<RegisterUserUseCaseParams, 
 
     const hashedPassword = await bcrypt.hash(password, salt)
 
-    const createdUser = await this.userRepository.createUser(email, hashedPassword)
+    await this.userRepository.createUser(email, hashedPassword)
 
-    await createdUser.save().catch((error: any) => {
-      logger.error(`error creating user: ${error}`)
-      throw new HttpExceptionError(500, `error creating user, please try again later`)
-    })
-
-    await this.emailService.sendAccountVerificationEmail(email)
+    await this.accountVerificationEmailUsecase.execute(email)
   }
 }

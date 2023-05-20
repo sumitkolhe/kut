@@ -2,10 +2,10 @@ import { UserRepository } from 'server/modules/users/repositories/user.repositor
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { ErrorType } from 'interfaces/error.interface'
 import { AccountVerificationEmailUseCase } from 'server/modules/users/use-cases/send-verification-email/send-verification-email.use-case'
+import type { ObjectId } from 'mongodb'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { Token } from 'interfaces/token.interface'
 
-export class ResendAccountVerificationEmailUseCase implements IUseCase<String, Token> {
+export class ResendAccountVerificationEmailUseCase implements IUseCase<ObjectId> {
   private userRepository: UserRepository
   private accountVerificationEmailUseCase: AccountVerificationEmailUseCase
 
@@ -14,11 +14,11 @@ export class ResendAccountVerificationEmailUseCase implements IUseCase<String, T
     this.userRepository = new UserRepository()
   }
 
-  async execute(email: string) {
-    const userDetails = await this.userRepository.findByEmail(email)
+  async execute(userId: ObjectId) {
+    const userDetails = await this.userRepository.findById(userId)
 
     if (!userDetails) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    return this.accountVerificationEmailUseCase.execute(email)
+    return this.accountVerificationEmailUseCase.execute(userDetails.email)
   }
 }

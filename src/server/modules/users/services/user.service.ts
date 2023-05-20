@@ -1,23 +1,14 @@
-import { ErrorType } from 'interfaces/error.interface'
-import { HttpExceptionError } from 'server/common/exceptions/http.exception'
-import type { User } from 'interfaces/user.interface'
-import { UserModel } from '~/server/modules/users/models/user.model'
+import { MeUseCase } from 'server/modules/users/use-cases/me/me.use-case'
+import type { ObjectId } from 'mongodb'
 
 export class UserService {
-  public me = async (email: string): Promise<User> => {
-    const userDetails = await UserModel.findOne(
-      { email },
-      {
-        _id: false,
-        __v: false,
-        userLinks: false,
-        apiKey: false,
-        password: false,
-      }
-    )
+  private readonly meUseCase: MeUseCase
 
-    if (!userDetails) throw new HttpExceptionError(404, ErrorType.userNotFound)
+  constructor() {
+    this.meUseCase = new MeUseCase()
+  }
 
-    return userDetails.toObject<User>()
+  public me = async (userId: ObjectId) => {
+    return this.meUseCase.execute(userId)
   }
 }

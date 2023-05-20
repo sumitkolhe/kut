@@ -36,6 +36,5 @@ export class AuthRoute implements Routes {
       this.authController.verifyAccount
     )
     this.router.post(`${this.path}/github`, this.authController.verifyAccount)
-    this.router.get(`${this.path}/me`, checkAuthentication, this.authController.me)
   }
 }

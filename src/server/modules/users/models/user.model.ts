@@ -1,85 +1,45 @@
-import mongoose from 'mongoose'
-import type { User } from 'interfaces/user.interface'
-import type { Document, Schema } from 'mongoose'
+import { schema, types } from 'papr'
+import { papr } from 'server/common/helpers/mongoose.helper'
 
-const UserSchema: Schema = new mongoose.Schema(
+const UserSchema = schema(
   {
-    profile: {
-      firstName: {
-        type: String,
-        required: false,
-        lowercase: true,
-      },
-      lastName: {
-        type: String,
-        required: false,
-        lowercase: true,
-      },
-      picture: {
-        type: String,
-        required: false,
-      },
-      name: {
-        type: String,
-        required: false,
-      },
-    },
-    email: {
-      type: String,
-      required: true,
-      lowercase: true,
-      unique: true,
-      index: true,
-    },
-    isBanned: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    isVerified: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    apiKeys: [
+    profile: types.object(
       {
-        key: {
-          type: String,
-          required: false,
-          unique: true,
-          index: true,
-          default: () => {
-            return Math.random().toString(36).slice(2, 11)
-          },
-        },
-        issuedOn: {
-          type: Date,
-          required: true,
-          default: Date.now,
-        },
-        expirationDate: {
-          type: Date,
-          required: true,
-        },
-        name: {
-          type: String,
-          required: true,
-        },
-        lastUsedOn: {
-          type: Date,
-          required: false,
-        },
+        firstName: types.string({ required: false }),
+        lastName: types.string({ required: false }),
+        picture: types.string({ required: false }),
+        name: types.string({ required: false }),
       },
-    ],
-    password: {
-      type: String,
-      required: true,
-      minlength: 6,
-    },
+      { required: false }
+    ),
+    email: types.string({ required: true }),
+    password: types.string({ required: true }),
+    isBanned: types.boolean({ required: true }),
+    isVerified: types.boolean({ required: true }),
+    apiKeys: types.array(
+      types.object(
+        {
+          apiKey: types.oneOf([types.string(), types.null()]),
+          issuedOn: types.date(),
+          expirationDate: types.date({ required: false }),
+          name: types.string({ required: true }),
+          lastUsedOn: types.date(),
+        },
+        { required: false }
+      ),
+      { required: false }
+    ),
   },
+
   {
+    defaults: {
+      isBanned: false,
+      isVerified: false,
+      apiKeys: [],
+    },
     timestamps: true,
   }
 )
 
-export const UserModel = mongoose.model<User & Document>('user', UserSchema)
+export type User = typeof UserSchema
+export const UserModel = papr.model('user', UserSchema)

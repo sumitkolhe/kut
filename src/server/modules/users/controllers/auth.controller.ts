@@ -10,6 +10,26 @@ export class AuthController {
     this.authService = new AuthService()
   }
 
+  public register: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<null>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { email, password }: User = req.body
+
+      await this.authService.register({ email, password })
+
+      return res.json({
+        status: 'SUCCESS',
+        message: 'user registered successfully',
+        data: null,
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
   public login: RequestHandler = async (
     req: Request,
     res: Response<CustomResponse<Tokens>>,
@@ -33,51 +53,15 @@ export class AuthController {
     }
   }
 
-  public register: RequestHandler = async (
-    req: Request,
-    res: Response<CustomResponse<null>>,
-    next: NextFunction
-  ) => {
-    try {
-      const { email, password }: User = req.body
-
-      await this.authService.register({ email, password })
-
-      return res.json({
-        status: 'SUCCESS',
-        message: 'user registered successfully',
-        data: null,
-      })
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  public me: RequestHandler = async (
-    req: Request,
-    res: Response<CustomResponse<User>>,
-    next: NextFunction
-  ) => {
-    try {
-      const { email } = req.auth
-
-      const userDetails = await this.authService.me(email)
-
-      return res.json({ status: 'SUCCESS', message: null, data: userDetails })
-    } catch (error) {
-      next(error)
-    }
-  }
-
   public resendVerificationEmail: RequestHandler = async (
     req: Request,
     res: Response<CustomResponse<User>>,
     next: NextFunction
   ) => {
     try {
-      const { email } = req.auth
+      const { userId } = req.auth
 
-      await this.authService.resendEmailVerification(email)
+      await this.authService.resendEmailVerification(userId)
 
       return res.json({
         status: 'SUCCESS',

@@ -25,8 +25,8 @@ export class LoginUserUseCase implements IUseCase<LoginUserUseCaseParams, Tokens
 
     if (!doesPasswordMatch) throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
 
-    const signedAccessToken = await signAccessToken({ email })
-    const signedRefreshToken = await signRefreshToken({ email })
+    const signedAccessToken = await signAccessToken({ id: doesUserExist._id })
+    const signedRefreshToken = await signRefreshToken({ id: doesUserExist._id })
 
     return { accessToken: signedAccessToken, refreshToken: signedRefreshToken }
   }
