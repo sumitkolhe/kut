@@ -4,6 +4,10 @@ import { useAuthStore } from 'store/auth.store'
 import { ErrorType } from 'interfaces/error.interface'
 import type { $Fetch } from 'ofetch'
 
+const reasonsToRenewSession = [ErrorType.invalidAuthenticationToken, ErrorType.unauthorised]
+
+const reasonsToLogout = [ErrorType.invalidRefreshToken, ErrorType.userNotFound]
+
 export class ApiService {
   public http: $Fetch
 
@@ -12,14 +16,14 @@ export class ApiService {
       baseURL: `${baseURL}/api/v1`,
 
       async onResponseError({ response }) {
-        if (
-          response?.status === 401 &&
-          response?._data?.message === ErrorType.invalidAuthenticationToken
-        ) {
+        if (response?.status === 401 && reasonsToRenewSession.includes(response?._data?.message)) {
           const { refreshAccessToken } = useAuthStore()
           const { refreshToken } = storeToRefs(useAuthStore())
 
           await refreshAccessToken(refreshToken.value)
+        } else if (response?.status === 401 && reasonsToLogout.includes(response?._data?.message)) {
+          const { logout } = useAuthStore()
+          return logout()
         }
       },
 
