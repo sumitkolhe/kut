@@ -1,10 +1,14 @@
-import type { AuthService } from 'server/modules/users/services/auth.service'
+import { UserService } from 'server/modules/users/services/user.service'
+import { ObjectId } from 'mongodb'
 import type { User } from 'interfaces/user.interface'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'interfaces/response.interface'
 
 export class UserController {
-  constructor(private readonly authService: AuthService) {}
+  private readonly userService: UserService
+  constructor() {
+    this.userService = new UserService()
+  }
 
   public me: RequestHandler = async (
     req: Request,
@@ -12,9 +16,9 @@ export class UserController {
     next: NextFunction
   ) => {
     try {
-      const { email } = req.auth
+      const { userId } = req.auth
 
-      const userDetails = await this.authService.me(email)
+      const userDetails = await this.userService.me(new ObjectId(userId))
 
       return res.json({ status: 'SUCCESS', message: null, data: userDetails })
     } catch (error) {
