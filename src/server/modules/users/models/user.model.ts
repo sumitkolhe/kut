@@ -1,44 +1,83 @@
-import { schema, types } from 'papr'
-import { papr } from 'server/common/helpers/mongo.helper'
+import { Schema, model } from 'mongoose'
 
-export const UserSchema = schema(
+export const UserSchema = new Schema(
   {
-    profile: types.object(
-      {
-        firstName: types.string({ required: false }),
-        lastName: types.string({ required: false }),
-        picture: types.string({ required: false }),
-        name: types.string({ required: false }),
+    profile: {
+      firstName: {
+        type: String,
+        required: false,
+        lowercase: true,
       },
-      { required: false }
-    ),
-    email: types.string({ required: true }),
-    password: types.string({ required: true }),
-    isBanned: types.boolean({ required: true }),
-    isVerified: types.boolean({ required: true }),
-    apiKeys: types.array(
-      types.object(
-        {
-          apiKey: types.oneOf([types.string(), types.null()]),
-          issuedOn: types.date(),
-          expirationDate: types.date({ required: false }),
-          name: types.string({ required: true }),
-          lastUsedOn: types.date(),
-        },
-        { required: false }
-      ),
-      { required: false }
-    ),
-  },
-
-  {
-    defaults: {
-      isBanned: false,
-      isVerified: false,
-      apiKeys: [],
+      lastName: {
+        type: String,
+        required: false,
+        lowercase: true,
+      },
+      picture: {
+        type: String,
+        required: false,
+      },
+      name: {
+        type: String,
+        required: false,
+      },
     },
+    email: {
+      type: String,
+      required: true,
+      lowercase: true,
+      unique: true,
+      index: true,
+    },
+    isBanned: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    isVerified: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    apiKeys: [
+      {
+        key: {
+          type: String,
+          required: false,
+          unique: true,
+          index: true,
+          default: () => {
+            return Math.random().toString(36).slice(2, 11)
+          },
+        },
+        issuedOn: {
+          type: Date,
+          required: true,
+          default: Date.now,
+        },
+        expirationDate: {
+          type: Date,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        lastUsedOn: {
+          type: Date,
+          required: false,
+        },
+      },
+    ],
+    password: {
+      type: String,
+      required: true,
+      minlength: 6,
+    },
+  },
+  {
     timestamps: true,
   }
 )
 
-export const UserModel = papr.model('users', UserSchema)
+export const UserModel = model('user', UserSchema)

@@ -1,4 +1,4 @@
 import type { UserSchema } from 'server/modules/users/models/user.model'
+import type { InferSchemaType } from 'mongoose'
 
-export type UserDto = (typeof UserSchema)[0]
-export type UserDtoWithDefaults = (typeof UserSchema)[1]
+export type UserDto = InferSchemaType<typeof UserSchema>

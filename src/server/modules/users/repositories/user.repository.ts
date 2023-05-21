@@ -1,31 +1,39 @@
 import { UserModel } from 'server/modules/users/models/user.model'
 import { BaseRepository } from 'server/common/classes/base-repository.class'
 import type { ObjectId } from 'mongodb'
-import type { UserDto, UserDtoWithDefaults } from 'server/modules/users/dto/user.dto'
+import type { UserDto } from 'server/modules/users/dto/user.dto'
 
-export class UserRepository extends BaseRepository<UserDto, UserDtoWithDefaults> {
+export class UserRepository extends BaseRepository<UserDto> {
   constructor() {
     super(UserModel)
   }
 
   async findById(id: ObjectId) {
-    return this.model.findById(id)
+    return this.model.findById(id).lean().exec()
   }
 
   async findByEmail(email: string) {
-    return this.model.findOne({ email })
+    return this.model.findOne({ email }).lean().exec()
   }
 
-  async exists(email: string) {
-    return this.model.exists({ email })
-  }
-
-  async createUser(email: string, password: string) {
-    return this.model.insertOne({ email, password })
+  async createUser(
+    email: string,
+    password: string,
+    authProvider: 'credentials' | 'google' | 'github'
+  ) {
+    return this.model.create({
+      email,
+      password,
+      authProviders: {
+        github: authProvider === 'github',
+        google: authProvider === 'google',
+        credentials: authProvider === 'credentials',
+      },
+    })
   }
 
   updateVerificationById(id: ObjectId, isVerified: boolean) {
-    return this.model.findOneAndUpdate({ _id: id }, { $set: { isVerified } })
+    return this.model.findOneAndUpdate({ _id: id }, { $set: { isVerified } }).lean().exec()
   }
 }
 

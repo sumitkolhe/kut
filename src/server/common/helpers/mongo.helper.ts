@@ -1,47 +1,31 @@
+import { connect, set } from 'mongoose'
 import { logger } from 'server/common/utils/logger'
 import { useConfig } from 'server/common/configs'
-import Papr from 'papr'
-import { MongoClient } from 'mongodb'
+import type { ConnectionStates } from 'mongoose'
 
 const config = useConfig()
 
-let cachedClient: MongoClient
-let isConnected = false
-
-export const papr = new Papr()
+let isConnected: ConnectionStates
 
 export default async () => {
-  if (isConnected) {
-    logger.info('connected using cached db')
-    return cachedClient
-  }
-
   try {
-    cachedClient = await MongoClient.connect(config.database.dbUrl)
+    if (isConnected) {
+      logger.info('connected using cached db')
+      return Promise.resolve()
+    }
 
-    const db = cachedClient.db(config.database.dbName)
+    set('strictQuery', true)
 
-    await db.collection('users').createIndex({ email: 1 }, { unique: true })
-    await db.collection('links').createIndex({ alias: 1 }, { unique: true })
-    await db.collection('links').createIndex(
-      {
-        alias: 'text',
-        target: 'text',
-        shortUrl: 'text',
-        description: 'text',
-      },
-      {
-        name: 'text_search_index',
-      }
-    )
+    const connection = await connect(config.database.dbUrl, {
+      dbName: config.database.dbName,
+    })
 
-    papr.initialize(db)
-    await papr.updateSchemas()
-
-    isConnected = true
+    isConnected = connection.connections[0].readyState
 
     logger.info('connected using new db connection')
+
+    return isConnected
   } catch (error) {
-    logger.error('error connecting to database', error)
+    logger.error('database connection failed.', error)
   }
 }

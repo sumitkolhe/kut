@@ -1,13 +1,9 @@
 import { BaseRepository } from 'server/common/classes/base-repository.class'
 import { LinkModel } from 'server/modules/links/models/link.model'
 import type { ObjectId } from 'mongodb'
-import type {
-  CreateLinkInput,
-  LinkDto,
-  LinkDtoWithDefaults,
-} from 'server/modules/links/dto/link.dto'
+import type { CreateLinkInput, LinkDto } from 'server/modules/links/dto/link.dto'
 
-export class LinkRepository extends BaseRepository<LinkDto, LinkDtoWithDefaults> {
+export class LinkRepository extends BaseRepository<LinkDto> {
   constructor() {
     super(LinkModel)
   }
@@ -47,10 +43,6 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDtoWithDefaults>
     return links
   }
 
-  async linkExists(alias: string) {
-    return this.model.exists({ alias })
-  }
-
   async getTotalLinks(userId: ObjectId) {
     return this.model.countDocuments({ userId })
   }
@@ -64,7 +56,7 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDtoWithDefaults>
   }
 
   async createLink(linkPayload: CreateLinkInput) {
-    return await this.model.insertOne({
+    return await this.model.create({
       userId: linkPayload.userId,
       alias: linkPayload.alias,
       target: linkPayload.target,

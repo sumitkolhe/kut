@@ -16,7 +16,7 @@ export class CreateLinkUseCase implements IUseCase<CreateLinkInput> {
   }
 
   async execute(linkInput: Omit<CreateLinkInput, 'shortUrl'>) {
-    const linkAlreadyExists = await this.linkRepository.linkExists(linkInput.alias)
+    const linkAlreadyExists = await this.linkRepository.exists({ alias: linkInput.alias })
 
     if (linkAlreadyExists) throw new HttpExceptionError(400, ErrorType.aliasAlreadyUsed)
 

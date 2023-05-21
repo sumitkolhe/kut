@@ -1,44 +1,49 @@
-import { schema, types } from 'papr'
-import { papr } from 'server/common/helpers/mongo.helper'
+import { Schema, Types, model } from 'mongoose'
 
-export const LinkSchema = schema(
+export const LinkSchema = new Schema(
   {
-    userId: types.objectId({ required: true }),
-    alias: types.string({ required: true }),
-    target: types.string({ required: true }),
-    shortUrl: types.string({ required: true }),
-    visitCount: types.number({ required: true }),
-    description: types.string({ required: false }),
-    meta: types.object(
-      {
-        password: types.oneOf([types.string({ required: false }), types.null({ required: false })]),
-        validFrom: types.string({ required: false }),
-        validTill: types.oneOf([
-          types.string({ required: false }),
-          types.null({ required: false }),
-        ]),
-        maxVisits: types.oneOf([
-          types.number({ required: false }),
-          types.null({ required: false }),
-        ]),
-        active: types.boolean({ required: false }),
+    userId: { type: Types.ObjectId, required: true, unique: false },
+    alias: { type: String, required: true, unique: true },
+    target: { type: String, required: true },
+    shortUrl: { type: String, required: true },
+    visitCount: { type: Number, default: 0, required: false },
+    description: { type: String, required: false, default: null },
+    meta: {
+      password: {
+        type: String,
+        required: false,
+        default: null,
       },
-      { required: false }
-    ),
-  },
-  {
-    defaults: {
-      visitCount: 0,
-      meta: {
-        password: null as unknown as undefined,
-        validFrom: new Date().toISOString(),
-        validTill: null as unknown as undefined,
-        maxVisits: null as unknown as undefined,
-        active: true,
+      validFrom: {
+        type: Date,
+        required: false,
+        default: Date.now(),
+      },
+      validTill: {
+        type: Date,
+        required: false,
+        default: null,
+      },
+      maxVisits: {
+        type: Number,
+        required: false,
+        default: null,
+      },
+      active: {
+        type: Boolean,
+        required: false,
+        default: true,
       },
     },
-    timestamps: true,
-  }
+  },
+  { timestamps: true }
 )
 
-export const LinkModel = papr.model('links', LinkSchema)
+LinkSchema.index({
+  alias: 'text',
+  target: 'text',
+  shortUrl: 'text',
+  description: 'text',
+})
+
+export const LinkModel = model('link', LinkSchema)
