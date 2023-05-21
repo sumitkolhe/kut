@@ -21,8 +21,6 @@ export default async () => {
 
     const db = cachedClient.db(config.database.dbName)
 
-    papr.initialize(db)
-
     await db.collection('users').createIndex({ email: 1 }, { unique: true })
     await db.collection('links').createIndex({ alias: 1 }, { unique: true })
     await db.collection('links').createIndex(
@@ -37,7 +35,9 @@ export default async () => {
       }
     )
 
+    papr.initialize(db)
     await papr.updateSchemas()
+
     isConnected = true
 
     logger.info('connected using new db connection')
