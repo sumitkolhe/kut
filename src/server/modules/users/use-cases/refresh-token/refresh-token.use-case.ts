@@ -17,7 +17,7 @@ export class RefreshTokenUseCase implements IUseCase<String, AccessTokenDto> {
       throw new HttpExceptionError(400, ErrorType.invalidRefreshToken)
     })
 
-    const doesUserExist = await this.userRepository.findById(decodedToken.id)
+    const doesUserExist = await this.userRepository.existsById(decodedToken.id)
 
     if (!doesUserExist) throw new HttpExceptionError(404, ErrorType.userNotFound)
 

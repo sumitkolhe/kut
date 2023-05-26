@@ -7,7 +7,6 @@ import useragent from 'express-useragent'
 import nocache from 'nocache'
 import { useConfig } from 'server/common/configs'
 import { errorMiddleware } from 'server/common/middlewares/error.middleware'
-import type { ObjectId } from 'mongodb'
 import type { Statistics } from '~/server/common/types/statistics.interface'
 import type { Response } from 'express'
 import type { Config } from 'server/common/types/config.type'
@@ -17,7 +16,7 @@ declare global {
   namespace Express {
     interface Request {
       auth: {
-        userId: ObjectId
+        userId: string
         email: string
         isVerified: boolean
         isBanned: boolean

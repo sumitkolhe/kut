@@ -20,10 +20,10 @@ export class VerifyAccountUseCase implements IUseCase<String> {
       throw new HttpExceptionError(400, ErrorType.invalidVerifyToken)
     }
 
-    const user = await this.userRepository.findById(decodedToken.id)
+    const user = await this.userRepository.existsById(decodedToken.id)
 
     if (!user) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    await this.userRepository.updateVerificationById(user._id, true)
+    await this.userRepository.updateVerificationById(decodedToken.id, true)
   }
 }

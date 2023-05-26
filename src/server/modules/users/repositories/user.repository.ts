@@ -1,15 +1,10 @@
 import { UserModel } from 'server/modules/users/models/user.model'
 import { BaseRepository } from 'server/common/classes/base-repository.class'
-import type { ObjectId } from 'mongodb'
 import type { UserDto } from 'server/modules/users/dto/user.dto'
 
-export class UserRepository extends BaseRepository<UserDto> {
+export class UserRepository extends BaseRepository<UserDto, UserDto> {
   constructor() {
     super(UserModel)
-  }
-
-  async findById(id: ObjectId) {
-    return this.model.findById(id).lean().exec()
   }
 
   async findByEmail(email: string) {
@@ -32,7 +27,7 @@ export class UserRepository extends BaseRepository<UserDto> {
     })
   }
 
-  updateVerificationById(id: ObjectId, isVerified: boolean) {
+  updateVerificationById(id: string, isVerified: boolean) {
     return this.model.findOneAndUpdate({ _id: id }, { $set: { isVerified } }).lean().exec()
   }
 }

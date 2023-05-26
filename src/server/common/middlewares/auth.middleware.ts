@@ -17,13 +17,14 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
   try {
     const tokenDetails = Jwt.verify(accessToken, config.token.access.secret) as Jwt.JwtPayload
 
-    const user = await userRepository.findById(tokenDetails.id)
+    const user = await userRepository.getById(tokenDetails.id)
 
     if (!user) {
       return next(new HttpExceptionError(401, ErrorType.userNotFound))
     }
 
     req.auth = {
+      // @ts-expect-error
       userId: user._id,
       email: user.email,
       isVerified: user.isVerified,
