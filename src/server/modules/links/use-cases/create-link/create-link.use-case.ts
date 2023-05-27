@@ -28,11 +28,13 @@ export class CreateLinkUseCase implements IUseCase<CreateLinkInput> {
 
     const verifiedTarget = sanitizeTargetLink(target)
 
+    const shortUrl = createShortLink(uniqueAlias)
+
     return this.linkRepository.createLink({
       userId,
       alias: uniqueAlias,
       target: verifiedTarget,
-      shortUrl: createShortLink(uniqueAlias),
+      shortUrl,
       description,
       meta: {
         password: meta?.password,

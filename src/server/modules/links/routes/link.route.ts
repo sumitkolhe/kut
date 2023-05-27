@@ -24,7 +24,7 @@ export class LinkRoute implements Routes {
       checkAuthentication,
       checkEmailVerification,
       allLinksSchema,
-      this.linkController.getAllLinks
+      this.linkController.getLinks
     )
     this.router.post(
       `${this.path}/shorten`,

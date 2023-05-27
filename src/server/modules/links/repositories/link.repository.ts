@@ -1,17 +1,15 @@
 import { BaseRepository } from 'server/common/classes/base-repository.class'
 import { LinkModel } from 'server/modules/links/models/link.model'
 import type { CreateLinkInput, LinkDto } from 'server/modules/links/dto/link.dto'
+import type { Paginator } from 'server/modules/links/types/pagination.type'
 
 export class LinkRepository extends BaseRepository<LinkDto, LinkDto> {
   constructor() {
     super(LinkModel)
   }
 
-  async getAllLinks(
-    userId: string,
-    { offset, limit, search }: { offset: number; limit: number; search: string }
-  ) {
-    const allLinks = await this.model.find(
+  async getAllLinks(userId: string, { offset, limit, search }: Paginator) {
+    return this.model.find(
       {
         $and: [
           { userId },
@@ -26,24 +24,17 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDto> {
         sort: { createdAt: -1 },
       }
     )
-
-    return allLinks
   }
 
   async getUserLinkByAlias(userId: string, alias: string) {
-    const link = await this.model
-      .findOne({
-        $and: [{ userId }, { alias }],
-      })
+    return this.model
+      .findOne({ $and: [{ userId }, { alias }] })
       .lean()
       .exec()
-
-    return link
   }
 
   async getLinkByAlias(alias: string) {
-    const links = await this.model.findOne({ alias }).lean().exec()
-    return links
+    return this.model.findOne({ alias }).lean().exec()
   }
 
   async getTotalLinks(userId: string) {
@@ -59,7 +50,7 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDto> {
   }
 
   async createLink(linkPayload: CreateLinkInput) {
-    return await this.model.create({
+    return this.model.create({
       userId: linkPayload.userId,
       alias: linkPayload.alias,
       target: linkPayload.target,

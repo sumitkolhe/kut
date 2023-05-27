@@ -3,6 +3,7 @@ import { CreateLinkUseCase } from 'server/modules/links/use-cases/create-link/cr
 import { RedirectLinkUseCase } from 'server/modules/links/use-cases/redirect-link/redirect-link.use-case'
 import type { Statistics } from 'server/common/types/statistics.interface'
 import type { CreateLinkInput } from 'server/modules/links/dto/link.dto'
+import type { Paginator } from 'server/modules/links/types/pagination.type'
 
 export class LinkService {
   private linkRepository: LinkRepository
@@ -19,7 +20,7 @@ export class LinkService {
     return this.createLinkUseCase.execute(createLinkInput)
   }
 
-  public getAllLinks = async (userId: string, offset: number, limit: number, search: string) => {
+  public getAllLinks = async (userId: string, { offset, limit, search }: Paginator) => {
     const [allLinks, totalCount] = await Promise.all([
       this.linkRepository.getAllLinks(userId, { offset, limit, search }),
       this.linkRepository.getTotalLinks(userId),

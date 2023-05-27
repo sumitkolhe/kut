@@ -2,6 +2,7 @@ import { LinkService } from 'server/modules/links/services/link.service'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'server/common/types/response.interface'
 import type { LinkDto } from 'server/modules/links/dto/link.dto'
+import type { Paginator } from 'server/modules/links/types/pagination.type'
 
 export class LinkController {
   private linkService: LinkService
@@ -10,53 +11,9 @@ export class LinkController {
     this.linkService = new LinkService()
   }
 
-  public getAllLinks: RequestHandler = async (
-    req: Request,
-    res: Response<
-      CustomResponse<{
-        links: LinkDto[]
-        total: number
-      }>
-    >,
-    next: NextFunction
-  ) => {
-    try {
-      const { userId } = req.auth
-      const { offset, limit, search } = req.query
-
-      const allLinks = await this.linkService.getAllLinks(
-        userId,
-        Number(offset),
-        Number(limit),
-        search as string
-      )
-
-      return res.json({ status: 'SUCCESS', message: null, data: allLinks })
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  public getLink: RequestHandler = async (
-    req: Request,
-    res: Response<CustomResponse<LinkDto>>,
-    next: NextFunction
-  ) => {
-    try {
-      const { userId } = req.auth
-      const { alias } = req.params
-
-      const link = await this.linkService.getLink(userId, alias as string)
-
-      return res.json({ status: 'SUCCESS', message: null, data: link })
-    } catch (error) {
-      next(error)
-    }
-  }
-
   public createLink: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<any>>,
+    res: Response<CustomResponse<LinkDto>>,
     next: NextFunction
   ) => {
     try {
@@ -77,6 +34,46 @@ export class LinkController {
       })
 
       return res.json({ status: 'SUCCESS', message: null, data: shortenedLink })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public getLinks: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<{ links: LinkDto[]; total: number }>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { userId } = req.auth
+      const { offset, limit, search } = req.query
+
+      const paginator: Paginator = {
+        offset: Number(offset),
+        limit: Number(limit),
+        search: search?.toString(),
+      }
+
+      const allLinks = await this.linkService.getAllLinks(userId, paginator)
+
+      return res.json({ status: 'SUCCESS', message: null, data: allLinks })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public getLink: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<LinkDto>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { userId } = req.auth
+      const { alias } = req.params
+
+      const link = await this.linkService.getLink(userId, alias.toString())
+
+      return res.json({ status: 'SUCCESS', message: null, data: link })
     } catch (error) {
       next(error)
     }
@@ -127,11 +124,7 @@ export class LinkController {
 
       const link = await this.linkService.redirectLink(alias, statistics, password)
 
-      return res.json({
-        status: 'SUCCESS',
-        message: null,
-        data: link,
-      })
+      return res.json({ status: 'SUCCESS', message: null, data: link })
     } catch (error) {
       next(error)
     }
