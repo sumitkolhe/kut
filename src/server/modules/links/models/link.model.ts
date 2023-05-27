@@ -1,8 +1,8 @@
-import { Schema, Types, model } from 'mongoose'
+import { Schema, model } from 'mongoose'
 
 export const LinkSchema = new Schema(
   {
-    userId: { type: Types.ObjectId, required: true, unique: false },
+    userId: { type: String, required: true },
     alias: { type: String, required: true, unique: true },
     target: { type: String, required: true },
     shortUrl: { type: String, required: true },

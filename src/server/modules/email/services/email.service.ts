@@ -29,9 +29,7 @@ export class EmailService {
           email: senderEmail,
         },
         to: [{ email: toEmail }],
-        params: {
-          ...params,
-        },
+        params: { ...params },
       },
       method: 'POST',
     })

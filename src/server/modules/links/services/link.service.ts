@@ -2,7 +2,6 @@ import { LinkRepository } from 'server/modules/links/repositories/link.repositor
 import { CreateLinkUseCase } from 'server/modules/links/use-cases/create-link/create-link.use-case'
 import { RedirectLinkUseCase } from 'server/modules/links/use-cases/redirect-link/redirect-link.use-case'
 import type { Statistics } from 'server/common/types/statistics.interface'
-import type { ObjectId } from 'mongodb'
 import type { CreateLinkInput } from 'server/modules/links/dto/link.dto'
 
 export class LinkService {
@@ -20,23 +19,20 @@ export class LinkService {
     return this.createLinkUseCase.execute(createLinkInput)
   }
 
-  public getAllLinks = async (userId: ObjectId, offset: number, limit: number, search: string) => {
+  public getAllLinks = async (userId: string, offset: number, limit: number, search: string) => {
     const [allLinks, totalCount] = await Promise.all([
       this.linkRepository.getAllLinks(userId, { offset, limit, search }),
       this.linkRepository.getTotalLinks(userId),
     ])
 
-    return {
-      links: allLinks,
-      total: totalCount,
-    }
+    return { links: allLinks, total: totalCount }
   }
 
-  public getLink = async (userId: ObjectId, alias: string) => {
+  public getLink = async (userId: string, alias: string) => {
     return this.linkRepository.getUserLinkByAlias(userId, alias)
   }
 
-  public deleteLink = async (userId: ObjectId, alias: string) => {
+  public deleteLink = async (userId: string, alias: string) => {
     return this.linkRepository.deleteLink(userId, alias)
   }
 

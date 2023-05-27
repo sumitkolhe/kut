@@ -25,6 +25,7 @@ export class CreateLinkUseCase implements IUseCase<CreateLinkInput> {
     const uniqueAlias = linkInput.alias
       ? linkInput.alias
       : await this.generateAliasUseCase.execute()
+
     const verifiedTarget = sanitizeTargetLink(target)
 
     return this.linkRepository.createLink({
