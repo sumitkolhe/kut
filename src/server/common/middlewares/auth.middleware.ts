@@ -27,8 +27,8 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
       // @ts-expect-error
       userId: user._id,
       email: user.email,
-      isVerified: user.isVerified,
-      isBanned: user.isBanned,
+      isVerified: user.isVerified!,
+      isBanned: user.isBanned!,
     }
 
     return next()
@@ -36,8 +36,9 @@ export const checkAuthentication: RequestHandler = async (req, _res, next) => {
     let errorMessage = error
 
     if (error instanceof Error) {
-      errorMessage =
-        error.name === 'JsonWebTokenError' ? ErrorType.invalidAuthenticationToken : error.message
+      if (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError')
+        errorMessage = ErrorType.invalidAuthenticationToken
+      else errorMessage = error.message
     }
     next(new HttpExceptionError(401, errorMessage as string))
   }
