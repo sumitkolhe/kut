@@ -66,7 +66,6 @@ export const UserSchema = new Schema(
           key: {
             type: String,
             required: false,
-            unique: true,
             index: true,
           },
           issuedOn: {

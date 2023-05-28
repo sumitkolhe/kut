@@ -7,6 +7,7 @@ definePageMeta({
 })
 
 const route = useRoute()
+const router = useRouter()
 const loading = ref(false)
 const { loginWithGithub } = useAuthStore()
 
@@ -15,29 +16,30 @@ onMounted(async () => {
   const { error } = await loginWithGithub(route.query.code as string)
 
   if (error) {
-    return createToast(error, { type: 'error', timeout: 3000 })
+    createToast(error, { type: 'error', timeout: 3000 })
+    return router.push('/')
   }
-
-  createToast('User registered successfully, redirecting...', {
-    type: 'success',
-    timeout: 2000,
-  })
 
   setTimeout(() => {
     loading.value = false
-    const router = useRouter()
     router.push('/dashboard')
-  }, 1500)
+  }, 1000)
 })
 </script>
 
 <template>
   <section class="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-800">
-    <div v-if="loading" class="flex flex-col items-center justify-center space-y-4">
-      <icon name="line-md:loading-twotone-loop" size="44" />
-      <p class="text-xl font-medium tracking-wide dark:text-gray-200 md:text-2xl xl:text-3xl">
-        Please wait...
-      </p>
+    <div v-if="loading" class="flex flex-col items-center justify-center space-y-6">
+      <div class="flex flex-col items-center justify-center space-y-2">
+        <p class="text-2xl font-medium tracking-wide dark:text-gray-200 md:text-3xl xl:text-4xl">
+          Authenticating
+        </p>
+        <p class="text-justify text-lg text-gray-500 dark:text-gray-400">
+          Kut is validating your identity...
+        </p>
+      </div>
+
+      <icon name="svg-spinners:eclipse" size="44" />
     </div>
   </section>
 </template>

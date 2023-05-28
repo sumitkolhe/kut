@@ -46,8 +46,6 @@ export class RedirectLinkUseCase implements IUseCase<String, String> {
     // increment visit count
     await this.linkRepository.incrementLinkVisits(link._id)
 
-    console.log('statistics', statistics)
-
     // add statistics for link visit
     // const newStats = new StatisticsModel({ linkId: link.id, ...statistics }) TODO: add after statistics model is refactored
 

@@ -45,12 +45,10 @@ export class LoginWithGithubUseCase implements IUseCase<UserGithubLoginDto, Auth
     if (existingUser) {
       if (existingUser.authProviders?.social?.github === false) {
         await this.userRepository.update(existingUser._id.toString(), {
-          authProviders: {
-            social: {
-              github: true,
-            },
+          $set: {
+            'authProviders.social.github': true,
+            isVerified: true,
           },
-          isVerified: true,
         })
       }
     } else {

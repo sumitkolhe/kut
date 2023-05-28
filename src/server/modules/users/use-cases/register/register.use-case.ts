@@ -16,22 +16,35 @@ export class RegisterUserUseCase implements IUseCase<UserRegisterDto, void> {
   }
 
   async execute({ email, password }: UserRegisterDto) {
-    const doesUserExist = await this.userRepository.exists({ email })
-
-    if (doesUserExist) throw new HttpExceptionError(409, ErrorType.userAlreadyExists)
+    const doesUserExist = await this.userRepository.findByEmail(email)
 
     const salt = await bcrypt.genSalt(10)
 
     const hashedPassword = await bcrypt.hash(password, salt)
 
-    await this.userRepository.create({
-      email,
-      password: hashedPassword,
-      authProviders: {
-        credentials: true,
-      },
-    })
-
-    return this.accountVerificationEmailUsecase.execute(email)
+    if (doesUserExist && doesUserExist.authProviders?.credentials === true) {
+      throw new HttpExceptionError(409, ErrorType.userAlreadyExists)
+    } else if (doesUserExist && doesUserExist.authProviders?.credentials === false) {
+      await this.userRepository.update(doesUserExist._id.toString(), {
+        $set: {
+          password: hashedPassword,
+          'authProviders.credentials': true,
+        },
+      })
+    } else {
+      await this.userRepository.create({
+        email,
+        password: hashedPassword,
+        authProviders: {
+          social: {
+            github: false,
+            google: false,
+          },
+          credentials: true,
+        },
+      })
+      await this.accountVerificationEmailUsecase.execute(email)
+    }
+    return
   }
 }

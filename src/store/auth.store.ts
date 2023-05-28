@@ -41,7 +41,6 @@ export const useAuthStore = defineStore('authentication-store', {
       try {
         const response = await this.$http.auth.loginWithGithub(code)
 
-        console.log(response)
         if (response.data?.accessToken) {
           this.accessToken = response.data.accessToken
           this.refreshToken = response.data.refreshToken
