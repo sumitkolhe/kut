@@ -17,9 +17,24 @@ export const UserSchema = new Schema(
         type: String,
         required: false,
       },
-      name: {
-        type: String,
-        required: false,
+    },
+    authProviders: {
+      social: {
+        google: {
+          type: Boolean,
+          required: true,
+          default: false,
+        },
+        github: {
+          type: Boolean,
+          required: true,
+          default: false,
+        },
+      },
+      credentials: {
+        type: Boolean,
+        required: true,
+        default: false,
       },
     },
     email: {
@@ -29,55 +44,54 @@ export const UserSchema = new Schema(
       unique: true,
       index: true,
     },
-    isBanned: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    isVerified: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    apiKeys: [
-      {
-        key: {
-          type: String,
-          required: false,
-          unique: true,
-          index: true,
-          default: () => {
-            return Math.random().toString(36).slice(2, 11)
-          },
-        },
-        issuedOn: {
-          type: Date,
-          required: true,
-          default: Date.now,
-        },
-        expirationDate: {
-          type: Date,
-          required: true,
-        },
-        name: {
-          type: String,
-          required: true,
-        },
-        lastUsedOn: {
-          type: Date,
-          required: false,
-        },
-      },
-    ],
     password: {
       type: String,
       required: true,
       minlength: 6,
+      select: false,
+    },
+    isBanned: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    isVerified: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    apiKeys: {
+      type: [
+        {
+          key: {
+            type: String,
+            required: false,
+            unique: true,
+            index: true,
+          },
+          issuedOn: {
+            type: Date,
+            required: true,
+            default: Date.now,
+          },
+          expirationDate: {
+            type: Date,
+            required: true,
+          },
+          name: {
+            type: String,
+            required: true,
+          },
+          lastUsedOn: {
+            type: Date,
+            required: false,
+          },
+        },
+      ],
+      required: false,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 )
 
 export const UserModel = model('user', UserSchema)
