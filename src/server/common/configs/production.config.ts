@@ -39,4 +39,8 @@ export const productionConfig: Config = {
     protocol: 'https',
     url: 'kut.sh',
   },
+  github: {
+    clientId: config.public.githubClientId,
+    clientSecret: config.githubClientSecret,
+  },
 }

@@ -19,6 +19,7 @@ export class AuthRoute implements Routes {
 
   private initializeRoutes() {
     this.router.post(`${this.path}/register`, registerationSchema, this.authController.register)
+    this.router.post(`${this.path}/github`, this.authController.loginWithGithub)
     this.router.post(`${this.path}/login`, loginSchema, this.authController.login)
     this.router.post(
       `${this.path}/refresh-token`,

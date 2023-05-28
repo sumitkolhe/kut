@@ -72,6 +72,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL,
+      githubClientId: process.env.GITHUB_CLIENT_ID,
     },
     dbUrl: process.env.DB_URL,
     dbName: process.env.DB_NAME,
@@ -82,5 +83,6 @@ export default defineNuxtConfig({
     accountVerificationTokenSecret: process.env.ACCOUNT_VERIFICATION_TOKEN_SECRET,
     accountVerificationTokenExpiration: process.env.ACCOUNT_VERIFICATION_TOKEN_EXPIRATION,
     emailApiKey: process.env.SIB_EMAIL_API_KEY,
+    githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
   },
 })

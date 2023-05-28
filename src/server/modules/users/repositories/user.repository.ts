@@ -8,23 +8,7 @@ export class UserRepository extends BaseRepository<UserDto, UserDto> {
   }
 
   async findByEmail(email: string) {
-    return this.model.findOne({ email }).lean().exec()
-  }
-
-  async createUser(
-    email: string,
-    password: string,
-    authProvider: 'credentials' | 'google' | 'github'
-  ) {
-    return this.model.create({
-      email,
-      password,
-      authProviders: {
-        github: authProvider === 'github',
-        google: authProvider === 'google',
-        credentials: authProvider === 'credentials',
-      },
-    })
+    return this.model.findOne({ email }).select('email password').lean().exec()
   }
 
   updateVerificationById(id: string, isVerified: boolean) {

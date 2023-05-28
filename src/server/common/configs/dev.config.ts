@@ -39,4 +39,8 @@ export const devConfig: Config = {
     protocol: 'http',
     url: '0.0.0.0:3000',
   },
+  github: {
+    clientId: config.public.githubClientId,
+    clientSecret: config.githubClientSecret,
+  },
 }

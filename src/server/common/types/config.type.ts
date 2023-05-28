@@ -35,4 +35,8 @@ export interface Config {
     protocol: 'http' | 'https'
     url: string
   }
+  github: {
+    clientId: string
+    clientSecret: string
+  }
 }

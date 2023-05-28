@@ -53,20 +53,20 @@ export class AuthController {
     }
   }
 
-  public resendVerificationEmail: RequestHandler = async (
+  public loginWithGithub: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<null>>,
+    res: Response<CustomResponse<AuthTokenDto>>,
     next: NextFunction
   ) => {
     try {
-      const { userId } = req.auth
+      const { code } = req.body
 
-      await this.authService.resendEmailVerification(userId)
+      const { accessToken, refreshToken } = await this.authService.loginWithGithub({ code })
 
       return res.json({
         status: 'SUCCESS',
-        message: 'verification email sent successfully',
-        data: null,
+        message: 'user registered successfully',
+        data: { accessToken, refreshToken },
       })
     } catch (error) {
       next(error)
@@ -81,7 +81,7 @@ export class AuthController {
     try {
       const { refreshToken } = req.body
 
-      const { accessToken } = await this.authService.refreshToken(refreshToken)
+      const { accessToken } = await this.authService.refreshToken({ refreshToken })
 
       return res.json({ status: 'SUCCESS', message: null, data: { accessToken } })
     } catch (error) {
@@ -102,6 +102,26 @@ export class AuthController {
       return res.json({
         status: 'SUCCESS',
         message: 'account verified successfully',
+        data: null,
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public resendVerificationEmail: RequestHandler = async (
+    req: Request,
+    res: Response<CustomResponse<null>>,
+    next: NextFunction
+  ) => {
+    try {
+      const { userId } = req.auth
+
+      await this.authService.resendEmailVerification(userId)
+
+      return res.json({
+        status: 'SUCCESS',
+        message: 'verification email sent successfully',
         data: null,
       })
     } catch (error) {

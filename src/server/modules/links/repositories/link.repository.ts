@@ -9,21 +9,15 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDto> {
   }
 
   async getAllLinks(userId: string, { offset, limit, search }: Paginator) {
-    return this.model.find(
-      {
-        $and: [
-          { userId },
-          {
-            $or: [search ? { $text: { $search: search } } : {}],
-          },
-        ],
-      },
-      {
-        limit,
-        skip: offset,
-        sort: { createdAt: -1 },
-      }
-    )
+    return this.model
+      .find({
+        $and: [{ userId }, search ? { $text: { $search: search } } : {}],
+      })
+      .limit(limit)
+      .skip(offset)
+      .sort({ createdAt: -1 })
+      .lean()
+      .exec()
   }
 
   async getUserLinkByAlias(userId: string, alias: string) {

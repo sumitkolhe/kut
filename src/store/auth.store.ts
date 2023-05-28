@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
 import { logger } from 'utils/logger'
 import type { FetchError } from 'ofetch'
-import type { User } from 'interfaces/user.interface'
+import type { UserDto } from 'server/modules/users/dto/user.dto'
 
 interface State {
-  user: Omit<User, 'apiKey' | 'userLinks'> | null
+  user: Omit<UserDto, 'apiKey' | 'userLinks'> | null
   isLoggedIn: boolean
   accessToken: string | null
   refreshToken: string | null
@@ -23,6 +23,25 @@ export const useAuthStore = defineStore('authentication-store', {
       try {
         const response = await this.$http.auth.login(email, password)
 
+        if (response.data?.accessToken) {
+          this.accessToken = response.data.accessToken
+          this.refreshToken = response.data.refreshToken
+          this.isLoggedIn = true
+        }
+
+        return { error: null }
+      } catch (err) {
+        const error = (err as FetchError) || Error
+        logger.error(error?.message)
+        return { error: error?.data?.message || error?.message }
+      }
+    },
+
+    async loginWithGithub(code: string) {
+      try {
+        const response = await this.$http.auth.loginWithGithub(code)
+
+        console.log(response)
         if (response.data?.accessToken) {
           this.accessToken = response.data.accessToken
           this.refreshToken = response.data.refreshToken

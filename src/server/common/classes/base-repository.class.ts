@@ -1,6 +1,6 @@
 import type { FilterQuery, Model, UpdateQuery } from 'mongoose'
 
-export class BaseRepository<Request, Response> {
+export class BaseRepository<Response, Request> {
   constructor(readonly model: Model<Response>) {
     this.model = model
   }

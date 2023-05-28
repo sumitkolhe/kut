@@ -1,7 +1,7 @@
 import type { CustomResponse } from 'server/common/types/response.interface'
 import type { $Fetch } from 'ofetch'
 import type { UserRegisterDto } from 'server/modules/users/dto/register.dto'
-import type { AuthTokenDto, RefreshTokenDto } from 'server/modules/users/dto/token.dto'
+import type { AccessTokenDto, AuthTokenDto } from 'server/modules/users/dto/token.dto'
 import type { UserDto } from 'server/modules/users/dto/user.dto'
 
 export class AuthService {
@@ -31,16 +31,21 @@ export class AuthService {
     })
   }
 
+  public async loginWithGithub(code: string) {
+    return this.http<CustomResponse<AuthTokenDto>>(`${this.base}/github`, {
+      body: { code },
+      method: 'POST',
+    })
+  }
+
   public async fetchUser() {
-    return useAsyncData(() =>
-      this.http<CustomResponse<UserDto>>(`user/me`, {
-        method: 'GET',
-      })
-    )
+    return this.http<CustomResponse<UserDto>>(`user/me`, {
+      method: 'GET',
+    })
   }
 
   public async refreshAccessToken(refreshToken: string) {
-    return this.http<CustomResponse<RefreshTokenDto>>(`${this.base}/refresh-token`, {
+    return this.http<CustomResponse<AccessTokenDto>>(`${this.base}/refresh-token`, {
       method: 'POST',
       body: { refreshToken },
     })

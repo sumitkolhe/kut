@@ -16,7 +16,7 @@ export class RegisterUserUseCase implements IUseCase<UserRegisterDto, void> {
   }
 
   async execute({ email, password }: UserRegisterDto) {
-    const doesUserExist = await this.userRepository.exists(email)
+    const doesUserExist = await this.userRepository.exists({ email })
 
     if (doesUserExist) throw new HttpExceptionError(409, ErrorType.userAlreadyExists)
 
@@ -24,8 +24,14 @@ export class RegisterUserUseCase implements IUseCase<UserRegisterDto, void> {
 
     const hashedPassword = await bcrypt.hash(password, salt)
 
-    await this.userRepository.createUser(email, hashedPassword)
+    await this.userRepository.create({
+      email,
+      password: hashedPassword,
+      authProviders: {
+        credentials: true,
+      },
+    })
 
-    await this.accountVerificationEmailUsecase.execute(email)
+    return this.accountVerificationEmailUsecase.execute(email)
   }
 }

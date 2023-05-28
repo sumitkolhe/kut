@@ -15,16 +15,16 @@ export class LoginUserUseCase implements IUseCase<UserLoginDto, AuthTokenDto> {
   }
 
   async execute({ email, password }: UserLoginDto) {
-    const doesUserExist = await this.userRepository.findByEmail(email)
+    const existingUser = await this.userRepository.findByEmail(email)
 
-    if (!doesUserExist) throw new HttpExceptionError(404, ErrorType.userNotFound)
+    if (!existingUser) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    const doesPasswordMatch = await bcrypt.compare(password, doesUserExist.password)
+    const doesPasswordMatch = await bcrypt.compare(password, existingUser.password!)
 
     if (!doesPasswordMatch) throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
 
-    const signedAccessToken = await signAccessToken({ id: doesUserExist._id })
-    const signedRefreshToken = await signRefreshToken({ id: doesUserExist._id })
+    const signedAccessToken = await signAccessToken({ id: existingUser._id })
+    const signedRefreshToken = await signRefreshToken({ id: existingUser._id })
 
     return { accessToken: signedAccessToken, refreshToken: signedRefreshToken }
   }

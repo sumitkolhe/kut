@@ -46,7 +46,7 @@ export const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: false,
       minlength: 6,
       select: false,
     },
@@ -91,7 +91,7 @@ export const UserSchema = new Schema(
       required: false,
     },
   },
-  { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
+  { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } } // InferSchemaType doesn't work properly without spcifying timestamps keys manually
 )
 
 export const UserModel = model('user', UserSchema)
