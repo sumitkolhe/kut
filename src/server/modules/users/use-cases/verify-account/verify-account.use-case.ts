@@ -3,15 +3,16 @@ import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { ErrorType } from 'interfaces/error.interface'
 import { verifyAccountVerificationToken } from 'server/modules/users/utils/token.util'
 import type { IUseCase } from 'server/common/types/use-case.type'
+import type { VerificationTokenDto } from 'server/modules/users/dto/token.dto'
 
-export class VerifyAccountUseCase implements IUseCase<String> {
+export class VerifyAccountUseCase implements IUseCase<VerificationTokenDto> {
   private userRepository: UserRepository
 
   constructor() {
     this.userRepository = new UserRepository()
   }
 
-  async execute(verificationToken: string) {
+  async execute({ verificationToken }: VerificationTokenDto) {
     let decodedToken
 
     try {
@@ -24,6 +25,6 @@ export class VerifyAccountUseCase implements IUseCase<String> {
 
     if (!user) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    await this.userRepository.updateVerificationById(decodedToken.id, true)
+    return this.userRepository.updateVerificationById(decodedToken.id, true)
   }
 }

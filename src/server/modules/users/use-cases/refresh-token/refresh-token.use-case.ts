@@ -3,16 +3,16 @@ import { UserRepository } from 'server/modules/users/repositories/user.repositor
 import { ErrorType } from 'interfaces/error.interface'
 import { signAccessToken, verifyRefreshToken } from 'server/modules/users/utils/token.util'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { AccessTokenDto } from 'server/modules/users/dto/token.dto'
+import type { AccessTokenDto, RefreshTokenDto } from 'server/modules/users/dto/token.dto'
 
-export class RefreshTokenUseCase implements IUseCase<String, AccessTokenDto> {
+export class RefreshTokenUseCase implements IUseCase<RefreshTokenDto, AccessTokenDto> {
   private userRepository: UserRepository
 
   constructor() {
     this.userRepository = new UserRepository()
   }
 
-  async execute(refreshToken: string) {
+  async execute({ refreshToken }: RefreshTokenDto) {
     const decodedToken = await verifyRefreshToken(refreshToken).catch(() => {
       throw new HttpExceptionError(400, ErrorType.invalidRefreshToken)
     })
