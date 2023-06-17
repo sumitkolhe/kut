@@ -136,7 +136,7 @@ div [command-dialog-mask] {
   z-index: 200;
   animation: 333ms cubic-bezier(0.16, 1, 0.3, 1) 0s 1 normal none running shown;
 
-  @apply bg-gray-50/[0.8] dark:bg-gray-900/[0.8];
+  @apply dark:bg-primary-900/[0.8] bg-primary-50/[0.8];
 }
 
 div [command-dialog-wrapper] {
@@ -149,7 +149,7 @@ div [command-dialog-wrapper] {
   max-width: 560px;
   animation: 333ms cubic-bezier(0.16, 1, 0.3, 1) 0s 1 normal none running shown;
 
-  @apply bg-gray-50 dark:bg-gray-800;
+  @apply bg-primary-50 dark:bg-primary-800;
 }
 
 .vercel [command-root] {
@@ -179,7 +179,7 @@ div [command-dialog-wrapper] {
 }
 
 .vercel [command-input]::placeholder {
-  @apply text-gray-300 dark:text-gray-600;
+  @apply text-primary-300 dark:text-primary-600;
 }
 
 .vercel [command-vercel-badge] {
@@ -195,7 +195,7 @@ div [command-dialog-wrapper] {
   text-transform: capitalize;
   font-weight: 500;
 
-  @apply text-gray-400 dark:text-gray-400;
+  @apply text-primary-400 dark:text-primary-400;
 }
 
 .vercel [command-item] {

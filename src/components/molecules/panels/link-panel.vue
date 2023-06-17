@@ -1,90 +1,28 @@
 <script lang="ts" setup>
-import PrimaryButton from 'components/atoms/button/primary-button.vue'
-import SecondaryButton from 'components/atoms/button/secondary-button.vue'
 import TextInput from 'components/atoms/input/text-input.vue'
-import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import useValidate from 'vue-tiny-validate'
-import dayjs from 'dayjs'
+import { useLinkStore } from 'store/link.store'
 import type { Rules } from 'vue-tiny-validate'
-import type { PropType } from 'vue'
+
+// emits
+const emits = defineEmits(['update:open-panel'])
 
 // props
 const props = defineProps({
-  loading: {
-    type: Boolean,
-    default: () => false,
-    required: true,
-  },
   openPanel: {
     type: Boolean,
     required: true,
   },
-  alias: {
-    type: [String, null] as PropType<string | null>,
-    required: true,
-  },
-  target: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: [String, null] as PropType<string | null>,
-    default: () => '',
-    required: false,
-  },
-  password: {
-    type: [String, null] as PropType<string | null>,
-    default: () => null,
-    required: false,
-  },
-  validFrom: {
-    type: [Date, String],
-    default: () => new Date(),
-    required: true,
-  },
-  validTill: {
-    type: [Date, null] as PropType<Date | null>,
-    default: () => null,
-    required: false,
-  },
-  maxVisits: {
-    type: [Number, null] as PropType<number | null>,
-    default: () => null,
-    required: false,
-  },
-  active: {
-    type: Boolean,
-    default: () => true,
-    required: false,
-  },
 })
 
-// emits
-const emits = defineEmits([
-  'update:alias',
-  'update:target',
-  'update:description',
-  'update:password',
-  'update:validFrom',
-  'update:validTill',
-  'update:maxVisits',
-  'update:active',
-  'update:openPanel',
-  'saveLink',
-])
+const toast = useToast()
 
-const linkPayload = reactive({
-  alias: props.alias,
-  target: props.target,
-  description: props.description,
-  password: props.password,
-  validFrom: props.validFrom,
-  validTill: props.validTill,
-  maxVisits: props.maxVisits,
-  active: props.active,
-})
+// store
+const { shortenLink } = useLinkStore()
 
 // refs
+const createLinkLoader = ref(false)
+
 const rules: Rules = reactive({
   target: [
     {
@@ -95,132 +33,164 @@ const rules: Rules = reactive({
   ],
 })
 
+const linkPayload = reactive({
+  alias: '',
+  target: '',
+  description: '',
+  meta: {
+    password: '',
+    validFrom: new Date(),
+    validTill: new Date(),
+    maxVisits: 2,
+    active: true,
+  },
+})
+
 const { result } = useValidate(linkPayload, rules)
 
-const validateLinkPayload = async () => {
+const modifyLink = async () => {
   result.value.$test()
-  if (!result.value.$invalid) {
-    emits('saveLink')
+  if (result.value.$invalid) return
+
+  createLinkLoader.value = true
+  const { error } = await shortenLink(linkPayload)
+
+  closePanel()
+  createLinkLoader.value = false
+
+  if (error) {
+    createToast(error, { type: 'error' })
+    toast.add({ title: 'Error creating link', description: error, color: 'red' })
+  } else {
+    toast.add({ title: 'Link created successfully', color: 'green' })
   }
+}
+
+const closePanel = () => {
+  emits('update:open-panel', false)
 }
 </script>
 
 <template>
-  <transition-root as="template" :show="openPanel">
-    <Dialog as="div" class="relative z-[70]">
-      <transition-child
-        as="template"
-        enter="ease-in-out duration-500"
-        enter-from="opacity-50"
-        enter-to="opacity-100"
-        leave="ease-in-out duration-1000"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
-      >
-        <div class="fixed inset-0 bg-gray-800 bg-opacity-50 transition-opacity" />
-      </transition-child>
+  <u-slideover :model-value="props.openPanel">
+    <div class="">
+      <div class="dark:border-primary-700 dark:bg-primary-800 space-y-1 border-b p-4 md:p-4">
+        <p class="text-primary-900 dark:text-primary-200 text-lg font-medium">Add a new link</p>
+      </div>
 
-      <transition-child
-        as="template"
-        enter="transform transition ease-in-out duration-300"
-        enter-from="translate-y-full md:translate-x-full md:translate-y-0"
-        enter-to="translate-y-0 md:translate-x-0 md:translate-y-0"
-        leave="transform transition ease-in-out duration-300"
-        leave-from="translate-y-0 md:translate-x-0 md:translate-y-0"
-        leave-to="translate-y-full md:translate-x-full md:translate-y-0"
-      >
-        <dialog-panel
-          class="fixed bottom-0 flex h-full max-h-[90%] w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-l-0 bg-gray-50 dark:border-t dark:border-gray-700 dark:bg-gray-900 md:right-0 md:rounded-t-none md:border-l md:border-t-0 md:dark:border-t-0 lg:max-h-screen lg:w-3/6 xl:w-2/6"
-        >
-          <div class="space-y-1 border-b p-4 dark:border-gray-700 dark:bg-gray-800 md:p-4">
-            <p class="text-lg font-medium text-gray-900 dark:text-gray-200">Add a new link</p>
-          </div>
+      <div class="flex flex-col space-y-4 p-4 md:p-6">
+        <u-form-group :error="result.target.$messages[0]" label="Target">
+          <u-input
+            v-model="linkPayload.target"
+            size="xl"
+            trailing-icon="i-tabler-link"
+            placeholder="https://github.com/sumitkolhe"
+          />
+        </u-form-group>
 
-          <div class="flex flex-col space-y-4 p-4 md:p-6">
-            <text-input
-              label="Target Link"
-              placeholder="https://github.com/sumitkolhe"
-              :model-value="linkPayload.target"
-              :errors="result.target.$messages"
-              prefix-icon="ph:link-simple"
-              @input="$emit('update:target', $event.target.value)"
-            />
+        <u-form-group :error="result.alias.$messages[0]" label="Alias">
+          <u-input
+            v-model="linkPayload.alias"
+            size="xl"
+            placeholder="Enter alias"
+            trailing-icon="i-tabler-edit-circle"
+          />
+        </u-form-group>
 
-            <text-input
-              label="Alias"
-              placeholder="Enter alias"
-              :model-value="linkPayload.alias"
-              prefix-icon="ph:pencil-simple-line"
-              @input="$emit('update:alias', $event.target.value)"
-            />
+        <u-form-group :error="result.description.$messages[0]" label="Description">
+          <u-input
+            v-model="linkPayload.alias"
+            size="xl"
+            placeholder="Description"
+            trailing-icon="i-tabler-edit-circle"
+          />
+        </u-form-group>
 
-            <text-input
-              :model-value="linkPayload.description"
-              label="Description"
-              prefix-icon="ph:notepad"
-              placeholder="Enter description"
-              @input="$emit('update:description', $event.target.value)"
-            />
+        <u-form-group :error="result.meta.password.$messages[0]" label="Password">
+          <u-input
+            v-model="linkPayload.meta.password"
+            size="xl"
+            placeholder="Enter alias"
+            trailing-icon="i-tabler-edit-circle"
+          />
+        </u-form-group>
 
-            <text-input
-              :model-value="linkPayload.password"
-              label="Password"
-              prefix-icon="ph:password"
-              placeholder="Enter password"
-              @input="$emit('update:password', $event.target.value)"
-            />
+        <u-form-group :error="result.target.$messages[0]" label="Alias">
+          <u-input
+            v-model="linkPayload.alias"
+            size="xl"
+            placeholder="Enter alias"
+            trailing-icon="i-tabler-edit-circle"
+          />
+        </u-form-group>
 
-            <text-input
-              :model-value="linkPayload.maxVisits"
-              label="Max. Visits"
-              prefix-icon="ph:hand-pointing"
-              placeholder="Enter maximum no. of visits"
-              @input="$emit('update:maxVisits', $event.target.value)"
-            />
+        <u-form-group :error="result.target.$messages[0]" label="Alias">
+          <u-input
+            v-model="linkPayload.alias"
+            size="xl"
+            placeholder="Enter alias"
+            trailing-icon="i-tabler-edit-circle"
+          />
+        </u-form-group>
 
-            <text-input
-              :model-value="dayjs(linkPayload.validFrom).format('DD-MM-YY HH:MM')"
-              label="Valid From"
-              type="datetime-local"
-              placeholder="Enter valid from date"
-              @input="$emit('update:validFrom', new Date($event.target.value))"
-            />
+        <u-form-group :error="result.target.$messages[0]" label="Alias">
+          <u-input
+            v-model="linkPayload.alias"
+            size="xl"
+            placeholder="Enter alias"
+            trailing-icon="i-tabler-edit-circle"
+          />
+        </u-form-group>
 
-            <text-input
-              :model-value="new Date(linkPayload.validTill!)?.toISOString()?.slice(0, 16)"
-              label="Valid Till"
-              type="datetime-local"
-              placeholder="Enter valid till date"
-              @input="$emit('update:validTill', new Date($event.target.value))"
-            />
+        <text-input
+          v-model="linkPayload.description"
+          label="Description"
+          prefix-icon="ph:notepad"
+          placeholder="Enter description"
+        />
 
-            <!-- <div class="flex flex-row items-center justify-between py-2">
-              <p class="text-sm text-gray-500">Enable Link</p>
+        <text-input
+          v-model="linkPayload.meta.password"
+          label="Password"
+          prefix-icon="ph:password"
+          placeholder="Enter password"
+        />
+
+        <text-input
+          v-model="linkPayload.meta.maxVisits"
+          label="Max. Visits"
+          prefix-icon="ph:hand-pointing"
+          placeholder="Enter maximum no. of visits"
+        />
+
+        <text-input
+          v-model="linkPayload.meta.validFrom"
+          label="Valid From"
+          type="datetime-local"
+          placeholder="Enter valid from date"
+        />
+
+        <text-input
+          v-model="linkPayload.meta.validTill"
+          label="Valid Till"
+          type="datetime-local"
+          placeholder="Enter valid till date"
+        />
+
+        <!-- <div class="flex flex-row items-center justify-between py-2">
+              <p class="text-sm text-primary-500">Enable Link</p>
               <primary-toggle
                 :model-value="linkPayload.active"
                 @input="$emit('update:active', $event.target.value)"
               />
             </div> -->
-          </div>
-
-          <div
-            class="sticky bottom-0 flex w-full justify-end space-x-6 border-t bg-gray-100 p-6 dark:border-gray-700 dark:bg-gray-800"
-          >
-            <secondary-button class="w-auto" @click="$emit('update:openPanel', false)">
-              Cancel
-            </secondary-button>
-
-            <primary-button
-              suffix-icon="octicon:paper-airplane-24"
-              :loading="loading"
-              class="w-full md:w-auto"
-              @click="validateLinkPayload"
-            >
-              Shorten
-            </primary-button>
-          </div>
-        </dialog-panel>
-      </transition-child>
-    </Dialog>
-  </transition-root>
+      </div>
+      <div
+        class="bg-primary-100 dark:border-primary-700 dark:bg-primary-800 fixed bottom-0 flex w-full max-w-lg justify-end space-x-6 border-t p-6"
+      >
+        <u-button variant="outline" @click="closePanel"> Cancel </u-button>
+        <u-button @click="modifyLink"> Shorten </u-button>
+      </div>
+    </div>
+  </u-slideover>
 </template>

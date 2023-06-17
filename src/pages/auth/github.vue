@@ -28,13 +28,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-800">
+  <section class="bg-primary-100 dark:bg-primary-800 flex min-h-screen items-center justify-center">
     <div v-if="loading" class="flex flex-col items-center justify-center space-y-6">
       <div class="flex flex-col items-center justify-center space-y-2">
-        <p class="text-2xl font-medium tracking-wide dark:text-gray-200 md:text-3xl xl:text-4xl">
+        <p class="dark:text-primary-200 text-2xl font-medium tracking-wide md:text-3xl xl:text-4xl">
           Authenticating
         </p>
-        <p class="text-justify text-lg text-gray-500 dark:text-gray-400">
+        <p class="text-primary-500 dark:text-primary-400 text-justify text-lg">
           Kut is validating your identity...
         </p>
       </div>

@@ -33,7 +33,7 @@ const next = () => emit('next-page')
 <template>
   <div class="mb-0 mt-6 flex items-center justify-end gap-3">
     <icon-button :disabled="isFirstPage" icon="line-md:chevron-left" @click="prev" />
-    <p class="text-sm dark:text-gray-400">
+    <p class="dark:text-primary-400 text-sm">
       {{ currentPage }}
       <span class="mx-0.25">/</span>
       {{ pageCount }}

@@ -61,20 +61,20 @@ watch(period, async (newPeriod) => {
       <div class="mb-4 flex items-center justify-between">
         <div class="flex space-x-4">
           <div
-            class="flex items-center rounded border bg-gray-50 px-4 text-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200"
+            class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 dark:text-primary-200 flex items-center rounded border px-4 text-lg"
           >
             <p>{{ totalVisits }} <span class="text-sm">clicks</span></p>
           </div>
 
           <nuxt-link
-            class="rounded border bg-gray-50 px-4 py-2 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-400"
+            class="bg-primary-50 hover:border-primary-300 dark:border-primary-700 dark:bg-primary-900 dark:hover:border-primary-400 rounded border px-4 py-2"
             target="_blank"
             :to="`https://kut.sh/${route.params.alias}`"
           >
             <p
               v-slice="20"
               :title="`https://kut.sh/${route.params.alias}`"
-              class="text-sm dark:text-gray-200 md:text-base"
+              class="dark:text-primary-200 text-sm md:text-base"
             >
               https://kut.sh/{{ route.params.alias }}
             </p>
@@ -85,7 +85,7 @@ watch(period, async (newPeriod) => {
 
       <div
         v-if="values.length > 0"
-        class="min-h-[300px] items-center justify-center rounded border bg-gray-50 p-2 dark:border-gray-700 dark:bg-gray-900"
+        class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 min-h-[300px] items-center justify-center rounded border p-2"
       >
         <v-frappe-chart
           type="line"
@@ -97,9 +97,9 @@ watch(period, async (newPeriod) => {
       </div>
       <div
         v-else
-        class="flex min-h-[300px] items-center justify-center rounded border bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900"
+        class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 flex min-h-[300px] items-center justify-center rounded border p-4"
       >
-        <p class="text-xl text-gray-500">No data available for last {{ period }}</p>
+        <p class="text-primary-500 text-xl">No data available for last {{ period }}</p>
       </div>
     </client-only>
   </section>

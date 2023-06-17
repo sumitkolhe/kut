@@ -23,7 +23,7 @@ const props = defineProps({
     :disabled="loading"
     type="button"
     :class="[props.prefixIcon ? 'pl-10' : '', props.suffixIcon ? 'pr-10' : '']"
-    class="relative inline-flex w-full cursor-pointer select-none appearance-none items-center justify-center rounded border border-gray-200 bg-gray-50 px-4 py-2 tracking-wide text-gray-500 transition hover:border-gray-900 hover:bg-gray-50 hover:text-gray-900 disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-500 dark:hover:border-gray-50 dark:hover:bg-gray-900 dark:hover:text-gray-50 disabled:dark:border-gray-700 disabled:dark:bg-gray-800 disabled:dark:text-gray-400"
+    class="border-primary-200 bg-primary-50 text-primary-500 hover:border-primary-900 hover:bg-primary-50 hover:text-primary-900 disabled:border-primary-200 disabled:bg-primary-100 disabled:text-primary-300 dark:border-primary-700 dark:bg-primary-900 dark:text-primary-500 dark:hover:border-primary-50 dark:hover:bg-primary-900 dark:hover:text-primary-50 disabled:dark:border-primary-700 disabled:dark:bg-primary-800 disabled:dark:text-primary-400 relative inline-flex w-full cursor-pointer select-none appearance-none items-center justify-center rounded border px-4 py-2 tracking-wide transition disabled:cursor-not-allowed"
     v-bind="$attrs"
   >
     <div

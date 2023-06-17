@@ -21,18 +21,18 @@ const { y } = useWindowScroll()
   <nav
     ref="element"
     :class="[y >= 60 ? 'shadow transition-all duration-200' : '']"
-    class="sticky top-0 z-50 border-b border-gray-200 bg-white px-6 dark:border-gray-700 dark:bg-gray-900"
+    class="border-primary-200 dark:border-primary-700 dark:bg-primary-900 sticky top-0 z-30 border-b bg-white px-6"
   >
     <div
       v-if="!$route.params.alias"
-      class="no-scrollbar mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll text-gray-400"
+      class="no-scrollbar text-primary-400 mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll"
     >
       <NuxtLink
         v-for="tab in tabs"
         :key="tab.name"
         :to="tab.href"
-        active-class="border-black dark:border-gray-50 border-b-[2px] text-black dark:text-gray-50"
-        class="inline-flex h-12 py-4 transition-all duration-200 hover:text-gray-600 hover:dark:text-gray-300"
+        active-class="border-black dark:border-primary-50 border-b-[2px] text-black dark:text-primary-50"
+        class="hover:text-primary-600 hover:dark:text-primary-300 inline-flex h-12 py-4 transition-all duration-200"
       >
         <Icon :name="tab.icon" size="20" class="mr-2" />
         <p class="text-sm">{{ tab.name }}</p>
@@ -41,18 +41,18 @@ const { y } = useWindowScroll()
 
     <div
       v-else
-      class="no-scrollbar mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll text-gray-400"
+      class="no-scrollbar text-primary-400 mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll"
     >
       <button @click="$router.push('/dashboard')">
-        <Icon name="ph:arrow-circle-left" class="mt-1 text-gray-400 hover:text-gray-900" />
+        <Icon name="ph:arrow-circle-left" class="text-primary-400 hover:text-primary-900 mt-1" />
       </button>
 
       <NuxtLink
         v-for="tab in subTabs"
         :key="tab.name"
         :to="tab.href"
-        active-class="border-black dark:border-gray-50 border-b-[2px] text-black dark:text-gray-50"
-        class="inline-flex h-12 py-4 hover:text-gray-600 hover:dark:text-gray-300"
+        active-class="border-black dark:border-primary-50 border-b-[2px] text-black dark:text-primary-50"
+        class="hover:text-primary-600 hover:dark:text-primary-300 inline-flex h-12 py-4"
       >
         <Icon :name="tab.icon" size="20" class="mr-2" />
         <p class="text-sm">{{ tab.name }}</p>

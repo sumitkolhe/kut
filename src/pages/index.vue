@@ -52,21 +52,21 @@ const features = [
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center bg-gray-50 px-6 dark:bg-gray-900">
+  <div class="bg-primary-50 dark:bg-primary-900 flex flex-col items-center justify-center px-6">
     <div class="my-32 flex max-w-screen-xl flex-col items-center text-center md:my-44">
       <div
         class="flex flex-col items-center justify-center space-y-4 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
       >
-        <h1 class="leading-tighter dark:text-gray-50">The only</h1>
+        <h1 class="leading-tighter dark:text-primary-50">The only</h1>
         <h1
           class="leading-tighter animate-text bg-gradient-to-r from-amber-500 via-red-500 to-purple-500 bg-clip-text text-transparent"
         >
           URL Shortener
         </h1>
-        <h1 class="leading-tighter dark:text-gray-50">you need.</h1>
+        <h1 class="leading-tighter dark:text-primary-50">you need.</h1>
       </div>
 
-      <p class="my-14 max-w-3xl text-center text-xl font-light text-gray-500 lg:text-2xl">
+      <p class="text-primary-500 my-14 max-w-3xl text-center text-xl font-light lg:text-2xl">
         Kut is an open-source, modern link shortening and management service to easily create,
         manage and track short links.
       </p>
@@ -89,7 +89,7 @@ const features = [
               class="absolute -inset-1.5 animate-text rounded-lg bg-gradient-to-r from-amber-600 via-red-600 to-purple-600 opacity-60 blur-md transition duration-500 group-hover:opacity-80 group-hover:duration-200"
             ></div>
             <button
-              class="relative w-full rounded-md border border-pink-500 bg-gray-50 px-8 py-[12px] hover:border-pink-700 dark:bg-gray-900 dark:text-gray-200 md:px-10 md:py-[12px]"
+              class="bg-primary-50 dark:bg-primary-900 dark:text-primary-200 relative w-full rounded-md border border-pink-500 px-8 py-[12px] hover:border-pink-700 md:px-10 md:py-[12px]"
             >
               <p class="text-base">Star on github</p>
             </button>
@@ -99,10 +99,10 @@ const features = [
     </div>
 
     <div class="my-6 flex max-w-screen-xl flex-col items-center justify-center md:my-20">
-      <h2 class="text-center text-3xl font-bold dark:text-gray-200 md:text-4xl lg:text-5xl">
+      <h2 class="dark:text-primary-200 text-center text-3xl font-bold md:text-4xl lg:text-5xl">
         All the features you need.
       </h2>
-      <p class="my-4 text-center text-lg text-gray-600 md:text-xl">
+      <p class="text-primary-600 my-4 text-center text-lg md:text-xl">
         Everything you need to create unlimited short links and share them on every platform.
       </p>
 
@@ -114,11 +114,11 @@ const features = [
         >
           <img
             :src="feature.icon"
-            class="m-2 h-44 w-44 dark:text-gray-200 md:h-56 md:w-56 xl:h-64 xl:w-64"
+            class="dark:text-primary-200 m-2 h-44 w-44 md:h-56 md:w-56 xl:h-64 xl:w-64"
           />
 
-          <h4 class="mb-2 mt-4 text-lg font-medium dark:text-gray-100">{{ feature.title }}</h4>
-          <p class="text-center font-normal text-gray-500">
+          <h4 class="dark:text-primary-100 mb-2 mt-4 text-lg font-medium">{{ feature.title }}</h4>
+          <p class="text-primary-500 text-center font-normal">
             {{ feature.description }}
           </p>
         </div>

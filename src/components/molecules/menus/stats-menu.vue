@@ -63,7 +63,9 @@ const emitChange = (period: Period) => {
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur transition-opacity" />
+          <div
+            class="bg-primary-800 fixed inset-0 bg-opacity-50 backdrop-blur transition-opacity"
+          />
         </transition-child>
 
         <transition-child
@@ -76,13 +78,15 @@ const emitChange = (period: Period) => {
           leave-to="translate-y-full"
         >
           <dialog-panel
-            class="fixed bottom-0 right-0 flex h-auto w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-t bg-gray-50 focus:outline-none dark:border-t dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+            class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 dark:text-primary-100 fixed bottom-0 right-0 flex h-auto w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-t focus:outline-none dark:border-t"
           >
             <div class="flex flex-col space-y-2 p-3">
               <button
                 v-for="period in options"
                 :key="period.name"
-                :class="[selectedPeriod.value === period.value ? 'bg-red-500 text-gray-100' : '']"
+                :class="[
+                  selectedPeriod.value === period.value ? 'text-primary-100 bg-red-500' : '',
+                ]"
                 class="no-select group flex w-full items-center space-x-4 rounded-md px-4 py-3"
                 @click="emitChange(period)"
               >
@@ -97,9 +101,9 @@ const emitChange = (period: Period) => {
     <Listbox v-else :model-value="selectedPeriod" @update:modelValue="emitChange">
       <div class="relative mt-1">
         <ListboxButton
-          class="relative flex w-fit cursor-pointer flex-row items-center justify-between space-x-4 rounded border bg-gray-50 px-4 py-2 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 sm:text-sm"
+          class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 dark:text-primary-200 relative flex w-fit cursor-pointer flex-row items-center justify-between space-x-4 rounded border px-4 py-2 focus:outline-none sm:text-sm"
         >
-          <Icon name="line-md:calendar" class="text-gray-600" size="20" />
+          <Icon name="line-md:calendar" class="text-primary-600" size="20" />
           <p class="block truncate text-sm">{{ selectedPeriod.name }}</p>
           <Icon name="mdi:chevron-down" />
         </ListboxButton>
@@ -110,7 +114,7 @@ const emitChange = (period: Period) => {
           leave-to-class="opacity-0"
         >
           <ListboxOptions
-            class="absolute z-[50] mt-2 max-h-64 w-full space-y-1 overflow-auto rounded-md border-gray-800 bg-gray-50 p-2 text-base shadow-lg ring-opacity-5 focus:outline-none dark:bg-gray-900"
+            class="border-primary-800 bg-primary-50 dark:bg-primary-900 absolute z-[50] mt-2 max-h-64 w-full space-y-1 overflow-auto rounded-md p-2 text-base shadow-lg ring-opacity-5 focus:outline-none"
           >
             <ListboxOption
               v-for="period in options"
@@ -122,14 +126,14 @@ const emitChange = (period: Period) => {
               <li
                 :class="[
                   active
-                    ? 'rounded bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-red-500'
+                    ? 'bg-primary-200 text-primary-700 dark:bg-primary-700 rounded dark:text-red-500'
                     : '',
                   'relative w-full cursor-default select-none rounded',
                 ]"
               >
                 <div
-                  class="flex items-center justify-between rounded px-4 py-2 dark:text-gray-200"
-                  :class="[selected ? 'bg-red-500 text-gray-50' : '']"
+                  class="dark:text-primary-200 flex items-center justify-between rounded px-4 py-2"
+                  :class="[selected ? 'text-primary-50 bg-red-500' : '']"
                 >
                   <p>{{ period.name }}</p>
                   <Icon v-if="selected" name="ph:check" size="20" />

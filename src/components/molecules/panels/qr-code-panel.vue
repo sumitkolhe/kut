@@ -48,7 +48,7 @@ const downloadQrCode = () => {
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur transition-opacity" />
+        <div class="bg-primary-800 fixed inset-0 bg-opacity-50 backdrop-blur transition-opacity" />
       </transition-child>
 
       <transition-child
@@ -61,13 +61,15 @@ const downloadQrCode = () => {
         leave-to="translate-y-full md:translate-x-full md:translate-y-0"
       >
         <dialog-panel
-          class="max-h-auto fixed bottom-0 flex w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-l-0 bg-gray-50 dark:border-t dark:border-gray-700 dark:bg-gray-900 md:right-0 md:h-full md:max-h-screen md:w-[50%] md:rounded-t-none md:border-l md:border-t-0 lg:w-[33%]"
+          class="max-h-auto bg-primary-50 dark:border-primary-700 dark:bg-primary-900 fixed bottom-0 flex w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-l-0 dark:border-t md:right-0 md:h-full md:max-h-screen md:w-[50%] md:rounded-t-none md:border-l md:border-t-0 lg:w-[33%]"
         >
-          <div class="space-y-1 border-b p-4 dark:border-gray-700 md:p-6">
-            <p class="text-xl font-medium text-gray-900 dark:text-gray-200">Download QR Code</p>
+          <div class="dark:border-primary-700 space-y-1 border-b p-4 md:p-6">
+            <p class="text-primary-900 dark:text-primary-200 text-xl font-medium">
+              Download QR Code
+            </p>
           </div>
           <div
-            class="flex h-full flex-col items-center justify-center space-y-6 bg-gray-100 p-12 dark:bg-gray-800"
+            class="bg-primary-100 dark:bg-primary-800 flex h-full flex-col items-center justify-center space-y-6 p-12"
           >
             <img
               v-if="props.link"
@@ -78,7 +80,7 @@ const downloadQrCode = () => {
           </div>
 
           <div
-            class="bottom-0 flex w-full flex-row items-center justify-end space-x-4 border-t p-4 dark:border-gray-700 md:p-6"
+            class="dark:border-primary-700 bottom-0 flex w-full flex-row items-center justify-end space-x-4 border-t p-4 md:p-6"
           >
             <primary-button
               suffix-icon="ph:arrow-circle-down"

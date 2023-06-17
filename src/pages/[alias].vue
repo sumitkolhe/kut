@@ -41,7 +41,7 @@ if (!error.value && data.value?.data) {
 </script>
 
 <template>
-  <div class="flex min-h-screen items-center justify-center bg-gray-50 px-6 dark:bg-gray-900">
+  <div class="bg-primary-50 dark:bg-primary-900 flex min-h-screen items-center justify-center px-6">
     Redirecting...
   </div>
 </template>

@@ -43,16 +43,16 @@ const stats = computed(() => [
     <div
       v-for="stat in stats"
       :key="stat.title"
-      class="flex w-auto flex-row items-center justify-between rounded-md border bg-white p-6 shadow-sm transition-all duration-100 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900 hover:dark:border-gray-50"
+      class="dark:border-primary-700 dark:bg-primary-900 hover:dark:border-primary-50 flex w-auto flex-row items-center justify-between rounded-md border bg-white p-6 shadow-sm transition-all duration-100 hover:shadow-lg"
     >
       <div class="space-y-4">
-        <p class="font-medium text-gray-800 dark:text-gray-200">{{ stat.title }}</p>
-        <p class="text-2xl font-medium dark:text-gray-200">{{ stat.value }}</p>
+        <p class="text-primary-800 dark:text-primary-200 font-medium">{{ stat.title }}</p>
+        <p class="dark:text-primary-200 text-2xl font-medium">{{ stat.value }}</p>
       </div>
       <div
-        class="flex items-center rounded-full border-[2px] bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-900"
+        class="bg-primary-100 dark:border-primary-600 dark:bg-primary-900 flex items-center rounded-full border-[2px] p-3"
       >
-        <Icon :name="stat.icon" size="32" class="dark:text-gray-600" />
+        <Icon :name="stat.icon" size="32" class="dark:text-primary-600" />
       </div>
     </div>
   </section>

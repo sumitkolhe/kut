@@ -48,11 +48,11 @@ const redirect = async () => {
 </script>
 
 <template>
-  <div class="flex min-h-screen items-center justify-center bg-gray-50 px-6 dark:bg-gray-900">
+  <div class="bg-primary-50 dark:bg-primary-900 flex min-h-screen items-center justify-center px-6">
     <div class="flex w-full max-w-sm flex-col items-center justify-center space-y-4">
       <div class="mb-6 flex flex-col items-center space-y-1 text-center">
-        <p class="text-2xl font-medium dark:text-gray-200">Protected link</p>
-        <p class="text-base dark:text-gray-300">Enter a password to visit the link</p>
+        <p class="dark:text-primary-200 text-2xl font-medium">Protected link</p>
+        <p class="dark:text-primary-300 text-base">Enter a password to visit the link</p>
       </div>
       <password-input
         v-model="passwordData.password"

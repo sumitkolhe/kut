@@ -49,10 +49,10 @@ const linkStats = computed(() => [
       <div
         v-for="(stat, index) of linkStats"
         :key="index"
-        class="space-y-3 rounded-md border bg-gray-50 p-6 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900"
+        class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 space-y-3 rounded-md border p-6 hover:shadow-lg"
       >
-        <p class="text-gray-500">{{ stat.name }}</p>
-        <p v-slice="25" class="text-lg font-medium dark:text-gray-200">
+        <p class="text-primary-500">{{ stat.name }}</p>
+        <p v-slice="25" class="dark:text-primary-200 text-lg font-medium">
           {{ stat.value }}
         </p>
       </div>
@@ -63,15 +63,15 @@ const linkStats = computed(() => [
       <div
         v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
         :key="i"
-        class="animate-pulse space-y-3 rounded-md border bg-gray-50 p-6"
+        class="bg-primary-50 animate-pulse space-y-3 rounded-md border p-6"
       >
         <div class="flex-1 space-y-8 py-1">
           <div class="space-y-3">
             <div class="grid grid-cols-3 gap-4">
-              <div class="col-span-1 h-3 rounded-full bg-gray-200"></div>
+              <div class="bg-primary-200 col-span-1 h-3 rounded-full"></div>
             </div>
           </div>
-          <div class="col-span-1 h-3 rounded-full bg-gray-200"></div>
+          <div class="bg-primary-200 col-span-1 h-3 rounded-full"></div>
         </div>
       </div>
     </div>

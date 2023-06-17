@@ -11,8 +11,8 @@ const props = defineProps({
 <template>
   <button
     v-bind="$attrs"
-    class="disabled:cusrsor-not-allowed inline-flex h-10 w-10 items-center justify-center rounded border border-gray-200 bg-gray-50 disabled:pointer-events-none disabled:bg-gray-100 disabled:text-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-700 dark:disabled:bg-gray-800"
+    class="disabled:cusrsor-not-allowed border-primary-200 bg-primary-50 disabled:bg-primary-100 disabled:text-primary-300 dark:border-primary-700 dark:bg-primary-900 dark:text-primary-700 dark:disabled:bg-primary-800 inline-flex h-10 w-10 items-center justify-center rounded border disabled:pointer-events-none"
   >
-    <Icon :name="props.icon" size="20" class="text-:gray-400 dark:text-gray-400" />
+    <Icon :name="props.icon" size="20" class="text-:gray-400 dark:text-primary-400" />
   </button>
 </template>

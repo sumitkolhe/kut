@@ -7,7 +7,7 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
     <icon
       v-if="!isDrawerVisible"
       name="line-md:close-to-menu-alt-transition"
-      class="dark:text-gray-300"
+      class="dark:text-primary-300"
       size="24"
       @click="toggleDrawer()"
     />
@@ -15,7 +15,7 @@ const { toggleDrawer, isDrawerVisible } = useDrawer()
       v-else
       name="line-md:menu-to-close-alt-transition"
       size="24"
-      class="dark:text-gray-300"
+      class="dark:text-primary-300"
       @click="toggleDrawer()"
     />
   </div>

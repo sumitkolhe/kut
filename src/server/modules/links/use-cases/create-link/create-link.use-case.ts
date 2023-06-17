@@ -37,11 +37,11 @@ export class CreateLinkUseCase implements IUseCase<CreateLinkInput> {
       shortUrl,
       description,
       meta: {
-        password: meta?.password,
-        validFrom: meta?.validFrom,
-        validTill: meta?.validTill,
-        maxVisits: meta?.maxVisits,
-        active: meta?.active,
+        password: meta?.password as string,
+        validFrom: meta?.validFrom as Date,
+        validTill: meta?.validTill as Date,
+        maxVisits: meta?.maxVisits as number,
+        active: meta?.active as boolean,
       },
     })
   }

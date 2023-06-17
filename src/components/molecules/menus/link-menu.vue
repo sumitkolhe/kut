@@ -43,7 +43,9 @@ const deleteLink = () => {
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur transition-opacity" />
+          <div
+            class="bg-primary-800 fixed inset-0 bg-opacity-50 backdrop-blur transition-opacity"
+          />
         </transition-child>
 
         <transition-child
@@ -56,11 +58,11 @@ const deleteLink = () => {
           leave-to="translate-y-full"
         >
           <dialog-panel
-            class="fixed bottom-0 right-0 flex h-auto w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-t bg-gray-50 focus:outline-none dark:border-t dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+            class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 dark:text-primary-100 fixed bottom-0 right-0 flex h-auto w-screen flex-col justify-between overflow-y-auto rounded-t-lg border-t focus:outline-none dark:border-t"
           >
             <div class="flex flex-col space-y-2 p-3">
               <button
-                class="no-select group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                class="no-select hover:bg-primary-200 dark:hover:bg-primary-700 group flex w-full items-center space-x-4 rounded-md px-4 py-3"
                 @click="$emit('edit-link')"
               >
                 <icon name="ph:pencil" />
@@ -68,7 +70,7 @@ const deleteLink = () => {
               </button>
 
               <button
-                class="no-select group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-red-500 hover:text-gray-100"
+                class="no-select hover:text-primary-100 group flex w-full items-center space-x-4 rounded-md px-4 py-3 hover:bg-red-500"
                 @click="deleteLink"
               >
                 <icon name="ph:trash" />
@@ -97,13 +99,13 @@ const deleteLink = () => {
           leave-to-class="transform scale-95 opacity-0"
         >
           <menu-items
-            class="absolute right-0 z-50 mt-4 w-screen origin-top-right divide-y divide-gray-100 rounded-md border bg-gray-50 shadow-lg focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 md:w-44"
+            class="divide-primary-100 bg-primary-50 dark:border-primary-700 dark:bg-primary-900 dark:text-primary-100 absolute right-0 z-50 mt-4 w-screen origin-top-right divide-y rounded-md border shadow-lg focus:outline-none md:w-44"
           >
             <div class="flex flex-col space-y-1 p-2">
               <menu-item>
                 <button
                   title="Edit Link"
-                  class="group flex w-full items-center space-x-4 rounded p-2 text-sm hover:bg-gray-200 dark:hover:bg-gray-700"
+                  class="hover:bg-primary-200 dark:hover:bg-primary-700 group flex w-full items-center space-x-4 rounded p-2 text-sm"
                   @click="$emit('edit-link')"
                 >
                   <icon name="ph:pencil" size="20" />
@@ -114,7 +116,7 @@ const deleteLink = () => {
               <menu-item>
                 <button
                   title="Delete Link"
-                  class="group flex w-full items-center space-x-4 rounded p-2 text-sm hover:bg-red-500 hover:text-gray-100"
+                  class="hover:text-primary-100 group flex w-full items-center space-x-4 rounded p-2 text-sm hover:bg-red-500"
                   @click="deleteLink"
                 >
                   <icon name="ph:trash" size="20" />

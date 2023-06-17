@@ -45,12 +45,12 @@ const drawerAction = (target: { link: string; external: boolean }) => {
       <transition name="slide-fade">
         <aside
           v-show="isDrawerVisible"
-          class="fixed inset-0 top-16 z-50 flex h-screen w-full flex-col overflow-y-hidden bg-gray-50 px-6 py-4 dark:bg-gray-900 md:hidden"
+          class="bg-primary-50 dark:bg-primary-900 fixed inset-0 top-16 z-50 flex h-screen w-full flex-col overflow-y-hidden px-6 py-4 md:hidden"
         >
           <div
             v-for="item in navItems"
             :key="item.title"
-            class="text-md flex cursor-pointer items-center space-x-4 border-b px-2 py-4 font-normal hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+            class="text-md hover:bg-primary-100 dark:border-primary-700 dark:text-primary-200 dark:hover:bg-primary-800 flex cursor-pointer items-center space-x-4 border-b px-2 py-4 font-normal"
             @click="drawerAction(item.target)"
           >
             <icon :name="item.icon" size="20" />

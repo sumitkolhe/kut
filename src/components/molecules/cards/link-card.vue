@@ -47,17 +47,17 @@ const props = defineProps({
 
 <template>
   <div
-    class="flex w-full flex-col items-center gap-y-4 rounded-md border bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900 md:px-6 md:py-5 lg:flex-row"
+    class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 flex w-full flex-col items-center gap-y-4 rounded-md border p-4 md:px-6 md:py-5 lg:flex-row"
   >
     <div
       class="flex w-full flex-row items-center justify-between lg:flex-col lg:items-start lg:space-y-1"
     >
-      <p class="text-xs uppercase tracking-wider text-gray-300">Short Link</p>
+      <p class="text-primary-300 text-xs uppercase tracking-wider">Short Link</p>
 
       <NuxtLink
         target="_blank"
         :to="props.shortUrl"
-        class="flex items-center text-sm text-gray-500"
+        class="text-primary-500 flex items-center text-sm"
       >
         <span v-slice="30" :title="props.shortUrl" class="truncate hover:underline">
           {{ props.shortUrl }}
@@ -68,12 +68,12 @@ const props = defineProps({
     <div
       class="flex w-full flex-row items-center justify-between lg:flex-col lg:items-start lg:space-y-1"
     >
-      <p class="text-xs uppercase tracking-wider text-gray-300">Target</p>
+      <p class="text-primary-300 text-xs uppercase tracking-wider">Target</p>
       <NuxtLink
         v-slice="30"
         target="_blank"
         :to="props.target"
-        class="truncate text-sm text-gray-500 hover:underline"
+        class="text-primary-500 truncate text-sm hover:underline"
       >
         {{ props.target }}
       </NuxtLink>
@@ -82,10 +82,10 @@ const props = defineProps({
     <div
       class="flex w-full flex-row items-center justify-between lg:flex-col lg:items-start lg:space-y-1"
     >
-      <p class="text-xs uppercase tracking-wider text-gray-300">Views</p>
+      <p class="text-primary-300 text-xs uppercase tracking-wider">Views</p>
 
-      <p class="truncate text-sm text-gray-500">
-        <span class="text-sm dark:text-gray-200">{{ props.visitCount }}</span>
+      <p class="text-primary-500 truncate text-sm">
+        <span class="dark:text-primary-200 text-sm">{{ props.visitCount }}</span>
         {{ props.visitCount > 1 ? 'views' : 'view' }}
       </p>
     </div>
@@ -93,9 +93,9 @@ const props = defineProps({
     <div
       class="flex w-full flex-row items-center justify-between lg:flex-col lg:items-start lg:space-y-1"
     >
-      <p class="text-xs uppercase tracking-wider text-gray-300">Added</p>
+      <p class="text-primary-300 text-xs uppercase tracking-wider">Added</p>
 
-      <p class="text-sm text-gray-500" :title="props.createdAt">
+      <p class="text-primary-500 text-sm" :title="props.createdAt">
         {{ useTimeAgo(props.createdAt).value }}
       </p>
     </div>
