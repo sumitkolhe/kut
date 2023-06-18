@@ -1,4 +1,3 @@
-export interface UserRegisterDto {
-  email: string
-  password: string
-}
+import type { UserClass } from 'server/modules/users/models'
+
+export type UserRegisterDto = Pick<UserClass, 'email' | 'password'>

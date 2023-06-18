@@ -1,4 +1,3 @@
-import type { UserSchema } from 'server/modules/users/models/user.model'
-import type { InferSchemaType } from 'mongoose'
+import type { UserClass } from 'server/modules/users/models'
 
-export type UserDto = InferSchemaType<typeof UserSchema>
+export type UserDto = UserClass
