@@ -3,7 +3,7 @@ import { UserRepository } from 'server/modules/users/repositories'
 import { ErrorType } from 'interfaces/error.interface'
 import bcrypt from 'bcryptjs'
 import { signAccessToken, signRefreshToken } from 'server/modules/users/utils'
-import type { IUseCase } from 'server/common/types/use-case.type'
+import type { IUseCase } from 'server/common/types'
 import type { AuthTokenDto, UserLoginDto } from 'server/modules/users/dto'
 
 export class LoginUserUseCase implements IUseCase<UserLoginDto, AuthTokenDto> {

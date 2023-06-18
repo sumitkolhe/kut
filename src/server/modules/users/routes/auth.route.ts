@@ -3,11 +3,11 @@ import { checkAuthentication } from 'server/common/middlewares/auth.middleware'
 import {
   loginSchema,
   refreshTokenSchema,
-  registerationSchema,
+  registrationSchema as registrationSchema,
   verifyAccountSchema,
-} from 'server/common/helpers/validator.helper'
-import { AuthController } from 'server/modules/users/controllers/auth.controller'
-import type { Routes } from 'server/common/types/routes.interface'
+} from 'server/modules/users/helpers'
+import { AuthController } from 'server/modules/users/controllers'
+import type { Routes } from 'server/common/types'
 
 export class AuthRoute implements Routes {
   public path = '/auth'
@@ -18,7 +18,7 @@ export class AuthRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}/register`, registerationSchema, this.authController.register)
+    this.router.post(`${this.path}/register`, registrationSchema, this.authController.register)
     this.router.post(`${this.path}/github`, this.authController.loginWithGithub)
     this.router.post(`${this.path}/login`, loginSchema, this.authController.login)
     this.router.post(

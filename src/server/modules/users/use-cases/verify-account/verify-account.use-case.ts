@@ -1,8 +1,8 @@
 import { UserRepository } from 'server/modules/users/repositories'
-import { HttpExceptionError } from 'server/common/exceptions/http.exception'
+import { HttpExceptionError } from 'server/common/exceptions'
 import { ErrorType } from 'interfaces/error.interface'
-import { verifyAccountVerificationToken } from 'server/modules/users/utils/token.util'
-import type { IUseCase } from 'server/common/types/use-case.type'
+import { verifyAccountVerificationToken } from 'server/modules/users/utils'
+import type { IUseCase } from 'server/common/types'
 import type { VerificationTokenDto } from 'server/modules/users/dto'
 
 export class VerifyAccountUseCase implements IUseCase<VerificationTokenDto> {

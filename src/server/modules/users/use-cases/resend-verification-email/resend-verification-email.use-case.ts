@@ -1,8 +1,8 @@
 import { UserRepository } from 'server/modules/users/repositories'
-import { HttpExceptionError } from 'server/common/exceptions/http.exception'
+import { HttpExceptionError } from 'server/common/exceptions'
 import { ErrorType } from 'interfaces/error.interface'
 import { AccountVerificationEmailUseCase } from 'server/modules/users/use-cases'
-import type { IUseCase } from 'server/common/types/use-case.type'
+import type { IUseCase } from 'server/common/types'
 
 export class ResendAccountVerificationEmailUseCase implements IUseCase<String> {
   private userRepository: UserRepository
