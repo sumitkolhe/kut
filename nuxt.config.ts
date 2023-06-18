@@ -36,14 +36,18 @@ export default defineNuxtConfig({
 
   css: ['~/assets/toast.css'],
 
+  ui: {
+    icons: ['tabler'],
+  },
+
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
-    '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     'nuxt-icon',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxt/devtools',
+    '@nuxthq/ui',
   ],
 
   serverHandlers: [

@@ -18,6 +18,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.14",
     "@pinia/nuxt": "^0.4.11",
+    "@typegoose/typegoose": "^11.2.0",
     "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.1",
     "cors": "^2.8.5",
@@ -41,6 +42,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
+    "@iconify-json/ph": "^1.1.5",
+    "@iconify-json/tabler": "^1.1.79",
     "@kolhe/eslint-config": "^1.1.8",
     "@nuxt/devtools": "^0.5.5",
     "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest",

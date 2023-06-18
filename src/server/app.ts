@@ -4,9 +4,9 @@ import express from 'express'
 import morgan from 'morgan'
 import timeout from 'express-timeout-handler'
 import useragent from 'express-useragent'
-import nocache from 'nocache'
 import { useConfig } from 'server/common/configs'
 import { errorMiddleware } from 'server/common/middlewares/error.middleware'
+import { LogLevels, setLogLevel } from '@typegoose/typegoose'
 import type { Statistics } from '~/server/common/types/statistics.interface'
 import type { Response } from 'express'
 import type { Config } from 'server/common/types/config.type'
@@ -40,6 +40,7 @@ export class App {
     this.initializeRoutes(routes)
     this.initializeRouteFallback()
     this.initializeErrorHandler()
+    setLogLevel(LogLevels.DEBUG)
   }
 
   private initializeMiddlewares() {
@@ -52,7 +53,6 @@ export class App {
       }),
       express.json(),
       express.urlencoded({ extended: true }),
-      nocache(),
       timeout.handler({
         timeout: 9000,
         onTimeout(req: Request, res: Response) {
