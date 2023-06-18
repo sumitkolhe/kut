@@ -1,12 +1,18 @@
-import { RegisterUserUseCase } from 'server/modules/users/use-cases/register/register.use-case'
-import { LoginUserUseCase } from 'server/modules/users/use-cases/login/login.use-case'
-import { RefreshTokenUseCase } from 'server/modules/users/use-cases/refresh-token/refresh-token.use-case'
-import { ResendAccountVerificationEmailUseCase } from 'server/modules/users/use-cases/resend-verification-email/resend-verification-email.use-case'
-import { VerifyAccountUseCase } from 'server/modules/users/use-cases/verify-account/verify-account.use-case'
-import { LoginWithGithubUseCase } from 'server/modules/users/use-cases/login-github/login-with-github.use-case'
-import type { UserRegisterDto } from 'server/modules/users/dto/register.dto'
-import type { UserGithubLoginDto, UserLoginDto } from 'server/modules/users/dto/login.dto'
-import type { RefreshTokenDto, VerificationTokenDto } from 'server/modules/users/dto/token.dto'
+import {
+  LoginUserUseCase,
+  LoginWithGithubUseCase,
+  RefreshTokenUseCase,
+  RegisterUserUseCase,
+  ResendAccountVerificationEmailUseCase,
+  VerifyAccountUseCase,
+} from 'server/modules/users/use-cases'
+import type {
+  RefreshTokenDto,
+  UserGithubLoginDto,
+  UserLoginDto,
+  UserRegisterDto,
+  VerificationTokenDto,
+} from 'server/modules/users/dto'
 
 export class AuthService {
   private readonly registerUseCase: RegisterUserUseCase

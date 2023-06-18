@@ -1,11 +1,10 @@
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
-import { UserRepository } from 'server/modules/users/repositories/user.repository'
+import { UserRepository } from 'server/modules/users/repositories'
 import { ErrorType } from 'interfaces/error.interface'
 import bcrypt from 'bcryptjs'
 import { signAccessToken, signRefreshToken } from 'server/modules/users/utils/token.util'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { UserLoginDto } from 'server/modules/users/dto/login.dto'
-import type { AuthTokenDto } from 'server/modules/users/dto/token.dto'
+import type { AuthTokenDto, UserLoginDto } from 'server/modules/users/dto'
 
 export class LoginUserUseCase implements IUseCase<UserLoginDto, AuthTokenDto> {
   private userRepository: UserRepository

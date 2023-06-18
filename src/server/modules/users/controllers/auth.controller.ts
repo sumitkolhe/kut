@@ -1,8 +1,7 @@
-import { AuthService } from 'server/modules/users/services/auth.service'
+import { AuthService } from 'server/modules/users/services'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'server/common/types/response.interface'
-import type { UserRegisterDto } from 'server/modules/users/dto/register.dto'
-import type { AccessTokenDto, AuthTokenDto } from 'server/modules/users/dto/token.dto'
+import type { AccessTokenDto, AuthTokenDto, UserRegisterDto } from 'server/modules/users/dto'
 
 export class AuthController {
   private readonly authService: AuthService

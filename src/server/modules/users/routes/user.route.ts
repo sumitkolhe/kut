@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { checkAuthentication } from 'server/common/middlewares/auth.middleware'
-import { UserController } from 'server/modules/users/controllers/user.controller'
+import { UserController } from 'server/modules/users/controllers'
 import type { Routes } from 'server/common/types/routes.interface'
 
 export class UserRoute implements Routes {

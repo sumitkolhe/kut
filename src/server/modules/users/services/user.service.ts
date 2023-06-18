@@ -1,4 +1,4 @@
-import { MeUseCase } from 'server/modules/users/use-cases/me/me.use-case'
+import { MeUseCase } from 'server/modules/users/use-cases'
 
 export class UserService {
   private readonly meUseCase: MeUseCase

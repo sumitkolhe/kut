@@ -1,8 +1,10 @@
 {
-  // https://v3.nuxtjs.org/concepts/typescript
+  "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "strict": true,
-    "strictNullChecks": true
+    "target": "ES2022",
+    "module": "ES2022",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }

@@ -1,5 +1,5 @@
 import { useConfig } from 'server/common/configs'
-import type { GithubUser, GithubUserEmail } from 'server/modules/users/types/github.type'
+import type { GithubUser, GithubUserEmail } from 'server/modules/users/types'
 
 const {
   github: { clientId, clientSecret },

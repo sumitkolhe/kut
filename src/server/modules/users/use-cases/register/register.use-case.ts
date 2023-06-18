@@ -1,10 +1,10 @@
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
-import { UserRepository } from 'server/modules/users/repositories/user.repository'
+import { UserRepository } from 'server/modules/users/repositories'
 import { ErrorType } from 'interfaces/error.interface'
 import bcrypt from 'bcryptjs'
-import { AccountVerificationEmailUseCase } from 'server/modules/users/use-cases/send-verification-email/send-verification-email.use-case'
+import { AccountVerificationEmailUseCase } from 'server/modules/users/use-cases'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { UserRegisterDto } from 'server/modules/users/dto/register.dto'
+import type { UserRegisterDto } from 'server/modules/users/dto'
 
 export class RegisterUserUseCase implements IUseCase<UserRegisterDto, void> {
   private userRepository: UserRepository

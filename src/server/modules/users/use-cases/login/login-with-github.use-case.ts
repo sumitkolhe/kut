@@ -1,15 +1,14 @@
-import { UserRepository } from 'server/modules/users/repositories/user.repository'
+import { UserRepository } from 'server/modules/users/repositories'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { ErrorType } from 'interfaces/error.interface'
 import {
   getGithubAccessToken,
   getGithubUser,
   getGithubUserEmails,
-} from 'server/modules/users/helpers/github.helper'
+} from 'server/modules/users/helpers'
 import { signAccessToken, signRefreshToken } from 'server/modules/users/utils/token.util'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { UserGithubLoginDto } from 'server/modules/users/dto/login.dto'
-import type { AuthTokenDto } from 'server/modules/users/dto/token.dto'
+import type { AuthTokenDto, UserGithubLoginDto } from 'server/modules/users/dto'
 
 export class LoginWithGithubUseCase implements IUseCase<UserGithubLoginDto, AuthTokenDto> {
   private userRepository: UserRepository

@@ -1,8 +1,8 @@
-import { UserRepository } from 'server/modules/users/repositories/user.repository'
+import { UserRepository } from 'server/modules/users/repositories'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import { ErrorType } from 'interfaces/error.interface'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { UserDto } from 'server/modules/users/dto/user.dto'
+import type { UserDto } from 'server/modules/users/dto'
 
 export class MeUseCase implements IUseCase<String, UserDto> {
   private userRepository: UserRepository

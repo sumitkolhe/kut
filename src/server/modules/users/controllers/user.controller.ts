@@ -1,7 +1,7 @@
-import { UserService } from 'server/modules/users/services/user.service'
+import { UserService } from 'server/modules/users/services'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 import type { CustomResponse } from 'server/common/types/response.interface'
-import type { UserDto } from 'server/modules/users/dto/user.dto'
+import type { UserDto } from 'server/modules/users/dto'
 
 export class UserController {
   private readonly userService: UserService
