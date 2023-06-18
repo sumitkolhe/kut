@@ -1,8 +1,8 @@
-import { HttpExceptionError } from 'server/common/exceptions/http.exception'
+import { HttpExceptionError } from 'server/common/exceptions'
 import { UserRepository } from 'server/modules/users/repositories'
 import { ErrorType } from 'interfaces/error.interface'
 import bcrypt from 'bcryptjs'
-import { signAccessToken, signRefreshToken } from 'server/modules/users/utils/token.util'
+import { signAccessToken, signRefreshToken } from 'server/modules/users/utils'
 import type { IUseCase } from 'server/common/types/use-case.type'
 import type { AuthTokenDto, UserLoginDto } from 'server/modules/users/dto'
 
@@ -18,7 +18,7 @@ export class LoginUserUseCase implements IUseCase<UserLoginDto, AuthTokenDto> {
 
     if (!existingUser) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    const doesPasswordMatch = await bcrypt.compare(password, existingUser.password!)
+    const doesPasswordMatch = await bcrypt.compare(password!, existingUser.password!)
 
     if (!doesPasswordMatch) throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
 
