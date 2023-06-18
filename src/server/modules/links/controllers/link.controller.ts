@@ -1,8 +1,8 @@
-import { LinkService } from 'server/modules/links/services/link.service'
+import { LinkService } from 'server/modules/links/services'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
-import type { CustomResponse } from 'server/common/types/response.interface'
-import type { LinkDto } from 'server/modules/links/dto/link.dto'
-import type { Paginator } from 'server/modules/links/types/pagination.type'
+import type { CustomResponse } from 'server/common/types'
+import type { CreateLinkDto, LinkDto } from 'server/modules/links/dto'
+import type { Paginator } from 'server/modules/links/types'
 
 export class LinkController {
   private linkService: LinkService
@@ -23,7 +23,7 @@ export class LinkController {
         target,
         description,
         meta: { password, validFrom, validTill, maxVisits, active } = {},
-      }: LinkDto = req.body
+      }: CreateLinkDto = req.body
 
       const shortenedLink = await this.linkService.createLink({
         userId,
@@ -81,7 +81,7 @@ export class LinkController {
 
   public updateLink: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<any>>,
+    res: Response<CustomResponse<LinkDto>>,
     next: NextFunction
   ) => {
     try {

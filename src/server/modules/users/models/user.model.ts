@@ -1,5 +1,4 @@
 import { getModelForClass, modelOptions, prop } from '@typegoose/typegoose'
-import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
 
 class UserProfile {
   @prop({ type: String, required: false, lowercase: true })
@@ -50,7 +49,7 @@ class UserApiKeys {
   public lastUsedOn?: Date
 }
 
-class UserClass extends TimeStamps {
+class UserClass {
   @prop({ type: UserProfile })
   public profile?: UserProfile
 
@@ -73,6 +72,8 @@ class UserClass extends TimeStamps {
   public isVerified?: boolean
 }
 
-const UserModel = getModelForClass(UserClass, { schemaOptions: { collection: 'users' } })
+const UserModel = getModelForClass(UserClass, {
+  schemaOptions: { collection: 'users', timestamps: true },
+})
 
 export { UserModel, UserClass }

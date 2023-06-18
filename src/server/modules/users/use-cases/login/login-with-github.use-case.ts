@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto'
 import { UserRepository } from 'server/modules/users/repositories'
 import { HttpExceptionError } from 'server/common/exceptions'
 import { ErrorType } from 'interfaces/error.interface'
@@ -48,6 +49,10 @@ export class LoginWithGithubUseCase implements IUseCase<UserGithubLoginDto, Auth
           google: false,
           credentials: false,
         },
+        apiKeys: {
+          key: randomUUID(),
+          name: 'default-api-key',
+        },
       })
 
       const signedAccessToken = await signAccessToken({ id: newUser._id })
@@ -67,7 +72,10 @@ export class LoginWithGithubUseCase implements IUseCase<UserGithubLoginDto, Auth
 
       return { accessToken: signedAccessToken, refreshToken: signedRefreshToken }
     } else {
-      throw new HttpExceptionError(500, ErrorType.somethingWentWrong)
+      const signedAccessToken = await signAccessToken({ id: existingUser?._id })
+      const signedRefreshToken = await signRefreshToken({ id: existingUser?._id })
+
+      return { accessToken: signedAccessToken, refreshToken: signedRefreshToken }
     }
   }
 }

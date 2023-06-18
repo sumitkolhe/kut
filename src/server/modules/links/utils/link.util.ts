@@ -3,7 +3,7 @@ import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 
 const config = useConfig()
 
-export const createShortLink = (alias: string) => {
+export const generateShortLink = (alias: string) => {
   return `${config.domain.protocol}://${config.domain.url}/${alias}`
 }
 

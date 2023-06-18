@@ -1,12 +1,12 @@
-import { createShortLink, sanitizeTargetLink } from 'server/modules/links/utils/link.util'
-import { LinkRepository } from 'server/modules/links/repositories/link.repository'
-import { GenerateAliasUseCase } from 'server/modules/links/use-cases/generate-alias/generate-alias.use-case'
+import { generateShortLink, sanitizeTargetLink } from 'server/modules/links/utils'
+import { LinkRepository } from 'server/modules/links/repositories'
+import { GenerateAliasUseCase } from 'server/modules/links/use-cases'
 import { ErrorType } from 'interfaces/error.interface'
-import { HttpExceptionError } from 'server/common/exceptions/http.exception'
-import type { CreateLinkInput } from 'server/modules/links/dto/link.dto'
-import type { IUseCase } from 'server/common/types/use-case.type'
+import { HttpExceptionError } from 'server/common/exceptions'
+import type { IUseCase } from 'server/common/types'
+import type { CreateLinkDto } from 'server/modules/links/dto'
 
-export class CreateLinkUseCase implements IUseCase<CreateLinkInput> {
+export class CreateLinkUseCase implements IUseCase<CreateLinkDto> {
   private linkRepository: LinkRepository
   private generateAliasUseCase: GenerateAliasUseCase
 
@@ -15,7 +15,7 @@ export class CreateLinkUseCase implements IUseCase<CreateLinkInput> {
     this.generateAliasUseCase = new GenerateAliasUseCase()
   }
 
-  async execute(linkInput: Omit<CreateLinkInput, 'shortUrl'>) {
+  async execute(linkInput: Omit<CreateLinkDto, 'shortUrl'>) {
     const linkAlreadyExists = await this.linkRepository.exists({ alias: linkInput.alias })
 
     if (linkAlreadyExists) throw new HttpExceptionError(400, ErrorType.aliasAlreadyUsed)
@@ -28,21 +28,15 @@ export class CreateLinkUseCase implements IUseCase<CreateLinkInput> {
 
     const verifiedTarget = sanitizeTargetLink(target)
 
-    const shortUrl = createShortLink(uniqueAlias)
+    const shortUrl = generateShortLink(uniqueAlias)
 
-    return this.linkRepository.createLink({
-      userId,
+    return this.linkRepository.create({
+      userId: userId!,
       alias: uniqueAlias,
       target: verifiedTarget,
       shortUrl,
       description,
-      meta: {
-        password: meta?.password as string,
-        validFrom: meta?.validFrom as Date,
-        validTill: meta?.validTill as Date,
-        maxVisits: meta?.maxVisits as number,
-        active: meta?.active as boolean,
-      },
+      meta,
     })
   }
 }

@@ -2,7 +2,7 @@ import { LinkRepository } from 'server/modules/links/repositories/link.repositor
 import { CreateLinkUseCase } from 'server/modules/links/use-cases/create-link/create-link.use-case'
 import { RedirectLinkUseCase } from 'server/modules/links/use-cases/redirect-link/redirect-link.use-case'
 import type { Statistics } from 'server/common/types/statistics.interface'
-import type { CreateLinkInput } from 'server/modules/links/dto/link.dto'
+import type { CreateLinkDto } from 'server/modules/links/dto'
 import type { Paginator } from 'server/modules/links/types/pagination.type'
 
 export class LinkService {
@@ -16,7 +16,7 @@ export class LinkService {
     this.redirectLinkUseCase = new RedirectLinkUseCase()
   }
 
-  public createLink = async (createLinkInput: Omit<CreateLinkInput, 'shortUrl'>) => {
+  public createLink = async (createLinkInput: CreateLinkDto) => {
     return this.createLinkUseCase.execute(createLinkInput)
   }
 

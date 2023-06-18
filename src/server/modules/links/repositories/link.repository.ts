@@ -1,6 +1,6 @@
 import { BaseRepository } from 'server/common/classes/base-repository.class'
 import { LinkModel } from 'server/modules/links/models/link.model'
-import type { CreateLinkInput, LinkDto } from 'server/modules/links/dto/link.dto'
+import type { LinkDto } from 'server/modules/links/dto'
 import type { Paginator } from 'server/modules/links/types/pagination.type'
 
 export class LinkRepository extends BaseRepository<LinkDto, LinkDto> {
@@ -41,23 +41,6 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDto> {
 
   async incrementLinkVisits(id: string) {
     return this.model.updateOne({ _id: id }, { $inc: { visitCount: 1 } })
-  }
-
-  async createLink(linkPayload: CreateLinkInput) {
-    return this.model.create({
-      userId: linkPayload.userId,
-      alias: linkPayload.alias,
-      target: linkPayload.target,
-      shortUrl: linkPayload.shortUrl,
-      description: linkPayload.description,
-      meta: {
-        password: linkPayload.meta?.password,
-        validFrom: linkPayload.meta?.validFrom,
-        validTill: linkPayload.meta?.validTill,
-        maxVisits: linkPayload.meta?.maxVisits,
-        active: linkPayload.meta?.active,
-      },
-    })
   }
 }
 

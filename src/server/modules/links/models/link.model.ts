@@ -1,49 +1,48 @@
-import { Schema, model } from 'mongoose'
+import { getModelForClass, index, plugin, prop } from '@typegoose/typegoose'
 
-export const LinkSchema = new Schema(
-  {
-    userId: { type: String, required: true },
-    alias: { type: String, required: true, unique: true },
-    target: { type: String, required: true },
-    shortUrl: { type: String, required: true },
-    visitCount: { type: Number, default: 0, required: false },
-    description: { type: String, required: false, default: null },
-    meta: {
-      password: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      validFrom: {
-        type: Date,
-        required: false,
-        default: Date.now(),
-      },
-      validTill: {
-        type: Date,
-        required: false,
-        default: null,
-      },
-      maxVisits: {
-        type: Number,
-        required: false,
-        default: null,
-      },
-      active: {
-        type: Boolean,
-        required: false,
-        default: true,
-      },
-    },
-  },
-  { timestamps: true }
-)
+class Meta {
+  @prop({ required: false, default: null, type: String })
+  password?: string | null
 
-LinkSchema.index({
-  alias: 'text',
-  target: 'text',
-  shortUrl: 'text',
-  description: 'text',
+  @prop({ required: false, default: Date.now(), type: Date })
+  validFrom?: Date
+
+  @prop({ required: false, default: null, type: Date })
+  validTill?: Date | null
+
+  @prop({ required: false, default: null, type: Number })
+  maxVisits?: number | null
+
+  @prop({ required: false, default: true, type: Boolean })
+  active?: boolean
+}
+
+@plugin(index, { alias: 'text', target: 'text', shortUrl: 'text', description: 'text' })
+class LinkClass {
+  @prop({ required: true, type: String })
+  userId!: string
+
+  @prop({ required: true, unique: true, type: String })
+  alias!: string
+
+  @prop({ required: true, type: String })
+  target!: string
+
+  @prop({ required: true, type: String })
+  shortUrl!: string
+
+  @prop({ default: 0, type: Number })
+  visitCount?: number
+
+  @prop({ type: String })
+  description?: string | null
+
+  @prop({ _id: false, type: () => Meta })
+  meta?: Meta
+}
+
+const LinkModel = getModelForClass(LinkClass, {
+  schemaOptions: { timestamps: true },
 })
 
-export const LinkModel = model('link', LinkSchema)
+export { LinkModel, LinkClass }

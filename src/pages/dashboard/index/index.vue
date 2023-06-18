@@ -153,7 +153,7 @@ watch(copied, (clicked) => {
           Get started by creating a new link.
         </p>
 
-        <u-button block trailing-icon="i-tabler-plus" @click="showCreateLinkPanel = true">
+        <u-button size="lg" trailing-icon="i-tabler-plus" @click="showCreateLinkPanel = true">
           Add link
         </u-button>
       </div>

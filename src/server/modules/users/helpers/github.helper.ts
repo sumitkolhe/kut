@@ -6,7 +6,6 @@ const {
 } = useConfig()
 
 export const getGithubAccessToken = (code: string) => {
-  console.log('clientId', clientId)
   return $fetch<{ access_token: string; token_type: string; scope: string }>(
     'https://github.com/login/oauth/access_token',
     {

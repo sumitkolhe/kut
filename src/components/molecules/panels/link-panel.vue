@@ -88,7 +88,7 @@ const closePanel = () => {
           />
         </u-form-group>
 
-        <u-form-group :error="result.alias.$messages[0]" label="Alias">
+        <u-form-group label="Alias">
           <u-input
             v-model="linkPayload.alias"
             size="xl"
@@ -97,7 +97,7 @@ const closePanel = () => {
           />
         </u-form-group>
 
-        <u-form-group :error="result.description.$messages[0]" label="Description">
+        <u-form-group label="Description">
           <u-input
             v-model="linkPayload.alias"
             size="xl"
@@ -106,36 +106,9 @@ const closePanel = () => {
           />
         </u-form-group>
 
-        <u-form-group :error="result.meta.password.$messages[0]" label="Password">
+        <u-form-group label="Password">
           <u-input
             v-model="linkPayload.meta.password"
-            size="xl"
-            placeholder="Enter alias"
-            trailing-icon="i-tabler-edit-circle"
-          />
-        </u-form-group>
-
-        <u-form-group :error="result.target.$messages[0]" label="Alias">
-          <u-input
-            v-model="linkPayload.alias"
-            size="xl"
-            placeholder="Enter alias"
-            trailing-icon="i-tabler-edit-circle"
-          />
-        </u-form-group>
-
-        <u-form-group :error="result.target.$messages[0]" label="Alias">
-          <u-input
-            v-model="linkPayload.alias"
-            size="xl"
-            placeholder="Enter alias"
-            trailing-icon="i-tabler-edit-circle"
-          />
-        </u-form-group>
-
-        <u-form-group :error="result.target.$messages[0]" label="Alias">
-          <u-input
-            v-model="linkPayload.alias"
             size="xl"
             placeholder="Enter alias"
             trailing-icon="i-tabler-edit-circle"
