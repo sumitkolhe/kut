@@ -1,8 +1,5 @@
 <script lang="ts" setup>
 import useValidate from 'vue-tiny-validate'
-import TextInput from 'components/atoms/input/text-input.vue'
-import PasswordInput from 'components/atoms/input/password-input.vue'
-import PrimaryButton from 'components/atoms/button/primary-button.vue'
 import { useAuthStore } from 'store/auth.store'
 import type { Rules } from 'vue-tiny-validate'
 
@@ -36,7 +33,7 @@ const rules: Rules = reactive({
     {
       name: 'required',
       test: (value: string) => value.length >= 6,
-      message: 'Password must be atleast 6 characters long.',
+      message: 'Password must be at-least 6 characters long.',
     },
   ],
 })
@@ -74,70 +71,80 @@ const githubLogin = () => {
 
   const loginUrl = `https://github.com/login/oauth/authorize?${params.toString()}}`
 
-  return navigateTo(loginUrl, { external: true })
+  return navigateTo(loginUrl, { external: true, replace: true })
 }
 </script>
 
 <template>
-  <section class="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-800">
+  <section class="bg-primary-100 dark:bg-primary-900 flex min-h-screen items-center justify-center">
     <!-- Inner container  -->
-    <div class="flex h-fit w-full max-w-xl flex-col rounded-lg dark:border-gray-700 lg:flex-row">
+    <div class="dark:border-primary-700 flex h-fit w-full max-w-xl flex-col rounded-lg lg:flex-row">
       <!-- Login Form  -->
       <div class="flex w-full flex-col items-center justify-center space-y-6 px-6 md:p-10 xl:p-14">
-        <h1 class="mb-4 text-2xl font-medium tracking-wide dark:text-gray-200 xl:text-3xl">
+        <h1 class="dark:text-primary-200 mb-4 text-2xl font-medium tracking-wide xl:text-3xl">
           Log in
         </h1>
         <div
           class="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0"
         >
-          <primary-button
-            class="py-3 hover:bg-gray-700 hover:text-white md:text-base"
+          <u-button
+            size="lg"
+            block
+            icon="i-tabler-brand-github"
+            :trailing="true"
+            :loading="loading"
             @click="githubLogin"
           >
-            Sign up with Github
-          </primary-button>
-          <!-- <base-button
-            class="bg-red-500 py-3 hover:border-red-600 hover:bg-red-600 hover:text-white"
-          >
-            Sign up with Google
-          </base-button> -->
+            Log in with GitHub
+          </u-button>
+
+          <!-- <u-button size="xl" block :loading="loading" @click="login">
+            Log in with Google
+          </u-button> -->
         </div>
 
         <div class="flex w-full justify-center border-b">
           <p
-            class="inline-block translate-y-2 transform bg-white px-2 text-sm font-medium leading-none tracking-wide text-gray-600 dark:bg-gray-800 dark:text-gray-200"
+            class="bg-primary-50 text-primary-600 dark:bg-primary-800 dark:text-primary-300 inline-block translate-y-2 transform px-2 text-sm font-medium leading-none tracking-wide"
           >
-            Or Log in with an e-mail
+            OR
           </p>
         </div>
 
         <form class="flex w-full flex-col items-center space-y-8">
           <div class="w-full space-y-4">
-            <text-input
-              v-model="loginData.email"
-              label="Email"
-              type="email"
-              placeholder="john@doe.com"
-              suffix-icon="ph:at"
-              :errors="result.email.$messages"
-            />
-            <password-input
-              v-model="loginData.password"
-              label="Password"
-              placeholder="********"
-              :errors="result.password.$messages"
-            />
+            <u-form-group label="Email" :error="result.email.$messages[0]">
+              <u-input
+                v-model="loginData.email"
+                size="xl"
+                type="email"
+                placeholder="dwight@dundermiflfin.com"
+                trailing
+                icon="i-tabler-at"
+              />
+            </u-form-group>
+
+            <u-form-group label="Password" :error="result.password.$messages[0]">
+              <u-input
+                v-model="loginData.password"
+                size="xl"
+                type="email"
+                placeholder="**********"
+                trailing
+                icon="i-tabler-password"
+              />
+            </u-form-group>
           </div>
 
-          <primary-button :loading="loading" @click="login"> Log in </primary-button>
+          <u-button size="lg" block :loading="loading" @click="login"> Log in </u-button>
         </form>
 
         <div class="space-y-3">
-          <p class="text-center text-gray-600">
+          <p class="text-primary-600 text-center">
             Don't have an account?
             <nuxt-link to="/auth/register" class="text-red-500 hover:underline">Sign up</nuxt-link>
           </p>
-          <p class="text-center text-gray-600">
+          <p class="text-primary-600 text-center">
             <nuxt-link to="/auth/forgot-password" class="text-red-500 hover:underline">
               Forgot password?
             </nuxt-link>

@@ -24,7 +24,7 @@ export default <Config>{
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        gray: {
+        midnight: {
           50: '#fff',
           100: '#FAFAFA',
           200: '#EAEAEA',
@@ -75,5 +75,4 @@ export default <Config>{
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
 }

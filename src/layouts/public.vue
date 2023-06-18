@@ -8,7 +8,7 @@ import AppFooter from 'components/organisms/app-footer.vue'
   <main class="no-select">
     <app-header />
     <app-drawer />
-    <NuxtLoadingIndicator color="#f55" :height="3" />
+    <nuxt-loading-indicator color="#f55" :height="30" />
     <slot />
     <app-footer />
   </main>
@@ -19,22 +19,8 @@ import AppFooter from 'components/organisms/app-footer.vue'
   font-family: 'Inter', sans-serif !important;
 }
 
-.no-select {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 .no-select:focus {
   outline: none !important;
-}
-
-body {
-  @apply bg-gray-100 dark:bg-gray-800;
 }
 
 /* Chrome, Safari and Opera */
@@ -42,6 +28,9 @@ body {
   display: none;
 }
 
+body {
+  @apply bg-primary-100 dark:bg-primary-900;
+}
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
