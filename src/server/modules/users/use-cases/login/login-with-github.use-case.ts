@@ -1,12 +1,12 @@
 import { UserRepository } from 'server/modules/users/repositories'
-import { HttpExceptionError } from 'server/common/exceptions/http.exception'
+import { HttpExceptionError } from 'server/common/exceptions'
 import { ErrorType } from 'interfaces/error.interface'
 import {
   getGithubAccessToken,
   getGithubUser,
   getGithubUserEmails,
 } from 'server/modules/users/helpers'
-import { signAccessToken, signRefreshToken } from 'server/modules/users/utils/token.util'
+import { signAccessToken, signRefreshToken } from 'server/modules/users/utils'
 import type { IUseCase } from 'server/common/types/use-case.type'
 import type { AuthTokenDto, UserGithubLoginDto } from 'server/modules/users/dto'
 
@@ -36,39 +36,38 @@ export class LoginWithGithubUseCase implements IUseCase<UserGithubLoginDto, Auth
       throw new HttpExceptionError(500, ErrorType.somethingWentWrong)
     }
 
-    let existingUser
-
     // check if user exists in db with the primary email
-    existingUser = await this.userRepository.findByEmail(githubEmail)
+    const existingUser = await this.userRepository.findByEmail(githubEmail)
 
-    if (existingUser) {
-      if (existingUser.authProviders?.social?.github === false) {
-        await this.userRepository.update(existingUser._id.toString(), {
-          $set: {
-            'authProviders.social.github': true,
-            isVerified: true,
-          },
-        })
-      }
-    } else {
-      existingUser = await this.userRepository.create({
+    if (!existingUser) {
+      const newUser = await this.userRepository.create({
         email: githubEmail,
         isVerified: true,
         authProviders: {
-          social: {
-            github: true,
-            google: false,
-          },
+          github: true,
+          google: false,
           credentials: false,
         },
       })
+
+      const signedAccessToken = await signAccessToken({ id: newUser._id })
+      const signedRefreshToken = await signRefreshToken({ id: newUser._id })
+
+      return { accessToken: signedAccessToken, refreshToken: signedRefreshToken }
+    } else if (existingUser.authProviders?.github === false) {
+      await this.userRepository.update(existingUser._id.toString(), {
+        $set: {
+          'authProviders.github': true,
+          isVerified: true,
+        },
+      })
+
+      const signedAccessToken = await signAccessToken({ id: existingUser?._id })
+      const signedRefreshToken = await signRefreshToken({ id: existingUser?._id })
+
+      return { accessToken: signedAccessToken, refreshToken: signedRefreshToken }
+    } else {
+      throw new HttpExceptionError(500, ErrorType.somethingWentWrong)
     }
-
-    // @ts-expect-error
-    const signedAccessToken = await signAccessToken({ id: existingUser._id })
-    // @ts-expect-error
-    const signedRefreshToken = await signRefreshToken({ id: existingUser._id })
-
-    return { accessToken: signedAccessToken, refreshToken: signedRefreshToken }
   }
 }

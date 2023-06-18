@@ -6,8 +6,9 @@ export class BaseRepository<Response, Request> {
   }
 
   // create
-  create(input: Request): Promise<Response> {
-    return this.model.create(input)
+  async create(input: Request) {
+    const response = await this.model.create(input)
+    return response.toObject()
   }
 
   createMany(input: Request[]): Promise<Response[]> {
