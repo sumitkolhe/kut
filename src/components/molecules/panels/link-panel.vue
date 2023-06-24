@@ -172,7 +172,9 @@ const closePanel = () => {
         class="bg-primary-100 dark:border-primary-700 dark:bg-primary-800 fixed bottom-0 flex w-full max-w-lg justify-end space-x-4 border-t px-6 py-4"
       >
         <u-button variant="outline" @click="closePanel"> Cancel </u-button>
-        <u-button class="px-6" @click="modifyLink"> Shorten </u-button>
+        <u-button class="px-6" :loading="loaders.createLinkLoader" @click="modifyLink">
+          Shorten
+        </u-button>
       </div>
     </div>
   </u-slideover>
