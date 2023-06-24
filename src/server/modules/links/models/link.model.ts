@@ -1,4 +1,5 @@
 import { getModelForClass, index, plugin, prop } from '@typegoose/typegoose'
+import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
 
 class Meta {
   @prop({ required: false, default: null, type: String })
@@ -18,7 +19,7 @@ class Meta {
 }
 
 @plugin(index, { alias: 'text', target: 'text', shortUrl: 'text', description: 'text' })
-class LinkClass {
+class LinkClass extends TimeStamps {
   @prop({ required: true, type: String })
   userId!: string
 
@@ -42,7 +43,7 @@ class LinkClass {
 }
 
 const LinkModel = getModelForClass(LinkClass, {
-  schemaOptions: { collection: 'links', timestamps: true },
+  schemaOptions: { collection: 'links' },
 })
 
 export { LinkModel, LinkClass }
