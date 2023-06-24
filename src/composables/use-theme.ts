@@ -1,10 +1,17 @@
 export const useTheme = () => {
   const colorMode = useColorMode()
-  const isDarkTheme = ref()
+
+  const isDarkTheme = computed({
+    get() {
+      return colorMode.value === 'dark'
+    },
+    set() {
+      colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+    },
+  })
 
   const changeTheme = () => {
-    colorMode.preference = colorMode.preference === 'light' ? 'dark' : 'light'
-    isDarkTheme.value = colorMode.preference === 'dark'
+    isDarkTheme.value = !isDarkTheme.value
   }
 
   return {
