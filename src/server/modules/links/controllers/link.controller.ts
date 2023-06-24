@@ -122,7 +122,7 @@ export class LinkController {
       const { password } = req.body
       const { statistics } = req
 
-      const link = await this.linkService.redirectLink(alias, statistics, password)
+      const link = await this.linkService.redirectLink(alias, statistics!, password)
 
       return res.json({ status: 'SUCCESS', message: null, data: link })
     } catch (error) {

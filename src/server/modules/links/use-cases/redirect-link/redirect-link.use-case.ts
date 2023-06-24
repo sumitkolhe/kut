@@ -2,7 +2,6 @@ import { LinkRepository } from 'server/modules/links/repositories/link.repositor
 import { ErrorType } from 'interfaces/error.interface'
 import { HttpExceptionError } from 'server/common/exceptions/http.exception'
 import type { IUseCase } from 'server/common/types/use-case.type'
-import type { Statistics } from 'server/common/types/statistics.interface'
 
 export class RedirectLinkUseCase implements IUseCase<String, String> {
   private linkRepository: LinkRepository
@@ -11,7 +10,7 @@ export class RedirectLinkUseCase implements IUseCase<String, String> {
     this.linkRepository = new LinkRepository()
   }
 
-  async execute(alias: string, statistics: Statistics, password?: string) {
+  async execute(alias: string, password?: string) {
     const link = await this.linkRepository.getLinkByAlias(alias)
 
     if (!link) {
@@ -23,35 +22,34 @@ export class RedirectLinkUseCase implements IUseCase<String, String> {
     }
 
     const currentDate = new Date()
+    const validFrom = link.meta?.validFrom ? new Date(link.meta.validFrom) : null
+    const validTill = link.meta?.validTill ? new Date(link.meta.validTill) : null
 
-    if (
-      (link.meta?.validFrom && new Date(link.meta.validFrom) > currentDate) ||
-      (link.meta?.validTill && new Date(link.meta.validTill) < currentDate)
-    ) {
+    if ((validFrom && validFrom > currentDate) || (validTill && validTill < currentDate)) {
       throw new HttpExceptionError(403, ErrorType.linkInactive)
     }
 
-    if (link.meta?.maxVisits && link.meta.maxVisits <= link.visitCount) {
+    if (link.meta?.maxVisits && link.meta.maxVisits <= link.visitCount!) {
       throw new HttpExceptionError(403, ErrorType.linkViewLimitReached)
     }
 
-    if (link.meta?.password && !password) {
-      throw new HttpExceptionError(403, ErrorType.linkPasswordProtected)
+    if (link.meta?.password) {
+      if (!password) {
+        throw new HttpExceptionError(403, ErrorType.linkPasswordProtected)
+      }
+      if (link.meta.password !== password) {
+        throw new HttpExceptionError(400, ErrorType.incorrectlinkPassword)
+      }
     }
 
-    if (link.meta?.password && password && link.meta?.password !== password) {
-      throw new HttpExceptionError(400, ErrorType.incorrectlinkPassword)
-    }
+    await this.linkRepository.incrementLinkVisits(link._id.toString())
 
-    // increment visit count
-    await this.linkRepository.incrementLinkVisits(link._id)
-
-    // add statistics for link visit
+    // Add statistics for link visit
     // const newStats = new StatisticsModel({ linkId: link.id, ...statistics }) TODO: add after statistics model is refactored
 
     // await newStats.save().catch(() => {
-    //   logger.error('cannot update link statistics')
-    // })
+    //   logger.error('cannot update link statistics');
+    // });
 
     return link.target
   }

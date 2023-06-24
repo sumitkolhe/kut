@@ -38,6 +38,6 @@ export class LinkService {
   }
 
   public redirectLink = async (alias: string, statistics: Statistics, password?: string) => {
-    return this.redirectLinkUseCase.execute(alias, statistics, password)
+    return this.redirectLinkUseCase.execute(alias, password)
   }
 }

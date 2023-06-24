@@ -106,7 +106,14 @@ export default defineAppConfig({
     },
 
     slideover: {
+      base: 'relative flex-1 flex flex-col w-full h-fit min-h-screen focus:outline-none',
       width: 'w-screen max-w-lg',
+      wrapper: 'fixed inset-0 flex z-50 overflow-y-scroll',
+    },
+
+    toggle: {
+      active: 'bg-primary-900 dark:bg-primary-300',
+      inactive: 'bg-primary-200 dark:bg-primary-600',
     },
   },
 })

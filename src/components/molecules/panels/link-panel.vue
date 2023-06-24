@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import TextInput from 'components/atoms/input/text-input.vue'
 import useValidate from 'vue-tiny-validate'
 import { useLinkStore } from 'store/link.store'
 import type { Rules } from 'vue-tiny-validate'
@@ -21,7 +20,9 @@ const toast = useToast()
 const { shortenLink } = useLinkStore()
 
 // refs
-const createLinkLoader = ref(false)
+const loaders = reactive({
+  createLinkLoader: false,
+})
 
 const rules: Rules = reactive({
   target: [
@@ -36,14 +37,12 @@ const rules: Rules = reactive({
 const linkPayload = reactive({
   alias: '',
   target: '',
-  description: '',
-  meta: {
-    password: '',
-    validFrom: new Date(),
-    validTill: new Date(),
-    maxVisits: 2,
-    active: true,
-  },
+  description: undefined,
+  password: undefined,
+  validFrom: new Date(),
+  validTill: undefined,
+  maxVisits: undefined,
+  active: true,
 })
 
 const { result } = useValidate(linkPayload, rules)
@@ -52,11 +51,22 @@ const modifyLink = async () => {
   result.value.$test()
   if (result.value.$invalid) return
 
-  createLinkLoader.value = true
-  const { error } = await shortenLink(linkPayload)
+  loaders.createLinkLoader = true
+  const { error } = await shortenLink({
+    alias: linkPayload.alias,
+    target: linkPayload.target,
+    description: linkPayload.description,
+    meta: {
+      password: linkPayload.password,
+      validFrom: linkPayload.validFrom,
+      validTill: linkPayload.validTill,
+      maxVisits: linkPayload.maxVisits,
+      active: linkPayload.active,
+    },
+  })
 
   closePanel()
-  createLinkLoader.value = false
+  loaders.createLinkLoader = false
 
   if (error) {
     createToast(error, { type: 'error' })
@@ -73,12 +83,12 @@ const closePanel = () => {
 
 <template>
   <u-slideover :model-value="props.openPanel">
-    <div class="">
+    <div>
       <div class="dark:border-primary-700 dark:bg-primary-800 space-y-1 border-b p-4 md:p-4">
         <p class="text-primary-900 dark:text-primary-200 text-lg font-medium">Add a new link</p>
       </div>
 
-      <div class="flex flex-col space-y-4 p-4 md:p-6">
+      <div class="flex flex-col space-y-4 overflow-y-scroll p-4 md:p-6">
         <u-form-group :error="result.target.$messages[0]" label="Target">
           <u-input
             v-model="linkPayload.target"
@@ -93,76 +103,76 @@ const closePanel = () => {
             v-model="linkPayload.alias"
             size="xl"
             placeholder="Enter alias"
-            trailing-icon="i-tabler-edit-circle"
+            trailing-icon="i-tabler-pencil"
           />
         </u-form-group>
 
         <u-form-group label="Description">
           <u-input
-            v-model="linkPayload.alias"
+            v-model="linkPayload.description"
             size="xl"
             placeholder="Description"
-            trailing-icon="i-tabler-edit-circle"
+            trailing-icon="i-tabler-news"
           />
         </u-form-group>
 
         <u-form-group label="Password">
           <u-input
-            v-model="linkPayload.meta.password"
+            v-model="linkPayload.password"
             size="xl"
             placeholder="Enter alias"
-            trailing-icon="i-tabler-edit-circle"
+            trailing-icon="i-tabler-password"
           />
         </u-form-group>
 
-        <text-input
-          v-model="linkPayload.description"
-          label="Description"
-          prefix-icon="ph:notepad"
-          placeholder="Enter description"
-        />
+        <u-form-group label="Maximum no. of visits">
+          <u-input
+            v-model="linkPayload.maxVisits"
+            size="xl"
+            placeholder="12"
+            trailing-icon="i-tabler-pointer-bolt"
+          />
+        </u-form-group>
 
-        <text-input
-          v-model="linkPayload.meta.password"
-          label="Password"
-          prefix-icon="ph:password"
-          placeholder="Enter password"
-        />
+        <u-form-group label="Valid From">
+          <u-input
+            size="xl"
+            type="datetime-local"
+            placeholder="Valid From"
+            trailing-icon="i-tabler-clock-plus"
+          />
+        </u-form-group>
 
-        <text-input
-          v-model="linkPayload.meta.maxVisits"
-          label="Max. Visits"
-          prefix-icon="ph:hand-pointing"
-          placeholder="Enter maximum no. of visits"
-        />
+        <u-form-group label="Valid Till">
+          <u-input
+            clearable
+            size="xl"
+            type="datetime-local"
+            placeholder="Enter alias"
+            trailing-icon="i-tabler-clock-x"
+          />
+        </u-form-group>
 
-        <text-input
-          v-model="linkPayload.meta.validFrom"
-          label="Valid From"
-          type="datetime-local"
-          placeholder="Enter valid from date"
-        />
-
-        <text-input
-          v-model="linkPayload.meta.validTill"
-          label="Valid Till"
-          type="datetime-local"
-          placeholder="Enter valid till date"
-        />
-
-        <!-- <div class="flex flex-row items-center justify-between py-2">
-              <p class="text-sm text-primary-500">Enable Link</p>
-              <primary-toggle
-                :model-value="linkPayload.active"
-                @input="$emit('update:active', $event.target.value)"
-              />
-            </div> -->
+        <div
+          class="bg-primary-100 dark:bg-primary-800 dark:border-primary-600 border-primary-200 flex justify-between rounded border p-3"
+        >
+          <p class="font-regular text-primary-700 dark:text-primary-500 block text-sm">
+            Enable Link
+          </p>
+          <u-toggle
+            v-model="linkPayload.active"
+            on-icon="i-tabler-check"
+            off-icon="i-tabler-x"
+            size="xl"
+          />
+        </div>
       </div>
+
       <div
-        class="bg-primary-100 dark:border-primary-700 dark:bg-primary-800 fixed bottom-0 flex w-full max-w-lg justify-end space-x-6 border-t p-6"
+        class="bg-primary-100 dark:border-primary-700 dark:bg-primary-800 fixed bottom-0 flex w-full max-w-lg justify-end space-x-4 border-t px-6 py-4"
       >
         <u-button variant="outline" @click="closePanel"> Cancel </u-button>
-        <u-button @click="modifyLink"> Shorten </u-button>
+        <u-button class="px-6" @click="modifyLink"> Shorten </u-button>
       </div>
     </div>
   </u-slideover>

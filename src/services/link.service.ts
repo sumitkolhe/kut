@@ -1,6 +1,6 @@
-import type { Link } from 'interfaces/link.interface'
 import type { CustomResponse } from 'server/common/types/response.interface'
 import type { $Fetch } from 'ofetch'
+import type { CreateLinkDto, LinkDto } from 'server/modules/links/dto'
 
 export class LinkService {
   private http: $Fetch
@@ -15,22 +15,22 @@ export class LinkService {
     this.base = '/links'
   }
 
-  public async shorten(linkPayload: Pick<Link, 'alias' | 'target' | 'meta' | 'description'>) {
-    return this.http<CustomResponse<Link>>(`${this.base}/shorten`, {
+  public async shorten(linkPayload: CreateLinkDto) {
+    return this.http<CustomResponse<LinkDto>>(`${this.base}/shorten`, {
       body: linkPayload,
       method: 'POST',
     })
   }
 
   public async fetchLinks(offset = 0, limit = 5, search?: string) {
-    return this.http<CustomResponse<{ links: Link[]; total: number }>>(`${this.base}`, {
+    return this.http<CustomResponse<{ links: LinkDto[]; total: number }>>(`${this.base}`, {
       query: { limit, offset, search },
       method: 'GET',
     })
   }
 
   public async fetchLink(alias: string) {
-    return this.http<CustomResponse<Link>>(`${this.base}/${alias}`, {
+    return this.http<CustomResponse<LinkDto>>(`${this.base}/${alias}`, {
       method: 'GET',
     })
   }
@@ -46,7 +46,7 @@ export class LinkService {
   }
 
   public async deleteLink(alias: string) {
-    return this.http<CustomResponse<Link>>(`${this.base}/${alias}`, {
+    return this.http<CustomResponse<LinkDto>>(`${this.base}/${alias}`, {
       method: 'DELETE',
     })
   }

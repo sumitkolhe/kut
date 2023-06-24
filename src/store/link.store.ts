@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { FetchError } from 'ofetch'
 import { logger } from 'utils/logger'
 import type { LinkDto } from 'server/modules/links/dto/link.dto'
+import type { CreateLinkDto } from 'server/modules/links/dto'
 
 interface State {
   allLinks: LinkDto[]
@@ -23,7 +24,7 @@ export const useLinkStore = defineStore('links', {
   }),
 
   actions: {
-    async shortenLink(linkPayload: Pick<LinkDto, 'alias' | 'target' | 'meta' | 'description'>) {
+    async shortenLink(linkPayload: CreateLinkDto) {
       try {
         const response = await this.$http.link.shorten(linkPayload)
 

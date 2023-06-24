@@ -42,7 +42,7 @@ class LinkClass {
 }
 
 const LinkModel = getModelForClass(LinkClass, {
-  schemaOptions: { timestamps: true },
+  schemaOptions: { collection: 'links', timestamps: true },
 })
 
 export { LinkModel, LinkClass }
