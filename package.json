@@ -46,7 +46,7 @@
     "@iconify-json/tabler": "^1.1.79",
     "@kolhe/eslint-config": "^1.1.8",
     "@nuxt/devtools": "^0.6.1",
-    "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest",
+    "@nuxthq/ui": "^2.4.1",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.13",
