@@ -69,8 +69,7 @@ const modifyLink = async () => {
   loaders.createLinkLoader = false
 
   if (error) {
-    createToast(error, { type: 'error' })
-    toast.add({ title: 'Error creating link', description: error, color: 'red' })
+    toast.add({ title: 'Error creating link', description: error, color: 'primary' })
   } else {
     toast.add({ title: 'Link created successfully', color: 'green' })
   }

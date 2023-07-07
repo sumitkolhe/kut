@@ -115,5 +115,15 @@ export default defineAppConfig({
       active: 'bg-primary-900 dark:bg-primary-300',
       inactive: 'bg-primary-200 dark:bg-primary-600',
     },
+
+    skeleton: {
+      base: 'animate-pulse',
+      rounded: 'rounded',
+      background: 'bg-primary-200 dark:bg-primary-600',
+    },
+
+    dropdown: {
+      shadow: 'none',
+    },
   },
 })

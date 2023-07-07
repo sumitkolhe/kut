@@ -9,7 +9,7 @@ const { isDrawerVisible } = useDrawer()
 
 <template>
   <main class="no-select" :class="[isDrawerVisible ? 'fixed w-full' : '']">
-    <NuxtLoadingIndicator color="#f55" :height="4" />
+    <nuxt-loading-indicator color="#f55" :height="4" />
     <dashboard-header />
     <dashboard-navigation />
     <dashboard-drawer />

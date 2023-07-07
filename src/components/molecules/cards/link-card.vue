@@ -1,82 +1,57 @@
 <script setup lang="ts">
 import { useTimeAgo } from '@vueuse/core'
 import LinkMenu from 'components/molecules/menus/link-menu.vue'
-import type { PropType } from 'vue'
+import QrCodePanel from 'components/molecules/panels/qr-code-panel.vue'
+import type { LinkDto } from 'server/modules/links/dto'
 
 // emits
-defineEmits(['delete-link', 'edit-link', 'qr-code', 'copy-link'])
+defineEmits(['delete-link', 'edit-link', 'show-qr-code', 'copy-link'])
 
 // props
-const props = defineProps({
-  alias: {
-    type: [String, null] as PropType<string | null>,
+defineProps({
+  link: {
+    type: Object as PropType<LinkDto>,
     required: true,
   },
-  target: {
-    type: String,
-    default: () => '',
-    required: false,
-  },
-  shortUrl: {
-    type: String,
-    default: () => '',
-    required: false,
-  },
-  description: {
-    type: [String, null] as PropType<string | null>,
-    default: () => '',
-    required: false,
-  },
-  visitCount: {
-    type: Number,
-    default: () => 0,
-    required: false,
-  },
-  createdAt: {
-    type: String,
-    default: () => null,
-    required: false,
-  },
-  updatedAt: {
-    type: String,
-    default: () => null,
-    required: false,
-  },
+})
+
+const toggles = reactive({
+  showQrCode: false,
 })
 </script>
 
 <template>
   <div
-    class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 flex w-full flex-col items-center gap-y-4 rounded-md border p-4 md:px-6 md:py-5 lg:flex-row"
+    class="bg-primary-100 dark:border-primary-700 dark:bg-primary-800 flex w-full flex-col items-center gap-y-4 rounded-md p-4 md:px-6 md:py-5 lg:flex-row"
   >
     <div
       class="flex w-full flex-row items-center justify-between lg:flex-col lg:items-start lg:space-y-1"
     >
       <p class="text-primary-300 text-xs uppercase tracking-wider">Short Link</p>
 
-      <NuxtLink
+      <nuxt-link
         target="_blank"
-        :to="props.shortUrl"
+        :to="link.shortUrl"
         class="text-primary-500 flex items-center text-sm"
       >
-        <span v-slice="30" :title="props.shortUrl" class="truncate hover:underline">
-          {{ props.shortUrl }}
+        <span v-slice="30" :title="link.shortUrl" class="truncate hover:underline">
+          {{ link.shortUrl }}
         </span>
-      </NuxtLink>
+      </nuxt-link>
     </div>
 
     <div
       class="flex w-full flex-row items-center justify-between lg:flex-col lg:items-start lg:space-y-1"
     >
       <p class="text-primary-300 text-xs uppercase tracking-wider">Target</p>
-      <NuxtLink
+      <nuxt-link
         v-slice="30"
         target="_blank"
-        :to="props.target"
+        :to="link.target"
         class="text-primary-500 truncate text-sm hover:underline"
       >
-        {{ props.target }}
-      </NuxtLink>
+        {{ link.target }}
+      </nuxt-link>
     </div>
 
     <div
@@ -85,8 +60,8 @@ const props = defineProps({
       <p class="text-primary-300 text-xs uppercase tracking-wider">Views</p>
 
       <p class="text-primary-500 truncate text-sm">
-        <span class="dark:text-primary-200 text-sm">{{ props.visitCount }}</span>
-        {{ props.visitCount > 1 ? 'views' : 'view' }}
+        <span class="dark:text-primary-200 text-sm">{{ link.visitCount }}</span>
+        {{ link?.visitCount && link.visitCount > 1 ? 'views' : 'view' }}
       </p>
     </div>
 
@@ -95,14 +70,14 @@ const props = defineProps({
     >
       <p class="text-primary-300 text-xs uppercase tracking-wider">Added</p>
 
-      <p class="text-primary-500 text-sm" :title="props.createdAt">
-        {{ useTimeAgo(props.createdAt).value }}
+      <p class="text-primary-500 text-sm" :title="link?.createdAt && link?.createdAt.toString()">
+        {{ link?.createdAt && useTimeAgo(link.createdAt).value }}
       </p>
     </div>
 
     <div class="flex w-full flex-row items-center justify-between space-x-4 lg:w-fit">
       <nuxt-link
-        :to="`/dashboard/${props.alias}`"
+        :to="`/dashboard/${link.alias}`"
         title="Link Statistics"
         class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20"
       >
@@ -116,11 +91,12 @@ const props = defineProps({
       </div>
 
       <div title="QR Code" class="cursor-pointer rounded p-1 hover:bg-red-300 hover:bg-opacity-20">
-        <icon
-          name="ph:qr-code"
-          class="text-red-500"
-          size="26"
-          @click="$emit('qr-code', props.shortUrl)"
+        <icon name="ph:qr-code" class="text-red-500" size="26" @click="toggles.showQrCode = true" />
+
+        <qr-code-panel
+          v-model:is-open="toggles.showQrCode"
+          :link="link.shortUrl"
+          @close="toggles.showQrCode = false"
         />
       </div>
 
@@ -132,4 +108,14 @@ const props = defineProps({
       </div>
     </div>
   </div>
+
+  <!-- <div class="w-full rounded border border-l-4 border-l-red-400 px-4 py-6">
+    <nuxt-link
+      target="_blank"
+      :to="link.shortUrl"
+      class="rounded border border-red-400 bg-red-100 p-3 text-red-500 hover:underline"
+    >
+      {{ link.shortUrl }}
+    </nuxt-link>
+  </div> -->
 </template>
