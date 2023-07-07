@@ -56,6 +56,15 @@ export default defineNuxtConfig({
 
   nitro: {
     plugins: ['~/server/common/helpers/mongo.helper.ts'],
+    esbuild: {
+      options: {
+        tsconfigRaw: {
+          compilerOptions: {
+            experimentalDecorators: true,
+          },
+        },
+      },
+    },
   },
 
   build: {
