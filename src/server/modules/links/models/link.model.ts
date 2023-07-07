@@ -1,5 +1,5 @@
 import { getModelForClass, index, plugin, prop } from '@typegoose/typegoose'
-import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
+import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses.js'
 
 class Meta {
   @prop({ required: false, default: null, type: String })

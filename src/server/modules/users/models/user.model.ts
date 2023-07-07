@@ -1,5 +1,5 @@
 import { getModelForClass, modelOptions, prop } from '@typegoose/typegoose'
-import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
+import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses.js'
 
 class UserProfile {
   @prop({ type: String, required: false, lowercase: true })
