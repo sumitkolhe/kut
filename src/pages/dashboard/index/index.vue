@@ -63,19 +63,20 @@ watch(copied, (clicked) => {
 </script>
 
 <template>
-  <section class="my-6 w-full gap-6 md:my-8">
+  <section class="my-6 w-full md:my-8">
     <!-- link search  -->
     <div class="flex w-full flex-row space-x-3">
-      <u-input
-        v-model="search"
-        class="w-full"
-        size="xl"
-        type="email"
-        :loading="loaders.searchLinksLoader"
-        placeholder="Search..."
-        icon="i-tabler-search"
-        @update:model-value="debouncedSearch"
-      />
+      <div class="w-full">
+        <u-input
+          v-model="search"
+          size="xl"
+          type="email"
+          :loading="loaders.searchLinksLoader"
+          placeholder="Search..."
+          icon="i-tabler-search"
+          @update:model-value="debouncedSearch"
+        />
+      </div>
 
       <u-button trailing-icon="i-tabler-plus" @click="toggles.showCreateLinkPanel = true">
         Add link
@@ -135,7 +136,7 @@ watch(copied, (clicked) => {
             ]"
             :popper="{ placement: 'bottom-end' }"
           >
-            <u-button color="white" label="Filter By" trailing-icon="i-tabler-chevron-down" />
+            <u-button color="white" label="Sort By" trailing-icon="i-tabler-chevron-down" />
           </u-dropdown>
         </div>
       </div>
