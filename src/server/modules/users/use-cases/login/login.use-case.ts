@@ -18,7 +18,10 @@ export class LoginUserUseCase implements IUseCase<UserLoginDto, AuthTokenDto> {
 
     if (!existingUser) throw new HttpExceptionError(404, ErrorType.userNotFound)
 
-    const doesPasswordMatch = await bcrypt.compare(password!, existingUser.password!)
+    if (!existingUser.password)
+      throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
+
+    const doesPasswordMatch = await bcrypt.compare(password!, existingUser.password)
 
     if (!doesPasswordMatch) throw new HttpExceptionError(400, ErrorType.incorrectLoginCredentials)
 
