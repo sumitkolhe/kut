@@ -14,7 +14,7 @@ const { isDrawerVisible } = useDrawer()
     <dashboard-navigation />
     <dashboard-drawer />
     <command-bar />
-    <div class="mx-auto max-w-screen-xl px-6 lg:-mb-36 xl:px-0">
+    <div class="mx-auto max-w-screen-xl px-4 lg:-mb-36 xl:px-0">
       <slot />
     </div>
   </main>

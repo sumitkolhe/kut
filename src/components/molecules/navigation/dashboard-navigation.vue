@@ -21,7 +21,7 @@ const { y } = useWindowScroll()
   <nav
     ref="element"
     :class="[y >= 60 ? 'shadow transition-all duration-200' : '']"
-    class="border-primary-200 dark:border-primary-700 dark:bg-primary-900 sticky top-0 z-30 border-b bg-white px-6"
+    class="border-primary-200 dark:border-primary-700 dark:bg-primary-900 sticky top-0 z-30 border-b bg-white px-4"
   >
     <div
       v-if="!$route.params.alias"

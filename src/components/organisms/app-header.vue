@@ -15,7 +15,7 @@ const { y } = useWindowScroll()
         ? 'border-b bg-opacity-50 backdrop-blur transition-all duration-200 dark:bg-opacity-50'
         : '',
     ]"
-    class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 fixed z-50 w-full px-6"
+    class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 fixed z-50 w-full px-4"
   >
     <div class="mx-auto flex h-16 max-w-screen-xl flex-row items-center justify-between">
       <nuxt-link class="flex items-center space-x-3" to="/">

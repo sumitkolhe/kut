@@ -30,7 +30,7 @@ const resendEmail = async () => {
 </script>
 
 <template>
-  <header class="bg-primary-50 dark:bg-primary-900 w-full px-6">
+  <header class="bg-primary-50 dark:bg-primary-900 w-full px-4">
     <div class="mx-auto flex h-16 max-w-screen-xl flex-row items-center justify-between">
       <div class="flex items-center space-x-6">
         <nuxt-link class="flex items-center space-x-3" to="/dashboard">
