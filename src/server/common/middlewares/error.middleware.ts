@@ -1,7 +1,7 @@
 import { isCelebrateError } from 'celebrate'
+import { logger } from 'server/common/utils/logger'
 import type { NextFunction, Request, Response } from 'express'
-import type { HttpExceptionError } from '~/server/common/exceptions/http.exception'
-import { logger } from '~/server/common/utils/logger'
+import type { HttpExceptionError } from 'server/common/exceptions/http.exception'
 
 interface ValidationError {
   error: string
