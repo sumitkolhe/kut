@@ -11,6 +11,10 @@ definePageMeta({
   auth: 'guest',
 })
 
+const {
+  public: { githubClientId },
+} = useRuntimeConfig()
+
 const { registerUser } = useAuthStore()
 
 const loading = ref(false)
@@ -63,10 +67,20 @@ const register = async () => {
   }
 }
 
-const signUpWithGithub = () => {
-  const loginUrl = `https://github.com/login/oauth/authorize?client_id=19a5d1e1b27c48cd21c7&redirect_uri=http://localhost:3000/auth/github&scope=read:user%20user:email&allow_signup=true`
+const githubSignup = () => {
+  const clientId = githubClientId
+  const scopes = ['read:user', 'user:email']
+  const allowSignup = true
 
-  return navigateTo(loginUrl, { external: true })
+  const params = new URLSearchParams({
+    client_id: clientId,
+    scope: scopes.join(' '),
+    allow_signup: allowSignup.toString(),
+  })
+
+  const loginUrl = `https://github.com/login/oauth/authorize?${params.toString()}}`
+
+  return navigateTo(loginUrl, { external: true, replace: true })
 }
 </script>
 
@@ -85,7 +99,7 @@ const signUpWithGithub = () => {
           <primary-button
             prefix-icon="ph:github-logo"
             class="hover:bg-primary-700 py-3 hover:text-white"
-            @click="signUpWithGithub"
+            @click="githubSignup"
           >
             Sign up with Github
           </primary-button>
