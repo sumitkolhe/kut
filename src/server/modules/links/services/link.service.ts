@@ -20,9 +20,12 @@ export class LinkService {
     return this.createLinkUseCase.execute(createLinkInput)
   }
 
-  public getAllLinks = async (userId: string, { offset, limit, search }: Paginator) => {
+  public getAllLinks = async (
+    userId: string,
+    { offset, limit, search, sortOptions }: Paginator
+  ) => {
     const [allLinks, totalCount] = await Promise.all([
-      this.linkRepository.getAllLinks(userId, { offset, limit, search }),
+      this.linkRepository.getAllLinks(userId, { offset, limit, search, sortOptions }),
       this.linkRepository.getTotalLinks(userId),
     ])
 

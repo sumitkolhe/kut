@@ -46,12 +46,13 @@ export class LinkController {
   ) => {
     try {
       const { userId } = req.auth
-      const { offset, limit, search } = req.query
+      const { offset, limit, search, sort } = req.query
 
       const paginator: Paginator = {
         offset: Number(offset),
         limit: Number(limit),
         search: search?.toString(),
+        sortOptions: sort as Paginator['sortOptions'],
       }
 
       const allLinks = await this.linkService.getAllLinks(userId, paginator)

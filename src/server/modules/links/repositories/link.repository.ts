@@ -8,14 +8,14 @@ export class LinkRepository extends BaseRepository<LinkDto, LinkDto> {
     super(LinkModel)
   }
 
-  async getAllLinks(userId: string, { offset, limit, search }: Paginator) {
+  async getAllLinks(userId: string, { offset, limit, search, sortOptions }: Paginator) {
     return this.model
       .find({
         $and: [{ userId }, search ? { $text: { $search: search } } : {}],
       })
       .limit(limit)
       .skip(offset)
-      .sort({ createdAt: -1 })
+      .sort(sortOptions)
       .lean()
       .exec()
   }

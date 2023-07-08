@@ -50,6 +50,14 @@ export const allLinksSchema = celebrate(
       offset: Joi.number().default(0),
       limit: Joi.number().default(10),
       search: Joi.optional(),
+      sort: Joi.string()
+        .optional()
+        .default('date')
+        .custom((value, helpers) => {
+          if (value === 'views') return { visitCount: -1 }
+          else if (value === 'date') return { createdAt: -1 }
+          return helpers.message({ custom: 'sort must have a value of [views] or [date]' })
+        }),
     }),
   },
   { abortEarly: false },
