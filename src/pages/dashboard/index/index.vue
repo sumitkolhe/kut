@@ -4,6 +4,7 @@ import { useOffsetPagination } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import LinkCard from 'components/molecules/cards/link-card.vue'
 import LinkPanel from 'components/molecules/panels/link-panel.vue'
+import type { Paginator } from 'server/modules/links/types'
 
 // store
 const { fetchAllLinks, deleteLink } = useLinkStore()
@@ -20,18 +21,19 @@ const toggles = reactive({
   showQrCode: false,
 })
 const search = ref()
+const sort = ref<Paginator['sort']>('date')
 const qrCode = ref()
 
 onMounted(async () => {
   loaders.allLinksLoader = true
-  await fetchAllLinks(0, 5)
+  await fetchAllLinks({ limit: 5, offset: 0 })
   loaders.allLinksLoader = false
 })
 
 // functions
 const debouncedSearch = useDebounceFn(async () => {
   loaders.searchLinksLoader = true
-  await fetchAllLinks(0, 5, search.value)
+  await fetchAllLinks({ offset: 0, limit: 5, search: search.value })
   loaders.searchLinksLoader = false
 }, 500)
 
@@ -45,7 +47,12 @@ const { currentPage, prev, next, currentPageSize } = useOffsetPagination({
   pageSize: 5,
   onPageChange: async ({ currentPage, currentPageSize }) => {
     loaders.allLinksLoader = true
-    await fetchAllLinks((currentPage - 1) * 5, currentPageSize)
+    await fetchAllLinks({
+      offset: (currentPage - 1) * 5,
+      limit: currentPageSize,
+      search: search.value,
+      sort: sort.value,
+    })
     loaders.allLinksLoader = false
   },
 })
@@ -60,6 +67,14 @@ const { copy, copied, text } = useClipboard({ legacy: true })
 watch(copied, (clicked) => {
   if (clicked) createToast(`${text.value} copied to clipboard`, { type: 'success' })
 })
+
+// watch(sort, async (value) => {
+//   loaders.allLinksLoader = true
+//   await fetchAllLinks({
+//     sort: value,
+//   })
+//   loaders.allLinksLoader = false
+// })
 </script>
 
 <template>
@@ -99,46 +114,39 @@ watch(copied, (clicked) => {
         </div>
       </div>
     </div>
-
     <!-- all links  -->
     <div
       v-else-if="allLinks.length > 0 && !loaders.allLinksLoader"
       class="bg-primary-50 dark:bg-primary-900 dark:border-primary-700 mt-8 rounded-md border"
     >
-      <div class="dark:border-primary-700 flex flex-row items-center justify-between border-b p-3">
+      <div
+        class="dark:border-primary-700 flex flex-row items-center justify-between border-b px-4 py-3"
+      >
         <p class="text-primary-700 dark:text-primary-300 font-medium">My Links</p>
-        <div>
-          <u-dropdown
-            :items="[
-              [
-                {
-                  label: 'Name',
-                  icon: 'i-tabler-abc',
-                  click: () => {
-                    console.log('Edit')
-                  },
+
+        <u-dropdown
+          :items="[
+            [
+              {
+                label: 'Date',
+                icon: 'i-tabler-calendar',
+                click: () => {
+                  sort = 'date'
                 },
-                {
-                  label: 'Date',
-                  icon: 'i-tabler-calendar',
-                  click: () => {
-                    console.log('Edit')
-                  },
+              },
+              {
+                label: 'Views',
+                icon: 'i-tabler-list-numbers',
+                click: () => {
+                  sort = 'views'
                 },
-                {
-                  label: 'Views',
-                  icon: 'i-tabler-list-numbers',
-                  click: () => {
-                    console.log('Edit')
-                  },
-                },
-              ],
-            ]"
-            :popper="{ placement: 'bottom-end' }"
-          >
-            <u-button color="white" label="Sort By" trailing-icon="i-tabler-chevron-down" />
-          </u-dropdown>
-        </div>
+              },
+            ],
+          ]"
+          :popper="{ placement: 'bottom-end' }"
+        >
+          <u-button color="white" label="Sort By" trailing-icon="i-tabler-chevron-down" />
+        </u-dropdown>
       </div>
 
       <div class="my-6 space-y-6 px-4 py-0 lg:space-y-4">

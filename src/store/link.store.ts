@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { FetchError } from 'ofetch'
 import { logger } from 'utils/logger'
+import type { Paginator } from 'server/modules/links/types'
 import type { LinkDto } from 'server/modules/links/dto/link.dto'
 import type { CreateLinkDto } from 'server/modules/links/dto'
 
@@ -38,9 +39,9 @@ export const useLinkStore = defineStore('links', {
       }
     },
 
-    async fetchAllLinks(offset = 0, limit = 5, search?: string) {
+    async fetchAllLinks({ offset, limit, search, sort }: Paginator) {
       try {
-        const response = await this.$http.link.fetchLinks(offset, limit, search)
+        const response = await this.$http.link.fetchLinks({ offset, limit, search, sort })
         this.allLinks = []
         this.totalCount = 0
 

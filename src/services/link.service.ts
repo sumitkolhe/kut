@@ -1,3 +1,4 @@
+import type { Paginator } from 'server/modules/links/types'
 import type { CustomResponse } from 'server/common/types/response.interface'
 import type { $Fetch } from 'ofetch'
 import type { CreateLinkDto, LinkDto } from 'server/modules/links/dto'
@@ -22,9 +23,9 @@ export class LinkService {
     })
   }
 
-  public async fetchLinks(offset = 0, limit = 5, search?: string) {
+  public async fetchLinks(options: Paginator) {
     return this.http<CustomResponse<{ links: LinkDto[]; total: number }>>(`${this.base}`, {
-      query: { limit, offset, search },
+      query: { ...options },
       method: 'GET',
     })
   }

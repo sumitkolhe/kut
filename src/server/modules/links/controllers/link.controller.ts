@@ -52,7 +52,7 @@ export class LinkController {
         offset: Number(offset),
         limit: Number(limit),
         search: search?.toString(),
-        sortOptions: sort as Paginator['sortOptions'],
+        sort: sort as Paginator['sort'],
       }
 
       const allLinks = await this.linkService.getAllLinks(userId, paginator)
