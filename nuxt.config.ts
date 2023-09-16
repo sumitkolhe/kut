@@ -41,7 +41,7 @@ export default defineNuxtConfig({
   css: ['~/assets/toast.css'],
 
   ui: {
-    icons: ['tabler'],
+    icons: ['ph'],
   },
 
   modules: [
