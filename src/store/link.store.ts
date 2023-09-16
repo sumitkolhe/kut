@@ -7,7 +7,7 @@ import type { CreateLinkDto } from 'server/modules/links/dto'
 
 interface State {
   allLinks: LinkDto[]
-  link: LinkDto | null
+  link: LinkDto
   linkViews: Record<string, number> | null
   overviewStats: Record<string, number> | null
   target: string | null
@@ -17,7 +17,7 @@ interface State {
 export const useLinkStore = defineStore('links', {
   state: (): State => ({
     allLinks: [],
-    link: null,
+    link: null as unknown as LinkDto,
     linkViews: null,
     overviewStats: null,
     target: null,

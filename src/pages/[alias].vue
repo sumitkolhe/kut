@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ErrorType } from 'interfaces/error.interface'
-import type { CustomResponse } from 'interfaces/response.interface'
+import type { CustomResponse } from 'server/common/types'
 
 definePageMeta({
   layout: 'public',

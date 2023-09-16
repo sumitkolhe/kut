@@ -12,5 +12,5 @@ function HttpServicePlugin({ store }: PiniaPluginContext) {
 }
 
 export default defineNuxtPlugin(({ $pinia }) => {
-  $pinia.use(HttpServicePlugin)
+  ;($pinia as any).use(HttpServicePlugin)
 })

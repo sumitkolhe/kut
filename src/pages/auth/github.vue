@@ -6,6 +6,7 @@ definePageMeta({
   auth: 'guest',
 })
 
+const toast = useToast()
 const route = useRoute()
 const router = useRouter()
 const loading = ref(false)
@@ -16,7 +17,8 @@ onMounted(async () => {
   const { error } = await loginWithGithub(route.query.code as string)
 
   if (error) {
-    createToast(error, { type: 'error', timeout: 3000 })
+    toast.add({ title: 'Error logging in with github', description: error, color: 'primary' })
+
     return router.push('/')
   }
 

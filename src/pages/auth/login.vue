@@ -12,6 +12,7 @@ const {
   public: { githubClientId },
 } = useRuntimeConfig()
 
+const toast = useToast()
 const router = useRouter()
 const { loginUser } = useAuthStore()
 
@@ -51,7 +52,7 @@ const login = async () => {
 
   if (error) {
     loading.value = false
-    return createToast('Invalid credentials', { type: 'error', timeout: 3000 })
+    toast.add({ title: 'Invalid credentials', description: error, color: 'primary' })
   } else {
     loading.value = false
     router.push('/dashboard')

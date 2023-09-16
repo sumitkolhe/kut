@@ -29,7 +29,7 @@ const linkStats = computed(() => [
   },
   {
     name: 'Expiry',
-    value: link.value.meta?.validTill
+    value: link?.value?.meta?.validTill
       ? useDateFormat(link.value.meta?.validTill, 'YYYY-MM-DD HH:mm:ss A').value
       : '-',
   },
@@ -68,10 +68,10 @@ const linkStats = computed(() => [
         <div class="flex-1 space-y-8 py-1">
           <div class="space-y-3">
             <div class="grid grid-cols-3 gap-4">
-              <div class="bg-primary-200 col-span-1 h-3 rounded-full"></div>
+              <div class="bg-primary-200 col-span-1 h-3 rounded-full" />
             </div>
           </div>
-          <div class="bg-primary-200 col-span-1 h-3 rounded-full"></div>
+          <div class="bg-primary-200 col-span-1 h-3 rounded-full" />
         </div>
       </div>
     </div>

@@ -16,10 +16,10 @@ const props = defineProps({
       >
         <span
           class="bg-primary-900 dark:bg-primary-50 absolute bottom-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm"
-        ></span>
+        />
         <p class="dark:text-primary-900 text-sm font-normal">{{ props.text }}</p>
       </div>
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

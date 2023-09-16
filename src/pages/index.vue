@@ -87,7 +87,7 @@ const features = [
           <div class="group relative">
             <div
               class="absolute -inset-1.5 animate-text rounded-lg bg-gradient-to-r from-amber-600 via-red-600 to-purple-600 opacity-60 blur-md transition duration-500 group-hover:opacity-80 group-hover:duration-200"
-            ></div>
+            />
             <button
               class="bg-primary-50 dark:bg-primary-900 dark:text-primary-200 relative w-full rounded-md border border-pink-500 px-8 py-[12px] hover:border-pink-700 md:px-10 md:py-[12px]"
             >

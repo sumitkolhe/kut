@@ -10,6 +10,7 @@ definePageMeta({
   auth: 'guest',
 })
 
+const toast = useToast()
 const route = useRoute()
 const { redirectProtectedLink } = useLinkStore()
 
@@ -42,7 +43,7 @@ const redirect = async () => {
   if (!error) {
     return navigateTo(data, { external: true, redirectCode: 301 })
   } else {
-    createToast(error, { type: 'error' })
+    toast.add({ title: 'Invalid password', description: error, color: 'primary' })
   }
 }
 </script>

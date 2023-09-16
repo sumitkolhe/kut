@@ -6,6 +6,8 @@ import LinkCard from 'components/molecules/cards/link-card.vue'
 import LinkPanel from 'components/molecules/panels/link-panel.vue'
 import type { Paginator } from 'server/modules/links/types'
 
+const toast = useToast()
+
 // store
 const { fetchAllLinks, deleteLink } = useLinkStore()
 const { totalCount, allLinks } = storeToRefs(useLinkStore())
@@ -65,7 +67,7 @@ const showQrCode = (url: string) => {
 const { copy, copied, text } = useClipboard({ legacy: true })
 
 watch(copied, (clicked) => {
-  if (clicked) createToast(`${text.value} copied to clipboard`, { type: 'success' })
+  if (clicked) toast.add({ title: `${text.value} copied to clipboard`, color: 'primary' })
 })
 
 // watch(sort, async (value) => {

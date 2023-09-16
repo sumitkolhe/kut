@@ -15,6 +15,7 @@ const {
   public: { githubClientId },
 } = useRuntimeConfig()
 
+const toast = useToast()
 const { registerUser } = useAuthStore()
 
 const loading = ref(false)
@@ -52,12 +53,14 @@ const register = async () => {
 
   if (error) {
     loading.value = false
-    createToast(error, { type: 'error', timeout: 3000 })
+    toast.add({ title: 'Error ', description: error, color: 'primary' })
   } else {
-    createToast('User registered successfully, redirecting...', {
-      type: 'success',
-      timeout: 2000,
+    toast.add({
+      title: 'User registered successfully, redirecting...',
+      description: 'You will be redirected to login page in 2 seconds',
+      color: 'primary',
     })
+
     loading.value = false
 
     setTimeout(() => {
