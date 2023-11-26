@@ -50,7 +50,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxt/devtools',
-    '@nuxthq/ui',
+    '@nuxt/ui',
   ],
 
   serverHandlers: [
