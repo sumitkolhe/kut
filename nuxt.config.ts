@@ -85,6 +85,8 @@ export default defineNuxtConfig({
     server: fileURLToPath(new URL('./src/server', import.meta.url)),
   },
 
+  serverDir: 'server',
+
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL,
