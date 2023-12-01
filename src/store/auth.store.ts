@@ -33,6 +33,7 @@ export const useAuthStore = defineStore('authentication-store', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },
@@ -51,6 +52,7 @@ export const useAuthStore = defineStore('authentication-store', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },
@@ -63,6 +65,7 @@ export const useAuthStore = defineStore('authentication-store', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },
@@ -78,6 +81,7 @@ export const useAuthStore = defineStore('authentication-store', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },
@@ -116,6 +120,7 @@ export const useAuthStore = defineStore('authentication-store', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },
@@ -128,6 +133,7 @@ export const useAuthStore = defineStore('authentication-store', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },

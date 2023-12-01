@@ -224,6 +224,7 @@ export class StatisticsService {
     if (views.length > 0 && views[0].visitData && Object.keys(views[0].visitData).length > 0) {
       return views[0]?.visitData
     }
+
     return null
   }
 }

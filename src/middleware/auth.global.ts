@@ -16,11 +16,13 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   if (payload.value && payload.value.exp! < Date.now() / 1000) {
     await refreshAccessToken(refreshToken.value)
+
     return
   }
 
   if (!user.value || !user.value?.email) {
     await fetchUser()
+
     return
   }
 

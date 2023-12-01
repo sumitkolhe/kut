@@ -2,7 +2,6 @@
 import DashboardDrawer from 'components/organisms/dashboard-drawer.vue'
 import DashboardHeader from 'components/organisms/dashboard-header.vue'
 import DashboardNavigation from 'components/molecules/navigation/dashboard-navigation.vue'
-import CommandBar from 'components/organisms/command-bar.vue'
 
 const { isDrawerVisible } = useDrawer()
 </script>
@@ -13,7 +12,6 @@ const { isDrawerVisible } = useDrawer()
     <dashboard-header />
     <dashboard-navigation />
     <dashboard-drawer />
-    <command-bar />
     <div class="mx-auto max-w-screen-xl px-4 lg:-mb-36 xl:px-0">
       <slot />
     </div>

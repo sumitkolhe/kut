@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  Dialog,
   DialogPanel,
   Listbox,
   ListboxButton,
@@ -53,7 +52,7 @@ const emitChange = (period: Period) => {
     </button>
 
     <transition-root v-if="smallerThanLg" as="template" :show="showPanel">
-      <Dialog as="div" class="relative z-50" @close="showPanel = false">
+      <dialog as="div" class="relative z-50" @close="showPanel = false">
         <transition-child
           as="template"
           enter="ease-in-out duration-500"
@@ -95,28 +94,28 @@ const emitChange = (period: Period) => {
             </div>
           </dialog-panel>
         </transition-child>
-      </Dialog>
+      </dialog>
     </transition-root>
 
-    <Listbox v-else :model-value="selectedPeriod" @update:modelValue="emitChange">
+    <listbox v-else :model-value="selectedPeriod" @update:model-value="emitChange">
       <div class="relative mt-1">
-        <ListboxButton
+        <listbox-button
           class="bg-primary-50 dark:border-primary-700 dark:bg-primary-900 dark:text-primary-200 relative flex w-fit cursor-pointer flex-row items-center justify-between space-x-4 rounded border px-4 py-2 focus:outline-none sm:text-sm"
         >
-          <Icon name="line-md:calendar" class="text-primary-600" size="20" />
+          <icon name="line-md:calendar" class="text-primary-600" size="20" />
           <p class="block truncate text-sm">{{ selectedPeriod.name }}</p>
-          <Icon name="mdi:chevron-down" />
-        </ListboxButton>
+          <icon name="mdi:chevron-down" />
+        </listbox-button>
 
         <transition
           leave-active-class="transition duration-100 ease-in"
           leave-from-class="opacity-100"
           leave-to-class="opacity-0"
         >
-          <ListboxOptions
+          <listbox-options
             class="border-primary-800 bg-primary-50 dark:bg-primary-900 absolute z-[50] mt-2 max-h-64 w-full space-y-1 overflow-auto rounded-md p-2 text-base shadow-lg ring-opacity-5 focus:outline-none"
           >
-            <ListboxOption
+            <listbox-option
               v-for="period in options"
               v-slot="{ active, selected }"
               :key="period.name"
@@ -136,13 +135,13 @@ const emitChange = (period: Period) => {
                   :class="[selected ? 'text-primary-50 bg-red-500' : '']"
                 >
                   <p>{{ period.name }}</p>
-                  <Icon v-if="selected" name="ph:check" size="20" />
+                  <icon v-if="selected" name="ph:check" size="20" />
                 </div>
               </li>
-            </ListboxOption>
-          </ListboxOptions>
+            </listbox-option>
+          </listbox-options>
         </transition>
       </div>
-    </Listbox>
+    </listbox>
   </div>
 </template>

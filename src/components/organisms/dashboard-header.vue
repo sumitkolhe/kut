@@ -20,6 +20,7 @@ const resendEmail = async () => {
 
   if (error) {
     loading.value = false
+
     return toast.add({ title: error, color: 'red' })
   } else {
     toast.add({ title: 'Verification email sent successfully', color: 'green' })

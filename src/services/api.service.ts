@@ -23,6 +23,7 @@ export class ApiService {
           await refreshAccessToken(refreshToken.value)
         } else if (response?.status === 401 && reasonsToLogout.includes(response?._data?.message)) {
           const { logout } = useAuthStore()
+
           return logout()
         }
       },

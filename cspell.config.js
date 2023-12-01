@@ -1,0 +1,27 @@
+module.exports = {
+  words: [
+    'foldr',
+    'consola',
+    'ofetch',
+    'pinia',
+    'nuxt',
+    'nuxthq',
+    'nuxtjs',
+    'vueuse',
+    'tailwindcss',
+    'Segoe',
+    'Roboto',
+    'typecheck',
+  ],
+  version: '0.2',
+  language: 'en',
+  ignorePaths: [
+    '**/node_modules/**',
+    'dist',
+    'tests-output',
+    'playwright-report',
+    '.vscode',
+    'src/locales',
+    'nuxt.config.ts',
+  ],
+}

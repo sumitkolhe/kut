@@ -7,5 +7,6 @@ export const getCookies = function (rawCookie: string | undefined): Record<strin
         cookies[parts[1].trim()] = (parts[2] || '').trim()
       }
     })
+
   return cookies
 }

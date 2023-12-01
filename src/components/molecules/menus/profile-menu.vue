@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { useAuthStore } from 'store/auth.store'
 
 const { logout } = useAuthStore()
 </script>
 
 <template>
-  <Menu as="div" class="relative z-40 inline-block text-left">
+  <menu as="div" class="relative z-40 inline-block text-left">
     <div>
-      <MenuButton class="text-primary-800 dark:text-primary-300">
-        <Icon name="ph:user-circle" size="28" />
-      </MenuButton>
+      <menu-button class="text-primary-800 dark:text-primary-300">
+        <icon name="ph:user-circle" size="28" />
+      </menu-button>
     </div>
 
     <transition
@@ -21,12 +21,12 @@ const { logout } = useAuthStore()
       leave-from-class="transform scale-100 opacity-100"
       leave-to-class="transform scale-95 opacity-0"
     >
-      <MenuItems
+      <menu-items
         class="divide-primary-200 bg-primary-50 dark:divide-primary-700 dark:bg-primary-900 dark:ring-primary-700 absolute right-0 mt-2 w-56 origin-top-right divide-y rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
         <div class="p-2">
-          <MenuItem v-slot="{ active }">
-            <NuxtLink
+          <menu-item v-slot="{ active }">
+            <nuxt-link
               to="/dashboard/settings"
               :class="[
                 active
@@ -37,12 +37,12 @@ const { logout } = useAuthStore()
               active-class=""
             >
               Profile
-            </NuxtLink>
-          </MenuItem>
+            </nuxt-link>
+          </menu-item>
         </div>
 
         <div class="p-2">
-          <MenuItem v-slot="{ active }">
+          <menu-item v-slot="{ active }">
             <button
               type="button"
               :class="[
@@ -55,9 +55,9 @@ const { logout } = useAuthStore()
             >
               Logout
             </button>
-          </MenuItem>
+          </menu-item>
         </div>
-      </MenuItems>
+      </menu-items>
     </transition>
-  </Menu>
+  </menu>
 </template>

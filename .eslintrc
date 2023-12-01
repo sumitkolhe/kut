@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "extends": ["@kolhe/eslint-config"],
+  "rules": {
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" }
+    ],
+
+    "vue/component-name-in-template-casing": [
+      "error",
+      "kebab-case",
+      {
+        "registeredComponentsOnly": false,
+        "ignores": []
+      }
+    ]
+  }
+}

@@ -52,7 +52,7 @@ const stats = computed(() => [
       <div
         class="bg-primary-100 dark:border-primary-600 dark:bg-primary-900 flex items-center rounded-full border-[2px] p-3"
       >
-        <Icon :name="stat.icon" size="32" class="dark:text-primary-600" />
+        <icon :name="stat.icon" size="32" class="dark:text-primary-600" />
       </div>
     </div>
   </section>

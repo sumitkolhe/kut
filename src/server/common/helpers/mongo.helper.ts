@@ -11,6 +11,7 @@ export default async () => {
   try {
     if (isConnected) {
       logger.info('connected using cached db')
+
       return Promise.resolve()
     }
 

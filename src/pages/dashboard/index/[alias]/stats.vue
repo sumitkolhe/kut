@@ -38,6 +38,7 @@ const totalVisits = computed(() => {
   if (linkViews.value) {
     const values = Object?.values(linkViews.value).map((view: number) => view)
     values.forEach((i) => (sum = sum + i))
+
     return sum
   } else {
     return sum

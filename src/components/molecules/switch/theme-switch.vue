@@ -4,14 +4,14 @@ const { isDarkTheme, changeTheme } = useTheme()
 
 <template>
   <div class="relative cursor-pointer">
-    <Icon
+    <icon
       v-if="!isDarkTheme"
       name="line-md:moon-alt-to-sunny-outline-loop-transition"
       size="24"
       class="text-primary-800 dark:text-primary-300"
       @click="changeTheme"
     />
-    <Icon
+    <icon
       v-else
       name="line-md:sunny-outline-to-moon-alt-loop-transition"
       size="24"

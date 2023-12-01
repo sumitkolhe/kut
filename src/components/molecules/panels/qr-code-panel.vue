@@ -41,7 +41,7 @@ const downloadQrCode = () => {
         class="dark:border-primary-700 dark:bg-primary-800 flex items-center justify-between space-y-1 border-b p-4 md:p-4"
       >
         <p class="text-primary-900 dark:text-primary-200 text-lg font-medium">Download QR Code</p>
-        <UButton
+        <u-button
           icon="i-tabler-x"
           size="sm"
           variant="outline"

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import {
-  Dialog,
   DialogPanel,
-  Menu,
   MenuButton,
   MenuItem,
   MenuItems,
@@ -33,7 +31,7 @@ const deleteLink = () => {
     </button>
 
     <transition-root v-if="smallerThanLg" as="template" :show="showPanel">
-      <Dialog as="div" class="relative z-50" @close="showPanel = false">
+      <dialog as="div" class="relative z-50" @close="showPanel = false">
         <transition-child
           as="template"
           enter="ease-in-out duration-500"
@@ -79,11 +77,11 @@ const deleteLink = () => {
             </div>
           </dialog-panel>
         </transition-child>
-      </Dialog>
+      </dialog>
     </transition-root>
 
     <div v-else title="Options" class="flex w-full justify-end">
-      <Menu as="div" class="relative inline-block text-left">
+      <menu as="div" class="relative inline-block text-left">
         <div>
           <menu-button title="Options">
             <icon name="ph:dots-three-vertical-bold" class="text-red-500" size="26" />
@@ -126,7 +124,7 @@ const deleteLink = () => {
             </div>
           </menu-items>
         </transition>
-      </Menu>
+      </menu>
     </div>
   </div>
 </template>

@@ -8,6 +8,7 @@ export class BaseRepository<Response, Request> {
   // create
   async create(input: Request) {
     const response = await this.model.create(input)
+
     return response.toObject()
   }
 
@@ -27,6 +28,7 @@ export class BaseRepository<Response, Request> {
   async exists(filter: FilterQuery<Response>): Promise<boolean> {
     const exists = await this.model.exists(filter)
     if (typeof exists === 'boolean') return exists
+
     return !!exists?._id
   }
 
@@ -36,6 +38,7 @@ export class BaseRepository<Response, Request> {
 
   async existsIds(ids: string[]): Promise<boolean> {
     const count = await this.model.countDocuments({ _id: { $in: ids } }).exec()
+
     return count === ids.length
   }
 
@@ -66,6 +69,7 @@ export class BaseRepository<Response, Request> {
 
   async deleteById(id: string): Promise<boolean> {
     const docDeleted = await this.model.deleteOne({ _id: id }).exec()
+
     return docDeleted?.deletedCount === 1
   }
 }

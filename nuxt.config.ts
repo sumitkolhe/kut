@@ -37,6 +37,7 @@ export default defineNuxtConfig({
   },
 
   srcDir: 'src',
+  serverDir: 'server',
 
   css: ['~/assets/toast.css'],
 
@@ -84,8 +85,6 @@ export default defineNuxtConfig({
     utils: fileURLToPath(new URL('./src/utils', import.meta.url)),
     server: fileURLToPath(new URL('./src/server', import.meta.url)),
   },
-
-  serverDir: 'server',
 
   runtimeConfig: {
     public: {

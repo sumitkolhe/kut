@@ -1,16 +1,14 @@
 import { $fetch } from 'ofetch'
 import { useConfig } from 'server/common/configs'
 
+interface SendEmailArgs {
+  templateId: number
+  toEmail: string
+  params: Record<string, string>
+}
+
 export class EmailService {
-  public sendEmail = ({
-    templateId,
-    toEmail,
-    params,
-  }: {
-    templateId: number
-    toEmail: string
-    params: Record<string, string>
-  }) => {
+  public sendEmail = async ({ templateId, toEmail, params }: SendEmailArgs) => {
     const {
       email: { apiKey, senderEmail, senderName },
     } = useConfig()

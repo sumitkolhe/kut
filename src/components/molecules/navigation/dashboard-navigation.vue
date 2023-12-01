@@ -27,16 +27,16 @@ const { y } = useWindowScroll()
       v-if="!$route.params.alias"
       class="no-scrollbar text-primary-400 mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll"
     >
-      <NuxtLink
+      <nuxt-link
         v-for="tab in tabs"
         :key="tab.name"
         :to="tab.href"
         active-class="border-black dark:border-primary-50 border-b-[2px] text-black dark:text-primary-50"
         class="hover:text-primary-600 hover:dark:text-primary-300 inline-flex h-12 py-4 transition-all duration-200"
       >
-        <Icon :name="tab.icon" size="20" class="mr-2" />
+        <icon :name="tab.icon" size="20" class="mr-2" />
         <p class="text-sm">{{ tab.name }}</p>
-      </NuxtLink>
+      </nuxt-link>
     </div>
 
     <div
@@ -44,19 +44,19 @@ const { y } = useWindowScroll()
       class="no-scrollbar text-primary-400 mx-auto flex h-12 max-w-screen-xl flex-row items-center space-x-8 overflow-x-scroll"
     >
       <button @click="$router.push('/dashboard')">
-        <Icon name="ph:arrow-circle-left" class="text-primary-400 hover:text-primary-900 mt-1" />
+        <icon name="ph:arrow-circle-left" class="text-primary-400 hover:text-primary-900 mt-1" />
       </button>
 
-      <NuxtLink
+      <nuxt-link
         v-for="tab in subTabs"
         :key="tab.name"
         :to="tab.href"
         active-class="border-black dark:border-primary-50 border-b-[2px] text-black dark:text-primary-50"
         class="hover:text-primary-600 hover:dark:text-primary-300 inline-flex h-12 py-4"
       >
-        <Icon :name="tab.icon" size="20" class="mr-2" />
+        <icon :name="tab.icon" size="20" class="mr-2" />
         <p class="text-sm">{{ tab.name }}</p>
-      </NuxtLink>
+      </nuxt-link>
     </div>
   </nav>
 </template>

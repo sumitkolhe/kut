@@ -35,6 +35,7 @@ export const useLinkStore = defineStore('links', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },
@@ -52,6 +53,7 @@ export const useLinkStore = defineStore('links', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },
@@ -66,6 +68,7 @@ export const useLinkStore = defineStore('links', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message }
       }
     },
@@ -80,6 +83,7 @@ export const useLinkStore = defineStore('links', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message, data: null }
       }
     },
@@ -92,6 +96,7 @@ export const useLinkStore = defineStore('links', {
       } catch (err) {
         const error = (err as FetchError) || Error
         logger.error(error?.message)
+
         return { error: error?.data?.message || error?.message, data: null }
       }
     },
